@@ -22,13 +22,6 @@ from timeit import default_timer as timer
 from sklearn.model_selection import train_test_split
 
 
-# import redis
-# import gevent
-
-
-# REDIS_URL = os.environ['REDIS_URL']
-# REDIS_CHAN = 'app'
-
 
 
 from Queue import Queue
@@ -39,26 +32,6 @@ app = Flask(__name__)
 app.debug = 'DEBUG' in os.environ
 socketio = SocketIO(app)
 sockets = Sockets(app)
-# redis = redis.from_url(REDIS_URL)
-
-# socketio = SocketIO(app,async_mode='eventlet')
-
-
-
-
-
-
-def disable_stdout_buffering():
-    # Appending to gc.garbage is a way to stop an object from being
-    # destroyed.  If the old sys.stdout is ever collected, it will
-    # close() stdout, which is not good.
-    gc.garbage.append(sys.stdout)
-    sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
-
-
-# Then this will give output in the correct order:
-# disable_stdout_buffering()
-
 
 
 
