@@ -108,7 +108,7 @@
                 var idNum = Util.getNumberFromText(id);
                 console.log('stopped drag now ', id, idNum);
                 $(this).css('border-bottom', 'transparent')
-                DataTable.filterById(idNum);
+                // DataTable.filterById(idNum);
 
             }
         });
@@ -129,7 +129,6 @@
             if (typeof maxCluster == 'undefined') maxCluster = 0;
             data['cluster'] = maxCluster + 1;
             ClusterModeler.clusterIds.push(data['cluster']);
-            console.log('data length now ', data, idGiven)
             // Main.currentData = [Object.assign({}, data)]
             data = [Object.assign({}, data)]
             data.push.apply(data, Main.currentData)
@@ -139,16 +138,6 @@
                 // return d.id == idGiven;
                 if (d.id == idGiven) return true
                 for (var item in DataTable.pickedAttrDict) {
-                    // if (item == 'Cylinders' && d[item] == DataTable.pickedAttrDict[item]) {
-                    //     return true;
-                    // }
-
-                    // if (item != 'Cylinders') {
-                    //     if (Math.abs(d[item] - DataTable.pickedAttrDict[item]) < 5) {
-                    //         return true;
-                    //     }
-                    // }
-
                     var ran = Main.attrDict[item]['range'];
                     var fac = Math.abs(+ran[0] - +ran[1]) * DataTable.ratioSelect
                     if (d[item] == DataTable.pickedAttrDict[item]) {

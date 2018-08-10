@@ -135,5 +135,5 @@ if __name__ == "__main__":
 	# app.run(host = '0.0.0.0', port = port)
 	# socketio.run(app, 7000)
 	# socketio.run(app, host='localhost', port=7000)
-	# socketio.run(app, debug=True)
-	socketio.run(app)
+	socketio.run(app, debug=True)
+	# socketio.run(app)

@@ -88,8 +88,8 @@ body {
 }
 
 #viewPanel {
-    display: flex;
-    flex-direction: column;
+    display: block;
+    /* flex-direction: column; */
     width: 60%;
     height: 95%;
     /*90%; 2000px*/
@@ -112,7 +112,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 35%;
+    height: 95%;
     /*90%; 2000px*/
     float: right;
     /* background-color: pink; */
@@ -145,7 +145,7 @@ body {
     /* flex: 1;
     flex-direction: row;*/
     width: 100%;
-    height: 65%;
+    height: 5%;
     /* max-height: 70%;  */
     background-color: #fff;
     color: #555;
@@ -160,14 +160,6 @@ body {
     /* margin-bottom: 5px; */
     border-radius: 5px;
     border: 1px solid lightgray;
-}
-
-#clusterDivSvg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 2px;
-    text-align: center;
 }
 
 #tableDetailPanel {
