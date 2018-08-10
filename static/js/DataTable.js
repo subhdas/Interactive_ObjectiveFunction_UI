@@ -10,21 +10,23 @@
             $('.dataTableHeadText').text(Main.trainData.length + ' rows')
             DataTable.makeTable(Main.trainData);
         } else {
-            $('.dataTableHeadText').text(' Added : ' + Main.currentData.length + ' rows  | Left : ' + Main.leftData.length + ' rows ')
+          // $('.dataTableHeadText').text(' Added : ' + Main.currentData.length + ' rows  | Left : ' + Main.leftData.length + ' rows ')
+            $('.dataTableHeadText').text(' Current Data Length : ' + Main.currentData.length)
             DataTable.makeTable(Main.leftData);
         }
     }
 
 
     DataTable.updateOnlyHeader = function (dataGiven) {
-        $('.dataTableHeadText').text(dataGiven.length + ' rows');
+      // $('.dataTableHeadText').text(dataGiven.length + ' rows');
+      $('.dataTableHeadText').text(' Current Data Length : ' + Main.currentData.length)
     }
 
 
     DataTable.switchToLeftData = function () {
         DataTable.viewFullTable = false;
         $('#tableContent').css('background', Main.colors.HIGHLIGHT);
-        $('.dataTableHeadText').text(' Added : ' + Main.currentData.length + ' rows  | Left : ' + Main.leftData.length + ' rows ');
+        $('.dataTableHeadText').text(' Current Data Length : ' + Main.trainData.length)
     }
 
 
@@ -44,7 +46,7 @@
         htmlStr += "<img class='imgIcon' src='static/img/icons/loadData.png'></div>"
         htmlStr += "<div class='iconHolder' id='removeAllData' onclick='' title='Remove all data'>"
         htmlStr += "<img class='imgIcon' src='static/img/icons/subtract.png'></div>"
-        htmlStr += "<button id='dataToggleBtn'> </button>";
+        // htmlStr += "<button id='dataToggleBtn'> </button>";
         htmlStr += "<div class = 'dataTableHeadText'>" + dataIn.length + " rows </div>";
 
 
@@ -56,15 +58,15 @@
         $('.dataTableHeadText').css('padding', '5px');
         // $('.dataTableHeadText').css('display' , )
 
-        $('#dataToggleBtn').button({
-            icon: "ui-icon-gear",
-            showLabel: false
-        })
-
-        $('#dataToggleBtn').click(function () {
-            DataTable.viewFullTable = !DataTable.viewFullTable;
-            DataTable.updateHeader();
-        })
+        // $('#dataToggleBtn').button({
+        //     icon: "ui-icon-gear",
+        //     showLabel: false
+        // })
+        //
+        // $('#dataToggleBtn').click(function () {
+        //     DataTable.viewFullTable = !DataTable.viewFullTable;
+        //     DataTable.updateHeader();
+        // })
 
 
 
@@ -220,16 +222,6 @@
     }
 
 
-    // DragTable.unFocus = function () {
-    //     if (document.selection) {
-    //         document.selection.empty()
-    //     } else {
-    //         window.getSelection().removeAllRanges()
-    //     }
-    // }
-
-
-
     DataTable.makeTable = function (dataGiven = main.appData) {
         $("#dataViewAppTable").remove();
 
@@ -330,6 +322,9 @@
             .attr("data-th", function (d) {
                 return d.name;
             })
+            .attr("data-id", function (d) {
+                return d.id;
+            })
             .attr('class', function (d) {
                 return 'td_' + d.value + ' td_' + d.name + ' td_' + d.name + '_' + d.value;
             })
@@ -345,17 +340,20 @@
                     // $('.td_' + d.name).css('background', 'rgba(0,0,0,0)');
                     // $('.td_' + d.name + '_' + d.value).css('background', Main.colors.HIGHLIGHT);
                     // $(this).css('background', Main.colors.HIGHLIGHT);
+                    $(this).closest('tr').css('background', Main.colors.HIGHLIGHT);
                     var txt = $(this).text();
                     var nameAttr = $(this).attr('data-th');
-
+                    var idAttr = $(this).closest('tr').attr('id');
+                    idAttr = Util.getNumberFromText(idAttr);
                     DataTable.pickedAttrDict[nameAttr] = txt;
-                    console.log('txt clicked ', txt, nameAttr, DataTable.pickedAttrDict);
+                    console.log('txt clicked ', txt, nameAttr, idAttr, DataTable.pickedAttrDict);
                 } else {
                     // $(this).css('background', 'rgba(0,0,0,0)');
+                    $(this).closest('tr').css('background', 'rgba(0,0,0,0)');
                     // $('.td_' + d.name + '_' + d.value).css('background', 'rgba(0,0,0,0)');
                     var nameAttr = $(this).attr('data-th');
                     delete DataTable.pickedAttrDict[nameAttr];
-                    console.log('txt clicked ', txt, nameAttr, DataTable.pickedAttrDict);
+                    console.log('txt removing  clicked ', txt, nameAttr, DataTable.pickedAttrDict);
                 }
 
                 var ran = Main.attrDict[d.name]['range'];

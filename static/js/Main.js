@@ -30,7 +30,7 @@
     */
 
     Main.colors = {
-        HIGHLIGHT: "#00BCD4",
+        HIGHLIGHT: "#C23573",
         LIGHTGRAY: "lightgray",
         BLACK: 'black',
         POS_COL: 'red',
@@ -156,7 +156,6 @@
                 // GridData.deletedNodesData = Util.deepCopyData(Main.trainData);
 
                 Main.processAttrData(Main.trainData);
-
                 Main.taskScheduler();
             });
 

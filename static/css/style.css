@@ -46,21 +46,6 @@ body {
     /* border: 0.1px solid lightgray; */
 }
 
-#sidePanel {
-    display: flex;
-    flex-direction: column;
-    /*    float: left;*/
-    width: 20%;
-    /* min-width: 300px; */
-    height: 95%;
-    /*93%*/
-    /* background-color: blue; */
-    margin: 5px;
-    border-radius: 5px;
-    border: 1px solid lightgray;
-    /*min-width: 300px;*/
-    /*    margin: 2px;*/
-}
 
 #sideRightPanel {
     display: flex;
@@ -195,7 +180,7 @@ body {
     text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
     font-weight: bold;
     text-transform: uppercase;
-    color: #00BCD4;
+    color: #C23573;
     letter-spacing: 1pt;
     word-spacing: 6pt;
     font-size: 20px;
@@ -206,70 +191,7 @@ body {
     padding: 10px;
 }
 
-#leftPanel {
-    display: flex;
-    flex-direction: row;
-    background-color: transparent;
-    /*#fff;*/
-    width: 100%;
-    height: 100%;
-    /*60vh*/
-    /*85%*/
-    /*    float: left;*/
-    overflow-x: hidden;
-    overflow-y: hidden;
-    position: relative;
-    z-index: 901;
-    /* padding: 5px; */
-}
 
-#auxSideMenuBar {
-    display: flex;
-    flex-direction: column;
-    /* background-color: rgb(235, 234, 234); */
-    background-color: transparent;
-    width: 25px;
-    height: 100%;
-    /*60vh*/
-    /*    float: left;*/
-    /* overflow-x: hidden;
-    overflow-y: hidden;
-    position: relative; */
-    z-index: 901;
-    border-radius: 5px;
-    border-right: 1px solid lightgray;
-    /* padding: 5px; */
-}
-
-#auxSideTop {
-    display: flex;
-    flex-direction: column;
-    /* background-color: lightgray; */
-    width: 100%;
-    height: 75%;
-    border-radius: 5px;
-    /* border: 1px solid lightgray; */
-}
-
-#auxSideBottom {
-    display: flex;
-    flex-direction: column;
-    /* background-color: lightgray; */
-    width: 100%;
-    height: 25%;
-}
-
-#leftPanelContent {
-    overflow: hidden;
-    overflow-x: hidden;
-    /*overflow-y: hidden;*/
-    height: 100%;
-    /*80%*/
-    padding: 10px;
-    width: 100%;
-    display: block;
-    flex-direction: column;
-}
 
 header {
     border: none;
@@ -293,15 +215,5 @@ header {
     height: 100%;
     border-bottom: 1px solid lightgray;
     /* overflow-y: auto; */
-    padding: 5px;
-}
-
-#gridDataPanel {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    /* border-bottom: 1px solid lightgray; */
-    overflow-y: auto;
     padding: 5px;
 }
