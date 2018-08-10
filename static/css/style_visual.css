@@ -4,7 +4,8 @@
 */
 
 tr:nth-of-type(odd) {
-    background: #eee;
+  /* background: #eee; */
+    background: white;
 }
 
 tr:nth-of-type(even) {
@@ -38,7 +39,7 @@ th.aes:after {
 tr:hover{
     /* background: #00BCD4; */
     /* background: white; */
-    color: cyan;
+    color: blue;
 }
 
 

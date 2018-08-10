@@ -5,6 +5,10 @@
     DataTable.ratioSelect = 0.15;
 
 
+    //new variabbles
+    DataTable.selectedRows = {}
+
+
     DataTable.updateHeader = function () {
         if (DataTable.viewFullTable) {
             $('.dataTableHeadText').text(Main.trainData.length + ' rows')
@@ -332,53 +336,76 @@
                 return d.value;
             })
             .on('click', function (d) {
-                if (DataTable.viewFullTable) return;
-                // return;
-                var back = $(this).css('background-color');
-                console.log(' background value ', back, d)
-                if (back.toString() == "rgba(0, 0, 0, 0)" || typeof back == 'undefined') {
-                    // $('.td_' + d.name).css('background', 'rgba(0,0,0,0)');
-                    // $('.td_' + d.name + '_' + d.value).css('background', Main.colors.HIGHLIGHT);
-                    // $(this).css('background', Main.colors.HIGHLIGHT);
-                    $(this).closest('tr').css('background', Main.colors.HIGHLIGHT);
-                    var txt = $(this).text();
-                    var nameAttr = $(this).attr('data-th');
-                    var idAttr = $(this).closest('tr').attr('id');
-                    idAttr = Util.getNumberFromText(idAttr);
-                    DataTable.pickedAttrDict[nameAttr] = txt;
-                    console.log('txt clicked ', txt, nameAttr, idAttr, DataTable.pickedAttrDict);
-                } else {
-                    // $(this).css('background', 'rgba(0,0,0,0)');
-                    $(this).closest('tr').css('background', 'rgba(0,0,0,0)');
-                    // $('.td_' + d.name + '_' + d.value).css('background', 'rgba(0,0,0,0)');
-                    var nameAttr = $(this).attr('data-th');
-                    delete DataTable.pickedAttrDict[nameAttr];
-                    console.log('txt removing  clicked ', txt, nameAttr, DataTable.pickedAttrDict);
-                }
-
-                var ran = Main.attrDict[d.name]['range'];
-                var fac = Math.abs(+ran[0] - +ran[1]) * DataTable.ratioSelect;
-                var idList = [];
-                //find data ids which will be effected on selecting this value
-                data.forEach(function (m) {
-                    if (Math.abs(m[d.name] - d.value) < fac) {
-                        idList.push(m.id);
-                    }
-                })
-
-                for (var k = 0; k < idList.length; k++) {
-                    var back = $("#tr_" + idList[k]).find('.td_' + d.name).css('background-color');
-                    console.log('background color clikced now ', back);
-                    // $("#tr_" + idList[k]).find('.td_' + d.name).css('background', Main.colors.HIGHLIGHT);
-                    if (back.toString() == "rgba(0, 0, 0, 0)" || typeof back == 'undefined')  {
-                        $("#tr_" + idList[k]).find('.td_' + d.name).css('background', Main.colors.HIGHLIGHT);
-                    }else{
-                        $("#tr_" + idList[k]).find('.td_' + d.name).css('background', 'rgba(0,0,0,0)');
-                    }
-                }
-                console.log('background ', idList, fac)
-                // $(this).css('background', 'cyan')
+                // if (DataTable.viewFullTable) return;
+                // // return;
+                // var back = $(this).css('background-color');
+                // console.log(' background value ', back, d)
+                // if (back.toString() == "rgba(0, 0, 0, 0)" || typeof back == 'undefined') {
+                //     // $('.td_' + d.name).css('background', 'rgba(0,0,0,0)');
+                //     // $('.td_' + d.name + '_' + d.value).css('background', Main.colors.HIGHLIGHT);
+                //     // $(this).css('background', Main.colors.HIGHLIGHT);
+                //     $(this).closest('tr').css('background', Main.colors.HIGHLIGHT);
+                //     var txt = $(this).text();
+                //     var nameAttr = $(this).attr('data-th');
+                //     var idAttr = $(this).closest('tr').attr('id');
+                //     idAttr = Util.getNumberFromText(idAttr);
+                //     DataTable.pickedAttrDict[nameAttr] = txt;
+                //     console.log('txt clicked ', txt, nameAttr, idAttr, DataTable.pickedAttrDict);
+                // } else {
+                //     // $(this).css('background', 'rgba(0,0,0,0)');
+                //     $(this).closest('tr').css('background', 'rgba(0,0,0,0)');
+                //     // $('.td_' + d.name + '_' + d.value).css('background', 'rgba(0,0,0,0)');
+                //     var nameAttr = $(this).attr('data-th');
+                //     delete DataTable.pickedAttrDict[nameAttr];
+                //     console.log('txt removing  clicked ', txt, nameAttr, DataTable.pickedAttrDict);
+                // }
+                //
+                // var ran = Main.attrDict[d.name]['range'];
+                // var fac = Math.abs(+ran[0] - +ran[1]) * DataTable.ratioSelect;
+                // var idList = [];
+                // //find data ids which will be effected on selecting this value
+                // data.forEach(function (m) {
+                //     if (Math.abs(m[d.name] - d.value) < fac) {
+                //         idList.push(m.id);
+                //     }
+                // })
+                //
+                // for (var k = 0; k < idList.length; k++) {
+                //     var back = $("#tr_" + idList[k]).find('.td_' + d.name).css('background-color');
+                //     console.log('background color clikced now ', back);
+                //     // $("#tr_" + idList[k]).find('.td_' + d.name).css('background', Main.colors.HIGHLIGHT);
+                //     if (back.toString() == "rgba(0, 0, 0, 0)" || typeof back == 'undefined')  {
+                //         $("#tr_" + idList[k]).find('.td_' + d.name).css('background', Main.colors.HIGHLIGHT);
+                //     }else{
+                //         $("#tr_" + idList[k]).find('.td_' + d.name).css('background', 'rgba(0,0,0,0)');
+                //     }
+                // }
+                // console.log('background ', idList, fac)
+                // // $(this).css('background', 'cyan')
             })
+
+
+        $("#dataViewAppTable tr").on('click', function(d){
+          var back = $(this).css('background-color');
+          // console.log("clicked tabel tr ", $(this), d, back);
+          var idNum = Util.getNumberFromText($(this).attr('id'));
+          if(typeof DataTable.selectedRows[idNum] ==  'undefined'){
+            $(this).css('background', Main.colors.HIGHLIGHT);
+            DataTable.selectedRows[idNum] = true;
+          }else{
+            $(this).css('background', "rgb(255,255,255)");
+            console.log("removing colors")
+            delete DataTable.selectedRows[idNum];
+          }
+
+
+           // if (back.toString() == "rgba(0, 0, 0, 0)" || typeof back == 'undefined' || back.toString() == "rgb(255,255,255)") {
+           //
+           // }else{
+           //   $(this).css('background-color', "rgba(0,0,0,0)");
+           // }
+
+        })
 
 
         if (!DataTable.viewFullTable) {
