@@ -41,7 +41,7 @@
     stores system variables
     */
     Main.commonVars = {
-        DEBUG: false,
+        DEBUG: true,
     }
 
 
@@ -49,7 +49,7 @@
         $(document).ready(function () {
             console.log("loading data");
             if (!Main.commonVars.DEBUG) {
-                console.log = function () {};
+                // console.log = function () {};
             }
             $("#sidePanel").css("width", "25px");
             $("#viewPanel").css("width", "100%");
@@ -173,11 +173,6 @@
         DataTable.addIconsTop(Main.trainData);
         DataTable.switchToLeftData();
         DataTable.makeTable(Main.leftData);
-        ClusterModeler.addIcons()
-        // ClusterModeler.getClustering();
-        // GridData.makeGridNodesVis();
-
-        // ClusterV4.makeVisCluster();
     }
 
 
