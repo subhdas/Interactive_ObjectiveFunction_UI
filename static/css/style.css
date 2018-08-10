@@ -28,12 +28,12 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: transparent;
+    background-color: lightgray;
     /* width: 100%; */
     height: 30px;
     margin: 5px;
-    border-radius: 5px;
-    border: 1px solid lightgray;
+    /* border-radius: 5px; */
+    border-bottom: 1px dashed black;
 }
 
 #bottomBar {
@@ -51,14 +51,15 @@ body {
     display: flex;
     flex-direction: row-reverse;
     /*    float: left;*/
-    width: 20%;
+    width: 35%;
     /* min-width: 300px; */
     height: 95%;
     /*93%*/
     /* background-color: green; */
     margin: 5px;
-    border-radius: 5px;
-    border: 1px solid lightgray;
+    /* border-radius: 5px; */
+    border-left: 1px dashed black;
+
     /*min-width: 300px;*/
     /*    margin: 2px;*/
 }
@@ -110,8 +111,8 @@ body {
     overflow-y: hidden;
     overflow-x: hidden;
     padding: 5px;
-    border-radius: 5px;
-    border: 1px solid lightgray;
+    /* border-radius: 5px;
+    border: 1px solid lightgray; */
 }
 
 #tableContent{
@@ -197,23 +198,13 @@ header {
     border: none;
 }
 
-#globalPanel {
+#labelCardPanel {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: auto;
-    border-bottom: 1px solid lightgray;
+    /* border-bottom: 1px solid lightgray; */
     padding: 5px;
     overflow-y: auto;
     overflow-x: hidden;
-}
-
-#featurePanel {
-    /* display: flex;
-    flex-direction: column-reverse; */
-    width: 100%;
-    height: 100%;
-    border-bottom: 1px solid lightgray;
-    /* overflow-y: auto; */
-    padding: 5px;
 }

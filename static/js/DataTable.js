@@ -48,8 +48,8 @@
 
         htmlStr = "<div class='iconHolder' id='addAllData' onclick='' title='Add all data'>"
         htmlStr += "<img class='imgIcon' src='static/img/icons/loadData.png'></div>"
-        htmlStr += "<div class='iconHolder' id='removeAllData' onclick='' title='Remove all data'>"
-        htmlStr += "<img class='imgIcon' src='static/img/icons/subtract.png'></div>"
+        htmlStr += "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
+        htmlStr += "<img class='imgIcon' src='static/img/icons/add.png'></div>"
         // htmlStr += "<button id='dataToggleBtn'> </button>";
         htmlStr += "<div class = 'dataTableHeadText'>" + dataIn.length + " rows </div>";
 
@@ -74,25 +74,12 @@
 
 
 
-        $('#addAllData').on('click', function () {
-            Main.trainData = Util.deepCopyData(Main.trainDataCopy);
-            for (var i = 0; i < ClusterModeler.numRecommendations; i++) {
-                ClusterModeler.getClustering(true, true, Main.trainData, i);
-            }
+        $('#addLabelCard').on('click', function () {
+          LabelCard.makeCards();
 
         })
 
-        $('#removeAllData').on('click', function () {
-            Main.trainData = Util.deepCopyData(Main.trainDataCopy);
-            Main.currentData = [];
-            Main.leftData = Util.deepCopyData(Main.trainData);
-            DataTable.switchToLeftData();
-            DataTable.makeTable(Main.leftData);
-            var containerId = "clusterDivSvg";
-            var svgId = "clusterSvgId_" + containerId;
-            $("#" + svgId).remove();
-            $("#globalPanel").empty();
-        })
+
 
 
 
@@ -391,6 +378,8 @@
           var idNum = Util.getNumberFromText($(this).attr('id'));
           if(typeof DataTable.selectedRows[idNum] ==  'undefined'){
             $(this).css('background', Main.colors.HIGHLIGHT);
+            // var selection = $(this).closest('td')
+            // DataTable.selectedRows[idNum] = d3.select(selection).datum();
             DataTable.selectedRows[idNum] = true;
           }else{
             $(this).css('background', "rgb(255,255,255)");
@@ -398,12 +387,6 @@
             delete DataTable.selectedRows[idNum];
           }
 
-
-           // if (back.toString() == "rgba(0, 0, 0, 0)" || typeof back == 'undefined' || back.toString() == "rgb(255,255,255)") {
-           //
-           // }else{
-           //   $(this).css('background-color', "rgba(0,0,0,0)");
-           // }
 
         })
 
