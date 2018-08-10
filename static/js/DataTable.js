@@ -147,7 +147,6 @@
                     if (Math.abs(d[item] - DataTable.pickedAttrDict[item]) < fac) {
                         return true;
                     }
-
                 }
                 return false;
             }) // data filtering completes here
