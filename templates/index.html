@@ -19,11 +19,13 @@
   <!-- libraries -->
   <script type="text/javascript" src="static/lib/d3/d3.v3.min.js"></script>
   <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
-  <script type="text/javascript" src="static/lib/jquery-1.11.3.min.js"></script>
+  <!-- <script type="text/javascript" src="static/lib/jquery-1.11.3.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript" src="static/lib/lasso.js"></script>
   <script type="text/javascript" src="static/lib/bootstrap.min.js"></script>
   <script type="text/javascript" src="static/lib/bootstrap2-toggle.min.js"></script>
-  <script type="text/javascript" src="static/lib/jqueryUI/jquery-ui.min.js"></script>
+  <!-- <script type="text/javascript" src="static/lib/jqueryUI/jquery-ui.min.js"></script> -->
   <script type="text/javascript" src="static/lib/bootstrap-select.min.js"></script>
   <script type="text/javascript" src="static/lib/socket.io.min.js"></script>
   <script type="text/javascript" src="static/lib/jquery.contextMenu.min.js"></script>
@@ -53,7 +55,7 @@
     <div id="viewPanel">
       <div id="tablePanel">
         <div id="tableSelectors"></div>
-        <div id="tableContent"></div>
+        <div id="tableContent" class=".ui-droppable tableConten"></div>
       </div>
       <div id="modelPanel">
         <div id="anony"></div>
@@ -61,8 +63,12 @@
 
     </div>
     <div id="sideRightPanel">
+      <div id="sideRightIconPanel"></div>
       <div id="sideRightContentPanel">
-        <div id="labelCardPanel"></div>
+        <div id="labelCardPanel">
+          <div id="labelCard"></div>
+
+        </div>
       </div>
     </div>
   </div>

@@ -49,7 +49,7 @@ body {
 
 #sideRightPanel {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     /*    float: left;*/
     width: 35%;
     /* min-width: 300px; */

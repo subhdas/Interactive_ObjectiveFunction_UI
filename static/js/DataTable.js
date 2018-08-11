@@ -87,7 +87,8 @@
 
     DataTable.dragFunction = function () {
         console.log('adding drag function')
-        $("#dataViewAppTable tr").draggable({
+        // $(".dataViewAppTable tr").draggable({
+        $("tr").draggable({
             helper: "clone",
             start: function () {
                 // console.log(' starting drag ')
@@ -96,15 +97,32 @@
             drag: function () {
                 // console.log('dragging now ', this)
             },
-            stop: function () {
+            stop: function (e) {
                 var id = $(this).attr('id');
                 var idNum = Util.getNumberFromText(id);
-                console.log('stopped drag now ', id, idNum);
+                console.log('stopped drag now ', id, idNum, e);
                 $(this).css('border-bottom', 'transparent')
                 // DataTable.filterById(idNum);
-
             }
         });
+
+        //add droppable
+        $(".ui-droppable.tableContent").droppable({
+           activate: function( event, ui ) {
+             console.log("droppable activate")
+           },
+            // tolerance: "intersect",
+            // accept: "tr",
+            // activeClass: "ui-state-default",
+            // hoverClass: "ui-state-hover",
+            drop: function(event, ui) {
+              $(this).addClass( "ui-state-highlight" )
+                $(this).append($(ui.draggable));
+                console.log("dropped item ", event, this, ui)
+            }
+        });
+
+
     }
 
     DataTable.filterById = function (idGiven) {
@@ -213,8 +231,8 @@
     }
 
 
-    DataTable.makeTable = function (dataGiven = main.appData) {
-        $("#dataViewAppTable").remove();
+    DataTable.makeTable = function (dataGiven = main.appData, containerId = "tableContent") {
+        $("#dataViewAppTable_"+containerId).remove();
 
         var data = Util.deepCopyData(dataGiven);
 
@@ -226,14 +244,15 @@
 
         var sortAscending = true;
         var table = d3
-            .select("#tableContent")
+            .select("#"+containerId)
             .insert("table", ":first-child")
-            .attr("id", "dataViewAppTable")
+            .attr("id", "dataViewAppTable_"+containerId)
+            .attr("class", "dataViewAppTable")
             .attr("height", "100%")
             .attr("width", "100%");
         // .attr("margin-top", "10px");
 
-        $("#dataViewAppTable").css("margin-top", "10px");
+        $("#dataViewAppTable_"+containerId).css("margin-top", "10px");
         //  .append('div')
         //  .attr('class', 'sepDivDataView')
         //  .style('height', '100px')
@@ -372,7 +391,7 @@
             })
 
 
-        $("#dataViewAppTable tr").on('click', function(d){
+        $("#dataViewAppTable_"+containerId+" tr").on('click', function(d){
           var back = $(this).css('background-color');
           // console.log("clicked tabel tr ", $(this), d, back);
           var idNum = Util.getNumberFromText($(this).attr('id'));
@@ -386,19 +405,11 @@
             console.log("removing colors")
             delete DataTable.selectedRows[idNum];
           }
-
-
         })
 
+        DataTable.dragFunction()
 
-        if (!DataTable.viewFullTable) {
-            DataTable.dragFunction();
-            $('#tableContent').css('background', Main.colors.HIGHLIGHT);
-
-        } else {
-            $('#tableContent').css('background', 'white');
-        }
-    };
+    };// end of makeTable
 
 
 
