@@ -3,7 +3,8 @@
   LabelCard.storedData ={}
 
 LabelCard.getDataForCard = function(dataGiven = Main.trainData){
-  var ran = Util.getRandomNumberBetween(Main.trainData.length*0.75 , 3).toFixed(0);
+  // var ran = Util.getRandomNumberBetween(Main.trainData.length*0.75 , 3).toFixed(0);
+  var ran = 3;
   var data = [];
   var i = 0;
   Main.trainData.forEach(function(d){
@@ -18,13 +19,16 @@ LabelCard.getDataForCard = function(dataGiven = Main.trainData){
 LabelCard.makeCards = function(containerId = ""){
   if(containerId == "") containerId = "labelCardPanel";
   $("#"+containerId).empty();
-  LabelCard.storedData = {};
+  // LabelCard.storedData = {};
 
   for(var item in DataTable.selectedRows){
     var htmlStr = "<div id='labelCard_"+item+"' class = 'ui-droppable labelCard'>";
     htmlStr += "</div>";
     $("#"+containerId).append(htmlStr);
-    var data = LabelCard.getDataForCard();
+    var data = LabelCard.storedData[item];
+    console.log('found data is ', data)
+    if(data == null) data = LabelCard.getDataForCard();
+    else data = data['data']
     DataTable.makeTable(data,"labelCard_"+item);
     LabelCard.storedData[item] = {
       'data' : data
@@ -51,12 +55,28 @@ $(".ui-droppable.labelCard").droppable({
     // activeClass: "ui-state-default",
     // hoverClass: "ui-state-hover",
     drop: function(event, ui) {
-      $(this).addClass( "ui-state-highlight" )
-        $(this).append($(ui.draggable));
-        console.log("dropped item ", event, this, ui)
+        $(this).addClass( "ui-state-highlight" )
+        // $(this).append($(ui.draggable));
+        console.log("dropped item ", ui);
+        var idNum = Util.getNumberFromText( ui.draggable[0]['id']);
+        var dataGet = Main.getDataById(idNum, Main.trainData);
+
+        var idCard = Util.getNumberFromText($(this).attr('id'));
+        var dataCard = LabelCard.storedData[idCard]['data']
+        dataCard.unshift(dataGet);
+        DataTable.makeTable(dataCard,"labelCard_"+idCard);
+
+
+        console.log('id dropped ',idNum, dataGet);
+        console.log('id dropped ',idCard, dataCard);
+
+
     }
 });
 
+}// end of makeCards
+
+LabelCard.updateCardById = function(cardId = 0){
 }
 
 
