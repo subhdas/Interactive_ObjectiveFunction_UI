@@ -2,7 +2,7 @@
   LabelCard = {};
   LabelCard.storedData ={}
 
-LabelCard.getDataForCard = function(dataGiven = Main.trainData){
+LabelCard.getDataForCard = function(mainId = 0, dataGiven = Main.trainData){
   // var ran = Util.getRandomNumberBetween(Main.trainData.length*0.75 , 3).toFixed(0);
   var ran = 3;
   var data = [];
@@ -13,6 +13,7 @@ LabelCard.getDataForCard = function(dataGiven = Main.trainData){
       i += 1;
     }
   })
+  data.unshift(Main.getDataById(mainId));
   return data;
 }
 
@@ -27,11 +28,12 @@ LabelCard.makeCards = function(containerId = ""){
     $("#"+containerId).append(htmlStr);
     var data = LabelCard.storedData[item];
     console.log('found data is ', data)
-    if(data == null) data = LabelCard.getDataForCard();
+    if(data == null) data = LabelCard.getDataForCard(item);
     else data = data['data']
     DataTable.makeTable(data,"labelCard_"+item);
     LabelCard.storedData[item] = {
-      'data' : data
+      'data' : data,
+      'mainRow' : data[0]
     }
   }
 
@@ -62,8 +64,10 @@ $(".ui-droppable.labelCard").droppable({
         var dataGet = Main.getDataById(idNum, Main.trainData);
 
         var idCard = Util.getNumberFromText($(this).attr('id'));
-        var dataCard = LabelCard.storedData[idCard]['data']
+        var dataCard = LabelCard.storedData[idCard]['data'];
+        dataCard.splice(0,1);
         dataCard.unshift(dataGet);
+        dataCard.unshift(LabelCard.storedData[idCard]['mainRow']);
         DataTable.makeTable(dataCard,"labelCard_"+idCard);
 
 

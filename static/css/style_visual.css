@@ -42,6 +42,24 @@ tr:hover{
     color: blue;
 }
 
+.labelCard tr{
+  /* display: flex;
+  flex-direction: column; */
+  font-size: 0.75em;
+
+}
+
+/* .labelCard td{
+  max-height: 10px;
+  height: 10px;
+} */
+
+/* .labelCard th{
+  display: inherit;
+} */
+
+
+
 
 
 
