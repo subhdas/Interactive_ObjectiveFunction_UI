@@ -21,6 +21,8 @@ import timeit
 from timeit import default_timer as timer
 from sklearn.model_selection import train_test_split
 
+from similarItems import getSimilarItems
+
 
 
 
@@ -31,7 +33,6 @@ from threading import Thread
 app = Flask(__name__)
 app.debug = 'DEBUG' in os.environ
 socketio = SocketIO(app)
-sockets = Sockets(app)
 
 
 
@@ -95,25 +96,12 @@ def handle_my_custom_event(data):
 	emit('data_return_preprocess', out)
 
 
-@socketio.on('find_clustering')
+@socketio.on('find_similarData')
 def handle_my_custom_event(data):
-	print " gotten item ++++++++++++++++++++++++++++++++++++++++++ ", data['id']
-	out = {}
+	print " gotten item ++++++++++++++++++++++++++++++++++++++++++ "
 	obj = {}
-	obj['id'] = data['id']
-	# print " num cluseters and cluster len ", int(data['numClusters']), int(data['clusterLen'])
-	obj['numClusters'] = int(data['numClusters']) + int(data['clusterLen'])
-	obj['data'] = out['data']
-	cenDf = pd.DataFrame(out['cluster_cen'])
-
-	# print "cen df is ", cenDf
-	print "numcluster sneding ", obj['numClusters'],  int(data['numClusters']), int(data['clusterLen'])
-	obj['clusterCen'] = cenDf.to_json()
-	obj['colHeaders'] = json.dumps(out['col_headers'].tolist())
-	# print " we get out ", obj['id'], obj['numClusters']
-	# print " we getting data now ", out
-	emit('on_clustering_recieve'+str(obj['id']), obj)
-	# socketio.removeListener('on_clustering_recieve')
+	obj = getSimilarItems(data)
+	emit('similarData_return', obj)
 
 
 @socketio.on('find_recommend')

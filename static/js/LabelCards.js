@@ -31,6 +31,7 @@ LabelCard.makeCards = function(containerId = ""){
     if(data == null) data = LabelCard.getDataForCard(item);
     else data = data['data']
     DataTable.makeTable(data,"labelCard_"+item);
+    LabelCard.stylizeTables("labelCard_"+item);
     LabelCard.storedData[item] = {
       'data' : data,
       'mainRow' : data[0]
@@ -69,7 +70,7 @@ $(".ui-droppable.labelCard").droppable({
         dataCard.unshift(dataGet);
         dataCard.unshift(LabelCard.storedData[idCard]['mainRow']);
         DataTable.makeTable(dataCard,"labelCard_"+idCard);
-
+        LabelCard.stylizeTables("labelCard_"+idCard)
 
         console.log('id dropped ',idNum, dataGet);
         console.log('id dropped ',idCard, dataCard);
@@ -81,6 +82,11 @@ $(".ui-droppable.labelCard").droppable({
 }// end of makeCards
 
 LabelCard.updateCardById = function(cardId = 0){
+}
+
+
+LabelCard.stylizeTables = function(containerId = ""){
+  $("#"+containerId+" tr:nth-child(1)").css('background', Main.colors.HIGHLIGHT2);
 }
 
 

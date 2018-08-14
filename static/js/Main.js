@@ -31,6 +31,7 @@
 
     Main.colors = {
         HIGHLIGHT: "#C23573",
+        HIGHLIGHT2: "#35B7C2",
         LIGHTGRAY: "lightgray",
         BLACK: 'black',
         POS_COL: 'red',

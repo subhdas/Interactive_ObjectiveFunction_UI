@@ -77,6 +77,20 @@
         $('#addLabelCard').on('click', function () {
           LabelCard.makeCards();
 
+          var objSend = {
+            data : Main.trainData,
+            selectedRowIds  : DataTable.selectedRows
+          };
+
+          socket.emit("find_similarData", objSend);
+          socket.off('find_similarData');
+          socket.removeAllListeners('similarData_return');
+          socket.on("similarData_return", function (dataObj) {
+            console.log('similar data returned ', dataObj )
+
+
+          })
+
         })
 
 
