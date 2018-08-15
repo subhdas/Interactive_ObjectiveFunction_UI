@@ -248,6 +248,8 @@
     DataTable.makeTable = function (dataGiven = main.appData, containerId = "tableContent") {
         $("#dataViewAppTable_"+containerId).remove();
 
+        var color_scale = d3.scale.linear().domain([0, 1]).range(['beige', 'green']);
+
         var data = Util.deepCopyData(dataGiven);
 
         // console.log(" drawing test data table ... ", dataGiven);
@@ -313,6 +315,24 @@
             })
             .attr('id', function (d) {
                 return 'tr_' + d.id;
+            })
+            .style('background', function(d){
+              var id = d.id;
+              var parId = Util.getNumberFromText(containerId);
+              if(parId =="") return "";
+              else{
+                var index = LabelCard.computeReturnData['indexBydata'][parId].indexOf(""+id);
+                // console.log('returning can add color ', index, id, parId)
+                if(index != -1){
+                  var prob = LabelCard.computeReturnData['probByData'][parId][index];
+                  // return color_scale(Util.getRandomNumberBetween(1,0))
+                  console.log('returning color scale ', prob)
+                  return color_scale(prob);
+                }else {
+                  return ""
+                }
+              }
+
             })
             .on('mouseover', function (d) {
                 try {

@@ -53,8 +53,7 @@ def findFeatures_byVariance(x):
     # finalColList = col_sorted[0:4]
     num = random.randint(1,len(col_sorted)-1)
     finalColList = col_sorted[-1*num:]
-    try: finalColList.remove('id')
-    except : pass
+
     # fin = x[finalCol]
     # fin['target_variable'] = tar
     print " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
@@ -68,7 +67,10 @@ def getSimilarItems(dataObj):
     data = dataObj['data']
     selectedRows = dataObj['selectedRowIds']
     data = pd.DataFrame(data)
-    data, colList = findFeatures_byVariance(data)
+    # data, colList = findFeatures_byVariance(data)
+    colList = data.columns.values.tolist()
+    try: colList.remove('id')
+    except : pass
     # print " we get data is ", data.head(3)
     # print " selected row ids ", selectedRows
     rowKeys = selectedRows.keys()
