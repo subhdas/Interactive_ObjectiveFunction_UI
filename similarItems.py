@@ -77,8 +77,8 @@ def getSimilarItems(dataObj):
     data = pd.DataFrame(data)
     # data, colList = findFeatures_byVariance(data)
     colList = data.columns.values.tolist()
-    # colList = ['Acceleration','Cylinders', 'id']
-    colList = ['Displacement','Horsepower', 'id']
+    colList = ['Acceleration','Cylinders', 'id']
+    # colList = ['Displacement','Horsepower', 'id']
     data = data[colList]
     try: colList.remove('id')
     except : pass
@@ -91,11 +91,14 @@ def getSimilarItems(dataObj):
     # print "data row key ", dataRowKey
     # print "data row not key ", notDataRowKey
     dataRowKey_mat = dataRowKey.as_matrix()
+    nonDataRowKey_mat = notDataRowKey.as_matrix()
+
+    print "nond data row matrix ", nonDataRowKey_mat
+
 
     def convertStr(x):
         try:  return float(x)
         except: return 0
-
     scoreDict = {}
     scoreArr = []
     for i in range(len(dataRowKey_mat)):
@@ -104,8 +107,7 @@ def getSimilarItems(dataObj):
         item = [convertStr(x) for x in item]
         # scoreDict[rowKeys[i]] = sum(item)
         scoreArr.append(sum(item))
-        print " iterating ", i, item, scoreDict
-
+        print " iterating ", i, item, scoreArr
     # for i in range(notDataRowKey.shape[0]):
     notDataRowKey['cluster'] = -1
     dataRowKey['cluster'] = -1
@@ -115,17 +117,23 @@ def getSimilarItems(dataObj):
     diffDict = {}
     notDataRowKeyCopy  = notDataRowKey.copy()
     print " index list ",notDataRowKey.index.tolist()
+    # nonDataRowKey_mat = np.squeeze(np.asarray(nonDataRowKey_mat))
 
-    for row in notDataRowKey.iterrows():
-    # for m in range(notDataRowKey.shape[0]):
-        m, rowList = row
+    # for row in notDataRowKey.iterrows():
+    for m in range(notDataRowKey.shape[0]):
+    # for m in range(len(nonDataRowKey_mat)):
+
+        # m, rowList = row
+        rowList = nonDataRowKey_mat[m,:]
         # rowList = notDataRowKey.iloc[int(m)]
         # print " we get i ", m, notDataRowKey.shape
-
-        arr = np.array(rowList)
+        # arr = np.array(rowList)
+        arr = rowList
         item = [convertStr(x) for x in arr]
         score = sum(item)
-        # print " in arr iterating ", i, item, score
+
+        print " in arr iterating ", m, item, score, len(nonDataRowKey_mat)
+
         index, value = find_nearest(scoreArr,score)
         diff = abs(value-score)
 
@@ -136,8 +144,8 @@ def getSimilarItems(dataObj):
         # print " index value ", m, index, value, score
         try: diffDict[int(rowKeys[index])].append(float(diff))
         except: diffDict[int(rowKeys[index])] = [float(diff)]
-        try: rowDict[int(rowKeys[index])].append(int(notDataRowKey['id'][m]))
-        except: rowDict[int(rowKeys[index])] = [int(notDataRowKey['id'][m])]
+        try: rowDict[int(rowKeys[index])].append(int(notDataRowKey['id'].values[m]))
+        except: rowDict[int(rowKeys[index])] = [int(notDataRowKey['id'].values[m])]
         try: rowProbDict[int(rowKeys[index])].append(float(diff))
         except: rowProbDict[int(rowKeys[index])] = [float(diff)]
         notDataRowKey['cluster'][m] = index
@@ -145,6 +153,7 @@ def getSimilarItems(dataObj):
     maxArr = []
     for i in range(dataRowKey.shape[0]):
         dataRowKey['cluster'][i] = i
+        print " in row prob dict ", i, rowProbDict
         maxVal = max(rowProbDict[int(rowKeys[i])])
         try: rowDict[int(rowKeys[i])].append(int(rowKeys[i]))
         except:  rowDict[int(rowKeys[i])] = [int(rowKeys[i])]
@@ -155,7 +164,7 @@ def getSimilarItems(dataObj):
     for i in range(dataRowKey.shape[0]):
         mx= maxArr[i]
         rowProbDict[int(rowKeys[i])] = [ round(float(x)/mx,20) for x in rowProbDict[int(rowKeys[i])]]
-    result = pd.concat([dataRowKey, notDataRowKey])
+    # result = pd.concat([dataRowKey, notDataRowKey])
 
     print " found rowdict ", rowDict
 
@@ -167,7 +176,7 @@ def getSimilarItems(dataObj):
 
 
 
-    return {'dataGiven' : result.to_dict('records'), 'indexBydata' : rowDict, 'probByData' : rowProbDict, 'colSelected' : colList, 'scoreDiff' : diffDict}
+    return {'indexBydata' : rowDict, 'probByData' : rowProbDict, 'colSelected' : colList, 'scoreDiff' : diffDict}
 
 
 
