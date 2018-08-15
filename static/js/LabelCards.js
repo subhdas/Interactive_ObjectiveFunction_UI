@@ -17,6 +17,29 @@ LabelCard.getDataForCard = function(mainId = 0, dataGiven = Main.trainData){
   return data;
 }
 
+
+LabelCard.getDataObject = function(idObject){
+  LabelCard.storedData ={}
+  for(var item in idObject){
+    var arr = idObject[item]
+    var dataRows = []
+    for(var i=0;i<arr.length;i++){
+      if(arr[i] == item)continue;
+      var data = Main.getDataById(arr[i], Main.trainData);
+      dataRows.push(Object.assign({}, data));
+    }
+    var dataARow = Main.getDataById(item, Main.trainData);
+    dataRows.unshift(dataARow);
+    LabelCard.storedData[item] = {
+      'data' : dataRows,
+      'mainRow' : dataRows[0]
+    }
+  }
+
+
+}
+
+
 LabelCard.makeCards = function(containerId = ""){
   if(containerId == "") containerId = "labelCardPanel";
   $("#"+containerId).empty();

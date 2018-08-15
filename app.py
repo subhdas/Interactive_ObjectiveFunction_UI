@@ -47,7 +47,7 @@ def preprocess_data(dataGiven):
 	inp_df = pd.DataFrame(dataIn)
 	inp_df['cluster'] = 0
 	orig_df = inp_df.fillna(0)
-	v = 20*7
+	v = 30*6
 	inp_df = orig_df[0:v]
 	app_df = orig_df[v:orig_df.shape[0] - 1]
 	app_df['id'] = [i for i in range(app_df.shape[0])]

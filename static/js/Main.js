@@ -54,7 +54,9 @@
             }
             $("#sidePanel").css("width", "25px");
             $("#viewPanel").css("width", "100%");
-            var dataSrc = "static/data/car_full1.csv";
+            var dataSrc = "static/data/car_full2.csv";
+            // var dataSrc = "static/data/movies_200.csv";
+            // var dataSrc = "static/data/movie_metadata_200.csv";
             // var dataSrc = "static/data/BreastCancerDataSet.csv";
 
             if (tag) Main.sendData(Main.outerData);
@@ -210,6 +212,19 @@
             Main.attrDict[title[i]]["uniqueVals"] = attrUniq;
             Main.attrDict[title[i]]["range"] = [attrUniq[0], attrUniq[attrUniq.length - 1]];
         }
+
+        Main.trainData.forEach(function(d){
+          var temp = d[Main.entityName];
+          var temp2 = d[Main.entityNameSecondImp];
+          delete d[Main.entityName];
+          delete d[Main.entityNameSecondImp];
+
+          d["0_"+Main.entityName] = temp;
+          d["0_"+Main.entityNameSecondImp] = temp2;
+        })
+        Main.entityName = "0_"+Main.entityName;
+        Main.entityNameSecondImp = "0_"+Main.entityNameSecondImp;
+        Main.leftData = Main.trainData;
 
     }
 

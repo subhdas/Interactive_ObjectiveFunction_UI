@@ -75,7 +75,6 @@
 
 
         $('#addLabelCard').on('click', function () {
-          LabelCard.makeCards();
 
           var objSend = {
             data : Main.trainData,
@@ -86,9 +85,9 @@
           socket.off('find_similarData');
           socket.removeAllListeners('similarData_return');
           socket.on("similarData_return", function (dataObj) {
-            console.log('similar data returned ', dataObj )
-
-
+            console.log('similar data returned ', dataObj );
+            LabelCard.getDataObject(dataObj['indexBydata']);
+            LabelCard.makeCards();
           })
 
         })
