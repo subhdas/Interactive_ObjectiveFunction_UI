@@ -5,6 +5,8 @@ import random
 import numpy as np
 import json
 import math
+from sklearn.feature_selection import VarianceThreshold
+
 #`values` should be sorted
 def get_closest(array, values):
     array = np.array(array)
@@ -30,11 +32,39 @@ def find_nearest(array, value):
     idx = (np.abs(array - value)).argmin()
     return idx, array[idx]
 
+def remove_categorical(X):
+    X = X.apply(pd.to_numeric, errors='ignore')
+    return X._get_numeric_data()
+
+
+def findFeatures_byVariance(x):
+    id = x['id']
+    finalColList = []
+    train = x.copy()
+    train = remove_categorical(train)
+    selector = VarianceThreshold()
+    selector.fit_transform(train)
+    col = train.columns.values
+    var = selector.variances_
+    col_sorted = [m for _, m in sorted(zip(var, col))]
+    print " variance obtained " , len(var), len(col), var
+    print " variance cols ", col
+    print " variance cols sorted ", col_sorted, sorted(var)
+    # finalColList = col_sorted[0:4]
+    finalColList = col_sorted[-4:]
+    # fin = x[finalCol]
+    # fin['target_variable'] = tar
+    print " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
+    fin = x[finalColList]
+    fin['id'] = id
+    print " we have finalCol ", finalColList
+    return fin
 
 def getSimilarItems(dataObj):
     data = dataObj['data']
     selectedRows = dataObj['selectedRowIds']
     data = pd.DataFrame(data)
+    data = findFeatures_byVariance(data)
     # print " we get data is ", data.head(3)
     # print " selected row ids ", selectedRows
     rowKeys = selectedRows.keys()
@@ -43,14 +73,11 @@ def getSimilarItems(dataObj):
     notDataRowKey = data.loc[~data['id'].isin(rowKeys)]
     # print "data row key ", dataRowKey
     # print "data row not key ", notDataRowKey
-
     dataRowKey_mat = dataRowKey.as_matrix()
 
     def convertStr(x):
-        try:
-            return float(x)
-        except:
-            return 0
+        try:  return float(x)
+        except: return 0
 
     scoreDict = {}
     scoreArr = []
@@ -80,8 +107,8 @@ def getSimilarItems(dataObj):
         item = [convertStr(x) for x in arr]
         score = sum(item)
         # print " in arr iterating ", i, item, score
-        # index, value = find_nearest(scoreArr,score)
-        index, value = find_nearest_sorted(scoreArr,score)
+        index, value = find_nearest(scoreArr,score)
+        # index, value = find_nearest_sorted(scoreArr,score)
         # index, value = 0,444
 
         # index, value = get_closest(scoreArr,score)
