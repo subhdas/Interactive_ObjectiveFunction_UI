@@ -86,6 +86,7 @@
           socket.removeAllListeners('similarData_return');
           socket.on("similarData_return", function (dataObj) {
             console.log('similar data returned ', dataObj );
+            LabelCard.computeReturnData = dataObj;
             LabelCard.getDataObject(dataObj['indexBydata']);
             LabelCard.makeCards();
           })

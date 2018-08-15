@@ -1,6 +1,7 @@
 (function(){
   LabelCard = {};
-  LabelCard.storedData ={}
+  LabelCard.storedData ={};
+  LabelCard.computeReturnData = {};
 
 LabelCard.getDataForCard = function(mainId = 0, dataGiven = Main.trainData){
   // var ran = Util.getRandomNumberBetween(Main.trainData.length*0.75 , 3).toFixed(0);
@@ -35,19 +36,37 @@ LabelCard.getDataObject = function(idObject){
       'mainRow' : dataRows[0]
     }
   }
+}
 
+LabelCard.addHeader = function(containerId = ""){
+  if(containerId == "") containerId = "labelCardPanel";
+  var htmlStr = "<div id ='labelCardHeaderId' >"
+  htmlStr += "<div id ='labelCardHeadRow' >Labels Added : " + Object.keys(LabelCard.storedData).length + "</div>";
+  htmlStr += "<div id ='labelCardHeadRow' >Features Relevant : " + LabelCard.computeReturnData['colSelected'] + "</div>";
+  htmlStr += "</div>";
 
+  $("#"+containerId).append(htmlStr);
+
+  $("#labelCardHeaderId").css('display', 'flex');
+  $("#labelCardHeaderId").css('flex-direction', 'column');
+  $("#labelCardHeaderId").css('padding', '3px');
+  $("#labelCardHeaderId").css('border-bottom', '1px solid gray');
 }
 
 
 LabelCard.makeCards = function(containerId = ""){
   if(containerId == "") containerId = "labelCardPanel";
   $("#"+containerId).empty();
-  // LabelCard.storedData = {};
+  LabelCard.addHeader(containerId);
 
   for(var item in DataTable.selectedRows){
-    var htmlStr = "<div id='labelCard_"+item+"' class = 'ui-droppable labelCard'>";
+
+    var htmlStr = "<div class ='labelWrap' ><div id ='labelCardInfo' >"
+    htmlStr += "<div id ='labelCardInfoRow' >Label Id : " + item + "</div>";
+    htmlStr += "<div id ='labelCardInfoRow' >Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
     htmlStr += "</div>";
+    htmlStr += "<div id='labelCard_"+item+"' class = 'ui-droppable labelCard'>";
+    htmlStr += "</div></div>";
     $("#"+containerId).append(htmlStr);
     var data = LabelCard.storedData[item];
     console.log('found data is ', data)
@@ -61,6 +80,11 @@ LabelCard.makeCards = function(containerId = ""){
     }
   }
 
+  $(".labelWrap").css('display', 'flex')
+  $(".labelWrap").css('flex-direction', 'column')
+  $(".labelWrap").css('padding', '3px')
+  $(".labelWrap").css('font-size', '0.8em')
+  $(".labelWrap").css('border-bottom', '1px solid lightgray')
   $(".labelCard").css("display", "flex");
   $(".labelCard").css("width", "100%");
   $(".labelCard").css("height", "300px");
