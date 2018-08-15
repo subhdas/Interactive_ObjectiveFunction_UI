@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import random
 import numpy as np
+import json
 
 def find_nearest(array, value):
     array = np.asarray(array)
@@ -42,6 +43,10 @@ def getSimilarItems(dataObj):
         print " iterating ", i, item, scoreDict
 
     # for i in range(notDataRowKey.shape[0]):
+    notDataRowKey['cluster'] = -1
+    dataRowKey['cluster'] = -1
+
+    rowDict = {}
     for row in notDataRowKey.iterrows():
         i, rowList = row
         arr = np.array(rowList)
@@ -49,10 +54,27 @@ def getSimilarItems(dataObj):
         score = sum(item)
         # print " in arr iterating ", i, item, score
         index, value = find_nearest(scoreArr,score)
-        print " index value ", index, value, score
+        print " index value ", i, index, value, score
+        try:
+            rowDict[rowKeys[index]].append(str(notDataRowKey['id'][i]))
+        except:
+            rowDict[rowKeys[index]] = [str(notDataRowKey['id'][i])]
+        notDataRowKey['cluster'][i] = index
 
 
-    return {'a' : rowKeys}
+    for i in range(dataRowKey.shape[0]):
+        dataRowKey['cluster'][i] = i
+        try:
+            rowDict[rowKeys[i]].append(str(rowKeys[i]))
+        except:
+            rowDict[rowKeys[i]] = [str(rowKeys[i])]
+    result = pd.concat([dataRowKey, notDataRowKey])
+
+    print " found rowdict ", rowDict
+
+
+
+    return {'dataGiven' : result.to_dict('records'), 'indexBydata' : rowDict}
 
 
 
