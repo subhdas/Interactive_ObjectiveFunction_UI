@@ -36,6 +36,12 @@ def remove_categorical(X):
     X = X.apply(pd.to_numeric, errors='ignore')
     return X._get_numeric_data()
 
+# X is the array you want to sort, Y is by the array
+def sortArr_ByArray(Y,X):
+    arr = [x for _,x in sorted(zip(Y,X))]
+    print ' sorted arr ', arr
+    return arr
+    # return arr[::-1]
 
 def findFeatures_byVariance(x):
     id = x['id']
@@ -63,12 +69,17 @@ def findFeatures_byVariance(x):
     print " we have finalCol ", finalColList
     return fin, finalColList
 
+
+
 def getSimilarItems(dataObj):
     data = dataObj['data']
     selectedRows = dataObj['selectedRowIds']
     data = pd.DataFrame(data)
     # data, colList = findFeatures_byVariance(data)
     colList = data.columns.values.tolist()
+    # colList = ['Acceleration','Cylinders', 'id']
+    colList = ['Displacement','Horsepower', 'id']
+    data = data[colList]
     try: colList.remove('id')
     except : pass
     # print " we get data is ", data.head(3)
@@ -101,6 +112,7 @@ def getSimilarItems(dataObj):
     scoreArr.sort()
     rowDict = {}
     rowProbDict = {}
+    diffDict = {}
     notDataRowKeyCopy  = notDataRowKey.copy()
     print " index list ",notDataRowKey.index.tolist()
 
@@ -116,37 +128,46 @@ def getSimilarItems(dataObj):
         # print " in arr iterating ", i, item, score
         index, value = find_nearest(scoreArr,score)
         diff = abs(value-score)
+
         # index, value = find_nearest_sorted(scoreArr,score)
         # index, value = 0,444
 
         # index, value = get_closest(scoreArr,score)
         # print " index value ", m, index, value, score
-        try: rowDict[rowKeys[index]].append(str(notDataRowKey['id'][m]))
-        except: rowDict[rowKeys[index]] = [str(notDataRowKey['id'][m])]
-        try: rowProbDict[rowKeys[index]].append(float(diff))
-        except: rowProbDict[rowKeys[index]] = [float(diff)]
+        try: diffDict[int(rowKeys[index])].append(float(diff))
+        except: diffDict[int(rowKeys[index])] = [float(diff)]
+        try: rowDict[int(rowKeys[index])].append(int(notDataRowKey['id'][m]))
+        except: rowDict[int(rowKeys[index])] = [int(notDataRowKey['id'][m])]
+        try: rowProbDict[int(rowKeys[index])].append(float(diff))
+        except: rowProbDict[int(rowKeys[index])] = [float(diff)]
         notDataRowKey['cluster'][m] = index
 
     maxArr = []
     for i in range(dataRowKey.shape[0]):
         dataRowKey['cluster'][i] = i
-        maxVal = max(rowProbDict[rowKeys[i]])
-        try: rowDict[rowKeys[i]].append(str(rowKeys[i]))
-        except:  rowDict[rowKeys[i]] = [str(rowKeys[i])]
-        try: rowProbDict[rowKeys[i]].append(float(maxVal)+1)
-        except:  rowProbDict[rowKeys[i]] = [float(maxVal)+1]
+        maxVal = max(rowProbDict[int(rowKeys[i])])
+        try: rowDict[int(rowKeys[i])].append(int(rowKeys[i]))
+        except:  rowDict[int(rowKeys[i])] = [int(rowKeys[i])]
+        try: rowProbDict[int(rowKeys[i])].append(float(maxVal)+1)
+        except:  rowProbDict[int(rowKeys[i])] = [float(maxVal)+1]
         maxArr.append(float(maxVal)+1)
 
     for i in range(dataRowKey.shape[0]):
         mx= maxArr[i]
-        rowProbDict[rowKeys[i]] = [ round(float(x)/mx,3) for x in rowProbDict[rowKeys[i]]]
+        rowProbDict[int(rowKeys[i])] = [ round(float(x)/mx,20) for x in rowProbDict[int(rowKeys[i])]]
     result = pd.concat([dataRowKey, notDataRowKey])
 
     print " found rowdict ", rowDict
 
+    for i in range(dataRowKey.shape[0]):
+        rowDict[int(rowKeys[i])] = sortArr_ByArray(diffDict[int(rowKeys[i])], rowDict[int(rowKeys[i])])
+        rowProbDict[int(rowKeys[i])] = sortArr_ByArray(diffDict[int(rowKeys[i])], rowProbDict[int(rowKeys[i])])
+        # diffDict[int(rowKeys[i])].sort(reverse = True)
+        diffDict[int(rowKeys[i])].sort()
 
 
-    return {'dataGiven' : result.to_dict('records'), 'indexBydata' : rowDict, 'probByData' : rowProbDict, 'colSelected' : colList}
+
+    return {'dataGiven' : result.to_dict('records'), 'indexBydata' : rowDict, 'probByData' : rowProbDict, 'colSelected' : colList, 'scoreDiff' : diffDict}
 
 
 

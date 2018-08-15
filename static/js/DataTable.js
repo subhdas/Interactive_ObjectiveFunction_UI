@@ -321,12 +321,12 @@
               var parId = Util.getNumberFromText(containerId);
               if(parId =="") return "";
               else{
-                var index = LabelCard.computeReturnData['indexBydata'][parId].indexOf(""+id);
+                var index = LabelCard.computeReturnData['indexBydata'][parId].indexOf(id);
                 // console.log('returning can add color ', index, id, parId)
                 if(index != -1){
                   var prob = LabelCard.computeReturnData['probByData'][parId][index];
                   // return color_scale(Util.getRandomNumberBetween(1,0))
-                  console.log('returning color scale ', prob)
+                  // console.log('returning color scale ', prob)
                   return color_scale(prob);
                 }else {
                   return ""
