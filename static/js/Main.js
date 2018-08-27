@@ -175,6 +175,7 @@
         DataTable.addIconsTop(Main.trainData);
         DataTable.switchToLeftData();
         DataTable.makeTable(Main.leftData);
+        Cons.makeConsDivs();
     }
 
 
