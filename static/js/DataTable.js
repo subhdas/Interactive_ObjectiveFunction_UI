@@ -225,9 +225,6 @@
         }, 400);
     }
 
-
-
-
     DataTable.filterTableByCluster = function (item) {
         var data = Util.deepCopyData(Main.currentData);
         // data.forEach(function(d){
