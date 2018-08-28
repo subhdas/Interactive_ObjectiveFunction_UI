@@ -49,58 +49,25 @@ tr:hover{
 
 }
 
-/* .labelCard td{
-  max-height: 10px;
-  height: 10px;
+
+/* #tooltip {
+    display: flex;
+    position: absolute;
+    text-align: center;
+    width: 40px;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+    pointer-events: none;
+}
+
+
+#tooltip.hidden {
+    display: none;
+}
+#tooltip p {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 20px;
 } */
-
-/* .labelCard th{
-  display: inherit;
-} */
-
-
-
-
-
-
-/*lasso styling below*/
-
-.lasso_svg path {
-    stroke: rgb(80, 80, 80);
-    stroke-width: 2px;
-    opacity: 0.1;
-}
-
-
-
-
-/* path {
-     stroke: rgb(80, 80, 80);
-     stroke-width: 2px;
-     opacity: 0.1;
-} */
-
-
-
-.lasso .drawn {
-    fill-opacity: .05;
-    fill : 'cyan'
-}
-
-.lasso .loop_close {
-    fill: none;
-    stroke-dasharray: 4, 4;
-}
-
-.lasso .origin {
-    fill: #3399FF;
-    fill-opacity: .5;
-}
-
-.not_possible {
-    fill: rgb(200, 200, 200);
-}
-
-.possible {
-    fill: #EC888C;
-}

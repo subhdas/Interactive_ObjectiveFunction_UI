@@ -176,6 +176,7 @@
         DataTable.switchToLeftData();
         DataTable.makeTable(Main.leftData);
         Cons.makeConsDivs();
+        BarM.makeStackedModelBars();
     }
 
 

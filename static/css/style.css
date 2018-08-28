@@ -48,13 +48,19 @@ body {
 }
 
 #bottomBar {
-    display: flex;
-    flex-direction: row;
+    /* display: flex; */
+    /* flex-direction: row; */
     /* width: 100%; */
-    height: 10%;
+    /* display: block; */
+    /* height: 15%; */
     /* margin: 5px; */
     border-bottom: 1px dashed black;
 
+}
+
+
+#bottomContent{
+  display: flex;
 }
 
 #constrainPanel{
@@ -66,8 +72,10 @@ body {
   font-size: 0.8em;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 5px;
+  /* padding: 5px; */
   border-right : 1px solid lightgray;
+  overflow-x: auto;
+  overflow-y: hidden;
   /* margin: 5px;
   border-radius: 5px; */
   /* cursor: pointer; */
@@ -76,7 +84,7 @@ body {
 
 #modelExplorePanel{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   /* width: 35%; */
   height: 100%;
   color: #555;
