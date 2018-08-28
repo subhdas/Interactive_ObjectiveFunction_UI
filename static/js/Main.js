@@ -16,6 +16,7 @@
     Main.attrDict = {};
     Main.numericalAttributes = {};
     Main.targetName = 'target_variable';
+    Main.predictedName = 'predicted'
     Main.appData = [];
     Main.outerData = [];
     Main.entityName = '';
@@ -206,6 +207,7 @@
             data.forEach(function (d) {
                 attrList.push(+d[title[i]])
                 d[Main.targetName] = -1;
+                d[Main.predictedName] = 'NA';
             })
 
             var attrUniq = Util.getUniqueArray(attrList);

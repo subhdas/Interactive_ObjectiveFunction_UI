@@ -16,32 +16,16 @@ from hyperopt.fmin import fmin
 
 
 
-
-
+def preProcessData(data):
+    data = data.apply(pd.to_numeric, errors='ignore')
+    data = data._get_numeric_data()
+    return data
 
 
 
 def find_goodModel(train,target):
-
-    train = train.apply(pd.to_numeric, errors='ignore')
-    train = train._get_numeric_data()
-    # domain space
-    # space = hp.uniform('x', -5, 6)
-    # # Create the algorithm
-    # tpe_algo = tpe.suggest
-    # # Create a trials object
-    # tpe_trials = Trials()
-    # # Run 2000 evals with the tpe algorithm
-    # tpe_best = fmin(fn=objective, space=space,
-    #                 algo=tpe_algo, trials=tpe_trials,
-    #                 max_evals=2000)
-
+    train = preProcessData(train)
     def objective(space):
-        # """Objective function to minimize"""
-        # # Create the polynomial object
-        # f = np.poly1d([1, -2, -28, 28, 12, -26, 100])
-        # # Return the value of the polynomial
-        # return f(x) * 0.05
         # clf = xgb.XGBRegressor(n_estimators = space['n_estimators'],
         #                        max_depth = space['max_depth'],
         #                        min_child_weight = space['min_child_weight'],
@@ -58,17 +42,12 @@ def find_goodModel(train,target):
                                     bootstrap = space['bootstrap'],
                                     criterion = space['criterion']
                                     )
-
-        # eval_set  = [( train, train_y), ( test, test_y)]
         clf.fit(train, target)
-        # test = train
-        # pred = clf.predict(test)
         cross_mean_score = cross_val_score(
             estimator=clf, X=train, y=target, scoring='precision_macro', cv=3, n_jobs=-1).mean()
 
         result = {'loss':cross_mean_score, 'status': STATUS_OK }
         print " result is ", result
-        #    print "SCORE:", mae
         return result
 
     col_train = train.columns
@@ -118,9 +97,20 @@ def makePredictions(space, train, test, target):
     print "train predictions ", predTest
     predTrain = [str(x) for x in predTrain]
     predTest = [str(x) for x in predTest]
+
+    predTrainDict = {}
+    predTestDict = {}
+    for i in range(len(predTrain)):
+        id = train['id'].values[i]
+        predTrainDict[str(id)] = str(predTrain[i])
+    for i in range(len(predTest)):
+        id = test['id'].values[i]
+        predTestDict[str(id)] = str(predTest[i])
+
+
     return {
-    'trainPred' : predTrain,
-    'testPred' : predTest
+    'trainPred' : predTrainDict,
+    'testPred' : predTestDict
     }
 
 

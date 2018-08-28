@@ -8,7 +8,15 @@
     //new variabbles
     DataTable.selectedRows = {}
 
-    DataTable.updateLabel = function(){
+    DataTable.modelUpdateLabel = function(){
+      var predTrainDict = BarM.modelData[0]['predictions']['trainPred'];
+      for(var item in predTrainDict){
+        var label = predTrainDict[item];
+        $('.td_id_'+item).parent().find('.td_'+Main.predictedName).text(label);
+      }
+    }
+
+    DataTable.userUpdateLabel = function(){
       var arr = [];
       for(var item in LabelCard.storedData){
         var data = LabelCard.storedData[item]['data'];

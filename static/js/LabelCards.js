@@ -72,7 +72,8 @@ LabelCard.addHeader = function(containerId = ""){
     // socket.removeAllListeners('send_good_model');
     socket.on("send_good_model", function (dataObj) {
       console.log('good model recieved ', dataObj );
-
+      BarM.modelData[0] = Object.assign({}, dataObj);
+      DataTable.modelUpdateLabel();
     })
   })
 }
@@ -174,7 +175,7 @@ $('body').on('focus', '[contenteditable]', function() {
   console.log('onblur ', $(this).text(), id);
   LabelCard.storedData[id]['label'] = $(this).text();
   LabelCard.tempLabels[id] = $(this).text();
-  DataTable.updateLabel();
+  DataTable.userUpdateLabel();
 })
 
 }// end of makeCards

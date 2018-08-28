@@ -116,6 +116,7 @@ def handle_my_custom_event(data):
 	print " request to get good model"
 	train = data['train']
 	train = pd.DataFrame(train)
+	train = train.drop(['predicted'], axis = 1)
 	targetCol = data['targetCol']
 	print "train and targetCol ", train.head(3)
 	print "train and targetCol ", targetCol, train.columns.values
