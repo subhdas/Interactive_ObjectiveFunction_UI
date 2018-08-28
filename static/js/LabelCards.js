@@ -47,7 +47,7 @@ LabelCard.getDataObject = function(idObject){
 LabelCard.addHeader = function(containerId = ""){
   if(containerId == "") containerId = "labelCardPanel";
   var htmlStr = "<div id ='labelCardHeaderId' >"
-  htmlStr += "<div class = 'iconDiv'><div class='iconHolder' id='addAllData' onclick='' title='Add all data'>"
+  htmlStr += "<div class = 'iconDiv'><div class='iconHolder' id='makeModel' onclick='' title='Make Models'>"
   htmlStr += "<img class='imgIcon' src='static/img/icons/three_bar.png'></div></div>"
   htmlStr += "<div id ='labelCardHeadRow' >Labels Added : " + Object.keys(LabelCard.storedData).length +  " | Features Relevant : " + LabelCard.computeReturnData['colSelected'] +"</div>";
   // htmlStr += "<div id ='labelCardHeadRow' >Features Relevant : " + LabelCard.computeReturnData['colSelected'] + "</div>";
@@ -61,6 +61,20 @@ LabelCard.addHeader = function(containerId = ""){
   $("#labelCardHeaderId").css('padding', '3px');
   // $("#labelCardHeaderId").css('border-bottom', '1px solid gray');
   $(".iconDiv").css('border-bottom', '1px solid gray');
+
+  $("#makeModel").on('click', function(){
+    var objSend = {
+      'train' : Main.trainData,
+      'targetCol' : Main.targetName,
+    }
+    socket.emit("get_good_model", objSend);
+    // socket.off('get_good_model');
+    // socket.removeAllListeners('send_good_model');
+    socket.on("send_good_model", function (dataObj) {
+      console.log('good model recieved ', dataObj );
+
+    })
+  })
 }
 
 

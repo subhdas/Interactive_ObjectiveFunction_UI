@@ -22,6 +22,7 @@ from timeit import default_timer as timer
 from sklearn.model_selection import train_test_split
 
 from similarItems import getSimilarItems
+from hyperOpt_optimize import find_goodModel
 
 
 
@@ -109,6 +110,21 @@ def handle_my_custom_event(data):
 	out = get_clustering(data)
 	# print " we get out ", out
 	emit('on_recommend_recieve', out)
+
+@socketio.on('get_good_model')
+def handle_my_custom_event(data):
+	print " request to get good model"
+	train = data['train']
+	train = pd.DataFrame(train)
+	targetCol = data['targetCol']
+	print "train and targetCol ", train.head(3)
+	print "train and targetCol ", targetCol, train.columns.values
+	target = train[str(targetCol)]
+	# target = ''
+	train.drop([targetCol], axis=1)
+	out = find_goodModel(train, target)
+	# print " we get out ", out
+	emit('send_good_model', out)
 
 # socket func+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
