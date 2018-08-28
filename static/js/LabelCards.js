@@ -33,7 +33,8 @@ LabelCard.getDataObject = function(idObject){
     dataRows.unshift(dataARow);
     LabelCard.storedData[item] = {
       'data' : dataRows,
-      'mainRow' : dataRows[0]
+      'mainRow' : dataRows[0],
+      'label' : item,
     }
   }
 }
@@ -66,8 +67,8 @@ LabelCard.makeCards = function(containerId = ""){
 
     var htmlStr = "<div class ='labelWrap' ><div id ='labelCardInfo'>"
     // htmlStr += "<div id ='labelCardInfoRow'>Label Id : <span contenteditable='true'>" + item + "</span></div>";
-    htmlStr += "<div id ='labelCardInfoRow'>Label Id/Name: <span > " + item + " | "+ name + " </span></div>";
-    htmlStr += "<div id ='labelCardInfoRow' >Label : <span contenteditable='true'>"+ item + "</span> Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
+    htmlStr += "<div id ='labelCardInfoRow'>Label Id/Name: <span > " + item + " | "+ name + " </span> | Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
+    htmlStr += "<div id ='labelCardInfoRow' class ='labelNameRow' >Label : <span id = 'spanLabel_"+item+"' contenteditable='true'>"+ item + "</span></div>";
     // htmlStr += "<div id ='labelCardInfoRow' >Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
     htmlStr += "</div>";
     htmlStr += "<div id='labelCard_"+item+"' class = 'ui-droppable labelCard'>";
@@ -81,7 +82,8 @@ LabelCard.makeCards = function(containerId = ""){
     LabelCard.stylizeTables("labelCard_"+item);
     LabelCard.storedData[item] = {
       'data' : data,
-      'mainRow' : data[0]
+      'mainRow' : data[0],
+      'label' : item,
     }
   }
 
@@ -97,6 +99,8 @@ LabelCard.makeCards = function(containerId = ""){
   $(".labelCard").css("margin", "5px");
   $(".labelCard").css("overflow-y", "auto");
   $(".labelCard").css("overflow-x", "auto");
+
+  $(".labelNameRow").css('font-weight', '900')
   // $(".labelCard :hover").css("background", "lightgray");
 
 
@@ -139,7 +143,9 @@ $('body').on('focus', '[contenteditable]', function() {
 //     console.log('key up focus ', $(this).text())
 // })
 .on('blur', '[contenteditable]', function(){
-  console.log('onblur ', $(this).text())
+  var id =  Util.getNumberFromText($(this).attr('id'));
+  console.log('onblur ', $(this).text(), id);
+  LabelCard.storedData[id]['label'] = $(this).text();
 })
 
 }// end of makeCards
