@@ -72,13 +72,14 @@ def find_goodModel(train,target):
         return result
 
     col_train = train.columns
-
+    bootStrapArr = [True,False]
+    criterionArr = ["gini", "entropy"]
     space ={
         'max_depth': hp.choice('max_depth', np.arange(10, 30, dtype=int)),
-        'min_samples_split': hp.choice('min_samples_split', np.arange(3, 15, dtype=int)),
-        'min_samples_leaf': hp.choice('min_samples_leaf', np.arange(3, 15, dtype=int)),
-        'bootstrap':hp.choice('bootstrap',[True,False]),
-        'criterion':hp.choice('criterion',["gini", "entropy"])
+        'min_samples_split': hp.choice('min_samples_split', np.arange(8, 15, dtype=int)),
+        'min_samples_leaf': hp.choice('min_samples_leaf', np.arange(5, 15, dtype=int)),
+        'bootstrap':hp.choice('bootstrap', bootStrapArr),
+        'criterion':hp.choice('criterion', criterionArr)
     }
 
     trials = Trials()
@@ -88,8 +89,40 @@ def find_goodModel(train,target):
                 max_evals=3, # change
                 trials=trials)
 
+
+
     print(best)
-    return best
+    best['bootstrap'] = bootStrapArr[best['bootstrap']]
+    best['criterion'] = criterionArr[best['criterion']]
+
+    obj = {
+    'predictions' : makePredictions(best,train, train,target),
+    'params' : best,
+    'STATUS' : 'OK'
+    }
+    return obj
+
+
+def makePredictions(space, train, test, target):
+    clf = RandomForestClassifier(max_depth=space['max_depth'],
+                                min_samples_split = space['min_samples_split'],
+                                min_samples_leaf = space['min_samples_leaf'],
+                                bootstrap = space['bootstrap'],
+                                criterion = space['criterion']
+                                )
+    clf.fit(train, target)
+    predTrain = clf.predict(train)
+    predTest = clf.predict(test)
+
+    print "train predictions ", predTrain
+    print "train predictions ", predTest
+    predTrain = [str(x) for x in predTrain]
+    predTest = [str(x) for x in predTest]
+    return {
+    'trainPred' : predTrain,
+    'testPred' : predTest
+    }
+
 
 if __name__ == "__main__":
 

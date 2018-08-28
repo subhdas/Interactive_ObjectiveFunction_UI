@@ -14,7 +14,7 @@
         var data = LabelCard.storedData[item]['data'];
         var label = LabelCard.storedData[item]['label'];
         for (var i=0;i<data.length;i++){
-          data[i].target = label;
+          data[i][Main.targetName] = label;
           $('.td_id_'+data[i].id).parent().find('.td_'+Main.targetName).text(label);
         }
         arr = arr.concat(data);
