@@ -22,6 +22,9 @@ from hyperopt.fmin import fmin
 
 
 def find_goodModel(train,target):
+
+    train = train.apply(pd.to_numeric, errors='ignore')
+    train = train._get_numeric_data()
     # domain space
     # space = hp.uniform('x', -5, 6)
     # # Create the algorithm
@@ -68,7 +71,6 @@ def find_goodModel(train,target):
         #    print "SCORE:", mae
         return result
 
-
     col_train = train.columns
 
     space ={
@@ -87,7 +89,7 @@ def find_goodModel(train,target):
                 trials=trials)
 
     print(best)
-    return {a:0, b:1}
+    return best
 
 if __name__ == "__main__":
 
