@@ -205,6 +205,7 @@
             var attrList = [];
             data.forEach(function (d) {
                 attrList.push(+d[title[i]])
+                d.target = -1;
             })
 
             var attrUniq = Util.getUniqueArray(attrList);

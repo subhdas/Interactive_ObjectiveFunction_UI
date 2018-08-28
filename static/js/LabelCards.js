@@ -1,6 +1,7 @@
 (function(){
   LabelCard = {};
   LabelCard.storedData ={};
+  LabelCard.tempLabels ={};
   LabelCard.computeReturnData = {};
 
 LabelCard.getDataForCard = function(mainId = 0, dataGiven = Main.trainData){
@@ -31,10 +32,14 @@ LabelCard.getDataObject = function(idObject){
     }
     var dataARow = Main.getDataById(item, Main.trainData);
     dataRows.unshift(dataARow);
+    var lab = item;
+    try{
+      lab = LabelCard.tempLabels[item];
+    }catch(err){}
     LabelCard.storedData[item] = {
       'data' : dataRows,
       'mainRow' : dataRows[0],
-      'label' : item,
+      'label' : lab,
     }
   }
 }
@@ -42,8 +47,11 @@ LabelCard.getDataObject = function(idObject){
 LabelCard.addHeader = function(containerId = ""){
   if(containerId == "") containerId = "labelCardPanel";
   var htmlStr = "<div id ='labelCardHeaderId' >"
-  htmlStr += "<div id ='labelCardHeadRow' >Labels Added : " + Object.keys(LabelCard.storedData).length + "</div>";
-  htmlStr += "<div id ='labelCardHeadRow' >Features Relevant : " + LabelCard.computeReturnData['colSelected'] + "</div>";
+  htmlStr += "<div class = 'iconDiv'><div class='iconHolder' id='addAllData' onclick='' title='Add all data'>"
+  htmlStr += "<img class='imgIcon' src='static/img/icons/three_bar.png'></div></div>"
+  htmlStr += "<div id ='labelCardHeadRow' >Labels Added : " + Object.keys(LabelCard.storedData).length +  " | Features Relevant : " + LabelCard.computeReturnData['colSelected'] +"</div>";
+  // htmlStr += "<div id ='labelCardHeadRow' >Features Relevant : " + LabelCard.computeReturnData['colSelected'] + "</div>";
+
   htmlStr += "</div>";
 
   $("#"+containerId).append(htmlStr);
@@ -51,7 +59,8 @@ LabelCard.addHeader = function(containerId = ""){
   $("#labelCardHeaderId").css('display', 'flex');
   $("#labelCardHeaderId").css('flex-direction', 'column');
   $("#labelCardHeaderId").css('padding', '3px');
-  $("#labelCardHeaderId").css('border-bottom', '1px solid gray');
+  // $("#labelCardHeaderId").css('border-bottom', '1px solid gray');
+  $(".iconDiv").css('border-bottom', '1px solid gray');
 }
 
 
@@ -65,7 +74,7 @@ LabelCard.makeCards = function(containerId = ""){
     var data = Main.getDataById(item, Main.trainData);
     var name = data[Main.entityNameSecondImp];
 
-    var htmlStr = "<div class ='labelWrap' ><div id ='labelCardInfo'>"
+    var htmlStr = "<br><div class ='labelWrap' ><div id ='labelCardInfo'>"
     // htmlStr += "<div id ='labelCardInfoRow'>Label Id : <span contenteditable='true'>" + item + "</span></div>";
     htmlStr += "<div id ='labelCardInfoRow'>Label Id/Name: <span > " + item + " | "+ name + " </span> | Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
     htmlStr += "<div id ='labelCardInfoRow' class ='labelNameRow' >Label : <span id = 'spanLabel_"+item+"' contenteditable='true'>"+ item + "</span></div>";
@@ -80,10 +89,14 @@ LabelCard.makeCards = function(containerId = ""){
     else data = data['data']
     DataTable.makeTable(data,"labelCard_"+item);
     LabelCard.stylizeTables("labelCard_"+item);
+    var lab = item;
+    try{
+      lab = LabelCard.tempLabels[item];
+    }catch(err){}
     LabelCard.storedData[item] = {
       'data' : data,
       'mainRow' : data[0],
-      'label' : item,
+      'label' : lab,
     }
   }
 
@@ -146,9 +159,13 @@ $('body').on('focus', '[contenteditable]', function() {
   var id =  Util.getNumberFromText($(this).attr('id'));
   console.log('onblur ', $(this).text(), id);
   LabelCard.storedData[id]['label'] = $(this).text();
+  LabelCard.tempLabels[id] = $(this).text();
+  DataTable.updateLabel();
 })
 
 }// end of makeCards
+
+
 
 LabelCard.updateCardById = function(cardId = 0){
 }

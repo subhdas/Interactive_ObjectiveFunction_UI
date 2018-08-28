@@ -8,6 +8,20 @@
     //new variabbles
     DataTable.selectedRows = {}
 
+    DataTable.updateLabel = function(){
+      var arr = [];
+      for(var item in LabelCard.storedData){
+        var data = LabelCard.storedData[item]['data'];
+        var label = LabelCard.storedData[item]['label'];
+        for (var i=0;i<data.length;i++){
+          data[i].target = label;
+          $('.td_id_'+data[i].id).parent().find('.td_target').text(label);
+        }
+        arr = arr.concat(data);
+      }
+      Main.trainData = arr;
+    }
+
 
     DataTable.updateHeader = function () {
         if (DataTable.viewFullTable) {
@@ -34,6 +48,9 @@
     }
 
 
+
+
+
     DataTable.addIconsTop = function (dataIn = Main.trainData, containerId = "") {
 
         if (containerId == "") {
@@ -46,9 +63,9 @@
         // $("#" + containerId).append(htmlStr);
 
 
-        htmlStr = "<div class='iconHolder' id='addAllData' onclick='' title='Add all data'>"
-        htmlStr += "<img class='imgIcon' src='static/img/icons/loadData.png'></div>"
-        htmlStr += "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
+        // htmlStr = "<div class='iconHolder' id='addAllData' onclick='' title='Add all data'>"
+        // htmlStr += "<img class='imgIcon' src='static/img/icons/loadData.png'></div>"
+        htmlStr = "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
         htmlStr += "<img class='imgIcon' src='static/img/icons/add.png'></div>"
         // htmlStr += "<button id='dataToggleBtn'> </button>";
         htmlStr += "<div class = 'dataTableHeadText'>" + dataIn.length + " rows </div>";

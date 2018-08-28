@@ -122,6 +122,7 @@ body {
     margin: 5px;
     /* border-radius: 5px; */
     border-left: 1px dashed black;
+    overflow-y: auto;
 
     /*min-width: 300px;*/
     /*    margin: 2px;*/
