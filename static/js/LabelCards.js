@@ -61,9 +61,14 @@ LabelCard.makeCards = function(containerId = ""){
 
   for(var item in DataTable.selectedRows){
 
-    var htmlStr = "<div class ='labelWrap' ><div id ='labelCardInfo' >"
-    htmlStr += "<div id ='labelCardInfoRow' >Label Id : " + item + "</div>";
-    htmlStr += "<div id ='labelCardInfoRow' >Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
+    var data = Main.getDataById(item, Main.trainData);
+    var name = data[Main.entityNameSecondImp];
+
+    var htmlStr = "<div class ='labelWrap' ><div id ='labelCardInfo'>"
+    // htmlStr += "<div id ='labelCardInfoRow'>Label Id : <span contenteditable='true'>" + item + "</span></div>";
+    htmlStr += "<div id ='labelCardInfoRow'>Label Id/Name: <span > " + item + " | "+ name + " </span></div>";
+    htmlStr += "<div id ='labelCardInfoRow' >Label : <span contenteditable='true'>"+ item + "</span> Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
+    // htmlStr += "<div id ='labelCardInfoRow' >Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
     htmlStr += "</div>";
     htmlStr += "<div id='labelCard_"+item+"' class = 'ui-droppable labelCard'>";
     htmlStr += "</div></div>";
@@ -125,6 +130,17 @@ $(".ui-droppable.labelCard").droppable({
 
     }
 });
+
+//contenteditable event listener
+$('body').on('focus', '[contenteditable]', function() {
+    // console.log('found focus ', $(this).text())
+})
+// .on('blur keyup paste input', '[contenteditable]', function() {
+//     console.log('key up focus ', $(this).text())
+// })
+.on('blur', '[contenteditable]', function(){
+  console.log('onblur ', $(this).text())
+})
 
 }// end of makeCards
 
