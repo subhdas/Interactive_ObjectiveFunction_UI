@@ -100,12 +100,6 @@
 
 
     $('#addLabelCard').on('click', function() {
-      // Object.keys( DataTable.selectedRows).forEach(key =>  DataTable.selectedRows[key] === undefined ? delete  DataTable.selectedRows[key] : '');
-      // Object.keys(DataTable.selectedRows).forEach(key => {
-      //   if (typeof key == 'undefined') {
-      //     delete DataTable.selectedRows[key];
-      //   }
-      // });
       var objSend = {
         data: Main.trainData,
         selectedRowIds: DataTable.selectedRows

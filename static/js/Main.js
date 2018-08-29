@@ -144,21 +144,21 @@
             }
             socket.emit("data_preprocess", objSend);
             socket.on("data_return_preprocess", function (dataGet) {
-                // console.log("received data after pre process ", dataGet);
+                console.log("received data after pre process ", dataGet);
                 Main.trainData = dataGet[0];
                 Main.trainDataCopy = Util.deepCopyData(Main.trainData)
                 Main.leftData = Util.deepCopyData(Main.trainData)
                 // Main.currentData = Util.deepCopyData(Main.trainData)
                 Main.currentData = []; //Util.deepCopyData(Main.trainData)
 
-                Main.trainTarget = dataGet[1];
-                Main.testData = dataGet[2];
-                Main.testTarget = dataGet[3];
-                Main.appData = dataGet[4];
+                // Main.trainTarget = dataGet[1];
+                Main.testData = dataGet[1];
+                // Main.testTarget = dataGet[3];
+                Main.appData = dataGet[2];
 
 
                 // GridData.deletedNodesData = Util.deepCopyData(Main.trainData);
-
+                // console.log(' now test data ', Main.testData.length, dataGet[2].length)
                 Main.processAttrData(Main.trainData);
                 Main.taskScheduler();
             });
@@ -171,8 +171,6 @@
     ideally should only run once, when the system loads
     */
     Main.taskScheduler = function () {
-
-        // ClusterModeler.visClus()
         DataTable.addIconsTop(Main.trainData);
         DataTable.switchToLeftData();
         DataTable.makeTable(Main.leftData);
@@ -230,6 +228,8 @@
         Main.entityName = "0_"+Main.entityName;
         Main.entityNameSecondImp = "0_"+Main.entityNameSecondImp;
         Main.leftData = Main.trainData;
+
+        console.log(' train test and left data ', Main.trainData.length, Main.testData.length, Main.leftData.length)
 
     }
 
