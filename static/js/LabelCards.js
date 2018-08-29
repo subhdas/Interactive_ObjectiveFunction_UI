@@ -91,8 +91,8 @@ LabelCard.makeCards = function(containerId = ""){
 
     var htmlStr = "<br><div class ='labelWrap' ><div id ='labelCardInfo'>"
     // htmlStr += "<div id ='labelCardInfoRow'>Label Id : <span contenteditable='true'>" + item + "</span></div>";
-    htmlStr += "<div id ='labelCardInfoRow'>Label Id/Name: <span > " + item + " | "+ name + " </span> | Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
-    htmlStr += "<div id ='labelCardInfoRow' class ='labelNameRow' >Label : <span id = 'spanLabel_"+item+"' contenteditable='true'>"+ item + "</span></div>";
+    htmlStr += "<div class = 'labelInfo' id ='labelCardInfoRow' class ='labelNameRow' >Label : <span class = 'labelItem' id = 'spanLabel_"+item+"' contenteditable='true'>"+ item + "</span></div>";
+    htmlStr += "<div class = 'labelInfo' id ='labelCardInfoRow'>Label Id/Name: <span > " + item + " | "+ name + " </span> | Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
     // htmlStr += "<div id ='labelCardInfoRow' >Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
     htmlStr += "</div>";
     htmlStr += "<div id='labelCard_"+item+"' class = 'ui-droppable labelCard'>";
@@ -129,6 +129,11 @@ LabelCard.makeCards = function(containerId = ""){
   $(".labelCard").css("overflow-x", "auto");
 
   $(".labelNameRow").css('font-weight', '900')
+  $(".labelInfo").css('padding', '3px')
+  $(".labelItem").css('background', Main.colors.HIGHLIGHT)
+  $(".labelItem").css('padding', '5px')
+  $(".labelItem").css('border-radius', '4px')
+  $(".labelItem").css('color', 'white')
   // $(".labelCard :hover").css("background", "lightgray");
 
 

@@ -453,6 +453,8 @@
           var idNum = Util.getNumberFromText($(this).attr('id'));
           if(typeof DataTable.selectedRows[idNum] ==  'undefined'){
             $(this).css('background', Main.colors.HIGHLIGHT);
+            DataTable.fontColor = $(this).css('color');
+            $(this).css('color', 'white');
             // var selection = $(this).closest('td')
             // DataTable.selectedRows[idNum] = d3.select(selection).datum();
             DataTable.selectedRows[idNum] = true;
@@ -460,6 +462,7 @@
             $(this).css('background', "rgb(255,255,255)");
             console.log("removing colors")
             delete DataTable.selectedRows[idNum];
+            $(this).css('color', DataTable.fontColor);
           }
         })
 
