@@ -92,7 +92,7 @@ LabelCard.makeCards = function(containerId = ""){
     var htmlStr = "<br><div class ='labelWrap' ><div id ='labelCardInfo'>"
     // htmlStr += "<div id ='labelCardInfoRow'>Label Id : <span contenteditable='true'>" + item + "</span></div>";
     htmlStr += "<div class = 'labelInfo' id ='labelCardInfoRow' class ='labelNameRow' >Label : <span class = 'labelItem' id = 'spanLabel_"+item+"' contenteditable='true'>"+ item + "</span></div>";
-    htmlStr += "<div class = 'labelInfo' id ='labelCardInfoRow'>Label Id/Name: <span > " + item + " | "+ name + " </span> | Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
+    htmlStr += "<div class = 'labelInfo' id ='labelCardInfoRow'>Label Id/Name: <span > " + item + " | "+ name + " </span> | Data Length : <span class = 'labelCardLength_"+item+"'>" + LabelCard.storedData[item]['data'].length + "</span></div>";
     // htmlStr += "<div id ='labelCardInfoRow' >Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
     htmlStr += "</div>";
     htmlStr += "<div id='labelCard_"+item+"' class = 'ui-droppable labelCard'>";
@@ -158,11 +158,30 @@ $(".ui-droppable.labelCard").droppable({
         dataCard.splice(0,1);
         dataCard.unshift(dataGet);
         dataCard.unshift(LabelCard.storedData[idCard]['mainRow']);
+
+        $(".labelCardLength_"+idCard).text(dataCard.length);
         DataTable.makeTable(dataCard,"labelCard_"+idCard);
-        LabelCard.stylizeTables("labelCard_"+idCard)
+        LabelCard.stylizeTables("labelCard_"+idCard);
 
         console.log('id dropped ',idNum, dataGet);
         console.log('id dropped ',idCard, dataCard);
+
+
+        //remove data from the labalcard where it was lastDragged
+        setTimeout(function(){
+          var dataPrev = LabelCard.storedData[parseInt(DataTable.lastLabelCardId)]['data'];
+          var newData = [];
+          dataPrev.forEach(function(d){
+            if(d.id != DataTable.lastDraggedId ){
+              newData.push(d);
+            }
+          })
+          console.log('newdata and data prev length ', newData.length, dataPrev.length)
+          LabelCard.storedData[parseInt(DataTable.lastLabelCardId)]['data'] = newData;
+          $(".labelCardLength_"+DataTable.lastLabelCardId).text(newData.length);
+          DataTable.makeTable(newData,"labelCard_"+parseInt(DataTable.lastLabelCardId));
+          LabelCard.stylizeTables("labelCard_"+parseInt(DataTable.lastLabelCardId));
+      }, 50);
 
 
     }

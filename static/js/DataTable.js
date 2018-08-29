@@ -141,11 +141,15 @@
       drag: function() {
         // console.log('dragging now ', this)
       },
-      stop: function(e) {
+      stop: function(e, ui) {
         var id = $(this).attr('id');
+        DataTable.lastLabelCardId = $(this).parent().parent().parent();
+        DataTable.lastLabelCardId = DataTable.lastLabelCardId.attr('id');
+        DataTable.lastLabelCardId = Util.getNumberFromText(DataTable.lastLabelCardId)
         var idNum = Util.getNumberFromText(id);
-        console.log('stopped drag now ', id, idNum, e);
-        $(this).css('border-bottom', 'transparent')
+        console.log('stopped drag now ', id, idNum,DataTable.lastLabelCardId );
+        DataTable.lastDraggedId = idNum;
+        $(this).css('border-bottom', 'transparent');
         // DataTable.filterById(idNum);
       }
     });

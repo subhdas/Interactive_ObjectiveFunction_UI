@@ -146,7 +146,8 @@
 
        $( "#bottomBar" ).accordion({
          collapsible: true,
-         heightStyle: "content"
+         heightStyle: "content",
+         active: false,
        });
 
        // $( "#btnAdd" ).button( "option", "icon", "ui-icon-gear" );
