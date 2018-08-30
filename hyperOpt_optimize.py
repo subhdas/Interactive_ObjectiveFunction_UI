@@ -42,6 +42,8 @@ def find_goodModel(train,target):
                                     bootstrap = space['bootstrap'],
                                     criterion = space['criterion']
                                     )
+
+        # score =  A*SameLabel + B*Features + 
         clf.fit(train, target)
         cross_mean_score = cross_val_score(
             estimator=clf, X=train, y=target, scoring='precision_macro', cv=3, n_jobs=-1).mean()

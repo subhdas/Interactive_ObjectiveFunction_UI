@@ -148,6 +148,7 @@ $(".ui-droppable.labelCard").droppable({
     // hoverClass: "ui-state-hover",
     drop: function(event, ui) {
         $(this).addClass( "ui-state-highlight" )
+
         // $(this).append($(ui.draggable));
         console.log("dropped item ", ui);
         var idNum = Util.getNumberFromText( ui.draggable[0]['id']);
@@ -155,6 +156,10 @@ $(".ui-droppable.labelCard").droppable({
 
         var idCard = Util.getNumberFromText($(this).attr('id'));
         var dataCard = LabelCard.storedData[idCard]['data'];
+        var dataIndex = Main.getDataIndexById(idCard, dataCard);
+
+        dataGet[Main.targetName] =  LabelCard.tempLabels[idCard];
+        $('.td_id_' + idNum).parent().find('.td_' + Main.targetName).text(dataGet[Main.targetName]);
         dataCard.splice(0,1);
         dataCard.unshift(dataGet);
         dataCard.unshift(LabelCard.storedData[idCard]['mainRow']);
@@ -168,6 +173,7 @@ $(".ui-droppable.labelCard").droppable({
 
 
         //remove data from the labalcard where it was lastDragged
+        //
         setTimeout(function(){
           var dataPrev = LabelCard.storedData[parseInt(DataTable.lastLabelCardId)]['data'];
           var newData = [];
