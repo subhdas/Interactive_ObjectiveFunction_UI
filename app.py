@@ -22,7 +22,7 @@ from timeit import default_timer as timer
 from sklearn.model_selection import train_test_split
 
 from similarItems import getSimilarItems
-from hyperOpt_optimize import find_goodModel
+from hyperOpt_optimize import wrap_findGoodModel
 
 
 
@@ -124,7 +124,7 @@ def handle_my_custom_event(data):
 	target = train[str(targetCol)]
 	# target = ''
 	train.drop([targetCol], axis=1)
-	out = find_goodModel(train, target)
+	out = wrap_findGoodModel(train, target)
 	# print " we get out ", out
 	emit('send_good_model', out)
 

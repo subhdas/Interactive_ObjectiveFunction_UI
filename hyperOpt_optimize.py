@@ -22,6 +22,16 @@ def preProcessData(data):
     return data
 
 
+def wrap_findGoodModel(train,target):
+    done = False
+    while( not done):
+        try:
+            obj = find_goodModel(train,target)
+            return obj
+        except Exception as e:
+            print " errored in finding good model ", e
+    return obj
+
 
 def find_goodModel(train,target):
     train = preProcessData(train)
@@ -43,7 +53,7 @@ def find_goodModel(train,target):
                                     criterion = space['criterion']
                                     )
 
-        # score =  A*SameLabel + B*Features + 
+        # score =  A*SameLabel + B*Features +
         clf.fit(train, target)
         cross_mean_score = cross_val_score(
             estimator=clf, X=train, y=target, scoring='precision_macro', cv=3, n_jobs=-1).mean()

@@ -453,10 +453,12 @@
 
 
     $("#dataViewAppTable_" + containerId + " tr").on('click', function(d) {
+      if(containerId != "tableContent" ) return;
       var back = $(this).css('background-color');
       // console.log("clicked tabel tr ", $(this), d, back);
       var idNum = Util.getNumberFromText($(this).attr('id'));
       if(typeof idNum == 'undefined') return;
+
       if (typeof DataTable.selectedRows[idNum] == 'undefined') {
         $(this).css('background', Main.colors.HIGHLIGHT);
         DataTable.fontColor = $(this).css('color');

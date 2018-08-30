@@ -151,11 +151,23 @@ $(".ui-droppable.labelCard").droppable({
 
         // $(this).append($(ui.draggable));
         console.log("dropped item ", ui);
-        var idNum = Util.getNumberFromText( ui.draggable[0]['id']);
+        var idNum = Util.getNumberFromText( ui.draggable[0]['id']); //dropped id
+
+
+
+
+
         var dataGet = Main.getDataById(idNum, Main.trainData);
 
-        var idCard = Util.getNumberFromText($(this).attr('id'));
+        var idCard = Util.getNumberFromText($(this).attr('id')); // card id dropped to
         var dataCard = LabelCard.storedData[idCard]['data'];
+        var check = false; //already present
+        dataCard.forEach(function(d,i){
+          if (idNum == d.id) check = true;
+        })
+        if(check) return;
+
+
         var dataIndex = Main.getDataIndexById(idCard, dataCard);
 
         dataGet[Main.targetName] =  LabelCard.tempLabels[idCard];
