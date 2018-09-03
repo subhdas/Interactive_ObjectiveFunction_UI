@@ -178,9 +178,6 @@
         ConsInt.interPanelContentFromData(stri  = name);
 
         if ( $('#consInterPanel').children().length > 0 ){
-
-        }else{
-          // ConsInt.makeInteractionPanel(stri = name);
         }
 
       })
