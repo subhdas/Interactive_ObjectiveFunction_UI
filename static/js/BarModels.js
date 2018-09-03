@@ -124,7 +124,7 @@
 
     var sizes = {
       width: 600,
-      height: 200
+      height: 120
     };
 
     var width = sizes.width - margins.left - margins.right;

@@ -50,7 +50,7 @@
 
 
   ConsInt.interPanelContentFromData = function(stri = ""){
-    console.log('inter called')
+    // console.log('inter called')
     for(var item in LabelCard.storedData){
       var labelId = item;
       if(typeof ConsInt.activeConstraints[stri]['input'][labelId] == 'undefined') continue;
@@ -85,7 +85,7 @@
       hoverClass: "labelitemHover",
       drop: function(event, ui) {
         // console.log("dropped item ", ui);
-        console.log("dropped item new ", event);
+        // console.log("dropped item new ", event);
         var idNum = Util.getNumberFromText(ui.draggable[0]['id']);
         var labelId = Util.getNumberFromText($(this).attr('id'));
 
@@ -109,7 +109,7 @@
           }catch(err){
             index = -1
           }
-          console.log(' dropped with index ', index, item, lab)
+          // console.log(' dropped with index ', index, item, lab)
           if(index != -1 && lab != item) {
             ConsInt.activeConstraints[stri]['input'][item].splice(index, 1);
           }
@@ -117,7 +117,6 @@
         try{
           ConsInt.interPanelContentFromData(stri);
         }catch(err){
-          // ConsInt.stylizeAddContent(idNum,labelId);
         }
 
       }// end of drop

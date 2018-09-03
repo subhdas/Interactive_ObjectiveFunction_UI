@@ -45,31 +45,35 @@
           'Add' : true,
           'Checked' : false,
         },
-        'Similar-Items' :{
+        'Similarity-Metric' :{
+          'Add' : true,
           'Checked' : false,
         },
-        'Dissimilar-Items' : {
+        'Information-Gain' : {
+          'Add' : true,
           'Checked' : false,
         }
       },
       'QUALITATIVE' : {
-        'Similar-Features': {
+        'Feature-Selection': {
+          'Add' : true,
           'Checked' : false,
         },
         'Feature-Weights' :{
           'Add' : true,
           'Checked' : false,
         },
-        'Same-Range-Features' : {
+        'Feature-Range' : {
+          'Add' : true,
           'Checked' : false,
         }
       },
       'PREDICTIVE' : {
-        'Interacted-Items': {
+        'Critical-Items' :{
           'Add' : true,
           'Checked' : false,
         },
-        'Critical-Items' :{
+        'Number-Items-Features' : {
           'Add' : true,
           'Checked' : false,
         },
