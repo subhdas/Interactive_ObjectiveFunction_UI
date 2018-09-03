@@ -42,11 +42,13 @@
 
     var htmlStr = "<div class = 'labelCon'>"
     //add label boxes
+    var labelArr = [];
     for (var item in LabelCard.storedData) {
       var val =  LabelCard.tempLabels[item];
-      if(typeof val =='undefined') val = item
+      if(typeof val =='undefined') val = item;
+      labelArr.push(val);
       htmlStr += "<div class = 'labelitemsTitle'> Label : " + val + "</div>"
-      htmlStr += "<div class = 'ui-droppable labelitemsCon'></div><br>"
+      htmlStr += "<div class = 'ui-droppable labelitemsCon' id = 'labelitemsConId_"+val+"' ></div><br>"
     }
     htmlStr += "</div>";
     $('#' + containerId).append(htmlStr);
@@ -72,7 +74,24 @@
         $(".dropNameInt").css('background', Main.colors.HIGHLIGHT2);
         $(".dropNameInt").css('border-radius', '3px');
 
-      }
+        //update data
+        var obj = {};
+        // var lab = $(event.target).siblings().closest('.labelitemsTitle').text();
+        var lab = $(event.target).attr('id');
+        lab = Util.getNumberFromText(lab);
+        try{
+          ConsInt.activeConstraints[stri]['input'][lab].push(idNum);
+        }catch(err){
+          ConsInt.activeConstraints[stri]['input'][lab] = [idNum];
+        }
+        for(var i=0;i<labelArr.length;i++){
+
+
+        }
+
+
+
+      }// end of drop
 
 
     })
