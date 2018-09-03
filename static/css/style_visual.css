@@ -50,6 +50,14 @@ tr:hover{
 }
 
 
+
+.labelitemHover
+ {
+     background-color: #CACACA;
+     border: 1px dashed #bbb;
+ }
+
+
 /* #tooltip {
     display: flex;
     position: absolute;

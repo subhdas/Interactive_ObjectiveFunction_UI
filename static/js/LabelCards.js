@@ -153,12 +153,12 @@ $(".ui-droppable.labelCard").droppable({
     // tolerance: "intersect",
     // accept: "tr",
     // activeClass: "ui-state-default",
-    // hoverClass: "ui-state-hover",
+    // hoverClass: "labelitemHover",
     drop: function(event, ui) {
         $(this).addClass( "ui-state-highlight" )
 
         // $(this).append($(ui.draggable));
-        console.log("dropped item ", ui);
+        // console.log("dropped item ", ui);
         var idNum = Util.getNumberFromText( ui.draggable[0]['id']); //dropped id
 
 
