@@ -106,6 +106,7 @@
 
 
     Cons.numConstraints = Object.keys(Cons.typeConstraints).length;
+    Cons.lastItemClicked = "";
 
 
     Cons.makeConsDivs = function(containerId = "constrainPanel"){
@@ -129,7 +130,7 @@
           // htmlStr += "<input type='checkbox' name='checkbox-nested-1' id='checkbox-nested-1'>"
           htmlStr += "<input type='checkbox' parent = '"+item+"' given = '"+val+"' name='"+val+"checkbox-"+k+"' class = 'constOpt' id='"+val+"checkbox-"+k+"'>"
           if(Cons.typeConstraints[item][val]['Add']){
-            htmlStr += "<button class='ui-button ui-widget ui-corner-all'>+</button>"
+            htmlStr += "<button  parent = '"+item+"' given = '"+val+"' class='ui-button ui-widget ui-corner-all constOptBtn'>+</button>"
             // htmlStr += "<button id = 'btnAdd' class='ui-button ui-widget ui-corner-all ui-button-icon-only' title='Add'>+</button>"
           } // if add button
           htmlStr += "<div>"
@@ -139,7 +140,10 @@
         htmlStr += "<div>";
         $("#"+containerId).append(htmlStr);
 
+
       }
+
+      $(".constOptBtn").hide();
 
 
 
@@ -149,7 +153,28 @@
         var item = $(this).attr('parent');
         console.log('clicked checkbox ', name, item);
         Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
+        Cons.lastItemClicked = name;
+        // $(this).find('button').css('display', 'block');
+        if(Cons.typeConstraints[item][name]['Checked']){
+          $(this).siblings().show();
+          // ConsInt.showPanel();
+        }else{
+          $(this).siblings().closest('button').hide();
+          ConsInt.hidePanel();
+        }
+        // ConsInt.getActiveConstraints();
+        // ConsInt.makeInteractionPanel();
+      })
+
+      $('.constOptBtn').on('click', function(e){
+        var name = $(this).attr('given');
+        var item = $(this).attr('parent');
+        console.log('clicked checkbox ', name, item);
+        // Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
+        ConsInt.showPanel();
+        Cons.lastItemClicked = name;
         ConsInt.getActiveConstraints();
+        ConsInt.makeInteractionPanel(stri = name);
       })
 
 
