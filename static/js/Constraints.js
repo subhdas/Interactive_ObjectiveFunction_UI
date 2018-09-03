@@ -174,10 +174,13 @@
         ConsInt.showPanel();
         Cons.lastItemClicked = name;
         ConsInt.getActiveConstraints();
+        ConsInt.makeInteractionPanel(stri = name);
+        ConsInt.interPanelContentFromData(stri  = name);
+
         if ( $('#consInterPanel').children().length > 0 ){
 
         }else{
-          ConsInt.makeInteractionPanel(stri = name);
+          // ConsInt.makeInteractionPanel(stri = name);
         }
 
       })

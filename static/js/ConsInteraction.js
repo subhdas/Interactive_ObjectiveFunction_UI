@@ -9,6 +9,7 @@
     for (var item in Cons.typeConstraints) {
       var elem = Cons.typeConstraints[item];
       for (var k in elem) {
+        if(typeof ConsInt.activeConstraints[k] != 'undefined' ) continue;
         if (elem[k]['Checked'] == true) {
           var obj = {
             'input': {},
@@ -36,17 +37,37 @@
   }
 
 
+  ConsInt.interPanelContentFromData = function(stri = ""){
+
+    for(var item in LabelCard.storedData){
+      var labelId = item;
+      if(typeof ConsInt.activeConstraints[stri]['input'][labelId] == 'undefined') continue;
+      var idArr = ConsInt.activeConstraints[stri]['input'][labelId];
+      for(var i =0;i<idArr.length;i++){
+        var idNum = idArr[i];
+        var dataGet = Main.getDataById(idNum, Main.trainData);
+        var name = dataGet[Main.entityNameSecondImp]
+        var htmlStr = "<div class = 'dropNameInt'>" + name + "</div>"
+        $("#labelitemsConId_"+labelId).append(htmlStr);
+        $(".dropNameInt").css('display', 'flex');
+        $(".dropNameInt").css('padding', '3px');
+        $(".dropNameInt").css('margin-bottom', '2px');
+        $(".dropNameInt").css('background', Main.colors.HIGHLIGHT2);
+        $(".dropNameInt").css('border-radius', '3px');
+      }
+    }//end of for
+  }
+
+
   ConsInt.makeInteractionPanel = function(stri = "", containerId = "consInterPanel") {
     $("#" + containerId).empty();
     ConsInt.addInterHeader(stri, containerId);
 
     var htmlStr = "<div class = 'labelCon'>"
     //add label boxes
-    var labelArr = [];
     for (var item in LabelCard.storedData) {
       var val =  LabelCard.tempLabels[item];
       if(typeof val =='undefined') val = item;
-      labelArr.push(val);
       htmlStr += "<div class = 'labelitemsTitle'> Label : " + val + "</div>"
       htmlStr += "<div class = 'ui-droppable labelitemsCon' id = 'labelitemsConId_"+val+"' ></div><br>"
     }
@@ -76,7 +97,6 @@
 
         //update data
         var obj = {};
-        // var lab = $(event.target).siblings().closest('.labelitemsTitle').text();
         var lab = $(event.target).attr('id');
         lab = Util.getNumberFromText(lab);
         try{
@@ -84,12 +104,6 @@
         }catch(err){
           ConsInt.activeConstraints[stri]['input'][lab] = [idNum];
         }
-        for(var i=0;i<labelArr.length;i++){
-
-
-        }
-
-
 
       }// end of drop
 
