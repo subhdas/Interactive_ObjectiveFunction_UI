@@ -141,14 +141,14 @@ LabelCard.makeCards = function(containerId = ""){
   $(".labelItem").css('background', Main.colors.HIGHLIGHT)
   $(".labelItem").css('padding', '5px')
   $(".labelItem").css('border-radius', '4px')
-  $(".labelItem").css('color', 'white')
+  $(".labelItem").css('color', 'white');
   // $(".labelCard :hover").css("background", "lightgray");
 
 
 
 $(".ui-droppable.labelCard").droppable({
    activate: function( event, ui ) {
-     console.log("droppable activate")
+     console.log("droppable activate");
    },
     // tolerance: "intersect",
     // accept: "tr",
@@ -202,14 +202,12 @@ $(".ui-droppable.labelCard").droppable({
               newData.push(d);
             }
           })
-          console.log('newdata and data prev length ', newData.length, dataPrev.length)
+          console.log('newdata and data prev length ', newData.length, dataPrev.length);
           LabelCard.storedData[parseInt(DataTable.lastLabelCardId)]['data'] = newData;
           $(".labelCardLength_"+DataTable.lastLabelCardId).text(newData.length);
           DataTable.makeTable(newData,"labelCard_"+parseInt(DataTable.lastLabelCardId));
           LabelCard.stylizeTables("labelCard_"+parseInt(DataTable.lastLabelCardId));
       }, 50);
-
-
     }
 });
 

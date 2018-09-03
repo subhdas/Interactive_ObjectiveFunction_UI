@@ -43,10 +43,8 @@
     var htmlStr = "<div class = 'labelCon'>"
     //add label boxes
     for (var item in LabelCard.storedData) {
-      var val = item;
-      try{
-        val = LabelCard.tempLabels[item];
-      }
+      var val =  LabelCard.tempLabels[item];
+      if(typeof val =='undefined') val = item
       htmlStr += "<div class = 'labelitemsTitle'> Label : " + val + "</div>"
       htmlStr += "<div class = 'ui-droppable labelitemsCon'></div><br>"
     }
