@@ -17,7 +17,7 @@ html,
 body {
     overflow-x: hidden;
     /* made it hidden */
-    overflow-y: hidden;
+    overflow-y: auto;
     height: 100%;
     /*1200px;*/
     width: 100%;

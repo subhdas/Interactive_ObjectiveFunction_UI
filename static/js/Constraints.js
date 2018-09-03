@@ -43,36 +43,64 @@
       'COMPOSITIONAL' : {
         'Same-Label': {
           'Add' : true,
+          'Checked' : false,
         },
-        'Similar-Items' :{},
-        'Dissimilar-Items' : {}
+        'Similar-Items' :{
+          'Checked' : false,
+        },
+        'Dissimilar-Items' : {
+          'Checked' : false,
+        }
       },
       'QUALITATIVE' : {
-        'Similar-Features': {},
+        'Similar-Features': {
+          'Checked' : false,
+        },
         'Feature-Weights' :{
           'Add' : true,
+          'Checked' : false,
         },
-        'Same-Range-Features' : {}
+        'Same-Range-Features' : {
+          'Checked' : false,
+        }
       },
       'PREDICTIVE' : {
         'Interacted-Items': {
           'Add' : true,
+          'Checked' : false,
         },
         'Critical-Items' :{
           'Add' : true,
+          'Checked' : false,
         },
-        'Number-Items' : {}
+        'Number-Items' : {
+          'Checked' : false,
+        }
       },
       'QUANTITATIVE' : {
-        'Precision': {},
-        'Accuracy' :{},
-        'Recall' : {},
-        'Cross-Val' : {},
+        'Precision': {
+          'Checked' : false,
+        },
+        'Accuracy' :{
+          'Checked' : false,
+        },
+        'Recall' : {
+          'Checked' : false,
+        },
+        'Cross-Val' : {
+          'Checked' : false,
+        },
       },
       'GENERALIZATION' : {
-        'Number-Label-HoldOut': {},
-        'Critical-Data-HoldOut' :{},
-        'Cross-Val-Score' : {}
+        'Number-Label-HoldOut': {
+          'Checked' : false,
+        },
+        'Critical-Data-HoldOut' :{
+          'Checked' : false,
+        },
+        'Cross-Val-Score' : {
+          'Checked' : false,
+        }
       },
     }
 
@@ -99,7 +127,7 @@
           // htmlStr += "<label for='checkbox-nested-1'>" + val + "</label>"
           // htmlStr += "<label for='checkbox-nested-1'>" + val + "</label>"
           // htmlStr += "<input type='checkbox' name='checkbox-nested-1' id='checkbox-nested-1'>"
-          htmlStr += "<input type='checkbox' name='"+val+"checkbox-"+k+"' id='"+val+"checkbox-"+k+"'>"
+          htmlStr += "<input type='checkbox' parent = '"+item+"' given = '"+val+"' name='"+val+"checkbox-"+k+"' class = 'constOpt' id='"+val+"checkbox-"+k+"'>"
           if(Cons.typeConstraints[item][val]['Add']){
             htmlStr += "<button class='ui-button ui-widget ui-corner-all'>+</button>"
             // htmlStr += "<button id = 'btnAdd' class='ui-button ui-widget ui-corner-all ui-button-icon-only' title='Add'>+</button>"
@@ -112,6 +140,17 @@
         $("#"+containerId).append(htmlStr);
 
       }
+
+
+
+      //events
+      $('.constOpt').on('click', function(e){
+        var name = $(this).attr('given');
+        var item = $(this).attr('parent');
+        console.log('clicked checkbox ', name, item);
+        Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
+        ConsInt.getActiveConstraints();
+      })
 
 
       // $("#"+containerId).empty();

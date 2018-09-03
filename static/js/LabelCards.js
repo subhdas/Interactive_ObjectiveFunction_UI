@@ -24,24 +24,32 @@ LabelCard.getDataObject = function(idObject){
   LabelCard.storedData ={}
   for(var item in idObject){
     var arr = idObject[item]
-    var dataRows = []
+    var dataRows = [];
+    var defLabel = "Label_"+item;
     for(var i=0;i<arr.length;i++){
-      if(arr[i] == item)continue;
       var data = Main.getDataById(arr[i], Main.trainData);
+      data[Main.targetName] = defLabel;
+      // if(arr[i] == item)continue;
       dataRows.push(Object.assign({}, data));
     }
     var dataARow = Main.getDataById(item, Main.trainData);
+    dataARow[Main.targetName] = defLabel;
+
+
     dataRows.unshift(dataARow);
-    var lab = item;
+    var lab = defLabel; //item
     try{
       lab = LabelCard.tempLabels[item];
     }catch(err){}
+    if(typeof  lab == 'undefined') lab = defLabel;
     LabelCard.storedData[item] = {
       'data' : dataRows,
       'mainRow' : dataRows[0],
       'label' : lab,
     }
   }
+
+    DataTable.userUpdateLabel();
 }
 
 LabelCard.addHeader = function(containerId = ""){
