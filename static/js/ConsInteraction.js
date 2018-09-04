@@ -66,6 +66,7 @@
         var labelId = "Same";
         // if(typeof ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId] == 'undefined')
         var idArr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId];
+        if (typeof  idArr == 'undefined') return;
         $("#labelitemsConId_"+labelId).empty();
         for(var i =0;i<idArr.length;i++){
           var idNum = idArr[i];
@@ -82,6 +83,7 @@
       var labelId = "Max";
       // if(typeof ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId] == 'undefined')
       var idArr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId];
+      if (typeof  idArr == 'undefined') return;
       $("#labelitemsConId_"+labelId).empty();
       for(var i =0;i<idArr.length;i++){
         var idNum = idArr[i];
@@ -89,6 +91,18 @@
       }
       labelId = "Min";
       var idArr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId];
+      if (typeof  idArr == 'undefined') return;
+      $("#labelitemsConId_"+labelId).empty();
+      for(var i =0;i<idArr.length;i++){
+        var idNum = idArr[i];
+        ConsInt.stylizeAddContent(idNum,labelId);
+      }
+    }
+    else if(stri == "Critical-Items") {
+      var labelId = "Critical";
+      // if(typeof ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId] == 'undefined')
+      var idArr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId];
+      if (typeof  idArr == 'undefined') return;
       $("#labelitemsConId_"+labelId).empty();
       for(var i =0;i<idArr.length;i++){
         var idNum = idArr[i];
@@ -112,7 +126,7 @@
   }
 
 
-  // same-label content
+  // feature -weights content
   ConsInt.contentForFeatWeights = function(containerId = ""){
     var htmlStr = "<div class = 'labelCon featWtCon'>"
     var val = "Feature-Weights"
@@ -195,7 +209,17 @@
      $(".labelFeatWt").css('text-align', 'left')
   }
 
+  // similarity - metric label
+    ConsInt.contentForCriticalItems = function(containerId = ""){
+      var htmlStr = "<div class = 'labelCon'>"
+      //add label boxes - same
+      val = 'Critical'
+      htmlStr += "<div class = 'labelitemsTitle'>" + val + " items : </div>"
+      htmlStr += "<div givenCons = '"+stri+"' class = 'ui-droppable labelitemsCon' id = 'labelitemsConId_"+val+"' ></div><br>"; // this is the event.target
 
+      htmlStr += "</div>";
+      $('#' + containerId).append(htmlStr);
+    }
 
   // similarity - metric label
     ConsInt.contentForSimilarItems = function(containerId = ""){
@@ -240,6 +264,7 @@
     else if(stri == "Similarity-Metric")  ConsInt.contentForSimilarItems(containerId);
     else if(stri == "Information-Gain")  ConsInt.contentForInfoGain(containerId);
     else if(stri == "Feature-Weights")  ConsInt.contentForFeatWeights(containerId);
+    else if(stri == "Critical-Items")  ConsInt.contentForCriticalItems(containerId);
 
     //style
     $(".labelitemsTitle").css('padding', '5px');

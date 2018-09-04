@@ -56,6 +56,11 @@
   }
 
 
+  DataTable.showTableView = function(){
+    Main.tabelViewMode = true;
+    $("#tableContent").show();
+    $("#scatContent").hide();
+  }
 
 
 
@@ -73,11 +78,16 @@
 
     // htmlStr = "<div class='iconHolder' id='addAllData' onclick='' title='Add all data'>"
     // htmlStr += "<img class='imgIcon' src='static/img/icons/loadData.png'></div>"
-    htmlStr = "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
-    htmlStr += "<img class='imgIcon' src='static/img/icons/add.png'></div>"
+    htmlStr = "<div class='iconHolder' id='tableViewC' onclick='' title='Show Table View'>"
+    htmlStr += "<img class='imgIcon' src='static/img/icons/table_view.png'></div>"
+
+    htmlStr += "<div class='iconHolder' id='correlViewC' onclick='' title='Show Correlation View'>"
+    htmlStr += "<img class='imgIcon' src='static/img/icons/parallel.png'></div>"
+
     // htmlStr += "<button id='dataToggleBtn'> </button>";
     htmlStr += "<div class = 'dataTableHeadText'>" + dataIn.length + " rows </div>";
-
+    htmlStr += "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
+    htmlStr += "<img class='imgIcon' src='static/img/icons/add.png'></div>"
 
     $("#" + containerId).append(htmlStr);
 
@@ -85,6 +95,7 @@
     $('.dataTableHeadText').css('flex-direction', 'row-reverse');
     $('.dataTableHeadText').css('width', '100%');
     $('.dataTableHeadText').css('padding', '5px');
+    $('.dataTableHeadText').css('align-self', 'center');
     // $('.dataTableHeadText').css('display' , )
 
     // $('#dataToggleBtn').button({
@@ -99,6 +110,15 @@
 
 
 
+    $('#correlViewC').on('click', function() {
+      Scat.showScatterView();
+    })
+
+    $('#tableViewC').on('click', function() {
+      DataTable.showTableView();
+    })
+
+    // table mode button click
     $('#addLabelCard').on('click', function() {
       var objSend = {
         data: Main.trainData,
@@ -114,7 +134,6 @@
         LabelCard.getDataObject(dataObj['indexBydata']);
         LabelCard.makeCards();
       })
-
     })
 
 

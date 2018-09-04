@@ -78,10 +78,7 @@
         }
       },
       'QUANTITATIVE' : {
-        'Precision': {
-          'Checked' : false,
-        },
-        'Accuracy' :{
+        'F1-Score' :{
           'Checked' : false,
         },
         'Recall' : {

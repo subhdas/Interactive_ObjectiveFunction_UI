@@ -23,6 +23,8 @@
     Main.entityNameSecondImp = '';
     Main.tooltipDictArr = [];
 
+    Main.tabelViewMode = true;
+
 
 
 
@@ -174,6 +176,9 @@
         DataTable.addIconsTop(Main.trainData);
         DataTable.switchToLeftData();
         DataTable.makeTable(Main.leftData);
+        Scat.makeTheMatrix();
+        Scat.hideScatterView();
+
         Cons.makeConsDivs();
         BarM.makeStackedModelBars();
     }
