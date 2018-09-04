@@ -128,13 +128,42 @@
       if(feat[i] == 'id') continue;
       htmlStr += "<div class = 'wrapRowFeatWt'><label class = 'labelFeatWt' for='"+feat[i]+"checkbox-"+i+"'>" + feat[i] + "</label>"
       htmlStr += "<input type='checkbox' parent = '"+feat[i]+"' given = '"+feat[i]+"' name='"+feat[i]+"checkbox-"+i+"' \
-      class = 'featOpt' id='"+feat[i]+"checkbox-"+i+"'></div>";
+      class = 'featOpt' id='"+feat[i]+"checkbox-"+i+"'>";
+
+      htmlStr += "<div class = 'sliderFeat' id='slider_"+feat[i]+"' ><div  id='custom-handle" + feat[i]+"' class='ui-slider-handle custom-handle'></div></div>"
+      htmlStr += "</div>"
     }
     $('#labelitemsConId_'+val).append(htmlStr);
     $( ".featOpt" ).checkboxradio({
        icon: false
      });
 
+     //slider Function
+    for(var i=0;i<feat.length;i++){
+      $( "#slider_"+feat[i] ).slider({
+        create: function() {
+          var handle = $( '#custom-handle' + feat[i] );
+          handle.text($( this ).slider("value"));
+        },
+        slide: function( event, ui ) {
+          // var handle = $('#custom-handle' + feat[i] );
+          var handle =  $(this).find('.custom-handle')
+          handle.text( ui.value );
+          console.log(' now ui value ', ui.value, feat[i], i, handle)
+        }
+      });
+    }
+    //events
+    $('.featOpt').on('click', function(e){
+      console.log('clicked attr ', e)
+      // console.log('clicked attr ', );
+      var nam = $(this).attr('given');
+      $("#slider_"+nam).toggle();
+      // console.log('clicked attr ', $(e.target).attr('id'))
+
+    })
+
+     $('.sliderFeat').hide();
      $(".labelitemsConFeat").css('height', 'auto')
      $(".labelFeatWt").css('width', '100px')
      $(".labelFeatWt").css('text-align', 'left')
