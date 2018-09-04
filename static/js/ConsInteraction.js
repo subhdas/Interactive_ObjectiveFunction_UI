@@ -51,22 +51,54 @@
 
   ConsInt.interPanelContentFromData = function(stri = ""){
     // console.log('inter called')
-    for(var item in LabelCard.storedData){
-      var labelId = item;
-      if(typeof ConsInt.activeConstraints[stri]['input'][labelId] == 'undefined') continue;
-      var idArr = ConsInt.activeConstraints[stri]['input'][labelId];
+    if(stri == "Same-Label"){
+      for(var item in LabelCard.storedData){
+        var labelId = item;
+        if(typeof ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId] == 'undefined') continue;
+        var idArr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId];
+        $("#labelitemsConId_"+labelId).empty();
+        for(var i =0;i<idArr.length;i++){
+          var idNum = idArr[i];
+          ConsInt.stylizeAddContent(idNum,labelId);
+        }
+      }//end of for
+    }else if(stri == "Similarity-Metric") {
+        var labelId = "Same";
+        // if(typeof ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId] == 'undefined')
+        var idArr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId];
+        $("#labelitemsConId_"+labelId).empty();
+        for(var i =0;i<idArr.length;i++){
+          var idNum = idArr[i];
+          ConsInt.stylizeAddContent(idNum,labelId);
+        }
+        labelId = "Different";
+        var idArr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId];
+        $("#labelitemsConId_"+labelId).empty();
+        for(var i =0;i<idArr.length;i++){
+          var idNum = idArr[i];
+          ConsInt.stylizeAddContent(idNum,labelId);
+        }
+    } else if(stri == "Information-Gain") {
+      var labelId = "Max";
+      // if(typeof ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId] == 'undefined')
+      var idArr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId];
       $("#labelitemsConId_"+labelId).empty();
       for(var i =0;i<idArr.length;i++){
         var idNum = idArr[i];
         ConsInt.stylizeAddContent(idNum,labelId);
       }
-    }//end of for
+      labelId = "Min";
+      var idArr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_"+labelId];
+      $("#labelitemsConId_"+labelId).empty();
+      for(var i =0;i<idArr.length;i++){
+        var idNum = idArr[i];
+        ConsInt.stylizeAddContent(idNum,labelId);
+      }
+    }
   }
 
-
-  ConsInt.makeInteractionPanel = function(stri = "", containerId = "consInterPanel") {
-    $("#" + containerId).empty();
-    ConsInt.addInterHeader(stri, containerId);
+  // same-label content
+  ConsInt.contentForLabels = function(containerId = ""){
     var htmlStr = "<div class = 'labelCon'>"
     //add label boxes
     for (var item in LabelCard.storedData) {
@@ -77,8 +109,74 @@
     }
     htmlStr += "</div>";
     $('#' + containerId).append(htmlStr);
+  }
+
+
+  // similarity - metric label
+    ConsInt.contentForSimilarItems = function(containerId = ""){
+      var htmlStr = "<div class = 'labelCon'>"
+      //add label boxes - same
+      val = 'Same'
+      htmlStr += "<div class = 'labelitemsTitle'>" + val + " items : </div>"
+      htmlStr += "<div givenCons = '"+stri+"' class = 'ui-droppable labelitemsCon' id = 'labelitemsConId_"+val+"' ></div><br>"; // this is the event.target
+
+      // -different
+      val = 'Different'
+      htmlStr += "<div class = 'labelitemsTitle'>" + val + " items :</div>"
+      htmlStr += "<div givenCons = '"+stri+"' class = 'ui-droppable labelitemsCon' id = 'labelitemsConId_"+val+"' ></div><br>"; // this is the event.target
+
+      htmlStr += "</div>";
+      $('#' + containerId).append(htmlStr);
+    }
+
+
+    // similarity - metric label
+      ConsInt.contentForInfoGain = function(containerId = ""){
+        var htmlStr = "<div class = 'labelCon'>"
+        //add label boxes - max gain
+        val = 'Max'
+        htmlStr += "<div class = 'labelitemsTitle'>" + val + " items : </div>"
+        htmlStr += "<div givenCons = '"+stri+"' class = 'ui-droppable labelitemsCon' id = 'labelitemsConId_"+val+"' ></div><br>"; // this is the event.target
+
+        // -min gain
+        val = 'Min'
+        htmlStr += "<div class = 'labelitemsTitle'>" + val + " items :</div>"
+        htmlStr += "<div givenCons = '"+stri+"' class = 'ui-droppable labelitemsCon' id = 'labelitemsConId_"+val+"' ></div><br>"; // this is the event.target
+
+        htmlStr += "</div>";
+        $('#' + containerId).append(htmlStr);
+      }
+
+
+  ConsInt.makeInteractionPanel = function(stri = "", containerId = "consInterPanel") {
+    $("#" + containerId).empty();
+    ConsInt.addInterHeader(stri, containerId);
+    if(stri == "Same-Label")  ConsInt.contentForLabels(containerId);
+    else if(stri == "Similarity-Metric")  ConsInt.contentForSimilarItems(containerId);
+    else if(stri == "Information-Gain")  ConsInt.contentForInfoGain(containerId);
+
     //style
     $(".labelitemsTitle").css('padding', '5px');
+    $('.labelCon').css('display', 'flex');
+    $('.labelCon').css('flex-direction', 'column');
+    $('.labelCon').css('width', '100%');
+    $('.labelCon').css('height', '100%');
+    $('.labelitemsCon').css('display', 'flex');
+    $('.labelitemsCon').css('flex-direction', 'column');
+    $('.labelitemsCon').css('padding', '5px');
+    $('.labelitemsCon').css('width', '100%');
+    $('.labelitemsCon').css('height', '200px');
+    $('.labelitemsCon').css('border-bottom', '1px solid gray');
+
+
+    $('#' + containerId).css('display', 'flex');
+    $('#' + containerId).css('flex-direction', 'column');
+    $("#" + containerId).css('overflow-x', 'hidden');
+    $("#" + containerId).css('overflow-y', 'auto');
+    $("#" + containerId).css('width', '30%');
+    $("#" + containerId).css('height', '100%');
+    $("#" + containerId).css('border-left', '1px solid lightgray');
+    $("#" + containerId).css('padding', '5px');
 
     //add droppable interface
     $(".ui-droppable.labelitemsCon").droppable({
@@ -93,7 +191,7 @@
         //update data
         var obj = {};
         var lab = $(event.target).attr('id');
-        lab = Util.getNumberFromText(lab);
+        // lab = Util.getNumberFromText(lab);
         try{
           if(  ConsInt.activeConstraints[stri]['input'][lab].indexOf(idNum) != -1) return ;
           ConsInt.activeConstraints[stri]['input'][lab].push(idNum);
@@ -120,32 +218,9 @@
         }
 
       }// end of drop
-
-
     })
 
-    //style
 
-    $('.labelCon').css('display', 'flex');
-    $('.labelCon').css('flex-direction', 'column');
-    $('.labelCon').css('width', '100%');
-    $('.labelCon').css('height', '100%');
-    $('.labelitemsCon').css('display', 'flex');
-    $('.labelitemsCon').css('flex-direction', 'column');
-    $('.labelitemsCon').css('padding', '5px');
-    $('.labelitemsCon').css('width', '100%');
-    $('.labelitemsCon').css('height', '200px');
-    $('.labelitemsCon').css('border-bottom', '1px solid gray');
-
-
-    $('#' + containerId).css('display', 'flex');
-    $('#' + containerId).css('flex-direction', 'column');
-    $("#" + containerId).css('overflow-x', 'hidden');
-    $("#" + containerId).css('overflow-y', 'auto');
-    $("#" + containerId).css('width', '30%');
-    $("#" + containerId).css('height', '100%');
-    $("#" + containerId).css('border-left', '1px solid lightgray');
-    $("#" + containerId).css('padding', '5px');
   }
 
 
