@@ -112,6 +112,36 @@
   }
 
 
+  // same-label content
+  ConsInt.contentForFeatWeights = function(containerId = ""){
+    var htmlStr = "<div class = 'labelCon featWtCon'>"
+    var val = "Feature-Weights"
+    // htmlStr += "<div class = 'labelitemsTitle'> Set : " + val + "</div>"
+    htmlStr += "<div givenCons = '"+stri+"' class = 'labelitemsConFeat' id = 'labelitemsConId_"+val+"' ></div><br>"; // this is the event.target
+    htmlStr += "</div>";
+    $('#' + containerId).append(htmlStr);
+
+    //place the features
+    var feat = Object.keys(Main.attrDict);
+    htmlStr = "";
+    for(var i=0;i<feat.length;i++){
+      if(feat[i] == 'id') continue;
+      htmlStr += "<div class = 'wrapRowFeatWt'><label class = 'labelFeatWt' for='"+feat[i]+"checkbox-"+i+"'>" + feat[i] + "</label>"
+      htmlStr += "<input type='checkbox' parent = '"+feat[i]+"' given = '"+feat[i]+"' name='"+feat[i]+"checkbox-"+i+"' \
+      class = 'featOpt' id='"+feat[i]+"checkbox-"+i+"'></div>";
+    }
+    $('#labelitemsConId_'+val).append(htmlStr);
+    $( ".featOpt" ).checkboxradio({
+       icon: false
+     });
+
+     $(".labelitemsConFeat").css('height', 'auto')
+     $(".labelFeatWt").css('width', '100px')
+     $(".labelFeatWt").css('text-align', 'left')
+  }
+
+
+
   // similarity - metric label
     ConsInt.contentForSimilarItems = function(containerId = ""){
       var htmlStr = "<div class = 'labelCon'>"
@@ -154,6 +184,7 @@
     if(stri == "Same-Label")  ConsInt.contentForLabels(containerId);
     else if(stri == "Similarity-Metric")  ConsInt.contentForSimilarItems(containerId);
     else if(stri == "Information-Gain")  ConsInt.contentForInfoGain(containerId);
+    else if(stri == "Feature-Weights")  ConsInt.contentForFeatWeights(containerId);
 
     //style
     $(".labelitemsTitle").css('padding', '5px');

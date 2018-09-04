@@ -55,10 +55,6 @@
         }
       },
       'QUALITATIVE' : {
-        'Feature-Selection': {
-          'Add' : true,
-          'Checked' : false,
-        },
         'Feature-Weights' :{
           'Add' : true,
           'Checked' : false,
@@ -122,11 +118,6 @@
         htmlStr += "<div class= 'contentRowCons'>"
         var k=0;
         for (var val in Cons.typeConstraints[item]){
-          console.log('val in ', val, k)
-          // htmlStr += "<div id ='row_"+item+"_"+val+"' class ='rowTypeCons'>"
-          //checkbox
-          //name
-
           htmlStr += "<div class = 'wrapRowCons'><label for='"+val+"checkbox-"+k+"'>" + val + "</label>"
           // htmlStr += "<label for='checkbox-"+k+"'>" + val + "</label>"
           // htmlStr += "<label for='checkbox-nested-1'>" + val + "</label>"
