@@ -127,10 +127,10 @@
     for(var i=0;i<feat.length;i++){
       if(feat[i] == 'id') continue;
       htmlStr += "<div class = 'wrapRowFeatWt'><label class = 'labelFeatWt' for='"+feat[i]+"checkbox-"+i+"'>" + feat[i] + "</label>"
-      htmlStr += "<input type='checkbox' parent = '"+feat[i]+"' given = '"+feat[i]+"' name='"+feat[i]+"checkbox-"+i+"' \
-      class = 'featOpt' id='"+feat[i]+"checkbox-"+i+"'>";
+      htmlStr += "<input type='checkbox' parent = '"+val+"' given = '"+feat[i]+"' name='"+feat[i]+"checkbox-"+i+"' \
+      class = 'featOpt featOpt_"+feat[i]+"' id='"+feat[i]+"checkbox-"+i+"'>";
 
-      htmlStr += "<div class = 'sliderFeat' id='slider_"+feat[i]+"' ><div  id='custom-handle" + feat[i]+"' class='ui-slider-handle custom-handle'></div></div>"
+      htmlStr += "<div class = 'sliderFeat' id='slider_"+feat[i]+"' ><div  parent = '"+val+"' given = '"+feat[i]+"' id='custom-handle" + feat[i]+"' class='ui-slider-handle custom-handle'></div></div>"
       htmlStr += "</div>"
     }
     $('#labelitemsConId_'+val).append(htmlStr);
@@ -149,21 +149,47 @@
           // var handle = $('#custom-handle' + feat[i] );
           var handle =  $(this).find('.custom-handle')
           handle.text( ui.value );
-          console.log(' now ui value ', ui.value, feat[i], i, handle)
+          // console.log(' now ui value ', ui.value, feat[i], i, handle)
+        },
+        change : function(e,ui){
+          var id = ui.handle.id;
+          // console.log(' found change ', $("#"+id).attr('parent'));
+          var ftWt =  $("#"+id).attr('parent');
+          var nam =  $("#"+id).attr('given');
+          ConsInt.activeConstraints[ftWt]['input'][nam] = ui.value;
         }
       });
     }
     //events
     $('.featOpt').on('click', function(e){
-      console.log('clicked attr ', e)
+      // console.log('clicked attr ', e)
       // console.log('clicked attr ', );
       var nam = $(this).attr('given');
+      var ftWt = $(this).attr('parent');
       $("#slider_"+nam).toggle();
-      // console.log('clicked attr ', $(e.target).attr('id'))
+      // console.log('checked or not ', this.checked);
+      if(this.checked){
+          var v = $("#slider_"+nam).slider("option", "value");
+          ConsInt.activeConstraints[ftWt]['input'][nam] = v;
+      }else{
+          delete ConsInt.activeConstraints[ftWt]['input'][nam];
+      }
 
-    })
+      // console.log('clicked attr ', $(e.target).attr('id'));
+    })// end of clicked
+    $('.sliderFeat').hide();
 
-     $('.sliderFeat').hide();
+    var objDict = ConsInt.activeConstraints[val]['input'];
+    for(var item in objDict){
+      var v = objDict[item];
+      console.log(' now in objdict ', v , objDict, val, item)
+      $(".featOpt_"+item).prop('checked', 'checked');
+      $(".featOpt_"+item).checkboxradio( "refresh" );
+      $("#slider_"+item).slider('value',v);
+      $("#slider_"+item).toggle();
+      $("#custom-handle"+item).text(v);
+    }
+
      $(".labelitemsConFeat").css('height', 'auto')
      $(".labelFeatWt").css('width', '100px')
      $(".labelFeatWt").css('text-align', 'left')
