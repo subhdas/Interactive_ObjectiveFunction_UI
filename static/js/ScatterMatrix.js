@@ -9,6 +9,24 @@ Scat.hideScatterView = function(){
 
 }
 
+Scat.prepNumericalData  = function(){
+  var numericArr = Object.keys(Main.numericalAttributes);
+  var dataCopy =  Util.deepCopyData(Main.trainData);
+  dataCopy.forEach(function(d){
+    for (var item in d ){
+      if(numericArr.indexOf(item) == -1 && item != Main.entityNameSecondImp){
+        delete d[item];
+      }else if(item == Main.entityNameSecondImp){
+        //pass
+      }else {
+        d[item] = +d[item]
+      }
+    }
+  })
+  console.log('numeric data is ', dataCopy)
+  return dataCopy;
+}
+
 Scat.showScatterView = function(){
   Main.tabelViewMode = false;
   $("#tableContent").hide();
@@ -18,10 +36,14 @@ Scat.showScatterView = function(){
 
 Scat.makeTheMatrix = function(containerId = ""){
 if(containerId == "") containerId = "scatContent";
+var dataHave = Scat.prepNumericalData();
 // $("#tableContent").hide();
 
-var width = 960,
-    size = 230,
+var wd = $("#"+containerId).css('width');
+wd = Util.getNumberFromText(wd);
+console.log('wd compute ', +wd*0.5)
+var width = 300, //960
+    size = 150,
     padding = 20;
 
 var x = d3.scale.linear()
@@ -44,9 +66,11 @@ var color = d3.scale.category10();
 
 d3.csv("static/data/flowers.csv", function(error, data) {
   if (error) throw error;
+  var categorical = Main.entityNameSecondImp ; //"species"
+  data = dataHave
 
   var domainByTrait = {},
-      traits = d3.keys(data[0]).filter(function(d) { return d !== "species"; }),
+      traits = d3.keys(data[0]).filter(function(d) { return d !== categorical; }),
       n = traits.length;
 
   traits.forEach(function(trait) {
@@ -118,7 +142,7 @@ d3.csv("static/data/flowers.csv", function(error, data) {
         .attr("cx", function(d) { return x(d[p.x]); })
         .attr("cy", function(d) { return y(d[p.y]); })
         .attr("r", 4)
-        .style("fill", function(d) { return color(d.species); });
+        .style("fill", function(d) { return color(d[categorical]); });
   }
 
   var brushCell;

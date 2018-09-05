@@ -202,6 +202,10 @@
                         Main.entityNameSecondImp = title[i];
                     }
                 }
+            }else{
+              if(title[i] != 'id' && title[i] != 'cluster'){
+                Main.numericalAttributes[title[i]] = true;
+              }
             }
             Main.attrDict[title[i]]['type'] = type;
             if (toolKeys < 5 && title[i] != Main.entityName) Main.tooltipDictArr.push(title[i]);
