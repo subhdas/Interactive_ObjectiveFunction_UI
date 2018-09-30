@@ -397,8 +397,8 @@
     $(".ui-droppable.labelitemsCon").droppable({
       hoverClass: "labelitemHover",
       drop: function(event, ui) {
-        // console.log("dropped item ", ui);
-        // console.log("dropped item new ", event);
+        console.log("dropped item ", ui);
+        console.log("dropped item new ", event);
         var idNum = Util.getNumberFromText(ui.draggable[0]['id']);
         var labelId = Util.getNumberFromText($(this).attr('id'));
 
