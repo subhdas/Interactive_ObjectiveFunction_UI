@@ -151,3 +151,21 @@ circle.hidden {
 .x.axis path {
   display: none;
 }
+
+
+  .tooltip_verBarFeat{
+      display: flex;
+      position      : absolute;
+      text-align    : center;
+      /*max-width     : 70px;*/
+      /*max-height    : 30px;*/
+      padding       : 10px;
+      border        : none;
+      border-radius : 8px;
+      margin-top    : -30px;
+      font          : 10px sans-serif;
+      background    : black;
+      color         : white;
+      pointer-events: none;
+      font-size: 1.1em;
+  }

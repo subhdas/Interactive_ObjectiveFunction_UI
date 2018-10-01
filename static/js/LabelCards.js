@@ -120,7 +120,7 @@ LabelCard.makeCards = function(containerId = ""){
     // DataTable.makeTable(data,"labelCard_"+item);
     DataTable.makeHeatMapTable(data,"labelCard_"+item);
     // BarM.makeFeatureLabelsHorBar("horBar-labelCard_"+item, 100,300);
-    BarM.makeFeatureLabelsVerBar("featBar-labelCard_"+item,400,100);
+    BarM.makeFeatureLabelsVerBar("featBar-labelCard_"+item,300,100);
     // LabelCard.stylizeTables("labelCard_"+item);
     var lab = item;
     try{
@@ -140,11 +140,11 @@ LabelCard.makeCards = function(containerId = ""){
 
   $(".labelHeadText").css('display', 'flex')
   $(".labelHeadText").css('flex-direction', 'column')
-  $(".labelHeadText").css('width', '60%')
+  // $(".labelHeadText").css('width', '60%')
   $(".labelHeadText").css('height', '100%')
 
   $(".featBarLabelCard").css('display', 'flex')
-  $(".featBarLabelCard").css('width', '40%')
+  $(".featBarLabelCard").css('width', 'auto')
   $(".featBarLabelCard").css('height', '100%')
   // $(".featBarLabelCard").css('background', 'yellow')
 

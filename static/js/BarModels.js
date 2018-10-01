@@ -309,7 +309,7 @@
         for (var i = 0; i < dataIn.length; i++) {
             var obj = {
                 label: dataIn[i][1],
-                value: (dataIn[i][0]/100).toFixed(1)
+                value: Math.log((+dataIn[i][0] / 10)).toFixed(2),
             }
             dataOut.push(obj)
         }
@@ -317,7 +317,125 @@
     }
 
 
-    BarM.makeFeatureLabelsVerBar = function(containerId = "",w,h) {
+    BarM.makeFeatureLabelsVerBar = function(containerId = "", w, h) {
+
+        $("#" + containerId).empty();
+
+        // var w = $("#"+containerId).width(); //960
+        // var h = $("#"+containerId).height(); //500
+        var labelName = containerId.split('_')[1];
+        var data = BarM.getDataforHorBar(labelName);
+        console.log('height is ', h, w, data)
+
+
+        var margin = {
+                top: 5,
+                right: 10,
+                bottom: 20,
+                left: 20
+            },
+            width = w - margin.left - margin.right,
+            height = h - margin.top - margin.bottom;
+
+        // Parse the date / time
+
+        var x = d3.scale.ordinal().rangeRoundBands([0, width*0.85], .05);
+
+        var y = d3.scale.linear()
+                // .base(Math.E)
+                .domain([0, d3.max(data, function(d) {
+                    return +d.value;
+                })])
+                .range([height, 0]);
+ 
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom")
+            // .tickFormat(d3.time.format("%Y-%m"));
+
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left")
+            .ticks(10);
+
+        var svg = d3
+            .select("#" + containerId)
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        data.forEach(function(d) {
+            d.value = +d.value;
+        });
+
+        x.domain(data.map(function(d) {
+            return d.label
+        }));
+        // y.domain([0, d3.max(data, function(d) {
+        //     return +d.value;
+        // })]);
+
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis)
+            .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", "-.55em")
+            .attr("transform", "rotate(-90)");
+
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Value ($)");
+
+
+              // tooltips
+        var div_tooltip = d3.select('body').append('div')
+        .attr('class', 'tooltip_verBarFeat')
+        .style('display', 'none')
+        .style('position', 'absolute');
+
+        svg.selectAll("bar")
+            .data(data)
+            .enter().append("rect")
+            .style("fill", "steelblue")
+            .attr("x", function(d) {
+                return x(d.label);
+            })
+            .attr("width", x.rangeBand())
+            .attr("y", function(d) {
+                return y(d.value);
+            })
+            .attr("height", function(d) {
+                return height - y(d.value);
+            })
+            .on('mouseover', function(d){
+                 div_tooltip.style('display', 'inline');
+                 div_tooltip
+                  .html(d.label + ': ' + d.value)
+                  .style('position', 'absolute')
+                  .style('left', (d3.event.pageX - 34) + 'px')
+                  .style('top', (d3.event.pageY - 12) + 'px');
+                  })
+            .on('mouseout', function(d){
+                 div_tooltip.style('display', 'none');
+            })
+
+
+    }
+
+
+    BarM.makeFeatureLabelsVerBarOld = function(containerId = "", w, h) {
         $("#" + containerId).empty();
 
         // var w = $("#"+containerId).width(); //960
@@ -333,7 +451,7 @@
                 left: 20
             },
             width = w - margin.left - margin.right,
-            height =  h- margin.top - margin.bottom;
+            height = h - margin.top - margin.bottom;
 
         var x = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
@@ -359,36 +477,36 @@
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-            x.domain(data.map(function(d) {
-                return d.label;
-            }));
-            y.domain([0, d3.max(data, function(d) {
-                return d.value;
-            })]);
+        x.domain(data.map(function(d) {
+            return d.label;
+        }));
+        y.domain([0, d3.max(data, function(d) {
+            return +d.value;
+        })]);
 
-            chart.append("g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(xAxis);
+        chart.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
 
-            chart.append("g")
-                .attr("class", "y axis")
-                .call(yAxis);
+        chart.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
 
-            chart.selectAll(".bar")
-                .data(data)
-                .enter().append("rect")
-                .attr("class", "bar")
-                .attr("x", function(d) {
-                    return x(d.label);
-                })
-                .attr("y", function(d) {
-                    return y(d.value);
-                })
-                .attr("height", function(d) {
-                    return height - y(d.value);
-                })
-                .attr("width", x.rangeBand());
+        chart.selectAll(".bar")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", function(d) {
+                return x(d.label);
+            })
+            .attr("y", function(d) {
+                return y(+d.value);
+            })
+            .attr("height", function(d) {
+                return height - y(+d.value);
+            })
+            .attr("width", x.rangeBand());
 
         function type(d) {
             d.value = +d.value; // coerce to number
