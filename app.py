@@ -102,7 +102,13 @@ def handle_my_custom_event(data):
 def handle_my_custom_event(data):
 	print " gotten item ++++++++++++++++++++++++++++++++++++++++++ "
 	obj = {}
-	obj = getSimilarItems(data)
+	found = False
+	while(not found):
+		try:
+			obj = getSimilarItems(data)
+			found = True
+		except:
+			found = False
 	emit('similarData_return', obj)
 
 

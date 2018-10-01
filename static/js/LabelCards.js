@@ -55,8 +55,11 @@ LabelCard.getDataObject = function(idObject){
 LabelCard.addHeader = function(containerId = ""){
   if(containerId == "") containerId = "labelCardPanel";
   var htmlStr = "<div id ='labelCardHeaderId' >"
-  htmlStr += "<div class = 'iconDiv'><div class='iconHolder' id='makeModel' onclick='' title='Make Models'>"
-  htmlStr += "<img class='imgIcon' src='static/img/icons/three_bar.png'></div></div>"
+  // htmlStr += "<div class = 'iconDiv'><div class='iconHolder' id='makeModel' onclick='' title='Make Models'>"
+  // htmlStr += "<img class='imgIcon' src='static/img/icons/three_bar.png'></div></div>"
+
+  htmlStr += "<button id='makeModel' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+  htmlStr += "<i class='material-icons'>dashboard</i></button>";
   htmlStr += "<div id ='labelCardHeadRow' >Labels Added : " + Object.keys(LabelCard.storedData).length +  " | Features Relevant : " + LabelCard.computeReturnData['colSelected'] +"</div>";
   // htmlStr += "<div id ='labelCardHeadRow' >Features Relevant : " + LabelCard.computeReturnData['colSelected'] + "</div>";
 
@@ -67,7 +70,7 @@ LabelCard.addHeader = function(containerId = ""){
   $("#labelCardHeaderId").css('display', 'flex');
   $("#labelCardHeaderId").css('flex-direction', 'column');
   $("#labelCardHeaderId").css('padding', '3px');
-  // $("#labelCardHeaderId").css('border-bottom', '1px solid gray');
+  $("#labelCardHeaderId").css('border-bottom', '1px solid gray');
   $(".iconDiv").css('border-bottom', '1px solid gray');
 
   $("#makeModel").on('click', function(){
@@ -98,20 +101,27 @@ LabelCard.makeCards = function(containerId = ""){
     var name = data[Main.entityNameSecondImp];
 
     var htmlStr = "<br><div class ='labelWrap' ><div id ='labelCardInfo'>"
+    htmlStr += "<div class ='labelHeaderWrap'><div class = 'labelHeadText'>"
     // htmlStr += "<div id ='labelCardInfoRow'>Label Id : <span contenteditable='true'>" + item + "</span></div>";
     htmlStr += "<div class = 'labelInfo' id ='labelCardInfoRow' class ='labelNameRow' >Label : <span class = 'labelItem' id = 'spanLabel_"+item+"' contenteditable='true'>"+ item + "</span></div>";
     htmlStr += "<div class = 'labelInfo' id ='labelCardInfoRow'>Label Id/Name: <span > " + item + " | "+ name + " </span> | Data Length : <span class = 'labelCardLength_"+item+"'>" + LabelCard.storedData[item]['data'].length + "</span></div>";
     // htmlStr += "<div id ='labelCardInfoRow' >Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
+    htmlStr += "</div><div class = 'featBarLabelCard' id='featBar-labelCard_"+item+"' ></div></div>"    
+
     htmlStr += "</div>";
-    htmlStr += "<div id='labelCard_"+item+"' class = 'ui-droppable labelCard'>";
-    htmlStr += "</div></div>";
+    // htmlStr += "<div class = 'wrapLabelCard' ><div class = 'horBar' id='horBar-labelCard_"+item+"'></div><div id='labelCard_"+item+"' class = 'ui-droppable labelCard'>";
+    htmlStr += "<div class = 'wrapLabelCard' ><div id='labelCard_"+item+"' class = 'ui-droppable labelCard'>";
+    htmlStr += "</div></div></div>";
     $("#"+containerId).append(htmlStr);
     var data = LabelCard.storedData[item];
     console.log('found data is ', data)
     if(data == null) data = LabelCard.getDataForCard(item);
     else data = data['data']
-    DataTable.makeTable(data,"labelCard_"+item);
-    LabelCard.stylizeTables("labelCard_"+item);
+    // DataTable.makeTable(data,"labelCard_"+item);
+    DataTable.makeHeatMapTable(data,"labelCard_"+item);
+    // BarM.makeFeatureLabelsHorBar("horBar-labelCard_"+item, 100,300);
+    BarM.makeFeatureLabelsVerBar("featBar-labelCard_"+item,400,100);
+    // LabelCard.stylizeTables("labelCard_"+item);
     var lab = item;
     try{
       lab = LabelCard.tempLabels[item];
@@ -123,6 +133,28 @@ LabelCard.makeCards = function(containerId = ""){
     }
   }
 
+  $(".labelHeaderWrap").css('display', 'flex')
+  $(".labelHeaderWrap").css('flex-direction', 'row')
+  $(".labelHeaderWrap").css('width', '100%')
+  $(".labelHeaderWrap").css('height', '10%')
+
+  $(".labelHeadText").css('display', 'flex')
+  $(".labelHeadText").css('flex-direction', 'column')
+  $(".labelHeadText").css('width', '60%')
+  $(".labelHeadText").css('height', '100%')
+
+  $(".featBarLabelCard").css('display', 'flex')
+  $(".featBarLabelCard").css('width', '40%')
+  $(".featBarLabelCard").css('height', '100%')
+  // $(".featBarLabelCard").css('background', 'yellow')
+
+
+  $(".wrapLabelCard").css('display', 'flex')
+  $(".horBar").css('display', 'flex')
+  $(".horBar").css('height', '300')
+  $(".horBar").css('width', '100')
+  $(".horBar").css('background', 'cyan')
+
   $(".labelWrap").css('display', 'flex')
   $(".labelWrap").css('flex-direction', 'column')
   $(".labelWrap").css('padding', '3px')
@@ -132,7 +164,7 @@ LabelCard.makeCards = function(containerId = ""){
   $(".labelCard").css("width", "100%");
   $(".labelCard").css("height", "300px");
   $(".labelCard").css("border-bottom", "1px solid lightgray");
-  $(".labelCard").css("margin", "5px");
+  $(".labelCard").css("margin-left", "5px");
   $(".labelCard").css("overflow-y", "auto");
   $(".labelCard").css("overflow-x", "auto");
 
@@ -185,8 +217,9 @@ $(".ui-droppable.labelCard").droppable({
         dataCard.unshift(LabelCard.storedData[idCard]['mainRow']);
 
         $(".labelCardLength_"+idCard).text(dataCard.length);
-        DataTable.makeTable(dataCard,"labelCard_"+idCard);
-        LabelCard.stylizeTables("labelCard_"+idCard);
+        // DataTable.makeTable(dataCard,"labelCard_"+idCard);
+        DataTable.makeHeatMapTable(dataCard,"labelCard_"+idCard);
+        // LabelCard.stylizeTables("labelCard_"+idCard);
 
         console.log('id dropped ',idNum, dataGet);
         console.log('id dropped ',idCard, dataCard);
@@ -205,8 +238,9 @@ $(".ui-droppable.labelCard").droppable({
           console.log('newdata and data prev length ', newData.length, dataPrev.length);
           LabelCard.storedData[parseInt(DataTable.lastLabelCardId)]['data'] = newData;
           $(".labelCardLength_"+DataTable.lastLabelCardId).text(newData.length);
-          DataTable.makeTable(newData,"labelCard_"+parseInt(DataTable.lastLabelCardId));
-          LabelCard.stylizeTables("labelCard_"+parseInt(DataTable.lastLabelCardId));
+          // DataTable.makeTable(newData,"labelCard_"+parseInt(DataTable.lastLabelCardId));
+          DataTable.makeHeatMapTable(newData,"labelCard_"+parseInt(DataTable.lastLabelCardId));
+          // LabelCard.stylizeTables("labelCard_"+parseInt(DataTable.lastLabelCardId));
       }, 50);
     }
 });

@@ -86,8 +86,13 @@
 
     // htmlStr += "<button id='dataToggleBtn'> </button>";
     htmlStr += "<div class = 'dataTableHeadText'>" + dataIn.length + " rows </div>";
-    htmlStr += "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
-    htmlStr += "<img class='imgIcon' src='static/img/icons/add.png'></div>"
+    // htmlStr += "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
+    // htmlStr += "<img class='imgIcon' src='static/img/icons/add.png'></div>"
+
+    htmlStr += "<button id='addLabelCard' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+    htmlStr += "<i class='material-icons'>add</i></button>";
+
+
 
     $("#" + containerId).append(htmlStr);
 
@@ -124,7 +129,6 @@
         data: Main.trainData,
         selectedRowIds: DataTable.selectedRows
       };
-
       socket.emit("find_similarData", objSend);
       socket.off('find_similarData');
       socket.removeAllListeners('similarData_return');
@@ -498,5 +502,177 @@
   }; // end of makeTable
 
 
+  DataTable.makeHeatMapTable = function(dataGiven = main.appData, containerId = "tableContent") {
+    $("#dataViewAppTable_" + containerId).remove();
+
+    var color_scale = d3.scale.linear().domain([0, 1]).range(['beige', 'green']);
+
+    var data = Util.deepCopyData(dataGiven);
+
+    // console.log(" drawing test data table ... ", dataGiven);
+    data.forEach(function(d, i) {
+      delete d.cluster;
+    }); // end of data for each
+
+    var sortAscending = true;
+    var table = d3
+      .select("#" + containerId)
+      .insert("table", ":first-child")
+      .attr("id", "dataViewAppTable_" + containerId)
+      .attr("class", "dataViewAppTable")
+      .attr("height", "100%")
+      .attr("width", "100%");
+
+    $("#dataViewAppTable_" + containerId).css("margin-top", "10px");
+
+
+    var titles = d3.keys(data[0]);
+    titles.sort();
+    var headers = table
+      .append("thead")
+      .append("tr")
+      .selectAll("th")
+      .data(titles)
+      .enter()
+      .append("th")
+      .text(function(d) {
+        return d;
+      })
+      .on("click", function(d) {
+        headers.attr("class", "header");
+
+        if (sortAscending) {
+          rows.sort(function(a, b) {
+            if (b[d] < a[d]) return 1
+            else return -1
+          });
+          sortAscending = false;
+          this.className = "aes";
+        } else {
+          rows.sort(function(a, b) {
+            if (b[d] < a[d]) return -1
+            else return 1
+          });
+          sortAscending = true;
+          this.className = "des";
+        }
+      });
+
+    var rows = table
+      .append("tbody")
+      .selectAll("tr")
+      .data(data)
+      .enter()
+      .append("tr")
+      .attr('class', function(d, i) {
+        return 'trTable trCl_' + i
+      })
+      .attr('id', function(d) {
+        return 'tr_' + d.id;
+      })
+      // .style('background', function(d) {
+      //   var id = d.id;
+      //   var parId = Util.getNumberFromText(containerId);
+      //   if (parId == "") return "";
+      //   else {
+      //     var index = LabelCard.computeReturnData['indexBydata'][parId].indexOf(id);
+      //     // console.log('returning can add color ', index, id, parId)
+      //     if (index != -1) {
+      //       var prob = LabelCard.computeReturnData['probByData'][parId][index];
+      //       // return color_scale(Util.getRandomNumberBetween(1,0))
+      //       // console.log('returning color scale ', prob)
+      //       return color_scale(prob);
+      //     } else {
+      //       return ""
+      //     }
+      //   }
+
+      // })
+      .on('mouseover', function(d) {
+        try {
+          DataTable.nodeColor = d3.selectAll(".node_" + d.id).style("fill");
+          d3.selectAll(".node_" + d.id).style("fill", "black");
+        } catch (err) {
+
+        }
+
+      })
+      .on('mouseout', function(d) {
+        try {
+          d3.selectAll(".node_" + d.id).style("fill", DataTable.nodeColor);
+        } catch (err) {
+
+        }
+
+      })
+    rows
+      .selectAll("td")
+      .data(function(d) {
+        return titles.map(function(k) {
+          return {
+            value: d[k],
+            name: k
+          };
+        });
+      })
+      .enter()
+      .append("td")
+      .attr("data-th", function(d) {
+        return d.name;
+      })
+      .attr("data-id", function(d) {
+        return d.id;
+      })
+      .attr('class', function(d) {
+        return 'td_' + d.value + ' td_' + d.name + ' td_' + d.name + '_' + d.value;
+      })
+      .style('margin', '10px')
+      .text(function(d) {
+        if(d.name != Main.entityNameSecondImp && 
+          d.name != Main.entityName && d.name != 'predicted' && d.name != 'target_variable')
+        {
+            console.log('Main attr ', Main.attrDict[d.name], d.name, d.value)
+            var ran = Main.attrDict[d.name]['range']
+            var diff = ran[1] - ran[0];
+            var val = d.value/ran[1];
+            var col = color_scale(val.toFixed(3));
+            $(this).closest('td').css('background', col);
+            return val.toFixed(3);
+
+        }else{
+            return d.value;
+        }
+   
+      })
+      .on('click', function(d) {
+  
+      })
+
+
+    $("#dataViewAppTable_" + containerId + " tr").on('click', function(d) {
+      if(containerId != "tableContent" ) return;
+      var back = $(this).css('background-color');
+      // console.log("clicked tabel tr ", $(this), d, back);
+      var idNum = Util.getNumberFromText($(this).attr('id'));
+      if(typeof idNum == 'undefined') return;
+
+      if (typeof DataTable.selectedRows[idNum] == 'undefined') {
+        $(this).css('background', Main.colors.HIGHLIGHT);
+        DataTable.fontColor = $(this).css('color');
+        $(this).css('color', 'white');
+        // var selection = $(this).closest('td')
+        // DataTable.selectedRows[idNum] = d3.select(selection).datum();
+        DataTable.selectedRows[idNum] = true;
+      } else {
+        $(this).css('background', "rgb(255,255,255)");
+        console.log("removing colors")
+        delete DataTable.selectedRows[idNum];
+        $(this).css('color', DataTable.fontColor);
+      }
+    })
+
+    DataTable.dragFunction()
+
+  }; // end of makeTable
 
 }());

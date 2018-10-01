@@ -52,12 +52,17 @@ def findFeatures_byVariance(x):
     selector.fit_transform(train)
     col = train.columns.values
     var = selector.variances_
-    col_sorted = [m for _, m in sorted(zip(var, col))]
+    colTup = sorted(zip(var, col))
+    colDict = dict(sorted(zip(var, col)))
+    colDict = {val:key for (key, val) in colDict.items()}
+    print " col Dict is ", colDict
+    col_sorted = [m for _, m in colTup]
     print " variance obtained " , len(var), len(col), var
-    print " variance cols ", col
+    # print " variance cols ", col
     print " variance cols sorted ", col_sorted, sorted(var)
     # finalColList = col_sorted[0:4]
     num = random.randint(1,len(col_sorted)-1)
+    print " random num for col is ", num
     finalColList = col_sorted[-1*num:]
 
     # fin = x[finalCol]
@@ -67,7 +72,7 @@ def findFeatures_byVariance(x):
 
     fin['id'] = id
     print " we have finalCol ", finalColList
-    return fin, finalColList
+    return colTup, finalColList
 
 
 
@@ -75,9 +80,9 @@ def getSimilarItems(dataObj):
     data = dataObj['data']
     selectedRows = dataObj['selectedRowIds']
     data = pd.DataFrame(data)
-    # data, colList = findFeatures_byVariance(data)
-    colList = data.columns.values.tolist()
-    colList = ['Acceleration','Cylinders', 'id']
+    colTuples, colList = findFeatures_byVariance(data)
+    # colList = data.columns.values.tolist()
+    # colList = ['Acceleration','Cylinders', 'id']
     # colList = ['Displacement','Horsepower', 'id']
     data = data[colList]
     try: colList.remove('id')
@@ -174,9 +179,30 @@ def getSimilarItems(dataObj):
         # diffDict[int(rowKeys[i])].sort(reverse = True)
         diffDict[int(rowKeys[i])].sort()
 
+    # find data for each label
+    dataDict = {}
+    colWtDict = {}
+    for i in range(len(rowKeys)):
+        indices = rowDict[int(rowKeys[i])]
+        arr = []
+        for j in range(data.shape[0]):
+            if(data['id'].values[j] in indices) : arr.append(data.loc[j,:])
+        dataDict[int(rowKeys[i])] = pd.DataFrame(arr)
+        colTuples, colList = findFeatures_byVariance(dataDict[int(rowKeys[i])])
+        colWtDict[int(rowKeys[i])]= colTuples
 
 
-    return {'indexBydata' : rowDict, 'probByData' : rowProbDict, 'colSelected' : colList, 'scoreDiff' : diffDict}
+
+
+
+    print " we get data dict as ", colWtDict
+
+
+
+
+
+    return {'indexBydata' : rowDict, 'probByData' : rowProbDict, 
+    'colSelected' : colList, 'scoreDiff' : diffDict, 'colWeights' : colTuples, 'colWtByData' : colWtDict} #, 'colWtByData' : colWtDict
 
 
 
