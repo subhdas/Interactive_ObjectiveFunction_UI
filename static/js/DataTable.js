@@ -293,34 +293,58 @@
   }
 
   DataTable.makeFilterVisTable = function(attr, el){
+    console.log('attr ', attr)
     if(attr == Main.entityName || attr == Main.entityNameSecondImp) return;
-    if(Main.attrDict[attr]['type'] == 'categorical') return;
+    try{
+      if(Main.attrDict[attr]['type'] == 'categorical') return;
+    }catch(e){
+      return;
+    }
     var data = [];
     Main.trainData.forEach(function(d,i){
       var obj = {
         index : i,
-        id : d['id'],
-        val : d[attr]
+        label : d['id'],
+        value : d[attr]
       }
       data.push(obj)
     })
-    console.log('data ffound ', attr, data)
+
+    // el.css('display', 'flex')
+    // el.css('flex-direction', 'row')
+    el.css('width', 'auto')
+
+    var id = el.attr('id');
+    var w = parseFloat(el.css('width'));
+    var h = parseFloat(el.css('height'));
+
+    w = 200;
+    h = 100;  
+    console.log('data ffound ', attr, data, id, w, h);
+    // BarM.makeFeatureLabelsVerBar(id,w,h,data)
+    BarM.makeHistoFilterTable(id,w,h,data,attr)
 
   }
 
   DataTable.addExtraItemsTables = function(containerId = "", data){
     var table = d3.select('#dataViewAppTable_'+containerId)
-    var titles = d3.keys(data[0]);
+    // var titles = d3.keys(data[0]);
+    var titles =  table.selectAll('th').data();
+    // console.log(' data head is ', titles)
 
+    table.selectAll('td')
+    .attr('width', '125px')
+    $('#tableContent').css('display', 'block')
 
     // to add filter panel
      table.selectAll('tbody')
        .insert("tr", ":first-child")
        .attr('id', 'filter_tr')
+       .attr('height', '100px')
        .data([data[0]])
        .selectAll("td")
        .data(function(d) {
-        console.log(' getting d as ', d, titles)
+        // console.log(' getting d as ', d, titles)
         return titles.map(function(k) {
           return {
             value: d[k],
@@ -342,12 +366,9 @@
       .attr('class', function(d) {
         return 'td_' + d.value + ' td_' + d.name + ' td_' + d.name + '_' + d.value;
       })
-      .style('background', '')
-      .html(function(d){
+      .style('background', function(d){
         DataTable.makeFilterVisTable(d.name, $(this))
-
-
-        return ''
+        return '';
       })
 
 
@@ -448,7 +469,7 @@
       .attr("id", "dataViewAppTable_" + containerId)
       .attr("class", "dataViewAppTable")
       .attr("height", "100%")
-      .attr("width", "100%");
+      .attr("width", "auto");
     // .attr("margin-top", "10px");
 
     $("#dataViewAppTable_" + containerId).css("margin-top", "10px");

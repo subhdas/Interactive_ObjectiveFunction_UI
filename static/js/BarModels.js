@@ -307,7 +307,7 @@
         var dataIn = LabelCard.computeReturnData['colWtByData'][labelName];
         var dataOut = []
         for (var i = 0; i < dataIn.length; i++) {
-            if(dataIn[i][1] == 'id') continue;
+            if (dataIn[i][1] == 'id') continue;
             var obj = {
                 label: dataIn[i][1],
                 value: Math.log((+dataIn[i][0] / 10)).toFixed(2),
@@ -317,30 +317,178 @@
         return dataOut;
     }
 
+    BarM.makeHistoFilterTable = function(containerId = "", w, h, data = "", attr="") {
+        var ran = Main.attrDict[attr]['range']
+        var numbins = 8;
+        if(attr == 'Cylinders') numbins = 2
+        var minbin = ran[0]
+        var maxbin = ran[1]
+        // var numbins =parseInt((maxbin - minbin) / binsize);
+        var binsize =parseInt((maxbin - minbin) / numbins);
 
-    BarM.makeFeatureLabelsVerBar = function(containerId = "", w, h) {
+        console.log('numbins ', numbins, maxbin, minbin, ran)
+
+        // whitespace on either side of the bars in units of MPG
+        var binmargin = .2;
+        var margin = {
+            top: 2,
+            right: 2,
+            bottom: 2,
+            left: 2
+        };
+        var width = w - margin.left - margin.right;
+        var height = h - margin.top - margin.bottom;
+
+        // Set the limits of the x axis
+        var xmin = minbin - 1
+        var xmax = maxbin + 1
+
+        histdata = new Array(numbins);
+        for (var i = 0; i < numbins; i++) {
+            histdata[i] = {
+                numfill: 0,
+                meta: ""
+            };
+        }
+
+        // Fill histdata with y-axis values and meta data
+        data.forEach(function(d) {
+            var bin = Math.abs(Math.floor((d.value - minbin) / binsize));
+            console.log(' bin is ', bin, d.value)
+            if ((bin.toString() != "NaN") && (bin < histdata.length)) {
+                var dt = Main.getDataById(""+ d.label, Main.trainData);
+                console.log('data is ', dt)
+
+                histdata[bin].numfill += 1;
+                histdata[bin].meta += "<tr><td> " + dt[Main.entityNameSecondImp] +
+                    " id :  " + d.label +
+                    "</td><td> " + attr + " : " +
+                    d.value + " </td></tr>";
+            }
+        });
+
+        console.log('hist data is ', histdata)
+
+        // This scale is for determining the widths of the histogram bars
+        // Must start at 0 or else x(binsize a.k.a dx) will be negative
+        var x = d3.scale.linear()
+            .domain([0, (xmax - xmin)])
+            .range([0, width]);
+
+        // Scale for the placement of the bars
+        var x2 = d3.scale.linear()
+            .domain([xmin, xmax])
+            .range([0, width]);
+
+        var y = d3.scale.linear()
+            .domain([0, d3.max(histdata, function(d) {
+                return d.numfill;
+            })])
+            .range([height, 0]);
+
+        var xAxis = d3.svg.axis()
+            .scale(x2)
+            .orient("bottom");
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .ticks(8)
+            .orient("left");
+
+        var tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .direction('e')
+            .offset([0, 20])
+            .html(function(d) {
+                return '<table id="tiptable">' + d.meta + "</table>";
+            })
+            .style('background', 'black')
+            .style('font-size', '0.8em')
+            .style('padding', '3px')
+            .style('border-radius', '10px');
+
+
+        // put the graph in the "mpg" div
+        var svg = d3.select("#"+containerId).append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," +
+                margin.top + ")");
+
+        svg.call(tip);
+
+        // set up the bars
+        var bar = svg.selectAll(".bar")
+            .data(histdata)
+            .enter().append("g")
+            .attr("class", "bar")
+            .attr("transform", function(d, i) {
+                return "translate(" +
+                    x2(i * binsize + minbin) + "," + y(d.numfill) + ")";
+            })
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide);
+
+        // add rectangles of correct size at correct location
+        bar.append("rect")
+            .attr("x", x(binmargin))
+            .attr("width", x(binsize - 2 * binmargin))
+            .attr("height", function(d) {
+                return height - y(d.numfill);
+            });
+
+        // add the x axis and x-label
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+        svg.append("text")
+            .attr("class", "xlabel")
+            .attr("text-anchor", "middle")
+            .attr("x", width / 2)
+            .attr("y", height + margin.bottom)
+            .text(attr);
+
+        // add the y axis and y-label
+        svg.append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate(0,0)")
+            .call(yAxis);
+        svg.append("text")
+            .attr("class", "ylabel")
+            .attr("y", 0 - margin.left) // x and y switched due to rotation
+            .attr("x", 0 - (height / 2))
+            .attr("dy", "1em")
+            .attr("transform", "rotate(-90)")
+            .style("text-anchor", "middle")
+            .text("");
+
+    }
+
+
+    BarM.makeFeatureLabelsVerBar = function(containerId = "", w, h, data = "") {
 
         $("#" + containerId).empty();
 
         // var w = $("#"+containerId).width(); //960
         // var h = $("#"+containerId).height(); //500
         var labelName = containerId.split('_')[1];
-        var data = BarM.getDataforHorBar(labelName);
-        console.log('height is ', h, w, data)
+        if (data == "") data = BarM.getDataforHorBar(labelName);
+        console.log('height is ', containerId, h, w, data)
 
 
         var margin = {
                 top: 5,
-                right: 10,
-                bottom: 20,
-                left: 20
+                right: 0,
+                bottom: 5,
+                left: 0
             },
             width = w - margin.left - margin.right,
             height = h - margin.top - margin.bottom;
 
         // Parse the date / time
 
-        var x = d3.scale.ordinal().rangeRoundBands([0, width * 0.85], .05);
+        var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
 
         var y = d3.scale.linear()
             // .base(Math.E)
@@ -361,7 +509,7 @@
             .ticks(10);
 
         var svg = d3
-            .select("#" + containerId)
+            .selectAll("#" + containerId)
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)

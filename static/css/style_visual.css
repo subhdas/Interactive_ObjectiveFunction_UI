@@ -169,3 +169,14 @@ circle.hidden {
       pointer-events: none;
       font-size: 1.1em;
   }
+
+
+  #tiptable tr{
+    background: transparent;
+    color:white;
+    font-size: 0.85em;
+    height : 20px;
+    display: flex;
+  }
+
+
