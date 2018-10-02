@@ -3,7 +3,7 @@
   DataTable.pickedAttrDict = {};
   DataTable.viewFullTable = true;
   DataTable.ratioSelect = 0.15;
-
+  DataTable.extraContent = false;
 
   //new variabbles
   DataTable.selectedRows = {}
@@ -292,6 +292,141 @@
     $('#tableContent').css('background', 'white');
   }
 
+  DataTable.makeFilterVisTable = function(attr, el){
+    if(attr == Main.entityName || attr == Main.entityNameSecondImp) return;
+    if(Main.attrDict[attr]['type'] == 'categorical') return;
+    var data = [];
+    Main.trainData.forEach(function(d,i){
+      var obj = {
+        index : i,
+        id : d['id'],
+        val : d[attr]
+      }
+      data.push(obj)
+    })
+    console.log('data ffound ', attr, data)
+
+  }
+
+  DataTable.addExtraItemsTables = function(containerId = "", data){
+    var table = d3.select('#dataViewAppTable_'+containerId)
+    var titles = d3.keys(data[0]);
+
+
+    // to add filter panel
+     table.selectAll('tbody')
+       .insert("tr", ":first-child")
+       .attr('id', 'filter_tr')
+       .data([data[0]])
+       .selectAll("td")
+       .data(function(d) {
+        console.log(' getting d as ', d, titles)
+        return titles.map(function(k) {
+          return {
+            value: d[k],
+            name: k
+          };
+        });
+      })
+      .enter()
+      .append("td")
+      .attr('id', function(d){
+        return 'filter_td_'+d.name
+      })
+      .attr("data-th", function(d) {
+        return d.name;
+      })
+      .attr("data-id", function(d) {
+        return d.id;
+      })
+      .attr('class', function(d) {
+        return 'td_' + d.value + ' td_' + d.name + ' td_' + d.name + '_' + d.value;
+      })
+      .style('background', '')
+      .html(function(d){
+        DataTable.makeFilterVisTable(d.name, $(this))
+
+
+        return ''
+      })
+
+
+
+    table.selectAll('tr')
+      .insert("td", ":first-child")
+      .attr('id', 'critical_')
+      // .style('background', 'white')
+      .style('display', function(d,i){
+        if(i!=0) return 'flex'
+      })
+      .style('flex-direction', 'row')
+      .style('width', '150px')
+      .html(function(d,i){
+        // console.log(' d and i is ', d, i)
+        if(i<2){
+          var col = $(this).siblings().attr('background');
+          if(i==0) col = "#333"
+          if(i==1) col = ""
+          $(this).css('background', col);
+          return ""
+        }else{
+          var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_"+d.id+"'><label>";
+          htmlStr += "<input type='checkbox' id = 'check_critical_"+d.id+"'><span class='lever'></span></label></div>"
+          htmlStr += "<label><input type='checkbox' class='filled-in check_discard' id = 'check_discard_"+d.id+"'/><span></span></label>"
+          return htmlStr;
+        }        
+      })
+
+
+
+
+      //toggle switches input controls-----------------------------------------------------------------------------------------
+      $(".switch_critical").on('input', function(e){
+        var id = $(this).attr('id');
+        var idNum = Util.getNumberFromText(id);
+        console.log('e is ', e,idNum);
+        var stri = 'Critical-Items'
+        Cons.typeConstraints['PREDICTIVE'][stri]['Checked'] = !Cons.typeConstraints['PREDICTIVE'][stri]['Checked'];
+        ConsInt.getActiveConstraints();
+        console.log('active cons ', ConsInt.activeConstraints)
+        try{
+          var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
+          var ind = arr.indexOf(idNum) 
+          if(ind != -1){
+            arr.splice(ind,1);
+          }else{
+            arr.push(idNum);
+          }
+        }catch(e){
+          ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]  = [idNum]
+        }
+      })
+
+      $(".check_discard").on('input', function(e){
+        var id = $(this).attr('id');
+        var idNum = Util.getNumberFromText(id);
+        console.log('e in check discard is ', e,idNum);
+        var stri = 'Discard-Items'
+        Cons.typeConstraints['PREDICTIVE'][stri]['Checked'] = !Cons.typeConstraints['PREDICTIVE'][stri]['Checked'];
+        ConsInt.getActiveConstraints();
+        console.log('active cons ', ConsInt.activeConstraints)
+        try{
+          var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
+          var ind = arr.indexOf(idNum) 
+          if(ind != -1){
+            arr.splice(ind,1);
+          }else{
+            arr.push(idNum);
+          }
+        }catch(e){
+          ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]  = [idNum]
+        }
+      })
+      // $(".ui-corner-all").css('background', 'transparent')
+      // $(".ui-corner-all").css('border', 'none')
+
+  }
+
 
   DataTable.makeTable = function(dataGiven = main.appData, containerId = "tableContent") {
     $("#dataViewAppTable_" + containerId).remove();
@@ -498,6 +633,10 @@
     })
 
     DataTable.dragFunction()
+    if(DataTable.extraContent == false){
+      DataTable.addExtraItemsTables(containerId,data);
+      DataTable.extraContent = true;
+    }
 
   }; // end of makeTable
 

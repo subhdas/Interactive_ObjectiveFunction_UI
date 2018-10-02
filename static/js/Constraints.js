@@ -52,7 +52,8 @@
         'Information-Gain' : {
           'Add' : true,
           'Checked' : false,
-        }
+        },
+
       },
       'QUALITATIVE' : {
         'Feature-Weights' :{
@@ -66,6 +67,10 @@
       },
       'PREDICTIVE' : {
         'Critical-Items' :{
+          'Add' : true,
+          'Checked' : false,
+        },
+        'Discard-Items' :{
           'Add' : true,
           'Checked' : false,
         },
