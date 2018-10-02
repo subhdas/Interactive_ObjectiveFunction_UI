@@ -339,18 +339,19 @@
 
         // Parse the date / time
 
-        var x = d3.scale.ordinal().rangeRoundBands([0, width*0.85], .05);
+        var x = d3.scale.ordinal().rangeRoundBands([0, width * 0.85], .05);
 
         var y = d3.scale.linear()
-                // .base(Math.E)
-                .domain([0, d3.max(data, function(d) {
-                    return +d.value;
-                })])
-                .range([height, 0]);
- 
+            // .base(Math.E)
+            .domain([0, d3.max(data, function(d) {
+                return +d.value;
+            })])
+            .range([height, 0]);
+
         var xAxis = d3.svg.axis()
             .scale(x)
             .orient("bottom")
+            .ticks(1)
             // .tickFormat(d3.time.format("%Y-%m"));
 
         var yAxis = d3.svg.axis()
@@ -383,27 +384,28 @@
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis)
             .selectAll("text")
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", "-.55em")
-            .attr("transform", "rotate(-90)");
+            .remove()
+            // .style("text-anchor", "end")
+            // .attr("dx", "-.8em")
+            // .attr("dy", "-.55em")
+            // .attr("transform", "rotate(-90)");
 
         svg.append("g")
             .attr("class", "y axis")
-            .call(yAxis)
-            .append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("dy", ".71em")
-            .style("text-anchor", "end")
-            .text("Value ($)");
+            // .call(yAxis)
+            // .append("text")
+            // .attr("transform", "rotate(-90)")
+            // .attr("y", 6)
+            // .attr("dy", ".71em")
+            // .style("text-anchor", "end")
+            // .text("Value ($)");
 
 
-              // tooltips
+        // tooltips
         var div_tooltip = d3.select('body').append('div')
-        .attr('class', 'tooltip_verBarFeat')
-        .style('display', 'none')
-        .style('position', 'absolute');
+            .attr('class', 'tooltip_verBarFeat')
+            .style('display', 'none')
+            .style('position', 'absolute');
 
         svg.selectAll("bar")
             .data(data)
@@ -419,16 +421,16 @@
             .attr("height", function(d) {
                 return height - y(d.value);
             })
-            .on('mouseover', function(d){
-                 div_tooltip.style('display', 'inline');
-                 div_tooltip
-                  .html(d.label + ': ' + d.value)
-                  .style('position', 'absolute')
-                  .style('left', (d3.event.pageX - 34) + 'px')
-                  .style('top', (d3.event.pageY - 12) + 'px');
-                  })
-            .on('mouseout', function(d){
-                 div_tooltip.style('display', 'none');
+            .on('mouseover', function(d) {
+                div_tooltip.style('display', 'inline');
+                div_tooltip
+                    .html(d.label + ': ' + d.value)
+                    .style('position', 'absolute')
+                    .style('left', (d3.event.pageX - 34) + 'px')
+                    .style('top', (d3.event.pageY - 12) + 'px');
+            })
+            .on('mouseout', function(d) {
+                div_tooltip.style('display', 'none');
             })
 
 
