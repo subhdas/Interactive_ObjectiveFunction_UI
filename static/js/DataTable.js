@@ -797,7 +797,7 @@
       .data(function(d) {
         return titles.map(function(k) {
           return {
-            value: d[k],
+            value: d[k], 
             name: k
           };
         });

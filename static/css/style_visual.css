@@ -1,4 +1,10 @@
 
+@highlight-col : #C23573;
+
+:root {
+    --main-highlight-color: #C23573; 
+    --main-highlight-color2: #35B7C2; 
+}
 /*for table styling*/
 
 tr:nth-of-type(odd) {
@@ -184,7 +190,9 @@ circle.hidden {
   }
 
 
-
+.ui-resizable-helper { 
+  border: 1.5px dotted black; 
+  background : var(--main-highlight-color2);}
 
 
 /*table thead tr{
