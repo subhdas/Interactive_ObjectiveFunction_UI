@@ -24,6 +24,7 @@ th {
     padding: 6px;
     border: 1px solid #ccc;
     text-align: left;
+    font-size: 1.4em;
 }
 
 th.des:after {
@@ -65,7 +66,10 @@ svg {
 }
 
 .axis path {
-  display: none;
+  display: block;
+}
+.x.axis path{
+  display: block;
 }
 
 .cell text {
@@ -179,4 +183,31 @@ circle.hidden {
     display: flex;
   }
 
+
+
+
+
+/*table thead tr{
+    display:block;
+}
+
+table th,table td{
+    width:100%;//fixed width
+}
+
+
+table  tbody{
+  display:block;
+  height:1000px;
+  overflow:auto;//set tbody to auto
+}*/
+
+/*tbody{
+  display: block;
+  overflow-y:scroll;//set tbody to auto
+  height:1000px;
+
+}*/
+
+/*-------------------------------------------------------------------*/
 

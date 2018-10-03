@@ -452,7 +452,9 @@
   DataTable.makeTable = function(dataGiven = main.appData, containerId = "tableContent") {
     $("#dataViewAppTable_" + containerId).remove();
 
-    var color_scale = d3.scale.linear().domain([0, 1]).range(['beige', 'green']);
+    // var color_scale = d3.scale.linear().domain([0, 1]).range(['beige', 'green']);
+    var color_scale = d3.scale.linear().domain([0, 1]).range([Main.colors.DARK_BWN, Main.colors.LIGHT_BWN]);
+    
 
     var data = Util.deepCopyData(dataGiven);
 
@@ -563,7 +565,8 @@
         return titles.map(function(k) {
           return {
             value: d[k],
-            name: k
+            name: k,
+            id: d['id']
           };
         });
       })
@@ -629,6 +632,29 @@
         // console.log('background ', idList, fac)
         // // $(this).css('background', 'cyan')
       })
+      .on('mouseover', function(d){
+        $(this).css('background', Main.colors.HIGHLIGHT2);
+        var id = d.id;
+        console.log(' d is ', d)
+        for(var item in BarM.filterHistData){
+          var nam = item.split('_')[0];
+          if(d.name == nam){
+            if(BarM.filterHistData[item].indexOf(id) != -1){
+              DataTable.tempCol = $("#histoBars_"+item).css('fill');
+              DataTable.tempItem = item;
+              $("#histoBars_"+item).css('fill', Main.colors.HIGHLIGHT);
+              return
+            }
+          }
+        }
+      })
+      .on('mouseout', function(d){
+        $(this).css('background', '');
+         $("#histoBars_"+DataTable.tempItem).css('fill',  DataTable.tempCol);
+
+
+
+      })
 
 
     $("#dataViewAppTable_" + containerId + " tr").on('click', function(d) {
@@ -665,7 +691,8 @@
   DataTable.makeHeatMapTable = function(dataGiven = main.appData, containerId = "tableContent") {
     $("#dataViewAppTable_" + containerId).remove();
 
-    var color_scale = d3.scale.linear().domain([0, 1]).range(['beige', 'green']);
+    // var color_scale = d3.scale.linear().domain([0, 1]).range(['beige', 'green']);
+    var color_scale = d3.scale.linear().domain([0, 1]).range([Main.colors.DARK_BWN, Main.colors.LIGHT_BWN]);
 
     var data = Util.deepCopyData(dataGiven);
 
@@ -797,7 +824,8 @@
             var val = d.value/ran[1];
             var col = color_scale(val.toFixed(3));
             $(this).closest('td').css('background', col);
-            return val.toFixed(3);
+            // return val.toFixed(3);
+            return d.value;
 
         }else{
             return d.value;

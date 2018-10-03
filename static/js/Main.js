@@ -38,7 +38,9 @@
         LIGHTGRAY: "lightgray",
         BLACK: 'black',
         POS_COL: 'red',
-        NEG_COL: 'blue'
+        NEG_COL: 'blue',
+        DARK_BWN : '#A19393',
+        LIGHT_BWN : '#EFE2E2'
     }
 
     /*

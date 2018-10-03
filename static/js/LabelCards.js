@@ -3,6 +3,7 @@
     LabelCard.storedData = {};
     LabelCard.tempLabels = {};
     LabelCard.computeReturnData = {};
+    LabelCard.heatMapViewMode = true;
 
     LabelCard.getDataForCard = function(mainId = 0, dataGiven = Main.trainData) {
         // var ran = Util.getRandomNumberBetween(Main.trainData.length*0.75 , 3).toFixed(0);
@@ -58,8 +59,14 @@
             // htmlStr += "<div class = 'iconDiv'><div class='iconHolder' id='makeModel' onclick='' title='Make Models'>"
             // htmlStr += "<img class='imgIcon' src='static/img/icons/three_bar.png'></div></div>"
 
-        htmlStr += "<button id='makeModel' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<div class= 'labelHeaderButtonRack' ><button id='makeModel' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>dashboard</i></button>";
+        htmlStr += "<div class='iconHolder' id='tableViewH' onclick='' title='Table View'>"
+        htmlStr += "<img class='imgIcon' src='static/img/icons/table_view.png'></div>"
+
+        htmlStr += "<div class='iconHolder' id='heatmapViewH' onclick='' title='Heatmap View'>"
+        htmlStr += "<img class='imgIcon' src='static/img/icons/stacked_bar.png'></div></div>"
+
         htmlStr += "<div id ='labelCardHeadRow' >Labels Added : " + Object.keys(LabelCard.storedData).length + " | Features Relevant : " + LabelCard.computeReturnData['colSelected'] + "</div>";
         // htmlStr += "<div id ='labelCardHeadRow' >Features Relevant : " + LabelCard.computeReturnData['colSelected'] + "</div>";
 
@@ -72,6 +79,9 @@
         $("#labelCardHeaderId").css('padding', '3px');
         $("#labelCardHeaderId").css('border-bottom', '1px solid gray');
         $(".iconDiv").css('border-bottom', '1px solid gray');
+
+        $(".labelHeaderButtonRack").css('display', 'flex')
+        $(".labelHeaderButtonRack").css('flex-direction', 'row');
 
         $("#makeModel").on('click', function() {
             var objSend = {
@@ -86,6 +96,40 @@
                 BarM.modelData[0] = Object.assign({}, dataObj);
                 DataTable.modelUpdateLabel();
             })
+        })
+
+        $("#tableViewH").on('click', function(d){
+          LabelCard.heatMapViewMode = false;
+
+            for (var item in DataTable.selectedRows) {
+              var data = LabelCard.storedData[item];
+              if (data == null) data = LabelCard.getDataForCard(item);
+              else data = data['data'];
+              console.log(' gotten data ', data, item)
+              if(LabelCard.heatMapViewMode){
+                  DataTable.makeHeatMapTable(data, "labelCard_" + item);
+                }else{
+                  DataTable.makeTable(data,"labelCard_"+item);
+                  LabelCard.stylizeTables("labelCard_"+item);
+                }
+            }
+
+        })
+
+        $("#heatmapViewH").on('click', function(d){
+          LabelCard.heatMapViewMode = true;
+          for (var item in DataTable.selectedRows) {
+            var data = LabelCard.storedData[item];
+            if (data == null) data = LabelCard.getDataForCard(item);
+            else data = data['data'];
+            console.log(' gotten data ', data, item)
+              if(LabelCard.heatMapViewMode){
+                  DataTable.makeHeatMapTable(data, "labelCard_" + item);
+                }else{
+                  DataTable.makeTable(data,"labelCard_"+item);
+                  LabelCard.stylizeTables("labelCard_"+item);
+                }
+            }          
         })
     }
 
@@ -104,7 +148,7 @@
                 htmlStr += "<div class ='labelHeaderWrap'><div class = 'labelHeadText'>"
                     // htmlStr += "<div id ='labelCardInfoRow'>Label Id : <span contenteditable='true'>" + item + "</span></div>";
                 htmlStr += "<div class = 'labelInfo' id ='labelCardInfoRow' class ='labelNameRow' >Label : <span class = 'labelItem' id = 'spanLabel_" + item + "' contenteditable='true'>" + item + "</span></div>";
-                htmlStr += "<div class = 'labelInfo' id ='labelCardInfoRow'>Label Id/Name: <span > " + item + " | " + name + " </span> | Data Length : <span class = 'labelCardLength_" + item + "'>" + LabelCard.storedData[item]['data'].length + "</span></div>";
+                htmlStr += "<div class = 'labelInfo' id ='labelCardInfoRow'> Representative : " + name + " </span> | Data Length : <span class = 'labelCardLength_" + item + "'>" + LabelCard.storedData[item]['data'].length + "</span></div>";
                 // htmlStr += "<div id ='labelCardInfoRow' >Data Length : " + LabelCard.storedData[item]['data'].length + "</div>";
                 htmlStr += "</div><div class = 'featBarLabelCard' id='featBar-labelCard_" + item + "' ></div></div>"
 
@@ -116,12 +160,15 @@
                 var data = LabelCard.storedData[item];
                 console.log('found data is ', data)
                 if (data == null) data = LabelCard.getDataForCard(item);
-                else data = data['data']
-                // DataTable.makeTable(data,"labelCard_"+item);
-                DataTable.makeHeatMapTable(data, "labelCard_" + item);
+                else data = data['data'];
+                if(LabelCard.heatMapViewMode){
+                  DataTable.makeHeatMapTable(data, "labelCard_" + item);
+                }else{
+                  DataTable.makeTable(data,"labelCard_"+item);
+                  LabelCard.stylizeTables("labelCard_"+item);
+                }
                 // BarM.makeFeatureLabelsHorBar("horBar-labelCard_"+item, 100,300);
                 BarM.makeFeatureLabelsVerBar("featBar-labelCard_" + item, 300, 100);
-                // LabelCard.stylizeTables("labelCard_"+item);
                 var lab = item;
                 try {
                     lab = LabelCard.tempLabels[item];
@@ -217,9 +264,12 @@
                     dataCard.unshift(LabelCard.storedData[idCard]['mainRow']);
 
                     $(".labelCardLength_" + idCard).text(dataCard.length);
-                    // DataTable.makeTable(dataCard,"labelCard_"+idCard);
-                    DataTable.makeHeatMapTable(dataCard, "labelCard_" + idCard);
-                    // LabelCard.stylizeTables("labelCard_"+idCard);
+                    if(LabelCard.heatMapViewMode){
+                      DataTable.makeHeatMapTable(dataCard, "labelCard_" + idCard);
+                    }else{
+                      DataTable.makeTable(dataCard,"labelCard_"+idCard);
+                      LabelCard.stylizeTables("labelCard_"+idCard);
+                    }
 
                     console.log('id dropped ', idNum, dataGet);
                     console.log('id dropped ', idCard, dataCard);
@@ -235,12 +285,17 @@
                                 newData.push(d);
                             }
                         })
-                        console.log('newdata and data prev length ', newData.length, dataPrev.length);
+                        // console.log('newdata and data prev length ', newData.length, dataPrev.length);
                         LabelCard.storedData[parseInt(DataTable.lastLabelCardId)]['data'] = newData;
-                        $(".labelCardLength_" + DataTable.lastLabelCardId).text(newData.length);
-                        // DataTable.makeTable(newData,"labelCard_"+parseInt(DataTable.lastLabelCardId));
-                        DataTable.makeHeatMapTable(newData, "labelCard_" + parseInt(DataTable.lastLabelCardId));
-                        // LabelCard.stylizeTables("labelCard_"+parseInt(DataTable.lastLabelCardId));
+                        $(".labelCardLength_" + DataTable.lastLabelCardId).text(newData.length);                       
+                        
+                         if(LabelCard.heatMapViewMode){
+                            DataTable.makeHeatMapTable(newData, "labelCard_" + parseInt(DataTable.lastLabelCardId));
+                          }else{
+                            DataTable.makeTable(newData,"labelCard_"+parseInt(DataTable.lastLabelCardId));
+                            LabelCard.stylizeTables("labelCard_"+parseInt(DataTable.lastLabelCardId));
+                          }
+
                     }, 50);
                 }
             });
