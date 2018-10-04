@@ -144,8 +144,12 @@
     })
 
     $('#addConstraints').on('click', function() {
-      ConP.addPanelCon()
-      
+      ConP.addPanelCon();
+      ConP.addConstrainSelector();  
+
+
+
+          
     })
 
 

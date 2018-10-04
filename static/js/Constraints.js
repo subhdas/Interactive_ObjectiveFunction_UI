@@ -2,44 +2,91 @@
 
 
     Cons = {};
+ 
+
     // Cons.typeConstraints = {
-    //   'COMPOSITIONAL' : {
-    //     'Items-In-Same-Label': {
-    //       'Add' : true,
+    //     'COMPOSITIONAL': {
+    //         'Same-Label': {
+    //             'Add': true,
+    //             'Checked': false,
+    //         },
+    //         'Similarity-Metric': {
+    //             'Add': true,
+    //             'Checked': false,
+    //         },
+    //         'Information-Gain': {
+    //             'Add': true,
+    //             'Checked': false,
+    //         },
+    //         'misc': {
+    //             'Color-Type': '#DEE54F'
+    //         }
     //     },
-    //     'Similar-Items-In-Same-Label' :{},
-    //     'Dissimilar-Items-In-Diff-Label' : {}
-    //   },
-    //   'QUALITATIVE' : {
-    //     'Similar-Features-In-Same-Label': {},
-    //     'Follow-Feature-Weights' :{
-    //       'Add' : true,
+    //     'QUALITATIVE': {
+    //         'Feature-Weights': {
+    //             'Add': true,
+    //             'Checked': false,
+    //         },
+    //         'Feature-Range': {
+    //             'Add': true,
+    //             'Checked': false,
+    //         },
+    //         'misc': {
+    //             'Color-Type': '#90D09D'
+    //         }
     //     },
-    //     'Same-Range-Features-In-Same-label' : {}
-    //   },
-    //   'PREDICTIVE' : {
-    //     'Interacted-Items-Correctly-Predicted': {
-    //       'Add' : true,
+    //     'PREDICTIVE': {
+    //         'Critical-Items': {
+    //             'Add': true,
+    //             'Checked': false,
+    //         },
+    //         'Discard-Items': {
+    //             'Add': true,
+    //             'Checked': false,
+    //         },
+    //         'Number-Items-Features': {
+    //             'Add': true,
+    //             'Checked': false,
+    //         },
+    //         'Number-Items': {
+    //             'Checked': false,
+    //         },
+    //         'misc': {
+    //             'Color-Type': '#D0B790'
+    //         }
     //     },
-    //     'Critical-Items-Correctly-Predicted' :{
-    //       'Add' : true,
+    //     'QUANTITATIVE': {
+    //         'F1-Score': {
+    //             'Checked': false,
+    //         },
+    //         'Recall': {
+    //             'Checked': false,
+    //         },
+    //         'Cross-Val': {
+    //             'Checked': false,
+    //         },
+    //         'misc': {
+    //             'Color-Type': '#A2B0C8'
+    //         }
     //     },
-    //     'Number-Items-Correctly-Predicted' : {}
-    //   },
-    //   'QUANTITATIVE' : {
-    //     'Precision-Score': {},
-    //     'Accuracy' :{},
-    //     'Recall' : {},
-    //     'Cross-Val-Score' : {},
-    //   },
-    //   'GENERALIZATION' : {
-    //     'Number-Label-Correct-HoldOut-Data': {},
-    //     'Critical-Data-Correct-HoldOut-Data' :{},
-    //     'Cross-Val-Score-HoldOut-Data' : {}
-    //   },
+    //     'GENERALIZATION': {
+    //         'Number-Label-HoldOut': {
+    //             'Checked': false,
+    //         },
+    //         'Critical-Data-HoldOut': {
+    //             'Checked': false,
+    //         },
+    //         'Cross-Val-Score': {
+    //             'Checked': false,
+    //         },
+    //         'misc': {
+    //             'Color-Type': '#F4A1E9'
+    //         }
+    //     },
     // }
 
-    Cons.typeConstraints = {
+
+        Cons.typeConstraints = {
         'COMPOSITIONAL': {
             'Same-Label': {
                 'Add': true,
@@ -50,6 +97,10 @@
                 'Checked': false,
             },
             'Information-Gain': {
+                'Add': true,
+                'Checked': false,
+            },
+             'Critical-Items': {
                 'Add': true,
                 'Checked': false,
             },
@@ -65,39 +116,16 @@
             'Feature-Range': {
                 'Add': true,
                 'Checked': false,
-            },
+            },       
             'misc': {
                 'Color-Type': '#90D09D'
-            }
-        },
-        'PREDICTIVE': {
-            'Critical-Items': {
-                'Add': true,
-                'Checked': false,
-            },
-            'Discard-Items': {
-                'Add': true,
-                'Checked': false,
-            },
-            'Number-Items-Features': {
-                'Add': true,
-                'Checked': false,
-            },
-            'Number-Items': {
-                'Checked': false,
-            },
-            'misc': {
-                'Color-Type': '#D0B790'
             }
         },
         'QUANTITATIVE': {
             'F1-Score': {
                 'Checked': false,
             },
-            'Recall': {
-                'Checked': false,
-            },
-            'Cross-Val': {
+             'Training-Accuracy': {
                 'Checked': false,
             },
             'misc': {
@@ -105,17 +133,14 @@
             }
         },
         'GENERALIZATION': {
-            'Number-Label-HoldOut': {
-                'Checked': false,
-            },
-            'Critical-Data-HoldOut': {
+            'Testing-Accuracy': {
                 'Checked': false,
             },
             'Cross-Val-Score': {
                 'Checked': false,
             },
             'misc': {
-                'Color-Type': '#F4A1E9'
+                'Color-Type': '#D0B790'
             }
         },
     }

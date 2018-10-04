@@ -21,7 +21,7 @@ ConP.addPanelCon = function(){
   var htmlStr = "<div class = 'conPanelDiv'><div class = 'conPanelHeader'> <p class = 'labelConPanel'>CONSTRAINTS PANEL</p>"
   htmlStr += "<button id='clearConPanel' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
   htmlStr += "<i class='material-icons'>clear</i></button></div>";
-  htmlStr += "<div class = 'conPanelContent'></div>"
+  htmlStr += "<div id = 'conPanelContentId' class = 'conPanelContent'></div>"
   htmlStr += "</div>"
   $('body').append(htmlStr);
   var w = window.innerWidth;
@@ -31,8 +31,8 @@ ConP.addPanelCon = function(){
   $(".conPanelDiv").css('position', 'absolute');
   $(".conPanelDiv").css('top', '300px');
   $(".conPanelDiv").css('left', w*0.75+'px');
-  $(".conPanelDiv").css('height', '650');
-  $(".conPanelDiv").css('width', '300px');
+  $(".conPanelDiv").css('height', '650px');
+  $(".conPanelDiv").css('width', '400px');
   $(".conPanelDiv").css('overflow-x', 'hidden');
   $(".conPanelDiv").css('overflow-y', 'auto');
   $(".conPanelDiv").css('border', '1px dotted lightgray');
@@ -65,5 +65,71 @@ ConP.addPanelCon = function(){
 }
 
 
+
+ConP.addConstrainSelector = function(containerId = "conPanelContentId"){
+  $("#"+containerId).empty();
+
+  var i = 1
+  var htmlStr = "<div class = 'conHeadPan' ><div class='input-field col s12 consSelectorTop'><select  class='selectConstrain browser-default'>"
+  for(var item in Cons.typeConstraints){
+    htmlStr += "<optgroup class = 'optConsSelectorTop' label='"+item+"'>";
+    var k = Cons.typeConstraints[item];
+    for (var elem in k ){
+      htmlStr +=  "<option class ='' value='"+elem+"'>"+elem+"</option>";
+      i += 1;
+    }
+    htmlStr += "</optgroup>";
+  }
+  htmlStr += "</select>";        
+  htmlStr += "<label></label></div>"
+
+  htmlStr += "<button id='addLabelCard' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+  htmlStr += "<i class='material-icons'>add</i></button>";
+
+  htmlStr += "<button id='addLabelCard' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+  htmlStr += "<i class='material-icons'>clear</i></button>";
+
+
+
+  htmlStr += "<div id = 'conHeadSupportPan'></div></div>";
+
+  $("#"+containerId).append(htmlStr);
+
+
+  // $(".conHeadPan").css('display', 'flex')
+  $(".conHeadPan").css('width', '100%')
+  $(".conHeadPan").css('padding', '2px')
+  $(".conHeadPan").css('border-bottom', '1px dotted lightgray')
+
+  $("#conHeadSupportPan").css('display', 'inline-flex')
+  $("#conHeadSupportPan").css('width', '75%')
+  $("#conHeadSupportPan").css('height', '20px')
+  $("#conHeadSupportPan").css('background', 'red')
+
+   $('select').formSelect();
+
+  var $select1 = $('select:not(.browser-default)');
+  $('.selectConstrain').on('change', function(e){
+     // var sel = $(this).val("1");
+     // sel = $('.something').find('option[value="SELECT-VALUE"]').prop('selected', true);
+     // var instance = M.FormSelect.getInstance($(this));
+     // var sel = instance.input;
+     // console.log(' e is ', sel)
+     // console.log(' e is ', e.target, e.target.value
+     var valueSelect = $(this).val();
+     console.log(' e is ', valueSelect);
+
+     if(valueSelect == 'Same-Label'){
+      ConP.showSameLabelContent('conHeadSupportPan');
+     }
+
+  })
+}
+
+ConP.showSameLabelContent = function(containerId = ""){
+
+  $('#'+containerId).empty();
+
+}
 
 }())
