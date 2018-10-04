@@ -219,6 +219,14 @@
             "#918550"
         ]
 
+        colors = [
+            "#DEE54F",
+            "#90D09D",
+            "#D0B790",
+            "#A2B0C8",
+            "#F4A1E9",
+        ]
+
         var groups = svg.selectAll('g')
             .data(dataset)
             .enter()

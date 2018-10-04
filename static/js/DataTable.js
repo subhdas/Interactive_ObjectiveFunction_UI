@@ -92,6 +92,9 @@
     htmlStr += "<button id='addLabelCard' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
     htmlStr += "<i class='material-icons'>add</i></button>";
 
+    htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+    htmlStr += "<i class='material-icons'>chat</i></button>";
+
 
 
     $("#" + containerId).append(htmlStr);
@@ -138,6 +141,11 @@
         LabelCard.getDataObject(dataObj['indexBydata']);
         LabelCard.makeCards();
       })
+    })
+
+    $('#addConstraints').on('click', function() {
+      ConP.addPanelCon()
+      
     })
 
 
