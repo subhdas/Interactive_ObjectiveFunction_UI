@@ -163,4 +163,20 @@
         }
     }
 
+    ParC.textListing = function(containerId = "", data = []) {
+        $("#" + containerId).empty();
+        var htmlStr = ""
+        data.forEach(function(d, i) {
+            htmlStr += "<div class = 'textPerItemConstrain' >" + d[Main.entityNameSecondImp] + "</div>";
+        })
+        $("#" + containerId).append(htmlStr);
+        $(".textPerItemConstrain").css('width', '100%')
+        $(".textPerItemConstrain").css('height', 'auto')
+        $(".textPerItemConstrain").css('background', Main.colors.HIGHLIGHT2)
+        $(".textPerItemConstrain").css('padding', '3px')
+        $(".textPerItemConstrain").css('border-radius', '3px')
+        $(".textPerItemConstrain").css('margin-bottom', '5px')
+        $(".textPerItemConstrain").css('margin-left', '5px')
+    }
+
 }())

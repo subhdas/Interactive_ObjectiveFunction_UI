@@ -15,11 +15,11 @@
         ConP.showingConstPanel = true;
         var valueSelect = $('.selectConstrain').val();
         if (valueSelect == 'Same-Label') {
-            ConP.addSameLabContentFromData();
+            TabCon.addSameLabContentFromData();
             // try {
             //     console.log('same label adding from data')
             // } catch (e) {
-            //     ConP.showSameLabelContent('conContentItems', 'conHeadSupportPan');
+            //     ConP.makeSameLabHeader('conContentItems', 'conHeadSupportPan');
             //     console.log('same label errored , so adding blank')
             // }
         }
@@ -97,9 +97,12 @@
         var i = 1
         var htmlStr = "<div class = 'conHeadPan' ><div class='input-field col s12 consSelectorTop'><select  class='selectConstrain browser-default'>"
         for (var item in Cons.typeConstraints) {
+            if(item =='QUANTITATIVE' || item == 'GENERALIZATION') continue;
             htmlStr += "<optgroup class = 'optConsSelectorTop' label='" + item + "'>";
             var k = Cons.typeConstraints[item];
             for (var elem in k) {
+                if(elem =='misc' || elem == 'Feature-Weights') continue;
+                if(elem =='Critical-Items' || elem == 'Information-Gain') continue;
                 htmlStr += "<option class ='' value='" + elem + "'>" + elem + "</option>";
                 i += 1;
             }
@@ -141,10 +144,11 @@
 
         $('select').formSelect();
 
-
+        
+        // add by default
         var valueSelect = $('.selectConstrain').val();
         if (valueSelect == 'Same-Label') {
-            ConP.showSameLabelContent('conContentItems', 'conHeadSupportPan');
+            TabCon.makeSameLabHeader('conContentItems', 'conHeadSupportPan');
         }
 
 
@@ -163,28 +167,61 @@
 
             if (valueSelect == 'Same-Label') {
                 try {
-                    ConP.addSameLabContentFromData();
+                    TabCon.addSameLabContentFromData();
                 } catch (e) {
-                    ConP.showSameLabelContent('conContentItems', 'conHeadSupportPan');
+                    TabCon.makeSameLabHeader('conContentItems', 'conHeadSupportPan');
+                }
+            }
+
+            if (valueSelect == 'Feature-Range') {
+                try {
+                    TabCon.addSameLabContentFromData();
+                } catch (e) {
+                    TabCon.makeSameLabHeader('conContentItems', 'conHeadSupportPan');
                 }
             }
 
         })
 
+        // when add button on constrain panel is clicked
         $("#addConstraintPanelItems").on('click', function() {
             var valueSelect = $('.selectConstrain').val();
+
+            //Same label
             if (valueSelect == 'Same-Label') {
                 Cons.typeConstraints['COMPOSITIONAL'][valueSelect]['Checked'] = true;
                 ConsInt.getActiveConstraints();
-                var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + ConP.radioCheckedSame];
+                var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame];
                 try {
                     arr.push.apply(arr, Object.keys(ConP.selectedRowsCons));
                     arr = Util.getUniqueArray(arr)
                 } catch (err) {
                     arr = Object.keys(ConP.selectedRowsCons);
                 }
-                ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + ConP.radioCheckedSame] = arr;
-                ConP.makeSameLabContent();
+                ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame] = arr;
+                TabCon.makeSameLabContent();
+
+                var arr = Object.keys(ConP.selectedRowsCons);
+                ConP.selectedRowsCons = {};
+                arr.forEach(function(d, i) {
+                    $("#tr_" + d).css('background', "rgb(255,255,255)")
+                    $("#tr_" + d).css('color', 'black')
+                })
+            }
+
+            //Feature Range
+            if (valueSelect == 'Feature-Range') {
+                Cons.typeConstraints['QUALITATIVE'][valueSelect]['Checked'] = true;
+                ConsInt.getActiveConstraints();
+                var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame];
+                try {
+                    arr.push.apply(arr, Object.keys(ConP.selectedRowsCons));
+                    arr = Util.getUniqueArray(arr)
+                } catch (err) {
+                    arr = Object.keys(ConP.selectedRowsCons);
+                }
+                ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame] = arr;
+                TabCon.makeSameLabContent(dataFeed = 'Feature-Range');
 
                 var arr = Object.keys(ConP.selectedRowsCons);
                 ConP.selectedRowsCons = {};
@@ -198,123 +235,8 @@
     }
 
 
-    ConP.addSameLabContentFromData = function() {
-        // Cons.typeConstraints['COMPOSITIONAL'][valueSelect]['Checked'] = true;
-        // ConsInt.getActiveConstraints();
-        var valueSelect = 'Same-Label'
-        for (var item in LabelCard.storedData) {
-            var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + item];
-            console.log(' got arr for item ', item, arr)
-            ConP.makeSameLabContent("_mainContentMid" + item, item);
-        }
 
 
 
-    }
-
-    ConP.makeSameLabContent = function(containerId = "_mainContentMid" + ConP.radioCheckedSame, item = ConP.radioCheckedSame) {
-        $("#" + containerId).empty();
-        var htmlStr = "<div class = 'parChartMainContentCons' id = 'parChartMainContentCons_" + item + "'></div>";
-        htmlStr += "<div class = 'textAreaMainContentCons' id ='textAreaMainContentCons_" + item + "' ></div>";
-        $("#" + containerId).append(htmlStr);
-
-        $(".parChartMainContentCons").css('display', 'flex');
-        $(".parChartMainContentCons").css('width', '70%');
-        $(".parChartMainContentCons").css('height', '100%');
-        $(".parChartMainContentCons").css('padding', '3px');
-        $(".parChartMainContentCons").css('border-right', '1px solid lightgray');
-
-        $(".textAreaMainContentCons").css('display', 'flex');
-        $(".textAreaMainContentCons").css('flex-direction', 'column');
-        $(".textAreaMainContentCons").css('width', '30%');
-        $(".textAreaMainContentCons").css('height', '100%');
-        // $(".textAreaMainContentCons").css('padding', '3px');
-        // $(".textAreaMainContentCons").css('margin-left', '5px');
-        $(".textAreaMainContentCons").css('overflow-y', 'auto')
-        $(".textAreaMainContentCons").css('overflow-x', 'hidden')
-
-
-        // for (var item in LabelCard.storedData) {
-        // console.log(' item is ', item, LabelCard.storedData, ConsInt.activeConstraints['Same-Label'])
-        try {
-            var data = [];
-            var arrId = ConsInt.activeConstraints['Same-Label']['input']['labelitemsConId_' + item];
-            // console.log(' add id ', arrId)
-            for (var i = 0; i < arrId.length; i++) {
-                var dataItem = Main.getDataById(arrId[i], Main.trainData);
-                data.push(dataItem);
-            }
-
-            var dataNumeric = Main.getDataByKeys(Object.keys(Main.numericalAttributes), data);
-            console.log(' data is ', dataNumeric)
-            ParC.makeParallelCoordChart('parChartMainContentCons_' + item, dataNumeric);
-            ConP.textListing('textAreaMainContentCons_' + item, data);
-            console.log('par chart added ')
-        } catch (e) {
-
-        }
-        // }//end of for
-    }
-
-
-
-    ConP.showSameLabelContent = function(containerId = "", supportId = "") {
-        $('#' + containerId).empty();
-        var htmlStr = ""
-        for (var item in LabelCard.storedData) {
-            var lab = LabelCard.storedData[item]['label']
-            if (typeof lab == 'undefined') lab = item
-            htmlStr += "<div class = '_wrapOneItem' ><div class = '_headConsTop' > Label : " + lab + "</div>";
-            htmlStr += "<div class ='_mainContentMid' id = '_mainContentMid" + item + "' ></div></div>";
-        }
-
-        $("#" + containerId).append(htmlStr);
-        $("._wrapOneItem").css('display', 'flex');
-        $("._wrapOneItem").css('flex-direction', 'column');
-        $("._wrapOneItem").css('width', '100%');
-        $("._wrapOneItem").css('height', '200px');
-        $("._wrapOneItem").css('border-bottom', '1px dotted lightgray');
-        $("._wrapOneItem").css('padding', '5px');
-
-        $("._headConsTop").css('width', '100%');
-        $("._mainContentMid").css('display', 'flex');
-        $("._mainContentMid").css('flex-direction', 'row');
-        $("._mainContentMid").css('width', '100%');
-        $("._mainContentMid").css('height', '75%');
-
-        htmlStr = ""
-        for (var item in LabelCard.storedData) {
-            var lab = LabelCard.storedData[item]['label']
-            if (typeof lab == 'undefined') lab = item
-            htmlStr += "<p><label><input class = 'radioLabelCons' name='group1' type='radio' checked />"
-            htmlStr += "<span>" + lab + "</span></label></p>";
-            ConP.radioCheckedSame = lab;
-        }
-        $("#" + supportId).empty();
-        $("#" + supportId).append(htmlStr);
-
-        $('.radioLabelCons').on('change', function(e) {
-            var check = $("input[name=group1]:checked").next().text();
-            ConP.radioCheckedSame = check;
-            console.log(' found ', check);
-        })
-
-    }
-
-
-    ConP.textListing = function(containerId = "", data = []) {
-        $("#" + containerId).empty();
-        var htmlStr = ""
-        data.forEach(function(d, i) {
-            htmlStr += "<div class = 'textPerItemConstrain' >" + d[Main.entityNameSecondImp] + "</div>";
-        })
-        $("#" + containerId).append(htmlStr);
-        $(".textPerItemConstrain").css('width', '100%')
-        $(".textPerItemConstrain").css('height', 'auto')
-        $(".textPerItemConstrain").css('background', Main.colors.HIGHLIGHT2)
-        $(".textPerItemConstrain").css('padding', '3px')
-        $(".textPerItemConstrain").css('border-radius', '3px')
-        $(".textPerItemConstrain").css('margin-bottom', '5px')
-        $(".textPerItemConstrain").css('margin-left', '5px')
-    }
+    
 }())
