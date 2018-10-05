@@ -136,7 +136,7 @@
 
          $('#addConstraints').on('click', function() {
             ConP.addPanelCon();
-            ConP.addConstrainSelector();  
+            // ConP.addConstrainSelector();  
           })
     }
 
