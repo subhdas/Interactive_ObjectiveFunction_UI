@@ -61,6 +61,8 @@
 
         htmlStr += "<div class= 'labelHeaderButtonRack' ><button id='makeModel' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>dashboard</i></button>";
+        htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>chat</i></button>";
         htmlStr += "<div class='iconHolder' id='tableViewH' onclick='' title='Table View'>"
         htmlStr += "<img class='imgIcon' src='static/img/icons/table_view.png'></div>"
 
@@ -131,6 +133,11 @@
                 }
             }          
         })
+
+         $('#addConstraints').on('click', function() {
+            ConP.addPanelCon();
+            ConP.addConstrainSelector();  
+          })
     }
 
 

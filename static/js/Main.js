@@ -71,6 +71,20 @@
 
     }
 
+    Main.getDataByKeys = function(keys= [],data=[]){
+        var dataOut = [];
+        data.forEach(function(d){
+            var obj ={}
+            for (var item in d){
+                if(keys.indexOf(item) != -1){
+                    obj[item] = d[item]
+                }
+            }
+            dataOut.push(obj)
+        })
+        return dataOut;
+    }
+
 
     Main.getDataById = function (id = 0, data = Main.trainData) {
         for (var i = 0; i < data.length; i++) {

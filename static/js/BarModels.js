@@ -365,7 +365,7 @@
         // Fill histdata with y-axis values and meta data
         data.forEach(function(d,i) {
             var bin = Math.abs(Math.floor((d.value - minbin) / binsize));
-            console.log(' bin is ', bin, d.value)
+            // console.log(' bin is ', bin, d.value)
             if ((bin.toString() != "NaN") && (bin < histdata.length)) {
                 try{
                     BarM.filterHistData[attr+"_"+bin].push(d.label)

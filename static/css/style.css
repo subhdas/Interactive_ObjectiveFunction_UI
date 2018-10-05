@@ -42,9 +42,9 @@ body {
     background-color: lightgray;
     /* width: 100%; */
     height: 30px;
-    margin: 5px;
+    /*margin: 5px;*/
     /* border-radius: 5px; */
-    border-bottom: 1px dashed black;
+    /*border-bottom: 1px dashed black;*/
 }
 
 #bottomBar {
@@ -249,7 +249,7 @@ body {
     display: flex;
     justify-content: flex-end;
     position: relative;
-    z-index: 20;
+    /*z-index: 20;*/
     background-color: transparent;
     text-align: center;
 }
