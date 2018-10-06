@@ -519,7 +519,11 @@
         $(".filterContent").css('flex-direction', 'column');
 
         $("#clearFilterPanel").css('float', 'right');
-        var dataNumeric = Main.getDataByKeys(Object.keys(Main.numericalAttributes), Main.trainData);
+        var arr = ['id'];
+        arr.push.apply(arr,Object.keys(Main.numericalAttributes));
+
+
+        var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
         ParC.makeParallelCoordChart('filterContentId', dataNumeric);
 
         $("#clearFilterPanel").on('click', function() {

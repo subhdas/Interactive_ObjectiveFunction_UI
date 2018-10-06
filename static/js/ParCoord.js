@@ -6,13 +6,13 @@
 
     ParC.makeParallelCoordChart = function(containerId = "", data) {
 
-    	$('#'+containerId).empty();
-    	var w = $("#"+containerId).css('width');
-    	w = parseFloat(w);
-    	var h = $("#"+containerId).css('height');
-    	h = parseFloat(h);
+        $('#' + containerId).empty();
+        var w = $("#" + containerId).css('width');
+        w = parseFloat(w);
+        var h = $("#" + containerId).css('height');
+        h = parseFloat(h);
 
-    	// console.log('width is ', w, h)
+        // console.log('width is ', w, h)
 
         var margin = {
                 top: 30,
@@ -32,105 +32,105 @@
             background,
             foreground;
 
-        var svg = d3.select("#"+containerId).append("svg")
+        var svg = d3.select("#" + containerId).append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-            // Extract the list of dimensions and create a scale for each.
-            x.domain(dimensions = d3.keys(data[0]).filter(function(d) {
-                return d != "name" && (y[d] = d3.scale.linear()
-                    .domain(d3.extent(data, function(p) {
-                        return +p[d];
-                    }))
-                    .range([height, 0]));
-            }));
+        // Extract the list of dimensions and create a scale for each.
+        x.domain(dimensions = d3.keys(data[0]).filter(function(d) {
+            return d != "name" && (y[d] = d3.scale.linear()
+                .domain(d3.extent(data, function(p) {
+                    return +p[d];
+                }))
+                .range([height, 0]));
+        }));
 
-            // Add grey background lines for context.
-            background = svg.append("g")
-                .attr("class", "background")
-                .selectAll("path")
-                .data(data)
-                .enter().append("path")
-                .attr("d", path);
+        // Add grey background lines for context.
+        background = svg.append("g")
+            .attr("class", "background")
+            .selectAll("path")
+            .data(data)
+            .enter().append("path")
+            .attr("d", path);
 
-            // Add blue foreground lines for focus.
-            foreground = svg.append("g")
-                .attr("class", "foreground")
-                .selectAll("path")
-                .data(data)
-                .enter().append("path")
-                .attr("d", path);
+        // Add blue foreground lines for focus.
+        foreground = svg.append("g")
+            .attr("class", "foreground")
+            .selectAll("path")
+            .data(data)
+            .enter().append("path")
+            .attr("d", path);
 
-            // Add a group element for each dimension.
-            var g = svg.selectAll(".dimension")
-                .data(dimensions)
-                .enter().append("g")
-                .attr("class", "dimension")
-                .attr("transform", function(d) {
-                    return "translate(" + x(d) + ")";
+        // Add a group element for each dimension.
+        var g = svg.selectAll(".dimension")
+            .data(dimensions)
+            .enter().append("g")
+            .attr("class", "dimension")
+            .attr("transform", function(d) {
+                return "translate(" + x(d) + ")";
+            })
+            .call(d3.behavior.drag()
+                .origin(function(d) {
+                    return {
+                        x: x(d)
+                    };
                 })
-                .call(d3.behavior.drag()
-                    .origin(function(d) {
-                        return {
-                            x: x(d)
-                        };
-                    })
-                    .on("dragstart", function(d) {
-                        dragging[d] = x(d);
-                        background.attr("visibility", "hidden");
-                    })
-                    .on("drag", function(d) {
-                        dragging[d] = Math.min(width, Math.max(0, d3.event.x));
-                        foreground.attr("d", path);
-                        dimensions.sort(function(a, b) {
-                            return position(a) - position(b);
-                        });
-                        x.domain(dimensions);
-                        g.attr("transform", function(d) {
-                            return "translate(" + position(d) + ")";
-                        })
-                    })
-                    .on("dragend", function(d) {
-                        delete dragging[d];
-                        transition(d3.select(this)).attr("transform", "translate(" + x(d) + ")");
-                        transition(foreground).attr("d", path);
-
-                        console.log(' brusing drag ', dragging)
-                        background
-                            .attr("d", path)
-                            .transition()
-                            .delay(500)
-                            .duration(0)
-                            .attr("visibility", null);
-                    }));
-
-            // Add an axis and title.
-            g.append("g")
-                .attr("class", "axis")
-                .each(function(d) {
-                    d3.select(this).call(axis.scale(y[d]));
+                .on("dragstart", function(d) {
+                    dragging[d] = x(d);
+                    background.attr("visibility", "hidden");
                 })
-                .append("text")
-                .style("text-anchor", "middle")
-                .attr("y", -9)
-                .text(function(d) {
-                    return d;
-                });
-
-            // Add and store a brush for each axis.
-            g.append("g")
-                .attr("class", "brush")
-                .each(function(d) {
-                    d3.select(this).call(y[d].brush = d3.svg.brush().y(y[d])
-                    	.on("brushstart", brushstart)
-                    	.on("brush", brush));
+                .on("drag", function(d) {
+                    dragging[d] = Math.min(width, Math.max(0, d3.event.x));
+                    foreground.attr("d", path);
+                    dimensions.sort(function(a, b) {
+                        return position(a) - position(b);
+                    });
+                    x.domain(dimensions);
+                    g.attr("transform", function(d) {
+                        return "translate(" + position(d) + ")";
+                    })
                 })
-                .selectAll("rect")
-                .attr("x", -8)
-                .attr("width", 16);
+                .on("dragend", function(d) {
+                    delete dragging[d];
+                    transition(d3.select(this)).attr("transform", "translate(" + x(d) + ")");
+                    transition(foreground).attr("d", path);
+
+                    console.log(' brusing drag ', dragging)
+                    background
+                        .attr("d", path)
+                        .transition()
+                        .delay(500)
+                        .duration(0)
+                        .attr("visibility", null);
+                }));
+
+        // Add an axis and title.
+        g.append("g")
+            .attr("class", "axis")
+            .each(function(d) {
+                d3.select(this).call(axis.scale(y[d]));
+            })
+            .append("text")
+            .style("text-anchor", "middle")
+            .attr("y", -9)
+            .text(function(d) {
+                return d;
+            });
+
+        // Add and store a brush for each axis.
+        g.append("g")
+            .attr("class", "brush")
+            .each(function(d) {
+                d3.select(this).call(y[d].brush = d3.svg.brush().y(y[d])
+                    .on("brushstart", brushstart)
+                    .on("brush", brush));
+            })
+            .selectAll("rect")
+            .attr("x", -8)
+            .attr("width", 16);
 
         function position(d) {
             var v = dragging[d];
@@ -154,22 +154,48 @@
 
         // Handles a brush event, toggling the display of foreground lines.
         function brush() {
+            ParC.filteredData = [];
+
             var actives = dimensions.filter(function(p) {
                     return !y[p].brush.empty();
                 }),
                 extents = actives.map(function(p) {
                     return y[p].brush.extent();
                 });
-                // console.log('active found ', actives)
-            foreground.style("display", function(d) {
+            // console.log('active found ', actives)
+            foreground.style("display", function(d, k) {
+
+                // // if(k==0) ParC.filteredData = [];
+                // var inside = false;
+                // actives.every(function(m,n){
+                // 	// console.log(' found m n ', m,n, extents)
+                // 	if(extents[n][0] <= +d[m] && +d[m] <= extents[n][1]){
+                //    		// ParC.filteredData.push(d);
+                //    		inside = true;
+                //    	}else{
+                //    		inside = false
+                //    	}
+                // })
+                // if(inside) ParC.filteredData.push(d)
+
+                ParC.filteredData.push(actives.every(function(p, j) {
+                    // console.log(' found d p ', d, p)
+                    return extents[j][0] <= d[p] && d[p] <= extents[j][1];
+                }) ? d['id'] : -1);
+
+
+                ParC.filteredData = Util.getUniqueArray(ParC.filteredData);
+
+
+                // console.log(' final Arr is ', finalArr)
                 return actives.every(function(p, i) {
-                	ParC.filteredData = []
-                	if(extents[i][0] <= d[p] && d[p] <= extents[i][1]){
-                		ParC.filteredData.push(d);
-                	}
-                	console.log(' found d p ', d, p)
-                    return extents[i][0] <= d[p] && d[p] <= extents[i][1];}) ? null : "none";
+                    // console.log(' found d p ', d, p)
+                    return extents[i][0] <= d[p] && d[p] <= extents[i][1];
+                }) ? null : "none";
             });
+
+            var ind = ParC.filteredData.indexOf(-1);
+            ParC.filteredData.splice(ind, 1);
         }
     }
 
