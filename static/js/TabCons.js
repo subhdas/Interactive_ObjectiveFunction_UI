@@ -5,11 +5,21 @@
     TabCon.addSameLabContentFromData = function(valueSelect = 'Same-Label') {
         // Cons.typeConstraints['COMPOSITIONAL'][valueSelect]['Checked'] = true;
         // ConsInt.getActiveConstraints();
-        for (var item in LabelCard.storedData) {
+        if (valueSelect == 'Similarity-Metric') {
+            var item = 'Similar';
             var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + item];
-            // console.log(' got arr for item ', item, arr)
             TabCon.makeSameLabContent("_mainContentMid" + item, item, valueSelect);
+            var item = 'Different';
+            var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + item];
+            TabCon.makeSameLabContent("_mainContentMid" + item, item, valueSelect);
+        } else {
+            for (var item in LabelCard.storedData) {
+                var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + item];
+                // console.log(' got arr for item ', item, arr)
+                TabCon.makeSameLabContent("_mainContentMid" + item, item, valueSelect);
+            }
         }
+
     }
 
     TabCon.makeSameLabContent = function(containerId = "_mainContentMid" + TabCon.radioCheckedSame, item = TabCon.radioCheckedSame, dataFeed = 'Same-Label') {
@@ -38,6 +48,7 @@
         // console.log(' item is ', item, LabelCard.storedData, ConsInt.activeConstraints['Same-Label'])
         try {
             var data = [];
+            console.log('getting data feed ', dataFeed)
             var arrId = ConsInt.activeConstraints[dataFeed]['input']['labelitemsConId_' + item];
             // console.log(' add id ', arrId)
             for (var i = 0; i < arrId.length; i++) {
@@ -58,15 +69,27 @@
 
 
 
-    TabCon.makeSameLabHeader = function(containerId = "", supportId = "") {
+    TabCon.makeSameLabHeader = function(containerId = "", supportId = "", dataFeed = "") {
         $('#' + containerId).empty();
         var htmlStr = ""
-        for (var item in LabelCard.storedData) {
-            var lab = LabelCard.storedData[item]['label']
-            if (typeof lab == 'undefined') lab = item
-            htmlStr += "<div class = '_wrapOneItem' ><div class = '_headConsTop' > Label : " + lab + "</div>";
-            htmlStr += "<div class ='_mainContentMid' id = '_mainContentMid" + item + "' ></div></div>";
+        if (dataFeed == 'Similarity-Metric') {
+            //by similar and different
+            htmlStr += "<div class = '_wrapOneItem' ><div class = '_headConsTop' > Similar items : </div>";
+            htmlStr += "<div class ='_mainContentMid' id = '_mainContentMidSimilar' ></div></div>";
+
+            htmlStr += "<div class = '_wrapOneItem' ><div class = '_headConsTop' > Different items : </div>";
+            htmlStr += "<div class ='_mainContentMid' id = '_mainContentMidDifferent' ></div></div>";
+
+        } else {
+            //by label
+            for (var item in LabelCard.storedData) {
+                var lab = LabelCard.storedData[item]['label']
+                if (typeof lab == 'undefined') lab = item
+                htmlStr += "<div class = '_wrapOneItem' ><div class = '_headConsTop' > Label : " + lab + "</div>";
+                htmlStr += "<div class ='_mainContentMid' id = '_mainContentMid" + item + "' ></div></div>";
+            }
         }
+
 
         $("#" + containerId).append(htmlStr);
         $("._wrapOneItem").css('display', 'flex');
@@ -83,13 +106,27 @@
         $("._mainContentMid").css('height', '75%');
 
         htmlStr = ""
-        for (var item in LabelCard.storedData) {
-            var lab = LabelCard.storedData[item]['label']
-            if (typeof lab == 'undefined') lab = item
+        if (dataFeed == 'Similarity-Metric') {
+            var lab = 'Similar'
             htmlStr += "<p><label><input class = 'radioLabelCons' name='group1' type='radio' checked />"
             htmlStr += "<span>" + lab + "</span></label></p>";
             TabCon.radioCheckedSame = lab;
+
+            var lab = 'Different'
+            htmlStr += "<p><label><input class = 'radioLabelCons' name='group1' type='radio' checked />"
+            htmlStr += "<span>" + lab + "</span></label></p>";
+            TabCon.radioCheckedSame = lab;
+
+        } else {
+            for (var item in LabelCard.storedData) {
+                var lab = LabelCard.storedData[item]['label']
+                if (typeof lab == 'undefined') lab = item
+                htmlStr += "<p><label><input class = 'radioLabelCons' name='group1' type='radio' checked />"
+                htmlStr += "<span>" + lab + "</span></label></p>";
+                TabCon.radioCheckedSame = lab;
+            }
         }
+
         $("#" + supportId).empty();
         $("#" + supportId).append(htmlStr);
 

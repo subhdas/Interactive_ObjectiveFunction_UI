@@ -4,6 +4,8 @@
     DataTable.viewFullTable = true;
     DataTable.ratioSelect = 0.15;
     DataTable.extraContent = false;
+    DataTable.showingFilterPanel = false;
+
 
     //new variabbles
     DataTable.selectedRows = {}
@@ -451,6 +453,89 @@
             // $(".ui-corner-all").css('background', 'transparent')
             // $(".ui-corner-all").css('border', 'none')
 
+
+            // add filter data button
+           var sel =  $("#filter_tr").find('td').first();
+           var htmlStr = "<button id='toggleFilterTableBtn' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+           htmlStr += "<i class='material-icons'>filter_tilt_shift</i></button>";
+           sel.append(htmlStr);
+
+
+           $("#toggleFilterTableBtn").on('click', function(e){
+              if($(".filterPanelDiv").length > 0){
+                DataTable.showFilterPanel();
+              }else{
+
+                DataTable.addFilterPanel(100,200, 500, 200);
+              }
+
+           })
+
+
+    } // end of add extra
+
+
+    DataTable.addFilterPanel = function(top,left, w ,h){
+        var htmlStr = "<div class = 'filterPanelDiv ui-widget-content'><div class = 'filterPanelHeader'> <p class = 'filterHeadtext'>Filter</p>"
+        htmlStr += "<button id='clearFilterPanel' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>clear</i></button></div>";
+        htmlStr += "<div id = 'filterContentId' class = 'filterContent'></div>"
+        htmlStr += "</div>"
+        $('body').append(htmlStr);
+
+
+        $(function() {
+            $(".filterPanelDiv").draggable();
+        });
+
+        // console.log('window width ', w)
+
+        $(".filterPanelDiv").css('position', 'absolute');
+        $(".filterPanelDiv").css('top', top+'px');
+        $(".filterPanelDiv").css('left',left +'px');
+        $(".filterPanelDiv").css('height', h+'px');
+        $(".filterPanelDiv").css('width',  w+'px');
+        $(".filterPanelDiv").css('overflow-x', 'hidden');
+        $(".filterPanelDiv").css('overflow-y', 'auto');
+        $(".filterPanelDiv").css('border', '1px dotted lightgray');
+        $(".filterPanelDiv").css('background', 'white');
+        $(".filterPanelDiv").css('box-shadow', '2px 3px 3px 2px lightgray');
+
+        $(".filterPanelHeader").css('padding', '10px');
+        $(".filterPanelHeader").css('background', Main.colors.HIGHLIGHT);
+        $(".filterPanelHeader").css('width', '100%');
+        $(".filterPanelHeader").css('height', '40px');
+        $(".filterPanelHeader").css('display', 'block');
+
+        $(".filterHeadtext").css('float', 'left');
+        $(".filterHeadtext").css('width', 'auto');
+        $(".filterHeadtext").css('display', 'inline');
+
+
+        // $(".filterContent").css('padding', '10px');
+        $(".filterContent").css('width', '100%');
+        $(".filterContent").css('height', '70%');
+        $(".filterContent").css('display', 'flex');
+        $(".filterContent").css('flex-direction', 'column');
+
+        $("#clearFilterPanel").css('float', 'right');
+        var dataNumeric = Main.getDataByKeys(Object.keys(Main.numericalAttributes), Main.trainData);
+        ParC.makeParallelCoordChart('filterContentId', dataNumeric);
+
+        $("#clearFilterPanel").on('click', function() {
+            DataTable.hideFilterPanel();
+        })
+    }
+
+      DataTable.hideFilterPanel = function() {
+        $(".filterPanelDiv").hide();
+        DataTable.showingFilterPanel = false;
+
+    }
+
+    DataTable.showFilterPanel = function() {
+        $(".filterPanelDiv").show();
+        DataTable.showingFilterPanel = true;
     }
 
 

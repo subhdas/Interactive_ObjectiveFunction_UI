@@ -97,12 +97,12 @@
         var i = 1
         var htmlStr = "<div class = 'conHeadPan' ><div class='input-field col s12 consSelectorTop'><select  class='selectConstrain browser-default'>"
         for (var item in Cons.typeConstraints) {
-            if(item =='QUANTITATIVE' || item == 'GENERALIZATION') continue;
+            if (item == 'QUANTITATIVE' || item == 'GENERALIZATION') continue;
             htmlStr += "<optgroup class = 'optConsSelectorTop' label='" + item + "'>";
             var k = Cons.typeConstraints[item];
             for (var elem in k) {
-                if(elem =='misc' || elem == 'Feature-Weights') continue;
-                if(elem =='Critical-Items' || elem == 'Information-Gain') continue;
+                if (elem == 'misc' || elem == 'Feature-Weights') continue;
+                if (elem == 'Critical-Items' || elem == 'Information-Gain') continue;
                 htmlStr += "<option class ='' value='" + elem + "'>" + elem + "</option>";
                 i += 1;
             }
@@ -144,11 +144,11 @@
 
         $('select').formSelect();
 
-        
+
         // add by default
         var valueSelect = $('.selectConstrain').val();
         if (valueSelect == 'Same-Label') {
-            TabCon.makeSameLabHeader('conContentItems', 'conHeadSupportPan');
+            TabCon.makeSameLabHeader('conContentItems', 'conHeadSupportPan', valueSelect);
         }
 
 
@@ -167,17 +167,28 @@
 
             if (valueSelect == 'Same-Label') {
                 try {
-                    TabCon.addSameLabContentFromData();
+                    TabCon.makeSameLabHeader('conContentItems', 'conHeadSupportPan', valueSelect);
+                    TabCon.addSameLabContentFromData(valueSelect);
                 } catch (e) {
-                    TabCon.makeSameLabHeader('conContentItems', 'conHeadSupportPan');
+                    // TabCon.makeSameLabHeader('conContentItems', 'conHeadSupportPan', valueSelect);
                 }
             }
 
             if (valueSelect == 'Feature-Range') {
                 try {
-                    TabCon.addSameLabContentFromData();
+                    TabCon.makeSameLabHeader('conContentItems', 'conHeadSupportPan', valueSelect);
+                    TabCon.addSameLabContentFromData(valueSelect);
                 } catch (e) {
-                    TabCon.makeSameLabHeader('conContentItems', 'conHeadSupportPan');
+                    // TabCon.makeSameLabHeader('conContentItems', 'conHeadSupportPan', valueSelect);
+                }
+            }
+
+            if (valueSelect == 'Similarity-Metric') {
+                try {
+                    TabCon.makeSameLabHeader('conContentItems', 'conHeadSupportPan', valueSelect);
+                    TabCon.addSameLabContentFromData(valueSelect);
+                } catch (e) {
+                    // TabCon.makeSameLabHeader('conContentItems', 'conHeadSupportPan', valueSelect);
                 }
             }
 
@@ -199,7 +210,8 @@
                     arr = Object.keys(ConP.selectedRowsCons);
                 }
                 ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame] = arr;
-                TabCon.makeSameLabContent();
+                // TabCon.makeSameLabContent();
+                TabCon.addSameLabContentFromData(valueSelect);
 
                 var arr = Object.keys(ConP.selectedRowsCons);
                 ConP.selectedRowsCons = {};
@@ -211,6 +223,7 @@
 
             //Feature Range
             if (valueSelect == 'Feature-Range') {
+                // $("._mainContentMid").empty();
                 Cons.typeConstraints['QUALITATIVE'][valueSelect]['Checked'] = true;
                 ConsInt.getActiveConstraints();
                 var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame];
@@ -221,8 +234,33 @@
                     arr = Object.keys(ConP.selectedRowsCons);
                 }
                 ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame] = arr;
-                TabCon.makeSameLabContent(dataFeed = 'Feature-Range');
 
+                // TabCon.makeSameLabContent("_mainContentMid" + TabCon.radioCheckedSame, TabCon.radioCheckedSame, valueSelect);
+                TabCon.addSameLabContentFromData(valueSelect);
+                var arr = Object.keys(ConP.selectedRowsCons);
+                ConP.selectedRowsCons = {};
+                arr.forEach(function(d, i) {
+                    $("#tr_" + d).css('background', "rgb(255,255,255)")
+                    $("#tr_" + d).css('color', 'black')
+                })
+            }
+
+            //Similarity Metric
+            if (valueSelect == 'Similarity-Metric') {
+                // $("._mainContentMid").empty();
+                Cons.typeConstraints['COMPOSITIONAL'][valueSelect]['Checked'] = true;
+                ConsInt.getActiveConstraints();
+                var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame];
+                try {
+                    arr.push.apply(arr, Object.keys(ConP.selectedRowsCons));
+                    arr = Util.getUniqueArray(arr)
+                } catch (err) {
+                    arr = Object.keys(ConP.selectedRowsCons);
+                }
+                ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame] = arr;
+
+                // TabCon.makeSameLabContent("_mainContentMid" + TabCon.radioCheckedSame, TabCon.radioCheckedSame, valueSelect);
+                TabCon.addSameLabContentFromData(valueSelect);
                 var arr = Object.keys(ConP.selectedRowsCons);
                 ConP.selectedRowsCons = {};
                 arr.forEach(function(d, i) {
@@ -238,5 +276,5 @@
 
 
 
-    
+
 }())

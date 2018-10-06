@@ -115,7 +115,6 @@
                   LabelCard.stylizeTables("labelCard_"+item);
                 }
             }
-
         })
 
         $("#heatmapViewH").on('click', function(d){

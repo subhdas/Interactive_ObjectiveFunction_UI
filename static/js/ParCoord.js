@@ -1,6 +1,7 @@
 (function() {
 
     ParC = {}
+    ParC.filteredData = [];
 
 
     ParC.makeParallelCoordChart = function(containerId = "", data) {
@@ -11,7 +12,7 @@
     	var h = $("#"+containerId).css('height');
     	h = parseFloat(h);
 
-    	console.log('width is ', w, h)
+    	// console.log('width is ', w, h)
 
         var margin = {
                 top: 30,
@@ -96,6 +97,8 @@
                         delete dragging[d];
                         transition(d3.select(this)).attr("transform", "translate(" + x(d) + ")");
                         transition(foreground).attr("d", path);
+
+                        console.log(' brusing drag ', dragging)
                         background
                             .attr("d", path)
                             .transition()
@@ -121,7 +124,9 @@
             g.append("g")
                 .attr("class", "brush")
                 .each(function(d) {
-                    d3.select(this).call(y[d].brush = d3.svg.brush().y(y[d]).on("brushstart", brushstart).on("brush", brush));
+                    d3.select(this).call(y[d].brush = d3.svg.brush().y(y[d])
+                    	.on("brushstart", brushstart)
+                    	.on("brush", brush));
                 })
                 .selectAll("rect")
                 .attr("x", -8)
@@ -155,10 +160,15 @@
                 extents = actives.map(function(p) {
                     return y[p].brush.extent();
                 });
+                // console.log('active found ', actives)
             foreground.style("display", function(d) {
                 return actives.every(function(p, i) {
-                    return extents[i][0] <= d[p] && d[p] <= extents[i][1];
-                }) ? null : "none";
+                	ParC.filteredData = []
+                	if(extents[i][0] <= d[p] && d[p] <= extents[i][1]){
+                		ParC.filteredData.push(d);
+                	}
+                	console.log(' found d p ', d, p)
+                    return extents[i][0] <= d[p] && d[p] <= extents[i][1];}) ? null : "none";
             });
         }
     }
