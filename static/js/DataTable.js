@@ -478,6 +478,9 @@
     DataTable.addFilterPanel = function(top,left, w ,h){
         var htmlStr = "<div class = 'filterPanelDiv ui-widget-content'><div class = 'filterPanelHeader'> <p class = 'filterHeadtext'>Filter</p>"
         htmlStr += "<button id='clearFilterPanel' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>done</i></button>";
+
+        htmlStr += "<button id='clearFilterPanel' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>clear</i></button></div>";
         htmlStr += "<div id = 'filterContentId' class = 'filterContent'></div>"
         htmlStr += "</div>"
@@ -529,6 +532,13 @@
         $("#clearFilterPanel").on('click', function() {
             DataTable.hideFilterPanel();
         })
+    }
+
+    DataTable.hideSelectedRows = function(arrIds = []){
+      $(".trTable").hide();
+      for(var item in arrIds){
+        $("#tr_"+item).show();
+      }
     }
 
       DataTable.hideFilterPanel = function() {

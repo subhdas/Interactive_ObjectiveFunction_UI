@@ -196,6 +196,9 @@
 
             var ind = ParC.filteredData.indexOf(-1);
             ParC.filteredData.splice(ind, 1);
+            setTimeout(function(){
+                DataTable.hideSelectedRows(ParC.filteredData);
+            }, 5000)
         }
     }
 
