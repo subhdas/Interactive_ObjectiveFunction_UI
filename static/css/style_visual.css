@@ -8,6 +8,20 @@
 }
 /*for table styling*/
 
+
+.trTable td {
+    position: relative;
+    overflow: hidden;
+    height: 3em;
+}
+
+.trTable div {
+    position: absolute;
+    margin: .1em;
+    left: 0;
+    top: 0;
+}
+
 tr{
   max-height: 50px;
   height: 5px;

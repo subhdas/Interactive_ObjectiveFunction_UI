@@ -477,8 +477,12 @@
 
     DataTable.addFilterPanel = function(top, left, w, h) {
         var htmlStr = "<div class = 'filterPanelDiv ui-widget-content'><div class = 'filterPanelHeader'> <p class = 'filterHeadtext'>Filter</p>"
+        
         htmlStr += "<div class = 'filterHeadButtonRack' ><button id='tickFilterBtn' class='filterPanelBtns mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>done</i></button>";
+        
+        htmlStr += "<button id='resetFilterPanel' class='filterPanelBtns mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
 
         htmlStr += "<button id='clearFilterPanel' class='filterPanelBtns mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>clear</i></button></div></div>";
@@ -525,7 +529,7 @@
         $(".filterPanelBtns").css('color', 'white')
 
         $(".filterHeadtext").css('float', 'left');
-        $(".filterHeadtext").css('width', '88%');
+        $(".filterHeadtext").css('width', '82%');
         $(".filterHeadtext").css('display', 'inline');
 
 
@@ -551,13 +555,28 @@
             DataTable.hideSelectedRows(ParC.filteredData);
         })
 
+        $("#resetFilterPanel").on('click', function() {
+            DataTable.resetFilterPanel();
+        })
 
+
+    }
+
+    DataTable.resetFilterPanel = function() {
+        $(".trTable").show();
+        ParC.filteredData = [];
+        var arr = ['id'];
+        arr.push.apply(arr, Object.keys(Main.numericalAttributes));
+        var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
+        ParC.makeParallelCoordChart('filterContentId', dataNumeric);        
     }
 
     DataTable.hideSelectedRows = function(arrIds = []) {
         $(".trTable").hide();
         for (var item in arrIds) {
             $("#tr_" + item).show();
+        // $(".trTable").css('opacity', 1);
+
         }
     }
 
@@ -708,6 +727,10 @@
             .text(function(d) {
                 return d.value;
             })
+            // .html(function(d){
+            //     return "<div class = 'td_elem_cell' >"+d.value+"</div>";
+            // })
+            // .style('height', '2em')
             .on('click', function(d) {
                 // if (DataTable.viewFullTable) return;
                 // // return;
@@ -779,6 +802,9 @@
 
 
             })
+
+        // $(".td_elem_cell").css('height', 'auto');
+        // $(".td_elem_cell").css('max-height', '25px');
 
 
         $("#dataViewAppTable_" + containerId + " tr").on('click', function(d) {
