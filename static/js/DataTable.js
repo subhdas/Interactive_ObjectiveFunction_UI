@@ -334,107 +334,86 @@
     }
 
     DataTable.addExtraItemsTables = function(containerId = "", data) {
-        var table = d3.select('#dataViewAppTable_' + containerId)
-            // var titles = d3.keys(data[0]);
-        var titles = table.selectAll('th').data();
-        // console.log(' data head is ', titles)
+            var table = d3.select('#dataViewAppTable_' + containerId)
+                // var titles = d3.keys(data[0]);
+            var titles = table.selectAll('th').data();
+            // console.log(' data head is ', titles)
 
-        table.selectAll('td')
-            .attr('width', '125px')
-        $('#tableContent').css('display', 'block')
+            table.selectAll('td')
+                .attr('width', '125px')
+            $('#tableContent').css('display', 'block')
 
-        // to add filter panel
-        table.selectAll('tbody')
-            .insert("tr", ":first-child")
-            .attr('id', 'filter_tr')
-            .attr('height', '100px')
-            .data([data[0]])
-            .selectAll("td")
-            .data(function(d) {
-                // console.log(' getting d as ', d, titles)
-                return titles.map(function(k) {
-                    return {
-                        value: d[k],
-                        name: k
-                    };
-                });
-            })
-            .enter()
-            .append("td")
-            .attr('id', function(d) {
-                return 'filter_td_' + d.name
-            })
-            .attr("data-th", function(d) {
-                return d.name;
-            })
-            .attr("data-id", function(d) {
-                return d.id;
-            })
-            .attr('class', function(d) {
-                return 'td_' + d.value + ' td_' + d.name + ' td_' + d.name + '_' + d.value;
-            })
-            .style('background', function(d) {
-                DataTable.makeFilterVisTable(d.name, $(this))
-                return '';
-            })
-
-
-
-        table.selectAll('tr')
-            .insert("td", ":first-child")
-            .attr('id', 'critical_')
-            // .style('background', 'white')
-            .style('display', function(d, i) {
-                if (i != 0) return 'flex'
-            })
-            .style('flex-direction', 'row')
-            .style('width', '150px')
-            .html(function(d, i) {
-                // console.log(' d and i is ', d, i)
-                if (i < 2) {
-                    var col = $(this).siblings().attr('background');
-                    if (i == 0) col = "#333"
-                    if (i == 1) col = ""
-                    $(this).css('background', col);
-                    return ""
-                } else {
-                    var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_" + d.id + "'><label>";
-                    htmlStr += "<input type='checkbox' id = 'check_critical_" + d.id + "'><span class='lever'></span></label></div>"
-                    htmlStr += "<label><input type='checkbox' class='filled-in check_discard' id = 'check_discard_" + d.id + "'/><span></span></label>"
-                    return htmlStr;
-                }
-            })
+            // to add filter panel
+            table.selectAll('tbody')
+                .insert("tr", ":first-child")
+                .attr('id', 'filter_tr')
+                .attr('height', '100px')
+                .data([data[0]])
+                .selectAll("td")
+                .data(function(d) {
+                    // console.log(' getting d as ', d, titles)
+                    return titles.map(function(k) {
+                        return {
+                            value: d[k],
+                            name: k
+                        };
+                    });
+                })
+                .enter()
+                .append("td")
+                .attr('id', function(d) {
+                    return 'filter_td_' + d.name
+                })
+                .attr("data-th", function(d) {
+                    return d.name;
+                })
+                .attr("data-id", function(d) {
+                    return d.id;
+                })
+                .attr('class', function(d) {
+                    return 'td_' + d.value + ' td_' + d.name + ' td_' + d.name + '_' + d.value;
+                })
+                .style('background', function(d) {
+                    DataTable.makeFilterVisTable(d.name, $(this))
+                    return '';
+                })
 
 
 
+            table.selectAll('tr')
+                .insert("td", ":first-child")
+                .attr('id', 'critical_')
+                // .style('background', 'white')
+                .style('display', function(d, i) {
+                    if (i != 0) return 'flex'
+                })
+                .style('flex-direction', 'row')
+                .style('width', '150px')
+                .html(function(d, i) {
+                    // console.log(' d and i is ', d, i)
+                    if (i < 2) {
+                        var col = $(this).siblings().attr('background');
+                        if (i == 0) col = "#333"
+                        if (i == 1) col = ""
+                        $(this).css('background', col);
+                        return ""
+                    } else {
+                        var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_" + d.id + "'><label>";
+                        htmlStr += "<input type='checkbox' id = 'check_critical_" + d.id + "'><span class='lever'></span></label></div>"
+                        htmlStr += "<label><input type='checkbox' class='filled-in check_discard' id = 'check_discard_" + d.id + "'/><span></span></label>"
+                        return htmlStr;
+                    }
+                })
 
-        //toggle switches input controls-----------------------------------------------------------------------------------------
-        $(".switch_critical").on('input', function(e) {
-            var id = $(this).attr('id');
-            var idNum = Util.getNumberFromText(id);
-            console.log('e is ', e, idNum);
-            var stri = 'Critical-Items'
-            Cons.typeConstraints['PREDICTIVE'][stri]['Checked'] = !Cons.typeConstraints['PREDICTIVE'][stri]['Checked'];
-            ConsInt.getActiveConstraints();
-            console.log('active cons ', ConsInt.activeConstraints)
-            try {
-                var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
-                var ind = arr.indexOf(idNum)
-                if (ind != -1) {
-                    arr.splice(ind, 1);
-                } else {
-                    arr.push(idNum);
-                }
-            } catch (e) {
-                ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [idNum]
-            }
-        })
 
-        $(".check_discard").on('input', function(e) {
+
+
+            //toggle switches input controls-----------------------------------------------------------------------------------------
+            $(".switch_critical").on('input', function(e) {
                 var id = $(this).attr('id');
                 var idNum = Util.getNumberFromText(id);
-                console.log('e in check discard is ', e, idNum);
-                var stri = 'Discard-Items'
+                console.log('e is ', e, idNum);
+                var stri = 'Critical-Items'
                 Cons.typeConstraints['PREDICTIVE'][stri]['Checked'] = !Cons.typeConstraints['PREDICTIVE'][stri]['Checked'];
                 ConsInt.getActiveConstraints();
                 console.log('active cons ', ConsInt.activeConstraints)
@@ -450,41 +429,65 @@
                     ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [idNum]
                 }
             })
-            // $(".ui-corner-all").css('background', 'transparent')
-            // $(".ui-corner-all").css('border', 'none')
+
+            $(".check_discard").on('input', function(e) {
+                    var id = $(this).attr('id');
+                    var idNum = Util.getNumberFromText(id);
+                    console.log('e in check discard is ', e, idNum);
+                    var stri = 'Discard-Items'
+                    Cons.typeConstraints['PREDICTIVE'][stri]['Checked'] = !Cons.typeConstraints['PREDICTIVE'][stri]['Checked'];
+                    ConsInt.getActiveConstraints();
+                    console.log('active cons ', ConsInt.activeConstraints)
+                    try {
+                        var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
+                        var ind = arr.indexOf(idNum)
+                        if (ind != -1) {
+                            arr.splice(ind, 1);
+                        } else {
+                            arr.push(idNum);
+                        }
+                    } catch (e) {
+                        ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [idNum]
+                    }
+                })
+                // $(".ui-corner-all").css('background', 'transparent')
+                // $(".ui-corner-all").css('border', 'none')
 
 
             // add filter data button
-           var sel =  $("#filter_tr").find('td').first();
-           var htmlStr = "<button id='toggleFilterTableBtn' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-           htmlStr += "<i class='material-icons'>filter_tilt_shift</i></button>";
-           sel.append(htmlStr);
+            var sel = $("#filter_tr").find('td').first();
+            var htmlStr = "<button id='toggleFilterTableBtn' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+            htmlStr += "<i class='material-icons'>filter_tilt_shift</i></button>";
+            sel.append(htmlStr);
 
 
-           $("#toggleFilterTableBtn").on('click', function(e){
-              if($(".filterPanelDiv").length > 0){
-                DataTable.showFilterPanel();
-              }else{
+            $("#toggleFilterTableBtn").on('click', function(e) {
+                if ($(".filterPanelDiv").length > 0) {
+                    DataTable.showFilterPanel();
+                } else {
 
-                DataTable.addFilterPanel(100,200, 500, 200);
-              }
+                    DataTable.addFilterPanel(100, 200, 500, 200);
+                }
 
-           })
-
-
-    } // end of add extra
+            })
 
 
-    DataTable.addFilterPanel = function(top,left, w ,h){
+        } // end of add extra
+
+
+    DataTable.addFilterPanel = function(top, left, w, h) {
         var htmlStr = "<div class = 'filterPanelDiv ui-widget-content'><div class = 'filterPanelHeader'> <p class = 'filterHeadtext'>Filter</p>"
-        htmlStr += "<button id='clearFilterPanel' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<div class = 'filterHeadButtonRack' ><button id='tickFilterBtn' class='filterPanelBtns mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>done</i></button>";
 
-        htmlStr += "<button id='clearFilterPanel' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-        htmlStr += "<i class='material-icons'>clear</i></button></div>";
+        htmlStr += "<button id='clearFilterPanel' class='filterPanelBtns mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>clear</i></button></div></div>";
         htmlStr += "<div id = 'filterContentId' class = 'filterContent'></div>"
-        htmlStr += "</div>"
+        htmlStr += "</div></div>"
         $('body').append(htmlStr);
+
+
+
 
 
         $(function() {
@@ -494,10 +497,10 @@
         // console.log('window width ', w)
 
         $(".filterPanelDiv").css('position', 'absolute');
-        $(".filterPanelDiv").css('top', top+'px');
-        $(".filterPanelDiv").css('left',left +'px');
-        $(".filterPanelDiv").css('height', h+'px');
-        $(".filterPanelDiv").css('width',  w+'px');
+        $(".filterPanelDiv").css('top', top + 'px');
+        $(".filterPanelDiv").css('left', left + 'px');
+        $(".filterPanelDiv").css('height', h + 'px');
+        $(".filterPanelDiv").css('width', w + 'px');
         $(".filterPanelDiv").css('overflow-x', 'hidden');
         $(".filterPanelDiv").css('overflow-y', 'auto');
         $(".filterPanelDiv").css('border', '1px dotted lightgray');
@@ -509,9 +512,20 @@
         $(".filterPanelHeader").css('width', '100%');
         $(".filterPanelHeader").css('height', '40px');
         $(".filterPanelHeader").css('display', 'block');
+        // $(".filterPanelHeader").css('flex', '2 1 auto');
+
+
+
+        // $(".filterPanelHeader").css('padding', '10px');
+        // $(".filterPanelHeader").css('background', Main.colors.HIGHLIGHT);
+        // $(".filterHeadButtonRack").css('width', '100%');
+        $(".filterHeadButtonRack").css('height', '100%');
+        $(".filterHeadButtonRack").css('display', 'flex');
+
+        $(".filterPanelBtns").css('color', 'white')
 
         $(".filterHeadtext").css('float', 'left');
-        $(".filterHeadtext").css('width', 'auto');
+        $(".filterHeadtext").css('width', '88%');
         $(".filterHeadtext").css('display', 'inline');
 
 
@@ -523,7 +537,7 @@
 
         $("#clearFilterPanel").css('float', 'right');
         var arr = ['id'];
-        arr.push.apply(arr,Object.keys(Main.numericalAttributes));
+        arr.push.apply(arr, Object.keys(Main.numericalAttributes));
 
 
         var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
@@ -532,16 +546,22 @@
         $("#clearFilterPanel").on('click', function() {
             DataTable.hideFilterPanel();
         })
+
+        $("#tickFilterBtn").on('click', function() {
+            DataTable.hideSelectedRows(ParC.filteredData);
+        })
+
+
     }
 
-    DataTable.hideSelectedRows = function(arrIds = []){
-      $(".trTable").hide();
-      for(var item in arrIds){
-        $("#tr_"+item).show();
-      }
+    DataTable.hideSelectedRows = function(arrIds = []) {
+        $(".trTable").hide();
+        for (var item in arrIds) {
+            $("#tr_" + item).show();
+        }
     }
 
-      DataTable.hideFilterPanel = function() {
+    DataTable.hideFilterPanel = function() {
         $(".filterPanelDiv").hide();
         DataTable.showingFilterPanel = false;
 
