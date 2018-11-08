@@ -176,6 +176,7 @@
 
         var units = dataset[0].map(function(d) {
             return d.y;
+            
         });
 
         var yScale = d3.scale.ordinal()

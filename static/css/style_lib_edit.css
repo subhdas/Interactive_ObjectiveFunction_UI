@@ -159,3 +159,12 @@ svg {
 .filterPanelBtns{
   color : white;
 }
+
+
+
+/*changing default table behavior*/
+
+table{
+  display: block;
+  height: 'auto';
+}

@@ -9,6 +9,9 @@
 /*for table styling*/
 
 
+
+
+/*
 .trTable td {
     position: relative;
     overflow: hidden;
@@ -20,7 +23,7 @@
     margin: .1em;
     left: 0;
     top: 0;
-}
+}*/
 
 tr{
   max-height: 50px;

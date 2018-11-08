@@ -437,7 +437,7 @@
                     var stri = 'Discard-Items'
                     Cons.typeConstraints['PREDICTIVE'][stri]['Checked'] = !Cons.typeConstraints['PREDICTIVE'][stri]['Checked'];
                     ConsInt.getActiveConstraints();
-                    console.log('active cons ', ConsInt.activeConstraints)
+                    // console.log('active cons ', ConsInt.activeConstraints)
                     try {
                         var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
                         var ind = arr.indexOf(idNum)
@@ -531,6 +531,7 @@
         $(".filterHeadtext").css('float', 'left');
         $(".filterHeadtext").css('width', '82%');
         $(".filterHeadtext").css('display', 'inline');
+        $(".filterHeadtext").css('color', 'white');
 
 
         // $(".filterContent").css('padding', '10px');
