@@ -123,6 +123,7 @@
             var data = LabelCard.storedData[item];
             if (data == null) data = LabelCard.getDataForCard(item);
             else data = data['data'];
+            data = Util.deepCopyData(data);
             console.log(' gotten data ', data, item)
               if(LabelCard.heatMapViewMode){
                   DataTable.makeHeatMapTable(data, "labelCard_" + item);

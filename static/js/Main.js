@@ -199,9 +199,22 @@
         BarM.makeStackedModelBars();
     }
 
+    Main.addLabels = function(data = Main.trainData){
+        var labels = ['sports', 'economical', 'utility']
+        data.forEach(function(d,i){
+            var ind = Util.getRandomNumberBetween(1,0)*3;
+            ind = Math.ceil(ind-1)
+            
+            d[Main.targetName] = labels[ind];
+        })
+        var dataOut = data;
+        return dataOut;
+    }
+
 
     Main.processAttrData = function (data) {
 
+        data = Main.addLabels(data);
         var title = Object.keys(data[0]);
         // console.log("title found ", title)
         for (var i = 0; i < title.length; i++) {
@@ -229,7 +242,7 @@
             var attrList = [];
             data.forEach(function (d) {
                 attrList.push(+d[title[i]])
-                d[Main.targetName] = -1;
+                // d[Main.targetName] = -1;
                 d[Main.predictedName] = 'NA';
             })
 

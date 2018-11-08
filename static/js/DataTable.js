@@ -605,6 +605,10 @@
         // console.log(" drawing test data table ... ", dataGiven);
         data.forEach(function(d, i) {
             delete d.cluster;
+            d['0_' + Main.targetName] = d[Main.targetName]
+            d['0_' + Main.predictedName] = d[Main.predictedName]
+            delete d[Main.targetName];
+            delete d[Main.predictedName];
         }); // end of data for each
         // main.testData = data.slice();
 
@@ -864,6 +868,10 @@
         // console.log(" drawing test data table ... ", dataGiven);
         data.forEach(function(d, i) {
             delete d.cluster;
+            // d['0_' + Main.targetName] = d[Main.targetName]
+            // d['0_' + Main.predictedName] = d[Main.predictedName]
+            // delete d[Main.targetName];
+            // delete d[Main.predictedName];
         }); // end of data for each
 
         var sortAscending = true;
