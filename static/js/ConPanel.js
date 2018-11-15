@@ -152,8 +152,6 @@
         }
 
 
-
-
         var $select1 = $('select:not(.browser-default)');
         $('.selectConstrain').on('change', function(e) {
             // var sel = $(this).val("1");

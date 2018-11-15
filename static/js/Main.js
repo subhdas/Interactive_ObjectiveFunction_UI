@@ -197,6 +197,8 @@
 
         Cons.makeConsDivs();
         BarM.makeStackedModelBars();
+
+        ConsInt.getActiveConstraints();
     }
 
     Main.addLabels = function(data = Main.trainData){
@@ -209,6 +211,23 @@
         })
         var dataOut = data;
         return dataOut;
+    }
+
+
+    Main.makeLabelIds = function(data){
+        Main.storedData = {}
+        data.forEach(function(d,i){
+            var target =  d[Main.targetName]
+            if(typeof Main.storedData[target] == 'undefined'){
+                Main.storedData[target] = {
+                    'data' : [d['id']],
+                    'mainRow': d['id'],
+                    'label' : target
+                }
+            }else{
+                Main.storedData[target]['data'].push(d['id'])
+            }
+        })
     }
 
 
@@ -266,9 +285,12 @@
         Main.entityName = "0_"+Main.entityName;
         Main.entityNameSecondImp = "0_"+Main.entityNameSecondImp;
         Main.leftData = Main.trainData;
-
+        Main.makeLabelIds(Main.trainData);
         console.log(' train test and left data ', Main.trainData.length, Main.testData.length, Main.leftData.length)
 
+        setTimeout(() => {
+        //  Util.writeCSV(Main.trainData)            
+        }, 3000);
     }
 
     /*
@@ -276,9 +298,8 @@ prints the system state variabbles
 */
     Main.printLogs = function () {
         console.log("MAIN object ", Main);
-        console.log("Model Clusterer object ", ClusterModeler);
-        console.log("GridData object ", GridData);
-        console.log("Metrics object ", Metrics);
+        console.log(' saving data ', Main.trainData)
+        Util.writeCSV(Main.trainData)
     }
 
 

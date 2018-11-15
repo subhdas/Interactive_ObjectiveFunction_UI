@@ -1,0 +1,150 @@
+Acceleration,MPG,Cylinders,Weight,Displacement,cluster,Horsepower,Model,id,target_variable,predicted,0_Origin,0_Car
+14.5,29,4,1940,97,0,78,77,105,economical,NA,Europe,Volkswagen Rabbit Custom
+12.6,25.4,6,2900,168,0,116,81,70,utility,NA,Japan,Toyota Cressida
+16.4,24,4,2865,140,0,92,82,44,economical,NA,US,Ford Fairmont Futura
+13.5,15,8,4135,318,0,150,72,10,utility,NA,US,Plymouth Fury iii
+14,14,8,4077,318,0,150,72,20,sports,NA,US,Plymouth Satellite Custom (sw)
+13.5,21.5,3,2720,80,0,110,77,61,sports,NA,Japan,Mazda RX-4
+16.2,31,4,2575,112,0,85,82,41,sports,NA,US,Pontiac J2000 SE Hatchback
+17.4,33,4,1795,91,0,53,76,129,utility,NA,Japan,Honda Civic
+14.9,31.5,4,1990,89,0,71,78,110,utility,NA,Europe,Volkswagen Scirocco
+17.5,33,4,1795,91,0,53,75,128,sports,NA,Japan,Honda Civic CVCC
+13.8,44.6,4,1850,91,0,67,80,154,economical,NA,Japan,Honda Civic 1500 gl
+13.5,18,3,2124,70,0,90,73,56,sports,NA,Japan,Mazda RX3
+13,15,8,4082,350,0,145,73,37,sports,NA,US,Chevrolet Monte Carlo S
+16.4,30,4,1985,97,0,67,77,135,economical,NA,Japan,Subaru DL
+24.6,44,4,2130,97,0,52,82,119,economical,NA,Europe,Volkswagen Pickup
+16.9,34,4,2245,108,0,70,82,171,utility,NA,Japan,Toyota Corolla
+15.8,34.3,4,2188,97,0,78,80,115,economical,NA,Europe,Audi 4000
+9.5,16,8,4278,400,0,230,73,38,economical,NA,US,Pontiac Grand Prix
+20,0,4,1978,97,0,48,71,78,sports,NA,Europe,Volkswagen Super Beetle 117
+13.8,24.2,6,2930,146,0,120,81,71,utility,NA,Japan,Datsun 810 Maxima
+16.7,16.5,6,3820,168,0,120,76,59,utility,NA,Europe,Mercedes-Benz 280s
+17.6,31,4,1970,91,0,68,82,168,utility,NA,Japan,Mazda GLC Custom
+15.7,32,4,1965,91,0,67,82,173,economical,NA,Japan,Honda Civic (auto)
+8.5,15,8,3850,390,0,190,70,9,economical,NA,US,AMC Ambassador DPL
+14.7,27.2,4,2300,119,0,97,78,140,utility,NA,Japan,Datsun 510
+19.5,30,4,2074,79,0,70,71,80,utility,NA,Europe,Peugeot 304
+15.3,27,4,2202,101,0,83,76,99,economical,NA,Europe,Renault 12tl
+15.5,19,4,2868,121,0,112,73,83,sports,NA,Europe,Volvo 144ea
+16.5,29,4,2219,98,0,83,74,85,economical,NA,Europe,Audi Fox
+15.4,0,4,2800,121,0,110,81,117,economical,NA,Europe,Saab 900s
+14.9,23.9,4,2405,119,0,97,78,142,utility,NA,Japan,Datsun 200-SX
+13.5,12,8,4456,350,0,160,72,15,utility,NA,US,Oldsmobile Delta 88 Royale
+11.5,12,8,4952,429,0,198,73,26,sports,NA,US,Mercury Marquis Brougham
+17.5,25,4,2672,110,0,87,70,74,sports,NA,Europe,Peugeot 504
+14.5,26,4,2585,156,0,92,82,48,sports,NA,US,Chrysler Lebaron Medallion
+14,20,4,2582,114,0,91,73,82,economical,NA,Europe,Audi 100LS
+14.5,27,4,2130,97,0,88,71,122,sports,NA,Japan,Datsun PL510
+11,13,8,4735,440,0,215,73,30,economical,NA,US,Chrysler New Yorker Brougham
+12.5,13,8,4422,400,0,190,72,16,sports,NA,US,Chrysler Newport Royal
+14.5,14,8,4042,302,0,137,73,24,economical,NA,US,Ford Gran Torino
+14.5,36,4,2205,107,0,75,82,170,utility,NA,Japan,Honda Accord
+14,25,4,2228,113,0,95,71,123,economical,NA,Japan,Toyota Corolla
+14.5,27,4,2130,97,0,88,70,121,sports,NA,Japan,Datsun PL510
+11,15,8,3399,318,0,150,73,39,utility,NA,US,Dodge Dart Custom
+13,13,8,4363,351,0,158,73,28,utility,NA,US,Ford LTD
+11,12,8,4951,455,0,225,73,31,economical,NA,US,Buick Electra 225 Custom
+17.8,32.3,4,2065,97,0,67,81,159,economical,NA,Japan,Subaru
+16,34.1,4,1985,91,0,68,81,162,utility,NA,Japan,Mazda GLC 4
+18.2,26,4,2265,97,0,75,77,134,sports,NA,Japan,Toyota Corolla Liftback
+16.1,35.1,4,1760,81,0,60,81,158,sports,NA,Japan,Honda Civic 1300
+13,13,8,3988,350,0,145,73,23,economical,NA,US,Chevrolet Malibu
+16,29,4,2525,135,0,84,82,42,utility,NA,US,Dodge Aries SE
+18,33.8,4,2145,97,0,67,80,155,sports,NA,Japan,Subaru DL
+11,18,8,3436,318,0,150,70,2,utility,NA,US,Plymouth Satellite
+13.5,13,8,4502,350,0,155,72,14,economical,NA,US,Buick LeSabre Custom
+16,31,4,2000,79,0,67,74,90,utility,NA,Europe,Fiat x1.9
+14.2,29,4,1937,90,0,70,76,100,utility,NA,Europe,Volkswagen Rabbit
+14,24,4,2660,121,0,110,73,84,utility,NA,Europe,Saab 99le
+11,11,8,4633,429,0,208,72,13,economical,NA,US,Mercury Marquis
+14.2,27.5,4,2560,134,0,95,78,139,utility,NA,Japan,Toyota Corolla
+20.5,23,4,3035,151,0,0,82,45,economical,NA,US,AMC Concord DL
+12.5,12,8,4499,350,0,180,73,36,economical,NA,US,Oldsmobile Vista Cruiser
+17,32.4,4,2290,107,0,72,80,156,utility,NA,Japan,Honda Accord
+12.5,15,8,3892,304,0,150,72,17,sports,NA,US,AMC Matador (sw)
+12.5,23.7,3,2420,70,0,100,80,68,sports,NA,Japan,Mazda RX-7 GS
+13.5,19,3,2330,70,0,97,72,55,economical,NA,Japan,Mazda RX2 Coupe
+16.9,25,4,2220,116,0,81,76,98,utility,NA,Europe,Opel 1900
+18.6,39.4,4,2070,85,0,70,78,137,sports,NA,Japan,Datsun B210 GX
+15.5,26,4,1963,79,0,67,74,86,sports,NA,Europe,Volkswagen Dasher
+12,16,8,3433,304,0,150,70,3,sports,NA,US,AMC Rebel SST
+10,15,8,4341,429,0,198,70,5,utility,NA,US,Ford Galaxie 500
+17,24,4,2545,119,0,97,75,127,utility,NA,Japan,Datsun 710
+12,18,8,3504,307,0,130,70,0,sports,NA,US,Chevrolet Chevelle Malibu
+18.6,36,4,1825,79,0,58,77,104,sports,NA,Europe,Renault 5 GTL
+18.2,37,4,2025,91,0,68,82,167,economical,NA,Japan,Mazda GLC Custom l
+14.8,32.9,4,2615,119,0,100,81,165,utility,NA,Japan,Datsun 200SX
+14,31.9,4,1925,89,0,71,79,111,utility,NA,Europe,Volkswagen Rabbit Custom
+12.5,12,8,4906,400,0,167,73,34,sports,NA,US,Ford Country
+15,23,4,2694,115,0,95,75,93,utility,NA,Europe,Audi 100LS
+16.9,39.1,4,1755,79,0,58,81,157,economical,NA,Japan,Toyota Starlet
+10,14,8,4425,455,0,225,70,8,utility,NA,US,Pontiac Catalina
+15.7,21.6,4,2795,121,0,115,78,109,economical,NA,Europe,Saab 99gle
+15.9,20.3,5,2830,131,0,103,78,62,sports,NA,Europe,Audi 5000
+18,34,4,2395,112,0,88,82,40,economical,NA,US,Chevrolet Cavalier 2-door
+17,23,4,2957,120,0,88,75,94,economical,NA,Europe,Peugeot 504
+19.4,32.8,4,1985,78,0,52,78,136,utility,NA,Japan,Mazda GLC Deluxe
+17.3,27,4,2950,151,0,90,82,50,economical,NA,US,Chevrolet Camaro
+17.5,0,4,3090,133,0,115,70,72,sports,NA,Europe,Citroen DS-21 Pallas
+13,13,8,4100,350,0,175,73,21,utility,NA,US,Buick Century 350
+14.5,22,4,2945,121,0,98,75,95,utility,NA,Europe,Volvo 244DL
+12.8,21.5,4,2600,121,0,110,77,107,economical,NA,Europe,BMW 320i
+14,29,4,1937,90,0,70,75,92,economical,NA,Europe,Volkswagen Rabbit
+14.5,26,4,2300,97,0,78,74,87,economical,NA,Europe,Opel Manta
+14.5,24,4,2430,107,0,90,70,75,utility,NA,Europe,Audi 100 LS
+15.7,20,4,3150,130,0,102,76,102,utility,NA,Europe,Volvo 245
+16.8,32.4,4,2350,108,0,75,81,164,sports,NA,Japan,Toyota Corolla
+14.7,37.3,4,2130,91,0,69,79,113,economical,NA,Europe,Fiat Strada Custom
+11.5,17,8,3672,304,0,150,72,12,economical,NA,US,AMC Ambassador SST
+16.5,25,4,2223,90,0,71,75,91,economical,NA,Europe,Volkswagen Dasher
+18.8,38.1,4,1968,89,0,60,80,146,utility,NA,Japan,Toyota Corolla Tercel
+18.6,28,4,2625,120,0,79,82,53,sports,NA,US,Ford Ranger
+11.5,15,8,3693,350,0,165,70,1,sports,NA,US,Buick Skylark 320
+12.5,15,8,3777,318,0,150,73,25,economical,NA,US,Dodge Coronet Custom
+15.5,19,6,2930,156,0,108,76,58,economical,NA,Japan,Toyota Mark II
+18,27,4,2735,151,0,90,82,43,sports,NA,US,Pontiac Phoenix
+21.9,19,4,3270,120,0,88,76,103,utility,NA,Europe,Peugeot 504
+13,13,8,4654,360,0,170,73,35,sports,NA,US,Plymouth Custom Suburb
+13.5,20,6,2807,156,0,122,73,57,sports,NA,Japan,Toyota Mark II
+19.6,30.7,6,3160,145,0,76,81,69,economical,NA,Europe,Volvo Diesel
+9,14,8,4354,454,0,220,70,6,utility,NA,US,Chevrolet Impala
+11.5,14,8,3672,304,0,150,73,22,utility,NA,US,AMC Matador
+15.6,27,4,2790,140,0,86,82,51,utility,NA,US,Ford Mustang GL
+11.6,32,4,2295,135,0,84,82,52,sports,NA,US,Dodge Rampage
+14,26,4,2246,116,0,75,74,89,economical,NA,Europe,Fiat 124 TC
+19.2,40.8,4,2110,85,0,65,80,153,utility,NA,Japan,Datsun 210
+19.2,31.8,4,2020,85,0,65,79,145,utility,NA,Japan,Datsun 210
+15.8,16.2,6,3410,163,0,133,78,64,economical,NA,Europe,Peugeot 604sl
+17.9,46.6,4,2110,86,0,65,80,152,sports,NA,Japan,Mazda GLC
+15.5,29.8,4,2711,134,0,90,80,148,sports,NA,Japan,Toyota Corolla Liftback
+19.9,36.4,5,2950,121,0,67,80,66,sports,NA,Europe,Audi 5000s (diesel)
+18.3,31.6,4,2635,120,0,74,81,166,sports,NA,Japan,Mazda 626
+16.8,33.5,4,1945,85,0,70,77,133,economical,NA,Japan,Datsun F-10 Hatchback
+19.4,37,4,1975,85,0,65,81,160,sports,NA,Japan,Datsun 210 MPG
+14,28,4,2123,116,0,90,71,79,economical,NA,Europe,Opel 1900
+17,32,4,1990,85,0,70,76,130,utility,NA,Japan,Datsun B-210
+15,37,4,2434,119,0,92,80,150,sports,NA,Japan,Datsun 510 Hatchback
+17.5,31.3,4,2542,120,0,75,80,149,sports,NA,Japan,Mazda 626
+11.4,32.7,6,2910,168,0,132,80,67,economical,NA,Japan,Datsun 280-ZX
+20.4,28.1,4,3230,141,0,80,81,116,economical,NA,Europe,Peugeot 505s Turbo Diesel
+13,14,8,4129,351,0,153,72,11,economical,NA,US,Ford Galaxie 500
+17.5,25,4,2375,104,0,95,70,76,utility,NA,Europe,Saab 99e
+17.3,37.7,4,2050,89,0,62,81,161,sports,NA,Japan,Toyota Tercel
+14,13,8,4098,307,0,130,72,18,sports,NA,US,Chevrolet Chevelle Concours (sw)
+12.5,26,4,2234,121,0,113,70,77,sports,NA,Europe,BMW 2002
+8.5,14,8,4312,440,0,215,70,7,economical,NA,US,Plymouth Fury iii
+10.5,17,8,3449,302,0,140,70,4,utility,NA,US,Ford Torino
+14.5,30,4,2065,88,0,76,71,81,utility,NA,Europe,Fiat 124B
+16.4,28,4,2155,97,0,75,76,131,economical,NA,Japan,Toyota Corolla
+20.5,26,4,1835,97,0,46,70,73,economical,NA,Europe,Volkswagen 1131 Deluxe Sedan
+16.6,29.5,4,2135,98,0,68,78,143,economical,NA,Japan,Honda Accord LX
+14.5,22,6,2815,146,0,97,77,60,sports,NA,Japan,Datsun 810
+16.2,38,4,1995,91,0,67,82,174,utility,NA,Japan,Datsun 310 GX
+14.7,38,4,2125,105,0,63,82,46,economical,NA,US,Plymouth Horizon Miser
+15.5,28,4,2464,107,0,86,76,97,utility,NA,Europe,Fiat 131
+16,29,4,2171,97,0,75,75,125,utility,NA,Japan,Toyota Corolla
+14.4,33.7,4,2210,107,0,75,81,163,sports,NA,Japan,Honda Prelude
+17.3,36,4,2125,98,0,70,82,47,economical,NA,US,Mercury Lynx l
+15.3,36,4,1980,105,0,74,82,118,economical,NA,Europe,Volkswagen Rabbit l
+14.1,30.5,4,2190,97,0,78,77,106,economical,NA,Europe,Volkswagen Dasher

@@ -1,0 +1,55 @@
+Auto-WEKA result:
+best classifier: weka.classifiers.lazy.IBk
+arguments: [-K, 1, -X]
+attribute search: weka.attributeSelection.GreedyStepwise
+attribute search arguments: [-C, -B, -R]
+attribute evaluation: weka.attributeSelection.CfsSubsetEval
+attribute evaluation arguments: [-L]
+metric: errorRate
+estimated errorRate: 0.0
+training time on evaluation dataset: 0.0 seconds
+
+You can use the chosen classifier in your own code as follows:
+
+AttributeSelection as = new AttributeSelection();
+ASSearch asSearch = ASSearch.forName("weka.attributeSelection.GreedyStepwise", new String[]{"-C", "-B", "-R"});
+as.setSearch(asSearch);
+ASEvaluation asEval = ASEvaluation.forName("weka.attributeSelection.CfsSubsetEval", new String[]{"-L"});
+as.setEvaluator(asEval);
+as.SelectAttributes(instances);
+instances = as.reduceDimensionality(instances);
+Classifier classifier = AbstractClassifier.forName("weka.classifiers.lazy.IBk", new String[]{"-K", "1", "-X"});
+classifier.buildClassifier(instances);
+
+
+Correctly Classified Instances         149              100      %
+Incorrectly Classified Instances         0                0      %
+Kappa statistic                          1     
+Mean absolute error                      0.0088
+Root mean squared error                  0.0093
+Relative absolute error                  1.978  %
+Root relative squared error              1.9759 %
+Total Number of Instances              149     
+
+=== Confusion Matrix ===
+
+  a  b  c   <-- classified as
+ 54  0  0 |  a = economical
+  0 49  0 |  b = utility
+  0  0 46 |  c = sports
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     economical
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     utility
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     sports
+Weighted Avg.    1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     
+
+Temporary run directories:
+C:\Users\subha\AppData\Local\Temp\autoweka2746856331438730824\
+C:\Users\subha\AppData\Local\Temp\autoweka4646779789440745623\
+
+
+For better performance, try giving Auto-WEKA more time.
+Tried 751 configurations; to get good results reliably you may need to allow for trying thousands of configurations.

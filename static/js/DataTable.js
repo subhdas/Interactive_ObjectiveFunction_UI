@@ -98,6 +98,8 @@
         // htmlStr += "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
         // htmlStr += "<img class='imgIcon' src='static/img/icons/add.png'></div>"
 
+            htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+            htmlStr += "<i class='material-icons'>chat</i></button>";
         htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>dashboard</i></button>";
 
@@ -127,6 +129,11 @@
         // })
 
 
+         $('#addConstraints').on('click', function () {
+             ConP.addPanelCon();
+             // ConP.addConstrainSelector();  
+         })
+
 
         $('#correlViewC').on('click', function () {
             Scat.showScatterView();
@@ -148,7 +155,7 @@
             // socket.on("similarData_return", function(dataObj) {
             //     console.log('similar data returned ', dataObj);
             //     LabelCard.computeReturnData = dataObj;
-            //     LabelCard.getDataObject(dataObj['indexBydata']);
+            //     LabelCard.getDataObject(dataObj['indexBydata']); 
             //     LabelCard.makeCards();
             // })
 

@@ -39,6 +39,33 @@
     }
 
 
+      Util.writeCSV = function (data, fileName = "my_data_.csv") {
+          //prep the data
+             let csvContent = "data:text/csv;charset=utf-8,";
+             var keys = Object.keys(data[0]);
+             csvContent += keys.join(',') + "\r\n";
+             data.forEach(function (rowArray) {
+                 var row = []
+                 for (item in rowArray) {
+                    //  if(item != 'className') continue
+                     row.push(rowArray[item]);
+                 }
+                 csvContent += row.join(',') + "\r\n";
+             });
+
+
+
+          var encodedUri = encodeURI(csvContent);
+          var link = document.createElement("a");
+          link.setAttribute("href", encodedUri);
+          link.setAttribute("download", fileName);
+          link.style.visibility = 'hidden';
+          link.innerHTML = "Click Here to download";
+          document.body.appendChild(link);
+          link.click();
+      }
+
+
 
     Util.shuffleArray = function(a) {
         for (let i = a.length - 1; i > 0; i--) {
