@@ -36,16 +36,7 @@ def wrap_findGoodModel(train,target):
 def find_goodModel(train,target):
     train = preProcessData(train)
     def objective(space):
-        # clf = xgb.XGBRegressor(n_estimators = space['n_estimators'],
-        #                        max_depth = space['max_depth'],
-        #                        min_child_weight = space['min_child_weight'],
-        #                        subsample = space['subsample'],
-        #                        learning_rate = space['learning_rate'],
-        #                        gamma = space['gamma'],
-        #                        colsample_bytree = space['colsample_bytree'],
-        #                        objective='reg:linear'
-        #                        )
-
+        # make the model using SKLearns classifiers
         clf = RandomForestClassifier(max_depth=space['max_depth'],
                                     min_samples_split = space['min_samples_split'],
                                     min_samples_leaf = space['min_samples_leaf'],
@@ -53,11 +44,65 @@ def find_goodModel(train,target):
                                     criterion = space['criterion']
                                     )
 
-        # score =  A*SameLabel + B*Features +
+        userDefinedWeights = {
+            'sameLabelWt' : 0.5,
+            'similarLabelIds' : 0.3,
+            'trainingAccuracy' : 0.2
+        }
+        # get the prediction    
         clf.fit(train, target)
+        targetPredicted = clf.predict(train)
+
+        trainNew = train.copy()
+        trainNew['target_variable'] = targetPredicted
+
+        # weighted by the user
+         userDefinedWeights = {
+             'sameLabelWt': 0.5,
+             'similarLabelIds': 0.3,
+             'trainingAccuracy': 0.2
+         }
+
+        # 1 - trainingAccuracy
         cross_mean_score = cross_val_score( estimator=clf, X=train, y=target, scoring='precision_macro', cv=3, n_jobs=-1).mean()
 
-        result = {'loss':cross_mean_score, 'status': STATUS_OK }
+        # 2 - compute score for same label
+        sameLabelObj = {
+            'sameLabelIds': [10, 25, 45],
+            'label': 0
+        }
+        label = sameLabelObj['label']
+        penaltySameLabel = 0
+        sameLabelIdsArr = sameLabelObj['sameLabelIds']
+        for i in range(len(sameLabelIdsArr)):
+            if(label == None):
+                label = trainNew.ix[sameLabelIdsArr[i], 'target_variable']
+
+            if(label is not trainNew.ix[sameLabelIdsArr[i], 'target_variable']):
+                penaltySameLabel += 1
+
+        # 3 - compute score for similar data items
+        similarLabelId = {
+            'similarLabelIds': [5, 22, 28],
+            'differentLabelIds': [10, 12, 18]
+        }
+        label = None
+        penaltySimilarLabel = 0
+        similarLabelIdArr = similarLabelId['similarLabelIds']
+        for i in range(len(similarLabelIdArr)):
+            if(label == None):
+                label = trainNew.ix[similarLabelIdArr[i], 'target_variable']
+
+            if(label is not trainNew.ix[similarLabelIdArr[i], 'target_variable']):
+                penaltySimilarLabel += 1
+
+
+        score = cross_mean_score *userDefinedWeights['trainingAccuracyWt'] 
+                    + penaltySameLabel * userDefinedWeights['sameLabelWt']
+                        + penaltySimilarLabel * userDefinedWeights['trainingAccuracy']
+
+
+        result = {'loss': score, 'status': STATUS_OK}
         print " result is ", result
         return result
 
@@ -79,8 +124,6 @@ def find_goodModel(train,target):
                 max_evals=3, # change
                 trials=trials)
 
-
-
     print(best)
     best['bootstrap'] = bootStrapArr[best['bootstrap']]
     best['criterion'] = criterionArr[best['criterion']]
@@ -90,6 +133,7 @@ def find_goodModel(train,target):
     'params' : best,
     'STATUS' : 'OK'
     }
+    
     return obj
 
 

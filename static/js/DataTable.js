@@ -1,4 +1,4 @@
-(function() {
+(function () {
     DataTable = {};
     DataTable.pickedAttrDict = {};
     DataTable.viewFullTable = true;
@@ -10,15 +10,17 @@
     //new variabbles
     DataTable.selectedRows = {}
 
-    DataTable.modelUpdateLabel = function() {
+    DataTable.modelUpdateLabel = function () {
         var predTrainDict = BarM.modelData[0]['predictions']['trainPred'];
         for (var item in predTrainDict) {
+            console.log('updating data table ', item)
             var label = predTrainDict[item];
-            $('.td_id_' + item).parent().find('.td_' + Main.predictedName).text(label);
+            // $('.td_id_' + item).parent().find('.td_0_' + Main.predictedName).text(label);
+            $('.trCl_' + item).find('.td_0_' + Main.predictedName).text(label);
         }
     }
 
-    DataTable.userUpdateLabel = function() {
+    DataTable.userUpdateLabel = function () {
         var arr = [];
         for (var item in LabelCard.storedData) {
             var data = LabelCard.storedData[item]['data'];
@@ -33,7 +35,7 @@
     }
 
 
-    DataTable.updateHeader = function() {
+    DataTable.updateHeader = function () {
         if (DataTable.viewFullTable) {
             $('.dataTableHeadText').text(Main.trainData.length + ' rows')
             DataTable.makeTable(Main.trainData);
@@ -45,20 +47,20 @@
     }
 
 
-    DataTable.updateOnlyHeader = function(dataGiven) {
+    DataTable.updateOnlyHeader = function (dataGiven) {
         // $('.dataTableHeadText').text(dataGiven.length + ' rows');
         $('.dataTableHeadText').text(' Current Data Length : ' + Main.currentData.length)
     }
 
 
-    DataTable.switchToLeftData = function() {
+    DataTable.switchToLeftData = function () {
         DataTable.viewFullTable = false;
         $('#tableContent').css('background', Main.colors.HIGHLIGHT);
         $('.dataTableHeadText').text(' Current Data Length : ' + Main.trainData.length)
     }
 
 
-    DataTable.showTableView = function() {
+    DataTable.showTableView = function () {
         Main.tabelViewMode = true;
         $("#tableContent").show();
         $("#scatContent").hide();
@@ -66,7 +68,7 @@
 
 
 
-    DataTable.addIconsTop = function(dataIn = Main.trainData, containerId = "") {
+    DataTable.addIconsTop = function (dataIn = Main.trainData, containerId = "") {
 
         if (containerId == "") {
             containerId = "tableSelectors";
@@ -91,8 +93,9 @@
         // htmlStr += "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
         // htmlStr += "<img class='imgIcon' src='static/img/icons/add.png'></div>"
 
-        htmlStr += "<button id='addLabelCard' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-        htmlStr += "<i class='material-icons'>add</i></button>";
+        htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>dashboard</i></button>";
+
 
         // htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         // htmlStr += "<i class='material-icons'>chat</i></button>";
@@ -120,28 +123,41 @@
 
 
 
-        $('#correlViewC').on('click', function() {
+        $('#correlViewC').on('click', function () {
             Scat.showScatterView();
         })
 
-        $('#tableViewC').on('click', function() {
+        $('#tableViewC').on('click', function () {
             DataTable.showTableView();
         })
 
         // table mode button click
-        $('#addLabelCard').on('click', function() {
+        $('#bakeModels').on('click', function () {
+            // var objSend = {
+            //     data: Main.trainData,
+            //     selectedRowIds: DataTable.selectedRows
+            // };
+            // socket.emit("find_similarData", objSend);
+            // socket.off('find_similarData');
+            // socket.removeAllListeners('similarData_return');
+            // socket.on("similarData_return", function(dataObj) {
+            //     console.log('similar data returned ', dataObj);
+            //     LabelCard.computeReturnData = dataObj;
+            //     LabelCard.getDataObject(dataObj['indexBydata']);
+            //     LabelCard.makeCards();
+            // })
+
             var objSend = {
-                data: Main.trainData,
-                selectedRowIds: DataTable.selectedRows
-            };
-            socket.emit("find_similarData", objSend);
-            socket.off('find_similarData');
-            socket.removeAllListeners('similarData_return');
-            socket.on("similarData_return", function(dataObj) {
-                console.log('similar data returned ', dataObj);
-                LabelCard.computeReturnData = dataObj;
-                LabelCard.getDataObject(dataObj['indexBydata']);
-                LabelCard.makeCards();
+                'train': Main.trainData,
+                'targetCol': Main.targetName,
+            }
+            socket.emit("get_good_model", objSend);
+            // socket.off('get_good_model');
+            // socket.removeAllListeners('send_good_model');
+            socket.on("send_good_model", function (dataObj) {
+                console.log('good model recieved ', dataObj);
+                BarM.modelData[0] = Object.assign({}, dataObj);
+                DataTable.modelUpdateLabel();
             })
         })
 
@@ -153,19 +169,19 @@
 
     }
 
-    DataTable.dragFunction = function() {
+    DataTable.dragFunction = function () {
         console.log('adding drag function')
-            // $(".dataViewAppTable tr").draggable({
+        // $(".dataViewAppTable tr").draggable({
         $("tr").draggable({
             helper: "clone",
-            start: function() {
+            start: function () {
                 // console.log(' starting drag ')
                 $(this).css('border-bottom', '5px solid black')
             },
-            drag: function() {
+            drag: function () {
                 // console.log('dragging now ', this)
             },
-            stop: function(e, ui) {
+            stop: function (e, ui) {
                 var id = $(this).attr('id');
                 DataTable.lastLabelCardId = $(this).parent().parent().parent();
                 DataTable.lastLabelCardId = DataTable.lastLabelCardId.attr('id');
@@ -180,14 +196,14 @@
 
         //add droppable
         $(".ui-droppable.tableContent").droppable({
-            activate: function(event, ui) {
+            activate: function (event, ui) {
                 console.log("droppable activate")
             },
             // tolerance: "intersect",
             // accept: "tr",
             // activeClass: "ui-state-default",
             // hoverClass: "ui-state-hover",
-            drop: function(event, ui) {
+            drop: function (event, ui) {
                 $(this).addClass("ui-state-highlight")
                 $(this).append($(ui.draggable));
                 console.log("dropped item ", event, this, ui)
@@ -197,7 +213,7 @@
 
     }
 
-    DataTable.filterById = function(idGiven) {
+    DataTable.filterById = function (idGiven) {
         var data = [];
         if (Main.leftData.length == 0) {
             data = Util.deepCopyData(Main.trainData);
@@ -217,22 +233,22 @@
             data.push.apply(data, Main.currentData)
             singleRowCheck = true;
         } else {
-            data = data.filter(function(d) {
-                    // return d.id == idGiven;
-                    if (d.id == idGiven) return true
-                    for (var item in DataTable.pickedAttrDict) {
-                        var ran = Main.attrDict[item]['range'];
-                        var fac = Math.abs(+ran[0] - +ran[1]) * DataTable.ratioSelect
-                        if (d[item] == DataTable.pickedAttrDict[item]) {
-                            return true;
-                        }
-
-                        if (Math.abs(d[item] - DataTable.pickedAttrDict[item]) < fac) {
-                            return true;
-                        }
+            data = data.filter(function (d) {
+                // return d.id == idGiven;
+                if (d.id == idGiven) return true
+                for (var item in DataTable.pickedAttrDict) {
+                    var ran = Main.attrDict[item]['range'];
+                    var fac = Math.abs(+ran[0] - +ran[1]) * DataTable.ratioSelect
+                    if (d[item] == DataTable.pickedAttrDict[item]) {
+                        return true;
                     }
-                    return false;
-                }) // data filtering completes here
+
+                    if (Math.abs(d[item] - DataTable.pickedAttrDict[item]) < fac) {
+                        return true;
+                    }
+                }
+                return false;
+            }) // data filtering completes here
 
             if (data.length < ClusterModeler.numClusters + 1) {
                 data.push.apply(data, Main.currentData);
@@ -265,7 +281,7 @@
     }
 
 
-    DataTable.computeLeftData = function() {
+    DataTable.computeLeftData = function () {
         //computeleftdata
         setTimeout(() => {
             var currentDataId = [];
@@ -283,12 +299,12 @@
         }, 400);
     }
 
-    DataTable.filterTableByCluster = function(item) {
+    DataTable.filterTableByCluster = function (item) {
         var data = Util.deepCopyData(Main.currentData);
         // data.forEach(function(d){
 
         // })
-        data = data.filter(function(d) {
+        data = data.filter(function (d) {
             // console.log('got d is ', d, d.cluster)
             return d.cluster == item;
         })
@@ -299,7 +315,7 @@
         $('#tableContent').css('background', 'white');
     }
 
-    DataTable.makeFilterVisTable = function(attr, el) {
+    DataTable.makeFilterVisTable = function (attr, el) {
         console.log('attr ', attr)
         if (attr == Main.entityName || attr == Main.entityNameSecondImp) return;
         try {
@@ -308,7 +324,7 @@
             return;
         }
         var data = [];
-        Main.trainData.forEach(function(d, i) {
+        Main.trainData.forEach(function (d, i) {
             var obj = {
                 index: i,
                 label: d['id'],
@@ -333,154 +349,154 @@
 
     }
 
-    DataTable.addExtraItemsTables = function(containerId = "", data) {
-            var table = d3.select('#dataViewAppTable_' + containerId)
-                // var titles = d3.keys(data[0]);
-            var titles = table.selectAll('th').data();
-            // console.log(' data head is ', titles)
+    DataTable.addExtraItemsTables = function (containerId = "", data) {
+        var table = d3.select('#dataViewAppTable_' + containerId)
+        // var titles = d3.keys(data[0]);
+        var titles = table.selectAll('th').data();
+        // console.log(' data head is ', titles)
 
-            table.selectAll('td')
-                .attr('width', '125px')
-            $('#tableContent').css('display', 'block')
+        table.selectAll('td')
+            .attr('width', '125px')
+        $('#tableContent').css('display', 'block')
 
-            // to add filter panel
-            table.selectAll('tbody')
-                .insert("tr", ":first-child")
-                .attr('id', 'filter_tr')
-                .attr('height', '100px')
-                .data([data[0]])
-                .selectAll("td")
-                .data(function(d) {
-                    // console.log(' getting d as ', d, titles)
-                    return titles.map(function(k) {
-                        return {
-                            value: d[k],
-                            name: k
-                        };
-                    });
-                })
-                .enter()
-                .append("td")
-                .attr('id', function(d) {
-                    return 'filter_td_' + d.name
-                })
-                .attr("data-th", function(d) {
-                    return d.name;
-                })
-                .attr("data-id", function(d) {
-                    return d.id;
-                })
-                .attr('class', function(d) {
-                    return 'td_' + d.value + ' td_' + d.name + ' td_' + d.name + '_' + d.value;
-                })
-                .style('background', function(d) {
-                    DataTable.makeFilterVisTable(d.name, $(this))
-                    return '';
-                })
-
-
-
-            table.selectAll('tr')
-                .insert("td", ":first-child")
-                .attr('id', 'critical_')
-                // .style('background', 'white')
-                .style('display', function(d, i) {
-                    if (i != 0) return 'flex'
-                })
-                .style('flex-direction', 'row')
-                .style('width', '150px')
-                .html(function(d, i) {
-                    // console.log(' d and i is ', d, i)
-                    if (i < 2) {
-                        var col = $(this).siblings().attr('background');
-                        if (i == 0) col = "#333"
-                        if (i == 1) col = ""
-                        $(this).css('background', col);
-                        return ""
-                    } else {
-                        var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_" + d.id + "'><label>";
-                        htmlStr += "<input type='checkbox' id = 'check_critical_" + d.id + "'><span class='lever'></span></label></div>"
-                        htmlStr += "<label><input type='checkbox' class='filled-in check_discard' id = 'check_discard_" + d.id + "'/><span></span></label>"
-                        return htmlStr;
-                    }
-                })
-
-
-
-
-            //toggle switches input controls-----------------------------------------------------------------------------------------
-            $(".switch_critical").on('input', function(e) {
-                var id = $(this).attr('id');
-                var idNum = Util.getNumberFromText(id);
-                console.log('e is ', e, idNum);
-                var stri = 'Critical-Items'
-                Cons.typeConstraints['PREDICTIVE'][stri]['Checked'] = !Cons.typeConstraints['PREDICTIVE'][stri]['Checked'];
-                ConsInt.getActiveConstraints();
-                console.log('active cons ', ConsInt.activeConstraints)
-                try {
-                    var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
-                    var ind = arr.indexOf(idNum)
-                    if (ind != -1) {
-                        arr.splice(ind, 1);
-                    } else {
-                        arr.push(idNum);
-                    }
-                } catch (e) {
-                    ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [idNum]
-                }
+        // to add filter panel
+        table.selectAll('tbody')
+            .insert("tr", ":first-child")
+            .attr('id', 'filter_tr')
+            .attr('height', '100px')
+            .data([data[0]])
+            .selectAll("td")
+            .data(function (d) {
+                // console.log(' getting d as ', d, titles)
+                return titles.map(function (k) {
+                    return {
+                        value: d[k],
+                        name: k
+                    };
+                });
+            })
+            .enter()
+            .append("td")
+            .attr('id', function (d) {
+                return 'filter_td_' + d.name
+            })
+            .attr("data-th", function (d) {
+                return d.name;
+            })
+            .attr("data-id", function (d) {
+                return d.id;
+            })
+            .attr('class', function (d) {
+                return 'td_' + d.value + ' td_' + d.name + ' td_' + d.name + '_' + d.value;
+            })
+            .style('background', function (d) {
+                DataTable.makeFilterVisTable(d.name, $(this))
+                return '';
             })
 
-            $(".check_discard").on('input', function(e) {
-                    var id = $(this).attr('id');
-                    var idNum = Util.getNumberFromText(id);
-                    console.log('e in check discard is ', e, idNum);
-                    var stri = 'Discard-Items'
-                    Cons.typeConstraints['PREDICTIVE'][stri]['Checked'] = !Cons.typeConstraints['PREDICTIVE'][stri]['Checked'];
-                    ConsInt.getActiveConstraints();
-                    // console.log('active cons ', ConsInt.activeConstraints)
-                    try {
-                        var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
-                        var ind = arr.indexOf(idNum)
-                        if (ind != -1) {
-                            arr.splice(ind, 1);
-                        } else {
-                            arr.push(idNum);
-                        }
-                    } catch (e) {
-                        ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [idNum]
-                    }
-                })
-                // $(".ui-corner-all").css('background', 'transparent')
-                // $(".ui-corner-all").css('border', 'none')
 
 
-            // add filter data button
-            var sel = $("#filter_tr").find('td').first();
-            var htmlStr = "<button id='toggleFilterTableBtn' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-            htmlStr += "<i class='material-icons'>filter_tilt_shift</i></button>";
-            sel.append(htmlStr);
-
-
-            $("#toggleFilterTableBtn").on('click', function(e) {
-                if ($(".filterPanelDiv").length > 0) {
-                    DataTable.showFilterPanel();
+        table.selectAll('tr')
+            .insert("td", ":first-child")
+            .attr('id', 'critical_')
+            // .style('background', 'white')
+            .style('display', function (d, i) {
+                if (i != 0) return 'flex'
+            })
+            .style('flex-direction', 'row')
+            .style('width', '150px')
+            .html(function (d, i) {
+                // console.log(' d and i is ', d, i)
+                if (i < 2) {
+                    var col = $(this).siblings().attr('background');
+                    if (i == 0) col = "#333"
+                    if (i == 1) col = ""
+                    $(this).css('background', col);
+                    return ""
                 } else {
-
-                    DataTable.addFilterPanel(100, 200, 500, 200);
+                    var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_" + d.id + "'><label>";
+                    htmlStr += "<input type='checkbox' id = 'check_critical_" + d.id + "'><span class='lever'></span></label></div>"
+                    htmlStr += "<label><input type='checkbox' class='filled-in check_discard' id = 'check_discard_" + d.id + "'/><span></span></label>"
+                    return htmlStr;
                 }
-
             })
 
 
-        } // end of add extra
 
 
-    DataTable.addFilterPanel = function(top, left, w, h) {
+        //toggle switches input controls-----------------------------------------------------------------------------------------
+        $(".switch_critical").on('input', function (e) {
+            var id = $(this).attr('id');
+            var idNum = Util.getNumberFromText(id);
+            console.log('e is ', e, idNum);
+            var stri = 'Critical-Items'
+            Cons.typeConstraints['PREDICTIVE'][stri]['Checked'] = !Cons.typeConstraints['PREDICTIVE'][stri]['Checked'];
+            ConsInt.getActiveConstraints();
+            console.log('active cons ', ConsInt.activeConstraints)
+            try {
+                var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
+                var ind = arr.indexOf(idNum)
+                if (ind != -1) {
+                    arr.splice(ind, 1);
+                } else {
+                    arr.push(idNum);
+                }
+            } catch (e) {
+                ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [idNum]
+            }
+        })
+
+        $(".check_discard").on('input', function (e) {
+            var id = $(this).attr('id');
+            var idNum = Util.getNumberFromText(id);
+            console.log('e in check discard is ', e, idNum);
+            var stri = 'Discard-Items'
+            Cons.typeConstraints['PREDICTIVE'][stri]['Checked'] = !Cons.typeConstraints['PREDICTIVE'][stri]['Checked'];
+            ConsInt.getActiveConstraints();
+            // console.log('active cons ', ConsInt.activeConstraints)
+            try {
+                var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
+                var ind = arr.indexOf(idNum)
+                if (ind != -1) {
+                    arr.splice(ind, 1);
+                } else {
+                    arr.push(idNum);
+                }
+            } catch (e) {
+                ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [idNum]
+            }
+        })
+        // $(".ui-corner-all").css('background', 'transparent')
+        // $(".ui-corner-all").css('border', 'none')
+
+
+        // add filter data button
+        var sel = $("#filter_tr").find('td').first();
+        var htmlStr = "<button id='toggleFilterTableBtn' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>filter_tilt_shift</i></button>";
+        sel.append(htmlStr);
+
+
+        $("#toggleFilterTableBtn").on('click', function (e) {
+            if ($(".filterPanelDiv").length > 0) {
+                DataTable.showFilterPanel();
+            } else {
+
+                DataTable.addFilterPanel(100, 200, 500, 200);
+            }
+
+        })
+
+
+    } // end of add extra
+
+
+    DataTable.addFilterPanel = function (top, left, w, h) {
         var htmlStr = "<div class = 'filterPanelDiv ui-widget-content'><div class = 'filterPanelHeader'> <p class = 'filterHeadtext'>Filter</p>"
-        
+
         htmlStr += "<div class = 'filterHeadButtonRack' ><button id='tickFilterBtn' class='filterPanelBtns mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>done</i></button>";
-        
+
         htmlStr += "<button id='resetFilterPanel' class='filterPanelBtns mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
 
@@ -494,7 +510,7 @@
 
 
 
-        $(function() {
+        $(function () {
             $(".filterPanelDiv").draggable();
         });
 
@@ -548,52 +564,52 @@
         var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
         ParC.makeParallelCoordChart('filterContentId', dataNumeric);
 
-        $("#clearFilterPanel").on('click', function() {
+        $("#clearFilterPanel").on('click', function () {
             DataTable.hideFilterPanel();
         })
 
-        $("#tickFilterBtn").on('click', function() {
+        $("#tickFilterBtn").on('click', function () {
             DataTable.hideSelectedRows(ParC.filteredData);
         })
 
-        $("#resetFilterPanel").on('click', function() {
+        $("#resetFilterPanel").on('click', function () {
             DataTable.resetFilterPanel();
         })
 
 
     }
 
-    DataTable.resetFilterPanel = function() {
+    DataTable.resetFilterPanel = function () {
         $(".trTable").show();
         ParC.filteredData = [];
         var arr = ['id'];
         arr.push.apply(arr, Object.keys(Main.numericalAttributes));
         var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
-        ParC.makeParallelCoordChart('filterContentId', dataNumeric);        
+        ParC.makeParallelCoordChart('filterContentId', dataNumeric);
     }
 
-    DataTable.hideSelectedRows = function(arrIds = []) {
+    DataTable.hideSelectedRows = function (arrIds = []) {
         $(".trTable").hide();
         for (var item in arrIds) {
             $("#tr_" + item).show();
-        // $(".trTable").css('opacity', 1);
+            // $(".trTable").css('opacity', 1);
 
         }
     }
 
-    DataTable.hideFilterPanel = function() {
+    DataTable.hideFilterPanel = function () {
         $(".filterPanelDiv").hide();
         DataTable.showingFilterPanel = false;
 
     }
 
-    DataTable.showFilterPanel = function() {
+    DataTable.showFilterPanel = function () {
         $(".filterPanelDiv").show();
         DataTable.showingFilterPanel = true;
     }
 
 
-    DataTable.makeTable = function(dataGiven = main.appData, containerId = "tableContent") {
+    DataTable.makeTable = function (dataGiven = main.appData, containerId = "tableContent") {
         $("#dataViewAppTable_" + containerId).remove();
 
         // var color_scale = d3.scale.linear().domain([0, 1]).range(['beige', 'green']);
@@ -603,7 +619,7 @@
         var data = Util.deepCopyData(dataGiven);
 
         // console.log(" drawing test data table ... ", dataGiven);
-        data.forEach(function(d, i) {
+        data.forEach(function (d, i) {
             delete d.cluster;
             d['0_' + Main.targetName] = d[Main.targetName]
             d['0_' + Main.predictedName] = d[Main.predictedName]
@@ -637,27 +653,27 @@
             .data(titles)
             .enter()
             .append("th")
-            .text(function(d) {
+            .text(function (d) {
                 return d;
             })
-            .on("click", function(d) {
-                headers.attr("class", "header");
+            .on("click", function (d) {
+                // headers.attr("class", "header");
 
-                if (sortAscending) {
-                    rows.sort(function(a, b) {
-                        if (b[d] < a[d]) return 1
-                        else return -1
-                    });
-                    sortAscending = false;
-                    this.className = "aes";
-                } else {
-                    rows.sort(function(a, b) {
-                        if (b[d] < a[d]) return -1
-                        else return 1
-                    });
-                    sortAscending = true;
-                    this.className = "des";
-                }
+                // if (sortAscending) {
+                //     rows.sort(function(a, b) {
+                //         if (b[d] < a[d]) return 1
+                //         else return -1
+                //     });
+                //     sortAscending = false;
+                //     this.className = "aes";
+                // } else {
+                //     rows.sort(function(a, b) {
+                //         if (b[d] < a[d]) return -1
+                //         else return 1
+                //     });
+                //     sortAscending = true;
+                //     this.className = "des";
+                // }
             });
 
         var rows = table
@@ -666,13 +682,13 @@
             .data(data)
             .enter()
             .append("tr")
-            .attr('class', function(d, i) {
+            .attr('class', function (d, i) {
                 return 'trTable trCl_' + i
             })
-            .attr('id', function(d) {
+            .attr('id', function (d) {
                 return 'tr_' + d.id;
             })
-            .style('background', function(d) {
+            .style('background', function (d) {
                 var id = d.id;
                 var parId = Util.getNumberFromText(containerId);
                 if (parId == "") return "";
@@ -690,7 +706,7 @@
                 }
 
             })
-            .on('mouseover', function(d) {
+            .on('mouseover', function (d) {
                 try {
                     DataTable.nodeColor = d3.selectAll(".node_" + d.id).style("fill");
                     d3.selectAll(".node_" + d.id).style("fill", "black");
@@ -699,7 +715,7 @@
                 }
 
             })
-            .on('mouseout', function(d) {
+            .on('mouseout', function (d) {
                 try {
                     d3.selectAll(".node_" + d.id).style("fill", DataTable.nodeColor);
                 } catch (err) {
@@ -709,8 +725,8 @@
             })
         rows
             .selectAll("td")
-            .data(function(d) {
-                return titles.map(function(k) {
+            .data(function (d) {
+                return titles.map(function (k) {
                     return {
                         value: d[k],
                         name: k,
@@ -720,23 +736,23 @@
             })
             .enter()
             .append("td")
-            .attr("data-th", function(d) {
+            .attr("data-th", function (d) {
                 return d.name;
             })
-            .attr("data-id", function(d) {
+            .attr("data-id", function (d) {
                 return d.id;
             })
-            .attr('class', function(d) {
+            .attr('class', function (d) {
                 return 'td_' + d.value + ' td_' + d.name + ' td_' + d.name + '_' + d.value;
             })
-            .text(function(d) {
+            .text(function (d) {
                 return d.value;
             })
             // .html(function(d){
             //     return "<div class = 'td_elem_cell' >"+d.value+"</div>";
             // })
             // .style('height', '2em')
-            .on('click', function(d) {
+            .on('click', function (d) {
                 // if (DataTable.viewFullTable) return;
                 // // return;
                 // var back = $(this).css('background-color');
@@ -784,7 +800,7 @@
                 // console.log('background ', idList, fac)
                 // // $(this).css('background', 'cyan')
             })
-            .on('mouseover', function(d) {
+            .on('mouseover', function (d) {
                 $(this).css('background', Main.colors.HIGHLIGHT2);
                 var id = d.id;
                 // console.log(' d is ', d)
@@ -800,7 +816,7 @@
                     }
                 }
             })
-            .on('mouseout', function(d) {
+            .on('mouseout', function (d) {
                 $(this).css('background', '');
                 $("#histoBars_" + DataTable.tempItem).css('fill', DataTable.tempCol);
 
@@ -812,38 +828,38 @@
         // $(".td_elem_cell").css('max-height', '25px');
 
 
-        $("#dataViewAppTable_" + containerId + " tr").on('click', function(d) {
-            if (containerId != "tableContent") return;
-            var back = $(this).css('background-color');
-            // console.log("clicked tabel tr ", $(this), d, back);
-            var idNum = Util.getNumberFromText($(this).attr('id'));
-            if (typeof idNum == 'undefined') return;
+        $("#dataViewAppTable_" + containerId + " tr").on('click', function (d) {
+            // if (containerId != "tableContent") return;
+            // var back = $(this).css('background-color');
+            // // console.log("clicked tabel tr ", $(this), d, back);
+            // var idNum = Util.getNumberFromText($(this).attr('id'));
+            // if (typeof idNum == 'undefined') return;
 
-            if (ConP.showingConstPanel) {
-                if (typeof ConP.selectedRowsCons[idNum] == 'undefined') {
-                    $(this).css('background', Main.colors.HIGHLIGHT2);
-                    DataTable.fontColor = $(this).css('color');
-                    $(this).css('color', 'white');
-                    ConP.selectedRowsCons[idNum] = true;
-                } else {
-                    $(this).css('background', "rgb(255,255,255)");
-                    console.log("removing colors")
-                    delete ConP.selectedRowsCons[idNum];
-                    $(this).css('color', DataTable.fontColor);
-                }
-            } else {
-                if (typeof DataTable.selectedRows[idNum] == 'undefined') {
-                    $(this).css('background', Main.colors.HIGHLIGHT);
-                    DataTable.fontColor = $(this).css('color');
-                    $(this).css('color', 'white');
-                    DataTable.selectedRows[idNum] = true;
-                } else {
-                    $(this).css('background', "rgb(255,255,255)");
-                    console.log("removing colors")
-                    delete DataTable.selectedRows[idNum];
-                    $(this).css('color', DataTable.fontColor);
-                }
-            }
+            // if (ConP.showingConstPanel) {
+            //     if (typeof ConP.selectedRowsCons[idNum] == 'undefined') {
+            //         $(this).css('background', Main.colors.HIGHLIGHT2);
+            //         DataTable.fontColor = $(this).css('color');
+            //         $(this).css('color', 'white');
+            //         ConP.selectedRowsCons[idNum] = true;
+            //     } else {
+            //         $(this).css('background', "rgb(255,255,255)");
+            //         console.log("removing colors")
+            //         delete ConP.selectedRowsCons[idNum];
+            //         $(this).css('color', DataTable.fontColor);
+            //     }
+            // } else {
+            //     if (typeof DataTable.selectedRows[idNum] == 'undefined') {
+            //         $(this).css('background', Main.colors.HIGHLIGHT);
+            //         DataTable.fontColor = $(this).css('color');
+            //         $(this).css('color', 'white');
+            //         DataTable.selectedRows[idNum] = true;
+            //     } else {
+            //         $(this).css('background', "rgb(255,255,255)");
+            //         console.log("removing colors")
+            //         delete DataTable.selectedRows[idNum];
+            //         $(this).css('color', DataTable.fontColor);
+            //     }
+            // }
 
 
         })
@@ -857,7 +873,7 @@
     }; // end of makeTable
 
 
-    DataTable.makeHeatMapTable = function(dataGiven = main.appData, containerId = "tableContent") {
+    DataTable.makeHeatMapTable = function (dataGiven = main.appData, containerId = "tableContent") {
         $("#dataViewAppTable_" + containerId).remove();
 
         // var color_scale = d3.scale.linear().domain([0, 1]).range(['beige', 'green']);
@@ -866,7 +882,7 @@
         var data = Util.deepCopyData(dataGiven);
 
         // console.log(" drawing test data table ... ", dataGiven);
-        data.forEach(function(d, i) {
+        data.forEach(function (d, i) {
             delete d.cluster;
             // d['0_' + Main.targetName] = d[Main.targetName]
             // d['0_' + Main.predictedName] = d[Main.predictedName]
@@ -895,21 +911,21 @@
             .data(titles)
             .enter()
             .append("th")
-            .text(function(d) {
+            .text(function (d) {
                 return d;
             })
-            .on("click", function(d) {
+            .on("click", function (d) {
                 headers.attr("class", "header");
 
                 if (sortAscending) {
-                    rows.sort(function(a, b) {
+                    rows.sort(function (a, b) {
                         if (b[d] < a[d]) return 1
                         else return -1
                     });
                     sortAscending = false;
                     this.className = "aes";
                 } else {
-                    rows.sort(function(a, b) {
+                    rows.sort(function (a, b) {
                         if (b[d] < a[d]) return -1
                         else return 1
                     });
@@ -924,10 +940,10 @@
             .data(data)
             .enter()
             .append("tr")
-            .attr('class', function(d, i) {
+            .attr('class', function (d, i) {
                 return 'trTable trCl_' + i
             })
-            .attr('id', function(d) {
+            .attr('id', function (d) {
                 return 'tr_' + d.id;
             })
             // .style('background', function(d) {
@@ -947,8 +963,8 @@
             //     }
             //   }
 
-        // })
-        .on('mouseover', function(d) {
+            // })
+            .on('mouseover', function (d) {
                 try {
                     DataTable.nodeColor = d3.selectAll(".node_" + d.id).style("fill");
                     d3.selectAll(".node_" + d.id).style("fill", "black");
@@ -957,7 +973,7 @@
                 }
 
             })
-            .on('mouseout', function(d) {
+            .on('mouseout', function (d) {
                 try {
                     d3.selectAll(".node_" + d.id).style("fill", DataTable.nodeColor);
                 } catch (err) {
@@ -967,8 +983,8 @@
             })
         rows
             .selectAll("td")
-            .data(function(d) {
-                return titles.map(function(k) {
+            .data(function (d) {
+                return titles.map(function (k) {
                     return {
                         value: d[k],
                         name: k
@@ -977,17 +993,17 @@
             })
             .enter()
             .append("td")
-            .attr("data-th", function(d) {
+            .attr("data-th", function (d) {
                 return d.name;
             })
-            .attr("data-id", function(d) {
+            .attr("data-id", function (d) {
                 return d.id;
             })
-            .attr('class', function(d) {
+            .attr('class', function (d) {
                 return 'td_' + d.value + ' td_' + d.name + ' td_' + d.name + '_' + d.value;
             })
             .style('margin', '10px')
-            .text(function(d) {
+            .text(function (d) {
                 if (d.name != Main.entityNameSecondImp &&
                     d.name != Main.entityName && d.name != 'predicted' && d.name != 'target_variable') {
                     // console.log('Main attr ', Main.attrDict[d.name], d.name, d.value)
@@ -1004,12 +1020,12 @@
                 }
 
             })
-            .on('click', function(d) {
+            .on('click', function (d) {
 
             })
 
 
-        $("#dataViewAppTable_" + containerId + " tr").on('click', function(d) {
+        $("#dataViewAppTable_" + containerId + " tr").on('click', function (d) {
             if (containerId != "tableContent") return;
             var back = $(this).css('background-color');
             // console.log("clicked tabel tr ", $(this), d, back);
