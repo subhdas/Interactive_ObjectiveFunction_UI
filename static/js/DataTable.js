@@ -15,8 +15,13 @@
         for (var item in predTrainDict) {
             console.log('updating data table ', item)
             var label = predTrainDict[item];
+            var col = 'lightgray'
+            var existingLabel = $('#tr_' + item).find('.td_0_' + Main.targetName).text();
+            if(existingLabel != label) col = 'orange'
             // $('.td_id_' + item).parent().find('.td_0_' + Main.predictedName).text(label);
-            $('.trCl_' + item).find('.td_0_' + Main.predictedName).text(label);
+            $('#tr_' + item).find('.td_0_' + Main.predictedName).text(label);
+            $('#tr_' + item).find('.td_0_' + Main.predictedName).css('border', '1px solid gray')
+            $('#tr_' + item).find('.td_0_' + Main.predictedName).css('background', col)
         }
     }
 
@@ -801,6 +806,7 @@
                 // // $(this).css('background', 'cyan')
             })
             .on('mouseover', function (d) {
+                DataTable.tdOrigColor = $(this).css('background')
                 $(this).css('background', Main.colors.HIGHLIGHT2);
                 var id = d.id;
                 // console.log(' d is ', d)
@@ -817,7 +823,7 @@
                 }
             })
             .on('mouseout', function (d) {
-                $(this).css('background', '');
+                $(this).css('background', DataTable.tdOrigColor);
                 $("#histoBars_" + DataTable.tempItem).css('fill', DataTable.tempCol);
 
 
