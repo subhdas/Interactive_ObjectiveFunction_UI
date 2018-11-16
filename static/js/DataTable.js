@@ -498,13 +498,13 @@ DataTable.addedExtra = 0;
 
 
         // add filter data button
-        var sel = $("#filter_tr").find('td').first();
-        var htmlStr = "<button id='toggleFilterTableBtn' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        var sel = $("#filter_tr_"+containerId).find('td').first();
+        var htmlStr = "<button id='toggleFilterTableBtn_"+containerId+"' class = 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' > "
         htmlStr += "<i class='material-icons'>filter_tilt_shift</i></button>";
         sel.append(htmlStr);
 
 
-        $("#toggleFilterTableBtn").on('click', function (e) {
+        $("#toggleFilterTableBtn_" + containerId).on('click', function (e) {
             if ($(".filterPanelDiv").length > 0) {
                 DataTable.showFilterPanel();
             } else {
@@ -660,7 +660,8 @@ DataTable.addedExtra = 0;
             .select("#" + containerId)
             .insert("table", ":first-child")
             .attr("id", "dataViewAppTable_" + containerId)
-            .attr("class", "dataViewAppTable")
+            // .attr("class", "dataViewAppTable mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp")
+            .attr("class", "dataViewAppTablep")
             .attr("height", "100%")
             .attr("width", "auto");
         // .attr("margin-top", "10px");
@@ -680,6 +681,7 @@ DataTable.addedExtra = 0;
             .data(titles)
             .enter()
             .append("th")
+            // .attr('class', 'mdl-data-table__cell--non-numeric')
             .text(function (d) {
                 return d;
             })

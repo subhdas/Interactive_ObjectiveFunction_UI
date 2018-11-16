@@ -125,3 +125,88 @@ circle.hidden {
   stroke: #fff;
 }
 
+
+
+/*from getmdl.io table design ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+table {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-collapse: collapse;
+  white-space: nowrap;
+  font-size: 10px;
+  background-color: rgb(255, 255, 255);
+}
+
+table thead {
+  padding-bottom: 3px;
+}
+
+table thead table__select {
+  margin-top: 0;
+}
+
+table tbody tr {
+  position: relative;
+  height: 48px;
+  transition-duration: 0.28s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: background-color;
+}
+
+table tbody tr.is-selected {
+  background-color: #e0e0e0;
+}
+
+table tbody tr:hover {
+  background-color: #eeeeee;
+}
+
+table td,
+table th {
+  padding: 0 18px 12px 18px;
+  text-align: left;
+}
+
+table td:first-of-type,
+table th:first-of-type {
+  padding-left: 24px;
+}
+
+table td:last-of-type,
+table th:last-of-type {
+  padding-right: 24px;
+}
+
+table td {
+  position: relative;
+  vertical-align: middle;
+  height: 48px;
+  wudth:auto;
+  /* border-top: 1px solid rgba(0, 0, 0, 0.12); */
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.12); */
+  padding-top: 12px;
+  box-sizing: border-box;
+}
+
+table td table__select {
+  vertical-align: middle;
+}
+
+table th {
+  position: relative;
+  vertical-align: bottom;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 24px;
+  letter-spacing: 0;
+  height: 48px;
+  font-size: 12px;
+  color: white;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+}
+
+
+/*from getmdl.io table design ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
