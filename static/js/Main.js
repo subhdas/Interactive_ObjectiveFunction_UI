@@ -192,6 +192,7 @@
         DataTable.addIconsTop(Main.trainData);
         DataTable.switchToLeftData();
         DataTable.makeTable(Main.leftData);
+        DataTable.makeTable(Main.testData, "tableContentTest");
         Scat.makeTheMatrix();
         Scat.hideScatterView();
 
