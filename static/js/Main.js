@@ -164,8 +164,8 @@
             socket.on("data_return_preprocess", function (dataGet) {
                 console.log("received data after pre process ", dataGet);
                 Main.trainData = dataGet[0];
-                Main.trainDataCopy = Util.deepCopyData(Main.trainData)
-                Main.leftData = Util.deepCopyData(Main.trainData)
+                Main.trainDataCopy = Util.deepCopyData(Main.trainData);
+                Main.leftData = Util.deepCopyData(Main.trainData);
                 // Main.currentData = Util.deepCopyData(Main.trainData)
                 Main.currentData = []; //Util.deepCopyData(Main.trainData)
 
@@ -191,7 +191,8 @@
     Main.taskScheduler = function () {
         DataTable.addIconsTop(Main.trainData);
         DataTable.switchToLeftData();
-        DataTable.makeTable(Main.leftData);
+        DataTable.makeTable(Main.trainData);
+        DataTable.extraContent = false;
         DataTable.makeTable(Main.testData, "tableContentTest");
         Scat.makeTheMatrix();
         Scat.hideScatterView();

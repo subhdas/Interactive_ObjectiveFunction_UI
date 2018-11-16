@@ -328,7 +328,7 @@
         return dataOut;
     }
 
-    BarM.makeHistoFilterTable = function(containerId = "", w, h, data = "", attr="") {
+    BarM.makeHistoFilterTable = function(containerId = "", w, h, data = "", dataQuery, attr="") {
         var ran = Main.attrDict[attr]['range']
         var numbins = 8;
         if(attr == 'Cylinders') numbins = 2
@@ -336,7 +336,7 @@
         var maxbin = ran[1]
         // var numbins =parseInt((maxbin - minbin) / binsize);
         var binsize =parseInt((maxbin - minbin) / numbins);
-        // console.log('numbins ', numbins, maxbin, minbin, ran)
+        // console.log('numbins ', numbins, maxbin, minbin, ran, containerId)
 
         // whitespace on either side of the bars in units of MPG
         var binmargin = .2;
@@ -363,6 +363,8 @@
             };
         }
 
+
+
         // Fill histdata with y-axis values and meta data
         data.forEach(function(d,i) {
             var bin = Math.abs(Math.floor((d.value - minbin) / binsize));
@@ -374,7 +376,7 @@
                     BarM.filterHistData[attr+"_"+bin] = [d.label]                    
                 }
 
-                var dt = Main.getDataById(""+ d.label, Main.trainData);
+                var dt = Main.getDataById("" + d.label, dataQuery); //Main.trainData
                 // console.log('data is ', dt)
                 histdata[bin].numfill += 1;
                 histdata[bin].bin = bin;
@@ -390,7 +392,7 @@
             d.numfill = Math.log(+d.numfill);
         })
 
-        // console.log('hist data is ', histdata)
+        // console.log('numbin hist data is ', histdata)
 
         // This scale is for determining the widths of the histogram bars
         // Must start at 0 or else x(binsize a.k.a dx) will be negative
@@ -432,7 +434,7 @@
 
 
         // put the graph in the "mpg" div
-        var svg = d3.select("#"+containerId).append("svg")
+        var svg = d3.selectAll("#"+containerId).append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
@@ -440,12 +442,15 @@
                 margin.top + ")");
 
         svg.call(tip);
+        // console.log('numbin added svg ', svg)
+
+        // return
 
         // set up the bars
-        var bar = svg.selectAll(".bar")
+        var bar = svg.selectAll(".bar_"+containerId)
             .data(histdata)
             .enter().append("g")
-            .attr("class", "bar")
+            .attr("class", "bar_"+containerId)
             .attr("transform", function(d, i) {
                 return "translate(" +
                     x2(i * binsize + minbin) + "," + y(d.numfill) + ")";
@@ -456,6 +461,7 @@
         // add rectangles of correct size at correct location
         bar.append("rect")
             .attr('id', function(d){
+                // return "histoBars_" + d.attr + "_" + d.bin + "_" + containerId
                 return "histoBars_"+d.attr+"_"+d.bin
             })
             .attr("x", x(binmargin))

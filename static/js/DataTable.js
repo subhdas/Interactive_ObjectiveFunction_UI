@@ -5,7 +5,7 @@
     DataTable.ratioSelect = 0.15;
     DataTable.extraContent = false;
     DataTable.showingFilterPanel = false;
-
+DataTable.addedExtra = 0;
 
     //new variabbles
     DataTable.selectedRows = {}
@@ -60,7 +60,7 @@
 
     DataTable.switchToLeftData = function () {
         DataTable.viewFullTable = false;
-        $('#tableContent').css('background', Main.colors.HIGHLIGHT);
+        // $('#tableContent').css('background', Main.colors.HIGHLIGHT);
         $('.dataTableHeadText').text(' Current Data Length : ' + Main.trainData.length)
     }
 
@@ -327,8 +327,7 @@
         $('#tableContent').css('background', 'white');
     }
 
-    DataTable.makeFilterVisTable = function (attr, el) {
-        console.log('attr ', attr)
+    DataTable.makeFilterVisTable = function (attr, el, dataIn) {
         if (attr == Main.entityName || attr == Main.entityNameSecondImp) return;
         try {
             if (Main.attrDict[attr]['type'] == 'categorical') return;
@@ -336,7 +335,7 @@
             return;
         }
         var data = [];
-        Main.trainData.forEach(function (d, i) {
+        dataIn.forEach(function (d, i) {
             var obj = {
                 index: i,
                 label: d['id'],
@@ -352,29 +351,63 @@
         var id = el.attr('id');
         var w = parseFloat(el.css('width'));
         var h = parseFloat(el.css('height'));
+        // console.log('in filter vis table  ', attr, data, id)
 
         w = 200;
         h = 100;
-        console.log('data ffound ', attr, data, id, w, h);
+        // console.log('data ffound ', attr, data, id, w, h);
         // BarM.makeFeatureLabelsVerBar(id,w,h,data)
-        BarM.makeHistoFilterTable(id, w, h, data, attr)
+        BarM.makeHistoFilterTable(id, w, h, data, dataIn, attr);
 
     }
 
     DataTable.addExtraItemsTables = function (containerId = "", data) {
+        // return
+        console.log('extra item adding ', containerId, DataTable.addedExtra)
+        if(DataTable.addedExtra == 0) containerId = "tableContent"
+        else  containerId = "tableContentTest";
+
         var table = d3.select('#dataViewAppTable_' + containerId)
         // var titles = d3.keys(data[0]);
         var titles = table.selectAll('th').data();
         // console.log(' data head is ', titles)
-
         table.selectAll('td')
             .attr('width', '125px')
-        $('#tableContent').css('display', 'block')
+        $('#'+containerId).css('display', 'block')
+
+
+
+
+           table.selectAll('tr')
+               .insert("td", ":first-child")
+               .attr('id', 'critical_')
+               // .style('background', 'white')
+               .style('display', function (d, i) {
+                   if (i != 0) return 'flex'
+               })
+               .style('flex-direction', 'row')
+               .style('width', '150px')
+               .html(function (d, i) {
+                   // console.log(' d and i is ', d, i)
+                   if (i < 2) {
+                       var col = $(this).siblings().attr('background');
+                       if (i == 0) col = "#333"
+                       if (i == 1) col = ""
+                       $(this).css('background', col);
+                       return ""
+                   } else {
+                       var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_" + d.id + "'><label>";
+                       htmlStr += "<input type='checkbox' id = 'check_critical_" + d.id + "'><span class='lever'></span></label></div>"
+                       htmlStr += "<label><input type='checkbox' class='filled-in check_discard' id = 'check_discard_" + d.id + "'/><span></span></label>"
+                       return htmlStr;
+                   }
+               })
 
         // to add filter panel
-        table.selectAll('tbody')
+        // table.selectAll('#'+containerId)
+        table.select('tbody')
             .insert("tr", ":first-child")
-            .attr('id', 'filter_tr')
+            .attr('id', 'filter_tr_'+containerId)
             .attr('height', '100px')
             .data([data[0]])
             .selectAll("td")
@@ -390,7 +423,8 @@
             .enter()
             .append("td")
             .attr('id', function (d) {
-                return 'filter_td_' + d.name
+                return 'filter_td_' + d.name + '_' + containerId
+                // return 'filter_td_' + d.name
             })
             .attr("data-th", function (d) {
                 return d.name;
@@ -402,36 +436,16 @@
                 return 'td_' + d.value + ' td_' + d.name + ' td_' + d.name + '_' + d.value;
             })
             .style('background', function (d) {
-                DataTable.makeFilterVisTable(d.name, $(this))
+                if(DataTable.addedExtra == 1) dataGo = Main.testData;
+                else dataGo = Main.trainData;
+                console.log(' found ', d.name)
+                DataTable.makeFilterVisTable(d.name, $(this), dataGo)
                 return '';
             })
 
 
 
-        table.selectAll('tr')
-            .insert("td", ":first-child")
-            .attr('id', 'critical_')
-            // .style('background', 'white')
-            .style('display', function (d, i) {
-                if (i != 0) return 'flex'
-            })
-            .style('flex-direction', 'row')
-            .style('width', '150px')
-            .html(function (d, i) {
-                // console.log(' d and i is ', d, i)
-                if (i < 2) {
-                    var col = $(this).siblings().attr('background');
-                    if (i == 0) col = "#333"
-                    if (i == 1) col = ""
-                    $(this).css('background', col);
-                    return ""
-                } else {
-                    var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_" + d.id + "'><label>";
-                    htmlStr += "<input type='checkbox' id = 'check_critical_" + d.id + "'><span class='lever'></span></label></div>"
-                    htmlStr += "<label><input type='checkbox' class='filled-in check_discard' id = 'check_discard_" + d.id + "'/><span></span></label>"
-                    return htmlStr;
-                }
-            })
+     
 
 
 
@@ -880,9 +894,16 @@
 
         DataTable.dragFunction()
         if (DataTable.extraContent == false) {
-            DataTable.addExtraItemsTables(containerId, data);
-            DataTable.extraContent = true;
+            try{
+                DataTable.addExtraItemsTables(containerId, data);
+                DataTable.extraContent = true;
+                DataTable.addedExtra += 1
+            }catch(e){
+
+            }
+            
         }
+
 
     }; // end of makeTable
 
