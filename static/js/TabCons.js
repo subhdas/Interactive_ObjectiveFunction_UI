@@ -13,7 +13,7 @@
             var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + item];
             TabCon.makeSameLabContent("_mainContentMid" + item, item, valueSelect);
         } else {
-            for (var item in LabelCard.storedData) {
+            for (var item in Main.storedData) {
                 var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + item];
                 // console.log(' got arr for item ', item, arr)
                 TabCon.makeSameLabContent("_mainContentMid" + item, item, valueSelect);
@@ -82,8 +82,8 @@
 
         } else {
             //by label
-            for (var item in LabelCard.storedData) {
-                var lab = LabelCard.storedData[item]['label']
+            for (var item in Main.storedData) {
+                var lab = Main.storedData[item]['label']
                 if (typeof lab == 'undefined') lab = item
                 htmlStr += "<div class = '_wrapOneItem' ><div class = '_headConsTop' > Label : " + lab + "</div>";
                 htmlStr += "<div class ='_mainContentMid' id = '_mainContentMid" + item + "' ></div></div>";
@@ -118,8 +118,8 @@
             TabCon.radioCheckedSame = lab;
 
         } else {
-            for (var item in LabelCard.storedData) {
-                var lab = LabelCard.storedData[item]['label']
+            for (var item in Main.storedData) {
+                var lab = Main.storedData[item]['label']
                 if (typeof lab == 'undefined') lab = item
                 htmlStr += "<p><label><input class = 'radioLabelCons' name='group1' type='radio' checked />"
                 htmlStr += "<span>" + lab + "</span></label></p>";

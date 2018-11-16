@@ -842,37 +842,38 @@
 
 
         $("#dataViewAppTable_" + containerId + " tr").on('click', function (d) {
-            // if (containerId != "tableContent") return;
-            // var back = $(this).css('background-color');
-            // // console.log("clicked tabel tr ", $(this), d, back);
-            // var idNum = Util.getNumberFromText($(this).attr('id'));
-            // if (typeof idNum == 'undefined') return;
+            if (containerId != "tableContent") return;
+            var back = $(this).css('background-color');
+            // console.log("clicked tabel tr ", $(this), d, back);
+            var idNum = Util.getNumberFromText($(this).attr('id'));
+            if (typeof idNum == 'undefined') return;
 
-            // if (ConP.showingConstPanel) {
-            //     if (typeof ConP.selectedRowsCons[idNum] == 'undefined') {
-            //         $(this).css('background', Main.colors.HIGHLIGHT2);
-            //         DataTable.fontColor = $(this).css('color');
-            //         $(this).css('color', 'white');
-            //         ConP.selectedRowsCons[idNum] = true;
-            //     } else {
-            //         $(this).css('background', "rgb(255,255,255)");
-            //         console.log("removing colors")
-            //         delete ConP.selectedRowsCons[idNum];
-            //         $(this).css('color', DataTable.fontColor);
-            //     }
-            // } else {
-            //     if (typeof DataTable.selectedRows[idNum] == 'undefined') {
-            //         $(this).css('background', Main.colors.HIGHLIGHT);
-            //         DataTable.fontColor = $(this).css('color');
-            //         $(this).css('color', 'white');
-            //         DataTable.selectedRows[idNum] = true;
-            //     } else {
-            //         $(this).css('background', "rgb(255,255,255)");
-            //         console.log("removing colors")
-            //         delete DataTable.selectedRows[idNum];
-            //         $(this).css('color', DataTable.fontColor);
-            //     }
-            // }
+            if (ConP.showingConstPanel) {
+                if (typeof ConP.selectedRowsCons[idNum] == 'undefined') {
+                    $(this).css('background', Main.colors.HIGHLIGHT2);
+                    DataTable.fontColor = $(this).css('color');
+                    $(this).css('color', 'white');
+                    ConP.selectedRowsCons[idNum] = true;
+                } else {
+                    $(this).css('background', "rgb(255,255,255)");
+                    console.log("removing colors")
+                    delete ConP.selectedRowsCons[idNum];
+                    $(this).css('color', DataTable.fontColor);
+                }
+            } else {
+                return
+                // if (typeof DataTable.selectedRows[idNum] == 'undefined') {
+                //     $(this).css('background', Main.colors.HIGHLIGHT);
+                //     DataTable.fontColor = $(this).css('color');
+                //     $(this).css('color', 'white');
+                //     DataTable.selectedRows[idNum] = true;
+                // } else {
+                //     $(this).css('background', "rgb(255,255,255)");
+                //     console.log("removing colors")
+                //     delete DataTable.selectedRows[idNum];
+                //     $(this).css('color', DataTable.fontColor);
+                // }
+            }
 
 
         })
