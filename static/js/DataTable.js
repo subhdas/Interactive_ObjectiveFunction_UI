@@ -331,6 +331,7 @@ DataTable.addedExtra = 0;
         if (attr == Main.entityName || attr == Main.entityNameSecondImp) return;
         try {
             if (Main.attrDict[attr]['type'] == 'categorical') return;
+            // if (attr == +Main.targetName) return;
         } catch (e) {
             return;
         }
@@ -378,30 +379,7 @@ DataTable.addedExtra = 0;
 
 
 
-           table.selectAll('tr')
-               .insert("td", ":first-child")
-               .attr('id', 'critical_')
-               // .style('background', 'white')
-               .style('display', function (d, i) {
-                   if (i != 0) return 'flex'
-               })
-               .style('flex-direction', 'row')
-               .style('width', '150px')
-               .html(function (d, i) {
-                   // console.log(' d and i is ', d, i)
-                   if (i < 2) {
-                       var col = $(this).siblings().attr('background');
-                       if (i == 0) col = "#333"
-                       if (i == 1) col = ""
-                       $(this).css('background', col);
-                       return ""
-                   } else {
-                       var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_" + d.id + "'><label>";
-                       htmlStr += "<input type='checkbox' id = 'check_critical_" + d.id + "'><span class='lever'></span></label></div>"
-                       htmlStr += "<label><input type='checkbox' class='filled-in check_discard' id = 'check_discard_" + d.id + "'/><span></span></label>"
-                       return htmlStr;
-                   }
-               })
+
 
         // to add filter panel
         // table.selectAll('#'+containerId)
@@ -444,7 +422,30 @@ DataTable.addedExtra = 0;
             })
 
 
-
+           table.selectAll('tr')
+               .insert("td", ":first-child")
+               .attr('id', 'critical_')
+               // .style('background', 'white')
+               .style('display', function (d, i) {
+                   if (i != 0) return 'flex'
+               })
+               .style('flex-direction', 'row')
+               .style('width', '150px')
+               .html(function (d, i) {
+                   // console.log(' d and i is ', d, i)
+                   if (i < 2) {
+                       var col = $(this).siblings().attr('background');
+                       if (i == 0) col = "#333"
+                       if (i == 1) col = ""
+                       $(this).css('background', col);
+                       return ""
+                   } else {
+                       var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_" + d.id + "'><label>";
+                       htmlStr += "<input type='checkbox' id = 'check_critical_" + d.id + "'><span class='lever'></span></label></div>"
+                       htmlStr += "<label><input type='checkbox' class='filled-in check_discard' id = 'check_discard_" + d.id + "'/><span></span></label>"
+                       return htmlStr;
+                   }
+               })
      
 
 
