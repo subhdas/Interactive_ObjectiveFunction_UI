@@ -11,9 +11,10 @@ DataTable.addedExtra = 0;
     DataTable.selectedRows = {}
 
     DataTable.modelUpdateLabel = function () {
+        //train data update
         var predTrainDict = BarM.modelData[0]['predictions']['trainPred'];
         for (var item in predTrainDict) {
-            console.log('updating data table ', item)
+            // console.log('updating data table ', item)
             var label = predTrainDict[item];
             var col = 'lightgray'
             var existingLabel = $('#tr_' + item).find('.td_0_' + Main.targetName).text();
@@ -22,6 +23,21 @@ DataTable.addedExtra = 0;
             $('#tr_' + item).find('.td_0_' + Main.predictedName).text(label);
             $('#tr_' + item).find('.td_0_' + Main.predictedName).css('border', '1px solid gray')
             $('#tr_' + item).find('.td_0_' + Main.predictedName).css('background', col)
+        }
+
+
+        //test data update
+        var predTestDict = BarM.modelData[0]['predictions']['testPred'];
+        for (var item in predTestDict) {
+            var label = predTestDict[item];
+            var col = 'lightgray'
+            var existingLabel = $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.targetName).text();
+            console.log('updating test data table ', existingLabel, item)
+            if (existingLabel != label) col = 'orange'
+            // $('.td_id_' + item).parent().find('.td_0_' + Main.predictedName).text(label);
+            $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).text(label);
+            $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('border', '1px solid gray')
+            $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('background', col)
         }
     }
 
@@ -161,6 +177,7 @@ DataTable.addedExtra = 0;
 
             var objSend = {
                 'train': Main.trainData,
+                'test' : Main.testData,
                 'targetCol': Main.targetName,
             }
             socket.emit("get_good_model", objSend);

@@ -22,19 +22,20 @@ def preProcessData(data):
     return data
 
 
-def wrap_findGoodModel(train,target):
+def wrap_findGoodModel(train,test, target):
     done = False
     while( not done):
         try:
-            obj = find_goodModel(train,target)
+            obj = find_goodModel(train,test,target)
             return obj
         except Exception as e:
             print " errored in finding good model ", e
     return obj
 
 
-def find_goodModel(train,target):
+def find_goodModel(train,test,target):
     train = preProcessData(train)
+    test = preProcessData(test)
     def objective(space):
         # clf = xgb.XGBRegressor(n_estimators = space['n_estimators'],
         #                        max_depth = space['max_depth'],
@@ -86,7 +87,7 @@ def find_goodModel(train,target):
     best['criterion'] = criterionArr[best['criterion']]
 
     obj = {
-    'predictions' : makePredictions(best,train, train,target),
+    'predictions' : makePredictions(best,train, test,target),
     'params' : best,
     'STATUS' : 'OK'
     }

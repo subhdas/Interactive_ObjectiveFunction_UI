@@ -125,12 +125,17 @@ def handle_my_custom_event(data):
 	train = pd.DataFrame(train)
 	train = train.drop(['predicted'], axis = 1)
 	targetCol = data['targetCol']
+
+	test = data['test']
+	test = pd.DataFrame(test)
+	test = test.drop(['predicted'], axis=1)
+
 	print "train and targetCol ", train.head(3)
 	print "train and targetCol ", targetCol, train.columns.values
 	target = train[str(targetCol)]
 	# target = ''
 	train.drop([targetCol], axis=1)
-	out = wrap_findGoodModel(train, target)
+	out = wrap_findGoodModel(train,test, target)
 	# print " we get out ", out
 	emit('send_good_model', out)
 

@@ -39,8 +39,8 @@
         BLACK: 'black',
         POS_COL: 'red',
         NEG_COL: 'blue',
-        DARK_BWN : '#A19393',
-        LIGHT_BWN : '#EFE2E2'
+        DARK_BWN: '#A19393',
+        LIGHT_BWN: '#EFE2E2'
     }
 
     /*
@@ -71,12 +71,12 @@
 
     }
 
-    Main.getDataByKeys = function(keys= [],data=[]){
+    Main.getDataByKeys = function (keys = [], data = []) {
         var dataOut = [];
-        data.forEach(function(d){
-            var obj ={}
-            for (var item in d){
-                if(keys.indexOf(item) != -1){
+        data.forEach(function (d) {
+            var obj = {}
+            for (var item in d) {
+                if (keys.indexOf(item) != -1) {
                     obj[item] = d[item]
                 }
             }
@@ -127,27 +127,27 @@
             targetName: Main.targetName
         }
 
-            socket.emit("data_preprocess", objSend);
+        socket.emit("data_preprocess", objSend);
 
-            socket.on("data_return_preprocess", function (dataGet) {
-                console.log("received data after pre process ", dataGet);
-                Main.trainData = dataGet[0];
-                Main.trainDataCopy = Util.deepCopyData(Main.trainData)
-                Main.leftData = Util.deepCopyData(Main.trainData)
-                // Main.currentData = Util.deepCopyData(Main.trainData)
-                Main.currentData = []; //Util.deepCopyData(Main.trainData)
+        socket.on("data_return_preprocess", function (dataGet) {
+            console.log("received data after pre process ", dataGet);
+            Main.trainData = dataGet[0];
+            Main.trainDataCopy = Util.deepCopyData(Main.trainData)
+            Main.leftData = Util.deepCopyData(Main.trainData)
+            // Main.currentData = Util.deepCopyData(Main.trainData)
+            Main.currentData = []; //Util.deepCopyData(Main.trainData)
 
-                // Main.trainTarget = dataGet[1];
-                Main.testData = dataGet[1];
-                // Main.testTarget = dataGet[3];
-                Main.appData = dataGet[2];
+            // Main.trainTarget = dataGet[1];
+            Main.testData = dataGet[1];
+            // Main.testTarget = dataGet[3];
+            Main.appData = dataGet[2];
 
 
-                // GridData.deletedNodesData = Util.deepCopyData(Main.trainData);
+            // GridData.deletedNodesData = Util.deepCopyData(Main.trainData);
 
-                Main.processAttrData(Main.trainData);
-                Main.taskScheduler();
-            });
+            Main.processAttrData(Main.trainData, Main.testData);
+            Main.taskScheduler();
+        });
     }
 
 
@@ -177,7 +177,7 @@
 
                 // GridData.deletedNodesData = Util.deepCopyData(Main.trainData);
                 // console.log(' now test data ', Main.testData.length, dataGet[2].length)
-                Main.processAttrData(Main.trainData);
+                Main.processAttrData(Main.trainData, Main.testData);
                 Main.taskScheduler();
             });
 
@@ -203,39 +203,41 @@
         ConsInt.getActiveConstraints();
     }
 
-    Main.addLabels = function(data = Main.trainData){
+    Main.addLabels = function (dataIn = Main.trainData) {
+        var data = Util.deepCopyData(dataIn)
         var labels = ['sports', 'economical', 'utility']
-        data.forEach(function(d,i){
-            var ind = Util.getRandomNumberBetween(1,0)*3;
-            ind = Math.ceil(ind-1)
-            
+        data.forEach(function (d, i) {
+            var ind = Util.getRandomNumberBetween(1, 0) * 3;
+            ind = Math.ceil(ind - 1)
             d[Main.targetName] = labels[ind];
         })
-        var dataOut = data;
+        var dataOut = Util.deepCopyData(data)
+        console.log('dataoUt ', dataOut)
         return dataOut;
     }
 
 
-    Main.makeLabelIds = function(data){
+    Main.makeLabelIds = function (data) {
         Main.storedData = {}
-        data.forEach(function(d,i){
-            var target =  d[Main.targetName]
-            if(typeof Main.storedData[target] == 'undefined'){
+        data.forEach(function (d, i) {
+            var target = d[Main.targetName]
+            if (typeof Main.storedData[target] == 'undefined') {
                 Main.storedData[target] = {
-                    'data' : [d['id']],
+                    'data': [d['id']],
                     'mainRow': d['id'],
-                    'label' : target
+                    'label': target
                 }
-            }else{
+            } else {
                 Main.storedData[target]['data'].push(d['id'])
             }
         })
     }
 
 
-    Main.processAttrData = function (data) {
+    Main.processAttrData = function (data, dataTest) {
 
         data = Main.addLabels(data);
+        dataTest = Main.addLabels(dataTest)
         var title = Object.keys(data[0]);
         // console.log("title found ", title)
         for (var i = 0; i < title.length; i++) {
@@ -252,10 +254,10 @@
                         Main.entityNameSecondImp = title[i];
                     }
                 }
-            }else{
-              if(title[i] != 'id' && title[i] != 'cluster'){
-                Main.numericalAttributes[title[i]] = true;
-              }
+            } else {
+                if (title[i] != 'id' && title[i] != 'cluster') {
+                    Main.numericalAttributes[title[i]] = true;
+                }
             }
             Main.attrDict[title[i]]['type'] = type;
             if (toolKeys < 5 && title[i] != Main.entityName) Main.tooltipDictArr.push(title[i]);
@@ -263,7 +265,10 @@
             var attrList = [];
             data.forEach(function (d) {
                 attrList.push(+d[title[i]])
-                // d[Main.targetName] = -1;
+                d[Main.predictedName] = 'NA';
+            })
+
+            dataTest.forEach(function (d) {
                 d[Main.predictedName] = 'NA';
             })
 
@@ -275,23 +280,39 @@
             Main.attrDict[title[i]]["range"] = [attrUniq[0], attrUniq[attrUniq.length - 1]];
         }
 
-        Main.trainData.forEach(function(d){
-          var temp = d[Main.entityName];
-          var temp2 = d[Main.entityNameSecondImp];
-          delete d[Main.entityName];
-          delete d[Main.entityNameSecondImp];
+        data.forEach(function (d) {
+            var temp = d[Main.entityName];
+            var temp2 = d[Main.entityNameSecondImp];
+            delete d[Main.entityName];
+            delete d[Main.entityNameSecondImp];
 
-          d["0_"+Main.entityName] = temp;
-          d["0_"+Main.entityNameSecondImp] = temp2;
+            d["0_" + Main.entityName] = temp;
+            d["0_" + Main.entityNameSecondImp] = temp2;
         })
-        Main.entityName = "0_"+Main.entityName;
-        Main.entityNameSecondImp = "0_"+Main.entityNameSecondImp;
+
+        dataTest.forEach(function (d) {
+            var temp = d[Main.entityName];
+            var temp2 = d[Main.entityNameSecondImp];
+            delete d[Main.entityName];
+            delete d[Main.entityNameSecondImp];
+
+            d["0_" + Main.entityName] = temp;
+            d["0_" + Main.entityNameSecondImp] = temp2;
+        })
+
+        Main.trainData = data;
+        Main.testData = dataTest
+        console.log(' data test is ', dataTest, Main.testData)
+
+
+        Main.entityName = "0_" + Main.entityName;
+        Main.entityNameSecondImp = "0_" + Main.entityNameSecondImp;
         Main.leftData = Main.trainData;
         Main.makeLabelIds(Main.trainData);
         console.log(' train test and left data ', Main.trainData.length, Main.testData.length, Main.leftData.length)
 
         setTimeout(() => {
-        //  Util.writeCSV(Main.trainData)            
+            //  Util.writeCSV(Main.trainData)            
         }, 3000);
     }
 
