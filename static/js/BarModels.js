@@ -433,6 +433,8 @@
             .style('border-radius', '10px');
 
 
+        
+
         // put the graph in the "mpg" div
         var svg = d3.selectAll("#"+containerId).append("svg")
             .attr("width", width + margin.left + margin.right)
@@ -442,6 +444,9 @@
                 margin.top + ")");
 
         svg.call(tip);
+        $("#tiptable").css("font-size", "1.3em")
+        $("#tiptable").css("background", "black")
+        $("#tiptable").css("color", "black")
         // console.log('numbin added svg ', svg)
 
         // return

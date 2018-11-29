@@ -168,3 +168,11 @@ table{
   display: block;
   height: 'auto';
 }
+
+
+
+#tiptable{
+  /* color : black; */
+  background: #000;
+  overflow-y: auto;
+}

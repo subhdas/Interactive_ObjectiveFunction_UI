@@ -13,8 +13,23 @@ from sklearn.ensemble import RandomForestClassifier
 import xgboost as xgb
 from hyperopt import hp, tpe, STATUS_OK, Trials
 from hyperopt.fmin import fmin
+from sklearn.metrics import classification_report, f1_score, accuracy_score, confusion_matrix
+import json
 
-
+# for json dumps to work
+class NumpyEncoder(json.JSONEncoder):
+    """ Special json encoder for numpy types """
+    def default(self, obj):
+        if isinstance(obj, (np.int_, np.intc, np.intp, np.int8,
+            np.int16, np.int32, np.int64, np.uint8,
+            np.uint16, np.uint32, np.uint64)):
+            return int(obj)
+        elif isinstance(obj, (np.float_, np.float16, np.float32, 
+            np.float64)):
+            return float(obj)
+        elif isinstance(obj,(np.ndarray,)): #### This is the fix
+            return obj.tolist()
+        return json.JSONEncoder.default(self, obj)
 
 def preProcessData(data):
     data = data.apply(pd.to_numeric, errors='ignore')
@@ -120,9 +135,14 @@ def makePredictions(space, train, test, target):
         predTestDict[str(id)] = str(predTest[i])
 
 
+    trainConfMatrix = confusion_matrix(target, predTrain)
+    # train_pd = pd.DataFrame(trainConfMatrix).to_json('data.json', orient='split')
+    print " found train conf matrix ", trainConfMatrix
+
     return {
     'trainPred' : predTrainDict,
-    'testPred' : predTestDict
+    'testPred' : predTestDict,
+    'trainConfMatrix' : json.dumps(np.array(trainConfMatrix), cls=NumpyEncoder),
     }
 
 

@@ -187,6 +187,11 @@ DataTable.addedExtra = 0;
                 console.log('good model recieved ', dataObj);
                 BarM.modelData[0] = Object.assign({}, dataObj);
                 DataTable.modelUpdateLabel();
+
+                var confMatrix = JSON.parse(dataObj['predictions']['trainConfMatrix'])
+                BarM.modelData[0]['predictions']['trainConfMatrix'] = confMatrix;
+                console.log('confMatrix gotten ', confMatrix);
+                ConfM.makeConfMatrix(confMatrix);
             })
         })
 

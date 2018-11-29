@@ -25,6 +25,7 @@
 
     Main.tabelViewMode = true;
 
+    Main.labels = ['sports', 'economical', 'utility'];
 
 
 
@@ -205,11 +206,10 @@
 
     Main.addLabels = function (dataIn = Main.trainData) {
         var data = Util.deepCopyData(dataIn)
-        var labels = ['sports', 'economical', 'utility']
         data.forEach(function (d, i) {
             var ind = Util.getRandomNumberBetween(1, 0) * 3;
             ind = Math.ceil(ind - 1)
-            d[Main.targetName] = labels[ind];
+            d[Main.targetName] = Main.labels[ind];
         })
         var dataOut = Util.deepCopyData(data)
         console.log('dataoUt ', dataOut)

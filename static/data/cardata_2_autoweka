@@ -1,0 +1,108 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.meta.AutoWEKAClassifier -seed 123 -timeLimit 15 -memLimit 1024 -nBestConfigs 1 -metric errorRate -parallelRuns 1
+Relation:     my_data-weka.filters.unsupervised.attribute.Remove-R9,11
+Instances:    149
+Attributes:   11
+              Acceleration
+              MPG
+              Cylinders
+              Weight
+              Displacement
+              cluster
+              Horsepower
+              Model
+              target_variable
+              0_Origin
+              0_Car
+Test mode:    split 66.0% train, remainder test
+
+=== Classifier model (full training set) ===
+
+best classifier: weka.classifiers.functions.SimpleLogistic
+arguments: [-W, 0.760443602275557, -A]
+attribute search: weka.attributeSelection.BestFirst
+attribute search arguments: [-D, 2, -N, 4]
+attribute evaluation: weka.attributeSelection.CfsSubsetEval
+attribute evaluation arguments: []
+metric: errorRate
+estimated errorRate: 0.6577181208053692
+training time on evaluation dataset: 0.104 seconds
+
+You can use the chosen classifier in your own code as follows:
+
+AttributeSelection as = new AttributeSelection();
+ASSearch asSearch = ASSearch.forName("weka.attributeSelection.BestFirst", new String[]{"-D", "2", "-N", "4"});
+as.setSearch(asSearch);
+ASEvaluation asEval = ASEvaluation.forName("weka.attributeSelection.CfsSubsetEval", new String[]{});
+as.setEvaluator(asEval);
+as.SelectAttributes(instances);
+instances = as.reduceDimensionality(instances);
+Classifier classifier = AbstractClassifier.forName("weka.classifiers.functions.SimpleLogistic", new String[]{"-W", "0.760443602275557", "-A"});
+classifier.buildClassifier(instances);
+
+
+Correctly Classified Instances          51               34.2282 %
+Incorrectly Classified Instances        98               65.7718 %
+Kappa statistic                          0.0201
+Mean absolute error                      0.4375
+Root mean squared error                  0.469 
+Relative absolute error                 98.6397 %
+Root relative squared error             99.5893 %
+Total Number of Instances              149     
+
+=== Confusion Matrix ===
+
+  a  b  c   <-- classified as
+  1 52  1 |  a = economical
+  0 49  0 |  b = utility
+  0 45  1 |  c = sports
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.019    0.000    1.000      0.019    0.036      0.109    0.515     0.377     economical
+                 1.000    0.970    0.336      1.000    0.503      0.100    0.535     0.363     utility
+                 0.022    0.010    0.500      0.022    0.042      0.048    0.520     0.319     sports
+Weighted Avg.    0.342    0.322    0.627      0.342    0.191      0.087    0.523     0.355     
+
+Temporary run directories:
+C:\Users\subha\AppData\Local\Temp\autoweka3413201419065938945\
+
+
+For better performance, try giving Auto-WEKA more time.
+Tried 478 configurations; to get good results reliably you may need to allow for trying thousands of configurations.
+
+
+Time taken to build model: 756.46 seconds
+
+=== Evaluation on test split ===
+
+Time taken to test model on test split: 0 seconds
+
+=== Summary ===
+
+Correctly Classified Instances          17               33.3333 %
+Incorrectly Classified Instances        34               66.6667 %
+Kappa statistic                          0     
+Mean absolute error                      0.446 
+Root mean squared error                  0.4748
+Relative absolute error                 99.9455 %
+Root relative squared error             99.939  %
+Total Number of Instances               51     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 1.000    1.000    0.333      1.000    0.500      ?        0.500     0.333     economical
+                 0.000    0.000    ?          0.000    ?          ?        0.500     0.294     utility
+                 0.000    0.000    ?          0.000    ?          ?        0.500     0.373     sports
+Weighted Avg.    0.333    0.333    ?          0.333    ?          ?        0.500     0.336     
+
+=== Confusion Matrix ===
+
+  a  b  c   <-- classified as
+ 17  0  0 |  a = economical
+ 15  0  0 |  b = utility
+ 19  0  0 |  c = sports
+
