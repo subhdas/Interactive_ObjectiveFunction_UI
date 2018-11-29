@@ -132,10 +132,12 @@ def handle_my_custom_event(data):
 
 	print "train and targetCol ", train.head(3)
 	print "train and targetCol ", targetCol, train.columns.values
-	target = train[str(targetCol)]
+	targetTrain = train[str(targetCol)]
+	targetTest = test[str(targetCol)]
 	# target = ''
 	train.drop([targetCol], axis=1)
-	out = wrap_findGoodModel(train,test, target)
+	test.drop([targetCol], axis=1)
+	out = wrap_findGoodModel(train,test, targetTrain,targetTest)
 	# print " we get out ", out
 	emit('send_good_model', out)
 

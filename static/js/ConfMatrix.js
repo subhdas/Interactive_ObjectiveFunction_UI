@@ -19,11 +19,13 @@ ConfM = {};
  	})
  	return [minVal, mxVal]
  }
-ConfM.makeConfMatrix = function(dataIn, containerId = "") {
+ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 	if(containerId == ""){
 		containerId = "sideRightContentPanel"
 	}
-	$("#"+containerId).empty();
+	if(type == 'train'){
+		$("#"+containerId).empty();
+	}
 
 
 	
@@ -57,7 +59,7 @@ ConfM.makeConfMatrix = function(dataIn, containerId = "") {
 
 	var svg = d3.select("#"+containerId)
 		.append('div')
-		.attr('id', 'trainConfMatrixDiv')
+		.attr('id', type+'_ConfMatrixDiv')
 		.attr("width", width + margin.left + margin.right)
 	    .attr("height", height + margin.top + margin.bottom)
 		.append("svg")
@@ -85,20 +87,20 @@ ConfM.makeConfMatrix = function(dataIn, containerId = "") {
 	    .domain([0, 1])
 	    .range(["white", "black"]);    
 
-	var row = svg.selectAll(".grp_row_trainConf")
+	var row = svg.selectAll(type+'_.grp_row_Conf')
 	    .data(data)
 	  	.enter().append("g")
-	    .attr("class", "grp_row_trainConf")
+	    .attr("class", type+'_.grp_row_Conf')
 	    .attr("transform", function(d, i) { return "translate(0," + y(i) + ")"; });
 
-	var cell = row.selectAll(".cell_train_conf_rect")
+	var cell = row.selectAll("."+type+"_cell_conf_rect")
 	    .data(function(d) { return d; })
 			.enter().append("g")
-	    .attr("class", "cell_train_conf_rect")
+	    .attr("class", type+"_cell_conf_rect")
 	    .attr("transform", function(d, i) { return "translate(" + x(i) + ", 0)"; });
 
 	cell.append('rect')  
-		.attr('class', 'train_conf_rect')  
+		.attr('class', type+'_conf_rect')  
 	    .attr("width", x.rangeBand())
 	    .attr("height", y.rangeBand())
 	    .style("stroke-width", 0)
@@ -116,7 +118,7 @@ ConfM.makeConfMatrix = function(dataIn, containerId = "") {
 	    .style("font-size", '1.5em')
 	    .text(function(d, i) { return d; });
 
-	row.selectAll(".cell_train_conf_rect")
+	row.selectAll("."+type+"_cell_conf_rect")
 	    .data(function(d, i) { return data[i]; })
 	     .style("fill", function(d){
 	    	console.log('found color ', d, extent)

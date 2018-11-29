@@ -37,18 +37,18 @@ def preProcessData(data):
     return data
 
 
-def wrap_findGoodModel(train,test, target):
+def wrap_findGoodModel(train,test, targetTrain, targetTest):
     done = False
     while( not done):
         try:
-            obj = find_goodModel(train,test,target)
+            obj = find_goodModel(train,test,targetTrain,targetTest)
             return obj
         except Exception as e:
             print " errored in finding good model ", e
     return obj
 
 
-def find_goodModel(train,test,target):
+def find_goodModel(train,test,targetTrain,targetTest):
     train = preProcessData(train)
     test = preProcessData(test)
     def objective(space):
@@ -70,8 +70,8 @@ def find_goodModel(train,test,target):
                                     )
 
         # score =  A*SameLabel + B*Features +
-        clf.fit(train, target)
-        cross_mean_score = cross_val_score( estimator=clf, X=train, y=target, scoring='precision_macro', cv=3, n_jobs=-1).mean()
+        clf.fit(train, targetTrain)
+        cross_mean_score = cross_val_score( estimator=clf, X=train, y=targetTrain, scoring='precision_macro', cv=3, n_jobs=-1).mean()
 
         result = {'loss':cross_mean_score, 'status': STATUS_OK }
         print " result is ", result
@@ -102,21 +102,21 @@ def find_goodModel(train,test,target):
     best['criterion'] = criterionArr[best['criterion']]
 
     obj = {
-    'predictions' : makePredictions(best,train, test,target),
+    'predictions' : makePredictions(best,train, test,targetTrain, targetTest),
     'params' : best,
     'STATUS' : 'OK'
     }
     return obj
 
 
-def makePredictions(space, train, test, target):
+def makePredictions(space, train, test, targetTrain, targetTest):
     clf = RandomForestClassifier(max_depth=space['max_depth'],
                                 min_samples_split = space['min_samples_split'],
                                 min_samples_leaf = space['min_samples_leaf'],
                                 bootstrap = space['bootstrap'],
                                 criterion = space['criterion']
                                 )
-    clf.fit(train, target)
+    clf.fit(train, targetTrain)
     predTrain = clf.predict(train)
     predTest = clf.predict(test)
 
@@ -135,7 +135,8 @@ def makePredictions(space, train, test, target):
         predTestDict[str(id)] = str(predTest[i])
 
 
-    trainConfMatrix = confusion_matrix(target, predTrain)
+    trainConfMatrix = confusion_matrix(targetTrain, predTrain)
+    testConfMatrix = confusion_matrix(targetTest, predTest)
     # train_pd = pd.DataFrame(trainConfMatrix).to_json('data.json', orient='split')
     print " found train conf matrix ", trainConfMatrix
 
@@ -143,6 +144,7 @@ def makePredictions(space, train, test, target):
     'trainPred' : predTrainDict,
     'testPred' : predTestDict,
     'trainConfMatrix' : json.dumps(np.array(trainConfMatrix), cls=NumpyEncoder),
+    'testConfMatrix' : json.dumps(np.array(testConfMatrix), cls=NumpyEncoder),
     }
 
 

@@ -17,12 +17,14 @@ DataTable.addedExtra = 0;
             // console.log('updating data table ', item)
             var label = predTrainDict[item];
             var col = 'lightgray'
+
             var existingLabel = $('#tr_' + item).find('.td_0_' + Main.targetName).text();
-            if(existingLabel != label) col = 'orange'
+            if(existingLabel != label) col = Main.colors.HIGHLIGHT; //'orange'
             // $('.td_id_' + item).parent().find('.td_0_' + Main.predictedName).text(label);
             $('#tr_' + item).find('.td_0_' + Main.predictedName).text(label);
             $('#tr_' + item).find('.td_0_' + Main.predictedName).css('border', '1px solid gray')
             $('#tr_' + item).find('.td_0_' + Main.predictedName).css('background', col)
+            if(existingLabel != label)  $('#tr_' + item).find('.td_0_' + Main.predictedName).css('color', 'white')
         }
 
 
@@ -32,12 +34,13 @@ DataTable.addedExtra = 0;
             var label = predTestDict[item];
             var col = 'lightgray'
             var existingLabel = $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.targetName).text();
-            console.log('updating test data table ', existingLabel, item)
-            if (existingLabel != label) col = 'orange'
+            // console.log('updating test data table ', existingLabel, item)
+            if (existingLabel != label) col = Main.colors.HIGHLIGHT; //'orange'
             // $('.td_id_' + item).parent().find('.td_0_' + Main.predictedName).text(label);
             $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).text(label);
             $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('border', '1px solid gray')
             $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('background', col)
+            if(existingLabel != label)  $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('color', 'white')
         }
     }
 
@@ -188,10 +191,13 @@ DataTable.addedExtra = 0;
                 BarM.modelData[0] = Object.assign({}, dataObj);
                 DataTable.modelUpdateLabel();
 
-                var confMatrix = JSON.parse(dataObj['predictions']['trainConfMatrix'])
-                BarM.modelData[0]['predictions']['trainConfMatrix'] = confMatrix;
-                console.log('confMatrix gotten ', confMatrix);
-                ConfM.makeConfMatrix(confMatrix);
+                var confMatrixTrain = JSON.parse(dataObj['predictions']['trainConfMatrix'])
+                var confMatrixTest = JSON.parse(dataObj['predictions']['testConfMatrix'])
+                BarM.modelData[0]['predictions']['trainConfMatrix'] = confMatrixTrain;
+                BarM.modelData[0]['predictions']['testConfMatrix'] = confMatrixTest;
+                console.log('confMatrix gotten ', confMatrixTrain);
+                ConfM.makeConfMatrix(confMatrixTrain, 'train');
+                ConfM.makeConfMatrix(confMatrixTest, 'test');
             })
         })
 
@@ -475,11 +481,19 @@ DataTable.addedExtra = 0;
 
         //toggle switches input controls-----------------------------------------------------------------------------------------
         $(".switch_critical").on('input', function (e) {
+            if(DataTable.criticalSwitch) {
+                return
+            }            
+            DataTable.criticalSwitch = true;
+            setTimeout(function(){
+                DataTable.criticalSwitch = false;
+            }, 500)
+
             var id = $(this).attr('id');
             var idNum = Util.getNumberFromText(id);
             console.log('e is ', e, idNum);
             var stri = 'Critical-Items'
-            Cons.typeConstraints['PREDICTIVE'][stri]['Checked'] = !Cons.typeConstraints['PREDICTIVE'][stri]['Checked'];
+            Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
             ConsInt.getActiveConstraints();
             console.log('active cons ', ConsInt.activeConstraints)
             try {
@@ -492,6 +506,24 @@ DataTable.addedExtra = 0;
                 }
             } catch (e) {
                 ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [idNum]
+            }
+                    setTimeout(function(){
+                    $(".btn_"+stri).trigger("click");
+                    }, 1000)
+
+
+            // if(typeof ConsInt.activeConstraints[stri] != 'undefined'){
+            try{
+                    var item = ConsInt.activeConstraints[stri]
+                    // $(".btn_"+stri).trigger("click");
+                     var x = document.getElementsByClassName("btn_"+stri);
+                     var id = $(".btn_"+stri).attr('id')
+                     var elem = document.getElementById(id);
+                     elem.click();
+                    console.log('clicked button cons ', ConsInt.activeConstraints[stri], item,id)
+            }catch(e){
+                    console.log('error in clicking button ', e, ConsInt.activeConstraints, stri)
+
             }
         })
 

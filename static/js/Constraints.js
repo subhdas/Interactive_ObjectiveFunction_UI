@@ -178,7 +178,7 @@
                 }
 
                 htmlStr += "<button parent = '" + item + "' given = '" + val + "' name='" + val + "checkbox-" + k + "' id='" + val + "checkbox-" + k + "' \
-          class='mdl-button mdl-js-button mdl-button--accent constOpt'>" + val + "</button>"
+          class='mdl-button mdl-js-button mdl-button--accent constOpt btn_"+val+"'>" + val + "</button>"
 
 
 
