@@ -5,7 +5,16 @@
     DataTable.ratioSelect = 0.15;
     DataTable.extraContent = false;
     DataTable.showingFilterPanel = false;
-DataTable.addedExtra = 0;
+    DataTable.addedExtra = 0;
+
+
+    //auto triggers
+    DataTable.criticalSwitch = false;
+    DataTable.criticalClicked = false;
+
+    DataTable.sameLabelClicked = false;
+
+
 
     //new variabbles
     DataTable.selectedRows = {}
@@ -135,6 +144,7 @@ DataTable.addedExtra = 0;
         $('.dataTableHeadText').css('width', '100%');
         $('.dataTableHeadText').css('padding', '5px');
         $('.dataTableHeadText').css('align-self', 'center');
+        $('.dataTableHeadText').css('font-size', '1.9em');
         // $('.dataTableHeadText').css('display' , )
 
         // $('#dataToggleBtn').button({
@@ -519,7 +529,17 @@ DataTable.addedExtra = 0;
                      var x = document.getElementsByClassName("btn_"+stri);
                      var id = $(".btn_"+stri).attr('id')
                      var elem = document.getElementById(id);
-                     elem.click();
+                     // elem.click();
+                     var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
+                     if(!DataTable.criticalClicked){
+                        elem.click()
+                        DataTable.criticalClicked = true;
+                     }
+                     if(arr.length==0 && DataTable.criticalClicked){
+                        elem.click();
+                        DataTable.criticalClicked = false;
+                     }
+
                     console.log('clicked button cons ', ConsInt.activeConstraints[stri], item,id)
             }catch(e){
                     console.log('error in clicking button ', e, ConsInt.activeConstraints, stri)

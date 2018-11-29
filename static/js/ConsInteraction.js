@@ -50,6 +50,7 @@
 
 
     ConsInt.interPanelContentFromData = function(stri = "") {
+        // return
         // console.log('inter called')
         if (stri == "Same-Label") {
             for (var item in LabelCard.storedData) {

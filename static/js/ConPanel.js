@@ -217,6 +217,26 @@
                     $("#tr_" + d).css('background', "rgb(255,255,255)")
                     $("#tr_" + d).css('color', 'black')
                 })
+
+                //auto select the same label button on top
+                if(arr.length > 0 ){
+                    var id = $(".btn_"+valueSelect).attr('id')
+                    var elem = document.getElementById(id);
+                    elem.click();   
+                    DataTable.sameLabelClicked = true;
+                    // setTimeout(function(){
+                    // },500)
+                    $(".btn_"+valueSelect).trigger("click")
+                    console.log('same-label found arr more than 0 ', arr, valueSelect, id, elem)
+                }
+
+                if(arr.length == 0 && DataTable.sameLabelClicked){
+                    DataTable.sameLabelClicked = false;
+                    var id = $(".btn_"+valueSelect).attr('id')
+                    var elem = document.getElementById(id);
+                    elem.click();
+
+                }
             }
 
             //Feature Range
