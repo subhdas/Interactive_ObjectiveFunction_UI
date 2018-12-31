@@ -114,7 +114,7 @@
         htmlStr += "<button id='addConstraintPanelItems' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>add</i></button>";
 
-        htmlStr += "<button id='addLabelCard' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<button id='removeItemsConPanel' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>clear</i></button>";
 
 
@@ -192,6 +192,12 @@
 
         })
 
+        // removes items added in the constrain panel
+        $("#removeItemsConPanel").on('click', function(){
+            var foundText = $(".selectConstrain").closest('label').text()
+            console.log('found text ', foundText)
+        })
+
         // when add button on constrain panel is clicked
         $("#addConstraintPanelItems").on('click', function() {
             var valueSelect = $('.selectConstrain').val();
@@ -224,10 +230,7 @@
                     var elem = document.getElementById(id);
                     elem.click();   
                     DataTable.sameLabelClicked = true;
-                    // setTimeout(function(){
-                    // },500)
                     $(".btn_"+valueSelect).trigger("click")
-                    console.log('same-label found arr more than 0 ', arr, valueSelect, id, elem)
                 }
 
                 if(arr.length == 0 && DataTable.sameLabelClicked){
@@ -235,7 +238,6 @@
                     var id = $(".btn_"+valueSelect).attr('id')
                     var elem = document.getElementById(id);
                     elem.click();
-
                 }
             }
 
@@ -285,6 +287,23 @@
                     $("#tr_" + d).css('background', "rgb(255,255,255)")
                     $("#tr_" + d).css('color', 'black')
                 })
+
+
+                //auto select the similarity metric button on top
+                if(arr.length > 0 ){
+                    var id = $(".btn_"+valueSelect).attr('id')
+                    var elem = document.getElementById(id);
+                    elem.click();   
+                    DataTable.similarityClicked = true;
+                    $(".btn_"+valueSelect).trigger("click")
+                }
+
+                if(arr.length == 0 && DataTable.similarityClicked){
+                    DataTable.similarityClicked = false;
+                    var id = $(".btn_"+valueSelect).attr('id')
+                    var elem = document.getElementById(id);
+                    elem.click();
+                }
             }
 
         })

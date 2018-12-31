@@ -13,6 +13,7 @@
     DataTable.criticalClicked = false;
 
     DataTable.sameLabelClicked = false;
+    DataTable.similarityClicked = false;
 
 
 
