@@ -90,7 +90,11 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 	var row = svg.selectAll(type+'_.grp_row_Conf')
 	    .data(data)
 	  	.enter().append("g")
-	    .attr("class", type+'_.grp_row_Conf')
+		.attr("class", type+'_.grp_row_Conf')
+		.attr('id', function (d, i) {
+			console.log(' giving row names ', d, i)
+			return type + '_grp_row_Conf_id_' + i;
+		})
 	    .attr("transform", function(d, i) { return "translate(0," + y(i) + ")"; });
 
 	var cell = row.selectAll("."+type+"_cell_conf_rect")
@@ -101,13 +105,37 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 
 	cell.append('rect')  
 		.attr('class', type+'_conf_rect')  
+		.attr('id', function(d,i){
+			console.log(' giving id names ', d,i)
+			return type+'_conf_rect_id_'+i;
+		})
 	    .attr("width", x.rangeBand())
 	    .attr("height", y.rangeBand())
 	    .style("stroke-width", 0)
 	    .style("fill", function(d){
 	    	// console.log('found color ', d, extent)
 	    	return ConfM.color(+d);
-	    })
+		})
+		.on('mouseover', function(d,i){
+			// console.log(' matrix found ', d3.selectAll(this));
+			// console.log(' matrix is ', $(this).attr('class'));
+			ConfM.cellStroke = $(this).css('stroke');
+			ConfM.cellStrokeWidth = $(this).css('stroke-weight');
+			$(this).css('stroke', 'black');
+			$(this).css('stroke-width', '4px');
+
+			var id = $(this).parents();
+			var idNum = $(id[1]).attr('id')
+			idNum = Util.getNumberFromText(idNum)
+			console.log(' getting the parent ', idNum, i)
+			var idList = DataTable.findLabelAcc(Main.labels[idNum], Main.labels[i])
+			console.log(' getting the parent ', Main.labels[idNum], Main.labels[i], idList)
+
+		})
+		.on('mouseout', function(d,i){
+			$(this).css('stroke', ConfM.cellStroke);
+			$(this).css('stroke-width', ConfM.cellStrokeWidth);
+		})
 
     cell.append("text")
 	    .attr("dy", ".32em")
@@ -121,7 +149,7 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 	row.selectAll("."+type+"_cell_conf_rect")
 	    .data(function(d, i) { return data[i]; })
 	     .style("fill", function(d){
-	    	console.log('found color ', d, extent)
+	    	// console.log('found color ', d, extent)
 	    	return ConfM.color(+d);
 	    })
 	    // .style("fill", colorMap);

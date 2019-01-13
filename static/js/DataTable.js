@@ -20,6 +20,23 @@
     //new variabbles
     DataTable.selectedRows = {}
 
+
+
+    DataTable.findLabelAcc = function(labelTar, labelPre, data = Main.trainData){
+        var idList = []
+        data.forEach(function(d,i){
+            // console.log('data check ', d , Main.targetName, Main.predictedName)
+
+            var predVal  = BarM.modelData[0]['predictions']['trainPred'][d.id];
+            if (d[Main.targetName] == labelTar && predVal == labelPre) {
+                idList.push(d.id);
+            }
+        })
+
+        idList = Util.getUniqueArray(idList);
+        return idList;
+    }
+
     DataTable.modelUpdateLabel = function () {
         //train data update
         var predTrainDict = BarM.modelData[0]['predictions']['trainPred'];
