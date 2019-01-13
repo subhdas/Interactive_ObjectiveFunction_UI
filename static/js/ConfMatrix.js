@@ -92,7 +92,7 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 	  	.enter().append("g")
 		.attr("class", type+'_.grp_row_Conf')
 		.attr('id', function (d, i) {
-			console.log(' giving row names ', d, i)
+			// console.log(' giving row names ', d, i)
 			return type + '_grp_row_Conf_id_' + i;
 		})
 	    .attr("transform", function(d, i) { return "translate(0," + y(i) + ")"; });
@@ -106,7 +106,7 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 	cell.append('rect')  
 		.attr('class', type+'_conf_rect')  
 		.attr('id', function(d,i){
-			console.log(' giving id names ', d,i)
+			// console.log(' giving id names ', d,i)
 			return type+'_conf_rect_id_'+i;
 		})
 	    .attr("width", x.rangeBand())
@@ -129,7 +129,12 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 			idNum = Util.getNumberFromText(idNum)
 			console.log(' getting the parent ', idNum, i)
 			// var idList = DataTable.findLabelAcc(labelsData[i], labelsData[idNum])
-			var idList = DataTable.findLabelAcc(labelsData[idNum] , labelsData[i])
+
+			var idList = BarM.modelData[0]['predictions']
+			['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
+
+
+			// var idList = DataTable.findLabelAcc(labelsData[idNum] , labelsData[i])
 			console.log(' getting the parent ', labelsData[idNum], labelsData[i], idList)
 
 		})

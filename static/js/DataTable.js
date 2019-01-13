@@ -22,11 +22,11 @@
 
 
 
-    DataTable.findLabelAcc = function(labelTar, labelPre, data = Main.trainData){
+    DataTable.findLabelAcc = function (labelTar, labelPre, data = Main.trainData) {
         var idList = []
-        data.forEach(function(d,i){
+        data.forEach(function (d, i) {
             // console.log('data check ', d , Main.targetName, Main.predictedName)
-            var predVal  = BarM.modelData[0]['predictions']['trainPred'][d.id];
+            var predVal = BarM.modelData[0]['predictions']['trainPred'][d.id];
             if (d[Main.targetName] == labelTar && predVal == labelPre) {
                 idList.push(d.id);
             }
@@ -45,12 +45,12 @@
             var col = 'lightgray'
 
             var existingLabel = $('#tr_' + item).find('.td_0_' + Main.targetName).text();
-            if(existingLabel != label) col = Main.colors.HIGHLIGHT; //'orange'
+            if (existingLabel != label) col = Main.colors.HIGHLIGHT; //'orange'
             // $('.td_id_' + item).parent().find('.td_0_' + Main.predictedName).text(label);
             $('#tr_' + item).find('.td_0_' + Main.predictedName).text(label);
             $('#tr_' + item).find('.td_0_' + Main.predictedName).css('border', '1px solid gray')
             $('#tr_' + item).find('.td_0_' + Main.predictedName).css('background', col)
-            if(existingLabel != label)  $('#tr_' + item).find('.td_0_' + Main.predictedName).css('color', 'white')
+            if (existingLabel != label) $('#tr_' + item).find('.td_0_' + Main.predictedName).css('color', 'white')
         }
 
 
@@ -66,7 +66,7 @@
             $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).text(label);
             $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('border', '1px solid gray')
             $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('background', col)
-            if(existingLabel != label)  $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('color', 'white')
+            if (existingLabel != label) $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('color', 'white')
         }
     }
 
@@ -143,8 +143,8 @@
         // htmlStr += "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
         // htmlStr += "<img class='imgIcon' src='static/img/icons/add.png'></div>"
 
-            htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-            htmlStr += "<i class='material-icons'>chat</i></button>";
+        htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>chat</i></button>";
         htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>dashboard</i></button>";
 
@@ -175,10 +175,10 @@
         // })
 
 
-         $('#addConstraints').on('click', function () {
-             ConP.addPanelCon();
-             // ConP.addConstrainSelector();  
-         })
+        $('#addConstraints').on('click', function () {
+            ConP.addPanelCon();
+            // ConP.addConstrainSelector();  
+        })
 
 
         $('#correlViewC').on('click', function () {
@@ -207,7 +207,7 @@
 
             var objSend = {
                 'train': Main.trainData,
-                'test' : Main.testData,
+                'test': Main.testData,
                 'targetCol': Main.targetName,
             }
             socket.emit("get_good_model", objSend);
@@ -223,6 +223,26 @@
                 BarM.modelData[0]['predictions']['trainConfMatrix'] = confMatrixTrain;
                 BarM.modelData[0]['predictions']['testConfMatrix'] = confMatrixTest;
                 console.log('confMatrix gotten ', confMatrixTrain);
+
+
+                // comppute data ids for each label combo
+                // train conf matr
+                var dataObj = {};
+                for (var i = 0; i < confMatrixTrain.length; i++) {
+                    var row = confMatrixTrain[i];
+                    for (var j = 0; j < row.length; j++) {
+                        var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j])
+                        var obj = {
+                            'data_idList': idList,
+                            'num_pred': row[j]
+                        }
+                        dataObj[i + '_' + j] = obj;
+                    }
+                }
+                BarM.modelData[0]['predictions']['confMatTrain_ids'] = dataObj;
+
+
+
                 ConfM.makeConfMatrix(confMatrixTrain, 'train');
                 ConfM.makeConfMatrix(confMatrixTest, 'test');
             })
@@ -420,8 +440,8 @@
     DataTable.addExtraItemsTables = function (containerId = "", data) {
         // return
         console.log('extra item adding ', containerId, DataTable.addedExtra)
-        if(DataTable.addedExtra == 0) containerId = "tableContent"
-        else  containerId = "tableContentTest";
+        if (DataTable.addedExtra == 0) containerId = "tableContent"
+        else containerId = "tableContentTest";
 
         var table = d3.select('#dataViewAppTable_' + containerId)
         // var titles = d3.keys(data[0]);
@@ -429,7 +449,7 @@
         // console.log(' data head is ', titles)
         table.selectAll('td')
             .attr('width', '125px')
-        $('#'+containerId).css('display', 'block')
+        $('#' + containerId).css('display', 'block')
 
 
 
@@ -440,7 +460,7 @@
         // table.selectAll('#'+containerId)
         table.select('tbody')
             .insert("tr", ":first-child")
-            .attr('id', 'filter_tr_'+containerId)
+            .attr('id', 'filter_tr_' + containerId)
             .attr('height', '100px')
             .data([data[0]])
             .selectAll("td")
@@ -469,7 +489,7 @@
                 return 'td_' + d.value + ' td_' + d.name + ' td_' + d.name + '_' + d.value;
             })
             .style('background', function (d) {
-                if(DataTable.addedExtra == 1) dataGo = Main.testData;
+                if (DataTable.addedExtra == 1) dataGo = Main.testData;
                 else dataGo = Main.trainData;
                 console.log(' found ', d.name)
                 DataTable.makeFilterVisTable(d.name, $(this), dataGo)
@@ -477,42 +497,42 @@
             })
 
 
-           table.selectAll('tr')
-               .insert("td", ":first-child")
-               .attr('id', 'critical_')
-               // .style('background', 'white')
-               .style('display', function (d, i) {
-                   if (i != 0) return 'flex'
-               })
-               .style('flex-direction', 'row')
-               .style('width', '150px')
-               .html(function (d, i) {
-                   // console.log(' d and i is ', d, i)
-                   if (i < 2) {
-                       var col = $(this).siblings().attr('background');
-                       if (i == 0) col = "#333"
-                       if (i == 1) col = ""
-                       $(this).css('background', col);
-                       return ""
-                   } else {
-                       var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_" + d.id + "'><label>";
-                       htmlStr += "<input type='checkbox' id = 'check_critical_" + d.id + "'><span class='lever'></span></label></div>"
-                       htmlStr += "<label><input type='checkbox' class='filled-in check_discard' id = 'check_discard_" + d.id + "'/><span></span></label>"
-                       return htmlStr;
-                   }
-               })
-     
+        table.selectAll('tr')
+            .insert("td", ":first-child")
+            .attr('id', 'critical_')
+            // .style('background', 'white')
+            .style('display', function (d, i) {
+                if (i != 0) return 'flex'
+            })
+            .style('flex-direction', 'row')
+            .style('width', '150px')
+            .html(function (d, i) {
+                // console.log(' d and i is ', d, i)
+                if (i < 2) {
+                    var col = $(this).siblings().attr('background');
+                    if (i == 0) col = "#333"
+                    if (i == 1) col = ""
+                    $(this).css('background', col);
+                    return ""
+                } else {
+                    var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_" + d.id + "'><label>";
+                    htmlStr += "<input type='checkbox' id = 'check_critical_" + d.id + "'><span class='lever'></span></label></div>"
+                    htmlStr += "<label><input type='checkbox' class='filled-in check_discard' id = 'check_discard_" + d.id + "'/><span></span></label>"
+                    return htmlStr;
+                }
+            })
+
 
 
 
 
         //toggle switches input controls-----------------------------------------------------------------------------------------
         $(".switch_critical").on('input', function (e) {
-            if(DataTable.criticalSwitch) {
+            if (DataTable.criticalSwitch) {
                 return
-            }            
+            }
             DataTable.criticalSwitch = true;
-            setTimeout(function(){
+            setTimeout(function () {
                 DataTable.criticalSwitch = false;
             }, 500)
 
@@ -534,32 +554,32 @@
             } catch (e) {
                 ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [idNum]
             }
-                    setTimeout(function(){
-                    $(".btn_"+stri).trigger("click");
-                    }, 1000)
+            setTimeout(function () {
+                $(".btn_" + stri).trigger("click");
+            }, 1000)
 
 
             // if(typeof ConsInt.activeConstraints[stri] != 'undefined'){
-            try{
-                    var item = ConsInt.activeConstraints[stri]
-                    // $(".btn_"+stri).trigger("click");
-                     var x = document.getElementsByClassName("btn_"+stri);
-                     var id = $(".btn_"+stri).attr('id')
-                     var elem = document.getElementById(id);
-                     // elem.click();
-                     var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
-                     if(!DataTable.criticalClicked){
-                        elem.click()
-                        DataTable.criticalClicked = true;
-                     }
-                     if(arr.length==0 && DataTable.criticalClicked){
-                        elem.click();
-                        DataTable.criticalClicked = false;
-                     }
+            try {
+                var item = ConsInt.activeConstraints[stri]
+                // $(".btn_"+stri).trigger("click");
+                var x = document.getElementsByClassName("btn_" + stri);
+                var id = $(".btn_" + stri).attr('id')
+                var elem = document.getElementById(id);
+                // elem.click();
+                var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
+                if (!DataTable.criticalClicked) {
+                    elem.click()
+                    DataTable.criticalClicked = true;
+                }
+                if (arr.length == 0 && DataTable.criticalClicked) {
+                    elem.click();
+                    DataTable.criticalClicked = false;
+                }
 
-                    console.log('clicked button cons ', ConsInt.activeConstraints[stri], item,id)
-            }catch(e){
-                    console.log('error in clicking button ', e, ConsInt.activeConstraints, stri)
+                console.log('clicked button cons ', ConsInt.activeConstraints[stri], item, id)
+            } catch (e) {
+                console.log('error in clicking button ', e, ConsInt.activeConstraints, stri)
 
             }
         })
@@ -589,8 +609,8 @@
 
 
         // add filter data button
-        var sel = $("#filter_tr_"+containerId).find('td').first();
-        var htmlStr = "<button id='toggleFilterTableBtn_"+containerId+"' class = 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' > "
+        var sel = $("#filter_tr_" + containerId).find('td').first();
+        var htmlStr = "<button id='toggleFilterTableBtn_" + containerId + "' class = 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' > "
         htmlStr += "<i class='material-icons'>filter_tilt_shift</i></button>";
         sel.append(htmlStr);
 
@@ -988,14 +1008,14 @@
 
         DataTable.dragFunction()
         if (DataTable.extraContent == false) {
-            try{
+            try {
                 DataTable.addExtraItemsTables(containerId, data);
                 DataTable.extraContent = true;
                 DataTable.addedExtra += 1
-            }catch(e){
+            } catch (e) {
 
             }
-            
+
         }
 
 
