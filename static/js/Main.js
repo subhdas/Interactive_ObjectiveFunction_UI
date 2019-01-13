@@ -187,6 +187,23 @@
 
     }
 
+    Main.makeTablePanelsAccord = function () {
+        setTimeout(() => {
+            $("#trainContent").accordion({
+                collapsible: true,
+                heightStyle: "content",
+                active: false,
+            });
+
+            $("#testContent").accordion({
+                collapsible: true,
+                heightStyle: "content",
+                active: false,
+            });
+        }, 100);
+
+    }
+
     /*
     ideally should only run once, when the system loads
     */
@@ -203,6 +220,8 @@
         BarM.makeStackedModelBars();
 
         ConsInt.getActiveConstraints();
+
+        // Main.makeTablePanelsAccord();
     }
 
     Main.addLabels = function (dataIn = Main.trainData) {

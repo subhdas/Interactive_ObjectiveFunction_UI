@@ -110,66 +110,33 @@ body {
 }
 
 
-#sideRightPanel {
+.wrapAllTables{
     display: flex;
     flex-direction: column;
-    /*    float: left;*/
-    width: 45%;
-    /* min-width: 300px; */
-    height: 95%;
-    /*93%*/
-    /* background-color: green; */
-    margin: 5px;
-    /* border-radius: 5px; */
-    border-left: 1px dashed black;
-    overflow-y: auto;
-
-    /*min-width: 300px;*/
-    /*    margin: 2px;*/
-}
-
-#sideRightContentPanel {
-    display: block;
-    /* flex-direction: column; */
     width: 100%;
-    height: 100%;
-    padding: 5px;
-    overflow-y: auto;
+    height: 50%;
+    margin: 10px;
+
 }
 
-#viewPanel {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    height: 95%;
-    /*90%; 2000px*/
-    float: right;
-    /* background-color: pink; */
-    color: #555;
-    font-size: 0.8em;
-    /* border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray; */
-    /* border: 1px solid lightgray; */
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 5px;
-    /* margin: 5px;
-    border-radius: 5px; */
-    /* cursor: pointer; */
-}
 
+.headerTables {
+    font-size: 1.25em;
+    /* padding : 5px; */
+    margin: 10px;
+}
 
 .allTableClass {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 50%;
+    height: 100%;
     /*90%; 2000px*/
     /* float: right; */
     /* background-color: pink; */
     color: #555;
     font-size: 0.8em;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     /* border-left: 1px solid lightgray;
     border-right: 1px solid lightgray; */
     /* border: 1px solid lightgray; */
@@ -207,7 +174,7 @@ body {
     flex-direction: column;
     width: 35%;
     height: 100%;
-    background-color: lightgray;
+    /* background-color: lightgray; */
     font-size: 0.8em;
     margin-top: 10px;
     overflow-y: hidden;
@@ -217,7 +184,7 @@ body {
 
 #tablePanelTest {
     height: 100%;
-    border: 2px solid gray;
+    /* border: 2px solid gray; */
 }
 
 #tableContent,

@@ -74,8 +74,11 @@
       <div id="modelExplorePanel"></div>
     </div>
   </div>
+
   <div id="viewBar">
-    <!-- <div id="viewPanel"> -->
+    <div id="trainContent" class = 'wrapAllTables'>
+    <h6 class = 'headerTables' >Train-Data
+    </h6>
     <div id="allTables" class='allTableClass'>
       <div id="tablePanel" class="train_table tableGeneral">
         <div id="tableSelectors"></div>
@@ -84,9 +87,12 @@
       </div>
       <div id="confMatTrain" class='confMatPanel'>
       </div>
-
     </div> <!-- all table finishes here -->
+  </div>
 
+    <div id="testContent" class = 'wrapAllTables'>
+    <h6 class = 'headerTables'>Test-Data
+    </h6>
     <div id="allTablesTest" class='allTableClass'>
       <div id="tablePanelTest" class="test_table tableGeneral">
         <div id="tableSelectors"></div>
@@ -95,11 +101,11 @@
       </div>
       <div id="confMatTest" class='confMatPanel'>
       </div>
-
     </div> <!-- all table finishes here -->
-    <!-- </div> view panel finishes here -->
+    </div>
 
   </div> <!-- viewBar finishes here-->
+
   <!--scripts-->
   <script src="static/js/Main.js"></script>
   <script src="static/js/Utilities.js"></script>
