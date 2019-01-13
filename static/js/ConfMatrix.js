@@ -2,13 +2,8 @@
 
 ConfM = {};
 
-/*
- * renders a confusion matrix to a given container 
- *
- */
-
-
- 
+ConfM.cellClickedTrain = false;
+ConfM.cellClickedTest = false;
 
 
  ConfM.getMaxMinConfMat = function(data){
@@ -40,7 +35,7 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 
 
 	
-	var margin = {top: 100, right: 100, bottom: 100, left: 100},
+	var margin = {top: 20, right: 20, bottom: 100, left: 100},
 	    width = 400,
 	    height = 400,
 	    data = dataIn,
@@ -115,7 +110,13 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 	    .attr("transform", function(d, i) { return "translate(" + x(i) + ", 0)"; });
 
 	cell.append('rect')  
-		.attr('class', type+'_conf_rect')  
+		.attr('class', function(d,i){
+			var id = $(this).parents();
+			var idNum = $(id[1]).attr('id')
+			idNum = Util.getNumberFromText(idNum);
+			var added = type+'_cell_'+idNum+'_'+i;
+			return type+'_conf_rect ' + added;
+		})  
 		.attr('id', function(d,i){
 			// console.log(' giving id names ', d,i)
 			return type+'_conf_rect_id_'+i;
@@ -138,7 +139,7 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 			var id = $(this).parents();
 			var idNum = $(id[1]).attr('id')
 			idNum = Util.getNumberFromText(idNum)
-			console.log(' getting the parent ', idNum, i, type)
+			// console.log(' getting the parent ', idNum, i, type)
 			// var idList = DataTable.findLabelAcc(labelsData[i], labelsData[idNum])
 
 
@@ -163,12 +164,37 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 			$(this).css('stroke-width', ConfM.cellStrokeWidth);
 
 			if(type == 'train'){
-				// $('.trTable').show();
 				$("#dataViewAppTable_tableContent").find('tr').show();
 			}else{
 				$("#dataViewAppTable_tableContentTest").find('tr').show();
-
-
+			}
+		})
+		.on('click', function(d,i){
+			var id = $(this).parents();
+			var idNum = $(id[1]).attr('id')
+			idNum = Util.getNumberFromText(idNum)
+			if(type == 'train' && ConfM.cellClickedTrain == false){
+				ConfM.cellClickedTrainId = idNum+'_'+i;
+				ConfM.cellClickedTrain = true;
+				ConfM.cellColorTrain = $(this).css('fill')
+				$(this).css('fill', Main.colors.HIGHLIGHT2);
+			} else if (type == 'train' && ConfM.cellClickedTrain == true){
+				if(ConfM.cellClickedTrainId == idNum+'_'+i){
+					ConfM.cellClickedTrain = false;
+					$(this).css('fill', ConfM.cellColorTrain)
+				}else{
+					// $('#' + type + '_grp_row_Conf_id_' + idNum)
+					// .find('#' + type + '_conf_rect_id_' + i).css("fill", ConfM.cellColorTrain);
+					var selector = "." + type + "_cell_" + ConfM.cellClickedTrainId;
+					$(selector).css("fill", ConfM.cellColorTrain);
+					console.log(' selector prev ', selector, idNum, i, ConfM.cellColorTrain)
+					
+					ConfM.cellClickedTrainId = idNum + '_' + i;
+					ConfM.cellClickedTrain = true;
+					ConfM.cellColorTrain = $(this).css('fill')
+					$(this).css('fill', Main.colors.HIGHLIGHT2);
+				}
+				
 			}
 		})
 
