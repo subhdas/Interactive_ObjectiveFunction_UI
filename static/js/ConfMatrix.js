@@ -24,12 +24,19 @@ ConfM = {};
  	return [minVal, mxVal]
  }
 ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
-	if(containerId == ""){
-		containerId = "sideRightContentPanel"
+	if(containerId == "" && type == 'train'){
+		containerId = "confMatTrain"
 	}
-	if(type == 'train'){
-		$("#"+containerId).empty();
+
+	if (containerId == "" && type == 'test') {
+		containerId = "confMatTest"
 	}
+
+	$("#" + containerId).empty();
+
+	// if(type == 'train'){
+	// 	$("#"+containerId).empty();
+	// }
 
 
 	
