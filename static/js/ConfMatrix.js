@@ -193,6 +193,10 @@
 					ConfM.cellClickedTrainId = idNum + '_' + i;
 					ConfM.cellClickedTrain = true;
 					ConfM.cellColorTrain = $(this).css('fill')
+					$("#dataViewAppTable_tableContent").find('tr').show();
+					var idList = BarM.modelData[0]['predictions']
+						['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
+					DataTable.hideRowsById(idList, 'train');
 					$(this).css('fill', Main.colors.HIGHLIGHT2);
 				} else if (type == 'train' && ConfM.cellClickedTrain == true) {
 					if (ConfM.cellClickedTrainId == idNum + '_' + i) {
@@ -203,12 +207,16 @@
 						// .find('#' + type + '_conf_rect_id_' + i).css("fill", ConfM.cellColorTrain);
 						var selector = "." + type + "_cell_" + ConfM.cellClickedTrainId;
 						$(selector).css("fill", ConfM.cellColorTrain);
-						console.log(' selector prev ', selector, idNum, i, ConfM.cellColorTrain)
+						// console.log(' selector prev ', selector, idNum, i, ConfM.cellColorTrain)
 
 						ConfM.cellClickedTrainId = idNum + '_' + i;
 						ConfM.cellClickedTrain = true;
 						ConfM.cellColorTrain = $(this).css('fill')
 						$(this).css('fill', Main.colors.HIGHLIGHT2);
+						$("#dataViewAppTable_tableContent").find('tr').show();
+						var idList = BarM.modelData[0]['predictions']
+							['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
+						DataTable.hideRowsById(idList, 'train');
 					}
 
 				}
