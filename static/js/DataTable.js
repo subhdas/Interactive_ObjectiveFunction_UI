@@ -22,11 +22,21 @@
 
 
 
-    DataTable.findLabelAcc = function (labelTar, labelPre, data = Main.trainData) {
+    DataTable.findLabelAcc = function (labelTar, labelPre, type = 'train') {
+
+        var data = [];
+        if (type == 'train') {
+            data = Main.trainData;
+        } else {
+            data = Main.testData;
+        }
+
         var idList = []
         data.forEach(function (d, i) {
             // console.log('data check ', d , Main.targetName, Main.predictedName)
             var predVal = BarM.modelData[0]['predictions']['trainPred'][d.id];
+            if (type == 'test') predVal = BarM.modelData[0]['predictions']['testPred'][d.id];
+
             if (d[Main.targetName] == labelTar && predVal == labelPre) {
                 idList.push(d.id);
             }
@@ -231,7 +241,7 @@
                 for (var i = 0; i < confMatrixTrain.length; i++) {
                     var row = confMatrixTrain[i];
                     for (var j = 0; j < row.length; j++) {
-                        var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j])
+                        var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'train')
                         var obj = {
                             'data_idList': idList,
                             'num_pred': row[j]
@@ -240,6 +250,22 @@
                     }
                 }
                 BarM.modelData[0]['predictions']['confMatTrain_ids'] = dataObj;
+
+
+                // test conf matr
+                var dataObj = {};
+                for (var i = 0; i < confMatrixTest.length; i++) {
+                    var row = confMatrixTest[i];
+                    for (var j = 0; j < row.length; j++) {
+                        var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'test')
+                        var obj = {
+                            'data_idList': idList,
+                            'num_pred': row[j]
+                        }
+                        dataObj[i + '_' + j] = obj;
+                    }
+                }
+                BarM.modelData[0]['predictions']['confMatTest_ids'] = dataObj;
 
 
 
@@ -619,7 +645,6 @@
             if ($(".filterPanelDiv").length > 0) {
                 DataTable.showFilterPanel();
             } else {
-
                 DataTable.addFilterPanel(100, 200, 500, 200);
             }
 
@@ -630,11 +655,12 @@
 
 
 
-    DataTable.hideRowsById = function(idList){
-
-        Main.trainData.forEach(function(d,i){
-            if(idList.indexOf(d.id) == -1){
-                $('#tr_'+d.id).hide();
+    DataTable.hideRowsById = function (idList, type='train') {
+        var data = Main.trainData;
+        if(type == 'test') data = Main.testData;
+        data.forEach(function (d, i) {
+            if (idList.indexOf(d.id) == -1) {
+                $('#tr_' + d.id).hide();
             }
         })
         // for(var i=0;i<idList.length;i++){
@@ -837,7 +863,7 @@
             .enter()
             .append("tr")
             .attr('class', function (d, i) {
-                return 'trTable ' + containerId+'_trCl_' + i
+                return 'trTable ' + containerId + '_trCl_' + i
             })
             .attr('id', function (d) {
                 // return containerId + '_tr_' + d.id;

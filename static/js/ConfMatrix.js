@@ -131,12 +131,21 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 			var id = $(this).parents();
 			var idNum = $(id[1]).attr('id')
 			idNum = Util.getNumberFromText(idNum)
-			console.log(' getting the parent ', idNum, i)
+			console.log(' getting the parent ', idNum, i, type)
 			// var idList = DataTable.findLabelAcc(labelsData[i], labelsData[idNum])
 
-			var idList = BarM.modelData[0]['predictions']
-			['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
-			DataTable.hideRowsById(idList);
+
+			if(type == 'train'){
+					var idList = BarM.modelData[0]['predictions']
+						['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
+					DataTable.hideRowsById(idList, 'train');
+			}else{
+				//test
+					var idList = BarM.modelData[0]['predictions']
+						['confMatTest_ids'][idNum + '_' + [i]]['data_idList'];
+					DataTable.hideRowsById(idList, 'test');
+			}
+		
 
 			// var idList = DataTable.findLabelAcc(labelsData[idNum] , labelsData[i])
 			console.log(' getting the parent ', labelsData[idNum], labelsData[i], idList)
@@ -146,7 +155,14 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 			$(this).css('stroke', ConfM.cellStroke);
 			$(this).css('stroke-width', ConfM.cellStrokeWidth);
 
-			$('.trTable').show();
+			if(type == 'train'){
+				// $('.trTable').show();
+				$("#dataViewAppTable_tableContent").find('tr').show();
+			}else{
+				$("#dataViewAppTable_tableContentTest").find('tr').show();
+
+
+			}
 		})
 
     cell.append("text")
