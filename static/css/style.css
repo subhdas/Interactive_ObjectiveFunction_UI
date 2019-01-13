@@ -101,7 +101,7 @@ body {
 
 #viewBar{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   /* width: 100%; */
   height: 100%;
   /* margin: 5px; */
@@ -139,7 +139,7 @@ body {
 
 #viewPanel {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 50%;
     height: 95%;
     /*90%; 2000px*/
@@ -159,13 +159,13 @@ body {
 }
 
 
-#allTables {
+.allTableClass {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
-    height: 98%;
+    height: 50%;
     /*90%; 2000px*/
-    float: right;
+    /* float: right; */
     /* background-color: pink; */
     color: #555;
     font-size: 0.8em;
@@ -180,11 +180,12 @@ body {
     border: 1px solid lightgray; */
 }
 
+
 .tableGeneral {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height:65%;
+    height:105%;
     /*90%; 2000px*/
     float: right;
     /* background-color: pink; */
@@ -202,7 +203,7 @@ body {
 }
 
 #tablePanelTest{
-    height: 30%;
+    height: 100%;
     border:2px solid gray;
 }
 

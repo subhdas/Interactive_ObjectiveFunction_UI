@@ -45,7 +45,7 @@
   <script type="text/javascript" src="static/lib/jquery.csv.min.js"></script>
   <script type="text/javascript" src="static/lib/material.min.js"></script>
   <script type="text/javascript" src="static/lib/materialize.min.js"></script>
-    <script type="text/javascript" src="static/lib/nouislider.min.js"></script>
+  <script type="text/javascript" src="static/lib/nouislider.min.js"></script>
 
 
 </head>
@@ -69,41 +69,32 @@
 
   <div id="bottomBar">
     <h3>Trade-Offs</h3>
-    <div id ="bottomContent">
-    <div id = "constrainPanel"></div>
-    <div id = "modelExplorePanel"></div>
-  </div>
+    <div id="bottomContent">
+      <div id="constrainPanel"></div>
+      <div id="modelExplorePanel"></div>
+    </div>
   </div>
   <div id="viewBar">
-    <div id="viewPanel">
-      <div id = "allTables">
-      <div id="tablePanel" class = "train_table tableGeneral">
-        <div id="tableSelectors"></div>
-        <div id="tableContent" class=".ui-droppable tableContent"></div>
-        <div id="scatContent" class=".ui-droppable scatContent"></div>
-      </div>
-
-<div id="tablePanelTest" class="test_table tableGeneral">
-        <div id="tableSelectors"></div>
-        <div id="tableContentTest" class=".ui-droppable tableContentTest"></div>
-        <!-- <div id="scatContentTest" class=".ui-droppable scatContentTest"></div> -->
-      </div>
-    </div>
-</div>
-
-      <div id="consInterPanel">
-
-    </div>
-    <div id="sideRightPanel">
-      <div id="sideRightIconPanel"></div>
-      <div id="sideRightContentPanel">
-        <div id="labelCardPanel">
-          <div id="labelCard"></div>
-
+    <!-- <div id="viewPanel"> -->
+      <div id="allTables" class ='allTableClass'>
+        <div id="tablePanel" class="train_table tableGeneral">
+          <div id="tableSelectors"></div>
+          <div id="tableContent" class=".ui-droppable tableContent"></div>
+          <div id="scatContent" class=".ui-droppable scatContent"></div>
         </div>
-      </div>
-    </div>
-  </div>
+      </div> <!-- all table finishes here -->
+
+      <div id="allTablesTest" class ='allTableClass'>
+
+        <div id="tablePanelTest" class="test_table tableGeneral">
+          <div id="tableSelectors"></div>
+          <div id="tableContentTest" class=".ui-droppable tableContentTest"></div>
+          <!-- <div id="scatContentTest" class=".ui-droppable scatContentTest"></div> -->
+        </div>
+      </div> <!-- all table finishes here -->
+    <!-- </div> view panel finishes here -->
+
+  </div> <!-- viewBar finishes here-->
   <!--scripts-->
   <script src="static/js/Main.js"></script>
   <script src="static/js/Utilities.js"></script>
