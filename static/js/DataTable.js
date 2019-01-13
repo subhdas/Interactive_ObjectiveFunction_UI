@@ -26,7 +26,6 @@
         var idList = []
         data.forEach(function(d,i){
             // console.log('data check ', d , Main.targetName, Main.predictedName)
-
             var predVal  = BarM.modelData[0]['predictions']['trainPred'][d.id];
             if (d[Main.targetName] == labelTar && predVal == labelPre) {
                 idList.push(d.id);

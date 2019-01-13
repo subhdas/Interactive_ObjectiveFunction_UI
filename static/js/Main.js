@@ -25,7 +25,8 @@
 
     Main.tabelViewMode = true;
 
-    Main.labels = ['sports', 'economical', 'utility'];
+    // Main.labels = ['sports', 'economical', 'utility'];
+    Main.labels = ['economical', 'sports', 'utility'];
 
 
 

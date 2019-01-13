@@ -33,7 +33,7 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 	    width = 400,
 	    height = 400,
 	    data = dataIn,
-	    labelsData = Main.labels,
+	    labelsData = Main.labels,//.reverse(),
 	    numrows,
 	    numcols;
 
@@ -128,8 +128,9 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 			var idNum = $(id[1]).attr('id')
 			idNum = Util.getNumberFromText(idNum)
 			console.log(' getting the parent ', idNum, i)
-			var idList = DataTable.findLabelAcc(Main.labels[idNum], Main.labels[i])
-			console.log(' getting the parent ', Main.labels[idNum], Main.labels[i], idList)
+			// var idList = DataTable.findLabelAcc(labelsData[i], labelsData[idNum])
+			var idList = DataTable.findLabelAcc(labelsData[idNum] , labelsData[i])
+			console.log(' getting the parent ', labelsData[idNum], labelsData[i], idList)
 
 		})
 		.on('mouseout', function(d,i){
