@@ -163,14 +163,14 @@
 
 				} else {
 					//test
-					var idList = BarM.modelData[0]['predictions']
-						['confMatTest_ids'][idNum + '_' + [i]]['data_idList'];
-					DataTable.hideRowsById(idList, 'test');
+					if (!ConfM.cellClickedTest) {
+						var idList = BarM.modelData[0]['predictions']
+							['confMatTest_ids'][idNum + '_' + [i]]['data_idList'];
+						DataTable.hideRowsById(idList, 'test');
+					}
 				}
-
-
 				// var idList = DataTable.findLabelAcc(labelsData[idNum] , labelsData[i])
-				console.log(' getting the parent ', labelsData[idNum], labelsData[i], idList)
+				// console.log(' getting the parent ', labelsData[idNum], labelsData[i], idList)
 
 			})
 			.on('mouseout', function (d, i) {
@@ -182,13 +182,16 @@
 						$("#dataViewAppTable_tableContent").find('tr').show();
 					}
 				} else {
-					$("#dataViewAppTable_tableContentTest").find('tr').show();
+					if (!ConfM.cellClickedTest) {
+						$("#dataViewAppTable_tableContentTest").find('tr').show();
+					}
 				}
 			})
 			.on('click', function (d, i) {
 				var id = $(this).parents();
 				var idNum = $(id[1]).attr('id')
 				idNum = Util.getNumberFromText(idNum)
+				// for train matrix
 				if (type == 'train' && ConfM.cellClickedTrain == false) {
 					ConfM.cellClickedTrainId = idNum + '_' + i;
 					ConfM.cellClickedTrain = true;
@@ -219,6 +222,38 @@
 						DataTable.hideRowsById(idList, 'train');
 					}
 
+				}
+
+				//test matrix
+				if (type == 'test' && ConfM.cellClickedTest == false) {
+					ConfM.cellClickedTestId = idNum + '_' + i;
+					ConfM.cellClickedTest = true;
+					ConfM.cellColorTest = $(this).css('fill')
+					$("#dataViewAppTable_tableContentTest").find('tr').show();
+					var idList = BarM.modelData[0]['predictions']
+						['confMatTest_ids'][idNum + '_' + [i]]['data_idList'];
+					DataTable.hideRowsById(idList, 'test');
+					$(this).css('fill', Main.colors.HIGHLIGHT2);
+				} else if (type == 'test' && ConfM.cellClickedTest == true) {
+					if (ConfM.cellClickedTestId == idNum + '_' + i) {
+						ConfM.cellClickedTest = false;
+						$(this).css('fill', ConfM.cellColorTrain)
+					} else {
+						// $('#' + type + '_grp_row_Conf_id_' + idNum)
+						// .find('#' + type + '_conf_rect_id_' + i).css("fill", ConfM.cellColorTrain);
+						var selector = "." + type + "_cell_" + ConfM.cellClickedTestId;
+						$(selector).css("fill", ConfM.cellColorTest);
+						// console.log(' selector prev ', selector, idNum, i, ConfM.cellColorTrain)
+
+						ConfM.cellClickedTestId = idNum + '_' + i;
+						ConfM.cellClickedTest = true;
+						ConfM.cellColorTest = $(this).css('fill')
+						$(this).css('fill', Main.colors.HIGHLIGHT2);
+						$("#dataViewAppTable_tableContentTest").find('tr').show();
+						var idList = BarM.modelData[0]['predictions']
+							['confMatTest_ids'][idNum + '_' + [i]]['data_idList'];
+						DataTable.hideRowsById(idList, 'test');
+					}
 				}
 			})
 
