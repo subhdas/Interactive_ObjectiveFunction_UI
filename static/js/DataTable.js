@@ -629,6 +629,20 @@
     } // end of add extra
 
 
+
+    DataTable.hideRowsById = function(idList){
+
+        Main.trainData.forEach(function(d,i){
+            if(idList.indexOf(d.id) == -1){
+                $('#tr_'+d.id).hide();
+            }
+        })
+        // for(var i=0;i<idList.length;i++){
+        //     $('#tr_'+idList[i]).hide();
+        // }
+    }
+
+
     DataTable.addFilterPanel = function (top, left, w, h) {
         var htmlStr = "<div class = 'filterPanelDiv ui-widget-content'><div class = 'filterPanelHeader'> <p class = 'filterHeadtext'>Filter</p>"
 
@@ -823,9 +837,10 @@
             .enter()
             .append("tr")
             .attr('class', function (d, i) {
-                return 'trTable trCl_' + i
+                return 'trTable ' + containerId+'_trCl_' + i
             })
             .attr('id', function (d) {
+                // return containerId + '_tr_' + d.id;
                 return 'tr_' + d.id;
             })
             .style('background', function (d) {

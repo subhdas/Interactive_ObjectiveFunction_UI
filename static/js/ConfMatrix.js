@@ -7,6 +7,10 @@ ConfM = {};
  *
  */
 
+
+ 
+
+
  ConfM.getMaxMinConfMat = function(data){
 
  	var mxVal = 0;
@@ -132,7 +136,7 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 
 			var idList = BarM.modelData[0]['predictions']
 			['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
-
+			DataTable.hideRowsById(idList);
 
 			// var idList = DataTable.findLabelAcc(labelsData[idNum] , labelsData[i])
 			console.log(' getting the parent ', labelsData[idNum], labelsData[i], idList)
@@ -141,6 +145,8 @@ ConfM.makeConfMatrix = function(dataIn, type = "train", containerId = "") {
 		.on('mouseout', function(d,i){
 			$(this).css('stroke', ConfM.cellStroke);
 			$(this).css('stroke-width', ConfM.cellStrokeWidth);
+
+			$('.trTable').show();
 		})
 
     cell.append("text")
