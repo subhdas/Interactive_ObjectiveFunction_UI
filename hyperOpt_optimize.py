@@ -13,7 +13,7 @@ from sklearn.ensemble import RandomForestClassifier
 import xgboost as xgb
 from hyperopt import hp, tpe, STATUS_OK, Trials
 from hyperopt.fmin import fmin
-from sklearn.metrics import classification_report, f1_score, accuracy_score, confusion_matrix
+from sklearn.metrics import classification_report, f1_score, accuracy_score, confusion_matrix, precision_score
 import json
 
 # for json dumps to work
@@ -95,7 +95,7 @@ def find_goodModel(train,test,targetTrain,targetTest):
     best = fmin(fn=objective,
                 space=space,
                 algo=tpe.suggest,
-                max_evals=5, # change
+                max_evals=3, # change
                 trials=trials)
 
 
@@ -141,6 +141,7 @@ def find_goodModel(train,test,targetTrain,targetTest):
 
     obj = {
     'predictions' : makePredictions(best,train, test,targetTrain, targetTest),
+    'predictionsAll': allmodel_pred_out,
     'params' : best,
     'STATUS' : 'OK'
     }
@@ -159,6 +160,29 @@ def makePredictions(space, train, test, targetTrain, targetTest):
     predTrain = clf.predict(train)
     predTest = clf.predict(test)
 
+
+    # metrics for train
+    precTrain = precision_score(targetTrain, predTrain, average='micro')
+    accTrain = accuracy_score(targetTrain, predTrain,  normalize=True)
+    f1Train = f1_score(targetTrain, predTrain, average='micro')
+
+    trainMetricObj = {
+        'prec' : precTrain,
+        'acc': accTrain,
+        'f1': f1Train,
+    }
+
+    # metrics for test
+    precTest = precision_score(targetTest, predTest, average='micro')
+    accTest = accuracy_score(targetTest, predTest,  normalize=True)
+    f1Test = f1_score(targetTest, predTest, average='micro')
+
+    testMetricObj = {
+        'prec': precTest,
+        'acc': accTest,
+        'f1': f1Test,
+    }
+
     # print "train predictions ", predTrain
     # print "train predictions ", predTest
     predTrain = [str(x) for x in predTrain]
@@ -174,12 +198,17 @@ def makePredictions(space, train, test, targetTrain, targetTest):
         predTestDict[str(id)] = str(predTest[i])
 
 
+    
+
+
     trainConfMatrix = confusion_matrix(targetTrain, predTrain)
     testConfMatrix = confusion_matrix(targetTest, predTest)
     # train_pd = pd.DataFrame(trainConfMatrix).to_json('data.json', orient='split')
     print " found train conf matrix ", trainConfMatrix
     print " +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
     return {
+    'trainMetrics': trainMetricObj,
+    'testMetrics': testMetricObj,
     'trainPred' : predTrainDict,
     'testPred' : predTestDict,
     'trainConfMatrix' : json.dumps(np.array(trainConfMatrix), cls=NumpyEncoder),

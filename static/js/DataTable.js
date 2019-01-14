@@ -234,6 +234,8 @@
                 BarM.modelData[0]['predictions']['testConfMatrix'] = confMatrixTest;
                 console.log('confMatrix gotten ', confMatrixTrain);
 
+                BarM.allModelData = dataObj['predictionsAll']
+
 
                 // comppute data ids for each label combo
                 // train conf matr
