@@ -67,7 +67,7 @@ body {
     display: flex;
     flex-direction: row;
     width: 74%;
-    height: 70%;
+    height: 45%%;
     color: #555;
     font-size: 0.8em;
     overflow-y: auto;
@@ -76,6 +76,23 @@ body {
     border-right: 1px solid lightgray;
     overflow-x: auto;
     overflow-y: hidden;
+    /* margin: 5px;
+  border-radius: 5px; */
+    /* cursor: pointer; */
+
+}
+
+#featureEnggPanel {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 100%;
+    color: #555;
+    font-size: 0.8em;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px;
+    background: lightgray;
     /* margin: 5px;
   border-radius: 5px; */
     /* cursor: pointer; */

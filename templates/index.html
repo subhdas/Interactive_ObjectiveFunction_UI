@@ -71,37 +71,38 @@
     <h3>Trade-Offs</h3>
     <div id="bottomContent">
       <div id="constrainPanel"></div>
+      <div id="featureEnggPanel"></div>
       <div id="modelExplorePanel"></div>
     </div>
   </div>
 
   <div id="viewBar">
-    <div id="trainContent" class = 'wrapAllTables'>
-    <h6 class = 'headerTables' >Train-Data
-    </h6>
-    <div id="allTables" class='allTableClass'>
-      <div id="tablePanel" class="train_table tableGeneral">
-        <div id="tableSelectors"></div>
-        <div id="tableContent" class=".ui-droppable tableContent"></div>
-        <div id="scatContent" class=".ui-droppable scatContent"></div>
-      </div>
-      <div id="confMatTrain" class='confMatPanel'>
-      </div>
-    </div> <!-- all table finishes here -->
-  </div>
+    <div id="trainContent" class='wrapAllTables'>
+      <h6 class='headerTables'>Train-Data
+      </h6>
+      <div id="allTables" class='allTableClass'>
+        <div id="tablePanel" class="train_table tableGeneral">
+          <div id="tableSelectors"></div>
+          <div id="tableContent" class=".ui-droppable tableContent"></div>
+          <div id="scatContent" class=".ui-droppable scatContent"></div>
+        </div>
+        <div id="confMatTrain" class='confMatPanel'>
+        </div>
+      </div> <!-- all table finishes here -->
+    </div>
 
-    <div id="testContent" class = 'wrapAllTables'>
-    <h6 class = 'headerTables'>Test-Data
-    </h6>
-    <div id="allTablesTest" class='allTableClass'>
-      <div id="tablePanelTest" class="test_table tableGeneral">
-        <div id="tableSelectors"></div>
-        <div id="tableContentTest" class=".ui-droppable tableContentTest"></div>
-        <!-- <div id="scatContentTest" class=".ui-droppable scatContentTest"></div> -->
-      </div>
-      <div id="confMatTest" class='confMatPanel'>
-      </div>
-    </div> <!-- all table finishes here -->
+    <div id="testContent" class='wrapAllTables'>
+      <h6 class='headerTables'>Test-Data
+      </h6>
+      <div id="allTablesTest" class='allTableClass'>
+        <div id="tablePanelTest" class="test_table tableGeneral">
+          <div id="tableSelectors"></div>
+          <div id="tableContentTest" class=".ui-droppable tableContentTest"></div>
+          <!-- <div id="scatContentTest" class=".ui-droppable scatContentTest"></div> -->
+        </div>
+        <div id="confMatTest" class='confMatPanel'>
+        </div>
+      </div> <!-- all table finishes here -->
     </div>
 
   </div> <!-- viewBar finishes here-->
@@ -119,6 +120,8 @@
   <script src="static/js/ScatterMatrix.js"></script>
   <script src="static/js/DataTable.js"></script>
   <script src="static/js/LabelCards.js"></script>
+  <script src="static/js/RadarChartLib.js"></script>
+  <script src="static/js/StarPlotModels.js"></script>
   <script src="static/js/Menu.js"></script>
   <script type="text/javascript">
     Main.init();

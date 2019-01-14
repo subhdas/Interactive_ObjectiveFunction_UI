@@ -217,7 +217,8 @@
         Scat.hideScatterView();
 
         Cons.makeConsDivs();
-        BarM.makeStackedModelBars();
+        // BarM.makeStackedModelBars();
+        StarM.makeStarPlot();
 
         ConsInt.getActiveConstraints();
 
