@@ -73,7 +73,7 @@ def find_goodModel(train,test,targetTrain,targetTest):
         clf.fit(train, targetTrain)
         cross_mean_score = cross_val_score( estimator=clf, X=train, y=targetTrain, scoring='precision_macro', cv=3, n_jobs=-1).mean()
 
-        result = {'loss':cross_mean_score, 'status': STATUS_OK }
+        result = {'loss': -1*cross_mean_score, 'status': STATUS_OK }
         print " result is ", result
         return result
 
@@ -81,9 +81,12 @@ def find_goodModel(train,test,targetTrain,targetTest):
     bootStrapArr = [True,False]
     criterionArr = ["gini", "entropy"]
     space ={
-        'max_depth': hp.choice('max_depth', np.arange(10, 30, dtype=int)),
-        'min_samples_split': hp.choice('min_samples_split', np.arange(8, 15, dtype=int)),
-        'min_samples_leaf': hp.choice('min_samples_leaf', np.arange(5, 15, dtype=int)),
+        # 'max_depth': hp.choice('max_depth', np.arange(10, 30, dtype=int)),
+        'max_depth': hp.choice('max_depth', range(5, 30)),
+        # 'min_samples_split': hp.choice('min_samples_split', np.arange(8, 15, dtype=int)),
+        'min_samples_split': hp.choice('min_samples_split', range(8, 15)),
+        # 'min_samples_leaf': hp.choice('min_samples_leaf', np.arange(5, 15, dtype=int)),
+        'min_samples_leaf': hp.choice('min_samples_leaf', range(5, 15)),
         'bootstrap':hp.choice('bootstrap', bootStrapArr),
         'criterion':hp.choice('criterion', criterionArr)
     }
@@ -92,12 +95,47 @@ def find_goodModel(train,test,targetTrain,targetTest):
     best = fmin(fn=objective,
                 space=space,
                 algo=tpe.suggest,
-                max_evals=3, # change
+                max_evals=5, # change
                 trials=trials)
 
 
+    print " trials are ", trials
+    mod_results = {}
 
-    print(best)
+    ind = 0
+    for trial in trials.trials:
+        res = trial['result']
+        par_space = trial['misc']['vals']
+        print " we get trial as : ", trial
+        print " we get trial as : ", res
+        print " we get trial as : ", par_space
+        print " ######################## "
+
+        for item in res:
+            res[item] = -1*res[item]
+        for item in par_space:
+            par_space[item] = par_space[item][0]
+            if(item == 'min_samples_split' or item == 'max_depth' or item == 'min_samples_leaf'):
+                if(par_space[item] < 2 ) : par_space[item] = int(par_space[item]) + 2
+        mod_results[ind] = { 'res' : res, 'space' : par_space}
+        print " we get trial as  after : ", par_space
+
+        ind += 1
+
+    allmodel_pred_out = {}
+    for item in mod_results:
+        space = mod_results[item]['space']
+        pred_out = {}
+        pred_out = makePredictions(space, train, test, targetTrain, targetTest)
+        allmodel_pred_out[item] = pred_out
+    
+    print " mod results obj ", mod_results
+    print " mod results obj ", allmodel_pred_out
+
+
+
+
+    print(" best output is ", best)
     best['bootstrap'] = bootStrapArr[best['bootstrap']]
     best['criterion'] = criterionArr[best['criterion']]
 
@@ -114,14 +152,15 @@ def makePredictions(space, train, test, targetTrain, targetTest):
                                 min_samples_split = space['min_samples_split'],
                                 min_samples_leaf = space['min_samples_leaf'],
                                 bootstrap = space['bootstrap'],
-                                criterion = space['criterion']
+                                # criterion = space['criterion']
                                 )
+    print " fitting before "
     clf.fit(train, targetTrain)
     predTrain = clf.predict(train)
     predTest = clf.predict(test)
 
-    print "train predictions ", predTrain
-    print "train predictions ", predTest
+    # print "train predictions ", predTrain
+    # print "train predictions ", predTest
     predTrain = [str(x) for x in predTrain]
     predTest = [str(x) for x in predTest]
 
@@ -139,7 +178,7 @@ def makePredictions(space, train, test, targetTrain, targetTest):
     testConfMatrix = confusion_matrix(targetTest, predTest)
     # train_pd = pd.DataFrame(trainConfMatrix).to_json('data.json', orient='split')
     print " found train conf matrix ", trainConfMatrix
-
+    print " +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
     return {
     'trainPred' : predTrainDict,
     'testPred' : predTestDict,
