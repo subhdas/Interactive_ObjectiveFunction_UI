@@ -1,5 +1,6 @@
 (function () {
-     RadarChart = {
+    //http://bl.ocks.org/tpreusse/2bc99d74a461b8c0acb1
+    RadarChart = {
         defaultConfig: {
             containerClass: 'radar-chart',
             w: 600,

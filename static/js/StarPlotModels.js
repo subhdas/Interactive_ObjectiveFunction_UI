@@ -111,6 +111,31 @@
         return randomDataset();
     }
 
+
+
+    StarM.addIconsStarPlot = function (containerId = "") {
+        if (containerId == "") containerId = "starPlotHeaderId";
+        $("#" + containerId).empty();
+
+        var htmlStr = "<div class = 'starPlotHeadTitle' > Model Output Panel </div>";
+        htmlStr += "<div class = 'starPlotHeadButton' ></div>";
+
+        $("#" + containerId).append(htmlStr);
+
+        $(".starPlotHeadTitle").css('width', '100%')
+        $(".starPlotHeadTitle").css('font-size', '1.5em')
+        htmlStr = "<button id='someBtnId' class='someBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
+
+        $(".starPlotHeadButton").append(htmlStr);
+
+        //click reset data button
+        $("#someBtnId").on('click', function () {
+
+        })
+
+    }
+
     StarM.makeStarPlot = function (containerId = "") {
         console.log(' making star plot for models ')
         RadarChart.defaultConfig.color = function () {};
@@ -120,6 +145,28 @@
 
         if (containerId == "") containerId = "modelExplorePanel"
         $("#" + containerId).empty();
+
+
+        //make icon panel 
+        var htmlStr = "<div class = 'starPlotHeader' id = 'starPlotHeaderId' ></div>";
+        htmlStr += "<div class = 'starPlotContent' id = 'starPlotContentId' ></div>";
+        $("#" + containerId).append(htmlStr);
+
+        // css styling
+        $('.starPlotHeader').css('display', 'flex');
+        $('.starPlotHeader').css('padding', '3px');
+        // $('.featureEngHeader').css('margin', '5px');
+        $('.starPlotHeader').css('width', '100%');
+        $('.starPlotHeader').css('height', '35px');
+        $('.starPlotHeader').css('border-bottom', '1px dotted lightgray');
+
+        $('.starPlotContent').css('display', 'flex');
+        $('.starPlotContent').css('padding', '4px');
+        $('.starPlotContent').css('margin', '5px');
+        $('.starPlotContent').css('width', '100%');
+        $('.starPlotContent').css('height', '100%');
+
+        StarM.addIconsStarPlot('starPlotHeaderId');
 
 
         // make the svg
@@ -164,10 +211,10 @@
         StarM.stylingStarPlot();
     }
 
-    StarM.stylingStarPlot = function(){
+    StarM.stylingStarPlot = function () {
 
         d3.selectAll('.poly_model')
-            .each(function(d,i){
+            .each(function (d, i) {
                 console.log(' styling the poly ', d, i)
                 $(this).css('fill', StarM.colorFill[i]);
                 $(this).css('stroke-width', '2');

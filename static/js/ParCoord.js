@@ -8,11 +8,17 @@
         if (containerId == "") containerId = "featureEngHeaderId";
         $("#" + containerId).empty();
 
+    var htmlStr = "<div class = 'featureHeadTitle' > Feature Panel </div>";
+    htmlStr += "<div class = 'featureHeadButton' ></div>";
 
-    var htmlStr = "<button id='resetDataBtnId' class='resetDataBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+    $("#" + containerId).append(htmlStr);
+
+    $(".featureHeadTitle").css('width', '100%')
+    $(".featureHeadTitle").css('font-size', '1.5em')
+    htmlStr = "<button id='resetDataBtnId' class='resetDataBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
     htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
 
-    $("#"+containerId).append(htmlStr);
+    $(".featureHeadButton").append(htmlStr);
 
     //click reset data button
     $("#resetDataBtnId").on('click', function(){
@@ -32,7 +38,7 @@
     ParC.featureEditorCreate = function (containerId = "") {
         if (containerId == "") containerId = "featureEnggPanel";
         $("#" + containerId).empty();
-         $("#" + containerId).css('height', Main.contentHeightTopBar + 'px');
+        $("#" + containerId).css('height', Main.contentHeightTopBar + 'px');
          //  $("#" + containerId).css('width', '1200px');
 
         var htmlStr = "<div class = 'featureEngHeader' id = 'featureEngHeaderId' ></div>";
@@ -41,16 +47,17 @@
 
         // css styling
         $('.featureEngHeader').css('display', 'flex');
-        $('.featureEngHeader').css('padding', '4px');
-        $('.featureEngHeader').css('margin', '5px');
+        $('.featureEngHeader').css('padding', '3px');
+        // $('.featureEngHeader').css('margin', '5px');
         $('.featureEngHeader').css('width', '100%');
-        $('.featureEngHeader').css('height', '20px');
+        $('.featureEngHeader').css('height', '35px');
+        $('.featureEngHeader').css('border-bottom', '1px dotted lightgray');
 
         $('.featureEngContent').css('display', 'flex');
         $('.featureEngContent').css('padding', '4px');
         $('.featureEngContent').css('margin', '5px');
         $('.featureEngContent').css('width', '100%');
-           $('.featureEngContent').css('height', '100%');
+        $('.featureEngContent').css('height', '100%');
 
         ParC.addIconsFeatureEditor('featureEngHeaderId');
 
