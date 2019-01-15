@@ -1,16 +1,59 @@
-(function() {
+(function () {
 
     ParC = {}
     ParC.filteredData = [];
 
 
-    ParC.makeParallelCoordChart = function(containerId = "", data) {
+    ParC.addIconsFeatureEditor = function (containerId = "") {
+        if (containerId == "") containerId = "featureEngHeaderId";
+        $("#" + containerId).empty();
+
+    }
+
+
+    ParC.featureEditorCreate = function (containerId = "") {
+        if (containerId == "") containerId = "featureEnggPanel";
+        $("#" + containerId).empty();
+         $("#" + containerId).css('height', Main.contentHeightTopBar + 'px');
+         //  $("#" + containerId).css('width', '1200px');
+
+        var htmlStr = "<div class = 'featureEngHeader' id = 'featureEngHeaderId' ></div>";
+        htmlStr += "<div class = 'featureEngContent' id = 'featureEngContentId' ></div>";
+        $("#" + containerId).append(htmlStr);
+
+        // css styling
+        $('.featureEngHeader').css('display', 'flex');
+        $('.featureEngHeader').css('padding', '4px');
+        $('.featureEngHeader').css('margin', '5px');
+        $('.featureEngHeader').css('width', '100%');
+        $('.featureEngHeader').css('height', '20px');
+
+        $('.featureEngContent').css('display', 'flex');
+        $('.featureEngContent').css('padding', '4px');
+        $('.featureEngContent').css('margin', '5px');
+        $('.featureEngContent').css('width', '100%');
+           $('.featureEngContent').css('height', '100%');
+
+        ParC.addIconsFeatureEditor('featureEngContentId');
+
+
+       
+        var arr = ['id'];
+        arr.push.apply(arr, Object.keys(Main.numericalAttributes));
+
+
+        var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
+        ParC.makeParallelCoordChart('featureEngContentId', dataNumeric);
+    }
+
+
+    ParC.makeParallelCoordChart = function (containerId = "", data) {
 
         $('#' + containerId).empty();
         var w = $("#" + containerId).css('width');
-        w = parseFloat(w);
+        w = parseFloat(w)*0.90;
         var h = $("#" + containerId).css('height');
-        h = parseFloat(h);
+        h = parseFloat(h)*0.90;
 
         // console.log('width is ', w, h)
 
@@ -40,9 +83,9 @@
 
 
         // Extract the list of dimensions and create a scale for each.
-        x.domain(dimensions = d3.keys(data[0]).filter(function(d) {
+        x.domain(dimensions = d3.keys(data[0]).filter(function (d) {
             return d != "name" && (y[d] = d3.scale.linear()
-                .domain(d3.extent(data, function(p) {
+                .domain(d3.extent(data, function (p) {
                     return +p[d];
                 }))
                 .range([height, 0]));
@@ -69,31 +112,31 @@
             .data(dimensions)
             .enter().append("g")
             .attr("class", "dimension")
-            .attr("transform", function(d) {
+            .attr("transform", function (d) {
                 return "translate(" + x(d) + ")";
             })
             .call(d3.behavior.drag()
-                .origin(function(d) {
+                .origin(function (d) {
                     return {
                         x: x(d)
                     };
                 })
-                .on("dragstart", function(d) {
+                .on("dragstart", function (d) {
                     dragging[d] = x(d);
                     background.attr("visibility", "hidden");
                 })
-                .on("drag", function(d) {
+                .on("drag", function (d) {
                     dragging[d] = Math.min(width, Math.max(0, d3.event.x));
                     foreground.attr("d", path);
-                    dimensions.sort(function(a, b) {
+                    dimensions.sort(function (a, b) {
                         return position(a) - position(b);
                     });
                     x.domain(dimensions);
-                    g.attr("transform", function(d) {
+                    g.attr("transform", function (d) {
                         return "translate(" + position(d) + ")";
                     })
                 })
-                .on("dragend", function(d) {
+                .on("dragend", function (d) {
                     delete dragging[d];
                     transition(d3.select(this)).attr("transform", "translate(" + x(d) + ")");
                     transition(foreground).attr("d", path);
@@ -110,20 +153,20 @@
         // Add an axis and title.
         g.append("g")
             .attr("class", "axis")
-            .each(function(d) {
+            .each(function (d) {
                 d3.select(this).call(axis.scale(y[d]));
             })
             .append("text")
             .style("text-anchor", "middle")
             .attr("y", -9)
-            .text(function(d) {
+            .text(function (d) {
                 return d;
             });
 
         // Add and store a brush for each axis.
         g.append("g")
             .attr("class", "brush")
-            .each(function(d) {
+            .each(function (d) {
                 d3.select(this).call(y[d].brush = d3.svg.brush().y(y[d])
                     .on("brushstart", brushstart)
                     .on("brush", brush));
@@ -143,7 +186,7 @@
 
         // Returns the path for a given data point.
         function path(d) {
-            return line(dimensions.map(function(p) {
+            return line(dimensions.map(function (p) {
                 return [position(p), y[p](d[p])];
             }));
         }
@@ -156,14 +199,14 @@
         function brush() {
             ParC.filteredData = [];
 
-            var actives = dimensions.filter(function(p) {
+            var actives = dimensions.filter(function (p) {
                     return !y[p].brush.empty();
                 }),
-                extents = actives.map(function(p) {
+                extents = actives.map(function (p) {
                     return y[p].brush.extent();
                 });
             // console.log('active found ', actives)
-            foreground.style("display", function(d, k) {
+            foreground.style("display", function (d, k) {
 
                 // // if(k==0) ParC.filteredData = [];
                 // var inside = false;
@@ -178,7 +221,7 @@
                 // })
                 // if(inside) ParC.filteredData.push(d)
 
-                ParC.filteredData.push(actives.every(function(p, j) {
+                ParC.filteredData.push(actives.every(function (p, j) {
                     // console.log(' found d p ', d, p)
                     return extents[j][0] <= d[p] && d[p] <= extents[j][1];
                 }) ? d['id'] : -1);
@@ -188,7 +231,7 @@
 
 
                 // console.log(' final Arr is ', finalArr)
-                return actives.every(function(p, i) {
+                return actives.every(function (p, i) {
                     // console.log(' found d p ', d, p)
                     return extents[i][0] <= d[p] && d[p] <= extents[i][1];
                 }) ? null : "none";
@@ -196,16 +239,16 @@
 
             var ind = ParC.filteredData.indexOf(-1);
             ParC.filteredData.splice(ind, 1);
-            setTimeout(function(){
+            setTimeout(function () {
                 // DataTable.hideSelectedRows(ParC.filteredData);
             }, 5000)
         }
     }
 
-    ParC.textListing = function(containerId = "", data = []) {
+    ParC.textListing = function (containerId = "", data = []) {
         $("#" + containerId).empty();
         var htmlStr = ""
-        data.forEach(function(d, i) {
+        data.forEach(function (d, i) {
             htmlStr += "<div class = 'textPerItemConstrain' >" + d[Main.entityNameSecondImp] + "</div>";
         })
         $("#" + containerId).append(htmlStr);

@@ -115,8 +115,8 @@
         console.log(' making star plot for models ')
         RadarChart.defaultConfig.color = function () {};
         RadarChart.defaultConfig.radius = 3;
-        RadarChart.defaultConfig.w = 400;
-        RadarChart.defaultConfig.h = 200;
+        RadarChart.defaultConfig.w = 300;
+        RadarChart.defaultConfig.h = 250;
 
         if (containerId == "") containerId = "modelExplorePanel"
         $("#" + containerId).empty();

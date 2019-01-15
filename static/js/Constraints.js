@@ -108,19 +108,19 @@
                 'Color-Type': '#DEE54F'
             }
         },
-        'QUALITATIVE': {
-            'Feature-Weights': {
-                'Add': true,
-                'Checked': false,
-            },
-            'Feature-Range': {
-                'Add': true,
-                'Checked': false,
-            },       
-            'misc': {
-                'Color-Type': '#90D09D'
-            }
-        },
+        // 'QUALITATIVE': {
+        //     'Feature-Weights': {
+        //         'Add': true,
+        //         'Checked': false,
+        //     },
+        //     'Feature-Range': {
+        //         'Add': true,
+        //         'Checked': false,
+        //     },       
+        //     'misc': {
+        //         'Color-Type': '#90D09D'
+        //     }
+        // },
         'QUANTITATIVE': {
             'F1-Score': {
                 'Checked': false,

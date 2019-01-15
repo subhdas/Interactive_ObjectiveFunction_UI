@@ -27,7 +27,7 @@
 
     // Main.labels = ['sports', 'economical', 'utility'];
     Main.labels = ['economical', 'sports', 'utility'];
-
+    Main.contentHeightTopBar = '300';
 
 
     /*
@@ -210,6 +210,7 @@
     Main.taskScheduler = function () {
         DataTable.addIconsTop(Main.trainData);
         DataTable.switchToLeftData();
+        ParC.featureEditorCreate();
         DataTable.makeTable(Main.trainData);
         DataTable.extraContent = false;
         DataTable.makeTable(Main.testData, "tableContentTest");
