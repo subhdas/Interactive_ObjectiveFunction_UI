@@ -1,8 +1,8 @@
-(function() {
+(function () {
 
 
     Cons = {};
- 
+
 
     // Cons.typeConstraints = {
     //     'COMPOSITIONAL': {
@@ -86,7 +86,7 @@
     // }
 
 
-        Cons.typeConstraints = {
+    Cons.typeConstraints = {
         'COMPOSITIONAL': {
             'Same-Label': {
                 'Add': true,
@@ -100,7 +100,7 @@
                 'Add': true,
                 'Checked': false,
             },
-             'Critical-Items': {
+            'Critical-Items': {
                 'Add': true,
                 'Checked': false,
             },
@@ -125,7 +125,7 @@
             'F1-Score': {
                 'Checked': false,
             },
-             'Training-Accuracy': {
+            'Training-Accuracy': {
                 'Checked': false,
             },
             'misc': {
@@ -150,8 +150,56 @@
     Cons.lastItemClicked = "";
 
 
-    Cons.makeConsDivs = function(containerId = "constrainPanel") {
+    Cons.addIconsConstraintsPanel = function (containerId = "") {
+        if (containerId == "") containerId = "constraintHeaderId";
+        $("#" + containerId).empty();
+
+        var htmlStr = "<div class = 'constraintHeadTitle' > Constraint Panel </div>";
+        htmlStr += "<div class = 'constraintHeadButton' ></div>";
+
+        $("#" + containerId).append(htmlStr);
+
+        $(".constraintHeadTitle").css('width', '100%')
+        $(".constraintHeadTitle").css('font-size', '1.5em')
+        htmlStr = "<button id='someBtnId' class='someBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
+
+        $(".constraintHeadButton").append(htmlStr);
+
+        //click reset data button
+        $("#someBtnId").on('click', function () {
+
+        })
+
+    }
+
+
+
+    Cons.makeConsDivs = function (containerId = "constrainPanel") {
         console.log('Cons is ', Cons.typeConstraints)
+        if (containerId == "") containerId = "constrainPanel";
+        $("#" + containerId).empty();
+        var htmlStr = "<div class = 'constraintHeader' id = 'constraintHeaderId' ></div>";
+        htmlStr += "<div class = 'constraintContent' id = 'constraintContentId' ></div>";
+        $("#" + containerId).append(htmlStr);
+
+        // css styling
+        $('.constraintHeader').css('display', 'flex');
+        $('.constraintHeader').css('padding', '3px');
+        // $('.featureEngHeader').css('margin', '5px');
+        $('.constraintHeader').css('width', '100%');
+        $('.constraintHeader').css('height', '35px');
+        $('.constraintHeader').css('border-bottom', '1px dotted lightgray');
+
+        $('.constraintContent').css('display', 'flex');
+        $('.constraintContent').css('padding', '4px');
+        $('.constraintContent').css('margin', '5px');
+        $('.constraintContent').css('width', '100%');
+        $('.constraintContent').css('height', '100%');
+
+        Cons.addIconsConstraintsPanel('constraintHeaderId');
+
+        containerId = "constraintContentId";
         var htmlStr = ""
         for (var item in Cons.typeConstraints) {
             console.log('item is ', item)
@@ -162,8 +210,8 @@
             for (var val in Cons.typeConstraints[item]) {
                 if (val == 'misc') continue;
                 htmlStr += "<div class = 'wrapRowCons'>"
-                    // htmlStr += "<label for='"+val+"checkbox-"+k+"'>" + val + "</label>"
-                    // htmlStr += "<input type='checkbox' parent = '"+item+"' given = '"+val+"' name='"+val+"checkbox-"+k+"' class = 'constOpt' id='"+val+"checkbox-"+k+"'>"
+                // htmlStr += "<label for='"+val+"checkbox-"+k+"'>" + val + "</label>"
+                // htmlStr += "<input type='checkbox' parent = '"+item+"' given = '"+val+"' name='"+val+"checkbox-"+k+"' class = 'constOpt' id='"+val+"checkbox-"+k+"'>"
 
 
                 if (Cons.typeConstraints[item][val]['Add']) {
@@ -171,14 +219,14 @@
                     // htmlStr += "<button parent = '"+item+"' given = '"+val+"'  class='mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored constOptBtn'>"
                     // htmlStr += "<i class='material-icons'>add</i></button>"
                     htmlStr += "<a parent = '" + item + "' given = '" + val + "' class='btn-floating constOptBtn'><i class='material-icons'>add</i></a>"
-                        // htmlStr += "<button id = 'btnAdd' class='ui-button ui-widget ui-corner-all ui-button-icon-only' title='Add'>+</button>"
+                    // htmlStr += "<button id = 'btnAdd' class='ui-button ui-widget ui-corner-all ui-button-icon-only' title='Add'>+</button>"
                 } // if add button
                 else {
                     htmlStr += "<a parent = '" + item + "' given = '" + val + "' class='btn-floating constOptBtn'><i class='material-icons'>check</i></a>"
                 }
 
                 htmlStr += "<button parent = '" + item + "' given = '" + val + "' name='" + val + "checkbox-" + k + "' id='" + val + "checkbox-" + k + "' \
-          class='mdl-button mdl-js-button mdl-button--accent constOpt btn_"+val+"'>" + val + "</button>"
+          class='mdl-button mdl-js-button mdl-button--accent constOpt btn_" + val + "'>" + val + "</button>"
 
 
 
@@ -197,7 +245,7 @@
 
         }
 
-        $(function() {
+        $(function () {
             $(".resizeWeight").resizable({
                 containment: "parent",
                 maxHeight: 10,
@@ -235,7 +283,7 @@
 
 
         //events
-        $('.constOpt').on('click', function(e) {
+        $('.constOpt').on('click', function (e) {
             var name = $(this).attr('given');
             var item = $(this).attr('parent');
             console.log('clicked checkbox ', name, item);
@@ -246,7 +294,7 @@
                 $(this).siblings().show();
                 $(this).css('background', Main.colors.HIGHLIGHT)
                 $(this).css('color', 'white')
-                    // ConsInt.showPanel();
+                // ConsInt.showPanel();
             } else {
                 $(this).siblings().closest('a').hide();
                 $(this).css('background', '')
@@ -257,7 +305,7 @@
             // ConsInt.makeInteractionPanel();
         })
 
-        $('.constOptBtn').on('click', function(e) {
+        $('.constOptBtn').on('click', function (e) {
             var name = $(this).attr('given');
             var item = $(this).attr('parent');
             console.log('clicked checkbox ', name, item);
@@ -280,14 +328,14 @@
 
         $(".wrapRowCons").css('display', 'flex')
         $(".wrapRowCons").css('padding', '2px')
-            // $(".headRowCons").css('background', Main.colors.LIGHTGRAY)
+        // $(".headRowCons").css('background', Main.colors.LIGHTGRAY)
         $(".headRowCons").css('padding', '5px')
         $(".headRowCons").css('height', 'auto')
         $(".headRowCons").css('width', '100%')
         $(".headRowCons").css('font-size', '1.3em')
 
         $(".contentRowCons").css('padding', '4px')
-            // $(".contentRowCons").css('background', Main.colors.LIGHTGRAY)
+        // $(".contentRowCons").css('background', Main.colors.LIGHTGRAY)
 
         $(".typeCons").css('display', 'flex');
         $(".typeCons").css('flex-direction', 'column');

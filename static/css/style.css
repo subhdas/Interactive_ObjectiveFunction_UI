@@ -65,14 +65,14 @@ body {
 
 #constrainPanel {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     /* width: 74%; */
     height: 45%%;
     color: #555;
     font-size: 0.8em;
     overflow-y: auto;
     overflow-x: hidden;
-    /* padding: 5px; */
+    padding: 5px;
     border-right: 1px solid lightgray;
     overflow-x: auto;
     overflow-y: hidden;
@@ -93,6 +93,8 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     padding: 5px;
+    /* border-right: 1px solid lightgray; */
+
     /* background: lightgray; */
     /* margin: 5px;
   border-radius: 5px; */
@@ -110,6 +112,8 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     padding: 5px;
+    border-left: 1px solid lightgray;
+
     /* margin: 5px;
   border-radius: 5px; */
     /* cursor: pointer; */
