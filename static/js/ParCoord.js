@@ -8,6 +8,24 @@
         if (containerId == "") containerId = "featureEngHeaderId";
         $("#" + containerId).empty();
 
+
+    var htmlStr = "<button id='resetDataBtnId' class='resetDataBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+    htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
+
+    $("#"+containerId).append(htmlStr);
+
+    //click reset data button
+    $("#resetDataBtnId").on('click', function(){
+           $(".trTable").show();
+           ParC.filteredData = [];
+        //    var arr = ['id'];
+        //    arr.push.apply(arr, Object.keys(Main.numericalAttributes));
+        //    var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
+        //    ParC.makeParallelCoordChart('filterContentId', dataNumeric);
+        ParC.featureEditorCreate();
+
+    })
+
     }
 
 
@@ -34,7 +52,7 @@
         $('.featureEngContent').css('width', '100%');
            $('.featureEngContent').css('height', '100%');
 
-        ParC.addIconsFeatureEditor('featureEngContentId');
+        ParC.addIconsFeatureEditor('featureEngHeaderId');
 
 
        
@@ -240,8 +258,8 @@
             var ind = ParC.filteredData.indexOf(-1);
             ParC.filteredData.splice(ind, 1);
             setTimeout(function () {
-                // DataTable.hideSelectedRows(ParC.filteredData);
-            }, 5000)
+                DataTable.hideSelectedRows(ParC.filteredData);
+            }, 1000)
         }
     }
 
