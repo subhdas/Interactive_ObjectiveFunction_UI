@@ -193,9 +193,14 @@
                             classed['radar-chart-serie' + i] = 1;
                             if (d.className) {
                                 classed[d.className] = 1;
+                                classed['poly_model'] = 1;
                             }
                             d3.select(this).classed(classed);
                         })
+                        // .attr('class', function(d,i){
+                        //     console.log('classing poly ', d, i)
+                        //     return d.className +'_modelPoly';
+                        // })
                         .attr('id', function(d,i){
                             return "radar-char-poly_"+i
                         })
