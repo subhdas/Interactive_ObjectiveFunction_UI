@@ -17,18 +17,22 @@
             'Same-Label': {
                 // 'Add': true,
                 'Checked': false,
+                'UserWt' : 1,
             },
             'Similarity-Metric': {
                 // 'Add': true,
                 'Checked': false,
+                'UserWt': 1,
             },
             'Information-Gain': {
                 // 'Add': true,
                 'Checked': false,
+                'UserWt': 1,
             },
             'Critical-Items': {
                 // 'Add': true,
                 'Checked': false,
+                'UserWt': 1,
             },
             'misc': {
                 'Color-Type': '#DEE54F'
@@ -50,9 +54,11 @@
         'QUANTITATIVE': {
             'F1-Score': {
                 'Checked': false,
+                'UserWt': 1,
             },
             'Training-Accuracy': {
                 'Checked': false,
+                'UserWt': 1,
             },
             'misc': {
                 'Color-Type': '#A2B0C8'
@@ -61,9 +67,11 @@
         'GENERALIZATION': {
             'Testing-Accuracy': {
                 'Checked': false,
+                'UserWt': 1,
             },
             'Cross-Val-Score': {
                 'Checked': false,
+                'UserWt': 1,
             },
             'misc': {
                 'Color-Type': '#D0B790'
@@ -152,7 +160,7 @@
             for (var val in Cons.typeConstraints[item]) {
                 if (val == 'misc') continue;
                 htmlStr += "<li class = 'ui-state-default' >"
-                htmlStr += "<div class = 'wrapRowCons'>"
+                htmlStr += "<div class = 'wrapRowCons' parent = '" + item + "' >"
 
                 // htmlStr += "<label for='"+val+"checkbox-"+k+"'>" + val + "</label>"
                 // htmlStr += "<input type='checkbox' parent = '"+item+"' given = '"+val+"' name='"+val+"checkbox-"+k+"' class = 'constOpt' id='"+val+"checkbox-"+k+"'>"
@@ -215,7 +223,26 @@
         // });
 
         $(".sortable").sortable({
-            placeholder: "ui-state-highlight"
+            placeholder: "ui-state-highlight",
+            out : function(e,ui){
+                // console.log(' changed ', ui, e);
+                   var par = $(this).parents();
+                   var children = $(par[0]).find('.wrapRowCons')
+                   //    var children = par.children()
+                //    console.log('parent is ', children)
+            
+             var type = $(children[0]).attr('parent');
+             console.log(' found of type ', type)
+                var wt = 1.0;
+                var inc = 1/children.length;
+               children.each(function(d){
+                   var txt = $(this).text();
+                   console.log(' child is ', txt)
+                   Cons.typeConstraints[type][txt] = wt
+                   wt -= inc;
+
+               })
+            }
         });
 
         //  $(".sortable").sortable();
