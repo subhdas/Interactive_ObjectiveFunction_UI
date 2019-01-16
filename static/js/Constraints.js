@@ -133,23 +133,41 @@
             htmlStr += "<div parent = '"+item+"' id='resizable' class='ui-widget-content resizeWeight'></div>";
             htmlStr += "<div class= 'contentRowCons'>"
             var k = 0;
+
+            htmlStr += "<ul class ='sortable' parent = '"+item+"' class='ui-sortable'>";
+            // < ul id = "sortable" >
+            //     <
+            //     li class = "ui-state-default" > Item 1 < /li> <
+            //     li class = "ui-state-default" > Item 2 < /li> <
+            //     li class = "ui-state-default" > Item 3 < /li> <
+            //     li class = "ui-state-default" > Item 4 < /li> <
+            //     li class = "ui-state-default" > Item 5 < /li> <
+            //     li class = "ui-state-default" > Item 6 < /li> <
+            //     li class = "ui-state-default" > Item 7 < /li> <
+            //     li class = "ui-state-default" > Item 8 < /li> <
+            //     li class = "ui-state-default" > Item 9 < /li> <
+            //     /ul>
+
+            
             for (var val in Cons.typeConstraints[item]) {
                 if (val == 'misc') continue;
+                htmlStr += "<li class = 'ui-state-default' >"
                 htmlStr += "<div class = 'wrapRowCons'>"
+
                 // htmlStr += "<label for='"+val+"checkbox-"+k+"'>" + val + "</label>"
                 // htmlStr += "<input type='checkbox' parent = '"+item+"' given = '"+val+"' name='"+val+"checkbox-"+k+"' class = 'constOpt' id='"+val+"checkbox-"+k+"'>"
 
-
-                if (Cons.typeConstraints[item][val]['Add']) {
-                    // htmlStr += "<button  parent = '"+item+"' given = '"+val+"' class='ui-button ui-widget ui-corner-all constOptBtn'>+</button>"
-                    // htmlStr += "<button parent = '"+item+"' given = '"+val+"'  class='mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored constOptBtn'>"
-                    // htmlStr += "<i class='material-icons'>add</i></button>"
-                    htmlStr += "<a parent = '" + item + "' given = '" + val + "' class='btn-floating constOptBtn'><i class='material-icons'>add</i></a>"
-                    // htmlStr += "<button id = 'btnAdd' class='ui-button ui-widget ui-corner-all ui-button-icon-only' title='Add'>+</button>"
-                } // if add button
-                else {
-                    htmlStr += "<a parent = '" + item + "' given = '" + val + "' class='btn-floating constOptBtn'><i class='material-icons'>check</i></a>"
-                }
+                // add func removed now
+                // if (Cons.typeConstraints[item][val]['Add']) {
+                //     // htmlStr += "<button  parent = '"+item+"' given = '"+val+"' class='ui-button ui-widget ui-corner-all constOptBtn'>+</button>"
+                //     // htmlStr += "<button parent = '"+item+"' given = '"+val+"'  class='mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored constOptBtn'>"
+                //     // htmlStr += "<i class='material-icons'>add</i></button>"
+                //     htmlStr += "<a parent = '" + item + "' given = '" + val + "' class='btn-floating constOptBtn'><i class='material-icons'>add</i></a>"
+                //     // htmlStr += "<button id = 'btnAdd' class='ui-button ui-widget ui-corner-all ui-button-icon-only' title='Add'>+</button>"
+                // } // if add button
+                // else {
+                //     htmlStr += "<a parent = '" + item + "' given = '" + val + "' class='btn-floating constOptBtn'><i class='material-icons'>check</i></a>"
+                // }
 
                 htmlStr += "<button parent = '" + item + "' given = '" + val + "' name='" + val + "checkbox-" + k + "' id='" + val + "checkbox-" + k + "' \
           class='mdl-button mdl-js-button mdl-button--accent constOpt btn_" + val + "'>" + val + "</button>"
@@ -157,9 +175,11 @@
 
 
                 htmlStr += "</div>"
+                htmlStr += "</li>"
                 k = k + 1;
             } // end for second
             // htmlStr += "  </div>"
+            htmlStr += "</ul>";
             htmlStr += "</div>";
             $("#" + containerId).append(htmlStr);
             htmlStr = "<div class= 'continueCons'> <div class ='continueContentCons'> + </div></div>"
@@ -170,6 +190,38 @@
             $("#headRowCons_" + item).css('background', col)
 
         }
+
+
+        //activate sortable effect
+        // $(".sortable").sortable({
+        //     change: function (event, ui) {
+        //         var pos = ui.helper.index() < ui.placeholder.index() ?
+        //             {
+        //                 start: ui.helper.index(),
+        //                 end: ui.placeholder.index()
+        //             } :
+        //             {
+        //                 start: ui.placeholder.index(),
+        //                 end: ui.helper.index()
+        //             }
+
+        //         $(this)
+        //             .children().removeClass('highlight')
+        //             .not(ui.helper).slice(pos.start, pos.end).addClass('highlight');
+        //     },
+        //     stop: function (event, ui) {
+        //         $(this).children().removeClass('highlight');
+        //     }
+        // });
+
+        $(".sortable").sortable({
+            placeholder: "ui-state-highlight"
+        });
+
+        //  $(".sortable").sortable();
+         $(".sortable").disableSelection();
+
+            // $("#sortable").sortable();
 
 
 
@@ -274,6 +326,7 @@
 
         $(".wrapRowCons").css('display', 'flex')
         $(".wrapRowCons").css('padding', '2px')
+        $(".wrapRowCons").css('width', '100%')
         // $(".headRowCons").css('background', Main.colors.LIGHTGRAY)
         $(".headRowCons").css('padding', '5px')
         $(".headRowCons").css('height', 'auto')

@@ -204,3 +204,39 @@ table{
   fill: #ADD8E6;
   stroke: none;
 }
+
+
+/* following for sortable */
+#sortable {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  /* width: 60%; */
+}
+
+
+
+
+
+.ui-state-default {
+  border: 1px solid lightgray;
+  background-color: white;
+  margin: 0 3px 3px 3px;
+  padding-left: 15px;
+  padding-right: 15px;
+  /* padding: 0.4em; */
+  /* font-size: 1.4em; */
+  /* height: 38px; */
+}
+
+
+.highlight {
+  background-color: #B24926;
+} 
+
+ .ui-state-highlight {
+   height: 40px;
+   line-height: 4em;
+   background:#C23573;
+
+ }
