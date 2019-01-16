@@ -46,9 +46,10 @@
         return idList;
     }
 
-    DataTable.modelUpdateLabel = function () {
+    DataTable.modelUpdateLabel = function (index = 0) {
         //train data update
-        var predTrainDict = BarM.modelData[0]['predictions']['trainPred'];
+        // var predTrainDict = BarM.modelData[0]['predictions']['trainPred'];
+        var predTrainDict = BarM.allModelData[index]['trainPred'];
         for (var item in predTrainDict) {
             // console.log('updating data table ', item)
             var label = predTrainDict[item];
@@ -65,7 +66,8 @@
 
 
         //test data update
-        var predTestDict = BarM.modelData[0]['predictions']['testPred'];
+        // var predTestDict = BarM.modelData[0]['predictions']['testPred'];
+        var predTestDict = BarM.allModelData[index]['testPred'];
         for (var item in predTestDict) {
             var label = predTestDict[item];
             var col = 'lightgray'
@@ -226,7 +228,7 @@
             socket.on("send_good_model", function (dataObj) {
                 console.log('good model recieved ', dataObj);
                 BarM.modelData[0] = Object.assign({}, dataObj);
-                DataTable.modelUpdateLabel();
+
 
                 var confMatrixTrain = JSON.parse(dataObj['predictions']['trainConfMatrix'])
                 var confMatrixTest = JSON.parse(dataObj['predictions']['testConfMatrix'])
@@ -235,7 +237,7 @@
                 console.log('confMatrix gotten ', confMatrixTrain);
 
                 BarM.allModelData = dataObj['predictionsAll']
-
+                DataTable.modelUpdateLabel();
 
                 // comppute data ids for each label combo
                 // train conf matr
@@ -659,9 +661,9 @@
 
 
 
-    DataTable.hideRowsById = function (idList, type='train') {
+    DataTable.hideRowsById = function (idList, type = 'train') {
         var data = Main.trainData;
-        if(type == 'test') data = Main.testData;
+        if (type == 'test') data = Main.testData;
         data.forEach(function (d, i) {
             if (idList.indexOf(d.id) == -1) {
                 $('#tr_' + d.id).hide();

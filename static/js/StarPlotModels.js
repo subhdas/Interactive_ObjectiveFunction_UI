@@ -164,6 +164,12 @@
             $(".modelNameHead").css('border', 'transparent')
             $(this).css('background', Main.colors.HIGHLIGHT)
             $(this).css('border', selBorder)
+
+            DataTable.modelUpdateLabel(idNum);
+            //to be done
+            ConfM.makeConfMatrix(confMatrixTrain, 'train');
+            ConfM.makeConfMatrix(confMatrixTest, 'test');
+
         })
 
     }

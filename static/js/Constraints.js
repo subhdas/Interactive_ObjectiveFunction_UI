@@ -3,105 +3,31 @@
 
     Cons = {};
 
+    Cons.origWidthConsBars = 0;
 
-    // Cons.typeConstraints = {
-    //     'COMPOSITIONAL': {
-    //         'Same-Label': {
-    //             'Add': true,
-    //             'Checked': false,
-    //         },
-    //         'Similarity-Metric': {
-    //             'Add': true,
-    //             'Checked': false,
-    //         },
-    //         'Information-Gain': {
-    //             'Add': true,
-    //             'Checked': false,
-    //         },
-    //         'misc': {
-    //             'Color-Type': '#DEE54F'
-    //         }
-    //     },
-    //     'QUALITATIVE': {
-    //         'Feature-Weights': {
-    //             'Add': true,
-    //             'Checked': false,
-    //         },
-    //         'Feature-Range': {
-    //             'Add': true,
-    //             'Checked': false,
-    //         },
-    //         'misc': {
-    //             'Color-Type': '#90D09D'
-    //         }
-    //     },
-    //     'PREDICTIVE': {
-    //         'Critical-Items': {
-    //             'Add': true,
-    //             'Checked': false,
-    //         },
-    //         'Discard-Items': {
-    //             'Add': true,
-    //             'Checked': false,
-    //         },
-    //         'Number-Items-Features': {
-    //             'Add': true,
-    //             'Checked': false,
-    //         },
-    //         'Number-Items': {
-    //             'Checked': false,
-    //         },
-    //         'misc': {
-    //             'Color-Type': '#D0B790'
-    //         }
-    //     },
-    //     'QUANTITATIVE': {
-    //         'F1-Score': {
-    //             'Checked': false,
-    //         },
-    //         'Recall': {
-    //             'Checked': false,
-    //         },
-    //         'Cross-Val': {
-    //             'Checked': false,
-    //         },
-    //         'misc': {
-    //             'Color-Type': '#A2B0C8'
-    //         }
-    //     },
-    //     'GENERALIZATION': {
-    //         'Number-Label-HoldOut': {
-    //             'Checked': false,
-    //         },
-    //         'Critical-Data-HoldOut': {
-    //             'Checked': false,
-    //         },
-    //         'Cross-Val-Score': {
-    //             'Checked': false,
-    //         },
-    //         'misc': {
-    //             'Color-Type': '#F4A1E9'
-    //         }
-    //     },
-    // }
+    Cons.userWtConst = {
+        'COMPOSITIONAL': 1,
+        'QUANTITATIVE': 1,
+        'GENERALIZATION': 1,
+    }
 
 
     Cons.typeConstraints = {
         'COMPOSITIONAL': {
             'Same-Label': {
-                'Add': true,
+                // 'Add': true,
                 'Checked': false,
             },
             'Similarity-Metric': {
-                'Add': true,
+                // 'Add': true,
                 'Checked': false,
             },
             'Information-Gain': {
-                'Add': true,
+                // 'Add': true,
                 'Checked': false,
             },
             'Critical-Items': {
-                'Add': true,
+                // 'Add': true,
                 'Checked': false,
             },
             'misc': {
@@ -204,7 +130,7 @@
         for (var item in Cons.typeConstraints) {
             console.log('item is ', item)
             htmlStr += "<div id= 'typeConst_" + item + "' class= 'typeCons'> <div class ='headRowCons' id= 'headRowCons_" + item + "'> " + item + "</div>"
-            htmlStr += "<div id='resizable' class='ui-widget-content resizeWeight'></div>";
+            htmlStr += "<div parent = '"+item+"' id='resizable' class='ui-widget-content resizeWeight'></div>";
             htmlStr += "<div class= 'contentRowCons'>"
             var k = 0;
             for (var val in Cons.typeConstraints[item]) {
@@ -245,18 +171,33 @@
 
         }
 
+
+
         $(function () {
             $(".resizeWeight").resizable({
                 containment: "parent",
-                maxHeight: 10,
-                animate: true
+                maxHeight: 20,
+                minHeight: 20,
+                // animate: true
+                  create: function (event, ui) {
+                      // Prefers an another cursor with two arrows
+                      $(".ui-resizable-handle").css("cursor", "col-resize");
+                  },
+                  resize: function(e, ui){
+                      var wd = $(this).width();
+                      var par = $(this).attr('parent');
+                      Cons.userWtConst[par] = +(wd/Cons.origWidthConsBars).toFixed(3);
+                    //   console.log('width bar is ', wd);
+                  }
             });
         });
 
 
         $(".resizeWeight").css('width', '100%')
-        $(".resizeWeight").css('height', '10px')
+        $(".resizeWeight").css('height', '20px')
         $(".resizeWeight").css('background', Main.colors.HIGHLIGHT)
+        // $(".resizeWeight").css('cursor', 'col-resize')
+        // $(".ui-resizable-e").css("cursor", "col-resize");
 
         $(".constOptBtn").css('display', 'flex');
         $(".constOptBtn").css('align-items', 'center');
@@ -280,10 +221,13 @@
         $(".continueContentCons").css('padding', '10px');
 
 
+        Cons.origWidthConsBars = $(".resizeWeight").width();
 
+   
 
         //events
         $('.constOpt').on('click', function (e) {
+            // return
             var name = $(this).attr('given');
             var item = $(this).attr('parent');
             console.log('clicked checkbox ', name, item);
@@ -291,34 +235,36 @@
             Cons.lastItemClicked = name;
             // $(this).find('button').css('display', 'block');
             if (Cons.typeConstraints[item][name]['Checked']) {
-                $(this).siblings().show();
+                // $(this).siblings().show();
                 $(this).css('background', Main.colors.HIGHLIGHT)
                 $(this).css('color', 'white')
                 // ConsInt.showPanel();
             } else {
-                $(this).siblings().closest('a').hide();
+                // $(this).siblings().closest('a').hide();
                 $(this).css('background', '')
                 $(this).css('color', 'black')
-                ConsInt.hidePanel();
+                // ConsInt.hidePanel();
             }
             // ConsInt.getActiveConstraints();
             // ConsInt.makeInteractionPanel();
         })
 
-        $('.constOptBtn').on('click', function (e) {
-            var name = $(this).attr('given');
-            var item = $(this).attr('parent');
-            console.log('clicked checkbox ', name, item);
-            // Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
-            ConsInt.showPanel();
-            Cons.lastItemClicked = name;
-            ConsInt.getActiveConstraints();
-            ConsInt.makeInteractionPanel(stri = name);
-            ConsInt.interPanelContentFromData(stri = name);
 
-            if ($('#consInterPanel').children().length > 0) {}
+        //this is the add button(which we dont have now so below COMMENTED)
+        // $('.constOptBtn').on('click', function (e) {
+        //     var name = $(this).attr('given');
+        //     var item = $(this).attr('parent');
+        //     console.log('clicked checkbox ', name, item);
+        //     // Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
+        //     ConsInt.showPanel();
+        //     Cons.lastItemClicked = name;
+        //     ConsInt.getActiveConstraints();
+        //     ConsInt.makeInteractionPanel(stri = name);
+        //     ConsInt.interPanelContentFromData(stri = name);
 
-        })
+        //     if ($('#consInterPanel').children().length > 0) {}
+
+        // })
 
 
         // $("#"+containerId).empty();
