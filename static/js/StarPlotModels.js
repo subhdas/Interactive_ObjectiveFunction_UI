@@ -117,10 +117,13 @@
 
         var htmlStr = "";
         for (var item in BarM.allModelData) {
-            htmlStr += "<div class = 'modelNameHead' id = 'modelNameHead_" + item + "' > M_" + item + " </div>";
+            var splClass = ""
+            if(item == BarM.selectedModelId) splClass = "modelNameHeadSel"
+            htmlStr += "<div class = 'modelNameHead " +splClass+"' id = 'modelNameHead_" + item + "' > M_" + item + " </div>";
         }
         $('#' + containerId).append(htmlStr);
 
+        var selBorder = '2px solid black';
         //css styling
         $(".modelNameHead").css('display', 'flex');
         $(".modelNameHead").css('font-size', '0.8em');
@@ -130,6 +133,8 @@
         $(".modelNameHead").css('padding', '4px');
         $(".modelNameHead").css('margin-right', '4px');
         $(".modelNameHead").css('cursor', 'pointer');
+
+        $(".modelNameHeadSel").css('border', selBorder)
 
         //interactions
         $(".modelNameHead").on('mouseover', function (e) {
@@ -146,7 +151,19 @@
             idNum = Util.getNumberFromText(idNum);
             $(".modelNameHead").css('opacity', 1);
             $(".poly_model").css("opacity", 0.75);
+        })
 
+        $(".modelNameHead").on('click', function (e) {
+
+            var idNum = $(this).attr('id');
+            idNum = Util.getNumberFromText(idNum);
+            BarM.selectedModelId = idNum;
+            // $(".modelNameHead").css('opacity', 1);
+            // $(".poly_model").css("opacity", 0.75);
+            $(".modelNameHead").css('background', Main.colors.HIGHLIGHT2)
+            $(".modelNameHead").css('border', 'transparent')
+            $(this).css('background', Main.colors.HIGHLIGHT)
+            $(this).css('border', selBorder)
         })
 
     }
