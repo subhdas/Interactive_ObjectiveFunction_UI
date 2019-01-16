@@ -111,28 +111,76 @@
         return randomDataset();
     }
 
+    StarM.addModelSelectors = function (containerId = "") {
+        if (containerId == "") containerId = "starPlotHeadTitleId";
+        //  $("#" + containerId).empty();
+
+        var htmlStr = "";
+        for (var item in BarM.allModelData) {
+            htmlStr += "<div class = 'modelNameHead' id = 'modelNameHead_" + item + "' > M_" + item + " </div>";
+        }
+        $('#' + containerId).append(htmlStr);
+
+        //css styling
+        $(".modelNameHead").css('display', 'flex');
+        $(".modelNameHead").css('font-size', '0.8em');
+        $(".modelNameHead").css('background', Main.colors.HIGHLIGHT2);
+        $(".modelNameHead").css('color', 'white');
+        $(".modelNameHead").css('border-radius', '4px');
+        $(".modelNameHead").css('padding', '4px');
+        $(".modelNameHead").css('margin-right', '4px');
+        $(".modelNameHead").css('cursor', 'pointer');
+
+        //interactions
+        $(".modelNameHead").on('mouseover', function (e) {
+            var idNum = $(this).attr('id');
+            idNum = Util.getNumberFromText(idNum);
+            $(".modelNameHead").css('opacity', 0.3);
+            $(this).css('opacity', 1);
+            $(".poly_model").css("opacity", 0.05);
+            $(".model_" + idNum).css("opacity", 0.75);
+        })
+
+        $(".modelNameHead").on('mouseout', function (e) {
+            var idNum = $(this).attr('id');
+            idNum = Util.getNumberFromText(idNum);
+            $(".modelNameHead").css('opacity', 1);
+            $(".poly_model").css("opacity", 0.75);
+
+        })
+
+    }
+
 
 
     StarM.addIconsStarPlot = function (containerId = "") {
         if (containerId == "") containerId = "starPlotHeaderId";
         $("#" + containerId).empty();
 
-        var htmlStr = "<div class = 'starPlotHeadTitle' > Model Output Panel </div>";
+        var htmlStr = "<div class = 'starPlotHeadTitle' id='starPlotHeadTitleId' > <pan class = 'modelOutputText'> Model Output Panel </span> </div>";
         htmlStr += "<div class = 'starPlotHeadButton' ></div>";
 
         $("#" + containerId).append(htmlStr);
 
         $(".starPlotHeadTitle").css('width', '100%')
         $(".starPlotHeadTitle").css('font-size', '1.5em')
+        $(".starPlotHeadTitle").css('display', 'flex')
         htmlStr = "<button id='someBtnId' class='someBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
 
         $(".starPlotHeadButton").append(htmlStr);
 
+        //css styling
+        $(".modelOutputText").css('margin-right', '25px')
+
         //click reset data button
         $("#someBtnId").on('click', function () {
 
         })
+
+
+        //extra content
+        StarM.addModelSelectors("starPlotHeadTitleId")
 
     }
 
