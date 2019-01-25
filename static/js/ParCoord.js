@@ -2,35 +2,39 @@
 
     ParC = {}
     ParC.filteredData = [];
+    ParC.userPickedAttr = [];
+    ParC.userVariance = {};
+    ParC.hoveredItem = '';
+    ParC.userCorrel = {};
 
 
     ParC.addIconsFeatureEditor = function (containerId = "") {
         if (containerId == "") containerId = "featureEngHeaderId";
         $("#" + containerId).empty();
 
-    var htmlStr = "<div class = 'featureHeadTitle' > Feature Panel </div>";
-    htmlStr += "<div class = 'featureHeadButton' ></div>";
+        var htmlStr = "<div class = 'featureHeadTitle' > Feature Panel </div>";
+        htmlStr += "<div class = 'featureHeadButton' ></div>";
 
-    $("#" + containerId).append(htmlStr);
+        $("#" + containerId).append(htmlStr);
 
-    $(".featureHeadTitle").css('width', '100%')
-    $(".featureHeadTitle").css('font-size', '1.5em')
-    htmlStr = "<button id='resetDataBtnId' class='resetDataBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-    htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
+        $(".featureHeadTitle").css('width', '100%')
+        $(".featureHeadTitle").css('font-size', '1.5em')
+        htmlStr = "<button id='resetDataBtnId' class='resetDataBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
 
-    $(".featureHeadButton").append(htmlStr);
+        $(".featureHeadButton").append(htmlStr);
 
-    //click reset data button
-    $("#resetDataBtnId").on('click', function(){
-           $(".trTable").show();
-           ParC.filteredData = [];
-        //    var arr = ['id'];
-        //    arr.push.apply(arr, Object.keys(Main.numericalAttributes));
-        //    var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
-        //    ParC.makeParallelCoordChart('filterContentId', dataNumeric);
-        ParC.featureEditorCreate();
+        //click reset data button
+        $("#resetDataBtnId").on('click', function () {
+            $(".trTable").show();
+            ParC.filteredData = [];
+            //    var arr = ['id'];
+            //    arr.push.apply(arr, Object.keys(Main.numericalAttributes));
+            //    var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
+            //    ParC.makeParallelCoordChart('filterContentId', dataNumeric);
+            ParC.featureEditorCreate();
 
-    })
+        })
 
     }
 
@@ -40,7 +44,7 @@
         $("#" + containerId).empty();
         // $("#" + containerId).css('height', Main.contentHeightTopBar + 'px');
         // $("#" + containerId).css('height', Main.contentWidthTopBar + 'px');
-         //  $("#" + containerId).css('width', '1200px');
+        //  $("#" + containerId).css('width', '1200px');
 
         var htmlStr = "<div class = 'featureEngHeader' id = 'featureEngHeaderId' ></div>";
         htmlStr += "<div class = 'featureEngContent' id = 'featureEngContentId' ></div>";
@@ -63,17 +67,17 @@
         ParC.addIconsFeatureEditor('featureEngHeaderId');
 
 
-       
+
         setTimeout(() => {
-        var arr = ['id'];
-        arr.push.apply(arr, Object.keys(Main.numericalAttributes));
+            var arr = ['id'];
+            arr.push.apply(arr, Object.keys(Main.numericalAttributes));
 
 
-        var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
-        ParC.makeParallelCoordChart('featureEngContentId', dataNumeric);
+            var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
+            ParC.makeParallelCoordChart('featureEngContentId', dataNumeric);
         }, 0);
-    
-            
+
+
     }
 
 
@@ -87,7 +91,7 @@
         var h = $("#" + containerId).height();
         h = parseFloat(h)
 
-        if(w < 120 && h < 120){
+        if (w < 120 && h < 120) {
             w = 650;
             h = 300;
         }
@@ -97,7 +101,7 @@
         var margin = {
                 top: 30,
                 right: 10,
-                bottom: 10,
+                bottom: 30,
                 left: 10
             },
             width = w - margin.left - margin.right,
@@ -188,16 +192,93 @@
                 }));
 
         // Add an axis and title.
-        g.append("g")
+        var gr = g.append("g")
             .attr("class", "axis")
             .each(function (d) {
                 d3.select(this).call(axis.scale(y[d]));
             })
-            .append("text")
+
+        gr.append("rect")
+            .attr('class', 'par_rect_header')
+            .attr("x", -35)
+            .attr("y", -20)
+            .style('width', '70px')
+            .style('height', '15px')
+            .style('fill', 'lightgray')
+            .on('mouseover', function (d, i) {
+                d3.select(this)
+                    .style('stroke', 'black')
+            })
+            .on('mouseout', function (d, i) {
+                d3.select(this)
+                    .style('stroke', '')
+            })
+            .on('click', function (d) {
+                var ind = ParC.userPickedAttr.indexOf(d);
+                if (ind == -1) {
+                    d3.select(this).style('fill', Main.colors.HIGHLIGHT2)
+                    ParC.userPickedAttr.push(d);
+                } else {
+                    d3.select(this).style('fill', 'lightgray')
+                    ParC.userPickedAttr.splice(ind, 1);
+                }
+            })
+
+        gr.append("text")
+            .attr('class', 'par_text_header')
             .style("text-anchor", "middle")
             .attr("y", -9)
             .text(function (d) {
                 return d;
+            });
+
+        var ypos = height - 0
+        // following for variance
+        gr.append("rect")
+            .attr('class', 'par_rect_variance')
+            .attr("x", -20)
+            .attr("y", ypos)
+            .style('width', '40px')
+            .style('height', '15px')
+            .style('fill', 'lightgray')
+            .on('mouseover', function (d, i) {
+                d3.select(this)
+                    .style('stroke', 'black')
+                ParC.hoveredItem = d;
+            })
+            .on('mouseout', function (d, i) {
+                d3.select(this)
+                    .style('stroke', '')
+                setTimeout(() => {
+                    ParC.hoveredItem = '';
+
+                }, 4000);
+            })
+            .on('click', function (d) {
+                if (ParC.userVariance[d] == 'mid') {
+                    ParC.userVariance[d] = 'high';
+                    d3.select(this).style('fill', 'red')
+                } else if (ParC.userVariance[d] == 'high') {
+                    ParC.userVariance[d] = 'low';
+                    d3.select(this).style('fill', 'cyan')
+                } else {
+                    ParC.userVariance[d] = 'mid';
+                    d3.select(this).style('fill', 'lightgray')
+                }
+            })
+        // .on("contextmenu", function (d, i) {
+        //     d3.event.preventDefault();
+        //     // react on right-clicking
+        //     console.log('main attr clicked ', d)
+        // });
+
+        gr.append("text")
+            .attr('class', 'par_text_variance')
+            .style("text-anchor", "middle")
+            .attr("y", ypos + 8)
+            .text(function (d) {
+                ParC.userVariance[d] = 'mid';
+                return 'V-M';
             });
 
         // Add and store a brush for each axis.
@@ -211,6 +292,71 @@
             .selectAll("rect")
             .attr("x", -8)
             .attr("width", 16);
+
+        // add a context menu here
+        var itemObj = {};
+        for (var item in Main.numericalAttributes) {
+            var obj = {
+                name: item,
+                icon: item,
+            }
+            itemObj[item] = obj;
+        }
+        itemObj['sep1'] = '------------------'
+        itemObj['clear'] = {
+            name: 'clear',
+            icon: 'clear'
+        }
+        $.contextMenu({
+            selector: '.par_rect_variance',
+            callback: function (key, options) {
+                //  var m = "clicked: " + key;
+                //  window.console && console.log(m) || alert(m);
+                if (key == 'clear') {
+                    try {
+                        delete ParC.userCorrel[ParC.hoveredItem];
+                    } catch (e) {
+
+                    }
+                } else {
+                    if(key != ParC.hoveredItem) ParC.userCorrel[ParC.hoveredItem] = key;
+                }
+            },
+            items: itemObj
+            //  items: {
+            //      "edit": {
+            //          name: "Edit",
+            //          icon: "edit"
+            //      },
+            //      "cut": {
+            //          name: "Cut",
+            //          icon: "cut"
+            //      },
+            //      copy: {
+            //          name: "Copy",
+            //          icon: "copy"
+            //      },
+            //      "paste": {
+            //          name: "Paste",
+            //          icon: "paste"
+            //      },
+            //      "delete": {
+            //          name: "Delete",
+            //          icon: "delete"
+            //      },
+            //      "sep1": "---------",
+            //      "quit": {
+            //          name: "Quit",
+            //          icon: function () {
+            //              return 'context-menu-icon context-menu-icon-quit';
+            //          }
+            //      }
+            //  }
+        });
+
+        $('.context-menu-one').on('click', function (e) {
+            //  console.log('clicked', this);
+        })
 
         function position(d) {
             var v = dragging[d];
