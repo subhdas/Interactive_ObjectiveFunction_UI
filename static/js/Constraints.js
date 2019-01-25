@@ -24,12 +24,18 @@
                 'Checked': false,
                 'UserWt': 1,
             },
-            'Information-Gain': {
+            // 'Information-Gain': {
+            //     // 'Add': true,
+            //     'Checked': false,
+            //     'UserWt': 1,
+            // },
+
+            'Critical-Items': {
                 // 'Add': true,
                 'Checked': false,
                 'UserWt': 1,
             },
-            'Critical-Items': {
+            'Non-Critical': {
                 // 'Add': true,
                 'Checked': false,
                 'UserWt': 1,
@@ -278,18 +284,21 @@
             var name = $(this).attr('given');
             var item = $(this).attr('parent');
             console.log('clicked checkbox ', name, item);
-            Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
+            // Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
             Cons.lastItemClicked = name;
             // $(this).find('button').css('display', 'block');
-            if (Cons.typeConstraints[item][name]['Checked']) {
+            if (Cons.typeConstraints[item][name]['Checked'] == true) {
                 // $(this).siblings().show();
                 $(this).css('background', Main.colors.HIGHLIGHT)
                 $(this).css('color', 'white')
+                console.log(' lets make button red ', Cons.typeConstraints, item, name)
                 // ConsInt.showPanel();
             } else {
                 // $(this).siblings().closest('a').hide();
                 $(this).css('background', '')
                 $(this).css('color', 'black')
+                console.log(' lets make button black ', Cons.typeConstraints, item, name)
+
                 // ConsInt.hidePanel();
             }
             // ConsInt.getActiveConstraints();

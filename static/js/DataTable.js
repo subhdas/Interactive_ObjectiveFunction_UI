@@ -11,11 +11,15 @@
     //auto triggers
     DataTable.criticalSwitch = false;
     DataTable.criticalClicked = false;
+    DataTable.non_criticalClicked = false;
 
     DataTable.sameLabelClicked = false;
     DataTable.similarityClicked = false;
 
 
+    //for critical items and informative sample toggle switches
+    DataTable.criticalInteract = {}
+    DataTable.inforInteract = {}
 
     //new variabbles
     DataTable.selectedRows = {}
@@ -528,7 +532,7 @@
                 return '';
             })
 
-
+        //adds critical and informative sample interactions
         table.selectAll('tr')
             .insert("td", ":first-child")
             .attr('id', 'critical_')
@@ -539,7 +543,7 @@
             .style('flex-direction', 'row')
             .style('width', '150px')
             .html(function (d, i) {
-                // console.log(' d and i is ', d, i)
+                console.log(' d and i is ', d, i)
                 if (i < 2) {
                     var col = $(this).siblings().attr('background');
                     if (i == 0) col = "#333"
@@ -547,12 +551,204 @@
                     $(this).css('background', col);
                     return ""
                 } else {
-                    var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_" + d.id + "'><label>";
-                    htmlStr += "<input type='checkbox' id = 'check_critical_" + d.id + "'><span class='lever'></span></label></div>"
-                    htmlStr += "<label><input type='checkbox' class='filled-in check_discard' id = 'check_discard_" + d.id + "'/><span></span></label>"
-                    return htmlStr;
+
+
+                    // return ""
+                    // var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_" + d.id + "'><label>";
+                    // htmlStr += "<input type='checkbox' id = 'check_critical_" + d.id + "'><span class='lever'></span></label></div>"
+                    // htmlStr += "<label><input type='checkbox' class='filled-in check_discard' id = 'check_discard_" + d.id + "'/><span></span></label>"
+                    // return htmlStr;
+
+                    DataTable.criticalInteract[d.id] = '-'
+                    DataTable.inforInteract[d.id] = '-'
+                    var htmlStr = "<div class ='containIntBtns' ><div class = 'criticalRect tableBtnInt' id = 'criticalRectId_" + d.id + "' ></div>";
+                    htmlStr += "<div class = 'infoRect tableBtnInt' id = 'infoRectId_" + d.id + "' ></div>";
+                    htmlStr += "</div>"
+                    return htmlStr
+
                 }
             })
+
+        // style for critical and informative samples
+        $(".containIntBtns").css("display", 'flex')
+        $(".containIntBtns").css("margin-right", '4px')
+
+        $(".tableBtnInt").css("display", 'flex')
+        $(".tableBtnInt").css("height", '20px')
+        $(".tableBtnInt").css("width", '20px')
+        $(".tableBtnInt").css("background", 'lightgray')
+        $(".tableBtnInt").css("border-radius", '4px')
+        $(".tableBtnInt").css("margin", '4px')
+
+
+
+
+        //interactions for critical and informative samples
+        $(".criticalRect").on('mouseover', function (d, i) {
+            $(this).css('border', '1px solid black')
+        })
+        $(".criticalRect").on('mouseout', function (d, i) {
+            $(this).css('border', '')
+        })
+        $(".criticalRect").on('click', function (d, i) {
+            if (DataTable.criticalSwitch) {
+                return
+            }
+            DataTable.criticalSwitch = true;
+            setTimeout(function () {
+                DataTable.criticalSwitch = false;
+            }, 500)
+            var id = $(this).attr('id');
+            id = Util.getNumberFromText(id);
+            var val = DataTable.criticalInteract[id];
+            if (val == '-') {
+                DataTable.criticalInteract[id] = 'yes'
+                $(this).css('background', Main.colors.HIGHLIGHT);
+            } else if (val == 'yes') {
+                DataTable.criticalInteract[id] = 'no'
+                $(this).css('background', Main.colors.HIGHLIGHT2);
+            } else {
+                DataTable.criticalInteract[id] = '-'
+                $(this).css('background', 'lightgray');
+            }
+
+            //critical items find
+            var critIdList = []
+            for (var item in DataTable.criticalInteract) {
+                if (DataTable.criticalInteract[item] == 'yes') {
+                    // console.log(' checked yes found ', item, DataTable.criticalInteract[item])
+                    critIdList.push(item)
+                }
+            }
+            critIdList = Util.getUniqueArray(critIdList);
+            // console.log('critical id list found ', critIdList)
+            var stri = 'Critical-Items'
+            Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; // !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
+            ConsInt.getActiveConstraints();
+            ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = critIdList;
+
+            var idBtn = $(".btn_" + stri).attr('id')
+            // var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
+            // console.log('button click check ', arr, DataTable.criticalClicked)
+            if (!DataTable.criticalClicked) {
+                setTimeout(() => {
+                    // $("#" + idBtn).trigger('click');
+                    $("#" + idBtn).click();
+                }, 100);
+                // $("#" + idBtn).trigger('click');
+                DataTable.criticalClicked = true;
+                console.log(' now tag is ', DataTable.criticalClicked, idBtn)
+            }
+            if (critIdList.length == 0 && DataTable.criticalClicked) {
+                // elem.click();
+                // $("#" + idBtn).trigger('click');
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false;
+                $("#" + idBtn).click();
+                DataTable.criticalClicked = false;
+                console.log(' now tag is 2 ', DataTable.criticalClicked, idBtn)
+
+            }
+
+
+            //non-critical items find
+            // var critIdList = []
+            // for (var item in DataTable.criticalInteract) {
+            //     if (DataTable.criticalInteract[item] == 'no') {
+            //         // console.log(' checked yes found ', item, DataTable.criticalInteract[item])
+            //         critIdList.push(item)
+            //     }
+            // }
+            // critIdList = Util.getUniqueArray(critIdList);
+            // // console.log('critical id list found ', critIdList)
+            // var stri2 = 'Non-Critical'
+            // Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; // !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
+            // ConsInt.getActiveConstraints();
+            // ConsInt.activeConstraints[stri2]['input']["labelitemsConId_" + stri2] = critIdList;
+
+            // var idBtn = $(".btn_" + stri2).attr('id')
+            // var arr = ConsInt.activeConstraints[stri2]['input']["labelitemsConId_" + stri2]
+            // // console.log('button click check ', arr, DataTable.criticalClicked)
+            // if (!DataTable.non_criticalClicked) {
+            //     setTimeout(() => {
+            //         // $("#" + idBtn).trigger('click');
+            //     }, 100);
+            //     DataTable.non_criticalClicked = true;
+            //     console.log(' now tag is ', DataTable.non_criticalClicked, idBtn)
+            // }
+            // if (arr.length == 0 && DataTable.non_criticalClicked) {
+            //     // elem.click();
+            //     // $("#" + idBtn).click();
+            //     DataTable.non_criticalClicked = false;
+            // }
+
+            return
+            // var stri = 'Critical-Items'
+            // Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
+            // ConsInt.getActiveConstraints();
+            // // console.log('active cons ', ConsInt.activeConstraints)
+            // try {
+            //     var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
+            //     var ind = arr.indexOf(id)
+            //     if (ind != -1) {
+            //         arr.splice(ind, 1);
+            //     } else {
+            //         arr.push(id);
+            //     }
+            // } catch (e) {
+            //     ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [id]
+            // }
+            // setTimeout(function () {
+            //     $(".btn_" + stri).trigger("click");
+            // }, 1000)
+
+
+            // // if(typeof ConsInt.activeConstraints[stri] != 'undefined'){
+            // try {
+            //     var item = ConsInt.activeConstraints[stri]
+            //     // $(".btn_"+stri).trigger("click");
+            //     var x = document.getElementsByClassName("btn_" + stri);
+            //     var id = $(".btn_" + stri).attr('id')
+            //     var elem = document.getElementById(id);
+            //     // elem.click();
+            //     var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
+            //     if (!DataTable.criticalClicked) {
+            //         elem.click()
+            //         DataTable.criticalClicked = true;
+            //     }
+            //     if (arr.length == 0 && DataTable.criticalClicked) {
+            //         elem.click();
+            //         DataTable.criticalClicked = false;
+            //     }
+
+            //     console.log('clicked button cons ', ConsInt.activeConstraints[stri], item, id)
+            // } catch (e) {
+            //     console.log('error in clicking button ', e, ConsInt.activeConstraints, stri)
+
+            // }
+        })
+
+
+        $(".infoRect").on('mouseover', function (d, i) {
+            $(this).css('border', '1px solid black')
+        })
+        $(".infoRect").on('mouseout', function (d, i) {
+            $(this).css('border', '')
+        })
+        $(".infoRect").on('click', function (d, i) {
+            var id = $(this).attr('id');
+            id = Util.getNumberFromText(id);
+            var val = DataTable.inforInteract[d.id];
+            if (val == '-') {
+                DataTable.inforInteract[id] = 'yes'
+                $(this).css('background', Main.colors.HIGHLIGHT);
+            } else if (val == 'yes') {
+                DataTable.inforInteract[id] = 'no'
+                $(this).css('background', Main.colors.HIGHLIGHT2);
+            } else {
+                DataTable.inforInteract[id] = '-'
+                $(this).css('background', 'lightgray');
+            }
+        })
 
 
 
@@ -574,7 +770,7 @@
             var stri = 'Critical-Items'
             Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
             ConsInt.getActiveConstraints();
-            console.log('active cons ', ConsInt.activeConstraints)
+            // console.log('active cons ', ConsInt.activeConstraints)
             try {
                 var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
                 var ind = arr.indexOf(idNum)
