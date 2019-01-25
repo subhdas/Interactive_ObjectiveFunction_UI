@@ -640,21 +640,21 @@
         // $(".ui-corner-all").css('border', 'none')
 
 
-        // add filter data button
-        var sel = $("#filter_tr_" + containerId).find('td').first();
-        var htmlStr = "<button id='toggleFilterTableBtn_" + containerId + "' class = 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' > "
-        htmlStr += "<i class='material-icons'>filter_tilt_shift</i></button>";
-        sel.append(htmlStr);
+        // add filter data button - commented out
+        // var sel = $("#filter_tr_" + containerId).find('td').first();
+        // var htmlStr = "<button id='toggleFilterTableBtn_" + containerId + "' class = 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' > "
+        // htmlStr += "<i class='material-icons'>filter_tilt_shift</i></button>";
+        // sel.append(htmlStr);
 
 
-        $("#toggleFilterTableBtn_" + containerId).on('click', function (e) {
-            if ($(".filterPanelDiv").length > 0) {
-                DataTable.showFilterPanel();
-            } else {
-                DataTable.addFilterPanel(100, 200, 500, 200);
-            }
+        // $("#toggleFilterTableBtn_" + containerId).on('click', function (e) {
+        //     if ($(".filterPanelDiv").length > 0) {
+        //         DataTable.showFilterPanel();
+        //     } else {
+        //         DataTable.addFilterPanel(100, 200, 500, 200);
+        //     }
 
-        })
+        // })
 
 
     } // end of add extra
