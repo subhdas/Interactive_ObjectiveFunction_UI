@@ -74,14 +74,14 @@
 
 
             var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
-            ParC.makeParallelCoordChart('featureEngContentId', dataNumeric);
+            ParC.makeParallelCoordChart('featureEngContentId', dataNumeric, true);
         }, 0);
 
 
     }
 
 
-    ParC.makeParallelCoordChart = function (containerId = "", data) {
+    ParC.makeParallelCoordChart = function (containerId = "", data, addInteract = false) {
         var parentContainerId = "featureEnggPanel";
         $('#' + containerId).empty();
         // var w = $("#" + containerId).css('width');
@@ -100,12 +100,21 @@
 
         var margin = {
                 top: 20,
-                right: 20,
+                right: 10,
                 bottom: 30,
                 left: 10
             },
             width = w - margin.left - margin.right,
             height = h - margin.top - margin.bottom;
+
+        if (addInteract){
+             margin = {
+                 top: 20,
+                 right: 20,
+                 bottom: 30,
+                 left: 10
+             }
+        }
 
         var x = d3.scale.ordinal().rangePoints([0, width], 1),
             y = {},
@@ -198,143 +207,147 @@
                 d3.select(this).call(axis.scale(y[d]));
             })
 
-        //feature selection rects on top
-        gr.append("rect")
-            .attr('class', 'par_rect_header')
-            .attr("x", -35)
-            .attr("y", -20)
-            .style('width', '70px')
-            .style('height', '15px')
-            .style('fill', 'lightgray')
-            .on('mouseover', function (d, i) {
-                d3.select(this)
-                    .style('stroke', 'black')
-            })
-            .on('mouseout', function (d, i) {
-                d3.select(this)
-                    .style('stroke', '')
-            })
-            .on('click', function (d) {
-                var ind = ParC.userPickedAttr.indexOf(d);
-                if (ind == -1) {
-                    d3.select(this).style('fill', Main.colors.HIGHLIGHT2)
-                    ParC.userPickedAttr.push(d);
-                } else {
-                    d3.select(this).style('fill', 'lightgray')
-                    ParC.userPickedAttr.splice(ind, 1);
-                }
-            })
+        // only do the following if the following flag is true
+        if (addInteract) {
+            //feature selection rects on top
+            gr.append("rect")
+                .attr('class', 'par_rect_header')
+                .attr("x", -35)
+                .attr("y", -20)
+                .style('width', '70px')
+                .style('height', '15px')
+                .style('fill', 'lightgray')
+                .on('mouseover', function (d, i) {
+                    d3.select(this)
+                        .style('stroke', 'black')
+                })
+                .on('mouseout', function (d, i) {
+                    d3.select(this)
+                        .style('stroke', '')
+                })
+                .on('click', function (d) {
+                    var ind = ParC.userPickedAttr.indexOf(d);
+                    if (ind == -1) {
+                        d3.select(this).style('fill', Main.colors.HIGHLIGHT2)
+                        ParC.userPickedAttr.push(d);
+                    } else {
+                        d3.select(this).style('fill', 'lightgray')
+                        ParC.userPickedAttr.splice(ind, 1);
+                    }
+                })
 
-        gr.append("text")
-            .attr('class', 'par_text_header')
-            .style("text-anchor", "middle")
-            .attr("y", -9)
-            .text(function (d) {
-                return d;
-            });
-        // following for variance
-        var ypos = height - 0
-        gr.append("rect")
-            .attr('class', 'par_rect_variance')
-            .attr('id', function (d, i) {
-                return 'par_rect_var_' + i
-            })
-            .attr("x", -20)
-            .attr("y", ypos)
-            .style('width', '40px')
-            .style('height', '15px')
-            .style('fill', 'lightgray')
-            .on('mouseover', function (d, i) {
-                d3.select(this)
-                    .style('stroke', 'black')
-                ParC.hoveredItem = d;
-            })
-            .on('mouseout', function (d, i) {
-                d3.select(this)
-                    .style('stroke', '')
-                setTimeout(() => {
-                    ParC.hoveredItem = '';
+            gr.append("text")
+                .attr('class', 'par_text_header')
+                .style("text-anchor", "middle")
+                .attr("y", -9)
+                .text(function (d) {
+                    return d;
+                });
+            // following for variance
+            var ypos = height - 0
+            gr.append("rect")
+                .attr('class', 'par_rect_variance')
+                .attr('id', function (d, i) {
+                    return 'par_rect_var_' + i
+                })
+                .attr("x", -20)
+                .attr("y", ypos)
+                .style('width', '40px')
+                .style('height', '15px')
+                .style('fill', 'lightgray')
+                .on('mouseover', function (d, i) {
+                    d3.select(this)
+                        .style('stroke', 'black')
+                    ParC.hoveredItem = d;
+                })
+                .on('mouseout', function (d, i) {
+                    d3.select(this)
+                        .style('stroke', '')
+                    setTimeout(() => {
+                        ParC.hoveredItem = '';
 
-                }, 15000);
-            })
-            .on('click', function (d) {
-                var id = $(this).attr('id');
-                id = Util.getNumberFromText(id);
-                if (ParC.userVariance[d] == 'mid') {
-                    ParC.userVariance[d] = 'high';
-                    d3.select(this).style('fill', 'red')
-                    d3.select('#par_text_var_' + id).text('V-H')
+                    }, 15000);
+                })
+                .on('click', function (d) {
+                    var id = $(this).attr('id');
+                    id = Util.getNumberFromText(id);
+                    if (ParC.userVariance[d] == 'mid') {
+                        ParC.userVariance[d] = 'high';
+                        d3.select(this).style('fill', 'red')
+                        d3.select('#par_text_var_' + id).text('V-H')
 
-                } else if (ParC.userVariance[d] == 'high') {
-                    ParC.userVariance[d] = 'low';
-                    d3.select(this).style('fill', 'cyan')
-                    d3.select('#par_text_var_' + id).text('V-L')
+                    } else if (ParC.userVariance[d] == 'high') {
+                        ParC.userVariance[d] = 'low';
+                        d3.select(this).style('fill', 'cyan')
+                        d3.select('#par_text_var_' + id).text('V-L')
 
-                } else {
+                    } else {
+                        ParC.userVariance[d] = 'mid';
+                        d3.select(this).style('fill', 'lightgray')
+                        d3.select('#par_text_var_' + id).text('V-M')
+
+                    }
+                })
+            // .on("contextmenu", function (d, i) {
+            //     d3.event.preventDefault();
+            //     // react on right-clicking
+            //     console.log('main attr clicked ', d)
+            // });
+
+            gr.append("text")
+                .attr('class', 'par_text_variance')
+                .attr('id', function (d, i) {
+                    return 'par_text_var_' + i
+                })
+                .style("text-anchor", "middle")
+                .attr("y", ypos + 8)
+                .text(function (d) {
                     ParC.userVariance[d] = 'mid';
-                    d3.select(this).style('fill', 'lightgray')
-                    d3.select('#par_text_var_' + id).text('V-M')
-
-                }
-            })
-        // .on("contextmenu", function (d, i) {
-        //     d3.event.preventDefault();
-        //     // react on right-clicking
-        //     console.log('main attr clicked ', d)
-        // });
-
-        gr.append("text")
-            .attr('class', 'par_text_variance')
-            .attr('id', function (d, i) {
-                return 'par_text_var_' + i
-            })
-            .style("text-anchor", "middle")
-            .attr("y", ypos + 8)
-            .text(function (d) {
-                ParC.userVariance[d] = 'mid';
-                return 'V-M';
-            });
+                    return 'V-M';
+                });
 
 
 
-        //following for correlation
-        // tooltips
-        var div_tooltip = d3.select('body').append('div')
-            .attr('class', 'tooltip_par_correl')
-            .style('display', 'none')
-            .style('position', 'absolute');
+            //following for correlation
+            // tooltips
+            var div_tooltip = d3.select('body').append('div')
+                .attr('class', 'tooltip_par_correl')
+                .style('display', 'none')
+                .style('position', 'absolute');
 
 
-        gr.append("rect")
-            .attr('class', function (d, i) {
-                return 'par_corr_variance par_corr_' + d
-            })
-            .attr('id', function (d, i) {
-                return 'par_rect_corr_' + i
-            })
-            .attr("x", 20)
-            .attr("y", ypos)
-            .style('width', '15px')
-            .style('height', '15px')
-            .style('fill', 'black')
-            .style('opacity', 0)
-            .on('mouseover', function (d) {
-                var op = $(this).css('opacity');
-                if (op == 0) return;
+            gr.append("rect")
+                .attr('class', function (d, i) {
+                    return 'par_corr_variance par_corr_' + d
+                })
+                .attr('id', function (d, i) {
+                    return 'par_rect_corr_' + i
+                })
+                .attr("x", 20)
+                .attr("y", ypos)
+                .style('width', '15px')
+                .style('height', '15px')
+                .style('fill', 'black')
+                .style('opacity', 0)
+                .on('mouseover', function (d) {
+                    var op = $(this).css('opacity');
+                    if (op == 0) return;
 
 
-                div_tooltip.style('display', 'inline');
-                div_tooltip
-                    .html('Correlated to : ' + ParC.userCorrel[d])
-                    .style('position', 'absolute')
-                    .style('left', (d3.event.pageX - 34) + 'px')
-                    .style('top', (d3.event.pageY - 12) + 'px');
-            })
-            .on('mouseout', function (d) {
-                var op = $(this).css('opacity');
-                if (op == 0) return;
-                div_tooltip.style('display', 'none');
-            })
+                    div_tooltip.style('display', 'inline');
+                    div_tooltip
+                        .html('Correlated to : ' + ParC.userCorrel[d])
+                        .style('position', 'absolute')
+                        .style('left', (d3.event.pageX - 34) + 'px')
+                        .style('top', (d3.event.pageY - 12) + 'px');
+                })
+                .on('mouseout', function (d) {
+                    var op = $(this).css('opacity');
+                    if (op == 0) return;
+                    div_tooltip.style('display', 'none');
+                })
+        }
+
 
 
 
