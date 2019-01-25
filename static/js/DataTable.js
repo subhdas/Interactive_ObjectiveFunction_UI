@@ -24,6 +24,10 @@
     //new variabbles
     DataTable.selectedRows = {}
 
+    //user added data informative and wasteful
+    DataTable.userInformativeItems = []
+    DataTable.userWastefulItems = []
+
 
 
     DataTable.findLabelAcc = function (labelTar, labelPre, type = 'train') {
@@ -543,7 +547,7 @@
             .style('flex-direction', 'row')
             .style('width', '150px')
             .html(function (d, i) {
-                console.log(' d and i is ', d, i)
+                // console.log(' d and i is ', d, i)
                 if (i < 2) {
                     var col = $(this).siblings().attr('background');
                     if (i == 0) col = "#333"
@@ -628,7 +632,6 @@
             ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = critIdList;
 
             var idBtn = $(".btn_" + stri).attr('id')
-            // var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
             // console.log('button click check ', arr, DataTable.criticalClicked)
             if (!DataTable.criticalClicked) {
                 setTimeout(() => {
@@ -640,7 +643,6 @@
                 // console.log(' now tag is ', DataTable.criticalClicked, idBtn)
             }
             if (critIdList.length == 0 && DataTable.criticalClicked) {
-                // elem.click();
                 // $("#" + idBtn).trigger('click');
                 Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false;
                 $("#" + idBtn).click();
@@ -650,84 +652,38 @@
             }
 
             setTimeout(() => {
-            //non-critical items find
-            var critIdList = []
-            for (var item in DataTable.criticalInteract) {
-                if (DataTable.criticalInteract[item] == 'no') {
-                    // console.log(' checked yes found ', item, DataTable.criticalInteract[item])
-                    critIdList.push(item)
+                //non-critical items find
+                var critIdList = []
+                for (var item in DataTable.criticalInteract) {
+                    if (DataTable.criticalInteract[item] == 'no') {
+                        // console.log(' checked yes found ', item, DataTable.criticalInteract[item])
+                        critIdList.push(item)
+                    }
                 }
-            }
-            critIdList = Util.getUniqueArray(critIdList);
-            // console.log('critical id list found ', critIdList)
-            var stri2 = 'Non-Critical'
-            Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; // !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
-            ConsInt.getActiveConstraints();
-            ConsInt.activeConstraints[stri2]['input']["labelitemsConId_" + stri2] = critIdList;
+                critIdList = Util.getUniqueArray(critIdList);
+                // console.log('critical id list found ', critIdList)
+                var stri2 = 'Non-Critical'
+                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; // !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
+                ConsInt.getActiveConstraints();
+                ConsInt.activeConstraints[stri2]['input']["labelitemsConId_" + stri2] = critIdList;
 
-            var idBtn = $(".btn_" + stri2).attr('id')
-            var arr = ConsInt.activeConstraints[stri2]['input']["labelitemsConId_" + stri2]
-            // console.log('button click check ', arr, DataTable.criticalClicked)
-            if (arr.length > 0 && !DataTable.non_criticalClicked) {
-                setTimeout(() => {
-                    $("#" + idBtn).trigger('click');
-                }, 100);
-                DataTable.non_criticalClicked = true;
-                console.log(' now tag is ', DataTable.non_criticalClicked, idBtn, critIdList)
-            }
-            if (arr.length == 0 && DataTable.non_criticalClicked) {
-                // elem.click();
-                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false;
-                $("#" + idBtn).click();
-                DataTable.non_criticalClicked = false;
-            }
+                var idBtn = $(".btn_" + stri2).attr('id')
+                // console.log('button click check ', arr, DataTable.criticalClicked)
+                if (critIdList.length > 0 && !DataTable.non_criticalClicked) {
+                    setTimeout(() => {
+                        $("#" + idBtn).trigger('click');
+                    }, 100);
+                    DataTable.non_criticalClicked = true;
+                    // console.log(' now tag is ', DataTable.non_criticalClicked, idBtn, critIdList)
+                }
+                if (critIdList.length == 0 && DataTable.non_criticalClicked) {
+                    Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false;
+                    $("#" + idBtn).click();
+                    DataTable.non_criticalClicked = false;
+                }
             }, 800);
-
-
             return
-            // var stri = 'Critical-Items'
-            // Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
-            // ConsInt.getActiveConstraints();
-            // // console.log('active cons ', ConsInt.activeConstraints)
-            // try {
-            //     var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
-            //     var ind = arr.indexOf(id)
-            //     if (ind != -1) {
-            //         arr.splice(ind, 1);
-            //     } else {
-            //         arr.push(id);
-            //     }
-            // } catch (e) {
-            //     ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [id]
-            // }
-            // setTimeout(function () {
-            //     $(".btn_" + stri).trigger("click");
-            // }, 1000)
 
-
-            // // if(typeof ConsInt.activeConstraints[stri] != 'undefined'){
-            // try {
-            //     var item = ConsInt.activeConstraints[stri]
-            //     // $(".btn_"+stri).trigger("click");
-            //     var x = document.getElementsByClassName("btn_" + stri);
-            //     var id = $(".btn_" + stri).attr('id')
-            //     var elem = document.getElementById(id);
-            //     // elem.click();
-            //     var arr = ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri]
-            //     if (!DataTable.criticalClicked) {
-            //         elem.click()
-            //         DataTable.criticalClicked = true;
-            //     }
-            //     if (arr.length == 0 && DataTable.criticalClicked) {
-            //         elem.click();
-            //         DataTable.criticalClicked = false;
-            //     }
-
-            //     console.log('clicked button cons ', ConsInt.activeConstraints[stri], item, id)
-            // } catch (e) {
-            //     console.log('error in clicking button ', e, ConsInt.activeConstraints, stri)
-
-            // }
         })
 
 
@@ -740,7 +696,8 @@
         $(".infoRect").on('click', function (d, i) {
             var id = $(this).attr('id');
             id = Util.getNumberFromText(id);
-            var val = DataTable.inforInteract[d.id];
+            var val = DataTable.inforInteract[id];
+            console.log(' clicked info rect ', id, val)
             if (val == '-') {
                 DataTable.inforInteract[id] = 'yes'
                 $(this).css('background', Main.colors.HIGHLIGHT);
@@ -751,6 +708,22 @@
                 DataTable.inforInteract[id] = '-'
                 $(this).css('background', 'lightgray');
             }
+
+            var critIdList = []
+            for (var item in DataTable.inforInteract) {
+                if (DataTable.inforInteract[item] == 'yes') {
+                    critIdList.push(item)
+                }
+            }
+            DataTable.userInformativeItems = Util.getUniqueArray(critIdList);
+
+            var critIdList = []
+            for (var item in DataTable.inforInteract) {
+                if (DataTable.inforInteract[item] == 'no') {
+                    critIdList.push(item)
+                }
+            }
+            DataTable.userWastefulItems = Util.getUniqueArray(critIdList);
         })
 
 
