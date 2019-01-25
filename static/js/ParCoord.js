@@ -99,8 +99,8 @@
         console.log('par coord width is ', w, h)
 
         var margin = {
-                top: 30,
-                right: 10,
+                top: 20,
+                right: 20,
                 bottom: 30,
                 left: 10
             },
@@ -198,6 +198,7 @@
                 d3.select(this).call(axis.scale(y[d]));
             })
 
+        //feature selection rects on top
         gr.append("rect")
             .attr('class', 'par_rect_header')
             .attr("x", -35)
@@ -231,11 +232,13 @@
             .text(function (d) {
                 return d;
             });
-
-        var ypos = height - 0
         // following for variance
+        var ypos = height - 0
         gr.append("rect")
             .attr('class', 'par_rect_variance')
+            .attr('id', function (d, i) {
+                return 'par_rect_var_' + i
+            })
             .attr("x", -20)
             .attr("y", ypos)
             .style('width', '40px')
@@ -252,18 +255,26 @@
                 setTimeout(() => {
                     ParC.hoveredItem = '';
 
-                }, 4000);
+                }, 15000);
             })
             .on('click', function (d) {
+                var id = $(this).attr('id');
+                id = Util.getNumberFromText(id);
                 if (ParC.userVariance[d] == 'mid') {
                     ParC.userVariance[d] = 'high';
                     d3.select(this).style('fill', 'red')
+                    d3.select('#par_text_var_' + id).text('V-H')
+
                 } else if (ParC.userVariance[d] == 'high') {
                     ParC.userVariance[d] = 'low';
                     d3.select(this).style('fill', 'cyan')
+                    d3.select('#par_text_var_' + id).text('V-L')
+
                 } else {
                     ParC.userVariance[d] = 'mid';
                     d3.select(this).style('fill', 'lightgray')
+                    d3.select('#par_text_var_' + id).text('V-M')
+
                 }
             })
         // .on("contextmenu", function (d, i) {
@@ -274,12 +285,31 @@
 
         gr.append("text")
             .attr('class', 'par_text_variance')
+            .attr('id', function (d, i) {
+                return 'par_text_var_' + i
+            })
             .style("text-anchor", "middle")
             .attr("y", ypos + 8)
             .text(function (d) {
                 ParC.userVariance[d] = 'mid';
                 return 'V-M';
             });
+
+
+        //following for correlation
+        gr.append("rect")
+            .attr('class', function(d,i){
+                return   'par_corr_variance par_corr_'+d
+            })
+            .attr('id', function (d, i) {
+                return 'par_rect_corr_' + i
+            })
+            .attr("x", 20)
+            .attr("y", ypos)
+            .style('width', '15px')
+            .style('height', '15px')
+            .style('fill', 'black')
+            .style('opacity', 0)
 
         // Add and store a brush for each axis.
         g.append("g")
@@ -315,11 +345,17 @@
                 if (key == 'clear') {
                     try {
                         delete ParC.userCorrel[ParC.hoveredItem];
+
                     } catch (e) {
 
                     }
                 } else {
-                    if(key != ParC.hoveredItem) ParC.userCorrel[ParC.hoveredItem] = key;
+                    if (key != ParC.hoveredItem) {
+                        ParC.userCorrel[ParC.hoveredItem] = key;
+                        d3.select('.par_corr_' + ParC.hoveredItem)
+                        .style('opacity', 1);
+
+                    }
                 }
             },
             items: itemObj
