@@ -634,7 +634,8 @@
                 setTimeout(() => {
                     // $("#" + idBtn).trigger('click');
                     $("#" + idBtn).click();
-                }, 100);
+                }, 10
+                0);
                 // $("#" + idBtn).trigger('click');
                 DataTable.criticalClicked = true;
                 console.log(' now tag is ', DataTable.criticalClicked, idBtn)
