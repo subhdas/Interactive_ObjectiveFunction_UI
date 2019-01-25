@@ -28,6 +28,7 @@
     // Main.labels = ['sports', 'economical', 'utility'];
     Main.labels = ['economical', 'sports', 'utility'];
     Main.contentHeightTopBar = '300';
+    Main.contentWidthTopBar = '700';
 
 
     /*

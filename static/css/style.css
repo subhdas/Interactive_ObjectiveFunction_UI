@@ -66,7 +66,7 @@ body {
 #constrainPanel {
     display: flex;
     flex-direction: column;
-    /* width: 74%; */
+    width: 'auto';
     height: 100%;
     color: #555;
     font-size: 0.8em;
@@ -85,8 +85,8 @@ body {
 #featureEnggPanel {
     display: flex;
     flex-direction: column;
-    /* width: 30%; */
-    width : 800px;
+    width: 60%;
+    /* width : 800px; */
     height: 100%;
     color: #555;
     font-size: 0.8em;
@@ -105,7 +105,7 @@ body {
 #modelExplorePanel {
     display: flex;
     flex-direction: column;
-    /* width: 35%; */
+    width: 'auto';
     height: 100%;
     color: #555;
     font-size: 0.8em;

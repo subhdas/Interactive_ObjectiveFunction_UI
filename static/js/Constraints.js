@@ -17,7 +17,7 @@
             'Same-Label': {
                 // 'Add': true,
                 'Checked': false,
-                'UserWt' : 1,
+                'UserWt': 1,
             },
             'Similarity-Metric': {
                 // 'Add': true,
@@ -138,11 +138,11 @@
         for (var item in Cons.typeConstraints) {
             console.log('item is ', item)
             htmlStr += "<div id= 'typeConst_" + item + "' class= 'typeCons'> <div class ='headRowCons' id= 'headRowCons_" + item + "'> " + item + "</div>"
-            htmlStr += "<div parent = '"+item+"' id='resizable' class='ui-widget-content resizeWeight'></div>";
+            htmlStr += "<div parent = '" + item + "' id='resizable' class='ui-widget-content resizeWeight'></div>";
             htmlStr += "<div class= 'contentRowCons'>"
             var k = 0;
 
-            htmlStr += "<ul class ='sortable' parent = '"+item+"' class='ui-sortable'>";
+            htmlStr += "<ul class ='sortable' parent = '" + item + "' class='ui-sortable'>";
             // < ul id = "sortable" >
             //     <
             //     li class = "ui-state-default" > Item 1 < /li> <
@@ -156,7 +156,7 @@
             //     li class = "ui-state-default" > Item 9 < /li> <
             //     /ul>
 
-            
+
             for (var val in Cons.typeConstraints[item]) {
                 if (val == 'misc') continue;
                 htmlStr += "<li class = 'ui-state-default' >"
@@ -200,56 +200,25 @@
         }
 
 
-        //activate sortable effect
-        // $(".sortable").sortable({
-        //     change: function (event, ui) {
-        //         var pos = ui.helper.index() < ui.placeholder.index() ?
-        //             {
-        //                 start: ui.helper.index(),
-        //                 end: ui.placeholder.index()
-        //             } :
-        //             {
-        //                 start: ui.placeholder.index(),
-        //                 end: ui.helper.index()
-        //             }
-
-        //         $(this)
-        //             .children().removeClass('highlight')
-        //             .not(ui.helper).slice(pos.start, pos.end).addClass('highlight');
-        //     },
-        //     stop: function (event, ui) {
-        //         $(this).children().removeClass('highlight');
-        //     }
-        // });
-
         $(".sortable").sortable({
             placeholder: "ui-state-highlight",
-            out : function(e,ui){
-                // console.log(' changed ', ui, e);
-                   var par = $(this).parents();
-                   var children = $(par[0]).find('.wrapRowCons')
-                   //    var children = par.children()
-                //    console.log('parent is ', children)
-            
-             var type = $(children[0]).attr('parent');
-             console.log(' found of type ', type)
-                var wt = 1.0;
-                var inc = 1/children.length;
-               children.each(function(d){
-                   var txt = $(this).text();
-                   console.log(' child is ', txt)
-                   Cons.typeConstraints[type][txt] = wt
-                   wt -= inc;
+            out: function (e, ui) {
+                var par = $(this).parents();
+                var children = $(par[0]).find('.wrapRowCons')
 
-               })
+                var type = $(children[0]).attr('parent');
+                var wt = 1.0;
+                var inc = 1 / children.length;
+                children.each(function (d) {
+                    var txt = $(this).text();
+                    //    console.log(' child is ', txt)
+                    Cons.typeConstraints[type][txt]['UserWt'] = wt
+                    wt -= inc;
+                })
             }
         });
 
-        //  $(".sortable").sortable();
-         $(".sortable").disableSelection();
-
-            // $("#sortable").sortable();
-
+        $(".sortable").disableSelection();
 
 
         $(function () {
@@ -258,16 +227,15 @@
                 maxHeight: 20,
                 minHeight: 20,
                 // animate: true
-                  create: function (event, ui) {
-                      // Prefers an another cursor with two arrows
-                      $(".ui-resizable-handle").css("cursor", "col-resize");
-                  },
-                  resize: function(e, ui){
-                      var wd = $(this).width();
-                      var par = $(this).attr('parent');
-                      Cons.userWtConst[par] = +(wd/Cons.origWidthConsBars).toFixed(3);
+                create: function (event, ui) {
+                    $(".ui-resizable-handle").css("cursor", "col-resize");
+                },
+                resize: function (e, ui) {
+                    var wd = $(this).width();
+                    var par = $(this).attr('parent');
+                    Cons.userWtConst[par] = +(wd / Cons.origWidthConsBars).toFixed(3);
                     //   console.log('width bar is ', wd);
-                  }
+                }
             });
         });
 
@@ -302,7 +270,7 @@
 
         Cons.origWidthConsBars = $(".resizeWeight").width();
 
-   
+
 
         //events
         $('.constOpt').on('click', function (e) {

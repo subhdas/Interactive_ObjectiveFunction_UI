@@ -38,7 +38,8 @@
     ParC.featureEditorCreate = function (containerId = "") {
         if (containerId == "") containerId = "featureEnggPanel";
         $("#" + containerId).empty();
-        $("#" + containerId).css('height', Main.contentHeightTopBar + 'px');
+        // $("#" + containerId).css('height', Main.contentHeightTopBar + 'px');
+        // $("#" + containerId).css('height', Main.contentWidthTopBar + 'px');
          //  $("#" + containerId).css('width', '1200px');
 
         var htmlStr = "<div class = 'featureEngHeader' id = 'featureEngHeaderId' ></div>";
@@ -63,24 +64,35 @@
 
 
        
+        setTimeout(() => {
         var arr = ['id'];
         arr.push.apply(arr, Object.keys(Main.numericalAttributes));
 
 
         var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
         ParC.makeParallelCoordChart('featureEngContentId', dataNumeric);
+        }, 0);
+    
+            
     }
 
 
     ParC.makeParallelCoordChart = function (containerId = "", data) {
-
+        var parentContainerId = "featureEnggPanel";
         $('#' + containerId).empty();
-        var w = $("#" + containerId).css('width');
-        w = parseFloat(w)*0.90;
-        var h = $("#" + containerId).css('height');
-        h = parseFloat(h)*0.90;
+        // var w = $("#" + containerId).css('width');
+        var w = $("#" + containerId).width()
+        w = parseFloat(w)
+        // var h = $("#" + containerId).css('height');
+        var h = $("#" + containerId).height();
+        h = parseFloat(h)
 
-        // console.log('width is ', w, h)
+        if(w < 120 && h < 120){
+            w = 650;
+            h = 300;
+        }
+
+        console.log('par coord width is ', w, h)
 
         var margin = {
                 top: 30,
