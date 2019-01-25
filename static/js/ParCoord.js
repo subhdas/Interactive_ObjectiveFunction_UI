@@ -296,10 +296,18 @@
             });
 
 
+
         //following for correlation
+        // tooltips
+        var div_tooltip = d3.select('body').append('div')
+            .attr('class', 'tooltip_par_correl')
+            .style('display', 'none')
+            .style('position', 'absolute');
+
+
         gr.append("rect")
-            .attr('class', function(d,i){
-                return   'par_corr_variance par_corr_'+d
+            .attr('class', function (d, i) {
+                return 'par_corr_variance par_corr_' + d
             })
             .attr('id', function (d, i) {
                 return 'par_rect_corr_' + i
@@ -310,6 +318,25 @@
             .style('height', '15px')
             .style('fill', 'black')
             .style('opacity', 0)
+            .on('mouseover', function (d) {
+                var op = $(this).css('opacity');
+                if (op == 0) return;
+
+
+                div_tooltip.style('display', 'inline');
+                div_tooltip
+                    .html('Correlated to : ' + ParC.userCorrel[d])
+                    .style('position', 'absolute')
+                    .style('left', (d3.event.pageX - 34) + 'px')
+                    .style('top', (d3.event.pageY - 12) + 'px');
+            })
+            .on('mouseout', function (d) {
+                var op = $(this).css('opacity');
+                if (op == 0) return;
+                div_tooltip.style('display', 'none');
+            })
+
+
 
         // Add and store a brush for each axis.
         g.append("g")
@@ -345,7 +372,8 @@
                 if (key == 'clear') {
                     try {
                         delete ParC.userCorrel[ParC.hoveredItem];
-
+                        d3.select('.par_corr_' + ParC.hoveredItem)
+                            .style('opacity', 0);
                     } catch (e) {
 
                     }
@@ -353,7 +381,7 @@
                     if (key != ParC.hoveredItem) {
                         ParC.userCorrel[ParC.hoveredItem] = key;
                         d3.select('.par_corr_' + ParC.hoveredItem)
-                        .style('opacity', 1);
+                            .style('opacity', 1);
 
                     }
                 }

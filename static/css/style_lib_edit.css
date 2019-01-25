@@ -60,7 +60,8 @@
 }
 
 
-  .tooltip_verBarFeat{
+  .tooltip_verBarFeat,
+  .tooltip_par_correl {
       display: flex;
       position      : absolute;
       text-align    : center;
