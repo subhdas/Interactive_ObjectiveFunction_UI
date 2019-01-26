@@ -19,6 +19,7 @@
 
     //for critical items and informative sample toggle switches
     DataTable.criticalInteract = {}
+    DataTable.criticalInteractAll = {}
     DataTable.inforInteract = {}
 
     //new variabbles
@@ -536,13 +537,19 @@
                 return '';
             })
 
+
+
         //adds critical and informative sample interactions
         table.selectAll('tr')
             .insert("td", ":first-child")
-            .attr('id', 'critical_')
+            // .attr('id', 'critical_')
+            .attr('id', function (d, i) {
+                return 'critical_' + i
+            })
             // .style('background', 'white')
             .style('display', function (d, i) {
                 if (i != 0) return 'flex'
+                // return flex;
             })
             .style('flex-direction', 'row')
             .style('width', '150px')
@@ -555,8 +562,6 @@
                     $(this).css('background', col);
                     return ""
                 } else {
-
-
                     // return ""
                     // var htmlStr = "<div class='switch switch_critical' id = 'switch_critical_" + d.id + "'><label>";
                     // htmlStr += "<input type='checkbox' id = 'check_critical_" + d.id + "'><span class='lever'></span></label></div>"
@@ -573,6 +578,21 @@
                 }
             })
 
+        // for selectall buttons
+        $("#dataViewAppTable_" + containerId)
+            .find("#critical_1")
+            // .css('background', 'yellow')
+            .html(function (d, i) {
+                // DataTable.criticalInteract[d.id] = '-'
+                // DataTable.inforInteract[d.id] = '-'
+                var htmlStr = "<div class ='containIntBtns' ><div class = 'tableBtnInt criticalRectAll' id = 'criticalRectId_" + containerId + "' parent = '"+containerId+"' ></div>";
+                htmlStr += "<div class = 'tableBtnInt infoRectAll' id = 'infoRectId_" + containerId + "' ></div>";
+                htmlStr += "</div>"
+                return htmlStr;
+            })
+
+
+
         // style for critical and informative samples
         $(".containIntBtns").css("display", 'flex')
         $(".containIntBtns").css("margin-right", '4px')
@@ -583,6 +603,61 @@
         $(".tableBtnInt").css("background", 'lightgray')
         $(".tableBtnInt").css("border-radius", '4px')
         $(".tableBtnInt").css("margin", '4px')
+
+
+        //interactions for select all buttons
+        $(".criticalRectAll").on('mouseover', function (d, i) {
+            $(this).css('border', '1px solid black')
+        })
+        $(".criticalRectAll").on('mouseout', function (d, i) {
+            $(this).css('border', '')
+        })
+        $(".criticalRectAll").on('click', function (d, i) {
+             if (DataTable.criticalSwitch) {
+                 return
+             }
+             DataTable.criticalSwitch = true;
+             setTimeout(function () {
+                 DataTable.criticalSwitch = false;
+             }, 500)
+            var id = -1;
+            var val = DataTable.criticalInteractAll[id];
+            if (val == '-') {
+                DataTable.criticalInteractAll[id] = 'yes'
+                $(this).css('background', Main.colors.HIGHLIGHT);
+            } else if (val == 'yes') {
+                DataTable.criticalInteractAll[id] = 'no'
+                $(this).css('background', Main.colors.HIGHLIGHT2);
+            } else {
+                DataTable.criticalInteractAll[id] = '-'
+                $(this).css('background', 'lightgray');
+            }
+
+            var arr = ParC.filteredData;
+
+            var cont = $(this).attr('parent')
+            $("#dataViewAppTable_" + cont)
+                .find(".trTable:visible")
+                .each(function (i, el) {
+                    console.log(' found is ', i, cont, el)
+                    var id = $(this).attr('id');
+                    id = Util.getNumberFromText(id);
+                    arr.push(id)
+                });
+            // if (arr.length == 0) {
+            //     Main.trainData.forEach(function (d, i) {
+            //         arr.push(d.id);
+            //     })
+            // }
+
+            // $(".criticalRect").trigger('click');
+            // $(".criticalRect").click();
+            var col = $(this).css('background');
+            for (var i = 0; i < arr.length; i++) {
+                $("#criticalRectId_" + arr[i]).css('background', col)
+            }
+
+        })
 
 
 
@@ -946,10 +1021,9 @@
 
     DataTable.hideSelectedRows = function (arrIds = []) {
         $(".trTable").hide();
-        for (var item in arrIds) {
-            $("#tr_" + item).show();
+        for (var i=0;i<arrIds.length;i++) {
+            $("#tr_" + arrIds[i]).show();
             // $(".trTable").css('opacity', 1);
-
         }
     }
 

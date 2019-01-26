@@ -191,7 +191,7 @@
                     transition(d3.select(this)).attr("transform", "translate(" + x(d) + ")");
                     transition(foreground).attr("d", path);
 
-                    console.log(' brusing drag ', dragging)
+                    // console.log(' brusing drag ', dragging)
                     background
                         .attr("d", path)
                         .transition()
