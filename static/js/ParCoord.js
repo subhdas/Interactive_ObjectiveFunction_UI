@@ -91,7 +91,7 @@
         var h = $("#" + containerId).height();
         h = parseFloat(h)
 
-        if (w < 120 && h < 120) {
+        if ((w < 120 && h < 120) || addInteract) {
             w = 650;
             h = 300;
         }

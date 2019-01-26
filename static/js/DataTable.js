@@ -632,7 +632,7 @@
                 DataTable.criticalInteractAll[id] = '-'
                 $(this).css('background', 'lightgray');
             }
-
+            var col = $(this).css('background');
             var arr = ParC.filteredData;
 
             var cont = $(this).attr('parent')
@@ -643,6 +643,8 @@
                     var id = $(this).attr('id');
                     id = Util.getNumberFromText(id);
                     arr.push(id)
+                    $("#criticalRectId_" + id).css('background', col)
+
                 });
             // if (arr.length == 0) {
             //     Main.trainData.forEach(function (d, i) {
@@ -652,7 +654,6 @@
 
             // $(".criticalRect").trigger('click');
             // $(".criticalRect").click();
-            var col = $(this).css('background');
             for (var i = 0; i < arr.length; i++) {
                 $("#criticalRectId_" + arr[i]).css('background', col)
             }
