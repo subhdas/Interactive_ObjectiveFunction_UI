@@ -284,7 +284,7 @@
             var name = $(this).attr('given');
             var item = $(this).attr('parent');
             console.log('clicked checkbox ', name, item);
-            // Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
+            if (!DataTable.fromTableInferred) Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
             Cons.lastItemClicked = name;
             // $(this).find('button').css('display', 'block');
             if (Cons.typeConstraints[item][name]['Checked'] == true) {

@@ -158,6 +158,7 @@
 					if (!ConfM.cellClickedTrain) {
 						var idList = BarM.modelData[0]['predictions']
 							['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
+						
 						DataTable.hideRowsById(idList, 'train');
 					}
 

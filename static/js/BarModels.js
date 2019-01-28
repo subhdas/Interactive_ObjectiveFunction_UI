@@ -26,6 +26,48 @@
     }
 
 
+    BarM.computeIdsConfMatrAllModel = function(){
+        for(var item in BarM.allModelData){
+            var mod = BarM.allModelData[item];
+            var confMatrixTrain = JSON.parse(mod['trainConfMatrix'])
+
+              var dataObj = {};
+              for (var i = 0; i < confMatrixTrain.length; i++) {
+                  var row = confMatrixTrain[i];
+                  for (var j = 0; j < row.length; j++) {
+                      var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'train')
+                      var obj = {
+                          'data_idList': idList,
+                          'num_pred': row[j]
+                      }
+                      dataObj[i + '_' + j] = obj;
+                  }
+              }
+              BarM.allModelData[item]['confMatTrain_ids'] = dataObj;
+
+
+            var confMatrixTest = JSON.parse(mod['testConfMatrix'])
+
+              // test conf matr
+              var dataObj = {};
+              for (var i = 0; i < confMatrixTest.length; i++) {
+                  var row = confMatrixTest[i];
+                  for (var j = 0; j < row.length; j++) {
+                      var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'test')
+                      var obj = {
+                          'data_idList': idList,
+                          'num_pred': row[j]
+                      }
+                      dataObj[i + '_' + j] = obj;
+                  }
+              }
+              BarM.allModelData[item]['confMatTest_ids'] = dataObj;
+
+
+        }
+    }
+
+
     BarM.makeStackedModelBars = function(containerId = "modelExplorePanel") {
         var data = [{
             data: [{

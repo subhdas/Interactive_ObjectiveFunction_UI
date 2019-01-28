@@ -21,6 +21,7 @@
     DataTable.criticalInteract = {}
     DataTable.criticalInteractAll = {}
     DataTable.inforInteract = {}
+    DataTable.inforInteractaLL = {}
 
     //new variabbles
     DataTable.selectedRows = {}
@@ -282,6 +283,7 @@
                 BarM.modelData[0]['predictions']['confMatTest_ids'] = dataObj;
 
 
+                BarM.computeIdsConfMatrAllModel();
 
                 StarM.makeStarPlot();
                 ConfM.makeConfMatrix(confMatrixTrain, 'train');
@@ -639,26 +641,53 @@
             $("#dataViewAppTable_" + cont)
                 .find(".trTable:visible")
                 .each(function (i, el) {
-                    console.log(' found is ', i, cont, el)
+                    // console.log(' found is ', i, cont, el)
                     var id = $(this).attr('id');
                     id = Util.getNumberFromText(id);
                     arr.push(id)
                     $("#criticalRectId_" + id).css('background', col)
 
                 });
-            // if (arr.length == 0) {
-            //     Main.trainData.forEach(function (d, i) {
-            //         arr.push(d.id);
-            //     })
-            // }
-
-            // $(".criticalRect").trigger('click');
-            // $(".criticalRect").click();
-            for (var i = 0; i < arr.length; i++) {
-                $("#criticalRectId_" + arr[i]).css('background', col)
-            }
 
         })
+
+
+            $(".infoRectAll").on('click', function (d, i) {
+                if (DataTable.criticalSwitch) {
+                    return
+                }
+                DataTable.criticalSwitch = true;
+                setTimeout(function () {
+                    DataTable.criticalSwitch = false;
+                }, 500)
+                var id = -1;
+                var val = DataTable.inforInteractaLL[id];
+                if (val == '-') {
+                    DataTable.inforInteractaLL[id] = 'yes'
+                    $(this).css('background', Main.colors.HIGHLIGHT);
+                } else if (val == 'yes') {
+                    DataTable.inforInteractaLL[id] = 'no'
+                    $(this).css('background', Main.colors.HIGHLIGHT2);
+                } else {
+                    DataTable.inforInteractaLL[id] = '-'
+                    $(this).css('background', 'lightgray');
+                }
+                var col = $(this).css('background');
+                var arr = ParC.filteredData;
+
+                var cont = $(this).attr('parent')
+                $("#dataViewAppTable_" + cont)
+                    .find(".trTable:visible")
+                    .each(function (i, el) {
+                        console.log(' found is ', i, cont, el)
+                        var id = $(this).attr('id');
+                        id = Util.getNumberFromText(id);
+                        arr.push(id)
+                        $("#criticalRectId_" + id).css('background', col)
+
+                    });
+
+            })
 
 
 
@@ -703,6 +732,10 @@
             critIdList = Util.getUniqueArray(critIdList);
             // console.log('critical id list found ', critIdList)
             var stri = 'Critical-Items'
+            DataTable.fromTableInferred = true;
+            setTimeout(() => {
+                DataTable.fromTableInferred = false;
+            }, 3000);
             Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; // !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
             ConsInt.getActiveConstraints();
             ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = critIdList;

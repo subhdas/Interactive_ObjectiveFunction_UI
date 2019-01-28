@@ -166,6 +166,15 @@
             $(this).css('border', selBorder)
 
             DataTable.modelUpdateLabel(idNum);
+
+
+            var mod = BarM.allModelData[idNum];
+            confMatrixTrain = mod['trainConfMatrix']
+            confMatrixTest = mod['testConfMatrix']
+
+            confMatrixTrain = JSON.parse(confMatrixTrain)
+            confMatrixTest = JSON.parse(confMatrixTest)
+
             //to be done
             ConfM.makeConfMatrix(confMatrixTrain, 'train');
             ConfM.makeConfMatrix(confMatrixTest, 'test');
