@@ -156,16 +156,21 @@
 
 				if (type == 'train') {
 					if (!ConfM.cellClickedTrain) {
-						var idList = BarM.modelData[0]['predictions']
-							['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
+						// var idList = BarM.modelData[0]['predictions']
+						// 	['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
 						
+
+						var idList = BarM.allModelData[BarM.selectedModelId]
+							['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
 						DataTable.hideRowsById(idList, 'train');
 					}
 
 				} else {
 					//test
 					if (!ConfM.cellClickedTest) {
-						var idList = BarM.modelData[0]['predictions']
+						// var idList = BarM.modelData[0]['predictions']
+						// 	['confMatTest_ids'][idNum + '_' + [i]]['data_idList'];
+						var idList = BarM.allModelData[BarM.selectedModelId]
 							['confMatTest_ids'][idNum + '_' + [i]]['data_idList'];
 						DataTable.hideRowsById(idList, 'test');
 					}

@@ -30,12 +30,12 @@
         for(var item in BarM.allModelData){
             var mod = BarM.allModelData[item];
             var confMatrixTrain = JSON.parse(mod['trainConfMatrix'])
-
+             console.log(' checking for ' , item, confMatrixTrain)
               var dataObj = {};
               for (var i = 0; i < confMatrixTrain.length; i++) {
                   var row = confMatrixTrain[i];
                   for (var j = 0; j < row.length; j++) {
-                      var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'train')
+                      var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'train', item)
                       var obj = {
                           'data_idList': idList,
                           'num_pred': row[j]
@@ -53,7 +53,7 @@
               for (var i = 0; i < confMatrixTest.length; i++) {
                   var row = confMatrixTest[i];
                   for (var j = 0; j < row.length; j++) {
-                      var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'test')
+                      var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'test', item)
                       var obj = {
                           'data_idList': idList,
                           'num_pred': row[j]

@@ -32,7 +32,7 @@
 
 
 
-    DataTable.findLabelAcc = function (labelTar, labelPre, type = 'train') {
+    DataTable.findLabelAcc = function (labelTar, labelPre, type = 'train', index = -1 ) {
 
         var data = [];
         if (type == 'train') {
@@ -46,6 +46,14 @@
             // console.log('data check ', d , Main.targetName, Main.predictedName)
             var predVal = BarM.modelData[0]['predictions']['trainPred'][d.id];
             if (type == 'test') predVal = BarM.modelData[0]['predictions']['testPred'][d.id];
+
+            if (index != -1) {
+                if (type == 'train'){
+                    predVal = BarM.allModelData[index]['trainPred'][d.id];
+                }else{
+                    predVal = BarM.allModelData[index]['testPred'][d.id];
+                }
+            } 
 
             if (d[Main.targetName] == labelTar && predVal == labelPre) {
                 idList.push(d.id);
