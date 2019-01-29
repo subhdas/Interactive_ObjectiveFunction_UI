@@ -28,6 +28,7 @@
 
     BarM.computeIdsConfMatrAllModel = function(){
         for(var item in BarM.allModelData){
+            if(item == 0)continue
             var mod = BarM.allModelData[item];
             var confMatrixTrain = JSON.parse(mod['trainConfMatrix'])
              console.log(' checking for ' , item, confMatrixTrain)

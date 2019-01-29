@@ -289,7 +289,7 @@
                     }
                 }
                 BarM.modelData[0]['predictions']['confMatTest_ids'] = dataObj;
-
+                BarM.allModelData[0] = BarM.modelData[0]['predictions']
 
                 BarM.computeIdsConfMatrAllModel();
 

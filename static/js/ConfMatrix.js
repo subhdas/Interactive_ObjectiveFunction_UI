@@ -203,7 +203,10 @@
 					ConfM.cellClickedTrain = true;
 					ConfM.cellColorTrain = $(this).css('fill')
 					$("#dataViewAppTable_tableContent").find('tr').show();
-					var idList = BarM.modelData[0]['predictions']
+					// var idList = BarM.modelData[0]['predictions']
+					// 	['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
+
+					var idList = BarM.allModelData[BarM.selectedModelId]
 						['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
 					DataTable.hideRowsById(idList, 'train');
 					$(this).css('fill', Main.colors.HIGHLIGHT2);
@@ -223,7 +226,9 @@
 						ConfM.cellColorTrain = $(this).css('fill')
 						$(this).css('fill', Main.colors.HIGHLIGHT2);
 						$("#dataViewAppTable_tableContent").find('tr').show();
-						var idList = BarM.modelData[0]['predictions']
+						// var idList = BarM.modelData[0]['predictions']
+						// 	['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
+						var idList = BarM.allModelData[BarM.selectedModelId]
 							['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
 						DataTable.hideRowsById(idList, 'train');
 					}
@@ -236,7 +241,9 @@
 					ConfM.cellClickedTest = true;
 					ConfM.cellColorTest = $(this).css('fill')
 					$("#dataViewAppTable_tableContentTest").find('tr').show();
-					var idList = BarM.modelData[0]['predictions']
+					// var idList = BarM.modelData[0]['predictions']
+					// 	['confMatTest_ids'][idNum + '_' + [i]]['data_idList'];
+					var idList = BarM.allModelData[BarM.selectedModelId]
 						['confMatTest_ids'][idNum + '_' + [i]]['data_idList'];
 					DataTable.hideRowsById(idList, 'test');
 					$(this).css('fill', Main.colors.HIGHLIGHT2);
@@ -256,7 +263,9 @@
 						ConfM.cellColorTest = $(this).css('fill')
 						$(this).css('fill', Main.colors.HIGHLIGHT2);
 						$("#dataViewAppTable_tableContentTest").find('tr').show();
-						var idList = BarM.modelData[0]['predictions']
+						// var idList = BarM.modelData[0]['predictions']
+						// 	['confMatTest_ids'][idNum + '_' + [i]]['data_idList'];
+						var idList = BarM.allModelData[BarM.selectedModelId]
 							['confMatTest_ids'][idNum + '_' + [i]]['data_idList'];
 						DataTable.hideRowsById(idList, 'test');
 					}
