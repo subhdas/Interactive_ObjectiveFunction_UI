@@ -23,7 +23,9 @@
         '-1': '-'
     }
     DataTable.inforInteract = {}
-    DataTable.inforInteractaLL = {}
+    DataTable.inforInteractaLL = {
+        '-1' : '-'
+    }
 
     //new variabbles
     DataTable.selectedRows = {}
@@ -673,7 +675,7 @@
                     id = Util.getNumberFromText(id);
                     // arr.push(id)
                     var back = $("#criticalRectId_" + id).css('background-color')
-                    console.log(' found back col as ', back)
+                    // console.log(' found back col as ', back)
                     if (back == 'rgb(194, 53, 115)') {
                         critIdList.push(id);
                     }
@@ -721,20 +723,47 @@
                 $(this).css('background', 'lightgray');
             }
             var col = $(this).css('background');
-            var arr = ParC.filteredData;
+            // var arr = ParC.filteredData;
 
             var cont = $(this).attr('parent')
             $("#dataViewAppTable_" + cont)
                 .find(".trTable:visible")
                 .each(function (i, el) {
-                    console.log(' found is ', i, cont, el)
+                    // console.log(' found is ', i, cont, el)
                     var id = $(this).attr('id');
                     id = Util.getNumberFromText(id);
-                    arr.push(id)
+                    // arr.push(id)
                     $("#infoRectId_" + id).css('background', col)
 
                 });
 
+
+
+
+            var critIdList = [];
+            $("#dataViewAppTable_" + cont)
+                .find(".trTable")
+                .each(function (i, el) {
+                    // console.log(' found is ', i, cont, el)
+                    var id = $(this).attr('id');
+                    id = Util.getNumberFromText(id);
+                    // arr.push(id)
+                    var back = $("#infoRectId_" + id).css('background-color')
+                    // console.log(' found back col as ', back)
+                    if (back == 'rgb(194, 53, 115)') {
+                        critIdList.push(id);
+                    }
+                });
+
+            DataTable.userInformativeItems = critIdList;
+
+
+            // if (critIdList.length == 0) {
+          
+            // } else {
+               
+            // }
+       
         })
 
 
