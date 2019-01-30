@@ -19,7 +19,9 @@
 
     //for critical items and informative sample toggle switches
     DataTable.criticalInteract = {}
-    DataTable.criticalInteractAll = {}
+    DataTable.criticalInteractAll = {
+        '-1': '-'
+    }
     DataTable.inforInteract = {}
     DataTable.inforInteractaLL = {}
 
@@ -646,19 +648,54 @@
                 $(this).css('background', 'lightgray');
             }
             var col = $(this).css('background');
-            var arr = ParC.filteredData;
+            // var arr = ParC.filteredData;
+            var stri = 'Critical-Items';
+            // Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; // !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
+            // ConsInt.getActiveConstraints();
+            // ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = ParC.filteredData;
 
             var cont = $(this).attr('parent')
             $("#dataViewAppTable_" + cont)
                 .find(".trTable:visible")
                 .each(function (i, el) {
+                    var id = $(this).attr('id');
+                    id = Util.getNumberFromText(id);
+                    // arr.push(id)
+                    $("#criticalRectId_" + id).css('background', col)
+                });
+
+            var critIdList = [];
+            $("#dataViewAppTable_" + cont)
+                .find(".trTable")
+                .each(function (i, el) {
                     // console.log(' found is ', i, cont, el)
                     var id = $(this).attr('id');
                     id = Util.getNumberFromText(id);
-                    arr.push(id)
-                    $("#criticalRectId_" + id).css('background', col)
-
+                    // arr.push(id)
+                    var back = $("#criticalRectId_" + id).css('background-color')
+                    console.log(' found back col as ', back)
+                    if (back == 'rgb(194, 53, 115)') {
+                        critIdList.push(id);
+                    }
                 });
+
+
+            if (critIdList.length == 0) {
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false          
+                DataTable.criticalClicked = false;
+            } else {
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //true
+                DataTable.criticalClicked = true;
+            }
+            ConsInt.getActiveConstraints();
+            try {
+                ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = critIdList;
+            } catch (e) {
+
+            }
+            var idBtn = $(".btn_" + stri).attr('id')
+            $("#" + idBtn).click();
+
 
         })
 
@@ -768,7 +805,6 @@
                 $("#" + idBtn).click();
                 DataTable.criticalClicked = false;
                 // console.log(' now tag is 2 ', DataTable.criticalClicked, idBtn)
-
             }
 
             setTimeout(() => {
@@ -1540,16 +1576,16 @@
 
 
 
-    DataTable.getTagNames = function(){
-        tagDict ={}
-        for(var item in Cons.typeConstraints){
-            if(item == 'QUANTITATIVE' || item == 'GENERALIZATION') continue;
+    DataTable.getTagNames = function () {
+        tagDict = {}
+        for (var item in Cons.typeConstraints) {
+            if (item == 'QUANTITATIVE' || item == 'GENERALIZATION') continue;
             var obj = Cons.typeConstraints[item];
-            for(var el in obj){
-                if(el == 'misc') continue;
-                if(obj[el]['Checked']){
+            for (var el in obj) {
+                if (el == 'misc') continue;
+                if (obj[el]['Checked']) {
                     tagDict[el] = true
-                }else{
+                } else {
                     tagDict[el] = true // to be removed
                 }
             }
@@ -1561,15 +1597,15 @@
         return tagDict
     }
 
-    DataTable.createFakeTagIdData = function(tagDict){
+    DataTable.createFakeTagIdData = function (tagDict) {
 
-        for (var item in tagDict){
-            var numLen = Util.getRandomNumberBetween(20,5).toFixed(0);
+        for (var item in tagDict) {
+            var numLen = Util.getRandomNumberBetween(20, 5).toFixed(0);
             var idList = [];
-            for(var i=0;i<numLen;i++){
+            for (var i = 0; i < numLen; i++) {
                 var val = Util.getRandomNumberBetween(140, 0).toFixed(0)
                 idList.push(+val)
-            }   
+            }
             tagDict[item] = idList
         }
         DataTable.tagNameDataId = tagDict;
@@ -1581,13 +1617,13 @@
         $(".tagContainer").empty();
 
         $("#" + containerId).css('display', 'flex')
-        $("#"+containerId).css('align-items', 'center')
+        $("#" + containerId).css('align-items', 'center')
         var listOfTagDict = {
             'critical-items': true,
             'ignore': true,
             'similar': true,
             'same-label': true,
-            'different' : true,
+            'different': true,
         }
 
         listOfTagDict = DataTable.getTagNames();
@@ -1595,7 +1631,7 @@
         var htmlStr = "<div class ='tagContainer' >"
         for (var item in listOfTagDict) {
             var tagName = item;
-            htmlStr += "<div class ='tagHead' id = 'tagHead_" + tagName + " ' parent = "+tagName+" > " + tagName +" </div>"
+            htmlStr += "<div class ='tagHead' id = 'tagHead_" + tagName + " ' parent = " + tagName + " > " + tagName + " </div>"
         }
         htmlStr += "</div>"
         $("#" + containerId).append(htmlStr);
@@ -1619,15 +1655,17 @@
         $(".tagHead").css('align-items', 'center')
 
         $(".tagHead").on('mouseover', function (d) {
-            if(DataTable.tagClicked) return
+            if (DataTable.tagClicked) return
             $(this).css('border', '1px solid black')
             $(".tagHead").css('background', 'lightgray')
             $(this).css('background', Main.colors.HIGHLIGHT2)
 
             var elem = $(this).attr('parent')
             var idList = DataTable.tagNameDataId[elem]
+            $("#dataViewAppTable_tableContent").find('tr').show();
+
             // console.log(' found is ', elem, idList, DataTable.tagNameDataId)
-            DataTable.hideRowsById(idList,'train')
+            DataTable.hideRowsById(idList, 'train')
         })
 
         $(".tagHead").on('mouseout', function (d) {
@@ -1639,30 +1677,31 @@
         })
 
         $(".tagHead").on('click', function (d) {
-        var elem = $(this).attr('parent');
-        
-        if(DataTable.tagClickName == elem){
-            DataTable.tagClicked = false;
-        }else{
-            DataTable.tagClicked = true;
-        }
-        if(DataTable.tagClicked){
-            $(".tagHead").css('border', 'transparent')
-             $(this).css('border', '1px solid black')
-             $(".tagHead").css('background', 'lightgray')
-             $(this).css('background', Main.colors.HIGHLIGHT2)
+            var elem = $(this).attr('parent');
 
-             var idList = DataTable.tagNameDataId[elem]
-             console.log(' found is ', elem, idList, DataTable.tagNameDataId)
-             DataTable.hideRowsById(idList, 'train')
-        } else{
-            $(".tagHead").css('border', 'transparent')
-            $(".tagHead").css('background', Main.colors.HIGHLIGHT2)
-            //train table
-            $("#dataViewAppTable_tableContent").find('tr').show();
-        }
-        DataTable.tagClickName = elem;
-        
+            if (DataTable.tagClickName == elem) {
+                DataTable.tagClicked = false;
+            } else {
+                DataTable.tagClicked = true;
+            }
+            if (DataTable.tagClicked) {
+                $(".tagHead").css('border', 'transparent')
+                $(this).css('border', '1px solid black')
+                $(".tagHead").css('background', 'lightgray')
+                $(this).css('background', Main.colors.HIGHLIGHT2)
+
+                var idList = DataTable.tagNameDataId[elem]
+                console.log(' found is ', elem, idList, DataTable.tagNameDataId);
+                $("#dataViewAppTable_tableContent").find('tr').show();
+                DataTable.hideRowsById(idList, 'train')
+            } else {
+                $(".tagHead").css('border', 'transparent')
+                $(".tagHead").css('background', Main.colors.HIGHLIGHT2)
+                //train table
+                $("#dataViewAppTable_tableContent").find('tr').show();
+            }
+            DataTable.tagClickName = elem;
+
         })
 
     }

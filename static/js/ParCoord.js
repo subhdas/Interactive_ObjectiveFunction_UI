@@ -483,9 +483,10 @@
 
                 ParC.filteredData.push(actives.every(function (p, j) {
                     // console.log(' found d p ', d, p)
-                    return extents[j][0] <= d[p] && d[p] <= extents[j][1];
+                    return +(extents[j][0] <= d[p] && d[p] <= extents[j][1]);
                 }) ? d['id'] : -1);
 
+            
 
                 ParC.filteredData = Util.getUniqueArray(ParC.filteredData);
 

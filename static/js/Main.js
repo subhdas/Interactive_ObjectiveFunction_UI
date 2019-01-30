@@ -214,6 +214,7 @@
         ParC.featureEditorCreate();
         DataTable.makeTable(Main.trainData);
         DataTable.makeTags();
+        
         DataTable.extraContent = false;
         DataTable.makeTable(Main.testData, "tableContentTest");
         Scat.makeTheMatrix();
