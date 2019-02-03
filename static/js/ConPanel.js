@@ -306,8 +306,10 @@
                     elem.click();
                 }
             }
+        DataTable.makeTags();
 
-        })
+
+        }) // end of func addconstrain panel
     }
 
 

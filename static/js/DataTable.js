@@ -698,8 +698,8 @@
             var idBtn = $(".btn_" + stri).attr('id')
             $("#" + idBtn).click();
 
-
-        })
+            DataTable.makeTags();
+        }) // end of rect dict
 
 
         $(".infoRectAll").on('click', function (d, i) {
@@ -760,9 +760,10 @@
             DataTable.userInformativeItems = critIdInforList;
             DataTable.userWastefulItems = critIdWasteList;
 
+            DataTable.makeTags();
 
 
-        })
+        }) // end of inforectall
 
 
 
@@ -864,10 +865,13 @@
                     $("#" + idBtn).click();
                     DataTable.non_criticalClicked = false;
                 }
+            DataTable.makeTags();
+            
             }, 800);
+            
             return
 
-        })
+        }) // end of critical 
 
 
         $(".infoRect").on('mouseover', function (d, i) {
@@ -907,6 +911,8 @@
                 }
             }
             DataTable.userWastefulItems = Util.getUniqueArray(critIdList);
+            DataTable.makeTags();
+            
         })
 
 
@@ -1638,10 +1644,24 @@
         DataTable.tagNameDataId = tagDict;
     }
 
+    DataTable.getTagRealData = function(){
+        var tagDict = {}
+        for (var item in ConsInt.activeConstraints){
+            var arrDict = ConsInt.activeConstraints[item]['input'];
+            var arrId = [];
+            for(var el in arrDict){
+                arrId.push.apply(arrId,arrDict[el])
+            }
+            arrId = Util.getUniqueArray(arrId);
+            tagDict[item] = arrId;
+        }
+        DataTable.tagNameDataId = tagDict;
+    }
+
 
     DataTable.makeTags = function (containerId = "") {
         if (containerId == "") containerId = "tableHeadDivTrain"
-        $(".tagContainer").empty();
+        $(".tagContainer").remove();
 
         $("#" + containerId).css('display', 'flex')
         $("#" + containerId).css('align-items', 'center')
@@ -1653,10 +1673,12 @@
             'different': true,
         }
 
-        listOfTagDict = DataTable.getTagNames();
-        DataTable.createFakeTagIdData(listOfTagDict);
+        // listOfTagDict = DataTable.getTagNames();
+        // DataTable.createFakeTagIdData(listOfTagDict);
+        DataTable.getTagRealData()
         var htmlStr = "<div class ='tagContainer' >"
-        for (var item in listOfTagDict) {
+        // for (var item in listOfTagDict) {
+        for (var item in DataTable.tagNameDataId) {
             var tagName = item;
             htmlStr += "<div class ='tagHead' id = 'tagHead_" + tagName + " ' parent = " + tagName + " > " + tagName + " </div>"
         }
