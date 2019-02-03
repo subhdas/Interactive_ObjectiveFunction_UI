@@ -1023,16 +1023,18 @@
 
 
     DataTable.hideRowsById = function (idList, type = 'train') {
+        // console.log('idlist before  , ', idList)
+        idList.forEach(function(d,i){
+            idList[i] = +idList[i]
+        })
+        // console.log('idlist now , ', idList)
         var data = Main.trainData;
         if (type == 'test') data = Main.testData;
         data.forEach(function (d, i) {
-            if (idList.indexOf(d.id) == -1) {
-                $('#tr_' + d.id).hide();
+            if (idList.indexOf(+d.id) == -1) {
+                $('#tr_' + +d.id).hide();
             }
         })
-        // for(var i=0;i<idList.length;i++){
-        //     $('#tr_'+idList[i]).hide();
-        // }
     }
 
 
@@ -1653,7 +1655,15 @@
                 arrId.push.apply(arrId,arrDict[el])
             }
             arrId = Util.getUniqueArray(arrId);
-            tagDict[item] = arrId;
+            if(arrId.length>0) tagDict[item] = arrId;
+        }
+
+        //for informative and wasteful items
+        if(DataTable.userInformativeItems.length>0){
+             tagDict['informative'] = DataTable.userInformativeItems;
+        }
+        if (DataTable.userWastefulItems.length > 0) {
+            tagDict['wasteful'] = DataTable.userWastefulItems;
         }
         DataTable.tagNameDataId = tagDict;
     }
@@ -1713,7 +1723,7 @@
             var idList = DataTable.tagNameDataId[elem]
             $("#dataViewAppTable_tableContent").find('tr').show();
 
-            // console.log(' found is ', elem, idList, DataTable.tagNameDataId)
+            console.log(' found is ', elem, idList, DataTable.tagNameDataId)
             DataTable.hideRowsById(idList, 'train')
         })
 
