@@ -1,23 +1,28 @@
-(function() {
+(function () {
 
     Scat = {};
 
-    Scat.hideScatterView = function() {
+    Scat.hideScatterView = function () {
         Main.tabelViewMode = true;
         $("#tableContent").show();
         $("#scatContent").hide();
 
     }
 
-    Scat.prepNumericalData = function() {
+Scat.filteredScatData = [];
+
+    Scat.prepNumericalData = function () {
         var numericArr = Object.keys(Main.numericalAttributes);
         var dataCopy = Util.deepCopyData(Main.trainData);
-        dataCopy.forEach(function(d) {
+        dataCopy.forEach(function (d) {
             for (var item in d) {
-                if (numericArr.indexOf(item) == -1 && item != Main.entityNameSecondImp) {
+                if (numericArr.indexOf(item) == -1 && item != Main.entityNameSecondImp && item != 'id') {
                     delete d[item];
                 } else if (item == Main.entityNameSecondImp) {
                     //pass
+                } else if (item == 'id') {
+                    console.log(' getting to see id ', d.id)
+                    d[item] = +d[item]
                 } else {
                     d[item] = +d[item]
                 }
@@ -27,14 +32,14 @@
         return dataCopy;
     }
 
-    Scat.showScatterView = function() {
+    Scat.showScatterView = function () {
         Main.tabelViewMode = false;
         $("#tableContent").hide();
         $("#scatContent").show();
 
     }
 
-    Scat.makeTheMatrix = function(containerId = "") {
+    Scat.makeTheMatrix = function (containerId = "") {
         if (containerId == "") containerId = "scatContent";
         var dataHave = Scat.prepNumericalData();
         // $("#tableContent").hide();
@@ -64,19 +69,19 @@
 
         var color = d3.scale.category10();
 
-        d3.csv("static/data/flowers.csv", function(error, data) {
+        d3.csv("static/data/flowers.csv", function (error, data) {
             if (error) throw error;
             var categorical = Main.entityNameSecondImp; //"species"
             data = dataHave
 
             var domainByTrait = {},
-                traits = d3.keys(data[0]).filter(function(d) {
+                traits = d3.keys(data[0]).filter(function (d) {
                     return d !== categorical;
                 }),
                 n = traits.length;
 
-            traits.forEach(function(trait) {
-                domainByTrait[trait] = d3.extent(data, function(d) {
+            traits.forEach(function (trait) {
+                domainByTrait[trait] = d3.extent(data, function (d) {
                     return d[trait];
                 });
             });
@@ -101,10 +106,10 @@
                 .data(traits)
                 .enter().append("g")
                 .attr("class", "x axis")
-                .attr("transform", function(d, i) {
+                .attr("transform", function (d, i) {
                     return "translate(" + (n - i - 1) * size + ",0)";
                 })
-                .each(function(d) {
+                .each(function (d) {
                     x.domain(domainByTrait[d]);
                     d3.select(this).call(xAxis);
                 });
@@ -113,10 +118,10 @@
                 .data(traits)
                 .enter().append("g")
                 .attr("class", "y axis")
-                .attr("transform", function(d, i) {
+                .attr("transform", function (d, i) {
                     return "translate(0," + i * size + ")";
                 })
-                .each(function(d) {
+                .each(function (d) {
                     y.domain(domainByTrait[d]);
                     d3.select(this).call(yAxis);
                 });
@@ -125,19 +130,19 @@
                 .data(cross(traits, traits))
                 .enter().append("g")
                 .attr("class", "cell")
-                .attr("transform", function(d) {
+                .attr("transform", function (d) {
                     return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")";
                 })
                 .each(plot);
 
             // Titles for the diagonal.
-            cell.filter(function(d) {
+            cell.filter(function (d) {
                     return d.i === d.j;
                 }).append("text")
                 .attr("x", padding)
                 .attr("y", padding)
                 .attr("dy", ".71em")
-                .text(function(d) {
+                .text(function (d) {
                     return d.x;
                 });
 
@@ -159,14 +164,14 @@
                 cell.selectAll("circle")
                     .data(data)
                     .enter().append("circle")
-                    .attr("cx", function(d) {
+                    .attr("cx", function (d) {
                         return x(d[p.x]);
                     })
-                    .attr("cy", function(d) {
+                    .attr("cy", function (d) {
                         return y(d[p.y]);
                     })
                     .attr("r", 4)
-                    .style("fill", function(d) {
+                    .style("fill", function (d) {
                         return color(d[categorical]);
                     });
             }
@@ -186,9 +191,20 @@
             // Highlight the selected circles.
             function brushmove(p) {
                 var e = brush.extent();
-                svg.selectAll("circle").classed("hidden", function(d) {
-                    return e[0][0] > d[p.x] || d[p.x] > e[1][0] ||
-                        e[0][1] > d[p.y] || d[p.y] > e[1][1];
+                Scat.filteredScatData = [];
+                ConP.selectedRowsCons = {}
+
+                svg.selectAll("circle").classed("hidden", function (d) {
+                    // console.log('d is ', d)
+                    var res = e[0][0] > d[p.x] || d[p.x] > e[1][0] ||
+                        e[0][1] > d[p.y] || d[p.y] > e[1][1]
+
+                    if (!res) {
+                        Scat.filteredScatData.push(+d.id);
+                        ConP.selectedRowsCons[d.id] = true;
+                    }
+                    Scat.filteredScatData = Util.getUniqueArray(Scat.filteredScatData)
+                    return res
                 });
             }
 
@@ -213,11 +229,11 @@
             return c;
         }
 
-        setTimeout(function(){
-           $("#scatContent line").css('stroke', 'lightgray')
-           $("#scatContent line").css('stroke-width', '0.5')
+        setTimeout(function () {
+            $("#scatContent line").css('stroke', 'lightgray')
+            $("#scatContent line").css('stroke-width', '0.5')
         }, 200)
-       
+
 
     }
 

@@ -200,6 +200,7 @@
 
         // when add button on constrain panel is clicked
         $("#addConstraintPanelItems").on('click', function() {
+            console.log('adding items to constrains panel')
             var valueSelect = $('.selectConstrain').val();
 
             //Same label
@@ -242,28 +243,28 @@
             }
 
             //Feature Range
-            if (valueSelect == 'Feature-Range') {
-                // $("._mainContentMid").empty();
-                Cons.typeConstraints['QUALITATIVE'][valueSelect]['Checked'] = true;
-                ConsInt.getActiveConstraints();
-                var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame];
-                try {
-                    arr.push.apply(arr, Object.keys(ConP.selectedRowsCons));
-                    arr = Util.getUniqueArray(arr)
-                } catch (err) {
-                    arr = Object.keys(ConP.selectedRowsCons);
-                }
-                ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame] = arr;
+            // if (valueSelect == 'Feature-Range') {
+            //     // $("._mainContentMid").empty();
+            //     Cons.typeConstraints['QUALITATIVE'][valueSelect]['Checked'] = true;
+            //     ConsInt.getActiveConstraints();
+            //     var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame];
+            //     try {
+            //         arr.push.apply(arr, Object.keys(ConP.selectedRowsCons));
+            //         arr = Util.getUniqueArray(arr)
+            //     } catch (err) {
+            //         arr = Object.keys(ConP.selectedRowsCons);
+            //     }
+            //     ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame] = arr;
 
-                // TabCon.makeSameLabContent("_mainContentMid" + TabCon.radioCheckedSame, TabCon.radioCheckedSame, valueSelect);
-                TabCon.addSameLabContentFromData(valueSelect);
-                var arr = Object.keys(ConP.selectedRowsCons);
-                ConP.selectedRowsCons = {};
-                arr.forEach(function(d, i) {
-                    $("#tr_" + d).css('background', "rgb(255,255,255)")
-                    $("#tr_" + d).css('color', 'black')
-                })
-            }
+            //     // TabCon.makeSameLabContent("_mainContentMid" + TabCon.radioCheckedSame, TabCon.radioCheckedSame, valueSelect);
+            //     TabCon.addSameLabContentFromData(valueSelect);
+            //     var arr = Object.keys(ConP.selectedRowsCons);
+            //     ConP.selectedRowsCons = {};
+            //     arr.forEach(function(d, i) {
+            //         $("#tr_" + d).css('background', "rgb(255,255,255)")
+            //         $("#tr_" + d).css('color', 'black')
+            //     })
+            // }
 
             //Similarity Metric
             if (valueSelect == 'Similarity-Metric') {

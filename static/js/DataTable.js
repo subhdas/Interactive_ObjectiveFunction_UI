@@ -24,7 +24,7 @@
     }
     DataTable.inforInteract = {}
     DataTable.inforInteractaLL = {
-        '-1' : '-'
+        '-1': '-'
     }
 
     //new variabbles
@@ -737,10 +737,8 @@
 
                 });
 
-
-
-
-            var critIdList = [];
+            var critIdInforList = [];
+            var critIdWasteList = []
             $("#dataViewAppTable_" + cont)
                 .find(".trTable")
                 .each(function (i, el) {
@@ -749,21 +747,21 @@
                     id = Util.getNumberFromText(id);
                     // arr.push(id)
                     var back = $("#infoRectId_" + id).css('background-color')
-                    // console.log(' found back col as ', back)
+                    console.log(' found back col as ', back)
                     if (back == 'rgb(194, 53, 115)') {
-                        critIdList.push(id);
+                        critIdInforList.push(id);
+                    }
+
+                    if (back == 'rgb(53, 183, 194)') {
+                        critIdWasteList.push(id);
                     }
                 });
 
-            DataTable.userInformativeItems = critIdList;
+            DataTable.userInformativeItems = critIdInforList;
+            DataTable.userWastefulItems = critIdWasteList;
 
 
-            // if (critIdList.length == 0) {
-          
-            // } else {
-               
-            // }
-       
+
         })
 
 
