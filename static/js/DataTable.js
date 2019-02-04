@@ -1901,6 +1901,8 @@
 
         })
 
+        StarM.addConstraintsTable();
+
     }
 
 }());

@@ -304,5 +304,55 @@
 
     }
 
+           StarM.addConstraintsTable = function (containerId = "") {
+               if (containerId == "") containerId = "starPlotContentId"
+               $("#" + containerId).empty();
+
+               // CONSTRAINTS SOLVE SCORE = 40/100
+               // TAGS TYPE HIGHLIGHTED ABOVVE TO FILTER TABLE
+               var htmlStr = "";
+               htmlStr += "<div class = 'consTableDiv'>"
+               for (var item in ConsInt.activeConstraints) {
+                   var arrDict = ConsInt.activeConstraints[item]['input'];
+                   var arrId = [];
+                   for (var el in arrDict) {
+                       arrId.push.apply(arrId, arrDict[el])
+                   }
+                   arrId = Util.getUniqueArray(arrId);
+                   var par = ConsInt.activeConstraints[item]['parent']
+                   if (arrId.length > 0) {
+                       for (var i = 0; i < arrId.length; i++) {
+                           var dataItem = Main.getDataById(arrId[i], Main.trainData);
+                           var nameItem = dataItem[Main.entityNameSecondImp];
+                           var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
+                           htmlStr += "<div class = 'rowConstTable'>"
+                           htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + nameItem + "</span>";
+                           htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + par + "</span>";
+                           htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";
+                           htmlStr += "</div>"
+                       } // end of inner for
+                   }
+               } // end of outer for
+               htmlStr += "</div>"
+               $("#" + containerId).append(htmlStr)
+
+               $(".consTableDiv").css('display', 'flex')
+               $(".consTableDiv").css('flex-direction', 'column')
+               $(".consTableDiv").css('margin-bottom', '3px')
+               $(".consTableDiv").css('padding', '3px')
+
+                $(".rowConstTable").css('display', 'flex')
+                $(".consTableDiv").css('margin-bottom', '3px')
+                $(".consTableDiv").css('padding', '3px')
+               $(".rowConstTable").css('border-bottom', '1px dashed lightgray')
+
+               $(".rowSpanConsTab").css('width', '200px')
+               $(".rowSpanConsTab").css('padding', '3px')
+               // $(".rowConstTable").css('border-bottom', '3px')
+           }
+
+           // ON/OFF Volkwswagen          CMP     CRIT        SATISFIED Y/N
+           // ON/OFF AUDI                 CMP     NON-CRIT    SATISFIED Y/N
+
 
 })()

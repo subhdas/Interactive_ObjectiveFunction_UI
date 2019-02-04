@@ -1,16 +1,16 @@
-(function() {
+(function () {
     ConP = {};
     ConP.showingConstPanel = false;
     ConP.selectedRowsCons = {}
 
 
-    ConP.hideConPanel = function() {
+    ConP.hideConPanel = function () {
         $(".conPanelDiv").hide();
         ConP.showingConstPanel = false;
 
     }
 
-    ConP.showConPanel = function() {
+    ConP.showConPanel = function () {
         $(".conPanelDiv").show();
         ConP.showingConstPanel = true;
         var valueSelect = $('.selectConstrain').val();
@@ -26,7 +26,7 @@
     }
 
 
-    ConP.addPanelCon = function() {
+    ConP.addPanelCon = function () {
 
         if ($(".conPanelDiv").length > 0) {
             ConP.showConPanel();
@@ -75,13 +75,13 @@
         $("#clearConPanel").css('float', 'right');
 
 
-        $(function() {
+        $(function () {
             $(".conPanelDiv").draggable();
         });
 
 
 
-        $("#clearConPanel").on('click', function() {
+        $("#clearConPanel").on('click', function () {
             ConP.hideConPanel();
         })
 
@@ -90,7 +90,7 @@
 
 
 
-    ConP.addConstrainSelector = function(containerId = "conPanelContentId") {
+    ConP.addConstrainSelector = function (containerId = "conPanelContentId") {
         $("#" + containerId).empty();
         ConP.showingConstPanel = true;
 
@@ -133,7 +133,7 @@
         $("#conHeadSupportPan").css('display', 'inline-flex')
         $("#conHeadSupportPan").css('width', '75%')
         $("#conHeadSupportPan").css('height', '20px')
-            // $("#conHeadSupportPan").css('background', 'red')
+        // $("#conHeadSupportPan").css('background', 'red')
 
 
         $("#conContentItems").css('display', 'flex');
@@ -153,7 +153,7 @@
 
 
         var $select1 = $('select:not(.browser-default)');
-        $('.selectConstrain').on('change', function(e) {
+        $('.selectConstrain').on('change', function (e) {
             // var sel = $(this).val("1");
             // sel = $('.something').find('option[value="SELECT-VALUE"]').prop('selected', true);
             // var instance = M.FormSelect.getInstance($(this));
@@ -193,13 +193,13 @@
         })
 
         // removes items added in the constrain panel
-        $("#removeItemsConPanel").on('click', function(){
+        $("#removeItemsConPanel").on('click', function () {
             var foundText = $(".selectConstrain").closest('label').text()
             console.log('found text ', foundText)
         })
 
         // when add button on constrain panel is clicked
-        $("#addConstraintPanelItems").on('click', function() {
+        $("#addConstraintPanelItems").on('click', function () {
             console.log('adding items to constrains panel')
             var valueSelect = $('.selectConstrain').val();
 
@@ -220,23 +220,23 @@
 
                 var arr = Object.keys(ConP.selectedRowsCons);
                 ConP.selectedRowsCons = {};
-                arr.forEach(function(d, i) {
+                arr.forEach(function (d, i) {
                     $("#tr_" + d).css('background', "rgb(255,255,255)")
                     $("#tr_" + d).css('color', 'black')
                 })
 
                 //auto select the same label button on top
-                if(arr.length > 0 ){
-                    var id = $(".btn_"+valueSelect).attr('id')
+                if (arr.length > 0) {
+                    var id = $(".btn_" + valueSelect).attr('id')
                     var elem = document.getElementById(id);
-                    elem.click();   
+                    elem.click();
                     DataTable.sameLabelClicked = true;
-                    $(".btn_"+valueSelect).trigger("click")
+                    $(".btn_" + valueSelect).trigger("click")
                 }
 
-                if(arr.length == 0 && DataTable.sameLabelClicked){
+                if (arr.length == 0 && DataTable.sameLabelClicked) {
                     DataTable.sameLabelClicked = false;
-                    var id = $(".btn_"+valueSelect).attr('id')
+                    var id = $(".btn_" + valueSelect).attr('id')
                     var elem = document.getElementById(id);
                     elem.click();
                 }
@@ -284,32 +284,35 @@
                 TabCon.addSameLabContentFromData(valueSelect);
                 var arr = Object.keys(ConP.selectedRowsCons);
                 ConP.selectedRowsCons = {};
-                arr.forEach(function(d, i) {
+                arr.forEach(function (d, i) {
                     $("#tr_" + d).css('background', "rgb(255,255,255)")
                     $("#tr_" + d).css('color', 'black')
                 })
 
 
                 //auto select the similarity metric button on top
-                if(arr.length > 0 ){
-                    var id = $(".btn_"+valueSelect).attr('id')
+                if (arr.length > 0) {
+                    var id = $(".btn_" + valueSelect).attr('id')
                     var elem = document.getElementById(id);
-                    elem.click();   
+                    elem.click();
                     DataTable.similarityClicked = true;
-                    $(".btn_"+valueSelect).trigger("click")
+                    $(".btn_" + valueSelect).trigger("click")
                 }
 
-                if(arr.length == 0 && DataTable.similarityClicked){
+                if (arr.length == 0 && DataTable.similarityClicked) {
                     DataTable.similarityClicked = false;
-                    var id = $(".btn_"+valueSelect).attr('id')
+                    var id = $(".btn_" + valueSelect).attr('id')
                     var elem = document.getElementById(id);
                     elem.click();
                 }
             }
-        DataTable.makeTags();
+            DataTable.makeTags();
 
 
         }) // end of func addconstrain panel
+
+
+ 
     }
 
 
