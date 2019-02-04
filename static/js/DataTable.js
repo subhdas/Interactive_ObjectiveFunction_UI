@@ -587,8 +587,22 @@
 
                     DataTable.criticalInteract[d.id] = '-'
                     DataTable.inforInteract[d.id] = '-'
-                    var htmlStr = "<div class ='containIntBtns' ><div class = 'criticalRect tableBtnInt' id = 'criticalRectId_" + d.id + "' ></div>";
-                    htmlStr += "<div class = 'infoRect tableBtnInt' id = 'infoRectId_" + d.id + "' ></div>";
+                    var htmlStr = "<div class ='containIntBtns' >"
+                    // htmlStr += "<div class = 'criticalRect tableBtnInt' id = 'criticalRectId_" + d.id + "' >"
+                    htmlStr += "<div id = 'criticalRectId_" + d.id + "' class = 'criticalRect tableBtnInt' >"
+                    htmlStr += "<button  class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                    htmlStr += "<i class='material-icons'>linear_scale</i></button>";
+                    htmlStr += "</div>"
+
+
+                    // htmlStr += "<div id = 'criticalRectId_" + d.id + "'  class='iconHolder criticalRect tableBtnInt'  title='Show logs'>"
+                    // htmlStr += "<img class='imgIcon' src='static/img/icons/print.png'> </div>"
+
+                    // htmlStr += "</div>";
+                    // htmlStr += "<div class = 'infoRect tableBtnInt' id = 'infoRectId_" + d.id + "' ></div>";
+                    
+                    htmlStr += "<button id = 'infoRectId_" + d.id + "' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored infoRect tableBtnInt'>"
+                    htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
                     htmlStr += "</div>"
                     return htmlStr
 
@@ -602,8 +616,22 @@
             .html(function (d, i) {
                 // DataTable.criticalInteract[d.id] = '-'
                 // DataTable.inforInteract[d.id] = '-'
-                var htmlStr = "<div class ='containIntBtns' ><div class = 'tableBtnInt criticalRectAll' id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "' ></div>";
-                htmlStr += "<div class = 'tableBtnInt infoRectAll' id = 'infoRectId_" + containerId + "' parent = '" + containerId + "' ></div>";
+                var htmlStr = "<div class ='containIntBtns' >"
+                // htmlStr += "<div class = 'tableBtnInt criticalRectAll' id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "' >"
+                // htmlStr += "</div>";                
+                
+                htmlStr += "<button id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored tableBtnInt criticalRectAll'>"
+                htmlStr += "<i class='material-icons'>linear_scale</i></button>";
+
+
+                // htmlStr += "<div class = 'tableBtnInt infoRectAll' id = 'infoRectId_" + containerId + "' parent = '" + containerId + "' ></div>";
+
+                htmlStr += "<button id = 'infoRectId_" + containerId + "' parent = '" + containerId + "' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored tableBtnInt infoRectAll'>"
+                htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
+
+                // htmlStr += "</div>";
+                        
+                
                 htmlStr += "</div>"
                 return htmlStr;
             })
@@ -617,9 +645,13 @@
         $(".tableBtnInt").css("display", 'flex')
         $(".tableBtnInt").css("height", '20px')
         $(".tableBtnInt").css("width", '20px')
-        $(".tableBtnInt").css("background", 'lightgray')
+        // $(".tableBtnInt").css("background", 'lightgray')
+        $(".tableBtnInt").css("justify-content", 'center')
         $(".tableBtnInt").css("border-radius", '4px')
         $(".tableBtnInt").css("margin", '4px')
+
+        $(".btnTableAddOn").css('height', '100%')
+        $(".btnTableAddOn").css('width', '100%')
 
 
         //interactions for select all buttons
@@ -788,13 +820,31 @@
             var val = DataTable.criticalInteract[id];
             if (val == '-') {
                 DataTable.criticalInteract[id] = 'yes'
-                $(this).css('background', Main.colors.HIGHLIGHT);
+                // $(this).css('background', Main.colors.HIGHLIGHT);
+                var htmlStr = "<button id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                htmlStr += "<i class='material-icons'>alarm_on</i></button>";
+                $(this).html(htmlStr);
+                $('.btnTableAddOn').css('width', '100%')
+                $('.btnTableAddOn').css('height', '100%')
+                
+                // $(this).parent().prepend(htmlStr);
+                // $(this).remove()
             } else if (val == 'yes') {
                 DataTable.criticalInteract[id] = 'no'
-                $(this).css('background', Main.colors.HIGHLIGHT2);
+                // $(this).css('background', Main.colors.HIGHLIGHT2);
+                 var htmlStr = "<button id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                 htmlStr += "<i class='material-icons'>alarm_off</i></button>";
+                 $(this).html(htmlStr)
+                $('.btnTableAddOn').css('width', '100%')
+                $('.btnTableAddOn').css('height', '100%')
             } else {
                 DataTable.criticalInteract[id] = '-'
-                $(this).css('background', 'lightgray');
+                // $(this).css('background', 'lightgray');
+                 var htmlStr = "<button id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                 htmlStr += "<i class='material-icons'>linear_scale</i></button>";
+                 $(this).html(htmlStr)
+                    $('.btnTableAddOn').css('width', '100%')
+                    $('.btnTableAddOn').css('height', '100%')
             }
 
             //critical items find
@@ -1667,6 +1717,7 @@
         }
         DataTable.tagNameDataId = tagDict;
     }
+
 
 
     DataTable.makeTags = function (containerId = "") {
