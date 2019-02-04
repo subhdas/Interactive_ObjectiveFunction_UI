@@ -679,7 +679,7 @@
             var val = DataTable.criticalInteractAll[id];
             if (val == '-') {
                 DataTable.criticalInteractAll[id] = 'yes'
-                $(this).css('background', Main.colors.HIGHLIGHT);
+                // $(this).css('background', Main.colors.HIGHLIGHT);
                 //id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "'
                 var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
                 htmlStr += "<i class='material-icons'>alarm_on</i></button>";
@@ -688,7 +688,7 @@
                 $('.btnTableAddOn').css('height', '100%')
             } else if (val == 'yes') {
                 DataTable.criticalInteractAll[id] = 'no'
-                $(this).css('background', Main.colors.HIGHLIGHT2);
+                // $(this).css('background', Main.colors.HIGHLIGHT2);
 
                 var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
                 htmlStr += "<i class='material-icons'>alarm_off</i></button>";
@@ -697,7 +697,7 @@
                 $('.btnTableAddOn').css('height', '100%')
             } else {
                 DataTable.criticalInteractAll[id] = '-'
-                $(this).css('background', 'lightgray');
+                // $(this).css('background', 'lightgray');
 
                 var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
                 htmlStr += "<i class='material-icons'>linear_scale</i></button>";
@@ -706,6 +706,7 @@
                 $('.btnTableAddOn').css('height', '100%')
             }
             var col = $(this).css('background-color');
+            var state = DataTable.criticalInteractAll[id];
             // var arr = ParC.filteredData;
             var stri = 'Critical-Items';
             // Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; // !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
@@ -722,10 +723,10 @@
                     // $("#criticalRectId_" + id).css('background', col)
                     htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
 
-                    if (col == "rgb(194, 53, 115)") {
+                    if (col == "rgb(194, 53, 115)" || state == 'yes') {
                         htmlStr += "<i class='material-icons'>alarm_on</i></button>";
 
-                    } else if (col == "rgb(53, 183, 194)") {
+                    } else if (col == "rgb(53, 183, 194)" || state == 'no') {
                         htmlStr += "<i class='material-icons'>alarm_off</i></button>";
 
                     } else {
@@ -784,7 +785,7 @@
             var val = DataTable.inforInteractaLL[id];
             if (val == '-') {
                 DataTable.inforInteractaLL[id] = 'yes'
-                $(this).css('background', Main.colors.HIGHLIGHT);
+                // $(this).css('background', Main.colors.HIGHLIGHT);
                 var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
                 htmlStr += "<i class='material-icons'>arrow_upward</i></button>";
                 $(this).html(htmlStr);
@@ -792,7 +793,7 @@
                 $('.btnTableAddOn').css('height', '100%')
             } else if (val == 'yes') {
                 DataTable.inforInteractaLL[id] = 'no'
-                $(this).css('background', Main.colors.HIGHLIGHT2);
+                // $(this).css('background', Main.colors.HIGHLIGHT2);
                     var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
                     htmlStr += "<i class='material-icons'>arrow_downward</i></button>";
                     $(this).html(htmlStr);
@@ -800,7 +801,7 @@
                     $('.btnTableAddOn').css('height', '100%')
             } else {
                 DataTable.inforInteractaLL[id] = '-'
-                $(this).css('background', 'lightgray');
+                // $(this).css('background', 'lightgray');
                     var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
                     htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
                     $(this).html(htmlStr);
@@ -808,6 +809,8 @@
                     $('.btnTableAddOn').css('height', '100%')
             }
             var col = $(this).css('background-color');
+            var state = DataTable.inforInteractaLL[id];
+
             // var arr = ParC.filteredData;
 
             var cont = $(this).attr('parent')
@@ -822,10 +825,10 @@
 
                     htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
 
-                    if (col == "rgb(194, 53, 115)") {
+                    if (col == "rgb(194, 53, 115)" || state == 'yes') {
                         htmlStr += "<i class='material-icons'>arrow_upward</i></button>";
 
-                    } else if (col == "rgb(53, 183, 194)") {
+                    } else if (col == "rgb(53, 183, 194)" || state == 'no') {
                         htmlStr += "<i class='material-icons'>arrow_downward</i></button>";
 
                     } else {
@@ -1005,7 +1008,7 @@
             console.log(' clicked info rect ', id, val)
             if (val == '-') {
                 DataTable.inforInteract[id] = 'yes'
-                $(this).css('background', Main.colors.HIGHLIGHT);
+                // $(this).css('background', Main.colors.HIGHLIGHT);
 
                 var htmlStr = "<button id = 'infoRectid_" + containerId + "' parent = '" + containerId + "' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
                 htmlStr += "<i class='material-icons'>arrow_upward</i></button>";
@@ -1014,7 +1017,7 @@
                 $('.btnTableAddOn').css('height', '100%')
             } else if (val == 'yes') {
                 DataTable.inforInteract[id] = 'no'
-                $(this).css('background', Main.colors.HIGHLIGHT2);
+                // $(this).css('background', Main.colors.HIGHLIGHT2);
                 var htmlStr = "<button id = 'infoRectid_" + containerId + "' parent = '" + containerId + "' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
                 htmlStr += "<i class='material-icons'>arrow_downward</i></button>";
                 $(this).html(htmlStr);
@@ -1022,7 +1025,7 @@
                 $('.btnTableAddOn').css('height', '100%')
             } else {
                 DataTable.inforInteract[id] = '-'
-                $(this).css('background', 'lightgray');
+                // $(this).css('background', 'lightgray');
                 var htmlStr = "<button id = 'infoRectid_" + containerId + "' parent = '" + containerId + "' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
                 htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
                 $(this).html(htmlStr);
