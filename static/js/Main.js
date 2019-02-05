@@ -74,6 +74,14 @@
 
     }
 
+    Main.getDataByEntityName = function(entityName, entity, data = []){
+          for (var i = 0; i < data.length; i++) {
+              if (data[i][entityName] == entity)
+                  return data[i];
+          }
+          return null;
+    }
+
     Main.getDataByKeys = function (keys = [], data = []) {
         var dataOut = [];
         data.forEach(function (d) {

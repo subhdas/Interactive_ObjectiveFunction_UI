@@ -356,9 +356,9 @@
                     var splClass = 'rowConstTableCol_'+result;
                     StarM.constraintsDict[i] = true;
                     htmlStr += "<div class = 'rowConstTable "+splClass+"' id = rowConstTableId_" + i + " parent = " + result + ">"
-                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + nameItem + "</span>";
+                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem'>" + nameItem + "</span>";
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
-                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab '>" + item + "</span>";
+                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + item + "</span>";
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";
                     htmlStr += "</div>"
                 } // end of inner for
@@ -403,6 +403,11 @@
             var id = $(this).attr('id')
             id = Util.getNumberFromText(id);
             StarM.constraintsDict[id] = !StarM.constraintsDict[id];
+            var item = $(this).find('.rowSpanItem').text();
+            var nameItem = $(this).find('.rowSpanNameItem').text();
+
+            var data = Main.getDataByEntityName(Main.entityNameSecondImp, nameItem, Main.trainData)
+            console.log(' clicked on ', 'id', item, nameItem, data)
             if (!StarM.constraintsDict[id]){
                 $(this).css('background', 'transparent')
                 $(this).css('color', 'black')
