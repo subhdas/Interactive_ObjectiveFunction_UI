@@ -738,18 +738,18 @@
                     $('.btnTableAddOn').css('height', '100%')
                 });
 
-            if(state == 'yes'){
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false     
-                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; //false
+            if (state == 'yes') {
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false     
+                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false; //false
                 DataTable.criticalClicked = false;
-            }else if (state == 'no'){
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false
-                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false; //false          
+            } else if (state == 'no') {
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false
+                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; //false          
                 DataTable.criticalClicked = true;
             } else {
                 //same as no
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false     
-                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; //false
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false     
+                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false; //false
                 DataTable.criticalClicked = true;
             }
 
@@ -768,9 +768,9 @@
                         critIdList.push(id);
                     }
 
-                      if (back == 'rgb(53, 183, 194)' || state == 'no') {
-                          critIdList2.push(id);
-                      }
+                    if (back == 'rgb(53, 183, 194)' || state == 'no') {
+                        critIdList2.push(id);
+                    }
                 });
 
 
@@ -788,10 +788,15 @@
             } catch (e) {
 
             }
-            var idBtn = $(".btn_" + stri).attr('id')
-            var idBtn2 = $(".btn_" + stri2).attr('id')
-            $("#" + idBtn).click();
-            $("#" + idBtn2).click();
+
+
+            setTimeout(() => {
+               var idBtn = $(".btn_" + stri).attr('id')
+               var idBtn2 = $(".btn_" + stri2).attr('id')
+               $("#" + idBtn).click();
+               $("#" + idBtn2).click();
+            }, 100);
+         
 
             DataTable.makeTags();
         }) // end of rect dict
@@ -818,19 +823,19 @@
             } else if (val == 'yes') {
                 DataTable.inforInteractaLL[id] = 'no'
                 // $(this).css('background', Main.colors.HIGHLIGHT2);
-                    var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
-                    htmlStr += "<i class='material-icons'>arrow_downward</i></button>";
-                    $(this).html(htmlStr);
-                    $('.btnTableAddOn').css('width', '100%')
-                    $('.btnTableAddOn').css('height', '100%')
+                var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                htmlStr += "<i class='material-icons'>arrow_downward</i></button>";
+                $(this).html(htmlStr);
+                $('.btnTableAddOn').css('width', '100%')
+                $('.btnTableAddOn').css('height', '100%')
             } else {
                 DataTable.inforInteractaLL[id] = '-'
                 // $(this).css('background', 'lightgray');
-                    var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
-                    htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
-                    $(this).html(htmlStr);
-                    $('.btnTableAddOn').css('width', '100%')
-                    $('.btnTableAddOn').css('height', '100%')
+                var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
+                $(this).html(htmlStr);
+                $('.btnTableAddOn').css('width', '100%')
+                $('.btnTableAddOn').css('height', '100%')
             }
             var col = $(this).css('background-color');
             var state = DataTable.inforInteractaLL[id];
