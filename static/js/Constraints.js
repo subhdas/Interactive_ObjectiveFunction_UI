@@ -4,6 +4,7 @@
     Cons = {};
 
     Cons.origWidthConsBars = 0;
+    Cons.cnsBtnMouseEvent = false;
 
     Cons.userWtConst = {
         'COMPOSITIONAL': 1,
@@ -276,7 +277,16 @@
 
         Cons.origWidthConsBars = $(".resizeWeight").width();
 
+        $('.constOpt').on('mouseover', function (e) {
+        Cons.cnsBtnMouseEvent = true;
 
+        })
+
+        $('.constOpt').on('mouseout', function (e) {
+
+    Cons.cnsBtnMouseEvent = false;
+
+        })
 
         //events
         $('.constOpt').on('click', function (e) {
@@ -286,6 +296,7 @@
             console.log('clicked checkbox ', name, item);
             //COMMENTED BELOW
             // if (!DataTable.fromTableInferred) Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
+            if (Cons.cnsBtnMouseEvent) Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
             Cons.lastItemClicked = name;
             // $(this).find('button').css('display', 'block');
             if (Cons.typeConstraints[item][name]['Checked'] == true) {

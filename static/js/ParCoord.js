@@ -6,6 +6,7 @@
     ParC.userVariance = {};
     ParC.hoveredItem = '';
     ParC.userCorrel = {};
+    ParC.parallelBrushed = false;
 
 
     ParC.addIconsFeatureEditor = function (containerId = "") {
@@ -33,6 +34,7 @@
             //    var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
             //    ParC.makeParallelCoordChart('filterContentId', dataNumeric);
             ParC.featureEditorCreate();
+            ParC.parallelBrushed = false;
 
         })
 
@@ -458,7 +460,7 @@
         // Handles a brush event, toggling the display of foreground lines.
         function brush() {
             ParC.filteredData = [];
-
+            ParC.parallelBrushed = true;
             var actives = dimensions.filter(function (p) {
                     return !y[p].brush.empty();
                 }),

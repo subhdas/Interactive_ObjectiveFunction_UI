@@ -9,6 +9,8 @@
         '#8C55EE',
     ]
 
+    StarM.modelOutputView = true
+
     StarM.getModelData = function () {
         var modelData = BarM.allModelData;
         var dataCollect = [];
@@ -184,6 +186,17 @@
     }
 
 
+    StarM.toggleModelConstraintView = function(){
+        StarM.modelOutputView = !StarM.modelOutputView;
+        if(StarM.modelOutputView){
+            $("#starPlotContentId").hide()
+            $("#starPlotModelId").show()
+        }else{
+            $("#starPlotContentId").show()
+            $("#starPlotModelId").hide()
+        }
+    }
+
 
     StarM.addIconsStarPlot = function (containerId = "") {
         if (containerId == "") containerId = "starPlotHeaderId";
@@ -197,7 +210,7 @@
         $(".starPlotHeadTitle").css('width', '100%')
         $(".starPlotHeadTitle").css('font-size', '1.5em')
         $(".starPlotHeadTitle").css('display', 'flex')
-        htmlStr = "<button id='someBtnId' class='someBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr = "<button id='toggleModelConstraintsId' class='someBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
 
         $(".starPlotHeadButton").append(htmlStr);
@@ -213,6 +226,11 @@
 
         //extra content
         StarM.addModelSelectors("starPlotHeadTitleId")
+
+
+        $("#toggleModelConstraintsId").on('click', function(d){
+            StarM.toggleModelConstraintView();
+        })
 
     }
 
@@ -307,6 +325,7 @@
            StarM.addConstraintsTable = function (containerId = "") {
                if (containerId == "") containerId = "starPlotContentId"
                $("#" + containerId).empty();
+               if(StarM.modelOutputView) $("#"+ containerId).hide();
 
                // CONSTRAINTS SOLVE SCORE = 40/100
                // TAGS TYPE HIGHLIGHTED ABOVVE TO FILTER TABLE
@@ -319,16 +338,18 @@
                        arrId.push.apply(arrId, arrDict[el])
                    }
                    arrId = Util.getUniqueArray(arrId);
-                   var par = ConsInt.activeConstraints[item]['parent']
+                   var par = ConsInt.activeConstraints[item]['parent'][0]
                    if (arrId.length > 0) {
                        for (var i = 0; i < arrId.length; i++) {
                            var dataItem = Main.getDataById(arrId[i], Main.trainData);
                            var nameItem = dataItem[Main.entityNameSecondImp];
+                           if(nameItem.length > 20) nameItem = nameItem.substring(0,15) + "..."
                            var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
                            htmlStr += "<div class = 'rowConstTable'>"
                            htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + nameItem + "</span>";
                            htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + par + "</span>";
-                           htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";
+                           htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + item + "</span>";
+                           htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";  
                            htmlStr += "</div>"
                        } // end of inner for
                    }

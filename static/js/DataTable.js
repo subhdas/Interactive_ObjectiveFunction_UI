@@ -675,6 +675,11 @@
             setTimeout(function () {
                 DataTable.criticalSwitch = false;
             }, 500)
+
+            DataTable.fromTableInferred = true;
+            setTimeout(() => {
+                DataTable.fromTableInferred = false;
+            }, 6000);
             var id = -1;
             var val = DataTable.criticalInteractAll[id];
             if (val == '-') {
@@ -734,6 +739,8 @@
                         htmlStr += "<i class='material-icons'>linear_scale</i></button>";
                     }
                     $("#criticalRectId_" + id).html(htmlStr);
+                    $("#criticalRectId_" + id).attr('parent', state);
+                    DataTable.criticalInteract[id] = state
                     $('.btnTableAddOn').css('width', '100%')
                     $('.btnTableAddOn').css('height', '100%')
                 });
@@ -755,48 +762,120 @@
 
             var critIdList = [];
             var critIdList2 = [];
+            // $("#dataViewAppTable_" + cont)
+            //     .find(".trTable:visible")
+            //     .each(function (i, el) {
+            //         // console.log(' found is ', i, cont, el)
+            //         var id = $(this).attr('id');
+            //         id = Util.getNumberFromText(id);
+            //         // arr.push(id)
+            //         var back = $("#criticalRectId_" + id).css('background-color')
+            //         // console.log(' found back col as ', back)
+            //         if (back == 'rgb(194, 53, 115)' || state == 'yes') {
+            //             critIdList.push(id);
+            //         }
+
+            //         if (back == 'rgb(53, 183, 194)' || state == 'no') {
+            //             critIdList2.push(id);
+            //         }
+            //     });
+
+
+
             $("#dataViewAppTable_" + cont)
-                .find(".trTable:visible")
+                .find(".trTable")
                 .each(function (i, el) {
-                    // console.log(' found is ', i, cont, el)
                     var id = $(this).attr('id');
+                    var stateGot = $(this).attr('parent');
                     id = Util.getNumberFromText(id);
                     // arr.push(id)
                     var back = $("#criticalRectId_" + id).css('background-color')
+                    var stateGot = $("#criticalRectId_" + id).attr('parent')
+                    // console.log('state getting ', stateGot, id)
                     // console.log(' found back col as ', back)
-                    if (back == 'rgb(194, 53, 115)' || state == 'yes') {
+                    if (back == 'rgb(194, 53, 115)' || stateGot == 'yes') {
                         critIdList.push(id);
                     }
 
-                    if (back == 'rgb(53, 183, 194)' || state == 'no') {
+                    if (back == 'rgb(53, 183, 194)' || stateGot == 'no') {
                         critIdList2.push(id);
                     }
                 });
 
 
-            // if (critIdList.length == 0) {
-            //     Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false          
-            //     DataTable.criticalClicked = false;
-            // } else {
-            //     Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //true
-            //     DataTable.criticalClicked = true;
-            // }
+            if (critIdList.length == 0) {
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false          
+                DataTable.criticalClicked = false;
+            } else {
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //true
+                DataTable.criticalClicked = true;
+            }
+
+            if (critIdList2.length == 0) {
+                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false; //false          
+                DataTable.criticalClicked = false;
+            } else {
+                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; //true
+                DataTable.criticalClicked = true;
+            }
             ConsInt.getActiveConstraints();
             try {
                 ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = critIdList;
+            } catch (e) {}
+            try {
                 ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2] = critIdList2;
-            } catch (e) {
+            } catch (e) {}
+            // try {
+            //     var elem = ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri]
+            //     if (typeof elem != 'undefined') {
+            //         elem = elem.concat(critIdList);
+            //         elem = Util.getUniqueArray(elem)
+            //         ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = elem
+            //     } else {
+            //         ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = critIdList;
+            //     }
 
-            }
+
+            //     var elem = ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2]
+            //     if (typeof elem != 'undefined') {
+            //         elem = elem.concat(critIdList2);
+            //         elem = Util.getUniqueArray(elem)
+            //         ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2] = elem
+            //     } else {
+            //         ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2] = critIdList2;
+            //     }
+
+            //     // ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2] = critIdList2;
+            // } catch (e) {
+            //     console.log('critall errors ', e)
+            // }
+
+            // //for critical lists
+            // try {
+            //     var arr = ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri];
+            //     if (arr.length > 0) Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false
+            //     else Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false;
+            // } catch (e) {
+
+            // }
+
+            // //for non-critical lists
+            // try {
+            //     var arr = ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2];
+            //     if (arr.length > 0) Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; //false
+            //     else Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false;
+            // } catch (e) {
+
+            // }
 
 
             setTimeout(() => {
-               var idBtn = $(".btn_" + stri).attr('id')
-               var idBtn2 = $(".btn_" + stri2).attr('id')
-               $("#" + idBtn).click();
-               $("#" + idBtn2).click();
+                var idBtn = $(".btn_" + stri).attr('id')
+                var idBtn2 = $(".btn_" + stri2).attr('id')
+                $("#" + idBtn).click();
+                $("#" + idBtn2).click();
             }, 100);
-         
+
 
             DataTable.makeTags();
         }) // end of rect dict
@@ -958,10 +1037,10 @@
             critIdList = Util.getUniqueArray(critIdList);
             // console.log('critical id list found ', critIdList)
             var stri = 'Critical-Items'
-            DataTable.fromTableInferred = true;
-            setTimeout(() => {
-                DataTable.fromTableInferred = false;
-            }, 3000);
+            // DataTable.fromTableInferred = true;
+            // setTimeout(() => {
+            //     DataTable.fromTableInferred = false;
+            // }, 6000);
             Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; // !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
             ConsInt.getActiveConstraints();
             ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = critIdList;
@@ -1004,6 +1083,7 @@
                 var idBtn = $(".btn_" + stri2).attr('id')
                 // console.log('button click check ', arr, DataTable.criticalClicked)
                 if (critIdList.length > 0 && !DataTable.non_criticalClicked) {
+                    Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true;
                     setTimeout(() => {
                         $("#" + idBtn).trigger('click');
                     }, 100);
@@ -1882,6 +1962,7 @@
 
         $(".tagHead").on('mouseover', function (d) {
             if (DataTable.tagClicked) return
+            if (ParC.parallelBrushed) return
             $(this).css('border', '1px solid black')
             $(".tagHead").css('background', 'lightgray')
             $(this).css('background', Main.colors.HIGHLIGHT2)
@@ -1896,6 +1977,8 @@
 
         $(".tagHead").on('mouseout', function (d) {
             if (DataTable.tagClicked) return
+            if (ParC.parallelBrushed) return
+
             $(this).css('border', 'transparent')
             $(".tagHead").css('background', Main.colors.HIGHLIGHT2)
             //train table
@@ -1903,6 +1986,8 @@
         })
 
         $(".tagHead").on('click', function (d) {
+            if (ParC.parallelBrushed) return
+
             var elem = $(this).attr('parent');
 
             if (DataTable.tagClickName == elem) {
