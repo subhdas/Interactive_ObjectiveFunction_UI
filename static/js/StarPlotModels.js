@@ -120,8 +120,8 @@
         var htmlStr = "";
         for (var item in BarM.allModelData) {
             var splClass = ""
-            if(item == BarM.selectedModelId) splClass = "modelNameHeadSel"
-            htmlStr += "<div class = 'modelNameHead " +splClass+"' id = 'modelNameHead_" + item + "' > M_" + item + " </div>";
+            if (item == BarM.selectedModelId) splClass = "modelNameHeadSel"
+            htmlStr += "<div class = 'modelNameHead " + splClass + "' id = 'modelNameHead_" + item + "' > M_" + item + " </div>";
         }
         $('#' + containerId).append(htmlStr);
 
@@ -186,12 +186,19 @@
     }
 
 
-    StarM.toggleModelConstraintView = function(){
+    StarM.toggleModelConstraintView = function () {
+
+        // var wid = $("#modelExplorePanel").width()
+        // var ht = $("#modelExplorePanel").height()
+        // wid = 300;
+        // $("#modelExplorePanel").css('width', wid)
+        // $("#modelExplorePanel").css('height', ht)
+
         StarM.modelOutputView = !StarM.modelOutputView;
-        if(StarM.modelOutputView){
+        if (StarM.modelOutputView) {
             $("#starPlotContentId").hide()
             $("#starPlotModelId").show()
-        }else{
+        } else {
             $("#starPlotContentId").show()
             $("#starPlotModelId").hide()
         }
@@ -211,7 +218,7 @@
         $(".starPlotHeadTitle").css('font-size', '1.5em')
         $(".starPlotHeadTitle").css('display', 'flex')
         htmlStr = "<button id='toggleModelConstraintsId' class='someBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-        htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
+        htmlStr += "<i class='material-icons'>blur_linear</i></button>";
 
         $(".starPlotHeadButton").append(htmlStr);
 
@@ -228,7 +235,7 @@
         StarM.addModelSelectors("starPlotHeadTitleId")
 
 
-        $("#toggleModelConstraintsId").on('click', function(d){
+        $("#toggleModelConstraintsId").on('click', function (d) {
             StarM.toggleModelConstraintView();
         })
 
@@ -322,62 +329,76 @@
 
     }
 
-           StarM.addConstraintsTable = function (containerId = "") {
-               if (containerId == "") containerId = "starPlotContentId"
-               $("#" + containerId).empty();
-               if(StarM.modelOutputView) $("#"+ containerId).hide();
+    StarM.addConstraintsTable = function (containerId = "") {
+        if (containerId == "") containerId = "starPlotContentId"
+        $("#" + containerId).empty();
+        if (StarM.modelOutputView) $("#" + containerId).hide();
 
-               // CONSTRAINTS SOLVE SCORE = 40/100
-               // TAGS TYPE HIGHLIGHTED ABOVVE TO FILTER TABLE
-               var htmlStr = "";
-               htmlStr += "<div class = 'consTableDiv'>"
-               for (var item in ConsInt.activeConstraints) {
-                   var arrDict = ConsInt.activeConstraints[item]['input'];
-                   var arrId = [];
-                   for (var el in arrDict) {
-                       arrId.push.apply(arrId, arrDict[el])
-                   }
-                   arrId = Util.getUniqueArray(arrId);
-                   var par = ConsInt.activeConstraints[item]['parent'][0]
-                   if (arrId.length > 0) {
-                       for (var i = 0; i < arrId.length; i++) {
-                           var dataItem = Main.getDataById(arrId[i], Main.trainData);
-                           var nameItem = dataItem[Main.entityNameSecondImp];
-                           if(nameItem.length > 20) nameItem = nameItem.substring(0,15) + "..."
-                           var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
-                           htmlStr += "<div class = 'rowConstTable'>"
-                           htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + nameItem + "</span>";
-                           htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + par + "</span>";
-                           htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + item + "</span>";
-                           htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";  
-                           htmlStr += "</div>"
-                       } // end of inner for
-                   }
-               } // end of outer for
-               htmlStr += "</div>"
-               $("#" + containerId).append(htmlStr)
+        // CONSTRAINTS SOLVE SCORE = 40/100
+        // TAGS TYPE HIGHLIGHTED ABOVVE TO FILTER TABLE
+        var htmlStr = "";
+        htmlStr += "<div class = 'consTableDiv'>"
+        for (var item in ConsInt.activeConstraints) {
+            var arrDict = ConsInt.activeConstraints[item]['input'];
+            var arrId = [];
+            for (var el in arrDict) {
+                arrId.push.apply(arrId, arrDict[el])
+            }
+            arrId = Util.getUniqueArray(arrId);
+            var par = ConsInt.activeConstraints[item]['parent'][0]
+            if (arrId.length > 0) {
+                for (var i = 0; i < arrId.length; i++) {
+                    var dataItem = Main.getDataById(arrId[i], Main.trainData);
+                    var nameItem = dataItem[Main.entityNameSecondImp];
+                    if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
+                    var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
+                    var splClass = 'rowConstTableCol_'+result
+                    htmlStr += "<div class = 'rowConstTable "+splClass+"' id = rowConstTableId_" + i + " parent = " + result + ">"
+                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + nameItem + "</span>";
+                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + par + "</span>";
+                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + item + "</span>";
+                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";
+                    htmlStr += "</div>"
+                } // end of inner for
+            }
+        } // end of outer for
+        htmlStr += "</div>"
+        $("#" + containerId).append(htmlStr)
 
-               $(".consTableDiv").css('display', 'flex')
-               $(".consTableDiv").css('flex-direction', 'column')
-               $(".consTableDiv").css('margin-bottom', '3px')
-               $(".consTableDiv").css('padding', '3px')
-               $(".consTableDiv").css('overflow-X', 'auto')
-               $(".consTableDiv").css('overflow-Y', 'auto')
-               $(".consTableDiv").css('max-height', '200px')
 
-                $(".rowConstTable").css('display', 'flex')
-                $(".rowConstTable").css('min-height', '20px')
-                $(".rowConstTable").css('height', '20px')
+        var col = [
+            "#E29510",
+            "#5B61E1"
+        ]
 
-               $(".rowConstTable").css('border-bottom', '1px dashed lightgray')
+        $(".rowConstTableCol_0").css('background', '#E29510')
+        $(".rowConstTableCol_1").css('background', '#5B61E1')
+        
 
-               $(".rowSpanConsTab").css('width', '200px')
-               $(".rowSpanConsTab").css('padding', '3px')
-               // $(".rowConstTable").css('border-bottom', '3px')
-           }
 
-           // ON/OFF Volkwswagen          CMP     CRIT        SATISFIED Y/N
-           // ON/OFF AUDI                 CMP     NON-CRIT    SATISFIED Y/N
+        $(".consTableDiv").css('display', 'flex')
+        $(".consTableDiv").css('flex-direction', 'column')
+        $(".consTableDiv").css('margin-bottom', '3px')
+        $(".consTableDiv").css('padding', '3px')
+        $(".consTableDiv").css('overflow-X', 'auto')
+        $(".consTableDiv").css('overflow-Y', 'auto')
+        $(".consTableDiv").css('max-height', '200px')
+
+        $(".rowConstTable").css('display', 'flex')
+        $(".rowConstTable").css('min-height', '20px')
+        $(".rowConstTable").css('height', '20px')
+        $(".rowConstTable").css('margin-bottom', '3px')
+        $(".rowConstTable").css('color', 'white')
+
+        $(".rowConstTable").css('border-bottom', '1px dashed lightgray')
+
+        $(".rowSpanConsTab").css('width', '200px')
+        $(".rowSpanConsTab").css('padding', '3px')
+        // $(".rowConstTable").css('border-bottom', '3px')
+    }
+
+    // ON/OFF Volkwswagen          CMP     CRIT        SATISFIED Y/N
+    // ON/OFF AUDI                 CMP     NON-CRIT    SATISFIED Y/N
 
 
 })()
