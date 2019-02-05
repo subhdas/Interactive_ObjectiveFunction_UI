@@ -9,7 +9,8 @@
         '#8C55EE',
     ]
 
-    StarM.modelOutputView = true
+    StarM.modelOutputView = true;
+    StarM.constraintsDict = {}
 
     StarM.getModelData = function () {
         var modelData = BarM.allModelData;
@@ -352,11 +353,12 @@
                     var nameItem = dataItem[Main.entityNameSecondImp];
                     if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
                     var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
-                    var splClass = 'rowConstTableCol_'+result
+                    var splClass = 'rowConstTableCol_'+result;
+                    StarM.constraintsDict[i] = true;
                     htmlStr += "<div class = 'rowConstTable "+splClass+"' id = rowConstTableId_" + i + " parent = " + result + ">"
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + nameItem + "</span>";
-                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + par + "</span>";
-                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + item + "</span>";
+                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
+                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab '>" + item + "</span>";
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";
                     htmlStr += "</div>"
                 } // end of inner for
@@ -394,6 +396,23 @@
 
         $(".rowSpanConsTab").css('width', '200px')
         $(".rowSpanConsTab").css('padding', '3px')
+        $(".rowSpanParent").css('width', '40px')
+
+
+        $(".rowConstTable").on('click', function(e){
+            var id = $(this).attr('id')
+            id = Util.getNumberFromText(id);
+            StarM.constraintsDict[id] = !StarM.constraintsDict[id];
+            if (!StarM.constraintsDict[id]){
+                $(this).css('background', 'transparent')
+                $(this).css('color', 'black')
+            }else{
+                $(this).css('background', col[0])
+                $(this).css('color', 'white')
+
+            }
+        })
+
         // $(".rowConstTable").css('border-bottom', '3px')
     }
 
