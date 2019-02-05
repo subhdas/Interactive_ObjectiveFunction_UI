@@ -737,6 +737,18 @@
                     $('.btnTableAddOn').css('height', '100%')
                 });
 
+            if(state == 'yes'){
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false          
+                DataTable.criticalClicked = false;
+            }else if (state == 'no'){
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false          
+                DataTable.criticalClicked = true;
+            } else {
+                //same as no
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false          
+                DataTable.criticalClicked = true;
+            }
+
             var critIdList = [];
             $("#dataViewAppTable_" + cont)
                 .find(".trTable")
@@ -747,19 +759,19 @@
                     // arr.push(id)
                     var back = $("#criticalRectId_" + id).css('background-color')
                     // console.log(' found back col as ', back)
-                    if (back == 'rgb(194, 53, 115)' || DataTable.criticalInteractAll[id] == 'yes') {
+                    if (back == 'rgb(194, 53, 115)' || state == 'yes') {
                         critIdList.push(id);
                     }
                 });
 
 
-            if (critIdList.length == 0) {
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false          
-                DataTable.criticalClicked = false;
-            } else {
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //true
-                DataTable.criticalClicked = true;
-            }
+            // if (critIdList.length == 0) {
+            //     Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false          
+            //     DataTable.criticalClicked = false;
+            // } else {
+            //     Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //true
+            //     DataTable.criticalClicked = true;
+            // }
             ConsInt.getActiveConstraints();
             try {
                 ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = critIdList;
