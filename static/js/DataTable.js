@@ -709,6 +709,7 @@
             var state = DataTable.criticalInteractAll[id];
             // var arr = ParC.filteredData;
             var stri = 'Critical-Items';
+            var stri2 = 'Non-Critical';
             // Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; // !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
             // ConsInt.getActiveConstraints();
             // ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = ParC.filteredData;
@@ -738,20 +739,24 @@
                 });
 
             if(state == 'yes'){
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false          
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false     
+                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; //false
                 DataTable.criticalClicked = false;
             }else if (state == 'no'){
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false          
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false
+                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false; //false          
                 DataTable.criticalClicked = true;
             } else {
                 //same as no
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false          
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false     
+                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; //false
                 DataTable.criticalClicked = true;
             }
 
             var critIdList = [];
+            var critIdList2 = [];
             $("#dataViewAppTable_" + cont)
-                .find(".trTable")
+                .find(".trTable:visible")
                 .each(function (i, el) {
                     // console.log(' found is ', i, cont, el)
                     var id = $(this).attr('id');
@@ -762,6 +767,10 @@
                     if (back == 'rgb(194, 53, 115)' || state == 'yes') {
                         critIdList.push(id);
                     }
+
+                      if (back == 'rgb(53, 183, 194)' || state == 'no') {
+                          critIdList2.push(id);
+                      }
                 });
 
 
@@ -775,11 +784,14 @@
             ConsInt.getActiveConstraints();
             try {
                 ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = critIdList;
+                ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2] = critIdList2;
             } catch (e) {
 
             }
             var idBtn = $(".btn_" + stri).attr('id')
+            var idBtn2 = $(".btn_" + stri2).attr('id')
             $("#" + idBtn).click();
+            $("#" + idBtn2).click();
 
             DataTable.makeTags();
         }) // end of rect dict
