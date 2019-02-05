@@ -747,17 +747,17 @@
                     // arr.push(id)
                     var back = $("#criticalRectId_" + id).css('background-color')
                     // console.log(' found back col as ', back)
-                    if (back == 'rgb(194, 53, 115)') {
+                    if (back == 'rgb(194, 53, 115)' || DataTable.criticalInteractAll[id] == 'yes') {
                         critIdList.push(id);
                     }
                 });
 
 
             if (critIdList.length == 0) {
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false          
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false          
                 DataTable.criticalClicked = false;
             } else {
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //true
+                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //true
                 DataTable.criticalClicked = true;
             }
             ConsInt.getActiveConstraints();

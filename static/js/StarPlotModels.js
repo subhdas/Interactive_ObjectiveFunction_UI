@@ -340,10 +340,14 @@
                $(".consTableDiv").css('flex-direction', 'column')
                $(".consTableDiv").css('margin-bottom', '3px')
                $(".consTableDiv").css('padding', '3px')
+               $(".consTableDiv").css('overflow-X', 'auto')
+               $(".consTableDiv").css('overflow-Y', 'auto')
+               $(".consTableDiv").css('max-height', '200px')
 
                 $(".rowConstTable").css('display', 'flex')
-                $(".consTableDiv").css('margin-bottom', '3px')
-                $(".consTableDiv").css('padding', '3px')
+                $(".rowConstTable").css('min-height', '20px')
+                $(".rowConstTable").css('height', '20px')
+
                $(".rowConstTable").css('border-bottom', '1px dashed lightgray')
 
                $(".rowSpanConsTab").css('width', '200px')
