@@ -54,8 +54,8 @@
         htmlStr += "</select>";
         htmlStr += "<label></label></div>"
 
-        // htmlStr += "<button id='addConstraintPanelItems' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-        // htmlStr += "<i class='material-icons'>add</i></button>";
+        htmlStr += "<button id='addConstraintPanelItems' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>add</i></button>";
 
         //  htmlStr += "<button id='removeItemsConPanel' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         //  htmlStr += "<i class='material-icons'>clear</i></button>";

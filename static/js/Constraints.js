@@ -19,11 +19,16 @@
                 // 'Add': true,
                 'Checked': false,
                 'UserWt': 1,
+                'Name' : 'Candidate',
+                'Tip' : 'Data items representing assigned labels. Provide data items as examples which strongly represent their target label',
             },
             'Similarity-Metric': {
                 // 'Add': true,
                 'Checked': false,
                 'UserWt': 1,
+                'Name': 'Similar',
+                'Tip': 'Data items which are similar or different to each other. Provide data items as examples showing similarity and difference between them.',
+
             },
             // 'Information-Gain': {
             //     // 'Add': true,
@@ -35,11 +40,18 @@
                 // 'Add': true,
                 'Checked': false,
                 'UserWt': 1,
+                'Name': 'Critical',
+                'Tip': 'Data items which are most relevant to you for the model to make correct predictions.',
+
+
             },
             'Non-Critical': {
                 // 'Add': true,
                 'Checked': false,
                 'UserWt': 1,
+                'Name' : 'Ignore',
+                'Tip': 'Data items which are least relevant to you for the model to make any error in predictions.',
+
             },
             'misc': {
                 'Color-Type': '#DEE54F'
@@ -59,13 +71,32 @@
         //     }
         // },
         'QUANTITATIVE': {
-            'F1-Score': {
-                'Checked': false,
-                'UserWt': 1,
-            },
+              'Recall': {
+                  'Checked': false,
+                  'UserWt': 1,
+                  'Name': 'Accuracy Recall',
+                   'Tip': 'Accuracy Recall is how many of the true positives are correctly predicted by the model',
+             },
+           
+             'Precision': {
+                 'Checked': false,
+                 'UserWt': 1,
+                 'Name': 'Accuracy Precision',
+                'Tip': 'Accuracy Precision is how many of the predicted data items were true positive',
+             },
+              'F1-Score': {
+                  'Checked': false,
+                  'UserWt': 1,
+                  'Name': 'Accuracy F1',
+                  'Tip': 'Accuracy F1 is the weighted average of Precision and Recall. This score takes both false positives and false negatives into account.\
+                Accuracy F1 is usually more useful if you have an uneven class distribution in the data',
+              },
             'Training-Accuracy': {
                 'Checked': false,
                 'UserWt': 1,
+                'Name': 'Accuracy Train',
+                 'Tip': 'Accuracy F1 is the weighted average of Precision and Recall. Therefore, this score takes both false positives and false negatives into account.\
+                Accuracy F1 is usually more useful if you have an uneven class distribution in the data',
             },
             'misc': {
                 'Color-Type': '#A2B0C8'
@@ -75,10 +106,17 @@
             'Testing-Accuracy': {
                 'Checked': false,
                 'UserWt': 1,
+                'Name': 'Accuracy Test',
+                 'Tip': 'Prediction accuracy of the test data will be used to evaluate model performance',
+
             },
             'Cross-Val-Score': {
                 'Checked': false,
                 'UserWt': 1,
+                'Name': 'Cross Validation',
+                 'Tip': 'The train data will be split into 10 folds and randomly one fold will be test data. \
+                 The model will be tested 10 times on each fold and the best performing accuracy score will be picked.',
+
             },
             'misc': {
                 'Color-Type': '#D0B790'
@@ -143,7 +181,7 @@
         containerId = "constraintContentId";
         var htmlStr = ""
         for (var item in Cons.typeConstraints) {
-            console.log('item is ', item)
+            // console.log('item is ', item)
             htmlStr += "<div id= 'typeConst_" + item + "' class= 'typeCons'> <div class ='headRowCons' id= 'headRowCons_" + item + "'> " + item + "</div>"
             htmlStr += "<div parent = '" + item + "' id='resizable' class='ui-widget-content resizeWeight'></div>";
             htmlStr += "<div class= 'contentRowCons'>"
@@ -166,6 +204,9 @@
 
             for (var val in Cons.typeConstraints[item]) {
                 if (val == 'misc') continue;
+            var nameItem = Cons.typeConstraints[item][val]['Name']
+            var titleItem = Cons.typeConstraints[item][val]['Tip']
+
                 htmlStr += "<li class = 'ui-state-default' >"
                 htmlStr += "<div class = 'wrapRowCons' parent = '" + item + "' >"
 
@@ -185,7 +226,7 @@
                 // }
 
                 htmlStr += "<button parent = '" + item + "' given = '" + val + "' name='" + val + "checkbox-" + k + "' id='" + val + "checkbox-" + k + "' \
-          class='mdl-button mdl-js-button mdl-button--accent constOpt btn_" + val + "'>" + val + "</button>"
+          class = 'mdl-button mdl-js-button mdl-button--accent constOpt btn_" + val + " 'title = '"+titleItem+"'>" + nameItem + " </button>"
 
 
 
@@ -267,6 +308,8 @@
         $(".constOpt").css('color', 'black');
         $(".constOpt").css('font-family', 'helvetica');
         $(".constOpt").css('margin-left', '5px');
+        $(".constOpt").css('width', '150px');
+        $(".constOpt").css('height', 'auto');
 
 
         $(".continueContentCons").css('display', 'flex');
