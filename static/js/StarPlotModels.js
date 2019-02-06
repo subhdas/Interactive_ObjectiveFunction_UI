@@ -351,12 +351,13 @@
                 for (var i = 0; i < arrId.length; i++) {
                     var dataItem = Main.getDataById(arrId[i], Main.trainData);
                     var nameItem = dataItem[Main.entityNameSecondImp];
+                    var fullNameItem = dataItem[Main.entityNameSecondImp];
                     if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
                     var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
-                    var splClass = 'rowConstTableCol_'+result;
+                    var splClass = 'rowConstTableCol_' + result;
                     StarM.constraintsDict[i] = true;
-                    htmlStr += "<div class = 'rowConstTable "+splClass+"' id = rowConstTableId_" + i + " parent = " + result + ">"
-                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem'>" + nameItem + "</span>";
+                    htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + i + " parent = " + result + ">"
+                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem' parent = '" + dataItem[Main.entityNameSecondImp] + "'>" + nameItem + "</span>";
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + item + "</span>";
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";
@@ -375,7 +376,7 @@
 
         $(".rowConstTableCol_0").css('background', '#E29510')
         $(".rowConstTableCol_1").css('background', '#5B61E1')
-        
+
 
 
         $(".consTableDiv").css('display', 'flex')
@@ -399,21 +400,99 @@
         $(".rowSpanParent").css('width', '40px')
 
 
-        $(".rowConstTable").on('click', function(e){
+        $(".rowConstTable").on('click', function (e) {
             var id = $(this).attr('id')
             id = Util.getNumberFromText(id);
             StarM.constraintsDict[id] = !StarM.constraintsDict[id];
             var item = $(this).find('.rowSpanItem').text();
-            var nameItem = $(this).find('.rowSpanNameItem').text();
+            var nameItem = $(this).find('.rowSpanNameItem').attr('parent')
 
             var data = Main.getDataByEntityName(Main.entityNameSecondImp, nameItem, Main.trainData)
             console.log(' clicked on ', 'id', item, nameItem, data)
-            if (!StarM.constraintsDict[id]){
+
+
+
+
+
+
+
+
+            if (!StarM.constraintsDict[id]) {
+                //when removing it
                 $(this).css('background', 'transparent')
                 $(this).css('color', 'black')
-            }else{
+
+
+                if (item == 'Critical-Items' || item == 'Non-Critical') {
+                    var arr = ConsInt.activeConstraints[item]['input']['labelitemsConId_' + item]
+                    var ind = arr.indexOf(data.id);
+                    if (ind != -1) {
+                        arr.splice(ind, 1);
+                        ConsInt.activeConstraints[item]['input']['labelitemsConId_' + item] = arr;
+                    }
+                    delete DataTable.criticalInteract[data.id]
+
+                    var htmlStr = "<button id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                    htmlStr += "<i class='material-icons'>linear_scale</i></button>";
+                    $("#criticalRectId_" + data.id).html(htmlStr);
+                    $('.btnTableAddOn').css('width', '100%')
+                    $('.btnTableAddOn').css('height', '100%')
+                }
+
+                if (item == 'Same-Label' || item == 'Similarity-Metric') {
+
+                    // var inputElem = ConsInt.activeConstraints[item]['input'];
+
+                    for (var i = 0; i < Main.labels.length; i++) {
+                        try {
+                            var arr = ConsInt.activeConstraints[item]['input']['labelitemsConId_' + Main.labels[i]]
+                            var ind = arr.indexOf(data.id.toString());
+                            if (ind != -1) {
+                                arr.splice(ind, 1);
+                                ConsInt.activeConstraints[item]['input']['labelitemsConId_' + Main.labels[i]] = arr;
+                            }
+                            // console.log('removed array success ', arr)
+                        } catch (e) {
+                            // console.log(' errored on same label ', e)
+                        }
+                    }
+                }
+
+
+
+
+
+            } else {
+                //when addding it back
                 $(this).css('background', col[0])
                 $(this).css('color', 'white')
+
+                if (item == 'Critical-Items' || item == 'Non-Critical') {
+                    var arr = ConsInt.activeConstraints[item]['input']['labelitemsConId_' + item]
+                    arr.push(data.id);
+                    arr = Util.getUniqueArray(arr);
+                    ConsInt.activeConstraints[item]['input']['labelitemsConId_' + item] = arr;
+                    DataTable.criticalInteract[data.id] = 'yes'
+
+                    var htmlStr = "<button id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                    htmlStr += "<i class='material-icons'>alarm_on</i></button>";
+                    $("#criticalRectId_" + data.id).html(htmlStr);
+                    $('.btnTableAddOn').css('width', '100%')
+                    $('.btnTableAddOn').css('height', '100%')
+                }
+
+                if (item == 'Same-Label' || item == 'Similar-Items') {
+                     for (var i = 0; i < Main.labels.length; i++) {
+                         try {
+                             var arr = ConsInt.activeConstraints[item]['input']['labelitemsConId_' + Main.labels[i]]
+                             arr.push(data.id)
+                             ConsInt.activeConstraints[item]['input']['labelitemsConId_' + Main.labels[i]] = arr;
+                         } catch (e) {
+                             // console.log(' errored on same label ', e)
+                         }
+                }
+
+
 
             }
         })
