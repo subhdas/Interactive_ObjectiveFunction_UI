@@ -7,7 +7,7 @@
     DataTable.showingFilterPanel = false;
     DataTable.addedExtra = 0;
 
-
+    DataTable.fontColor = 'black'
     //auto triggers
     DataTable.criticalSwitch = false;
     DataTable.criticalClicked = false;
@@ -124,11 +124,11 @@
 
     DataTable.updateHeader = function () {
         if (DataTable.viewFullTable) {
-            $('.dataTableHeadText').text(Main.trainData.length + ' rows')
+            $('.containerDataTableHeadText').text(Main.trainData.length + ' rows')
             DataTable.makeTable(Main.trainData);
         } else {
             // $('.dataTableHeadText').text(' Added : ' + Main.currentData.length + ' rows  | Left : ' + Main.leftData.length + ' rows ')
-            $('.dataTableHeadText').text(' Current Data Length : ' + Main.currentData.length)
+            $('.containerDataTableHeadText').text(' Current Data Length : ' + Main.currentData.length)
             DataTable.makeTable(Main.leftData);
         }
     }
@@ -136,14 +136,14 @@
 
     DataTable.updateOnlyHeader = function (dataGiven) {
         // $('.dataTableHeadText').text(dataGiven.length + ' rows');
-        $('.dataTableHeadText').text(' Current Data Length : ' + Main.currentData.length)
+        $('.containerDataTableHeadText').text(' Current Data Length : ' + Main.currentData.length)
     }
 
 
     DataTable.switchToLeftData = function () {
         DataTable.viewFullTable = false;
         // $('#tableContent').css('background', Main.colors.HIGHLIGHT);
-        $('.dataTableHeadText').text(' Current Data Length : ' + Main.trainData.length)
+        $('.containerDataTableHeadText').text(' Current Data Length : ' + Main.trainData.length)
     }
 
 
@@ -169,21 +169,30 @@
 
         // htmlStr = "<div class='iconHolder' id='addAllData' onclick='' title='Add all data'>"
         // htmlStr += "<img class='imgIcon' src='static/img/icons/loadData.png'></div>"
-        htmlStr = "<div class='iconHolder' id='tableViewC' onclick='' title='Show Table View'>"
-        htmlStr += "<img class='imgIcon' src='static/img/icons/table_view.png'></div>"
 
-        htmlStr += "<div class='iconHolder' id='correlViewC' onclick='' title='Show Correlation View'>"
-        htmlStr += "<img class='imgIcon' src='static/img/icons/parallel.png'></div>"
+        // htmlStr = "<div class='iconHolder' id='tableViewC' onclick='' title='Show Table View'>"
+        // htmlStr += "<img class='imgIcon' src='static/img/icons/table_view.png'></div>"
 
+        // htmlStr += "<div class='iconHolder' id='correlViewC' onclick='' title='Show Correlation View'>"
+        // htmlStr += "<img class='imgIcon' src='static/img/icons/parallel.png'></div>"
+
+        htmlStr = "<div class = tabSelectorBtnsDiv>"
+        htmlStr += "<button id='tableViewC' title='Show Table View' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored' title='Show Correlation View'>"
+        htmlStr += "<i class='material-icons'>credit_card</i></button>";
+        htmlStr += "<button id='correlViewC' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>border_outer</i></button>";
+        htmlStr += '</div>'
         // htmlStr += "<button id='dataToggleBtn'> </button>";
-        htmlStr += "<div class = 'dataTableHeadText' id = 'dataTableHeadTextId'>" + dataIn.length + " rows </div>";
+        htmlStr += "<div class = 'dataTableHeadText' id = 'dataTableHeadTextId'><div class = 'containerDataTableHeadText'>" + dataIn.length + " rows </div></div>";
         // htmlStr += "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
         // htmlStr += "<img class='imgIcon' src='static/img/icons/add.png'></div>"
 
+        htmlStr += "<div class = tableHeadButtons>"
         htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>chat</i></button>";
         htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>dashboard</i></button>";
+        htmlStr += '</div>'
 
 
         // htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
@@ -192,10 +201,16 @@
 
 
         $("#" + containerId).append(htmlStr);
+
+
         //adds constraint selector inline
         setTimeout(() => {
-        ConP.addPanelInLine();            
+            ConP.addPanelInLine();
         }, 10);
+
+
+        $(".tabSelectorBtnsDiv").css('display', 'flex')
+        $(".tabSelectorBtnsDiv").css('align-items', 'center')
 
         $('.dataTableHeadText').css('display', 'flex');
         $('.dataTableHeadText').css('flex-direction', 'row-reverse');
@@ -203,6 +218,14 @@
         $('.dataTableHeadText').css('padding', '5px');
         $('.dataTableHeadText').css('align-self', 'center');
         $('.dataTableHeadText').css('font-size', '1.9em');
+
+        $('.containerDataTableHeadText').css('display', 'flex')
+        $('.containerDataTableHeadText').css('align-items', 'center')
+
+        $('.tableHeadButtons').css('display', 'flex')
+        $('.tableHeadButtons').css('align-items', 'center')
+
+
         // $('.dataTableHeadText').css('display' , )
 
 
@@ -1626,17 +1649,117 @@
             if (typeof idNum == 'undefined') return;
 
             if (ConP.showingConstPanel) {
-                if (typeof ConP.selectedRowsCons[idNum] == 'undefined') {
+                var valueSelect = $('.selectConstrain').val();
+
+                // if (typeof ConP.selectedRowsCons[idNum] == 'undefined') {
+                if (back != 'rgb(53, 183, 194)') {
                     $(this).css('background', Main.colors.HIGHLIGHT2);
                     DataTable.fontColor = $(this).css('color');
                     $(this).css('color', 'white');
                     ConP.selectedRowsCons[idNum] = true;
+                    console.log(' was not there before ', idNum, ConP.selectedRowsCons, back)
                 } else {
                     $(this).css('background', "rgb(255,255,255)");
                     console.log("removing colors")
                     delete ConP.selectedRowsCons[idNum];
-                    $(this).css('color', DataTable.fontColor);
+
+
+                    //delete from the main data
+                    var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame];
+                    var ind = arr.indexOf(idNum);
+                    arr.splice(ind,1)
+
+                    $(this).css('color', 'black');
+                    console.log(' was there before ', idNum, ConP.selectedRowsCons);
                 }
+
+
+                //directly adding the data
+
+
+                //Same label
+                if (valueSelect == 'Same-Label') {
+                    Cons.typeConstraints['COMPOSITIONAL'][valueSelect]['Checked'] = true;
+                    ConsInt.getActiveConstraints();
+                    var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame];
+                    try {
+                        arr.push.apply(arr, Object.keys(ConP.selectedRowsCons));
+                        arr = Util.getUniqueArray(arr)
+                    } catch (err) {
+                        arr = Object.keys(ConP.selectedRowsCons);
+                    }
+                    ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame] = arr;
+                    // TabCon.makeSameLabContent();
+                    TabCon.addSameLabContentFromData(valueSelect);
+
+                    var arr = Object.keys(ConP.selectedRowsCons);
+                    ConP.selectedRowsCons = {};
+                    // commented - no need deselect
+                    arr.forEach(function (d, i) {
+                        // $("#tr_" + d).css('background', "rgb(255,255,255)")
+                        // $("#tr_" + d).css('color', 'black')
+                    })
+
+                    //auto select the same label button on top
+                    if (arr.length > 0) {
+                        var id = $(".btn_" + valueSelect).attr('id')
+                        var elem = document.getElementById(id);
+                        elem.click();
+                        DataTable.sameLabelClicked = true;
+                        $(".btn_" + valueSelect).trigger("click")
+                    }
+
+                    if (arr.length == 0 && DataTable.sameLabelClicked) {
+                        DataTable.sameLabelClicked = false;
+                        var id = $(".btn_" + valueSelect).attr('id')
+                        var elem = document.getElementById(id);
+                        elem.click();
+                    }
+                }
+
+                  if (valueSelect == 'Similarity-Metric') {
+                      // $("._mainContentMid").empty();
+                      Cons.typeConstraints['COMPOSITIONAL'][valueSelect]['Checked'] = true;
+                      ConsInt.getActiveConstraints();
+                      var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame];
+                      try {
+                          arr.push.apply(arr, Object.keys(ConP.selectedRowsCons));
+                          arr = Util.getUniqueArray(arr)
+                      } catch (err) {
+                          arr = Object.keys(ConP.selectedRowsCons);
+                      }
+                      ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame] = arr;
+
+                      // TabCon.makeSameLabContent("_mainContentMid" + TabCon.radioCheckedSame, TabCon.radioCheckedSame, valueSelect);
+                      TabCon.addSameLabContentFromData(valueSelect);
+                      var arr = Object.keys(ConP.selectedRowsCons);
+                      ConP.selectedRowsCons = {};
+                      //commented - no need to deselect
+                      arr.forEach(function (d, i) {
+                          // $("#tr_" + d).css('background', "rgb(255,255,255)")
+                          // $("#tr_" + d).css('color', 'black')
+                      })
+
+
+                      //auto select the similarity metric button on top
+                      if (arr.length > 0) {
+                          var id = $(".btn_" + valueSelect).attr('id')
+                          var elem = document.getElementById(id);
+                          elem.click();
+                          DataTable.similarityClicked = true;
+                          $(".btn_" + valueSelect).trigger("click")
+                      }
+
+                      if (arr.length == 0 && DataTable.similarityClicked) {
+                          DataTable.similarityClicked = false;
+                          var id = $(".btn_" + valueSelect).attr('id')
+                          var elem = document.getElementById(id);
+                          elem.click();
+                      }
+                  }
+                  DataTable.makeTags();
+
+
             } else {
                 return
                 // if (typeof DataTable.selectedRows[idNum] == 'undefined') {
