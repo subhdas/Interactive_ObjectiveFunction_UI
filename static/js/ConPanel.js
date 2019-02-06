@@ -158,7 +158,7 @@
                     var lab = arr[i]
                     if (typeof lab == 'undefined') lab = item
                     htmlStr += "<p class ='par_radioBtnClass'><label><input class = 'radioLabelCons' name='group1' type='radio' checked />"
-                    htmlStr += "<span>" + lab + "</span></label></p>";
+                    htmlStr += "<span class = 'spanRadiobtnClass'>" + lab + "</span></label></p>";
                     TabCon.radioCheckedSame = lab;
                 }
                 htmlStr += "</div>"
@@ -188,6 +188,9 @@
                 $(".par_radioBtnClass").css('display', 'flex')
                 $(".par_radioBtnClass").css('margin', '0px')
                 $(".par_radioBtnClass").css('align-items', 'center')
+                $(".par_radioBtnClass").css('padding-right', '15px')
+
+                // $(".spanRadiobtnClass").css('padding-left', '15px')
 
                 $('.radioLabelCons').on('change', function (e) {
                     var check = $("input[name=group1]:checked").next().text();
@@ -582,7 +585,7 @@
 
 
 
-    }
+    // }
 
 
 
