@@ -176,7 +176,7 @@
         htmlStr += "<img class='imgIcon' src='static/img/icons/parallel.png'></div>"
 
         // htmlStr += "<button id='dataToggleBtn'> </button>";
-        htmlStr += "<div class = 'dataTableHeadText'>" + dataIn.length + " rows </div>";
+        htmlStr += "<div class = 'dataTableHeadText' id = 'dataTableHeadTextId'>" + dataIn.length + " rows </div>";
         // htmlStr += "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
         // htmlStr += "<img class='imgIcon' src='static/img/icons/add.png'></div>"
 
@@ -192,6 +192,10 @@
 
 
         $("#" + containerId).append(htmlStr);
+        //adds constraint selector inline
+        setTimeout(() => {
+        ConP.addPanelInLine();            
+        }, 10);
 
         $('.dataTableHeadText').css('display', 'flex');
         $('.dataTableHeadText').css('flex-direction', 'row-reverse');
@@ -200,16 +204,6 @@
         $('.dataTableHeadText').css('align-self', 'center');
         $('.dataTableHeadText').css('font-size', '1.9em');
         // $('.dataTableHeadText').css('display' , )
-
-        // $('#dataToggleBtn').button({
-        //     icon: "ui-icon-gear",
-        //     showLabel: false
-        // })
-        //
-        // $('#dataToggleBtn').click(function () {
-        //     DataTable.viewFullTable = !DataTable.viewFullTable;
-        //     DataTable.updateHeader();
-        // })
 
 
         $('#addConstraints').on('click', function () {

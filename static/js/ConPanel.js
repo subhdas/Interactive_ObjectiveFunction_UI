@@ -26,6 +26,66 @@
     }
 
 
+    ConP.addPanelInLine = function(containerId = ""){
+        if (containerId == "") containerId = "dataTableHeadTextId"
+
+         var i = 1
+         var htmlStr = "<div class = 'conHeadPan' ><div class='input-field col s12 consSelectorTop'><select  class='selectConstrain browser-default'>"
+         for (var item in Cons.typeConstraints) {
+             if (item == 'QUANTITATIVE' || item == 'GENERALIZATION') continue;
+            //  htmlStr += "<optgroup class = 'optConsSelectorTop' label='" + item + "'>";
+             var k = Cons.typeConstraints[item];
+             for (var elem in k) {
+                 if (elem == 'misc' || elem == 'Feature-Weights') continue;
+                 if (elem == 'Critical-Items' || elem == 'Information-Gain') continue;
+                 htmlStr += "<option class ='' value='" + elem + "'>" + elem + "</option>";
+                 i += 1;
+             }
+             htmlStr += "</optgroup>";
+         }
+         htmlStr += "</select>";
+         htmlStr += "<label></label></div>"
+
+         htmlStr += "<button id='addConstraintPanelItems' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+         htmlStr += "<i class='material-icons'>add</i></button>";
+
+        //  htmlStr += "<button id='removeItemsConPanel' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        //  htmlStr += "<i class='material-icons'>clear</i></button>";
+
+
+
+        //  htmlStr += "<div id = 'conHeadSupportPan'></div>"
+         htmlStr += "</div>";
+        //  htmlStr += "<div id = 'conContentItems'></div>"
+
+         $("#" + containerId).append(htmlStr);
+
+         console.log('added con panel in line , ', Cons.typeConstraints, containerId)
+        
+        //    $(".conHeadPan").css('width', '100%')
+           $(".conHeadPan").css('padding', '2px')
+           $(".conHeadPan").css('border-bottom', '1px dotted lightgray')
+           $(".conHeadPan").css('display', 'flex')
+           $(".conHeadPan").css('flex-direction', 'row-reverse')
+           $(".conHeadPan").css('align-items', 'center')
+
+           $("#conHeadSupportPan").css('display', 'inline-flex')
+           $("#conHeadSupportPan").css('width', '75%')
+           $("#conHeadSupportPan").css('height', '20px')
+           // $("#conHeadSupportPan").css('background', 'red')
+
+
+           $("#conContentItems").css('display', 'flex');
+           $("#conContentItems").css('width', '100%');
+           $("#conContentItems").css('height', 'auto');
+           // $("#conContentItems").css('background', 'yellow');
+           $("#conContentItems").css('flex-direction', 'column');
+
+           $('select').formSelect();
+
+    }
+
+
     ConP.addPanelCon = function () {
 
         if ($(".conPanelDiv").length > 0) {

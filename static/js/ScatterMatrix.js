@@ -21,7 +21,7 @@ Scat.filteredScatData = [];
                 } else if (item == Main.entityNameSecondImp) {
                     //pass
                 } else if (item == 'id') {
-                    console.log(' getting to see id ', d.id)
+                    // console.log(' getting to see id ', d.id)
                     d[item] = +d[item]
                 } else {
                     d[item] = +d[item]
