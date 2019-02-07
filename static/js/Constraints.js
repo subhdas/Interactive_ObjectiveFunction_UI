@@ -5,6 +5,7 @@
 
     Cons.origWidthConsBars = 0;
     Cons.cnsBtnMouseEvent = false;
+    Cons.accordionOpen = false;
 
     Cons.userWtConst = {
         'COMPOSITIONAL': 1,
@@ -424,6 +425,10 @@
             collapsible: true,
             heightStyle: "content",
             active: false,
+            activate: function (event, ui) {
+                Cons.accordionOpen = !Cons.accordionOpen
+                console.log('accordion opened ', Cons.accordionOpen)
+            }
         });
 
         // $( "#btnAdd" ).button( "option", "icon", "ui-icon-gear" );
