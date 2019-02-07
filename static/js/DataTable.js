@@ -183,16 +183,19 @@
         htmlStr += "<i class='material-icons'>border_outer</i></button>";
         htmlStr += '</div>'
         // htmlStr += "<button id='dataToggleBtn'> </button>";
+        
+        htmlStr += "<div class = tableHeadButtons>"
+        // htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        // htmlStr += "<i class='material-icons'>chat</i></button>";
+        htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        htmlStr += "<i class='material-icons'>dashboard</i></button>";
+        htmlStr += '</div>'
+        
         htmlStr += "<div class = 'dataTableHeadText' id = 'dataTableHeadTextId'><div class = 'containerDataTableHeadText'>" + dataIn.length + " rows </div></div>";
         // htmlStr += "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
         // htmlStr += "<img class='imgIcon' src='static/img/icons/add.png'></div>"
 
-        htmlStr += "<div class = tableHeadButtons>"
-        htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-        htmlStr += "<i class='material-icons'>chat</i></button>";
-        htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-        htmlStr += "<i class='material-icons'>dashboard</i></button>";
-        htmlStr += '</div>'
+        
 
 
         // htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"

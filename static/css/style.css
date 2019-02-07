@@ -66,7 +66,7 @@ body {
 #constrainPanel {
     display: flex;
     flex-direction: column;
-    width: 'auto';
+    width: 45%;
     height: 100%;
     color: #555;
     font-size: 0.8em;
@@ -85,7 +85,7 @@ body {
 #featureEnggPanel {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 40%;
     /* width : 800px; */
     height: 100%;
     color: #555;
@@ -105,7 +105,7 @@ body {
 #modelExplorePanel {
     display: flex;
     flex-direction: column;
-    width: 'auto';
+    width: 30%;
     height: 100%;
     color: #555;
     font-size: 0.8em;
@@ -173,7 +173,7 @@ body {
 .tableGeneral {
     display: flex;
     flex-direction: column;
-    width: 65%;
+    width: 75%;
     height: 100%;
     /*90%; 2000px*/
     float: right;
@@ -194,7 +194,7 @@ body {
 .confMatPanel {
     display: flex;
     flex-direction: column;
-    width: 35%;
+    width: 30%;
     height: 100%;
     /* background-color: lightgray; */
     font-size: 0.8em;
@@ -219,7 +219,7 @@ body {
     overflow-x: auto;
     padding: 5px;
     border-top: 1px solid lightgray;
-    background: #C23573;
+    /* background: #C23573; */
 }
 
 
