@@ -44,9 +44,10 @@
 
             var k = Cons.typeConstraints[item];
             for (var elem in k) {
+                var name = k[elem]['Name']
                 if (elem == 'misc' || elem == 'Feature-Weights') continue;
                 if (elem == 'Critical-Items' || elem == 'Information-Gain' || elem == 'Non-Critical') continue;
-                htmlStr += "<option class ='' value='" + elem + "'>" + elem + "</option>";
+                htmlStr += "<option class ='' value='" + elem + "'>" + name + "</option>";
                 i += 1;
             }
             htmlStr += "</optgroup>";

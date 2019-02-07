@@ -2018,7 +2018,8 @@
                 arrId.push.apply(arrId, arrDict[el])
             }
             arrId = Util.getUniqueArray(arrId);
-            if (arrId.length > 0) tagDict[item] = arrId;
+            // if (arrId.length > 0) tagDict[item] = arrId;
+            if (arrId.length > 0) tagDict[ConsInt.activeConstraints[item]['usedName']] = arrId;
         }
 
         //for informative and wasteful items

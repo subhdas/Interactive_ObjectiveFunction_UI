@@ -14,7 +14,8 @@
                     var obj = {
                         'input': {},
                         'parent': item,
-                        'name': k
+                        'name': k,
+                        'usedName': elem[k]['Name'], // k
                     }
                     ConsInt.activeConstraints[k] = obj;
                 }

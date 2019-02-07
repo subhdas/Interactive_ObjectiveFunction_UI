@@ -26,7 +26,7 @@
                 // 'Add': true,
                 'Checked': false,
                 'UserWt': 1,
-                'Name': 'Similar',
+                'Name': 'Similarity',
                 'Tip': 'Data items which are similar or different to each other. Provide data items as examples showing similarity and difference between them.',
 
             },
@@ -72,20 +72,20 @@
         // },
         'QUANTITATIVE': {
               'Recall': {
-                  'Checked': false,
+                  'Checked': true,
                   'UserWt': 1,
                   'Name': 'Accuracy Recall',
                    'Tip': 'Accuracy Recall is how many of the true positives are correctly predicted by the model',
              },
            
              'Precision': {
-                 'Checked': false,
+                 'Checked': true,
                  'UserWt': 1,
                  'Name': 'Accuracy Precision',
                 'Tip': 'Accuracy Precision is how many of the predicted data items were true positive',
              },
               'F1-Score': {
-                  'Checked': false,
+                  'Checked': true,
                   'UserWt': 1,
                   'Name': 'Accuracy F1',
                   'Tip': 'Accuracy F1 is the weighted average of Precision and Recall. This score takes both false positives and false negatives into account.\
@@ -244,6 +244,13 @@
         for (var item in Cons.typeConstraints) {
             var col = Cons.typeConstraints[item]['misc']['Color-Type']
             $("#headRowCons_" + item).css('background', col)
+            for (var el in Cons.typeConstraints[item]){
+            if (Cons.typeConstraints[item][el]['Checked']){
+                 $('.btn_'+el).css('background', Main.colors.HIGHLIGHT)
+                 $('.btn_' + el).css('color', 'white')
+            }
+
+            }
 
         }
 
@@ -346,13 +353,13 @@
                 // $(this).siblings().show();
                 $(this).css('background', Main.colors.HIGHLIGHT)
                 $(this).css('color', 'white')
-                console.log(' lets make button red ', Cons.typeConstraints, item, name)
+                // console.log(' lets make button red ', Cons.typeConstraints, item, name)
                 // ConsInt.showPanel();
             } else {
                 // $(this).siblings().closest('a').hide();
                 $(this).css('background', '')
                 $(this).css('color', 'black')
-                console.log(' lets make button black ', Cons.typeConstraints, item, name)
+                // console.log(' lets make button black ', Cons.typeConstraints, item, name)
 
                 // ConsInt.hidePanel();
             }
