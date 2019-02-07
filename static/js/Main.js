@@ -233,8 +233,18 @@
         StarM.makeStarPlot();
 
         ConsInt.getActiveConstraints();
-
+        
+        Main.tableTogglingApply();
         // Main.makeTablePanelsAccord();
+    }
+
+    Main.tableTogglingApply = function(){
+        $('.tableTogglerCl').on('click', function (e) {
+            var id = $(this).attr('id');
+            id = Util.getNumberFromText(id);
+            DataTable.toggleTableContentViews(id);
+        })
+
     }
 
     Main.addLabels = function (dataIn = Main.trainData) {

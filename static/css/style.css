@@ -173,7 +173,7 @@ body {
 .tableGeneral {
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 85%;
     height: 100%;
     /*90%; 2000px*/
     float: right;
@@ -194,7 +194,7 @@ body {
 .confMatPanel {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 20%;
     height: 100%;
     /* background-color: lightgray; */
     font-size: 0.8em;
@@ -202,6 +202,13 @@ body {
     overflow-y: hidden;
     overflow-x: hidden;
     padding: 5px;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+
+.tableHeadDiv{
+    display: flex;
 }
 
 #tablePanelTest {

@@ -38,10 +38,11 @@
             //add items from active constraints
             for (var item in ConsInt.activeConstraints) {
                 var ind = origDef.indexOf(item)
+                var name = ConsInt.activeConstraints[item]['usedName']
 
                 if (ind == -1) {
                     var ob = {
-                        axis: item,
+                        axis: name,
                         value: Util.getRandomNumberBetween(1, 0).toFixed(2),
                     }
                     obj['axes'].push(ob);

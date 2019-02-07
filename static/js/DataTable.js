@@ -7,6 +7,8 @@
     DataTable.showingFilterPanel = false;
     DataTable.addedExtra = 0;
 
+    DataTable.splitView = true
+
     DataTable.fontColor = 'black'
     //auto triggers
     DataTable.criticalSwitch = false;
@@ -154,6 +156,29 @@
     }
 
 
+    DataTable.toggleTableContentViews = function (id = 0) {
+        //id=0, train table , elese test table
+        DataTable.splitView = !DataTable.splitView;
+        $
+        if (DataTable.splitView) {
+            //two tables showing
+            $('#trainContent').css('height', '50%')
+            $('#testContent').css('height', '50%')
+
+        } else {
+            //only one showing
+            if(id == 0){
+                //train
+                   $('#trainContent').css('height', '100%')
+                   $('#testContent').css('height', '0%')
+            }else{
+                   $('#trainContent').css('height', '0%')
+                   $('#testContent').css('height', '100%')
+            }
+        }
+
+    }
+
 
     DataTable.addIconsTop = function (dataIn = Main.trainData, containerId = "") {
 
@@ -183,19 +208,19 @@
         htmlStr += "<i class='material-icons'>border_outer</i></button>";
         htmlStr += '</div>'
         // htmlStr += "<button id='dataToggleBtn'> </button>";
-        
+
         htmlStr += "<div class = tableHeadButtons>"
         // htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         // htmlStr += "<i class='material-icons'>chat</i></button>";
         htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>dashboard</i></button>";
         htmlStr += '</div>'
-        
+
         htmlStr += "<div class = 'dataTableHeadText' id = 'dataTableHeadTextId'><div class = 'containerDataTableHeadText'>" + dataIn.length + " rows </div></div>";
         // htmlStr += "<div class='iconHolder' id='addLabelCard' onclick='' title='Add Label Card'>"
         // htmlStr += "<img class='imgIcon' src='static/img/icons/add.png'></div>"
 
-        
+
 
 
         // htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
@@ -1670,7 +1695,7 @@
                     //delete from the main data
                     var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame];
                     var ind = arr.indexOf(idNum);
-                    arr.splice(ind,1)
+                    arr.splice(ind, 1)
 
                     $(this).css('color', 'black');
                     console.log(' was there before ', idNum, ConP.selectedRowsCons);
@@ -1720,47 +1745,47 @@
                     }
                 }
 
-                  if (valueSelect == 'Similarity-Metric') {
-                      // $("._mainContentMid").empty();
-                      Cons.typeConstraints['COMPOSITIONAL'][valueSelect]['Checked'] = true;
-                      ConsInt.getActiveConstraints();
-                      var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame];
-                      try {
-                          arr.push.apply(arr, Object.keys(ConP.selectedRowsCons));
-                          arr = Util.getUniqueArray(arr)
-                      } catch (err) {
-                          arr = Object.keys(ConP.selectedRowsCons);
-                      }
-                      ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame] = arr;
+                if (valueSelect == 'Similarity-Metric') {
+                    // $("._mainContentMid").empty();
+                    Cons.typeConstraints['COMPOSITIONAL'][valueSelect]['Checked'] = true;
+                    ConsInt.getActiveConstraints();
+                    var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame];
+                    try {
+                        arr.push.apply(arr, Object.keys(ConP.selectedRowsCons));
+                        arr = Util.getUniqueArray(arr)
+                    } catch (err) {
+                        arr = Object.keys(ConP.selectedRowsCons);
+                    }
+                    ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame] = arr;
 
-                      // TabCon.makeSameLabContent("_mainContentMid" + TabCon.radioCheckedSame, TabCon.radioCheckedSame, valueSelect);
-                      TabCon.addSameLabContentFromData(valueSelect);
-                      var arr = Object.keys(ConP.selectedRowsCons);
-                      ConP.selectedRowsCons = {};
-                      //commented - no need to deselect
-                      arr.forEach(function (d, i) {
-                          // $("#tr_" + d).css('background', "rgb(255,255,255)")
-                          // $("#tr_" + d).css('color', 'black')
-                      })
+                    // TabCon.makeSameLabContent("_mainContentMid" + TabCon.radioCheckedSame, TabCon.radioCheckedSame, valueSelect);
+                    TabCon.addSameLabContentFromData(valueSelect);
+                    var arr = Object.keys(ConP.selectedRowsCons);
+                    ConP.selectedRowsCons = {};
+                    //commented - no need to deselect
+                    arr.forEach(function (d, i) {
+                        // $("#tr_" + d).css('background', "rgb(255,255,255)")
+                        // $("#tr_" + d).css('color', 'black')
+                    })
 
 
-                      //auto select the similarity metric button on top
-                      if (arr.length > 0) {
-                          var id = $(".btn_" + valueSelect).attr('id')
-                          var elem = document.getElementById(id);
-                          elem.click();
-                          DataTable.similarityClicked = true;
-                          $(".btn_" + valueSelect).trigger("click")
-                      }
+                    //auto select the similarity metric button on top
+                    if (arr.length > 0) {
+                        var id = $(".btn_" + valueSelect).attr('id')
+                        var elem = document.getElementById(id);
+                        elem.click();
+                        DataTable.similarityClicked = true;
+                        $(".btn_" + valueSelect).trigger("click")
+                    }
 
-                      if (arr.length == 0 && DataTable.similarityClicked) {
-                          DataTable.similarityClicked = false;
-                          var id = $(".btn_" + valueSelect).attr('id')
-                          var elem = document.getElementById(id);
-                          elem.click();
-                      }
-                  }
-                  DataTable.makeTags();
+                    if (arr.length == 0 && DataTable.similarityClicked) {
+                        DataTable.similarityClicked = false;
+                        var id = $(".btn_" + valueSelect).attr('id')
+                        var elem = document.getElementById(id);
+                        elem.click();
+                    }
+                }
+                DataTable.makeTags();
 
 
             } else {

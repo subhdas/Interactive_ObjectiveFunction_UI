@@ -49,6 +49,10 @@
 			numcols;
 
 
+		width = $("#" + containerId).width()*0.5;
+		height = $("#"+containerId).height()*0.4;
+
+
 		if (!data) {
 			throw new Error('No data passed.');
 		}
