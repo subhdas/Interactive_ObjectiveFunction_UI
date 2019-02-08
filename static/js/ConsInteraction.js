@@ -9,7 +9,9 @@
         for (var item in Cons.typeConstraints) {
             var elem = Cons.typeConstraints[item];
             for (var k in elem) {
-                // if (typeof ConsInt.activeConstraints[k] != 'undefined') continue; // COMMENTED
+                if (!Cons.cnsBtnMouseEvent){
+                if (typeof ConsInt.activeConstraints[k] != 'undefined') continue; // COMMENTED
+                }
                 if (elem[k]['Checked'] == true) {
                     var obj = {
                         'input': {},
@@ -21,9 +23,9 @@
                 } else{
                     try{
                     delete ConsInt.activeConstraints[k]
-                    console.log(' deleted ', k)
+                    // console.log(' deleted ', k)
                     }catch(e){
-                        console.log(' delete error ', e)
+                        // console.log(' delete error ', e)
                     }
                 }
             }
