@@ -9,15 +9,22 @@
         for (var item in Cons.typeConstraints) {
             var elem = Cons.typeConstraints[item];
             for (var k in elem) {
-                if (typeof ConsInt.activeConstraints[k] != 'undefined') continue;
+                // if (typeof ConsInt.activeConstraints[k] != 'undefined') continue; // COMMENTED
                 if (elem[k]['Checked'] == true) {
                     var obj = {
                         'input': {},
                         'parent': item,
                         'name': k,
-                        'usedName': elem[k]['Name'], // k
+                        'usedName': elem[k]['Name'], // 
                     }
                     ConsInt.activeConstraints[k] = obj;
+                } else{
+                    try{
+                    delete ConsInt.activeConstraints[k]
+                    console.log(' deleted ', k)
+                    }catch(e){
+                        console.log(' delete error ', e)
+                    }
                 }
             }
         }

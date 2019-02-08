@@ -157,20 +157,20 @@
 
 
     DataTable.toggleTableContentViews = function (id = 0) {
-                    $("#tableHeadDivTrain").show()
+        $("#tableHeadDivTrain").show()
         //id=0, train table , elese test table
         DataTable.splitView = !DataTable.splitView;
         if (Cons.accordionOpen) {
 
-               if (id == 0) {
-                   //train
-                    $("#tableHeadDivTrain").hide()
-                   $('#trainContent').css('height', '0%')
-                   $('#testContent').css('height', '100%')
-               } else {
-                   $('#trainContent').css('height', '100%')
-                   $('#testContent').css('height', '0%')
-               }
+            if (id == 0) {
+                //train
+                $("#tableHeadDivTrain").hide()
+                $('#trainContent').css('height', '0%')
+                $('#testContent').css('height', '100%')
+            } else {
+                $('#trainContent').css('height', '100%')
+                $('#testContent').css('height', '0%')
+            }
             // if (DataTable.splitView) {
             //     //two tables showing
             //       if (id == 0) {
@@ -249,8 +249,8 @@
         htmlStr += "<div class = tableHeadButtons>"
         // htmlStr += "<button id='addConstraints' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         // htmlStr += "<i class='material-icons'>chat</i></button>";
-        htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-        htmlStr += "<i class='material-icons'>dashboard</i></button>";
+        // htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        // htmlStr += "<i class='material-icons'>dashboard</i></button>";
         htmlStr += '</div>'
 
         htmlStr += "<div class = 'dataTableHeadText' id = 'dataTableHeadTextId'><div class = 'containerDataTableHeadText'>" + dataIn.length + " rows </div></div>";
@@ -542,11 +542,10 @@
         $('#tableContent').css('background', 'white');
     }
 
-    DataTable.makeFilterVisTable = function (attr, el, dataIn) {
+    DataTable.makeFilterVisTable = function (attr, el, dataIn, containerId) {
         if (attr == Main.entityName || attr == Main.entityNameSecondImp) return;
         try {
             if (Main.attrDict[attr]['type'] == 'categorical') return;
-            // if (attr == +Main.targetName) return;
         } catch (e) {
             return;
         }
@@ -573,7 +572,7 @@
         h = 100;
         // console.log('data ffound ', attr, data, id, w, h);
         // BarM.makeFeatureLabelsVerBar(id,w,h,data)
-        BarM.makeHistoFilterTable(id, w, h, data, dataIn, attr);
+        BarM.makeHistoFilterTable(id, w, h, data, dataIn, attr, containerId);
 
     }
 
@@ -632,7 +631,7 @@
                 if (DataTable.addedExtra == 1) dataGo = Main.testData;
                 else dataGo = Main.trainData;
                 console.log(' found ', d.name)
-                DataTable.makeFilterVisTable(d.name, $(this), dataGo)
+                DataTable.makeFilterVisTable(d.name, $(this), dataGo, containerId)
                 return '';
             })
 
@@ -683,10 +682,14 @@
                     // htmlStr += "</div>";
                     // htmlStr += "<div class = 'infoRect tableBtnInt' id = 'infoRectId_" + d.id + "' ></div>";
 
-                    htmlStr += "<div id = 'infoRectId_" + d.id + "' class = 'infoRect tableBtnInt' >"
-                    htmlStr += "<button  class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored  btnTableAddOn'>"
-                    htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
-                    htmlStr += "</div>"
+                    if (containerId == 'tableContent') {
+                        htmlStr += "<div id = 'infoRectId_" + d.id + "' class = 'infoRect tableBtnInt' >"
+                        htmlStr += "<button  class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored  btnTableAddOn'>"
+                        htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
+                        htmlStr += "</div>"
+                    }
+
+
                     htmlStr += "</div>"
                     return htmlStr
 
@@ -711,12 +714,14 @@
 
 
                 // htmlStr += "<div class = 'tableBtnInt infoRectAll' id = 'infoRectId_" + containerId + "' parent = '" + containerId + "' ></div>";
-                htmlStr += "<div id = 'infoRectId_" + containerId + "' parent = '" + containerId + "' class = 'tableBtnInt infoRectAll' >"
-                htmlStr += "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
-                htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
-                htmlStr += "</div>"
+                if (containerId == 'tableContent') {
 
+                    htmlStr += "<div id = 'infoRectId_" + containerId + "' parent = '" + containerId + "' class = 'tableBtnInt infoRectAll' >"
+                    htmlStr += "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                    htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
+                    htmlStr += "</div>"
 
+                }
                 // htmlStr += "</div>";
 
 
@@ -1463,11 +1468,13 @@
         ParC.makeParallelCoordChart('filterContentId', dataNumeric);
     }
 
-    DataTable.hideSelectedRows = function (arrIds = []) {
-        $(".trTable").hide();
+    DataTable.hideSelectedRows = function (arrIds = [], containerId = 'tableContent') {
+        // var containerId = 'tableContent'
+        $("#dataViewAppTable_" + containerId).find('.trTable').hide();
+        // $(".trTable").hide();
         for (var i = 0; i < arrIds.length; i++) {
-            $("#tr_" + arrIds[i]).show();
-            // $(".trTable").css('opacity', 1);
+            // $("#tr_" + arrIds[i]).show();
+            $("#dataViewAppTable_" + containerId).find("#tr_" + arrIds[i]).show();
         }
     }
 
@@ -1686,9 +1693,9 @@
                     var nam = item.split('_')[0];
                     if (d.name == nam) {
                         if (BarM.filterHistData[item].indexOf(id) != -1) {
-                            DataTable.tempCol = $("#histoBars_" + item).css('fill');
+                            DataTable.tempCol = $("#histoBars_" + containerId + "_" + item).css('fill');
                             DataTable.tempItem = item;
-                            $("#histoBars_" + item).css('fill', Main.colors.HIGHLIGHT);
+                            $("#histoBars_" + containerId + "_" + item).css('fill', Main.colors.HIGHLIGHT);
                             return
                         }
                     }
@@ -1696,7 +1703,7 @@
             })
             .on('mouseout', function (d) {
                 $(this).css('background', DataTable.tdOrigColor);
-                $("#histoBars_" + DataTable.tempItem).css('fill', DataTable.tempCol);
+                $("#histoBars_" + containerId + "_" + DataTable.tempItem).css('fill', DataTable.tempCol);
 
 
 

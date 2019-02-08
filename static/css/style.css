@@ -191,6 +191,8 @@ body {
     border: 1px solid lightgray; */
 }
 
+
+
 .confMatPanel {
     display: flex;
     flex-direction: column;
@@ -283,8 +285,16 @@ body {
     border: 1px solid lightgray;
 }
 
-#titlePanel {
+#btnTopPanel {
+    display: flex;
     width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+#titlePanel {
+    width: 60%;
     display: flex;
     justify-content: flex-end;
     position: relative;

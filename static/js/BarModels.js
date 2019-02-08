@@ -301,7 +301,7 @@
                 return xScale(d.x);
             })
             .on('mouseover', function(d) {
-                console.log('mouseovering')
+                // console.log('mouseovering')
                 var xPos = parseFloat(d3.select(this).attr('x')) / 2 + width / 2;
                 var yPos = parseFloat(d3.select(this).attr('y')) + yScale.rangeBand() / 2;
                 d3.select('#tooltip')
@@ -373,7 +373,7 @@
         return dataOut;
     }
 
-    BarM.makeHistoFilterTable = function(containerId = "", w, h, data = "", dataQuery, attr="") {
+    BarM.makeHistoFilterTable = function (containerId = "", w, h, data = "", dataQuery, attr = "", parContainerId = "") {
         var ran = Main.attrDict[attr]['range']
         var numbins = 8;
         if(attr == 'Cylinders') numbins = 2
@@ -492,7 +492,6 @@
         $("#tiptable").css("font-size", "1.3em")
         $("#tiptable").css("background", "black")
         $("#tiptable").css("color", "black")
-        // console.log('numbin added svg ', svg)
 
         // return
 
@@ -505,14 +504,14 @@
                 return "translate(" +
                     x2(i * binsize + minbin) + "," + y(d.numfill) + ")";
             })
-            .on('mouseover', tip.show)
-            .on('mouseout', tip.hide);
+            // .on('mouseover', tip.show) // commented 
+            // .on('mouseout', tip.hide);
 
         // add rectangles of correct size at correct location
         bar.append("rect")
             .attr('id', function(d){
                 // return "histoBars_" + d.attr + "_" + d.bin + "_" + containerId
-                return "histoBars_"+d.attr+"_"+d.bin
+                return "histoBars_" + parContainerId + "_" + d.attr + "_" + d.bin
             })
             .attr("x", x(binmargin))
             .attr("width", x(binsize - 2 * binmargin))
@@ -659,6 +658,7 @@
                 return height - y(d.value);
             })
             .on('mouseover', function(d) {
+                // return
                 div_tooltip.style('display', 'inline');
                 div_tooltip
                     .html(d.label + ': ' + d.value)
@@ -667,6 +667,7 @@
                     .style('top', (d3.event.pageY - 12) + 'px');
             })
             .on('mouseout', function(d) {
+                // return
                 div_tooltip.style('display', 'none');
             })
 

@@ -7,7 +7,7 @@
     ParC.hoveredItem = '';
     ParC.userCorrel = {};
     ParC.parallelBrushed = false;
-
+    ParC.dataImpactContainer = 'tableContent'
 
     ParC.addIconsFeatureEditor = function (containerId = "") {
         if (containerId == "") containerId = "featureEngHeaderId";
@@ -20,10 +20,32 @@
 
         $(".featureHeadTitle").css('width', '100%')
         $(".featureHeadTitle").css('font-size', '1.5em')
+
+         var htmlStr = "<div class = 'parCDataSelect' ><div class='input-field col s12 parCSelectorTop'>"
+         htmlStr += "<select  class='parCDataSelectClass browser-default'>"
+         htmlStr += "<option class ='' value='" + "0" + "'>" + "Train Data" + "</option>";
+         htmlStr += "<option class ='' value='" + "1" + "'>" + "Test Data" + "</option>";
+         htmlStr += "</select>";
+         htmlStr += "<label></label></div>"
+
+        $(".featureHeadButton").append(htmlStr);
+
+
+
         htmlStr = "<button id='resetDataBtnId' class='resetDataBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
 
         $(".featureHeadButton").append(htmlStr);
+
+        $(".featureHeadButton").css('display', 'flex')
+        $(".featureHeadButton").css('padding', '10px')
+        $(".featureHeadButton").css('align-items', 'center')
+        $(".featureHeadButton").css('justify-content', 'center')
+        $(".featureHeadButton").css('height', '20px')
+
+        $(".parCDataSelect").css('width', '200px')
+        // $(".parCDataSelect").css('height', '15px')
+        $(".parCDataSelectClass").css('height', '30px')
 
         //click reset data button
         $("#resetDataBtnId").on('click', function () {
@@ -37,6 +59,22 @@
             ParC.parallelBrushed = false;
 
         })
+
+
+         $('select').formSelect();
+         // interaction for selector selection
+         var $select1 = $('select:not(.browser-default)');
+         $('.parCDataSelectClass').on('change', function (e) {
+             var valueSelect = $(this).val();
+            //  console.log(' e is ', valueSelect);
+             if(valueSelect == 0){
+                 ParC.dataImpactContainer = 'tableContent'
+                 ParC.updateParCoord(valueSelect);
+             }else{
+                 ParC.dataImpactContainer = 'tableContentTest'
+                 ParC.updateParCoord(valueSelect);
+             }
+         })
 
     }
 
@@ -73,12 +111,22 @@
         setTimeout(() => {
             var arr = ['id'];
             arr.push.apply(arr, Object.keys(Main.numericalAttributes));
-
-
             var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
             ParC.makeParallelCoordChart('featureEngContentId', dataNumeric, true);
         }, 0);
+    }
 
+    ParC.updateParCoord = function(dataType = 0){
+           var arr = ['id'];
+           arr.push.apply(arr, Object.keys(Main.numericalAttributes));
+           var dataNumeric = [];
+           if(dataType == 0){
+             dataNumeric = Main.getDataByKeys(arr, Main.trainData);
+           }else{
+             dataNumeric = Main.getDataByKeys(arr, Main.testData);
+           }
+          console.log('updating par coord chart ', dataType, dataNumeric.length)
+           ParC.makeParallelCoordChart('featureEngContentId', dataNumeric, true);
 
     }
 
@@ -503,7 +551,7 @@
             var ind = ParC.filteredData.indexOf(-1);
             ParC.filteredData.splice(ind, 1);
             setTimeout(function () {
-                DataTable.hideSelectedRows(ParC.filteredData);
+                DataTable.hideSelectedRows(ParC.filteredData, ParC.dataImpactContainer);
             }, 1000)
         }
     }

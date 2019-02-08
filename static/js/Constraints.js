@@ -347,7 +347,10 @@
             console.log('clicked checkbox ', name, item);
             //COMMENTED BELOW
             // if (!DataTable.fromTableInferred) Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
-            if (Cons.cnsBtnMouseEvent) Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
+            if (Cons.cnsBtnMouseEvent) {
+                Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
+                console.log('hovered and clicked button ', Cons.typeConstraints[item][name])
+            }
             Cons.lastItemClicked = name;
             // $(this).find('button').css('display', 'block');
             if (Cons.typeConstraints[item][name]['Checked'] == true) {
@@ -364,7 +367,9 @@
 
                 // ConsInt.hidePanel();
             }
-            // ConsInt.getActiveConstraints();
+            setTimeout(() => {
+                ConsInt.getActiveConstraints();            
+            }, 300);
             // ConsInt.makeInteractionPanel();
         })
 
