@@ -402,7 +402,8 @@
         $(".consTableDiv").css('padding', '3px')
         $(".consTableDiv").css('overflow-X', 'auto')
         $(".consTableDiv").css('overflow-Y', 'auto')
-        $(".consTableDiv").css('max-height', '200px')
+        $(".consTableDiv").css('max-height', '325px')
+        $(".consTableDiv").css('height', '100%')
 
         $(".rowConstTable").css('display', 'flex')
         $(".rowConstTable").css('min-height', '20px')

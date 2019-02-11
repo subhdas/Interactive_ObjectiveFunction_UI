@@ -873,7 +873,7 @@
                 .find(".trTable")
                 .each(function (i, el) {
                     var id = $(this).attr('id');
-                    var stateGot = $(this).attr('parent');
+                    // var stateGot = $(this).attr('parent');
                     id = Util.getNumberFromText(id);
                     // arr.push(id)
                     var back = $("#criticalRectId_" + id).css('background-color')
@@ -1030,6 +1030,9 @@
                         htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
                     }
                     $("#infoRectId_" + id).html(htmlStr);
+                    $("#infoRectId_" + id).attr('parent', state);
+                    DataTable.inforInteract[id] = state
+
                     $('.btnTableAddOn').css('width', '100%')
                     $('.btnTableAddOn').css('height', '100%')
 
@@ -1045,12 +1048,16 @@
                     id = Util.getNumberFromText(id);
                     // arr.push(id)
                     var back = $("#infoRectId_" + id).css('background-color')
-                    console.log(' found back col as ', back)
-                    if (back == 'rgb(194, 53, 115)') {
+                    // var stateGot = $("#infoRectId_" + id).attr('parent')
+                    var stateGot = DataTable.inforInteract[id];
+
+
+                    // console.log(' found back col as ', back)
+                    if (back == 'rgb(194, 53, 115)' || stateGot == 'yes') {
                         critIdInforList.push(id);
                     }
 
-                    if (back == 'rgb(53, 183, 194)') {
+                    if (back == 'rgb(53, 183, 194)' || stateGot == 'no') {
                         critIdWasteList.push(id);
                     }
                 });
@@ -1081,6 +1088,8 @@
             setTimeout(function () {
                 DataTable.criticalSwitch = false;
             }, 500)
+
+            d.stopPropagation();
             var id = $(this).attr('id');
             id = Util.getNumberFromText(id);
             var val = DataTable.criticalInteract[id];
@@ -1201,7 +1210,9 @@
             var id = $(this).attr('id');
             id = Util.getNumberFromText(id);
             var val = DataTable.inforInteract[id];
-            console.log(' clicked info rect ', id, val)
+            // console.log(' clicked info rect ', id, val)
+            d.stopPropagation();
+
             if (val == '-') {
                 DataTable.inforInteract[id] = 'yes'
                 // $(this).css('background', Main.colors.HIGHLIGHT);
