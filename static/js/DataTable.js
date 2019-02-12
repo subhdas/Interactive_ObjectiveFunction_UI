@@ -2172,7 +2172,7 @@
             var idList = DataTable.tagNameDataId[elem]
             $("#dataViewAppTable_tableContent").find('tr').show();
 
-            console.log(' found is ', elem, idList, DataTable.tagNameDataId)
+            // console.log(' found is ', elem, idList, DataTable.tagNameDataId)
             DataTable.hideRowsById(idList, 'train')
         })
 

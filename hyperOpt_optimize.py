@@ -34,7 +34,10 @@ class NumpyEncoder(json.JSONEncoder):
 def preProcessData(data):
     data = data.apply(pd.to_numeric, errors='ignore')
     data = data._get_numeric_data()
-    return data
+    idCol = data['id']
+    data = data.drop(['id', 'cluster'], axis = 1)
+    print " pre processing data col ", data.columns.values
+    return data, idCol
 
 
 def wrap_findGoodModel(train,test, targetTrain, targetTest):
@@ -49,8 +52,8 @@ def wrap_findGoodModel(train,test, targetTrain, targetTest):
 
 
 def find_goodModel(train,test,targetTrain,targetTest):
-    train = preProcessData(train)
-    test = preProcessData(test)
+    train, trainId = preProcessData(train)
+    test, testId = preProcessData(test)
     def objective(space):
         # clf = xgb.XGBRegressor(n_estimators = space['n_estimators'],
         #                        max_depth = space['max_depth'],
@@ -126,11 +129,11 @@ def find_goodModel(train,test,targetTrain,targetTest):
     for item in mod_results:
         space = mod_results[item]['space']
         pred_out = {}
-        pred_out = makePredictions(space, train, test, targetTrain, targetTest)
+        pred_out = makePredictions(space, train, test, targetTrain, targetTest, trainId, testId)
         allmodel_pred_out[item] = pred_out
     
-    print " mod results obj ", mod_results
-    print " mod results obj ", allmodel_pred_out
+    # print " mod results obj ", mod_results
+    # print " mod results obj ", allmodel_pred_out
 
 
 
@@ -140,7 +143,7 @@ def find_goodModel(train,test,targetTrain,targetTest):
     best['criterion'] = criterionArr[best['criterion']]
 
     obj = {
-    'predictions' : makePredictions(best,train, test,targetTrain, targetTest),
+    'predictions' : makePredictions(best,train, test,targetTrain, targetTest, trainId, testId),
     'predictionsAll': allmodel_pred_out,
     'params' : best,
     'STATUS' : 'OK'
@@ -148,7 +151,7 @@ def find_goodModel(train,test,targetTrain,targetTest):
     return obj
 
 
-def makePredictions(space, train, test, targetTrain, targetTest):
+def makePredictions(space, train, test, targetTrain, targetTest, trainId, testId):
     clf = RandomForestClassifier(max_depth=space['max_depth'],
                                 min_samples_split = space['min_samples_split'],
                                 min_samples_leaf = space['min_samples_leaf'],
@@ -159,6 +162,18 @@ def makePredictions(space, train, test, targetTrain, targetTest):
     clf.fit(train, targetTrain)
     predTrain = clf.predict(train)
     predTest = clf.predict(test)
+
+
+    feat_imp = clf.feature_importances_ 
+    # print " features are ", train.columns.values
+    # print " feature imp is ", feat_imp
+    # print " feat imp zipped ", zip(train.columns.values,feat_imp)
+
+    feat_imp_dict = {}
+    for feat, imp in zip(train.columns.values,feat_imp):
+        feat_imp_dict[feat] = imp
+    
+    print " feat imp dict ", feat_imp_dict
 
 
     # metrics for train
@@ -191,10 +206,12 @@ def makePredictions(space, train, test, targetTrain, targetTest):
     predTrainDict = {}
     predTestDict = {}
     for i in range(len(predTrain)):
-        id = train['id'].values[i]
+        # id = trainId['id'].values[i]
+        id = trainId[i]
         predTrainDict[str(id)] = str(predTrain[i])
     for i in range(len(predTest)):
-        id = test['id'].values[i]
+        # id = testId['id'].values[i]
+        id = testId[i]
         predTestDict[str(id)] = str(predTest[i])
 
 
@@ -211,6 +228,7 @@ def makePredictions(space, train, test, targetTrain, targetTest):
     'testMetrics': testMetricObj,
     'trainPred' : predTrainDict,
     'testPred' : predTestDict,
+    'feat_imp_dict' : feat_imp_dict,
     'trainConfMatrix' : json.dumps(np.array(trainConfMatrix), cls=NumpyEncoder),
     'testConfMatrix' : json.dumps(np.array(testConfMatrix), cls=NumpyEncoder),
     }

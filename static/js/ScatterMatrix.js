@@ -9,7 +9,7 @@
 
     }
 
-Scat.filteredScatData = [];
+    Scat.filteredScatData = [];
 
     Scat.prepNumericalData = function () {
         var numericArr = Object.keys(Main.numericalAttributes);
@@ -28,7 +28,7 @@ Scat.filteredScatData = [];
                 }
             }
         })
-        console.log('numeric data is ', dataCopy)
+        // console.log('numeric data is ', dataCopy)
         return dataCopy;
     }
 
@@ -37,6 +37,22 @@ Scat.filteredScatData = [];
         $("#tableContent").hide();
         $("#scatContent").show();
 
+    }
+
+    Scat.hideSelectedCircle = function (idList) {
+        idList.forEach(function (d, i) {
+            idList[i] = +idList[i]
+        })
+        var data = Main.trainData;
+        data.forEach(function (d, i) {
+            if (idList.indexOf(+d.id) == -1) {
+                $('.scatterCir_' + +d.id).hide();
+            }
+        })
+    }
+
+    Scat.showAllCircle = function(){
+        $(".scatterCir").show();
     }
 
     Scat.makeTheMatrix = function (containerId = "") {
@@ -164,6 +180,12 @@ Scat.filteredScatData = [];
                 cell.selectAll("circle")
                     .data(data)
                     .enter().append("circle")
+                    .attr('class', function (d) {
+                        return 'scatterCir scatterCir_' + d.id
+                    })
+                    .attr('id', function (d) {
+                        return 'scatterCirId_' + d.id
+                    })
                     .attr("cx", function (d) {
                         return x(d[p.x]);
                     })

@@ -49,8 +49,8 @@
 			numcols;
 
 
-		width = $("#" + containerId).width()*0.5;
-		height = $("#"+containerId).height()*0.4;
+		width = $("#" + containerId).width() * 0.5;
+		height = $("#" + containerId).height() * 0.4;
 
 
 		if (!data) {
@@ -162,12 +162,15 @@
 					if (!ConfM.cellClickedTrain) {
 						// var idList = BarM.modelData[0]['predictions']
 						// 	['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
-						
+
 
 						var idList = BarM.allModelData[BarM.selectedModelId]
 							['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
 						DataTable.hideRowsById(idList, 'train');
+						Scat.hideSelectedCircle(idList);
 					}
+
+
 
 				} else {
 					//test
@@ -190,6 +193,8 @@
 				if (type == 'train') {
 					if (!ConfM.cellClickedTrain) {
 						$("#dataViewAppTable_tableContent").find('tr').show();
+						Scat.showAllCircle();
+
 					}
 				} else {
 					if (!ConfM.cellClickedTest) {

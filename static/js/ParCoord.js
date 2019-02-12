@@ -55,6 +55,7 @@
             //    arr.push.apply(arr, Object.keys(Main.numericalAttributes));
             //    var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
             //    ParC.makeParallelCoordChart('filterContentId', dataNumeric);
+            $('.tagContainer').show();
             ParC.featureEditorCreate();
             ParC.parallelBrushed = false;
 
@@ -507,6 +508,7 @@
 
         // Handles a brush event, toggling the display of foreground lines.
         function brush() {
+            $('.tagContainer').hide();
             ParC.filteredData = [];
             ParC.parallelBrushed = true;
             var actives = dimensions.filter(function (p) {
