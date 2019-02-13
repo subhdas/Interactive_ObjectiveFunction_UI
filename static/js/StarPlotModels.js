@@ -196,7 +196,7 @@
             ConfM.makeConfMatrix(confMatrixTrain, 'train');
             ConfM.makeConfMatrix(confMatrixTest, 'test');
 
-        StarM.addfeatureResults("", BarM.selectedModelId)
+            StarM.addfeatureResults("", BarM.selectedModelId)
 
 
         })
@@ -216,12 +216,15 @@
         if (StarM.modelOutputView) {
             $(".modelOutputText").text('Model Output Panel')
             $("#starPlotContentId").hide()
-            $("#starPlotModelId").show()
+            // $("#starPlotModelId").show()
+            $("#modelOutDivId").show()
         } else {
             $(".modelOutputText").text('Constraint List View')
 
             $("#starPlotContentId").show()
-            $("#starPlotModelId").hide()
+            // $("#starPlotModelId").hide()
+            $("#modelOutDivId").hide()
+
         }
     }
 
@@ -298,11 +301,21 @@
         // make the svg
         var chart = RadarChart.chart();
         var cfg = chart.config(); // retrieve default config
-        var svg = d3.select('#' + containerId).append('svg')
+        var svg = d3.select('#' + containerId)
+            .append('div')
+            .attr('class', 'modelOutDiv')
+            .attr('id', 'modelOutDivId')
+            .style('width', '100%')
+            .style('height', '100%')
+            .style('display', 'flex')
+            .style('flex-direction', 'column')
+            .style('align-items', 'center')
+            .append('svg')
             .attr('class', 'starPlotModelClass')
             .attr('id', 'starPlotModelId')
-            .attr('width', cfg.w + cfg.w + 50)
-            .attr('height', cfg.h + cfg.h / 4);
+            .attr('width', cfg.w + 20)
+            // .attr('width', cfg.w + cfg.w + 50)
+            .attr('height', cfg.h + cfg.h /20);
         svg.append('g').classed('single', 1).datum(StarM.getRandomData()).call(chart);
 
 
@@ -353,46 +366,47 @@
     }
 
 
-    StarM.addfeatureResults = function(containerId = "", index =0){
-        if (containerId == "") containerId = "modelExplorePanel"
+    StarM.addfeatureResults = function (containerId = "", index = 0) {
+        if (containerId == "") containerId = "modelOutDivId"//        "modelExplorePanel"
         $(".featExplain").remove()
-        try{
-        var featImpDict = BarM.allModelData[index]['feat_imp_dict'];
-        } catch(e){
+        try {
+            var featImpDict = BarM.allModelData[index]['feat_imp_dict'];
+        } catch (e) {
             return
         }
         var featImpArr = []
-        for(var item in featImpDict){
+        for (var item in featImpDict) {
             featImpArr.push([item, featImpDict[item]])
         }
 
-        featImpArr.sort(function(a,b){
-            if(a[1] > b[1]) return -1
+        featImpArr.sort(function (a, b) {
+            if (a[1] > b[1]) return -1
             else return 1
         })
 
         console.log('top attrib are  ', featImpArr)
-        var maxFeat = 3
-        var htmlStr= "<div class = 'featExplain' >"
-        htmlStr += "<div class ='featExHeadText'> Decision Making features are </div>"
-        for(var i=0;i<featImpArr.length;i++){
-            htmlStr += "<span class = 'featName' >"+featImpArr[i][0]+", </span>";
-            if(i>maxFeat) break;
+        var maxFeat = 2
+        var htmlStr = "<div class = 'featExplain' >"
+        htmlStr += "<span class ='featExHeadText'> Decision Making features are </span>"
+        for (var i = 0; i < featImpArr.length; i++) {
+            htmlStr += "<span class = 'featName' >" + featImpArr[i][0] + " </span>";
+            if (i >= maxFeat) break;
         }
 
         htmlStr += "</div>";
 
-        $("#"+containerId).append(htmlStr);
+        $("#" + containerId).append(htmlStr);
 
 
         // $(".featExplain").css('display', 'flex')
-        $(".featExplain").css('padding', '5px')
-        $(".featExplain").css('font-size', '1.3em')
-        $(".featExplain").css('margin', '8px')
+        $(".featExplain").css('padding', '3px')
+        $(".featExplain").css('font-size', '1.2em')
+        $(".featExplain").css('margin', '4px')
+        $(".featExplain").css('line-height', '20px')
 
         $(".featName").css('background', Main.colors.HIGHLIGHT2)
-        $(".featName").css('padding', '8px')
-        $(".featName").css('margin', '8px')
+        $(".featName").css('padding', '4px')
+        $(".featName").css('margin', '4px')
 
 
 

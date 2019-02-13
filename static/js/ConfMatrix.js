@@ -18,6 +18,52 @@
 		})
 		return [minVal, mxVal]
 	}
+
+	ConfM.modelResultsDisplay = function (containerId = "", index = 0) {
+		if (containerId == "") containerId = "confMatTrain"
+		$("#modelResult_" + containerId).remove();
+		//   try {
+		//   	var featImpDict = BarM.allModelData[index]['feat_imp_dict'];
+		//   } catch (e) {
+		//   	return
+		//   }
+
+		var acc = (Util.getRandomNumberBetween(1, 0) * 100).toFixed(2)
+
+		var htmlStr = "<div class = 'modelResult' id = 'modelResult_" + containerId + "'>"
+		htmlStr += "<div class = 'modResRow'><span class ='modelResHeadText'> Prediction Accuracy is  </span>"
+		htmlStr += "<span class = 'modelResOut' >" + acc + " </span></div>";
+
+
+		//add other constraints
+		for (var item in ConsInt.activeConstraints) {
+			if (item == 'Precision' || item == 'Recall' || item == 'F1-Score') continue;
+			try {
+				var arr = ConsInt.activeConstraints[item]['input']['labelitemsConId_' + item];
+				if (arr.length == 0) continue;
+			} catch (e) {}
+
+			var val = (Util.getRandomNumberBetween(1, 0) * 100).toFixed(2)
+			var name = ConsInt.activeConstraints[item]['usedName']
+			htmlStr += "<div class = 'modResRow'><span class ='modelResHeadText'>" + name + " Accuracy is  </span>"
+			htmlStr += "<span class = 'modelResOut' >" + val + " </span></div>";
+		}
+		htmlStr += "</div>";
+
+		$("#" + containerId).append(htmlStr);
+
+
+		$(".modelResult").css('display', 'flex')
+		$(".modelResult").css('flex-direction', 'column')
+		$(".modelResult").css('padding', '5px')
+		$(".modelResult").css('font-size', '1.3em')
+		$(".modelResult").css('margin', '8px')
+
+		$(".modelResOut").css('background', Main.colors.HIGHLIGHT2)
+		$(".modelResOut").css('padding', '8px')
+		$(".modelResOut").css('margin', '8px')
+	}
+
 	ConfM.makeConfMatrix = function (dataIn, type = "train", containerId = "") {
 		if (containerId == "" && type == 'train') {
 			containerId = "confMatTrain"
@@ -357,6 +403,8 @@
 			.text(function (d, i) {
 				return d;
 			});
+
+		ConfM.modelResultsDisplay(containerId)
 
 	}
 
