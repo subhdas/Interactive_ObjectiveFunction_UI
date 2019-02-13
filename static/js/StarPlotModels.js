@@ -196,6 +196,9 @@
             ConfM.makeConfMatrix(confMatrixTrain, 'train');
             ConfM.makeConfMatrix(confMatrixTest, 'test');
 
+        StarM.addfeatureResults("", BarM.selectedModelId)
+
+
         })
 
     }
@@ -331,7 +334,9 @@
         }
         render();
 
+
         StarM.stylingStarPlot();
+        StarM.addfeatureResults("", BarM.selectedModelId)
     }
 
     StarM.stylingStarPlot = function () {
@@ -344,6 +349,52 @@
                 $(this).css('stroke', 'gray');
                 $(this).css('opacity', 0.75);
             })
+
+    }
+
+
+    StarM.addfeatureResults = function(containerId = "", index =0){
+        if (containerId == "") containerId = "modelExplorePanel"
+        $(".featExplain").remove()
+        try{
+        var featImpDict = BarM.allModelData[index]['feat_imp_dict'];
+        } catch(e){
+            return
+        }
+        var featImpArr = []
+        for(var item in featImpDict){
+            featImpArr.push([item, featImpDict[item]])
+        }
+
+        featImpArr.sort(function(a,b){
+            if(a[1] > b[1]) return -1
+            else return 1
+        })
+
+        console.log('top attrib are  ', featImpArr)
+        var maxFeat = 3
+        var htmlStr= "<div class = 'featExplain' >"
+        htmlStr += "<div class ='featExHeadText'> Decision Making features are </div>"
+        for(var i=0;i<featImpArr.length;i++){
+            htmlStr += "<span class = 'featName' >"+featImpArr[i][0]+", </span>";
+            if(i>maxFeat) break;
+        }
+
+        htmlStr += "</div>";
+
+        $("#"+containerId).append(htmlStr);
+
+
+        // $(".featExplain").css('display', 'flex')
+        $(".featExplain").css('padding', '5px')
+        $(".featExplain").css('font-size', '1.3em')
+        $(".featExplain").css('margin', '8px')
+
+        $(".featName").css('background', Main.colors.HIGHLIGHT2)
+        $(".featName").css('padding', '8px')
+        $(".featName").css('margin', '8px')
+
+
 
     }
 
