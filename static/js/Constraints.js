@@ -248,13 +248,25 @@
             htmlStr = "<div class= 'continueCons'> <div class ='continueContentCons'> + </div></div>"
         }
 
+
+        // for default items
         for (var item in Cons.typeConstraints) {
             var col = Cons.typeConstraints[item]['misc']['Color-Type']
             $("#headRowCons_" + item).css('background', col)
             for (var el in Cons.typeConstraints[item]) {
                 if (Cons.typeConstraints[item][el]['Checked']) {
-                    $('.btn_' + el).css('background', Main.colors.HIGHLIGHT)
-                    $('.btn_' + el).css('color', 'white')
+                    // $('.btn_' + el).css('background', Main.colors.HIGHLIGHT)
+                    // $('.btn_' + el).css('color', 'white')
+
+                    //to fix button toggles
+                    var item = $('.btn_' + el).parent().find('.btnConstOpt').attr('parent')
+                    var val = $('.btn_' + el).parent().find('.btnConstOpt').attr('given')
+                    $('.btn_' + el).parent().find('.btnConstOpt').remove();
+                    var k = 0
+                    var htmlStr = "<button  parent = '" + item + "' given = '" + val + "' \
+                class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnConstOpt' id='" + val + "_btnCheck-" + k + "'>"
+                    htmlStr += "<i class='material-icons'>check</i></button>"; // drag_handle
+                    $('.btn_' + el).parent().prepend(htmlStr);
                 }
 
             }
@@ -263,10 +275,9 @@
 
 
         // $(".btnConstOpt").hide();
+        // $(".btnConstOpt").on('click', function (e) {
 
-        $(".btnConstOpt").on('click', function (e) {
-
-        })
+        // })
 
 
         $(".sortable").sortable({
@@ -331,6 +342,7 @@
         $(".constOpt").css('margin-left', '5px');
         $(".constOpt").css('width', '150px');
         $(".constOpt").css('height', 'auto');
+        $(".constOpt").css('line-height', '15px');
 
 
         $(".continueContentCons").css('display', 'flex');
@@ -372,13 +384,12 @@
                 var item = $(this).parent().find('.btnConstOpt').attr('parent')
                 var val = $(this).parent().find('.btnConstOpt').attr('given')
                 $(this).parent().find('.btnConstOpt').remove();
-                var  k =0 
-
+                var k = 0
                 var htmlStr = "<button  parent = '" + item + "' given = '" + val + "' \
                 class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnConstOpt' id='" + val + "_btnCheck-" + k + "'>"
                 htmlStr += "<i class='material-icons'>check</i></button>"; // drag_handle
-
                 $(this).parent().prepend(htmlStr);
+
                 // $(this).siblings().show();
                 //commented coloring
                 // $(this).css('background', Main.colors.HIGHLIGHT)
@@ -391,15 +402,14 @@
 
 
                 //to fix button toggles
-                 var item = $(this).parent().find('.btnConstOpt').attr('parent')
-                 var val = $(this).parent().find('.btnConstOpt').attr('given')
-                 $(this).parent().find('.btnConstOpt').remove();
-                 var k = 0;
-                 var htmlStr = "<button  parent = '" + item + "' given = '" + val + "' \
+                var item = $(this).parent().find('.btnConstOpt').attr('parent')
+                var val = $(this).parent().find('.btnConstOpt').attr('given')
+                $(this).parent().find('.btnConstOpt').remove();
+                var k = 0;
+                var htmlStr = "<button  parent = '" + item + "' given = '" + val + "' \
                  class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnConstOpt' id='" + val + "_btnCheck-" + k + "'>"
-                 htmlStr += "<i class='material-icons'>linear_scale</i></button>"; // drag_handle
-
-                 $(this).parent().prepend(htmlStr);
+                htmlStr += "<i class='material-icons'>linear_scale</i></button>"; // drag_handle
+                $(this).parent().prepend(htmlStr);
 
                 //commented coloring
                 // $(this).css('background', '')
