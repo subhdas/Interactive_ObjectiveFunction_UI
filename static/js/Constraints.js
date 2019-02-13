@@ -20,8 +20,8 @@
                 // 'Add': true,
                 'Checked': false,
                 'UserWt': 1,
-                'Name' : 'Candidate',
-                'Tip' : 'Data items representing assigned labels. Provide data items as examples which strongly represent their target label',
+                'Name': 'Candidate',
+                'Tip': 'Data items representing assigned labels. Provide data items as examples which strongly represent their target label',
             },
             'Similarity-Metric': {
                 // 'Add': true,
@@ -50,7 +50,7 @@
                 // 'Add': true,
                 'Checked': false,
                 'UserWt': 1,
-                'Name' : 'Ignore',
+                'Name': 'Ignore',
                 'Tip': 'Data items which are least relevant to you for the model to make any error in predictions.',
 
             },
@@ -72,31 +72,31 @@
         //     }
         // },
         'QUANTITATIVE': {
-              'Recall': {
-                  'Checked': true,
-                  'UserWt': 1,
-                  'Name': 'Accuracy Recall',
-                   'Tip': 'Accuracy Recall is how many of the true positives are correctly predicted by the model',
-             },
-           
-             'Precision': {
-                 'Checked': true,
-                 'UserWt': 1,
-                 'Name': 'Accuracy Precision',
+            'Recall': {
+                'Checked': true,
+                'UserWt': 1,
+                'Name': 'Accuracy Recall',
+                'Tip': 'Accuracy Recall is how many of the true positives are correctly predicted by the model',
+            },
+
+            'Precision': {
+                'Checked': true,
+                'UserWt': 1,
+                'Name': 'Accuracy Precision',
                 'Tip': 'Accuracy Precision is how many of the predicted data items were true positive',
-             },
-              'F1-Score': {
-                  'Checked': true,
-                  'UserWt': 1,
-                  'Name': 'Accuracy F1',
-                  'Tip': 'Accuracy F1 is the weighted average of Precision and Recall. This score takes both false positives and false negatives into account.\
+            },
+            'F1-Score': {
+                'Checked': true,
+                'UserWt': 1,
+                'Name': 'Accuracy F1',
+                'Tip': 'Accuracy F1 is the weighted average of Precision and Recall. This score takes both false positives and false negatives into account.\
                 Accuracy F1 is usually more useful if you have an uneven class distribution in the data',
-              },
+            },
             'Training-Accuracy': {
                 'Checked': false,
                 'UserWt': 1,
                 'Name': 'Accuracy Train',
-                 'Tip': 'Accuracy F1 is the weighted average of Precision and Recall. Therefore, this score takes both false positives and false negatives into account.\
+                'Tip': 'Accuracy F1 is the weighted average of Precision and Recall. Therefore, this score takes both false positives and false negatives into account.\
                 Accuracy F1 is usually more useful if you have an uneven class distribution in the data',
             },
             'misc': {
@@ -108,14 +108,14 @@
                 'Checked': false,
                 'UserWt': 1,
                 'Name': 'Accuracy Test',
-                 'Tip': 'Prediction accuracy of the test data will be used to evaluate model performance',
+                'Tip': 'Prediction accuracy of the test data will be used to evaluate model performance',
 
             },
             'Cross-Val-Score': {
                 'Checked': false,
                 'UserWt': 1,
                 'Name': 'Cross Validation',
-                 'Tip': 'The train data will be split into 10 folds and randomly one fold will be test data. \
+                'Tip': 'The train data will be split into 10 folds and randomly one fold will be test data. \
                  The model will be tested 10 times on each fold and the best performing accuracy score will be picked.',
 
             },
@@ -205,8 +205,8 @@
 
             for (var val in Cons.typeConstraints[item]) {
                 if (val == 'misc') continue;
-            var nameItem = Cons.typeConstraints[item][val]['Name']
-            var titleItem = Cons.typeConstraints[item][val]['Tip']
+                var nameItem = Cons.typeConstraints[item][val]['Name']
+                var titleItem = Cons.typeConstraints[item][val]['Tip']
 
                 htmlStr += "<li class = 'ui-state-default' >"
                 htmlStr += "<div class = 'wrapRowCons' parent = '" + item + "' >"
@@ -226,8 +226,14 @@
                 //     htmlStr += "<a parent = '" + item + "' given = '" + val + "' class='btn-floating constOptBtn'><i class='material-icons'>check</i></a>"
                 // }
 
+                // htmlStr += "<div id = 'criticalRectId_" + d.id + "' class = 'criticalRect tableBtnInt' >"
+                htmlStr += "<button  parent = '" + item + "' given = '" + val + "'  \
+                class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnConstOpt' id='" + val + "_btnCheck-" + k + "'>"
+                htmlStr += "<i class='material-icons'>linear_scale</i></button>"; // drag_handle
+                // htmlStr += "</div>"
+
                 htmlStr += "<button parent = '" + item + "' given = '" + val + "' name='" + val + "checkbox-" + k + "' id='" + val + "checkbox-" + k + "' \
-          class = 'mdl-button mdl-js-button mdl-button--accent constOpt btn_" + val + " 'title = '"+titleItem+"'>" + nameItem + " </button>"
+          class = 'mdl-button mdl-js-button mdl-button--accent constOpt btn_" + val + " 'title = '" + titleItem + "'>" + nameItem + " </button>"
 
 
 
@@ -245,15 +251,22 @@
         for (var item in Cons.typeConstraints) {
             var col = Cons.typeConstraints[item]['misc']['Color-Type']
             $("#headRowCons_" + item).css('background', col)
-            for (var el in Cons.typeConstraints[item]){
-            if (Cons.typeConstraints[item][el]['Checked']){
-                 $('.btn_'+el).css('background', Main.colors.HIGHLIGHT)
-                 $('.btn_' + el).css('color', 'white')
-            }
+            for (var el in Cons.typeConstraints[item]) {
+                if (Cons.typeConstraints[item][el]['Checked']) {
+                    $('.btn_' + el).css('background', Main.colors.HIGHLIGHT)
+                    $('.btn_' + el).css('color', 'white')
+                }
 
             }
 
         }
+
+
+        // $(".btnConstOpt").hide();
+
+        $(".btnConstOpt").on('click', function (e) {
+
+        })
 
 
         $(".sortable").sortable({
@@ -329,13 +342,13 @@
         Cons.origWidthConsBars = $(".resizeWeight").width();
 
         $('.constOpt').on('mouseover', function (e) {
-        Cons.cnsBtnMouseEvent = true;
+            Cons.cnsBtnMouseEvent = true;
 
         })
 
         $('.constOpt').on('mouseout', function (e) {
 
-    Cons.cnsBtnMouseEvent = false;
+            Cons.cnsBtnMouseEvent = false;
 
         })
 
@@ -349,26 +362,54 @@
             // if (!DataTable.fromTableInferred) Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
             if (Cons.cnsBtnMouseEvent) {
                 Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
-                console.log('hovered and clicked button ', Cons.typeConstraints[item][name])
+                // console.log('hovered and clicked button ', Cons.typeConstraints[item][name])
             }
             Cons.lastItemClicked = name;
             // $(this).find('button').css('display', 'block');
             if (Cons.typeConstraints[item][name]['Checked'] == true) {
+
+                //to fix button toggles
+                var item = $(this).parent().find('.btnConstOpt').attr('parent')
+                var val = $(this).parent().find('.btnConstOpt').attr('given')
+                $(this).parent().find('.btnConstOpt').remove();
+                var  k =0 
+
+                var htmlStr = "<button  parent = '" + item + "' given = '" + val + "' \
+                class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnConstOpt' id='" + val + "_btnCheck-" + k + "'>"
+                htmlStr += "<i class='material-icons'>check</i></button>"; // drag_handle
+
+                $(this).parent().prepend(htmlStr);
                 // $(this).siblings().show();
-                $(this).css('background', Main.colors.HIGHLIGHT)
-                $(this).css('color', 'white')
+                //commented coloring
+                // $(this).css('background', Main.colors.HIGHLIGHT)
+                // $(this).css('color', 'white')
+
                 // console.log(' lets make button red ', Cons.typeConstraints, item, name)
                 // ConsInt.showPanel();
             } else {
                 // $(this).siblings().closest('a').hide();
-                $(this).css('background', '')
-                $(this).css('color', 'black')
+
+
+                //to fix button toggles
+                 var item = $(this).parent().find('.btnConstOpt').attr('parent')
+                 var val = $(this).parent().find('.btnConstOpt').attr('given')
+                 $(this).parent().find('.btnConstOpt').remove();
+                 var k = 0;
+                 var htmlStr = "<button  parent = '" + item + "' given = '" + val + "' \
+                 class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnConstOpt' id='" + val + "_btnCheck-" + k + "'>"
+                 htmlStr += "<i class='material-icons'>linear_scale</i></button>"; // drag_handle
+
+                 $(this).parent().prepend(htmlStr);
+
+                //commented coloring
+                // $(this).css('background', '')
+                // $(this).css('color', 'black')
                 // console.log(' lets make button black ', Cons.typeConstraints, item, name)
 
                 // ConsInt.hidePanel();
             }
             setTimeout(() => {
-                ConsInt.getActiveConstraints();            
+                ConsInt.getActiveConstraints();
             }, 300);
             // ConsInt.makeInteractionPanel();
         })
