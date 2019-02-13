@@ -176,6 +176,7 @@
         $('.constraintContent').css('margin', '5px');
         $('.constraintContent').css('width', '100%');
         $('.constraintContent').css('height', '100%');
+        $('.constraintContent').css('justify-content', 'center');
 
         Cons.addIconsConstraintsPanel('constraintHeaderId');
 
@@ -264,9 +265,11 @@
                     $('.btn_' + el).parent().find('.btnConstOpt').remove();
                     var k = 0
                     var htmlStr = "<button  parent = '" + item + "' given = '" + val + "' \
-                class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnConstOpt' id='" + val + "_btnCheck-" + k + "'>"
+                class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnConstOpt btnConstOptSpl' id='" + val + "_btnCheck-" + k + "'>"
                     htmlStr += "<i class='material-icons'>check</i></button>"; // drag_handle
                     $('.btn_' + el).parent().prepend(htmlStr);
+                $(".btnConstOptSpl").css('background', Main.colors.HIGHLIGHT)
+
                 }
 
             }
@@ -320,6 +323,10 @@
         });
 
 
+        $(".typeCons").css('width', '200px')
+        // $(".typeCons").css('font-size', '0.75em')
+
+
         $(".resizeWeight").css('width', '100%')
         $(".resizeWeight").css('height', '20px')
         $(".resizeWeight").css('background', Main.colors.HIGHLIGHT)
@@ -335,14 +342,14 @@
 
         $(".constOpt").css('display', 'flex');
         $(".constOpt").css('text-align', 'left');
-        $(".constOpt").css('font-size', '0.9em');
+        $(".constOpt").css('font-size', '0.75em');
         $(".constOpt").css('font-weight', 'bold');
         $(".constOpt").css('color', 'black');
         $(".constOpt").css('font-family', 'helvetica');
         $(".constOpt").css('margin-left', '5px');
         $(".constOpt").css('width', '150px');
         $(".constOpt").css('height', 'auto');
-        $(".constOpt").css('line-height', '15px');
+        $(".constOpt").css('line-height', '18px');
 
 
         $(".continueContentCons").css('display', 'flex');
@@ -386,9 +393,10 @@
                 $(this).parent().find('.btnConstOpt').remove();
                 var k = 0
                 var htmlStr = "<button  parent = '" + item + "' given = '" + val + "' \
-                class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnConstOpt' id='" + val + "_btnCheck-" + k + "'>"
+                class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnConstOpt btnConstOptSpl' id='" + val + "_btnCheck-" + k + "'>"
                 htmlStr += "<i class='material-icons'>check</i></button>"; // drag_handle
                 $(this).parent().prepend(htmlStr);
+                $(".btnConstOptSpl").css('background', Main.colors.HIGHLIGHT)
 
                 // $(this).siblings().show();
                 //commented coloring
