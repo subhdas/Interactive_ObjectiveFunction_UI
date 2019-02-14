@@ -308,10 +308,12 @@
             var attrList = [];
             data.forEach(function (d) {
                 attrList.push(+d[title[i]])
+                // delete d[Main.predictedName]
                 d[Main.predictedName] = 'NA';
             })
 
             dataTest.forEach(function (d) {
+                // delete d[Main.predictedName]
                 d[Main.predictedName] = 'NA';
             })
 
@@ -352,7 +354,7 @@
         Main.entityNameSecondImp = "0_" + Main.entityNameSecondImp;
         Main.leftData = Main.trainData;
         Main.makeLabelIds(Main.trainData);
-        console.log(' train test and left data ', Main.trainData.length, Main.testData.length, Main.leftData.length)
+        // console.log(' train test and left data ', Main.trainData.length, Main.testData.length, Main.leftData.length)
 
         setTimeout(() => {
             //  Util.writeCSV(Main.trainData)            

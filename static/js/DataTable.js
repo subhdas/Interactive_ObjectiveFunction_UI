@@ -1554,14 +1554,21 @@
 
 
         var data = Util.deepCopyData(dataGiven);
-
+        var vc = 15
         // console.log(" drawing test data table ... ", dataGiven);
         data.forEach(function (d, i) {
             delete d.cluster;
             d['0_' + Main.targetName] = d[Main.targetName]
-            d['0_' + Main.predictedName] = d[Main.predictedName]
+            // d['0_' + Main.predictedName] = d[Main.predictedName]
             delete d[Main.targetName];
             delete d[Main.predictedName];
+
+            var name = d[Main.entityNameSecondImp]
+            // console.log(' name is ', name, name.length)
+            if(name.length>vc){
+                name = name.substring(0,vc) + '...'
+            }
+            d[Main.entityNameSecondImp] = name
         }); // end of data for each
         // main.testData = data.slice();
 
