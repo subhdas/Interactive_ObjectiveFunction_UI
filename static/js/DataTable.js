@@ -98,7 +98,7 @@
             var classSpl = ""
             if (existingLabel != label) {
                 res = 'close';
-                val = existingLabel + '/' + label;
+                val = existingLabel + ' / ' + label;
                 classSpl = "btnResOutSpl"
             }
             var htmlStr = "<button  parent = '" + 5 + "' given = '" + 5 + "'  \
@@ -121,14 +121,36 @@
         for (var item in predTestDict) {
             var label = predTestDict[item];
             var col = 'lightgray'
-            var existingLabel = $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.targetName).text();
+            var existingLabel = $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.targetName).attr('parent');
             // console.log('updating test data table ', existingLabel, item)
-            if (existingLabel != label) col = Main.colors.HIGHLIGHT; //'orange'
-            // $('.td_id_' + item).parent().find('.td_0_' + Main.predictedName).text(label);
-            $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).text(label);
-            $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('border', '1px solid gray')
-            $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('background', col)
-            if (existingLabel != label) $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('color', 'white')
+            // if (existingLabel != label) col = Main.colors.HIGHLIGHT; //'orange'
+            // // $('.td_id_' + item).parent().find('.td_0_' + Main.predictedName).text(label);
+            // $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).text(label);
+            // $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('border', '1px solid gray')
+            // $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('background', col)
+            // if (existingLabel != label) $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('color', 'white')
+        
+        
+        
+            //new changed rendering
+            var res = 'check'
+            var val = existingLabel
+            var classSpl = ""
+            if (existingLabel != label) {
+                res = 'close';
+                val = existingLabel + ' / ' + label;
+                classSpl = "btnResOutSpl"
+            }
+            var htmlStr = "<button  parent = '" + 5 + "' given = '" + 5 + "'  \
+                class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnResOut " + classSpl + "' id='btnResOutId" + 0 + "'>"
+            htmlStr += "<i class='material-icons'>" + res + "</i></button>"; // drag_handle
+            htmlStr += "<span class = 'itemResult'>" + val + "</span>";
+            $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.targetName).html(htmlStr)
+
+            $('.btnResOutSpl').css('background', Main.colors.HIGHLIGHT)
+            $('.btnResOut').css('margin-right', '5px')
+        
+        
         }
     }
 
