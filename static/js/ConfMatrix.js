@@ -96,10 +96,16 @@
 
 
 		width = $("#" + containerId).width() * 0.5;
-		height = $("#" + containerId).height() * 0.4;
+		height = $("#" + containerId).height() * 0.1; //0.4
 
-		var width = 100;
-		var height = 100;
+		width = height;
+
+		if(width < 100){
+			width = 100;
+			height = 100
+		}
+		// var width = 100;
+		// var height = 100;
 
 
 		if (!data) {
