@@ -98,6 +98,9 @@
 		width = $("#" + containerId).width() * 0.5;
 		height = $("#" + containerId).height() * 0.4;
 
+		var width = 100;
+		var height = 100;
+
 
 		if (!data) {
 			throw new Error('No data passed.');
@@ -126,6 +129,8 @@
 			.append("svg")
 			.attr("width", width + margin.left + margin.right)
 			.attr("height", height + margin.top + margin.bottom)
+			// .style('max-width', mxWid)
+			// .style('max-height', mxHt)
 			.append("g")
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -133,7 +138,9 @@
 			.style("stroke", "black")
 			.style("stroke-width", "2px")
 			.attr("width", width)
-			.attr("height", height);
+			.attr("height", height)
+			// .style('max-width', mxWid)
+			// .style('max-height', mxHt)
 
 
 		var x = d3.scale.ordinal()
