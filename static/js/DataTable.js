@@ -288,6 +288,10 @@
         htmlStr += "<i class='material-icons'>credit_card</i></button>";
         htmlStr += "<button id='correlViewC' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
         htmlStr += "<i class='material-icons'>border_outer</i></button>";
+
+
+        htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored bakeModelsCl'>"
+        htmlStr += "<i class='material-icons'>play_circle_filled</i></button>";
         htmlStr += '</div>'
         // htmlStr += "<button id='dataToggleBtn'> </button>";
 
@@ -429,7 +433,7 @@
 
                 StarM.makeStarPlot();
                 ConfM.makeConfMatrix(confMatrixTrain, 'train');
-                ConfM.makeConfMatrix(confMatrixTest, 'test');
+                ConfM.makeConfMatrix(confMatrixTest, 'test'); // test
             })
         })
 

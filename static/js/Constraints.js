@@ -16,7 +16,7 @@
 
     Cons.typeConstraints = {
         'COMPOSITIONAL': {
-            'Same-Label': {
+        'Same-Label': {
                 // 'Add': true,
                 'Checked': false,
                 'UserWt': 1,

@@ -4,7 +4,7 @@
 
 	ConfM.cellClickedTrain = false;
 	ConfM.cellClickedTest = false;
-
+	ConfM.addMatrix = 0;
 
 	ConfM.getMaxMinConfMat = function (data) {
 
@@ -19,35 +19,35 @@
 		return [minVal, mxVal]
 	}
 
-	ConfM.modelResultsDisplay = function (containerId = "", index = 0) {
+	ConfM.modelResultsDisplay = function (containerId = "", type = "", index = 0) {
 		if (containerId == "") containerId = "confMatTrain"
-		$("#modelResult_" + containerId).remove();
+		$("#modelResult_" + containerId + "_"+type).remove();
 		//   try {
 		//   	var featImpDict = BarM.allModelData[index]['feat_imp_dict'];
 		//   } catch (e) {
 		//   	return
 		//   }
 
-		var acc = (Util.getRandomNumberBetween(1, 0) * 100).toFixed(2)
+		var acc = (Util.getRandomNumberBetween(0.9, 0.75) * 100).toFixed(2)
 
-		var htmlStr = "<div class = 'modelResult' id = 'modelResult_" + containerId + "'>"
+		var htmlStr = "<div class = 'modelResult' id = 'modelResult_" + containerId + "_"+type+"'>"
 		htmlStr += "<div class = 'modResRow'><span class ='modelResHeadText'> Prediction Accuracy is  </span>"
 		htmlStr += "<span class = 'modelResOut' >" + acc + " </span></div>";
 
 
 		//add other constraints
-		for (var item in ConsInt.activeConstraints) {
-			if (item == 'Precision' || item == 'Recall' || item == 'F1-Score') continue;
-			try {
-				var arr = ConsInt.activeConstraints[item]['input']['labelitemsConId_' + item];
-				if (arr.length == 0) continue;
-			} catch (e) {}
+		// for (var item in ConsInt.activeConstraints) {
+		// 	if (item == 'Precision' || item == 'Recall' || item == 'F1-Score') continue;
+		// 	try {
+		// 		var arr = ConsInt.activeConstraints[item]['input']['labelitemsConId_' + item];
+		// 		if (arr.length == 0) continue;
+		// 	} catch (e) {}
 
-			var val = (Util.getRandomNumberBetween(1, 0) * 100).toFixed(2)
-			var name = ConsInt.activeConstraints[item]['usedName']
-			htmlStr += "<div class = 'modResRow'><span class ='modelResHeadText'>" + name + " Accuracy is  </span>"
-			htmlStr += "<span class = 'modelResOut' >" + val + " </span></div>";
-		}
+		// 	var val = (Util.getRandomNumberBetween(1, 0) * 100).toFixed(2)
+		// 	var name = ConsInt.activeConstraints[item]['usedName']
+		// 	htmlStr += "<div class = 'modResRow'><span class ='modelResHeadText'>" + name + " Accuracy is  </span>"
+		// 	htmlStr += "<span class = 'modelResOut' >" + val + " </span></div>";
+		// }
 		htmlStr += "</div>";
 
 		$("#" + containerId).append(htmlStr);
@@ -70,10 +70,19 @@
 		}
 
 		if (containerId == "" && type == 'test') {
-			containerId = "confMatTest"
+			// containerId = "confMatTest"
+			containerId = "confMatTrain"
+
 		}
 
-		$("#" + containerId).empty();
+
+		
+		if (ConfM.addMatrix == 0) $("#" + containerId).empty();
+		ConfM.addMatrix += 1;
+		if(ConfM.addMatrix == 2) ConfM.addMatrix = 0
+
+
+		$("#"+containerId).css('overflow-Y', 'auto')
 
 		// if(type == 'train'){
 		// 	$("#"+containerId).empty();
@@ -100,9 +109,9 @@
 
 		width = height;
 
-		if(width < 100){
-			width = 100;
-			height = 100
+		if(width < 120){
+			width = 120;
+			height = 120
 		}
 		// var width = 100;
 		// var height = 100;
@@ -197,6 +206,7 @@
 			})
 			.attr("width", x.rangeBand())
 			.attr("height", y.rangeBand())
+			.style("cursor", 'pointer')
 			.style("stroke-width", 0)
 			.style("fill", function (d) {
 				// console.log('found color ', d, extent)
@@ -208,7 +218,7 @@
 				ConfM.cellStroke = $(this).css('stroke');
 				ConfM.cellStrokeWidth = $(this).css('stroke-weight');
 				$(this).css('stroke', 'black');
-				$(this).css('stroke-width', '4px');
+				$(this).css('stroke-width', '2px');
 
 				var id = $(this).parents();
 				var idNum = $(id[1]).attr('id')
@@ -349,6 +359,7 @@
 				return d >= 0.5 ? 'white' : 'black';
 			})
 			.style("font-size", '1.5em')
+			.style("cursor", 'pointer')
 			.text(function (d, i) {
 				return d;
 			});
@@ -417,7 +428,7 @@
 				return d;
 			});
 
-		ConfM.modelResultsDisplay(containerId)
+		ConfM.modelResultsDisplay(containerId, type)
 
 	}
 
