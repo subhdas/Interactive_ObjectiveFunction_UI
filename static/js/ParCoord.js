@@ -81,7 +81,8 @@
 
 
     ParC.featureEditorCreate = function (containerId = "") {
-        if (containerId == "") containerId = "featureEnggPanel";
+        // if (containerId == "") containerId = "featureEnggPanel";
+        if (containerId == "") containerId = "confMatTest";
         $("#" + containerId).empty();
         // $("#" + containerId).css('height', Main.contentHeightTopBar + 'px');
         // $("#" + containerId).css('height', Main.contentWidthTopBar + 'px');

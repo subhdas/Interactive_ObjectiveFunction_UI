@@ -261,14 +261,111 @@
 
     }
 
+    DataTable.addBtnTestTable = function(containerId = ""){
+         if (containerId == "") {
+             containerId = "tableHeadDivTest"
+
+               var htmlStr = "<div class = tabSelectorBtnsDiv>"
+               htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored bakeModelsCl'>"
+               htmlStr += "<i class='material-icons'>play_circle_filled</i></button>";
+               htmlStr += '</div>'
+
+                $("#" + containerId).append(htmlStr);
+                $("#" + containerId).css('display', 'flex');
+                $("#" + containerId).css('align-items', 'center');
+
+                        // table mode button click
+                        $('#bakeModels').on('click', function () {
+                            // var objSend = {
+                            //     data: Main.trainData,
+                            //     selectedRowIds: DataTable.selectedRows
+                            // };
+                            // socket.emit("find_similarData", objSend);
+                            // socket.off('find_similarData');
+                            // socket.removeAllListeners('similarData_return');
+                            // socket.on("similarData_return", function(dataObj) {
+                            //     console.log('similar data returned ', dataObj);
+                            //     LabelCard.computeReturnData = dataObj;
+                            //     LabelCard.getDataObject(dataObj['indexBydata']); 
+                            //     LabelCard.makeCards();
+                            // })
+
+                            var objSend = {
+                                'train': Main.trainData,
+                                'test': Main.testData,
+                                'targetCol': Main.targetName,
+                            }
+                            socket.emit("get_good_model", objSend);
+                            // socket.off('get_good_model');
+                            // socket.removeAllListeners('send_good_model');
+                            socket.on("send_good_model", function (dataObj) {
+                                console.log('good model recieved ', dataObj);
+                                BarM.modelData[0] = Object.assign({}, dataObj);
+
+
+                                var confMatrixTrain = JSON.parse(dataObj['predictions']['trainConfMatrix'])
+                                var confMatrixTest = JSON.parse(dataObj['predictions']['testConfMatrix'])
+                                BarM.modelData[0]['predictions']['trainConfMatrix'] = confMatrixTrain;
+                                BarM.modelData[0]['predictions']['testConfMatrix'] = confMatrixTest;
+                                console.log('confMatrix gotten ', confMatrixTrain);
+
+                                BarM.allModelData = dataObj['predictionsAll']
+                                DataTable.modelUpdateLabel();
+
+                                // comppute data ids for each label combo
+                                // train conf matr
+                                var dataObj = {};
+                                for (var i = 0; i < confMatrixTrain.length; i++) {
+                                    var row = confMatrixTrain[i];
+                                    for (var j = 0; j < row.length; j++) {
+                                        var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'train')
+                                        var obj = {
+                                            'data_idList': idList,
+                                            'num_pred': row[j]
+                                        }
+                                        dataObj[i + '_' + j] = obj;
+                                    }
+                                }
+                                BarM.modelData[0]['predictions']['confMatTrain_ids'] = dataObj;
+
+
+
+                                // test conf matr
+                                var dataObj = {};
+                                for (var i = 0; i < confMatrixTest.length; i++) {
+                                    var row = confMatrixTest[i];
+                                    for (var j = 0; j < row.length; j++) {
+                                        var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'test')
+                                        var obj = {
+                                            'data_idList': idList,
+                                            'num_pred': row[j]
+                                        }
+                                        dataObj[i + '_' + j] = obj;
+                                    }
+                                }
+                                BarM.modelData[0]['predictions']['confMatTest_ids'] = dataObj;
+                                BarM.allModelData[0] = BarM.modelData[0]['predictions']
+
+                                BarM.computeIdsConfMatrAllModel();
+
+                                StarM.makeStarPlot();
+                                ConfM.makeConfMatrix(confMatrixTrain, 'train');
+                                ConfM.makeConfMatrix(confMatrixTest, 'test'); // test
+                            })
+                        })
+
+         }
+    }
+
 
     DataTable.addIconsTop = function (dataIn = Main.trainData, containerId = "") {
 
         if (containerId == "") {
-            containerId = "tableSelectors";
+            // containerId = "tableSelectors";
+            containerId = "tableHeadDivTrain"
         }
-        $("#tableSelectors").empty();
-        $("#tableSelectors").css('display', 'flex');
+        // $("#"+containerId).empty();
+        $("#" + containerId).css('display', 'flex');
 
         // var htmlStr = "<div id='clusterControlDiv'></div>";
         // $("#" + containerId).append(htmlStr);
@@ -327,11 +424,11 @@
         $(".tabSelectorBtnsDiv").css('align-items', 'center')
 
         $('.dataTableHeadText').css('display', 'flex');
-        $('.dataTableHeadText').css('flex-direction', 'row-reverse');
+        // $('.dataTableHeadText').css('flex-direction', 'row-reverse');
         $('.dataTableHeadText').css('width', '100%');
         $('.dataTableHeadText').css('padding', '5px');
         $('.dataTableHeadText').css('align-self', 'center');
-        $('.dataTableHeadText').css('font-size', '1.9em');
+        $('.dataTableHeadText').css('font-size', '1.2em');
 
         $('.containerDataTableHeadText').css('display', 'flex')
         $('.containerDataTableHeadText').css('align-items', 'center')
@@ -357,85 +454,85 @@
             DataTable.showTableView();
         })
 
-        // table mode button click
-        $('#bakeModels').on('click', function () {
-            // var objSend = {
-            //     data: Main.trainData,
-            //     selectedRowIds: DataTable.selectedRows
-            // };
-            // socket.emit("find_similarData", objSend);
-            // socket.off('find_similarData');
-            // socket.removeAllListeners('similarData_return');
-            // socket.on("similarData_return", function(dataObj) {
-            //     console.log('similar data returned ', dataObj);
-            //     LabelCard.computeReturnData = dataObj;
-            //     LabelCard.getDataObject(dataObj['indexBydata']); 
-            //     LabelCard.makeCards();
-            // })
+        // // table mode button click
+        // $('#bakeModels').on('click', function () {
+        //     // var objSend = {
+        //     //     data: Main.trainData,
+        //     //     selectedRowIds: DataTable.selectedRows
+        //     // };
+        //     // socket.emit("find_similarData", objSend);
+        //     // socket.off('find_similarData');
+        //     // socket.removeAllListeners('similarData_return');
+        //     // socket.on("similarData_return", function(dataObj) {
+        //     //     console.log('similar data returned ', dataObj);
+        //     //     LabelCard.computeReturnData = dataObj;
+        //     //     LabelCard.getDataObject(dataObj['indexBydata']); 
+        //     //     LabelCard.makeCards();
+        //     // })
 
-            var objSend = {
-                'train': Main.trainData,
-                'test': Main.testData,
-                'targetCol': Main.targetName,
-            }
-            socket.emit("get_good_model", objSend);
-            // socket.off('get_good_model');
-            // socket.removeAllListeners('send_good_model');
-            socket.on("send_good_model", function (dataObj) {
-                console.log('good model recieved ', dataObj);
-                BarM.modelData[0] = Object.assign({}, dataObj);
-
-
-                var confMatrixTrain = JSON.parse(dataObj['predictions']['trainConfMatrix'])
-                var confMatrixTest = JSON.parse(dataObj['predictions']['testConfMatrix'])
-                BarM.modelData[0]['predictions']['trainConfMatrix'] = confMatrixTrain;
-                BarM.modelData[0]['predictions']['testConfMatrix'] = confMatrixTest;
-                console.log('confMatrix gotten ', confMatrixTrain);
-
-                BarM.allModelData = dataObj['predictionsAll']
-                DataTable.modelUpdateLabel();
-
-                // comppute data ids for each label combo
-                // train conf matr
-                var dataObj = {};
-                for (var i = 0; i < confMatrixTrain.length; i++) {
-                    var row = confMatrixTrain[i];
-                    for (var j = 0; j < row.length; j++) {
-                        var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'train')
-                        var obj = {
-                            'data_idList': idList,
-                            'num_pred': row[j]
-                        }
-                        dataObj[i + '_' + j] = obj;
-                    }
-                }
-                BarM.modelData[0]['predictions']['confMatTrain_ids'] = dataObj;
+        //     var objSend = {
+        //         'train': Main.trainData,
+        //         'test': Main.testData,
+        //         'targetCol': Main.targetName,
+        //     }
+        //     socket.emit("get_good_model", objSend);
+        //     // socket.off('get_good_model');
+        //     // socket.removeAllListeners('send_good_model');
+        //     socket.on("send_good_model", function (dataObj) {
+        //         console.log('good model recieved ', dataObj);
+        //         BarM.modelData[0] = Object.assign({}, dataObj);
 
 
+        //         var confMatrixTrain = JSON.parse(dataObj['predictions']['trainConfMatrix'])
+        //         var confMatrixTest = JSON.parse(dataObj['predictions']['testConfMatrix'])
+        //         BarM.modelData[0]['predictions']['trainConfMatrix'] = confMatrixTrain;
+        //         BarM.modelData[0]['predictions']['testConfMatrix'] = confMatrixTest;
+        //         console.log('confMatrix gotten ', confMatrixTrain);
 
-                // test conf matr
-                var dataObj = {};
-                for (var i = 0; i < confMatrixTest.length; i++) {
-                    var row = confMatrixTest[i];
-                    for (var j = 0; j < row.length; j++) {
-                        var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'test')
-                        var obj = {
-                            'data_idList': idList,
-                            'num_pred': row[j]
-                        }
-                        dataObj[i + '_' + j] = obj;
-                    }
-                }
-                BarM.modelData[0]['predictions']['confMatTest_ids'] = dataObj;
-                BarM.allModelData[0] = BarM.modelData[0]['predictions']
+        //         BarM.allModelData = dataObj['predictionsAll']
+        //         DataTable.modelUpdateLabel();
 
-                BarM.computeIdsConfMatrAllModel();
+        //         // comppute data ids for each label combo
+        //         // train conf matr
+        //         var dataObj = {};
+        //         for (var i = 0; i < confMatrixTrain.length; i++) {
+        //             var row = confMatrixTrain[i];
+        //             for (var j = 0; j < row.length; j++) {
+        //                 var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'train')
+        //                 var obj = {
+        //                     'data_idList': idList,
+        //                     'num_pred': row[j]
+        //                 }
+        //                 dataObj[i + '_' + j] = obj;
+        //             }
+        //         }
+        //         BarM.modelData[0]['predictions']['confMatTrain_ids'] = dataObj;
 
-                StarM.makeStarPlot();
-                ConfM.makeConfMatrix(confMatrixTrain, 'train');
-                ConfM.makeConfMatrix(confMatrixTest, 'test'); // test
-            })
-        })
+
+
+        //         // test conf matr
+        //         var dataObj = {};
+        //         for (var i = 0; i < confMatrixTest.length; i++) {
+        //             var row = confMatrixTest[i];
+        //             for (var j = 0; j < row.length; j++) {
+        //                 var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'test')
+        //                 var obj = {
+        //                     'data_idList': idList,
+        //                     'num_pred': row[j]
+        //                 }
+        //                 dataObj[i + '_' + j] = obj;
+        //             }
+        //         }
+        //         BarM.modelData[0]['predictions']['confMatTest_ids'] = dataObj;
+        //         BarM.allModelData[0] = BarM.modelData[0]['predictions']
+
+        //         BarM.computeIdsConfMatrAllModel();
+
+        //         StarM.makeStarPlot();
+        //         ConfM.makeConfMatrix(confMatrixTrain, 'train');
+        //         ConfM.makeConfMatrix(confMatrixTest, 'test'); // test
+        //     })
+        // })
 
 
 

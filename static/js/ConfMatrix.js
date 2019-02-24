@@ -30,7 +30,7 @@
 
 		var acc = (Util.getRandomNumberBetween(0.9, 0.75) * 100).toFixed(2)
 
-		var htmlStr = "<div class = 'modelResult' id = 'modelResult_" + containerId + "_"+type+"'>"
+		var htmlStr = "<div class = '"+type + "_wrapDivs modelResult' id = 'modelResult_" + containerId + "_" + type + "'>"
 		htmlStr += "<div class = 'modResRow'><span class ='modelResHeadText'> Prediction Accuracy is  </span>"
 		htmlStr += "<span class = 'modelResOut' >" + acc + " </span></div>";
 
@@ -58,10 +58,22 @@
 		$(".modelResult").css('padding', '5px')
 		$(".modelResult").css('font-size', '1.3em')
 		$(".modelResult").css('margin', '8px')
+		$(".modelResult").css('height', '20px')
 
 		$(".modelResOut").css('background', Main.colors.HIGHLIGHT2)
 		$(".modelResOut").css('padding', '8px')
 		$(".modelResOut").css('margin', '8px')
+
+		$("." + type + "_wrapDivs").wrapAll("<div class='wrapperDivConfMatr'></div>");
+
+
+		$(".wrapperDivConfMatr").css('display', 'flex');
+		$(".wrapperDivConfMatr").css('width', '100%');
+		$(".wrapperDivConfMatr").css('height', 'auto');
+		$(".wrapperDivConfMatr").css('padding', '4px');
+		$(".wrapperDivConfMatr").css('align-items', 'center');
+		$(".wrapperDivConfMatr").css('justify-content', 'center');
+
 	}
 
 	ConfM.makeConfMatrix = function (dataIn, type = "train", containerId = "") {
@@ -135,10 +147,11 @@
 
 		numrows = data.length;
 		numcols = data[0].length;
-
+		
 		var svg = d3.select("#" + containerId)
 			.append('div')
 			.attr('id', type + '_ConfMatrixDiv')
+			.attr('class', type + '_wrapDivs')
 			.attr("width", width + margin.left + margin.right)
 			.attr("height", height + margin.top + margin.bottom)
 			.append("svg")
