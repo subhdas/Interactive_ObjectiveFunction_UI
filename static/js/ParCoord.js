@@ -105,6 +105,7 @@
         $('.featureEngContent').css('margin', '5px');
         $('.featureEngContent').css('width', '100%');
         $('.featureEngContent').css('height', '100%');
+        $('.featureEngContent').css('overflow-X', 'auto');
 
         ParC.addIconsFeatureEditor('featureEngHeaderId');
 

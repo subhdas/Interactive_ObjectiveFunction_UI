@@ -146,6 +146,7 @@ body {
     font-size: 1.25em;
     /* padding : 5px; */
     margin: 10px;
+    width : 120px;
 }
 
 .allTableClass {
@@ -288,7 +289,7 @@ body {
 #btnTopPanel {
     display: flex;
     width: 100%;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     padding: 10px;
 }

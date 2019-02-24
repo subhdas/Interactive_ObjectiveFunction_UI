@@ -225,7 +225,7 @@
         
         DataTable.extraContent = false;
         DataTable.makeTable(Main.testData, "tableContentTest");
-        DataTable.addBtnTestTable();
+        // DataTable.addBtnTestTable();
         Scat.makeTheMatrix();
         Scat.hideScatterView();
 
