@@ -94,7 +94,7 @@
 		if(ConfM.addMatrix == 2) ConfM.addMatrix = 0
 
 
-		$("#"+containerId).css('overflow-Y', 'auto')
+		// $("#"+containerId).css('overflow-Y', 'auto')
 
 		// if(type == 'train'){
 		// 	$("#"+containerId).empty();

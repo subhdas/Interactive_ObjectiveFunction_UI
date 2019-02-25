@@ -90,39 +90,45 @@
   </div>
 
   <div id="viewBar">
-    <div id="trainContent" class='wrapAllTables'>
-      <div class='tableHeadDiv' id='tableHeadDivTrain'>
-        <button id='tableTogglerId_0' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored tableTogglerCl'>
-          <i class='material-icons'>import_export</i></button>
-        <h6 class=' headerTables'>Train-Data</h6>
+    <div id="bothTables">
+      <div id="trainContent" class='wrapAllTables'>
+        <div class='tableHeadDiv' id='tableHeadDivTrain'>
+          <button id='tableTogglerId_0' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored tableTogglerCl'>
+            <i class='material-icons'>import_export</i></button>
+          <h6 class=' headerTables'>Train-Data</h6>
+        </div>
+        <div id="allTables" class='allTableClass'>
+          <div id="tablePanel" class="train_table tableGeneral">
+            <div id="tableSelectors"></div>
+            <div id="tableContent" class=".ui-droppable tableContent"></div>
+            <div id="scatContent" class=".ui-droppable scatContent"></div>
+          </div>
+          <!-- <div id="confMatTrain" class='confMatPanel'> </div> -->
+        </div> <!-- all table finishes here -->
       </div>
-      <div id="allTables" class='allTableClass'>
-        <div id="tablePanel" class="train_table tableGeneral">
-          <div id="tableSelectors"></div>
-          <div id="tableContent" class=".ui-droppable tableContent"></div>
-          <div id="scatContent" class=".ui-droppable scatContent"></div>
+
+      <div id="testContent" class='wrapAllTables'>
+        <div class='tableHeadDiv' id='tableHeadDivTest'>
+          <button id='tableTogglerId_1' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored tableTogglerCl'>
+            <i class='material-icons'>import_export</i></button>
+          <h6 class='headerTables'>Test-Data </h6>
         </div>
-        <div id="confMatTrain" class='confMatPanel'>
-        </div>
-      </div> <!-- all table finishes here -->
+        </h6>
+        <div id="allTablesTest" class='allTableClass'>
+          <div id="tablePanelTest" class="test_table tableGeneral">
+            <div id="tableSelectors"></div>
+            <div id="tableContentTest" class=".ui-droppable tableContentTest"></div>
+            <!-- <div id="scatContentTest" class=".ui-droppable scatContentTest"></div> -->
+          </div>
+          <!-- <div id="confMatTest" class='confMatPanel'></div> -->
+        </div> <!-- all table finishes here -->
+      </div>
     </div>
 
-    <div id="testContent" class='wrapAllTables'>
-      <div class='tableHeadDiv' id='tableHeadDivTest'>
-        <button id='tableTogglerId_1' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored tableTogglerCl'>
-          <i class='material-icons'>import_export</i></button>
-        <h6 class='headerTables'>Test-Data </h6>
-      </div>
-      </h6>
-      <div id="allTablesTest" class='allTableClass'>
-        <div id="tablePanelTest" class="test_table tableGeneral">
-          <div id="tableSelectors"></div>
-          <div id="tableContentTest" class=".ui-droppable tableContentTest"></div>
-          <!-- <div id="scatContentTest" class=".ui-droppable scatContentTest"></div> -->
-        </div>
-        <div id="confMatTest" class='confMatPanel'>
-        </div>
-      </div> <!-- all table finishes here -->
+    <div id="rightPanel">
+      <div id="confMatTrain" class='confMatPanel'> </div>
+      <div id="confMatTest" class='confMatPanel'></div>
+
     </div>
 
   </div> <!-- viewBar finishes here-->

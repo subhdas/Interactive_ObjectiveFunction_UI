@@ -492,6 +492,13 @@
             activate: function (event, ui) {
                 Cons.accordionOpen = !Cons.accordionOpen
                 console.log('accordion opened ', Cons.accordionOpen)
+
+                if(Cons.accordionOpen){
+                    $("#confMatTrain").hide();                    
+                }else{
+                    $("#confMatTrain").show();
+
+                }
             }
         });
 
