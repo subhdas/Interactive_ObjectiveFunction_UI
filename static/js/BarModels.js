@@ -375,7 +375,7 @@
 
     BarM.makeHistoFilterTable = function (containerId = "", w, h, data = "", dataQuery, attr = "", parContainerId = "") {
         var ran = Main.attrDict[attr]['range']
-        var numbins = 8;
+        var numbins = 5;
         if(attr == 'Cylinders') numbins = 2
         var minbin = ran[0]
         var maxbin = ran[1]
@@ -388,7 +388,7 @@
         var margin = {
             top: 2,
             right: 2,
-            bottom: 35,
+            bottom: 40,
             left: 2
         };
         var width = w - margin.left - margin.right;

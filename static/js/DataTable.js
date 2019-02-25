@@ -636,8 +636,10 @@
         var h = parseFloat(el.css('height'));
         // console.log('in filter vis table  ', attr, data, id)
 
-        w = 200;
-        h = 100;
+        // w = 200;
+        h = 75;
+
+        w = 100
         // console.log('data ffound ', attr, data, id, w, h);
         // BarM.makeFeatureLabelsVerBar(id,w,h,data)
         BarM.makeHistoFilterTable(id, w, h, data, dataIn, attr, containerId);
@@ -646,7 +648,7 @@
 
     DataTable.addExtraItemsTables = function (containerId = "", data) {
         // return
-        console.log('extra item adding ', containerId, DataTable.addedExtra)
+        // console.log('extra item adding ', containerId, DataTable.addedExtra)
         if (DataTable.addedExtra == 0) containerId = "tableContent"
         else containerId = "tableContentTest";
 
@@ -983,48 +985,7 @@
             try {
                 ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2] = critIdList2;
             } catch (e) {}
-            // try {
-            //     var elem = ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri]
-            //     if (typeof elem != 'undefined') {
-            //         elem = elem.concat(critIdList);
-            //         elem = Util.getUniqueArray(elem)
-            //         ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = elem
-            //     } else {
-            //         ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = critIdList;
-            //     }
 
-
-            //     var elem = ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2]
-            //     if (typeof elem != 'undefined') {
-            //         elem = elem.concat(critIdList2);
-            //         elem = Util.getUniqueArray(elem)
-            //         ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2] = elem
-            //     } else {
-            //         ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2] = critIdList2;
-            //     }
-
-            //     // ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2] = critIdList2;
-            // } catch (e) {
-            //     console.log('critall errors ', e)
-            // }
-
-            // //for critical lists
-            // try {
-            //     var arr = ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri];
-            //     if (arr.length > 0) Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false
-            //     else Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false;
-            // } catch (e) {
-
-            // }
-
-            // //for non-critical lists
-            // try {
-            //     var arr = ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2];
-            //     if (arr.length > 0) Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; //false
-            //     else Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false;
-            // } catch (e) {
-
-            // }
 
 
             setTimeout(() => {
@@ -1332,8 +1293,6 @@
 
 
 
-
-
         //toggle switches input controls-----------------------------------------------------------------------------------------
         $(".switch_critical").on('input', function (e) {
             if (DataTable.criticalSwitch) {
@@ -1412,25 +1371,7 @@
                 ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [idNum]
             }
         })
-        // $(".ui-corner-all").css('background', 'transparent')
-        // $(".ui-corner-all").css('border', 'none')
 
-
-        // add filter data button - commented out
-        // var sel = $("#filter_tr_" + containerId).find('td').first();
-        // var htmlStr = "<button id='toggleFilterTableBtn_" + containerId + "' class = 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' > "
-        // htmlStr += "<i class='material-icons'>filter_tilt_shift</i></button>";
-        // sel.append(htmlStr);
-
-
-        // $("#toggleFilterTableBtn_" + containerId).on('click', function (e) {
-        //     if ($(".filterPanelDiv").length > 0) {
-        //         DataTable.showFilterPanel();
-        //     } else {
-        //         DataTable.addFilterPanel(100, 200, 500, 200);
-        //     }
-
-        // })
 
 
     } // end of add extra
