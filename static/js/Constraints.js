@@ -141,10 +141,10 @@
 
         $(".constraintHeadTitle").css('width', '100%')
         $(".constraintHeadTitle").css('font-size', '1.5em')
-        htmlStr = "<button id='someBtnId' class='someBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-        htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
+        // htmlStr = "<button id='someBtnId' class='someBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        // htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
 
-        $(".constraintHeadButton").append(htmlStr);
+        // $(".constraintHeadButton").append(htmlStr);
 
         //click reset data button
         $("#someBtnId").on('click', function () {
