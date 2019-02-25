@@ -346,7 +346,7 @@
 
         $('.dataTableHeadText').css('display', 'flex');
         // $('.dataTableHeadText').css('flex-direction', 'row-reverse');
-        $('.dataTableHeadText').css('width', '100%');
+        $('.dataTableHeadText').css('width', 'auto');
         $('.dataTableHeadText').css('padding', '5px');
         $('.dataTableHeadText').css('align-self', 'center');
         $('.dataTableHeadText').css('font-size', '1.2em');
@@ -2201,7 +2201,7 @@
 
         $("#" + containerId).css('display', 'flex')
         $("#" + containerId).css('align-items', 'center')
-        var listOfTagDict = {
+        var listOfTagDict = {   
             'critical-items': true,
             'ignore': true,
             'similar': true,
@@ -2226,6 +2226,7 @@
         $(".tagContainer").css('width', 'auto')
         $(".tagContainer").css('height', '100%')
         $(".tagContainer").css('padding', '5px')
+        $(".tagContainer").css('align-items', 'center')
 
         $(".tagHead").css('display', 'flex')
         $(".tagHead").css('width', 'auto')

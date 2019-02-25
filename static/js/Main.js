@@ -236,6 +236,7 @@
         ConsInt.getActiveConstraints();
         
         Main.tableTogglingApply();
+        Rul.makeRuleList();
         // Main.makeTablePanelsAccord();
     }
 

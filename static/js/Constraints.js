@@ -268,7 +268,7 @@
                 class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnConstOpt btnConstOptSpl' id='" + val + "_btnCheck-" + k + "'>"
                     htmlStr += "<i class='material-icons'>check</i></button>"; // drag_handle
                     $('.btn_' + el).parent().prepend(htmlStr);
-                    $(".btnConstOptSpl").css('background', Main.colors.HIGHLIGHT)
+                    $(".btnConstOptSpl").css('background', Main.colors.HIGHLIGHT2)
 
                 }
 
@@ -396,7 +396,7 @@
                 class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnConstOpt btnConstOptSpl' id='" + val + "_btnCheck-" + k + "'>"
                 htmlStr += "<i class='material-icons'>check</i></button>"; // drag_handle
                 $(this).parent().prepend(htmlStr);
-                $(".btnConstOptSpl").css('background', Main.colors.HIGHLIGHT)
+                $(".btnConstOptSpl").css('background', Main.colors.HIGHLIGHT2)
 
                 // $(this).siblings().show();
                 //commented coloring

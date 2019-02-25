@@ -313,7 +313,7 @@
             .append('svg')
             .attr('class', 'starPlotModelClass')
             .attr('id', 'starPlotModelId')
-            .attr('width', cfg.w + 20)
+            .attr('width', cfg.w + 80)
             // .attr('width', cfg.w + cfg.w + 50)
             .attr('height', cfg.h + cfg.h /20);
         svg.append('g').classed('single', 1).datum(StarM.getRandomData()).call(chart);
