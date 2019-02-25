@@ -719,11 +719,14 @@
             })
             .style('flex-direction', 'row')
             .style('width', '150px')
+            // .style('background', 'white')
+            // .style('color', 'black')
             .html(function (d, i) {
                 // console.log(' d and i is ', d, i)
                 if (i < 2) {
                     var col = $(this).siblings().attr('background');
                     if (i == 0) col = "#333"
+                    if (i == 0) col = "white"
                     if (i == 1) col = ""
                     $(this).css('background', col);
                     return ""
@@ -1623,8 +1626,10 @@
             .append("th")
             // .attr('class', 'mdl-data-table__cell--non-numeric')
             .text(function (d) {
-                return d;
+                return d
             })
+            .style('color', 'black')
+            .style('background', 'white')
             .on("click", function (d) {
                 // headers.attr("class", "header");
 
