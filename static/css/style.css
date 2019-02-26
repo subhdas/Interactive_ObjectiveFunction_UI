@@ -94,7 +94,7 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     padding: 5px;
-    max-height : 300px;
+    max-height: 300px;
     overflow-y: auto;
     /* border-right: 1px solid lightgray; */
 
@@ -135,7 +135,7 @@ body {
 }
 
 
-.wrapAllTables{
+.wrapAllTables {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -152,11 +152,11 @@ body {
 
 }
 
-#rightPanel{
+#rightPanel {
     display: flex;
     flex-direction: column;
-    height : 100%;
-    width: 35   %;
+    height: 100%;
+    width: 35 %;
     /* overflow-Y : auto; */
 }
 
@@ -165,7 +165,7 @@ body {
     font-size: 1.25em;
     /* padding : 5px; */
     margin: 10px;
-    width : 120px;
+    width: 120px;
 }
 
 .allTableClass {
@@ -229,7 +229,7 @@ body {
 }
 
 
-.tableHeadDiv{
+.tableHeadDiv {
     display: flex;
 }
 
@@ -353,4 +353,55 @@ header {
     padding: 5px;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*+++++++++++++++++++++++++++++++++++++*/
+
+div.wrapAllTables {
+    clear: both;
+    overflow: auto;
+}
+
+html>body div.wrapAllTables {
+    overflow: hidden;
+}
+
+div.wrapAllTables table {
+    float: left;
+}
+
+thead.fixedHeader tr {
+    position: relative;
+    
+}
+/* 
+html>body tbody.scrollContent {
+    display: block;
+    height: 262px;
+    overflow: auto;
+    width: 100%
+} */
+
+html>body thead.fixedHeader {
+    display: table;
+    overflow: auto;
+    width: 100%;
+     /* position: -webkit-sticky;
+     position: sticky; */
 }

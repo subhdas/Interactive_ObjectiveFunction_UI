@@ -670,6 +670,7 @@
         table.select('tbody')
             .insert("tr", ":first-child")
             .attr('id', 'filter_tr_' + containerId)
+            .attr('class', 'filter_tr')
             .attr('height', '100px')
             .data([data[0]])
             .selectAll("td")
@@ -1565,6 +1566,7 @@
             .data(titles)
             .enter()
             .append("th")
+            .attr('class', 'fixedHeader')
             // .attr('class', 'mdl-data-table__cell--non-numeric')
             .text(function (d) {
                 return d
@@ -1593,6 +1595,7 @@
 
         var rows = table
             .append("tbody")
+            .attr('class', 'scrollContent')
             .selectAll("tr")
             .data(data)
             .enter()
@@ -1896,6 +1899,33 @@
             }
 
         }
+
+
+
+        //adding for freezing top row
+
+        $("#tableContent").scroll(function () {
+            var screenTop = $(document).scrollTop();
+            var thisTop = $(this).scrollTop();
+            console.log('scrollng noew ', screenTop, thisTop)
+
+            $(this).find('thead').css('position', 'absolute')
+            $(this).find('thead').css('display', 'table')
+            $(this).find('thead').css('top', thisTop-20)
+            $(this).find('thead').closest('tr').css('background', 'white')
+            $(this).find('thead').closest('th').css('z-index', 100)
+            $(this).find('thead').css('z-index', 100)
+
+
+            //  $(this).find('.filter_tr').css('position', 'absolute')
+            //  $(this).find('.filter_tr').css('display', 'table')
+            //  $(this).find('.filter_tr').css('height', '100px')
+            //  $(this).find('.filter_tr').css('top', thisTop + 50 - 20)
+            //  $(this).find('.filter_tr').closest('tr').css('background', 'white')
+            //  $(this).find('.filter_tr').closest('tr').css('z-index', 100)
+            //  $(this).find('.filter_tr').css('z-index', 100)
+
+        });
 
 
     }; // end of makeTable
