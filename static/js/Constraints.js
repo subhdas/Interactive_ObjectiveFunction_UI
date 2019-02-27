@@ -430,7 +430,7 @@
                 ConsInt.getActiveConstraints();
             }, 300);
 
-            Rul.makeRuleList();
+            // Rul.makeRuleList();
 
             // ConsInt.makeInteractionPanel();
         })

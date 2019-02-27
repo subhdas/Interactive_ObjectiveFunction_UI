@@ -507,7 +507,7 @@
                 return [position(p), y[p](d[p])];
             }));
         }
-
+        
         function brushstart() {
             d3.event.sourceEvent.stopPropagation();
         }

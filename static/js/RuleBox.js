@@ -8,8 +8,7 @@
 
 
 
-	Rul.makeRuleList = function (containerId = "") {
-
+	Rul.makeRuleList = function (containerId = "", id = "") {
 		if (!Rul.setRule) return;
 		if (containerId == "") containerId = "featureEnggPanel"
 		$("#" + containerId).empty();
@@ -17,53 +16,102 @@
 		var htmlStr = ""
 		// htmlStr += "<div class ='fullRuleAll' >"
 
-		// get the rules 
-		if (ParC.tempDimRules.length > 0) {
-			var dims = ParC.tempDimRules[0]
-			var ext = ParC.tempDimRules[1]
 
-			
-			Rul.ruleData['n_rule_' + Rul.ruleIndex] = {}
-			for (var i = 0; i < dims.length; i++) {
-				ext[i] = ext[i].map(function (e) {
-					console.log('e ', e)
-					return +e.toFixed(2);
-				});
-				Rul.ruleData['n_rule_' + Rul.ruleIndex][dims[i]] = ext[i]
+		for (var item in ConsInt.activeConstraints) {
+			var elem = ConsInt.activeConstraints[item];
+			// console.log('gottent iem ', elem, item);
+			var go = true;
+			try{
+				var key  = Object.keys(elem['input'])
+				for(var m =0;m<key.length;m++){
+					var lenVal = elem['input'][key[m]].length
+				}
+				// var lenVal = elem['input']['labelitemsConId_' + item].length
+				console.log('lets check ', lenVal, item)
+			}catch(e){
+				// console.log('contiuing for ', elem, item)
+				go = false;
 			}
-			Rul.ruleIndex += 1;
-			Rul.setRule = false;
-			setTimeout(() => {
-				Rul.setRule = true;
-			}, 300);
-		}
+			if (lenVal > 0 && go) {
+				try {
+					var k = Object.keys(Rul.ruleData[item]).length
+					// console.log(' lets find k ', k, item)
+				} catch (e) {
+					// get the rules 
+					if (ParC.tempDimRules.length > 0) {
+						var dims = ParC.tempDimRules[0]
+						var ext = ParC.tempDimRules[1]
 
-
-
-
-
-
-		if (Object.keys(Rul.ruleData).length == 0) {
-			Rul.ruleData = {
-				'rule_1': {
-					'MPG': [32, 90],
-					'Acceleration': [6.5, 8.23],
-					'Weight': [2874, 3585],
-					'Cyinders': [3, 6],
-				},
-
-				'rule_2': {
-					'Acceleration': [2.1, 5.3],
-					'Cyinders': [5, 7],
-				},
-
-
-				'rule_3': {
-					'Weight': [-1, 3402],
-					'MPG': [-1, 38],
-				},
+						if (id == "") {
+							id = 'n_rule_' + Rul.ruleIndex
+						}
+						id = item;
+						console.log('lets make rule for ', item)
+						Rul.ruleData[id] = {}
+						for (var i = 0; i < dims.length; i++) {
+							ext[i] = ext[i].map(function (e) {
+								return +e.toFixed(2);
+							});
+							Rul.ruleData[id][dims[i]] = ext[i]
+						}
+						Rul.ruleIndex += 1;
+						Rul.setRule = false;
+						setTimeout(() => {
+							Rul.setRule = true;
+						}, 300);
+					}
+				}
 			}
-		}
+		} //end of for
+
+		// // get the rules 
+		// if (ParC.tempDimRules.length > 0) {
+		// 	var dims = ParC.tempDimRules[0]
+		// 	var ext = ParC.tempDimRules[1]
+
+		// 	if(id==""){
+		// 		id = 'n_rule_' + Rul.ruleIndex
+		// 	}
+		// 	Rul.ruleData[id] = {}
+		// 	for (var i = 0; i < dims.length; i++) {
+		// 		ext[i] = ext[i].map(function (e) {
+		// 			return +e.toFixed(2);
+		// 		});
+		// 		Rul.ruleData[id][dims[i]] = ext[i]
+		// 	}
+		// 	Rul.ruleIndex += 1;
+		// 	Rul.setRule = false;
+		// 	setTimeout(() => {
+		// 		Rul.setRule = true;
+		// 	}, 300);
+		// }
+
+
+
+
+
+
+		// if (Object.keys(Rul.ruleData).length == 0) {
+		// 	Rul.ruleData = {
+		// 		'rule_1': {
+		// 			'MPG': [32, 90],
+		// 			'Acceleration': [6.5, 8.23],
+		// 			'Weight': [2874, 3585],
+		// 			'Cyinders': [3, 6],
+		// 		},
+
+		// 		'rule_2': {
+		// 			'Acceleration': [2.1, 5.3],
+		// 			'Cyinders': [5, 7],
+		// 		},
+
+
+		// 		'rule_3': {
+		// 			'Weight': [-1, 3402],
+		// 			'MPG': [-1, 38],
+		// 		},
+		// 	}
+		// }
 
 		for (var item in Rul.ruleData) {
 			var dataObj = Rul.ruleData[item];

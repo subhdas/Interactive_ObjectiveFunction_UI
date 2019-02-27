@@ -997,7 +997,7 @@
                 $("#" + idBtn2).click();
             }, 100);
 
-
+            Rul.makeRuleList('', 'critical_All');
             DataTable.makeTags();
         }) // end of rect dict
 

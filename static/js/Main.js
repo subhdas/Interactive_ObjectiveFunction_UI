@@ -231,12 +231,12 @@
 
         Cons.makeConsDivs();
         // BarM.makeStackedModelBars();
-        StarM.makeStarPlot();
+        // StarM.makeStarPlot();
 
         ConsInt.getActiveConstraints();
         
         Main.tableTogglingApply();
-        Rul.makeRuleList();
+        // Rul.makeRuleList();
         // Main.makeTablePanelsAccord();
     }
 
