@@ -102,7 +102,7 @@
                 classSpl = "btnResOutSpl"
             }
             var htmlStr = "<button  parent = '" + 5 + "' given = '" + 5 + "'  \
-                class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnResOut "+classSpl+"' id='btnResOutId" + 0 + "'>"
+                class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnResOut " + classSpl + "' id='btnResOutId" + 0 + "'>"
             htmlStr += "<i class='material-icons'>" + res + "</i></button>"; // drag_handle
             htmlStr += "<span class = 'itemResult'>" + val + "</span>";
             $('#tr_' + item).find('.td_0_' + Main.targetName).html(htmlStr)
@@ -129,9 +129,9 @@
             // $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('border', '1px solid gray')
             // $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('background', col)
             // if (existingLabel != label) $("#tableContentTest").find('#tr_' + item).find('.td_0_' + Main.predictedName).css('color', 'white')
-        
-        
-        
+
+
+
             //new changed rendering
             var res = 'check'
             var val = existingLabel
@@ -149,8 +149,8 @@
 
             $('.btnResOutSpl').css('background', Main.colors.HIGHLIGHT)
             $('.btnResOut').css('margin-right', '5px')
-        
-        
+
+
         }
     }
 
@@ -261,21 +261,21 @@
 
     }
 
-    DataTable.addBtnTestTable = function(containerId = ""){
-         if (containerId == "") {
-             containerId = "tableHeadDivTest"
+    DataTable.addBtnTestTable = function (containerId = "") {
+        if (containerId == "") {
+            containerId = "tableHeadDivTest"
 
-               var htmlStr = "<div class = tabSelectorBtnsDiv>"
-               htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored bakeModelsCl'>"
-               htmlStr += "<i class='material-icons'>play_circle_filled</i></button>";
-               htmlStr += '</div>'
+            var htmlStr = "<div class = tabSelectorBtnsDiv>"
+            htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored bakeModelsCl'>"
+            htmlStr += "<i class='material-icons'>play_circle_filled</i></button>";
+            htmlStr += '</div>'
 
-                $("#" + containerId).append(htmlStr);
-                $("#" + containerId).css('display', 'flex');
-                $("#" + containerId).css('align-items', 'center');
+            $("#" + containerId).append(htmlStr);
+            $("#" + containerId).css('display', 'flex');
+            $("#" + containerId).css('align-items', 'center');
 
 
-         }
+        }
     }
 
 
@@ -377,7 +377,7 @@
 
         // table mode button click
         $('#bakeModels').on('click', function (e) {
-             e.stopPropagation();
+            e.stopPropagation();
             // var objSend = {
             //     data: Main.trainData,
             //     selectedRowIds: DataTable.selectedRows
@@ -715,6 +715,7 @@
             .attr('id', function (d, i) {
                 return 'critical_' + i
             })
+            .attr('class', 'critical_cls')
             // .style('background', 'white')
             .style('display', function (d, i) {
                 if (i != 0) return 'flex'
@@ -1533,8 +1534,8 @@
 
             var name = d[Main.entityNameSecondImp]
             // console.log(' name is ', name, name.length)
-            if(name.length>vc){
-                name = name.substring(0,vc) + '...'
+            if (name.length > vc) {
+                name = name.substring(0, vc) + '...'
             }
             d[Main.entityNameSecondImp] = name
         }); // end of data for each
@@ -1905,25 +1906,51 @@
         //adding for freezing top row
 
         $("#tableContent").scroll(function () {
+            return
             var screenTop = $(document).scrollTop();
             var thisTop = $(this).scrollTop();
-            console.log('scrollng noew ', screenTop, thisTop)
+
+            // var wid = $("#critical_2").width();
+
 
             $(this).find('thead').css('position', 'absolute')
-            $(this).find('thead').css('display', 'table')
-            $(this).find('thead').css('top', thisTop-20)
+            // $(this).find('thead').css('width', '1600px')
+            $(this).find('thead').css('display', 'flex')
+            $(this).find('thead').css('top', thisTop - 20)
             $(this).find('thead').closest('tr').css('background', 'white')
-            $(this).find('thead').closest('th').css('z-index', 100)
+            $(this).find('th').css('display', 'table-cell')
+            $(this).find('th').css('width', '400px')
+            // $(this).find('thead').closest('th').css('z-index', 100)
             $(this).find('thead').css('z-index', 100)
 
 
-            //  $(this).find('.filter_tr').css('position', 'absolute')
-            //  $(this).find('.filter_tr').css('display', 'table')
-            //  $(this).find('.filter_tr').css('height', '100px')
-            //  $(this).find('.filter_tr').css('top', thisTop + 50 - 20)
-            //  $(this).find('.filter_tr').closest('tr').css('background', 'white')
-            //  $(this).find('.filter_tr').closest('tr').css('z-index', 100)
-            //  $(this).find('.filter_tr').css('z-index', 100)
+
+            setTimeout(() => {
+                var wid = $("#critical_2").css('width');
+                console.log('scrollng noew ', screenTop, thisTop, wid)
+
+                $('#critical_0').css('width', wid)
+                $('#critical_0').css('display', 'table-cell')
+            }, 0);
+
+
+
+
+            $(this).find('.filter_tr').css('position', 'absolute')
+            $(this).find('.filter_tr').css('display', 'table')
+            $(this).find('.filter_tr').css('height', '100px')
+            $(this).find('.filter_tr').css('top', thisTop + 40 - 20)
+            $(this).find('.filter_tr').closest('tr').css('background', 'white')
+            $(this).find('.filter_tr').find('td').css('width', '100px')
+            $(this).find('.filter_tr').closest('tr').css('z-index', 100)
+            $(this).find('.filter_tr').css('z-index', 100)
+
+            // $('tbody').css('width', '1600px')
+            $('tbody').css('display', 'table')
+            $('td').css('width', '100px')
+            $('td').css('min-width', '100px')
+            $('td').css('display', 'table-cell')
+            $('.critical_cls').css('width', '55px')
 
         });
 
@@ -2177,7 +2204,7 @@
 
         $("#" + containerId).css('display', 'flex')
         $("#" + containerId).css('align-items', 'center')
-        var listOfTagDict = {   
+        var listOfTagDict = {
             'critical-items': true,
             'ignore': true,
             'similar': true,
@@ -2248,8 +2275,11 @@
 
             if (DataTable.tagClickName == elem) {
                 DataTable.tagClicked = false;
+                DataTable.tagClickName = ""
             } else {
                 DataTable.tagClicked = true;
+                DataTable.tagClickName = elem;
+
             }
             if (DataTable.tagClicked) {
                 $(".tagHead").css('border', 'transparent')
@@ -2267,7 +2297,6 @@
                 //train table
                 $("#dataViewAppTable_tableContent").find('tr').show();
             }
-            DataTable.tagClickName = elem;
 
         })
 

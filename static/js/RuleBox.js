@@ -3,36 +3,67 @@
 	Rul = {};
 
 	Rul.ruleData = {}
+	Rul.ruleIndex = 0
+	Rul.setRule = true;
 
 
-	Rul.ruleData = {
-		'rule_1': {
-			'MPG': [32, 90],
-			'Acceleration': [6.5, 8.23],
-			'Weight': [2874, 3585],
-			'Cyinders': [3, 6],
-		},
-
-		'rule_2': {
-			'Acceleration': [2.1, 5.3],
-			'Cyinders': [5, 7],
-		},
-
-
-		'rule_3': {
-			'Weight': [-1, 3402],
-			'MPG': [-1, 38],
-		},
-
-
-	}
 
 	Rul.makeRuleList = function (containerId = "") {
+
+		if (!Rul.setRule) return;
 		if (containerId == "") containerId = "featureEnggPanel"
 		$("#" + containerId).empty();
 
 		var htmlStr = ""
 		// htmlStr += "<div class ='fullRuleAll' >"
+
+		// get the rules 
+		if (ParC.tempDimRules.length > 0) {
+			var dims = ParC.tempDimRules[0]
+			var ext = ParC.tempDimRules[1]
+
+			
+			Rul.ruleData['n_rule_' + Rul.ruleIndex] = {}
+			for (var i = 0; i < dims.length; i++) {
+				ext[i] = ext[i].map(function (e) {
+					console.log('e ', e)
+					return +e.toFixed(2);
+				});
+				Rul.ruleData['n_rule_' + Rul.ruleIndex][dims[i]] = ext[i]
+			}
+			Rul.ruleIndex += 1;
+			Rul.setRule = false;
+			setTimeout(() => {
+				Rul.setRule = true;
+			}, 300);
+		}
+
+
+
+
+
+
+		if (Object.keys(Rul.ruleData).length == 0) {
+			Rul.ruleData = {
+				'rule_1': {
+					'MPG': [32, 90],
+					'Acceleration': [6.5, 8.23],
+					'Weight': [2874, 3585],
+					'Cyinders': [3, 6],
+				},
+
+				'rule_2': {
+					'Acceleration': [2.1, 5.3],
+					'Cyinders': [5, 7],
+				},
+
+
+				'rule_3': {
+					'Weight': [-1, 3402],
+					'MPG': [-1, 38],
+				},
+			}
+		}
 
 		for (var item in Rul.ruleData) {
 			var dataObj = Rul.ruleData[item];
@@ -58,7 +89,7 @@
 
 			}
 			htmlStr += "</div>"
-		htmlStr += "</div>"
+			htmlStr += "</div>"
 
 
 		}
@@ -81,7 +112,7 @@
 		$('.fullRuleAll').css('flex-direction', 'row');
 		$('.fullRuleAll').css('padding', '5px');
 		$('.fullRuleAll').css('margin', '5px');
-		
+
 		$('.ruleName').css('margin-right', '5px');
 		$('.ruleName').css('background', Main.colors.HIGHLIGHT);
 		$('.ruleName').css('border-radius', '3px');
@@ -117,9 +148,9 @@
 			$(this).css('background', 'lightgray')
 		})
 
-			$(".fullRuleAll").on('mouseout', function (e) {
-				$(this).css('background', '')
-			})
+		$(".fullRuleAll").on('mouseout', function (e) {
+			$(this).css('background', '')
+		})
 
 	}
 

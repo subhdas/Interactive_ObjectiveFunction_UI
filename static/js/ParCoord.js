@@ -9,6 +9,8 @@
     ParC.parallelBrushed = false;
     ParC.dataImpactContainer = 'tableContent'
 
+    ParC.tempDimRules = []
+
     ParC.addIconsFeatureEditor = function (containerId = "") {
         if (containerId == "") containerId = "featureEngHeaderId";
         $("#" + containerId).empty();
@@ -58,6 +60,8 @@
             $('.tagContainer').show();
             ParC.featureEditorCreate();
             ParC.parallelBrushed = false;
+            ParC.tempDimRules = []
+
 
         })
 
@@ -519,7 +523,15 @@
                 extents = actives.map(function (p) {
                     return y[p].brush.extent();
                 });
-            // console.log('active found ', actives)
+            console.log('active found ', actives, extents)
+
+
+
+
+            ParC.tempDimRules = []
+            ParC.tempDimRules.push(actives)
+            ParC.tempDimRules.push(extents)
+
             foreground.style("display", function (d, k) {
 
                 // // if(k==0) ParC.filteredData = [];

@@ -376,7 +376,7 @@
             // return
             var name = $(this).attr('given');
             var item = $(this).attr('parent');
-            console.log('clicked checkbox ', name, item);
+            // console.log('clicked checkbox ', name, item);
             //COMMENTED BELOW
             // if (!DataTable.fromTableInferred) Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
             if (Cons.cnsBtnMouseEvent) {
@@ -429,6 +429,9 @@
             setTimeout(() => {
                 ConsInt.getActiveConstraints();
             }, 300);
+
+            Rul.makeRuleList();
+
             // ConsInt.makeInteractionPanel();
         })
 
