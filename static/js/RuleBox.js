@@ -314,6 +314,12 @@
 
 		$(".fullRuleAll").on('mouseover', function (e) {
 			$(this).css('background', 'lightgray');
+
+
+			var nam = $(this).attr('parent');
+			var rowIdList = DataTable.tagNameDataId[nam];
+			StarM.showOnlyRows(rowIdList,nam);
+
 			// var self = this;
 			// var htmlStr = "<div class= 'closeBtnRules'>";
 			// htmlStr += "<button id='closeBtnRuleId' title='Remove Rule' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored' >"
@@ -353,6 +359,7 @@
 		$(".fullRuleAll").on('mouseout', function (e) {
 			$(this).css('background', '')
 			$('.closeBtnRules').remove();
+			StarM.showAllRows();
 		})
 
 		$(".fullRuleAll").on('click', function (e) {

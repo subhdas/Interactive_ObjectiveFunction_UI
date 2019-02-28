@@ -523,7 +523,7 @@
                 extents = actives.map(function (p) {
                     return y[p].brush.extent();
                 });
-            console.log('active found ', actives, extents)
+            // console.log('active found ', actives, extents)
             // Rul.brushPast = true;
             // setTimeout(() => {
             //     Rul.brushPast = false;
