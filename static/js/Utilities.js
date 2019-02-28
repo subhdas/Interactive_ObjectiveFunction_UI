@@ -19,6 +19,12 @@
         return 'rgba(214, 39, 40, ' + opacity + ')';
     }
 
+    Util.arrayDiff = function (a,b) {
+        return b.filter(function (i) {
+            return a.indexOf(i) < 0;
+        });
+    };
+
 
    Util.deepCopyData = function (dataGiven) {
         //copy an origData oc

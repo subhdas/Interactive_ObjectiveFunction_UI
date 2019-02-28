@@ -221,7 +221,7 @@
         DataTable.switchToLeftData();
         ParC.featureEditorCreate();
         DataTable.makeTable(Main.trainData);
-        DataTable.makeTags();
+        // DataTable.makeTags();
         
         DataTable.extraContent = false;
         DataTable.makeTable(Main.testData, "tableContentTest");

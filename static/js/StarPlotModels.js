@@ -218,13 +218,17 @@
             $("#starPlotContentId").hide()
             // $("#starPlotModelId").show()
             $("#modelOutDivId").show()
+            $('.modelNameHead').show();
+
         } else {
             $(".modelOutputText").text('Constraint List View')
 
             $("#starPlotContentId").show()
             // $("#starPlotModelId").hide()
             $("#modelOutDivId").hide()
+            StarM.addConstraintsTable();
 
+            $('.modelNameHead').hide();
         }
     }
 
@@ -233,7 +237,7 @@
         if (containerId == "") containerId = "starPlotHeaderId";
         $("#" + containerId).empty();
 
-        var htmlStr = "<div class = 'starPlotHeadTitle' id='starPlotHeadTitleId' > <pan class = 'modelOutputText'> Model Output Panel </span> </div>";
+        var htmlStr = "<div class = 'starPlotHeadTitle' id='starPlotHeadTitleId' > <span class = 'modelOutputText'> Model Output Panel </span> </div>";
         htmlStr += "<div class = 'starPlotHeadButton' ></div>";
 
         $("#" + containerId).append(htmlStr);
@@ -275,12 +279,15 @@
         if (containerId == "") containerId = "modelExplorePanel"
         $("#" + containerId).empty();
 
-
+        $('#'+containerId).css('border-left', '1px solid lightgray')
         //make icon panel 
         var htmlStr = "<div class = 'starPlotHeader' id = 'starPlotHeaderId' ></div>";
         htmlStr += "<div class = 'starPlotContent' id = 'starPlotContentId' ></div>";
         $("#" + containerId).append(htmlStr);
 
+        // var ht = $('.constraintContent').height();
+        var ht = 275;
+        console.log('height found ', ht)
         // css styling
         $('.starPlotHeader').css('display', 'flex');
         $('.starPlotHeader').css('padding', '3px');
@@ -293,9 +300,10 @@
         $('.starPlotContent').css('padding', '4px');
         $('.starPlotContent').css('margin', '5px');
         $('.starPlotContent').css('width', '100%');
-        $('.starPlotContent').css('height', '100%');
+        $('.starPlotContent').css('height', ht);
 
         StarM.addIconsStarPlot('starPlotHeaderId');
+        $('.starPlotContent').hide();
 
 
         // make the svg
@@ -405,6 +413,7 @@
         $(".featExplain").css('line-height', '20px')
 
         $(".featName").css('background', Main.colors.HIGHLIGHT2)
+        $(".featName").css('color', 'white')
         $(".featName").css('padding', '4px')
         $(".featName").css('margin', '4px')
 
@@ -423,6 +432,7 @@
         htmlStr += "<div class = 'consTableDiv'>"
         for (var item in ConsInt.activeConstraints) {
             var arrDict = ConsInt.activeConstraints[item]['input'];
+            var name = ConsInt.activeConstraints[item]['usedName'];
             var arrId = [];
             for (var el in arrDict) {
                 arrId.push.apply(arrId, arrDict[el])
@@ -441,7 +451,7 @@
                     htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + i + " parent = " + result + ">"
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem' parent = '" + dataItem[Main.entityNameSecondImp] + "'>" + nameItem + "</span>";
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
-                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + item + "</span>";
+                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + name + "</span>";
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";
                     htmlStr += "</div>"
                 } // end of inner for

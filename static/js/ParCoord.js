@@ -35,7 +35,7 @@
 
 
         htmlStr = "<button id='resetDataBtnId' class='resetDataBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-        htmlStr += "<i class='material-icons'>keyboard_return</i></button>";
+        htmlStr += "<i class='material-icons'>settings_backup_restore</i></button>";
 
         $(".featureHeadButton").append(htmlStr);
 
@@ -507,7 +507,7 @@
                 return [position(p), y[p](d[p])];
             }));
         }
-        
+
         function brushstart() {
             d3.event.sourceEvent.stopPropagation();
         }
@@ -524,7 +524,10 @@
                     return y[p].brush.extent();
                 });
             console.log('active found ', actives, extents)
-
+            // Rul.brushPast = true;
+            // setTimeout(() => {
+            //     Rul.brushPast = false;
+            // }, 12000);
 
 
 

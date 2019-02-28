@@ -40,6 +40,7 @@
     DataTable.tagClicked = false;
     DataTable.tagClickName = ""
     DataTable.tagNameDataId = {}
+    DataTable.latestTag = ""
 
     DataTable.findLabelAcc = function (labelTar, labelPre, type = 'train', index = -1) {
 
@@ -997,7 +998,7 @@
                 $("#" + idBtn2).click();
             }, 100);
 
-            Rul.makeRuleList('', 'critical_All');
+            // Rul.makeRuleList('', 'critical_All');
             DataTable.makeTags();
         }) // end of rect dict
 
@@ -2193,6 +2194,13 @@
         if (DataTable.userWastefulItems.length > 0) {
             tagDict['wasteful'] = DataTable.userWastefulItems;
         }
+
+
+        // find latest tag
+        var keyAlready = Object.keys(DataTable.tagNameDataId)
+        var keyNew = Object.keys(tagDict);
+
+        DataTable.latestTag = Util.arrayDiff(keyAlready,keyNew);
         DataTable.tagNameDataId = tagDict;
     }
 
@@ -2297,11 +2305,10 @@
                 //train table
                 $("#dataViewAppTable_tableContent").find('tr').show();
             }
-
         })
 
         StarM.addConstraintsTable();
-
+        Rul.makeRuleList();
     }
 
 }());

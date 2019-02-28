@@ -115,7 +115,7 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     padding: 5px;
-    border-left: 1px solid lightgray;
+    /* border-left: 1px solid lightgray; */
 
     /* margin: 5px;
   border-radius: 5px; */
