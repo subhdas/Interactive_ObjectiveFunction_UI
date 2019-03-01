@@ -431,6 +431,7 @@
         $('.rowConstTable').show();
         $('.rowConstTable').each(function (d) {
             var id = $(this).attr('parent');
+            console.log('getting id ', id, $(this))
             var name = $(this).attr('given');
             if (idList.indexOf(id) == -1 && name != type) {
                 $(this).hide();
@@ -476,10 +477,11 @@
         } // end of outer for
 
 
-        //adding informative samples and wasteful samples
+        //adding informative samples
         if (DataTable.userInformativeItems.length > 0) {
             // htmlStr += "<div class = 'consTableDiv'>"
-            var par = 'informative';
+            var par = 'I'; //informative
+            var name = 'informative'
             var arrId = DataTable.userInformativeItems;
             for (var i = 0; i < arrId.length; i++) {
                 var dataItem = Main.getDataById(arrId[i], Main.trainData);
@@ -497,10 +499,12 @@
                 htmlStr += "</div>"
             } // end of inner for
         }
-
+        //adding wasteful samples
         if (DataTable.userWastefulItems.length > 0) {
             // htmlStr += "<div class = 'consTableDiv'>"
-            var par = 'wasteful';
+            var par = 'W'; //wasteful
+            var name = 'wasteful'
+
             var arrId = DataTable.userWastefulItems;
             for (var i = 0; i < arrId.length; i++) {
                 var dataItem = Main.getDataById(arrId[i], Main.trainData);

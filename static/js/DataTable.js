@@ -221,7 +221,7 @@
             if (DataTable.splitView) {
                 //two tables showing
                 $('#trainContent').css('height', '85%') // 50%
-                $('#testContent').css('height', '15%')  // 50%
+                $('#testContent').css('height', '15%') // 50%
 
             } else {
                 //only one showing
@@ -867,6 +867,8 @@
                 $(this).html(htmlStr);
                 $('.btnTableAddOn').css('width', '100%')
                 $('.btnTableAddOn').css('height', '100%')
+                DataTable.tempLatestTag = 'Critical'
+
             } else if (val == 'yes') {
                 DataTable.criticalInteractAll[id] = 'no'
                 // $(this).css('background', Main.colors.HIGHLIGHT2);
@@ -876,6 +878,8 @@
                 $(this).html(htmlStr);
                 $('.btnTableAddOn').css('width', '100%')
                 $('.btnTableAddOn').css('height', '100%')
+                DataTable.tempLatestTag = 'Ignore'
+
             } else {
                 DataTable.criticalInteractAll[id] = '-'
                 // $(this).css('background', 'lightgray');
@@ -935,7 +939,6 @@
                 Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false; //false
                 DataTable.criticalClicked = true;
             }
-
             var critIdList = [];
             var critIdList2 = [];
             // $("#dataViewAppTable_" + cont)
@@ -1034,6 +1037,8 @@
                 $(this).html(htmlStr);
                 $('.btnTableAddOn').css('width', '100%')
                 $('.btnTableAddOn').css('height', '100%')
+                DataTable.tempLatestTag = 'informative'
+
             } else if (val == 'yes') {
                 DataTable.inforInteractaLL[id] = 'no'
                 // $(this).css('background', Main.colors.HIGHLIGHT2);
@@ -1042,6 +1047,8 @@
                 $(this).html(htmlStr);
                 $('.btnTableAddOn').css('width', '100%')
                 $('.btnTableAddOn').css('height', '100%')
+                DataTable.tempLatestTag = 'wasteful'
+
             } else {
                 DataTable.inforInteractaLL[id] = '-'
                 // $(this).css('background', 'lightgray');
@@ -1114,8 +1121,6 @@
             DataTable.userWastefulItems = critIdWasteList;
 
             DataTable.makeTags();
-
-
         }) // end of inforectall
 
 
@@ -1149,6 +1154,8 @@
                 $(this).html(htmlStr);
                 $('.btnTableAddOn').css('width', '100%')
                 $('.btnTableAddOn').css('height', '100%')
+                DataTable.tempLatestTag = 'Critical'
+
 
                 // $(this).parent().prepend(htmlStr);
                 // $(this).remove()
@@ -1160,6 +1167,8 @@
                 $(this).html(htmlStr)
                 $('.btnTableAddOn').css('width', '100%')
                 $('.btnTableAddOn').css('height', '100%')
+                DataTable.tempLatestTag = 'Ignore'
+
             } else {
                 DataTable.criticalInteract[id] = '-'
                 // $(this).css('background', 'lightgray');
@@ -1270,6 +1279,8 @@
                 $(this).html(htmlStr);
                 $('.btnTableAddOn').css('width', '100%')
                 $('.btnTableAddOn').css('height', '100%')
+                DataTable.tempLatestTag = 'informative'
+
             } else if (val == 'yes') {
                 DataTable.inforInteract[id] = 'no'
                 // $(this).css('background', Main.colors.HIGHLIGHT2);
@@ -1278,6 +1289,8 @@
                 $(this).html(htmlStr);
                 $('.btnTableAddOn').css('width', '100%')
                 $('.btnTableAddOn').css('height', '100%')
+                DataTable.tempLatestTag = 'wasteful'
+
             } else {
                 DataTable.inforInteract[id] = '-'
                 // $(this).css('background', 'lightgray');
@@ -2213,7 +2226,12 @@
         var keyAlready = Object.keys(DataTable.tagNameDataId)
         var keyNew = Object.keys(tagDict);
 
-        DataTable.latestTag = Util.arrayDiff(keyAlready,keyNew);
+        DataTable.latestTag = Util.arrayDiff(keyAlready, keyNew);
+
+        if(DataTable.latestTag.length == 0){
+            DataTable.latestTag.push(DataTable.tempLatestTag)
+        }
+
         DataTable.tagNameDataId = tagDict;
     }
 
