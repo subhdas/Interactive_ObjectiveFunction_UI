@@ -238,22 +238,15 @@
 				idNum = Util.getNumberFromText(idNum)
 				// console.log(' getting the parent ', idNum, i, type)
 				// var idList = DataTable.findLabelAcc(labelsData[i], labelsData[idNum])
-
-
 				if (type == 'train') {
 					if (!ConfM.cellClickedTrain) {
 						// var idList = BarM.modelData[0]['predictions']
 						// 	['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
-
-
 						var idList = BarM.allModelData[BarM.selectedModelId]
 							['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
 						DataTable.hideRowsById(idList, 'train');
-						Scat.hideSelectedCircle(idList);
+						if (!Main.tabelViewMode) Scat.hideSelectedCircle(idList);
 					}
-
-
-
 				} else {
 					//test
 					if (!ConfM.cellClickedTest) {
@@ -266,7 +259,6 @@
 				}
 				// var idList = DataTable.findLabelAcc(labelsData[idNum] , labelsData[i])
 				// console.log(' getting the parent ', labelsData[idNum], labelsData[i], idList)
-
 			})
 			.on('mouseout', function (d, i) {
 				$(this).css('stroke', ConfM.cellStroke);
@@ -275,8 +267,7 @@
 				if (type == 'train') {
 					if (!ConfM.cellClickedTrain) {
 						$("#dataViewAppTable_tableContent").find('tr').show();
-						Scat.showAllCircle();
-
+						if (!Main.tabelViewMode) Scat.showAllCircle();
 					}
 				} else {
 					if (!ConfM.cellClickedTest) {

@@ -279,7 +279,7 @@
         if (containerId == "") containerId = "modelExplorePanel"
         $("#" + containerId).empty();
 
-        $('#'+containerId).css('border-left', '1px solid lightgray')
+        $('#' + containerId).css('border-left', '1px solid lightgray')
         //make icon panel 
         var htmlStr = "<div class = 'starPlotHeader' id = 'starPlotHeaderId' ></div>";
         htmlStr += "<div class = 'starPlotContent' id = 'starPlotContentId' ></div>";
@@ -323,7 +323,7 @@
             .attr('id', 'starPlotModelId')
             .attr('width', cfg.w + 80)
             // .attr('width', cfg.w + cfg.w + 50)
-            .attr('height', cfg.h + cfg.h /20);
+            .attr('height', cfg.h + cfg.h / 20);
         svg.append('g').classed('single', 1).datum(StarM.getRandomData()).call(chart);
 
 
@@ -375,7 +375,7 @@
 
 
     StarM.addfeatureResults = function (containerId = "", index = 0) {
-        if (containerId == "") containerId = "modelOutDivId"//        "modelExplorePanel"
+        if (containerId == "") containerId = "modelOutDivId" //        "modelExplorePanel"
         $(".featExplain").remove()
         try {
             var featImpDict = BarM.allModelData[index]['feat_imp_dict'];
@@ -422,17 +422,17 @@
     }
 
 
-    StarM.showAllRows = function(){
+    StarM.showAllRows = function () {
         $('.rowConstTable').show();
-        
+
     }
 
-    StarM.showOnlyRows = function(idList,type ){
+    StarM.showOnlyRows = function (idList, type) {
         $('.rowConstTable').show();
-        $('.rowConstTable').each(function(d){
+        $('.rowConstTable').each(function (d) {
             var id = $(this).attr('parent');
             var name = $(this).attr('given');
-            if(idList.indexOf(id) == -1 && name != type){
+            if (idList.indexOf(id) == -1 && name != type) {
                 $(this).hide();
             }
         })
@@ -465,7 +465,7 @@
                     var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
                     var splClass = 'rowConstTableCol_' + result;
                     StarM.constraintsDict[i] = true;
-                    htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + + " parent = " + dataItem['id'] +  " given = "+name+">"
+                    htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + +" parent = " + dataItem['id'] + " given = " + name + ">"
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem' parent = '" + dataItem[Main.entityNameSecondImp] + "'>" + nameItem + "</span>";
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + name + "</span>";
@@ -474,6 +474,51 @@
                 } // end of inner for
             }
         } // end of outer for
+
+
+        //adding informative samples and wasteful samples
+        if (DataTable.userInformativeItems.length > 0) {
+            // htmlStr += "<div class = 'consTableDiv'>"
+            var par = 'informative';
+            var arrId = DataTable.userInformativeItems;
+            for (var i = 0; i < arrId.length; i++) {
+                var dataItem = Main.getDataById(arrId[i], Main.trainData);
+                var nameItem = dataItem[Main.entityNameSecondImp];
+                var fullNameItem = dataItem[Main.entityNameSecondImp];
+                if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
+                var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
+                var splClass = 'rowConstTableCol_' + result;
+                StarM.constraintsDict[i] = true;
+                htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + +" parent = " + dataItem['id'] + " given = " + name + ">"
+                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem' parent = '" + dataItem[Main.entityNameSecondImp] + "'>" + nameItem + "</span>";
+                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
+                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + name + "</span>";
+                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";
+                htmlStr += "</div>"
+            } // end of inner for
+        }
+
+        if (DataTable.userWastefulItems.length > 0) {
+            // htmlStr += "<div class = 'consTableDiv'>"
+            var par = 'wasteful';
+            var arrId = DataTable.userWastefulItems;
+            for (var i = 0; i < arrId.length; i++) {
+                var dataItem = Main.getDataById(arrId[i], Main.trainData);
+                var nameItem = dataItem[Main.entityNameSecondImp];
+                var fullNameItem = dataItem[Main.entityNameSecondImp];
+                if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
+                var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
+                var splClass = 'rowConstTableCol_' + result;
+                StarM.constraintsDict[i] = true;
+                htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + +" parent = " + dataItem['id'] + " given = " + name + ">"
+                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem' parent = '" + dataItem[Main.entityNameSecondImp] + "'>" + nameItem + "</span>";
+                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
+                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + name + "</span>";
+                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";
+                htmlStr += "</div>"
+            } // end of inner for
+        }
+
         htmlStr += "</div>"
         $("#" + containerId).append(htmlStr)
 

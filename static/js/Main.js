@@ -50,7 +50,7 @@
     stores system variables
     */
     Main.commonVars = {
-        DEBUG: true,
+        DEBUG: false,
     }
 
 

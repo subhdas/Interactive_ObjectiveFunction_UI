@@ -217,50 +217,63 @@
                 $('#trainContent').css('height', '100%')
                 $('#testContent').css('height', '0%')
             }
-            // if (DataTable.splitView) {
-            //     //two tables showing
-            //       if (id == 0) {
-            //           //train
-            //           $('#trainContent').css('height', '0%')
-            //           $('#testContent').css('height', '100%')
-            //       } else {
-            //           $('#trainContent').css('height', '100%')
-            //           $('#testContent').css('height', '0%')
-            //       }
-
-            // } else {
-            //     //only one showing
-            //     if (id == 0) {
-            //         //train
-            //         $('#trainContent').css('height', '100%')
-            //         $('#testContent').css('height', '0%')
-            //     } else {
-            //         $('#trainContent').css('height', '0%')
-            //         $('#testContent').css('height', '100%')
-            //     }
-            // }
         } else {
             if (DataTable.splitView) {
                 //two tables showing
-                $('#trainContent').css('height', '50%')
-                $('#testContent').css('height', '50%')
+                $('#trainContent').css('height', '85%') // 50%
+                $('#testContent').css('height', '15%')  // 50%
 
             } else {
                 //only one showing
                 if (id == 0) {
                     //train
-                    $('#trainContent').css('height', '100%')
-                    $('#testContent').css('height', '0%')
+                    $('#trainContent').css('height', '100%');
+                    $('#testContent').css('height', '0%');
                 } else {
-                    $("#tableHeadDivTrain").hide()
+                    $("#tableHeadDivTrain").hide();
                     $('#trainContent').css('height', '0%')
                     $('#testContent').css('height', '100%')
                 }
             }
         }
-
-
     }
+
+
+    // DataTable.toggleTableContentViews = function (id = 0) {
+    //     $("#tableHeadDivTrain").show()
+    //     //id=0, train table , elese test table
+    //     DataTable.splitView = !DataTable.splitView;
+    //     if (Cons.accordionOpen) {
+
+    //         if (id == 0) {
+    //             //train
+    //             $("#tableHeadDivTrain").hide()
+    //             $('#trainContent').css('height', '0%')
+    //             $('#testContent').css('height', '100%')
+    //         } else {
+    //             $('#trainContent').css('height', '100%')
+    //             $('#testContent').css('height', '0%')
+    //         }
+    //     } else {
+    //         if (DataTable.splitView) {
+    //             //two tables showing
+    //             $('#trainContent').css('height', '50%')
+    //             $('#testContent').css('height', '50%')
+
+    //         } else {
+    //             //only one showing
+    //             if (id == 0) {
+    //                 //train
+    //                 $('#trainContent').css('height', '100%')
+    //                 $('#testContent').css('height', '0%')
+    //             } else {
+    //                 $("#tableHeadDivTrain").hide()
+    //                 $('#trainContent').css('height', '0%')
+    //                 $('#testContent').css('height', '100%')
+    //             }
+    //         }
+    //     }
+    // }
 
     DataTable.addBtnTestTable = function (containerId = "") {
         if (containerId == "") {

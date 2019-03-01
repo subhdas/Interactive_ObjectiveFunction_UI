@@ -138,9 +138,13 @@ body {
 .wrapAllTables {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 50%;
+    width: 100%; 
+    height: 85%;/*100%*/
     margin: 10px;
+}
+
+.wrapAllTablesTest{
+    height: 15%;
 }
 
 #bothTables {
@@ -156,7 +160,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 35 %;
+    width: 35%;
     /* overflow-Y : auto; */
 }
 
