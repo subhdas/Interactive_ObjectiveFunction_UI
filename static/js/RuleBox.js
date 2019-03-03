@@ -6,6 +6,8 @@
 	Rul.ruleIndex = 0
 	Rul.setRule = true;
 	Rul.brushPast = false;
+	Rul.tempRuleName = [];
+	Rul.tempRuleMapping = {}
 
 	Rul.addIcons = function(containerId = ''){
 		 if (containerId == "") containerId = "ruleHeaderId";
@@ -174,7 +176,6 @@
 					Rul.setRule = true;
 				}, 300);
 			}
-
 		}
 
 
@@ -233,11 +234,14 @@
 
 		var keysTags = Object.keys(DataTable.tagNameDataId);
 
+		keysTags.push.apply(keysTags,Rul.tempRuleName)
+		console.log(' key tags are ', keysTags)
+		var ind = 0;
 		for (var item in Rul.ruleData) {
 			if(keysTags.indexOf(item) == -1) continue; // might need to remoe for custom naming
 			var dataObj = Rul.ruleData[item];
 			htmlStr += "<div class ='fullRuleAll' parent = "+item+" >"
-			htmlStr += "<div class ='ruleName' >" + item + "</div>"
+			htmlStr += "<div class ='ruleName' contenteditable=" + true + " parent=" + item + "  given=" + item + " id='ruleNameId_" + ind + "' >" + item + "</div>"
 			htmlStr += "<div class ='ruleOneSet' >"
 
 			for (var el in dataObj) {
@@ -259,7 +263,7 @@
 			}
 			htmlStr += "</div>"
 			htmlStr += "</div>"
-
+			ind += 1;
 
 		}
 
@@ -287,7 +291,8 @@
 		$('.ruleName').css('border-radius', '3px');
 		$('.ruleName').css('color', 'white');
 		$('.ruleName').css('padding', '4px');
-		$('.ruleName').css('height', '25px');
+		$('.ruleName').css('height', '50px');
+		$('.ruleName').css('width', '75px');
 
 		$('.ruleOneSet').css('display', 'flex');
 		$('.ruleOneSet').css('flex-direction', 'column');
@@ -316,12 +321,42 @@
 		$('.ruleItems').css('font-weight', 'bold')
 		$('.ruleItems').css('font-size', '1.3em')
 
-		$(".fullRuleAll").on('mouseover', function (e) {
+
+
+		$(".ruleName").on('keyup', function(e){
+			var origTxt = $(this).attr('parent');
+			var txt = $(this).text();
+			console.log(' txt found on change ', origTxt, txt)
+
+			var ob = Rul.ruleData[origTxt];
+			delete Rul.ruleData[origTxt];
+			Rul.ruleData[txt] = ob;
+
+			$(this).attr('parent', txt)
+			var id =$(this).attr('id')
+			setTimeout(() => {
+				var newtxt = $("#" + id).text()
+				Rul.tempRuleMapping[newtxt] = $("#" + id).attr('given')
+				Rul.tempRuleName.push(newtxt)
+				Rul.tempRuleName = Util.getUniqueArray(Rul.tempRuleName);
+			}, 3000);
+		})
+
+		var selector = ".fullRuleAll"
+		var selector = ".ruleOneSet"
+
+		$(selector).on('mouseover', function (e) {
 			$(this).css('background', 'lightgray');
 
 
-			var nam = $(this).attr('parent');
+			// var nam = $(this).attr('parent');
+			var nam = $(this).parent().attr('parent');
+			console.log(' found naming in parent ', nam, DataTable.tagNameDataId)
 			var rowIdList = DataTable.tagNameDataId[nam];
+			if(typeof rowIdList == 'undefined'){
+				nam = Rul.tempRuleMapping[nam];
+				rowIdList = DataTable.tagNameDataId[nam];
+			}
 			StarM.showOnlyRows(rowIdList,nam);
 
 			// var self = this;
@@ -360,16 +395,19 @@
 
 		})
 
-		$(".fullRuleAll").on('mouseout', function (e) {
+		$(selector).on('mouseout', function (e) {
 			$(this).css('background', '')
 			$('.closeBtnRules').remove();
 			StarM.showAllRows();
 		})
 
-		$(".fullRuleAll").on('click', function (e) {
-			$(this).remove();
-			var nam = $(this).attr('parent')
+		$(selector).on('click', function (e) {
+			// var nam = $(this).attr('parent');
+			var nam = $(this).parent().attr('parent');
+			console.log('removing name ', nam)
 			delete Rul.ruleData[nam]
+			$(this).parent().remove();
+
 		})
 
 	}
