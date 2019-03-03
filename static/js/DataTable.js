@@ -2228,7 +2228,7 @@
 
         DataTable.latestTag = Util.arrayDiff(keyAlready, keyNew);
 
-        if(DataTable.latestTag.length == 0){
+        if (DataTable.latestTag.length == 0) {
             DataTable.latestTag.push(DataTable.tempLatestTag)
         }
 
@@ -2339,7 +2339,9 @@
         })
 
         StarM.addConstraintsTable();
-        Rul.makeRuleList();
+        setTimeout(() => {
+            Rul.makeRuleList();
+        }, 400);
     }
 
 }());

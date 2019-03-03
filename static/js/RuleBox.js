@@ -230,7 +230,11 @@
 		// 	}
 		// }
 
+
+		var keysTags = Object.keys(DataTable.tagNameDataId);
+
 		for (var item in Rul.ruleData) {
+			if(keysTags.indexOf(item) == -1) continue; // might need to remoe for custom naming
 			var dataObj = Rul.ruleData[item];
 			htmlStr += "<div class ='fullRuleAll' parent = "+item+" >"
 			htmlStr += "<div class ='ruleName' >" + item + "</div>"

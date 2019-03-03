@@ -431,7 +431,7 @@
         $('.rowConstTable').show();
         $('.rowConstTable').each(function (d) {
             var id = $(this).attr('parent');
-            console.log('getting id ', id, $(this))
+            console.log('getting id ', id, idList);
             var name = $(this).attr('given');
             if (idList.indexOf(id) == -1 && name != type) {
                 $(this).hide();
@@ -466,7 +466,7 @@
                     var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
                     var splClass = 'rowConstTableCol_' + result;
                     StarM.constraintsDict[i] = true;
-                    htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + +" parent = " + dataItem['id'] + " given = " + name + ">"
+                    htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + " parent = " + dataItem['id'] + " given = " + name + ">"
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem' parent = '" + dataItem[Main.entityNameSecondImp] + "'>" + nameItem + "</span>";
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + name + "</span>";
@@ -491,7 +491,7 @@
                 var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
                 var splClass = 'rowConstTableCol_' + result;
                 StarM.constraintsDict[i] = true;
-                htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + +" parent = " + dataItem['id'] + " given = " + name + ">"
+                htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + " parent = " + dataItem['id'] + " given = " + name + ">"
                 htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem' parent = '" + dataItem[Main.entityNameSecondImp] + "'>" + nameItem + "</span>";
                 htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
                 htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + name + "</span>";
@@ -514,7 +514,7 @@
                 var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
                 var splClass = 'rowConstTableCol_' + result;
                 StarM.constraintsDict[i] = true;
-                htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + +" parent = " + dataItem['id'] + " given = " + name + ">"
+                htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + " parent = " + dataItem['id'] + " given = " + name + ">"
                 htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem' parent = '" + dataItem[Main.entityNameSecondImp] + "'>" + nameItem + "</span>";
                 htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
                 htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + name + "</span>";
