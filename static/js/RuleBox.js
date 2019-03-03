@@ -331,7 +331,11 @@
 
 		$(".ruleName").on('keyup', function (e) {
 			var origTxt = $(this).attr('parent');
+			// $(this).text().replace(/\s/g, "");
 			var txt = $(this).text();
+			txt = txt.replace(/\s/g, "");
+			// $(this).text(txt)
+
 			console.log(' txt found on change ', origTxt, txt)
 
 			var ob = Rul.ruleData[origTxt];
@@ -341,10 +345,12 @@
 			$(this).attr('parent', txt)
 			var id = $(this).attr('id')
 			setTimeout(() => {
+				// $(this).text(txt)
 				var newtxt = $("#" + id).text();
 				var origTxt = $("#" + id).attr('given')
-				Rul.tempRuleMapping[newtxt] = origTxt
-				Rul.tempRuleName.push(newtxt)
+				newtxt = txt
+				Rul.tempRuleMapping[newtxt] = origTxt // newtxt
+				Rul.tempRuleName.push(newtxt) // newtxt
 				Rul.tempRuleName = Util.getUniqueArray(Rul.tempRuleName);
 				Rul.tempTagNameDataId[newtxt] = DataTable.tagNameDataId[origTxt].slice()
 			}, 3000);

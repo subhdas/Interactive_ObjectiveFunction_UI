@@ -1796,6 +1796,7 @@
                     $(this).css('color', 'white');
                     ConP.selectedRowsCons[idNum] = true;
                     console.log(' was not there before ', idNum, ConP.selectedRowsCons, back)
+                    DataTable.tempLatestTag = valueSelect;
                 } else {
                     $(this).css('background', "rgb(255,255,255)");
                     console.log("removing colors")
@@ -1817,6 +1818,8 @@
 
                 //Same label
                 if (valueSelect == 'Same-Label') {
+
+                    DataTable.tempLatestTag = 'Candidate'
                     Cons.typeConstraints['COMPOSITIONAL'][valueSelect]['Checked'] = true;
                     ConsInt.getActiveConstraints();
                     var arr = ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame];
@@ -1856,6 +1859,9 @@
                 }
 
                 if (valueSelect == 'Similarity-Metric') {
+
+                    DataTable.tempLatestTag = 'Similarity'
+
                     // $("._mainContentMid").empty();
                     Cons.typeConstraints['COMPOSITIONAL'][valueSelect]['Checked'] = true;
                     ConsInt.getActiveConstraints();
