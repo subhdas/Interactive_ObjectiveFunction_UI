@@ -8,39 +8,35 @@
 	Rul.brushPast = false;
 	Rul.tempRuleName = [];
 	Rul.tempRuleMapping = {}
+	Rul.tempTagNameDataId = {}
 
-	Rul.addIcons = function(containerId = ''){
-		 if (containerId == "") containerId = "ruleHeaderId";
-		 $("#" + containerId).empty();
+	Rul.addIcons = function (containerId = '') {
+		if (containerId == "") containerId = "ruleHeaderId";
+		$("#" + containerId).empty();
 
-		 var htmlStr = "<div class = 'ruleHeadTitle' > Rule Panel </div>";
-		 htmlStr += "<div class = 'ruleHeadButton' ></div>";
+		var htmlStr = "<div class = 'ruleHeadTitle' > Rule Panel </div>";
+		htmlStr += "<div class = 'ruleHeadButton' ></div>";
 
-		 $("#" + containerId).append(htmlStr);
+		$("#" + containerId).append(htmlStr);
 
-		 $(".ruleHeadTitle").css('width', '100%')
-		 $(".ruleHeadTitle").css('font-size', '1.5em')
+		$(".ruleHeadTitle").css('width', '100%')
+		$(".ruleHeadTitle").css('font-size', '1.5em')
 
+		htmlStr = "<button id='resetRuleDataBtnId' class='resetRuleDataBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+		htmlStr += "<i class='material-icons'>settings_backup_restore</i></button>";
 
+		$(".ruleHeadButton").append(htmlStr);
 
+		$(".ruleHeadButton").css('display', 'flex')
+		$(".ruleHeadButton").css('padding', '10px')
+		$(".ruleHeadButton").css('align-items', 'center')
+		$(".ruleHeadButton").css('justify-content', 'center')
+		$(".ruleHeadButton").css('height', '20px')
 
-		 htmlStr = "<button id='resetRuleDataBtnId' class='resetRuleDataBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-		 htmlStr += "<i class='material-icons'>settings_backup_restore</i></button>";
+		//click reset data button
+		$("#resetRuleDataBtnId").on('click', function () {
 
-		 $(".ruleHeadButton").append(htmlStr);
-
-		 $(".ruleHeadButton").css('display', 'flex')
-		 $(".ruleHeadButton").css('padding', '10px')
-		 $(".ruleHeadButton").css('align-items', 'center')
-		 $(".ruleHeadButton").css('justify-content', 'center')
-		 $(".ruleHeadButton").css('height', '20px')
-
-
-		 //click reset data button
-		 $("#resetRuleDataBtnId").on('click', function () {
-
-
-		 })
+		})
 
 	}
 
@@ -54,26 +50,31 @@
 
 
 
-		     var htmlStr = "<div class = 'ruleHeader' id = 'ruleHeaderId' ></div>";
-		     htmlStr += "<div class = 'ruleContent' id = 'ruleContentId' ></div>";
-		     $("#" + containerId).append(htmlStr);
+		var htmlStr = "<div class = 'ruleHeader' id = 'ruleHeaderId' ></div>";
+		htmlStr += "<div class = 'ruleContent' id = 'ruleContentId' ></div>";
+		$("#" + containerId).append(htmlStr);
 
-		     // css styling
-		     $('.ruleHeader').css('display', 'flex');
-		     $('.ruleHeader').css('padding', '3px');
-		     // $('.featureEngHeader').css('margin', '5px');
-		     $('.ruleHeader').css('width', '100%');
-		     $('.ruleHeader').css('height', '35px');
-		     $('.ruleHeader').css('border-bottom', '1px dotted lightgray');
+		// css styling
+		$('.ruleHeader').css('display', 'flex');
+		$('.ruleHeader').css('padding', '3px');
+		// $('.featureEngHeader').css('margin', '5px');
+		$('.ruleHeader').css('width', '100%');
+		$('.ruleHeader').css('height', '35px');
+		$('.ruleHeader').css('border-bottom', '1px dotted lightgray');
 
-		     $('.ruleContent').css('display', 'flex');
-		     $('.ruleContent').css('padding', '4px');
-		     $('.ruleContent').css('margin', '5px');
-		     $('.ruleContent').css('width', '100%');
-		     $('.ruleContent').css('height', '100%');
-		     $('.ruleContent').css('overflow-X', 'auto');
+		//  $('.ruleContent').css('display', 'flex');
+		$('.ruleContent').css('padding', '4px');
+		$('.ruleContent').css('margin', '5px');
+		$('.ruleContent').css('width', '100%');
+		//  $('.ruleContent').css('height', '100%');
+		$('.ruleContent').css('overflow-x', 'auto');
 
-		     Rul.addIcons('ruleHeaderId');
+		$(".ruleContent").css('overflow-y', 'auto')
+		$(".ruleContent").css('display', 'block')
+		$(".ruleContent").css('height', '260px')
+		$(".ruleContent").css('flex-direction', 'column')
+
+		Rul.addIcons('ruleHeaderId');
 
 		// if (Rul.brushPast) {
 		// 	// var spl = ''
@@ -234,13 +235,13 @@
 
 		var keysTags = Object.keys(DataTable.tagNameDataId);
 
-		keysTags.push.apply(keysTags,Rul.tempRuleName)
+		keysTags.push.apply(keysTags, Rul.tempRuleName)
 		console.log(' key tags are ', keysTags)
 		var ind = 0;
 		for (var item in Rul.ruleData) {
-			if(keysTags.indexOf(item) == -1) continue; // might need to remoe for custom naming
+			if (keysTags.indexOf(item) == -1) continue; // might need to remoe for custom naming
 			var dataObj = Rul.ruleData[item];
-			htmlStr += "<div class ='fullRuleAll' parent = "+item+" >"
+			htmlStr += "<div class ='fullRuleAll' parent = " + item + " >"
 			htmlStr += "<div class ='ruleName' contenteditable=" + true + " parent=" + item + "  given=" + item + " id='ruleNameId_" + ind + "' >" + item + "</div>"
 			htmlStr += "<div class ='ruleOneSet' >"
 
@@ -270,7 +271,8 @@
 
 
 
-		$("#" + containerId).append(htmlStr);
+		// $("#" + containerId).append(htmlStr);
+		$(".ruleContent").append(htmlStr);
 
 
 
@@ -322,8 +324,12 @@
 		$('.ruleItems').css('font-size', '1.3em')
 
 
+		$("#" + containerId).css('overflow-y', 'hidden')
 
-		$(".ruleName").on('keyup', function(e){
+
+
+
+		$(".ruleName").on('keyup', function (e) {
 			var origTxt = $(this).attr('parent');
 			var txt = $(this).text();
 			console.log(' txt found on change ', origTxt, txt)
@@ -333,12 +339,14 @@
 			Rul.ruleData[txt] = ob;
 
 			$(this).attr('parent', txt)
-			var id =$(this).attr('id')
+			var id = $(this).attr('id')
 			setTimeout(() => {
-				var newtxt = $("#" + id).text()
-				Rul.tempRuleMapping[newtxt] = $("#" + id).attr('given')
+				var newtxt = $("#" + id).text();
+				var origTxt = $("#" + id).attr('given')
+				Rul.tempRuleMapping[newtxt] = origTxt
 				Rul.tempRuleName.push(newtxt)
 				Rul.tempRuleName = Util.getUniqueArray(Rul.tempRuleName);
+				Rul.tempTagNameDataId[newtxt] = DataTable.tagNameDataId[origTxt].slice()
 			}, 3000);
 		})
 
@@ -353,11 +361,11 @@
 			var nam = $(this).parent().attr('parent');
 			console.log(' found naming in parent ', nam, DataTable.tagNameDataId)
 			var rowIdList = DataTable.tagNameDataId[nam];
-			if(typeof rowIdList == 'undefined'){
-				nam = Rul.tempRuleMapping[nam];
-				rowIdList = DataTable.tagNameDataId[nam];
+			if (typeof rowIdList == 'undefined') {
+				// nam = Rul.tempRuleMapping[nam];
+				rowIdList = Rul.tempTagNameDataId[nam];
 			}
-			StarM.showOnlyRows(rowIdList,nam);
+			StarM.showOnlyRows(rowIdList, nam);
 
 			// var self = this;
 			// var htmlStr = "<div class= 'closeBtnRules'>";
