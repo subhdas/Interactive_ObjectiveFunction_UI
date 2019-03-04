@@ -18,35 +18,44 @@
         var origDef = ['Recall', 'Precision', 'F1-Score']
         for (var item in modelData) {
             var trainMet = modelData[item]['trainMetrics']
+            // var obj = {}
             var obj = {
                 className: 'model_' + item,
-                axes: [{
-                        axis: 'Recall',
-                        value: trainMet['acc'],
-                    },
-                    {
-                        axis: 'Precision',
-                        value: trainMet['prec'],
-                    },
-                    {
-                        axis: 'F1-Score',
-                        value: trainMet['f1'],
-                    }
-                ]
+                // axes: [{
+                //         axis: 'Recall',
+                //         value: trainMet['acc'],
+                //     },
+                //     {
+                //         axis: 'Precision',
+                //         value: trainMet['prec'],
+                //     },
+                //     {
+                //         axis: 'F1-Score',
+                //         value: trainMet['f1'],
+                //     }
+                // ]
+                axes : [],
             }
 
             //add items from active constraints
             for (var item in ConsInt.activeConstraints) {
-                var ind = origDef.indexOf(item)
+                // var ind = origDef.indexOf(item)
                 var name = ConsInt.activeConstraints[item]['usedName']
+                var inpObj = ConsInt.activeConstraints[item]['input']
+                var keyInp = Object.keys(inpObj)
+                console.log(' keyInp s ', keyInp, item)
+                try {
+                    if (inpObj[keyInp[0]].length == 0) continue
+                } catch (e) {
 
-                if (ind == -1) {
+                }
+                // if (ind == -1) {
                     var ob = {
                         axis: name,
                         value: Util.getRandomNumberBetween(1, 0).toFixed(2),
                     }
                     obj['axes'].push(ob);
-                }
+                // }
             }
             dataCollect.push(obj);
         }
@@ -323,7 +332,7 @@
             .attr('id', 'starPlotModelId')
             .attr('width', cfg.w + 80)
             // .attr('width', cfg.w + cfg.w + 50)
-            .attr('height', cfg.h + cfg.h / 20);
+            .attr('height', cfg.h + cfg.h / 10);
         svg.append('g').classed('single', 1).datum(StarM.getRandomData()).call(chart);
 
 
