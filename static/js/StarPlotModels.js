@@ -15,7 +15,7 @@
     StarM.getModelData = function () {
         var modelData = BarM.allModelData;
         var dataCollect = [];
-        var origDef = ['Recall', 'Precision', 'F1-Score']
+        var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score']
         for (var item in modelData) {
             var trainMet = modelData[item]['trainMetrics']
             // var obj = {}

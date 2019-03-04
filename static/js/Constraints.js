@@ -398,12 +398,32 @@
                 $(this).parent().prepend(htmlStr);
                 $(".btnConstOptSpl").css('background', Main.colors.HIGHLIGHT2)
 
-                try {
-                    var inpObj = ConsInt.activeConstraints[name]['input'];
-                    console.log(' inp obj is ', inpObj, name)
-                } catch (e) {
-                    alert('Please add examples for constraint : ' + name)
-                }
+
+                setTimeout(() => {
+                    var alertSend = false;
+                    var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score']
+
+                    try {
+                        var inpObj = ConsInt.activeConstraints[name]['input'];
+                        var keys = Object.keys(inpObj);
+                        if (keys.length == 0) {
+                            alertSend = true;
+                        } else if (inpObj[keys[0]].length == 0) {
+                            alertSend = true;
+                        }
+                        console.log(' inp obj is ', inpObj, name)
+                    } catch (e) {
+                        alertSend = true;
+                    }
+                    var ind = origDef.indexOf(name)
+                    if(ind != - 1) alertSend = false;
+                    // if (alertSend) alert('Please add examples for constraint : ' + name)
+                    if (alertSend) {
+                        alertify.set('notifier', 'position', 'top-center');
+                        alertify.error('Please add examples for constraint : ' + name);
+                    }
+                }, 500);
+
 
 
                 // $(this).siblings().show();
