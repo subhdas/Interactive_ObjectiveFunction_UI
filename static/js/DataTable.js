@@ -1227,26 +1227,29 @@
                     }
                 }
                 critIdList = Util.getUniqueArray(critIdList);
+                // return
                 // console.log('critical id list found ', critIdList)
-                var stri2 = 'Non-Critical'
-                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; // !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
-                ConsInt.getActiveConstraints();
-                ConsInt.activeConstraints[stri2]['input']["labelitemsConId_" + stri2] = critIdList;
+                if (critIdList.length > 0) {
+                    var stri2 = 'Non-Critical'
+                    Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; // !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
+                    ConsInt.getActiveConstraints();
+                    ConsInt.activeConstraints[stri2]['input']["labelitemsConId_" + stri2] = critIdList;
 
-                var idBtn = $(".btn_" + stri2).attr('id')
-                // console.log('button click check ', arr, DataTable.criticalClicked)
-                if (critIdList.length > 0 && !DataTable.non_criticalClicked) {
-                    Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true;
-                    setTimeout(() => {
-                        $("#" + idBtn).trigger('click');
-                    }, 100);
-                    DataTable.non_criticalClicked = true;
-                    // console.log(' now tag is ', DataTable.non_criticalClicked, idBtn, critIdList)
-                }
-                if (critIdList.length == 0 && DataTable.non_criticalClicked) {
-                    Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false;
-                    $("#" + idBtn).click();
-                    DataTable.non_criticalClicked = false;
+                    var idBtn = $(".btn_" + stri2).attr('id')
+                    // console.log('button click check ', arr, DataTable.criticalClicked)
+                    if (critIdList.length > 0 && !DataTable.non_criticalClicked) {
+                        Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true;
+                        setTimeout(() => {
+                            $("#" + idBtn).trigger('click');
+                        }, 100);
+                        DataTable.non_criticalClicked = true;
+                        // console.log(' now tag is ', DataTable.non_criticalClicked, idBtn, critIdList)
+                    }
+                    if (critIdList.length == 0 && DataTable.non_criticalClicked) {
+                        Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false;
+                        $("#" + idBtn).click();
+                        DataTable.non_criticalClicked = false;
+                    }
                 }
                 DataTable.makeTags();
 

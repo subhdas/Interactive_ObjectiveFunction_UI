@@ -16,7 +16,7 @@
 
     Cons.typeConstraints = {
         'COMPOSITIONAL': {
-        'Same-Label': {
+            'Same-Label': {
                 // 'Add': true,
                 'Checked': false,
                 'UserWt': 1,
@@ -398,6 +398,14 @@
                 $(this).parent().prepend(htmlStr);
                 $(".btnConstOptSpl").css('background', Main.colors.HIGHLIGHT2)
 
+                try {
+                    var inpObj = ConsInt.activeConstraints[name]['input'];
+                    console.log(' inp obj is ', inpObj, name)
+                } catch (e) {
+                    alert('Please add examples for constraint : ' + name)
+                }
+
+
                 // $(this).siblings().show();
                 //commented coloring
                 // $(this).css('background', Main.colors.HIGHLIGHT)
@@ -496,9 +504,9 @@
                 Cons.accordionOpen = !Cons.accordionOpen
                 console.log('accordion opened ', Cons.accordionOpen)
 
-                if(Cons.accordionOpen){
-                    $("#confMatTrain").hide();                    
-                }else{
+                if (Cons.accordionOpen) {
+                    $("#confMatTrain").hide();
+                } else {
                     $("#confMatTrain").show();
 
                 }
