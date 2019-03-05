@@ -121,6 +121,7 @@ def handle_my_custom_event(data):
 @socketio.on('get_good_model')
 def handle_my_custom_event(data):
 	print " request to get good model"
+	metricList = data['metrics']
 	train = data['train']
 	train = pd.DataFrame(train)
 	train = train.drop(['predicted'], axis = 1)
@@ -137,7 +138,12 @@ def handle_my_custom_event(data):
 	# target = ''
 	train.drop([targetCol], axis=1)
 	test.drop([targetCol], axis=1)
-	out = wrap_findGoodModel(train,test, targetTrain,targetTest)
+
+
+	extraInfo = {
+        'metricList': metricList
+    }
+	out = wrap_findGoodModel(train,test, targetTrain,targetTest, extraInfo)
 	# print " we get out ", out
 	emit('send_good_model', out)
 

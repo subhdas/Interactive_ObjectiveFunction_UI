@@ -16,11 +16,11 @@
         var modelData = BarM.allModelData;
         var dataCollect = [];
         var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score']
-        for (var item in modelData) {
-            var trainMet = modelData[item]['trainMetrics']
+        for (var el in modelData) {
+            var trainMet = modelData[el]['trainMetrics']
             // var obj = {}
             var obj = {
-                className: 'model_' + item,
+                className: 'model_' + el,
                 // axes: [{
                 //         axis: 'Recall',
                 //         value: trainMet['acc'],
@@ -42,7 +42,8 @@
                 var ind = origDef.indexOf(item)
                 var name = ConsInt.activeConstraints[item]['usedName']
                 var inpObj = ConsInt.activeConstraints[item]['input']
-                
+                console.log(' getting name as ', name, item, ConsInt.activeConstraints, el);
+                if(typeof name == 'undefined') name = item
                 try {
                     var keyInp = Object.keys(inpObj)
                     // console.log(' keyInp s ', keyInp, item)
@@ -51,10 +52,13 @@
                 } catch (e) {
 
                 }
+                
+                var valFound = trainMet[item]
                 // if (ind == -1) {
                     var ob = {
                         axis: name,
-                        value: Util.getRandomNumberBetween(1, 0).toFixed(2),
+                        // value: Util.getRandomNumberBetween(1, 0).toFixed(2),
+                        value: valFound
                     }
                     obj['axes'].push(ob);
                 // }
@@ -126,17 +130,18 @@
             return data.map(function (d) {
                 return {
                     className: d.className,
-                    axes: d.axes.map(function (axis) {
+                    axes: d.axes.map(function (k) {
                         return {
-                            axis: axis.axis,
+                            axis: k.axis,
                             value: Math.ceil(Math.random() * 10)
                         };
                     })
                 };
             });
         }
-
-        return randomDataset();
+        // console.log('getting data this time ', data)
+        return data;
+        // return randomDataset();
     }
 
     StarM.addModelSelectors = function (containerId = "") {

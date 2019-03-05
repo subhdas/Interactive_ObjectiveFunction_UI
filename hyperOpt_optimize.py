@@ -40,18 +40,19 @@ def preProcessData(data):
     return data, idCol
 
 
-def wrap_findGoodModel(train,test, targetTrain, targetTest):
+def wrap_findGoodModel(train,test, targetTrain, targetTest, extraInfo):
     done = False
+    
     while( not done):
         try:
-            obj = find_goodModel(train,test,targetTrain,targetTest)
+            obj = find_goodModel(train,test,targetTrain,targetTest, extraInfo)
             return obj
         except Exception as e:
             print " errored in finding good model ", e
     return obj
 
 
-def find_goodModel(train,test,targetTrain,targetTest):
+def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
     train, trainId = preProcessData(train)
     test, testId = preProcessData(test)
     def objective(space):
@@ -129,7 +130,7 @@ def find_goodModel(train,test,targetTrain,targetTest):
     for item in mod_results:
         space = mod_results[item]['space']
         pred_out = {}
-        pred_out = makePredictions(space, train, test, targetTrain, targetTest, trainId, testId)
+        pred_out = makePredictions(space, train, test, targetTrain, targetTest, trainId, testId, extraInfo)
         allmodel_pred_out[item] = pred_out
     
     # print " mod results obj ", mod_results
@@ -143,7 +144,7 @@ def find_goodModel(train,test,targetTrain,targetTest):
     best['criterion'] = criterionArr[best['criterion']]
 
     obj = {
-    'predictions' : makePredictions(best,train, test,targetTrain, targetTest, trainId, testId),
+    'predictions' : makePredictions(best,train, test,targetTrain, targetTest, trainId, testId, extraInfo),
     'predictionsAll': allmodel_pred_out,
     'params' : best,
     'STATUS' : 'OK'
@@ -151,13 +152,15 @@ def find_goodModel(train,test,targetTrain,targetTest):
     return obj
 
 
-def makePredictions(space, train, test, targetTrain, targetTest, trainId, testId):
+def makePredictions(space, train, test, targetTrain, targetTest, trainId, testId, extraInfo):
     clf = RandomForestClassifier(max_depth=space['max_depth'],
                                 min_samples_split = space['min_samples_split'],
                                 min_samples_leaf = space['min_samples_leaf'],
                                 bootstrap = space['bootstrap'],
                                 # criterion = space['criterion']
                                 )
+
+    metricList = extraInfo['metricList']
     print " fitting before "
     clf.fit(train, targetTrain)
     predTrain = clf.predict(train)
@@ -187,6 +190,19 @@ def makePredictions(space, train, test, targetTrain, targetTest, trainId, testId
         'f1': f1Train,
     }
 
+    # fill in the metric obj for train
+    for i in range(len(metricList)):
+        if(metricList[i] == 'F1-Score') : 
+            trainMetricObj[metricList[i]] = f1Train
+            continue
+        if(metricList[i] == 'Precision') : 
+            trainMetricObj[metricList[i]] = precTrain
+            continue
+        if(metricList[i] == 'Recall') : 
+            trainMetricObj[metricList[i]] = accTrain
+            continue
+        trainMetricObj[metricList[i]] = random.uniform(0.1, 0.99)
+
     # metrics for test
     precTest = precision_score(targetTest, predTest, average='micro')
     accTest = accuracy_score(targetTest, predTest,  normalize=True)
@@ -197,6 +213,20 @@ def makePredictions(space, train, test, targetTrain, targetTest, trainId, testId
         'acc': accTest,
         'f1': f1Test,
     }
+
+    # fill in the metric obj for test
+    for i in range(len(metricList)):
+        if(metricList[i] == 'F1-Score') : 
+            testMetricObj[metricList[i]] = f1Test
+            continue
+        if(metricList[i] == 'Precision') : 
+            testMetricObj[metricList[i]] = precTest
+            continue
+        if(metricList[i] == 'Recall') : 
+            testMetricObj[metricList[i]] = accTest
+            continue
+        testMetricObj[metricList[i]] = random.uniform(0.1, 0.99)
+
 
     # print "train predictions ", predTrain
     # print "train predictions ", predTest

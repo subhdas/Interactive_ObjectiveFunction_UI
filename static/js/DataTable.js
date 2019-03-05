@@ -406,10 +406,12 @@
             //     LabelCard.makeCards();
             // })
 
+            var metricList = Object.keys(ConsInt.activeConstraints);
             var objSend = {
                 'train': Main.trainData,
                 'test': Main.testData,
                 'targetCol': Main.targetName,
+                'metrics': metricList
             }
             socket.emit("get_good_model", objSend);
             // socket.off('get_good_model');
@@ -428,7 +430,7 @@
                 BarM.allModelData = dataObj['predictionsAll']
 
 
-               
+
 
                 // comppute data ids for each label combo
                 // train conf matr
@@ -465,12 +467,15 @@
                 BarM.allModelData[0] = BarM.modelData[0]['predictions']
 
                 BarM.computeIdsConfMatrAllModel();
+                // ConsInt.getActiveConstraints();
+                setTimeout(() => {
+                    StarM.makeStarPlot();
 
-                StarM.makeStarPlot();
+                }, 500);
                 ConfM.makeConfMatrix(confMatrixTrain, 'train');
                 ConfM.makeConfMatrix(confMatrixTest, 'test'); // test
 
-                     DataTable.modelUpdateLabel();
+                DataTable.modelUpdateLabel();
 
             })
         })
