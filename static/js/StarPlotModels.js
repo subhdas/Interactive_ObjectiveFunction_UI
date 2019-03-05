@@ -42,9 +42,10 @@
                 var ind = origDef.indexOf(item)
                 var name = ConsInt.activeConstraints[item]['usedName']
                 var inpObj = ConsInt.activeConstraints[item]['input']
-                var keyInp = Object.keys(inpObj)
-                console.log(' keyInp s ', keyInp, item)
+                
                 try {
+                    var keyInp = Object.keys(inpObj)
+                    console.log(' keyInp s ', keyInp, item)
                     if(keyInp.length == 0 && ind == -1) continue;
                     if (inpObj[keyInp[0]].length == 0 && ind == -1) continue
                 } catch (e) {

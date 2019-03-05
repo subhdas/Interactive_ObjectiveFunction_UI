@@ -17,8 +17,8 @@
                     //adding data to the datastack
                     var obj = {}
                     try {
-                        obj = ConsInt.tempActConstraints[k];
-                        console.log(' active copying worked ', ConsInt.activeConstraints, k, ConsInt.tempActConstraints)
+                        obQj = ConsInt.tempActConstraints[k];
+                        // console.log(' active copying worked ', ConsInt.activeConstraints, k, ConsInt.tempActConstraints)
                     } catch (e) {}
                     if (typeof obj == 'undefined') {
                         //normal case

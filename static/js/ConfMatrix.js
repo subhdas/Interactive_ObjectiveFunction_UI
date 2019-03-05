@@ -66,6 +66,12 @@
 
 		$("." + type + "_wrapDivs").wrapAll("<div class='wrapperDivConfMatr'></div>");
 
+		var ind = 0
+		$('.wrapperDivConfMatr').each(function(d,i){
+			$(this).attr('id', 'wrapperDivConfMatrId_'+ind)
+			ind += 1;
+		})
+
 
 		$(".wrapperDivConfMatr").css('display', 'flex');
 		$(".wrapperDivConfMatr").css('width', '100%');

@@ -30,7 +30,7 @@
     Main.contentHeightTopBar = '300';
     Main.contentWidthTopBar = '700';
 
-
+    Main.rightPanelBothShow = true
     /*
     stores system colors
     */
@@ -238,6 +238,40 @@
         Main.tableTogglingApply();
         // Rul.makeRuleList();
         // Main.makeTablePanelsAccord();
+
+        Main.addRightPanelIcon();
+    }
+
+
+    Main.addRightPanelIcon = function(containerId = ""){
+        if (containerId == "") containerId = "rightPanelIconId"
+
+        var htmlStr = ""
+        htmlStr += "<button id='togRightPan' title='Show Table View' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored' title='Toggle Right Panel Content'>"
+        htmlStr += "<i class='material-icons'>eject</i></button>";
+
+        $('#'+containerId).append(htmlStr)
+
+        $("#rightPanelIconId").css('display', 'flex')
+        $("#rightPanelIconId").css('width', '100%')
+        $("#rightPanelIconId").css('height', '30px')
+        $("#rightPanelIconId").css('padding', '2px')
+        $("#rightPanelIconId").css('margin', '2px')
+
+
+        //add listerner
+        $("#togRightPan").on('click', function(d){
+            Main.rightPanelBothShow = !Main.rightPanelBothShow;
+
+            if(Main.rightPanelBothShow){
+                $("#confMatTrain").show();
+                $("#confMatTest").show();
+            }else{
+                $("#confMatTrain").hide();
+                $("#confMatTest").show();
+            }
+        })
+
     }
 
     Main.tableTogglingApply = function(){
