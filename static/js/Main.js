@@ -74,12 +74,12 @@
 
     }
 
-    Main.getDataByEntityName = function(entityName, entity, data = []){
-          for (var i = 0; i < data.length; i++) {
-              if (data[i][entityName] == entity)
-                  return data[i];
-          }
-          return null;
+    Main.getDataByEntityName = function (entityName, entity, data = []) {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i][entityName] == entity)
+                return data[i];
+        }
+        return null;
     }
 
     Main.getDataByKeys = function (keys = [], data = []) {
@@ -213,6 +213,58 @@
 
     }
 
+
+    Main.addLoadingWidget = function () {
+        // src = http://tobiasahlin.com/spinkit/
+        var htmlStr = "";
+        htmlStr += "<div class ='wrapLoadingDiv'>"
+        htmlStr += "<div class='spinner'>"
+        htmlStr += "<div class='rect1'></div>"
+        htmlStr += "<div class='rect2'></div>"
+        htmlStr += "<div class='rect3'></div>"
+        htmlStr += "<div class='rect4'></div>"
+        htmlStr += "<div class='rect5'></div>"
+        htmlStr += "</div>"
+        htmlStr += "</div>"
+        $('body').prepend(htmlStr);
+        $('.wrapLoadingDiv').hide();
+        Main.showSpinner = false;
+    }
+
+
+    Main.loadingSpinnerToggle = function (tog = true) {
+        //pre conditioning 
+        var containerId = "confMatTrain"; //"confMatTrain"
+        var offs = $("#" + containerId).position()
+        var wid = $("#" + containerId).width()
+        var ht = $("#" + containerId).height()
+
+        var topPos = offs.top - 5; //400
+        var leftPos = offs.left //100
+
+
+        console.log(' found top and left pos ', topPos, leftPos)
+
+        $('.wrapLoadingDiv').css('display', 'flex')
+        $('.wrapLoadingDiv').css('width', wid)
+        $('.wrapLoadingDiv').css('height', ht)
+        $('.wrapLoadingDiv').css('position', 'absolute')
+        $('.wrapLoadingDiv').css('top', topPos + 'px')
+        $('.wrapLoadingDiv').css('left', leftPos + 'px')
+        $('.wrapLoadingDiv').css('z-index', 2000)
+        $('.wrapLoadingDiv').css('background', 'white')
+        //  $('.wrapLoadingDiv').css('border', '1px solid lightgray')
+        $('.wrapLoadingDiv').css('align-items', 'center')
+        $('.wrapLoadingDiv').css('justify-content', 'center')
+        $('.wrapLoadingDiv').css('opacity', '0.75')
+        Main.showSpinner = tog;
+        if (Main.showSpinner) {
+            $('.wrapLoadingDiv').show();
+        } else {
+            $('.wrapLoadingDiv').hide();
+        }
+    }
+
     /*
     ideally should only run once, when the system loads
     */
@@ -221,7 +273,7 @@
         DataTable.switchToLeftData();
         ParC.featureEditorCreate();
         DataTable.makeTable(Main.trainData);
-        
+
         DataTable.extraContent = false;
         DataTable.makeTable(Main.testData, "tableContentTest");
         Scat.makeTheMatrix();
@@ -230,21 +282,22 @@
         Cons.makeConsDivs();
 
         ConsInt.getActiveConstraints();
-        
+
         Main.tableTogglingApply();
 
         Main.addRightPanelIcon();
+        Main.addLoadingWidget();
     }
 
 
-    Main.addRightPanelIcon = function(containerId = ""){
+    Main.addRightPanelIcon = function (containerId = "") {
         if (containerId == "") containerId = "rightPanelIconId"
 
         var htmlStr = ""
         htmlStr += "<button id='togRightPan' title='Show Table View' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored' title='Toggle Right Panel Content'>"
         htmlStr += "<i class='material-icons'>eject</i></button>";
 
-        $('#'+containerId).append(htmlStr)
+        $('#' + containerId).append(htmlStr)
 
         $("#rightPanelIconId").css('display', 'flex')
         $("#rightPanelIconId").css('width', '100%')
@@ -254,13 +307,13 @@
 
 
         //add listerner
-        $("#togRightPan").on('click', function(d){
+        $("#togRightPan").on('click', function (d) {
             Main.rightPanelBothShow = !Main.rightPanelBothShow;
 
-            if(Main.rightPanelBothShow){
+            if (Main.rightPanelBothShow) {
                 $("#confMatTrain").show();
                 // $("#confMatTest").show();
-            }else{
+            } else {
                 $("#confMatTrain").hide();
                 // $("#confMatTest").show();
             }
@@ -268,7 +321,7 @@
 
     }
 
-    Main.tableTogglingApply = function(){
+    Main.tableTogglingApply = function () {
         $('.tableTogglerCl').on('click', function (e) {
             var id = $(this).attr('id');
             id = Util.getNumberFromText(id);

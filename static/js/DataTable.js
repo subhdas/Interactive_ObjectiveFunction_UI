@@ -390,7 +390,7 @@
             //     LabelCard.getDataObject(dataObj['indexBydata']); 
             //     LabelCard.makeCards();
             // })
-
+            Main.loadingSpinnerToggle(true);
             var metricList = Object.keys(ConsInt.activeConstraints);
             var objSend = {
                 'train': Main.trainData,
@@ -460,6 +460,11 @@
 
                 DataTable.modelUpdateLabel();
                 Cons.checkConstraintsActive();
+
+                setTimeout(() => {
+                    Main.loadingSpinnerToggle(false);            
+                }, 150);
+
 
             })
         })
