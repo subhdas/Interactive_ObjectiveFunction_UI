@@ -265,10 +265,10 @@
 
             if(Main.rightPanelBothShow){
                 $("#confMatTrain").show();
-                $("#confMatTest").show();
+                // $("#confMatTest").show();
             }else{
                 $("#confMatTrain").hide();
-                $("#confMatTest").show();
+                // $("#confMatTest").show();
             }
         })
 

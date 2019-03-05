@@ -521,31 +521,37 @@
             activate: function (event, ui) {
                 Cons.accordionOpen = !Cons.accordionOpen
                 console.log('accordion opened ', Cons.accordionOpen)
-                return
+                // return
 
-                if (Cons.accordionOpen) {
-                    // $("#confMatTrain").hide();
-                    $('#confMatTrain').css('height', 'auto');
-                    var trnHt = $('#trainContent').height();
-                    var testHt = $('#testContent').height();
-                    console.log('height calc both train test ', trnHt, testHt)
-                    if (trnHt > testHt) {
-                        //train mode
-                        $('#wrapperDivConfMatrId_' + 1).hide();
-                    } else {
-                        //test mode
-                        $('#wrapperDivConfMatrId_' + 0).hide();
-                    }
+                 if (Cons.accordionOpen) {
+                     Main.rightPanelBothShow = false;
+                     $("#confMatTrain").hide();
+                 } else {
+                     Main.rightPanelBothShow = true;
 
+                     $("#confMatTrain").show();
+                 }
 
+                // if (Cons.accordionOpen) {
+                //     // $("#confMatTrain").hide();
+                //     $('#confMatTrain').css('height', 'auto');
+                //     var trnHt = $('#trainContent').height();
+                //     var testHt = $('#testContent').height();
+                //     console.log('height calc both train test ', trnHt, testHt)
+                //     if (trnHt > testHt) {
+                //         //train mode
+                //         $('#wrapperDivConfMatrId_' + 1).hide();
+                //     } else {
+                //         //test mode
+                //         $('#wrapperDivConfMatrId_' + 0).hide();
+                //     }
+                // } else {
+                //     // $("#confMatTrain").show();
+                //     $('#wrapperDivConfMatrId_' + 0).show();
+                //     $('#wrapperDivConfMatrId_' + 1).show();
+                //     //   $('#confMatTrain').css('height', '50%');
 
-                } else {
-                    // $("#confMatTrain").show();
-                    $('#wrapperDivConfMatrId_' + 0).show();
-                    $('#wrapperDivConfMatrId_' + 1).show();
-                    //   $('#confMatTrain').css('height', '50%');
-
-                }
+                // }
             }
         });
 
