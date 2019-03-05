@@ -399,43 +399,46 @@
                 $(".btnConstOptSpl").css('background', Main.colors.HIGHLIGHT2)
 
 
-                setTimeout(() => {
-                    var alertSend = false;
-                    var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score']
 
-                    try {
-                        var inpObj = ConsInt.activeConstraints[name]['input'];
-                        var keys = Object.keys(inpObj);
-                        if (keys.length == 0) {
-                            alertSend = true;
-                        } else if (inpObj[keys[0]].length == 0) {
+
+
+                // to send alerts if no examples constraint found
+                // only true when hand clicked manually
+                if (Cons.cnsBtnMouseEvent) {
+                    // get data from tempActiveConsr
+                    // try {
+                    //     ConsInt.activeConstraints[name] = ConsInt.tempActConstraints[name];
+                    //     console.log(' active copying worked ', ConsInt.activeConstraints, name, ConsInt.tempActConstraints)
+                    // } catch (e) {}
+                    setTimeout(() => {
+                        var alertSend = false;
+                        var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score']
+                        var usedName = Cons.typeConstraints[item][name]['Name']
+                        try {
+                            var inpObj = ConsInt.activeConstraints[name]['input'];
+                            var keys = Object.keys(inpObj);
+                            if (keys.length == 0) {
+                                alertSend = true;
+                            } else if (inpObj[keys[0]].length == 0) {
+                                alertSend = true;
+                            }
+                            console.log(' inp obj is ', inpObj, name)
+                        } catch (e) {
                             alertSend = true;
                         }
-                        console.log(' inp obj is ', inpObj, name)
-                    } catch (e) {
-                        alertSend = true;
-                    }
-                    var ind = origDef.indexOf(name)
-                    if(ind != - 1) alertSend = false;
-                    // if (alertSend) alert('Please add examples for constraint : ' + name)
-                    if (alertSend) {
-                        alertify.set('notifier', 'position', 'top-center');
-                        alertify.error('Please add examples for constraint : ' + name);
-                    }
-                }, 500);
+                        var ind = origDef.indexOf(name)
+                        if (ind != -1) alertSend = false;
+                        // if (alertSend) alert('Please add examples for constraint : ' + name)
+                        if (alertSend) {
+                            // $('.ajs-error').css('width', '500px')
+                            alertify.set('notifier', 'position', 'top-center');
+                            alertify.error('Please show examples for: ' + usedName);
+                        }
+                    }, 500);
+                }
 
 
-
-                // $(this).siblings().show();
-                //commented coloring
-                // $(this).css('background', Main.colors.HIGHLIGHT)
-                // $(this).css('color', 'white')
-
-                // console.log(' lets make button red ', Cons.typeConstraints, item, name)
-                // ConsInt.showPanel();
             } else {
-                // $(this).siblings().closest('a').hide();
-
 
                 //to fix button toggles
                 var item = $(this).parent().find('.btnConstOpt').attr('parent')
@@ -447,12 +450,7 @@
                 htmlStr += "<i class='material-icons'>linear_scale</i></button>"; // drag_handle
                 $(this).parent().prepend(htmlStr);
 
-                //commented coloring
-                // $(this).css('background', '')
-                // $(this).css('color', 'black')
-                // console.log(' lets make button black ', Cons.typeConstraints, item, name)
 
-                // ConsInt.hidePanel();
             }
             setTimeout(() => {
                 ConsInt.getActiveConstraints();

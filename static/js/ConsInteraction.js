@@ -3,6 +3,7 @@
 
     ConsInt = {};
     ConsInt.activeConstraints = {};
+    ConsInt.tempActConstraints = {}
 
 
     ConsInt.getActiveConstraints = function () {
@@ -13,15 +14,29 @@
                     if (typeof ConsInt.activeConstraints[k] != 'undefined') continue; // COMMENTED
                 }
                 if (elem[k]['Checked'] == true) {
-                    var obj = {
-                        'input': {},
-                        'parent': item,
-                        'name': k,
-                        'usedName': elem[k]['Name'], // 
+                    //adding data to the datastack
+                    var obj = {}
+                    try {
+                        obj = ConsInt.tempActConstraints[k];
+                        console.log(' active copying worked ', ConsInt.activeConstraints, k, ConsInt.tempActConstraints)
+                    } catch (e) {}
+                    if (typeof obj == 'undefined') {
+                        //normal case
+                        obj = {
+                            'input': {},
+                            'parent': item,
+                            'name': k,
+                            'usedName': elem[k]['Name'], // 
+                        }
                     }
                     ConsInt.activeConstraints[k] = obj;
                 } else {
+                    //deleting item from the datastack
                     try {
+                        var obj = ConsInt.activeConstraints[k]
+                        if (Object.keys(obj).length > 0) {
+                            ConsInt.tempActConstraints[k] = Object.assign({}, obj)
+                        }
                         delete ConsInt.activeConstraints[k]
                         // console.log(' deleted ', k)
                     } catch (e) {
