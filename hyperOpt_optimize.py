@@ -57,6 +57,31 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
     MAX_EVAL = 10
     train, trainId = preProcessData(train)
     test, testId = preProcessData(test)
+
+    def compo_metrics(targetTrain,predTrain):
+        metObj = extraInfo['metricKeys']
+        critIds = []
+        # find for critical-items
+        try:
+            critIds = metObj['Critical-Items']['Critical-Items'] # gets an array
+        except:
+            return 0
+        predTrainDict = {}
+        origTrainDict = {}
+        for i in range(len(predTrain)):
+            # id = trainId['id'].values[i]
+            id = trainId[i]
+            predTrainDict[str(id)] = str(predTrain[i])
+            origTrainDict[str(id)] = str(targetTrain[i])
+
+        critScore = 0;
+        for i in range(len(critIds)):
+            if(predTrainDict[critIds[i]] == origTrainDict[critIds[i]]): critScore += 1
+
+        critScore = (critScore*1.0)/len(critIds)
+        return critScore
+
+
     def objective(space):
         # clf = xgb.XGBRegressor(n_estimators = space['n_estimators'],
         #                        max_depth = space['max_depth'],
@@ -77,10 +102,14 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
 
         # score =  A*SameLabel + B*Features +
         clf.fit(train, targetTrain)
+        predTrain = clf.predict(train)
         cross_mean_score = cross_val_score( estimator=clf, X=train, y=targetTrain, scoring='precision_macro', cv=3, n_jobs=-1).mean()
 
+
+        compMetScore = compo_metrics(targetTrain, predTrain)
+
         result = {'loss': -1*cross_mean_score, 'status': STATUS_OK }
-        print " result is ", result, MAX_RET, MAX_EVAL
+        print " result is ", result, MAX_RET, MAX_EVAL, compMetScore
         return result
 
     col_train = train.columns
