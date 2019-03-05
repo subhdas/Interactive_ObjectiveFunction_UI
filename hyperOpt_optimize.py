@@ -53,8 +53,8 @@ def wrap_findGoodModel(train,test, targetTrain, targetTest, extraInfo):
 
 
 def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
-    MAX_RET = 4
-    MAX_EVAL = 100
+    MAX_RET = 2
+    MAX_EVAL = 10
     train, trainId = preProcessData(train)
     test, testId = preProcessData(test)
     def objective(space):
@@ -80,7 +80,7 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
         cross_mean_score = cross_val_score( estimator=clf, X=train, y=targetTrain, scoring='precision_macro', cv=3, n_jobs=-1).mean()
 
         result = {'loss': -1*cross_mean_score, 'status': STATUS_OK }
-        print " result is ", result
+        print " result is ", result, MAX_RET, MAX_EVAL
         return result
 
     col_train = train.columns
