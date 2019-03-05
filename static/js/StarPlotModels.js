@@ -45,7 +45,7 @@
                 
                 try {
                     var keyInp = Object.keys(inpObj)
-                    console.log(' keyInp s ', keyInp, item)
+                    // console.log(' keyInp s ', keyInp, item)
                     if(keyInp.length == 0 && ind == -1) continue;
                     if (inpObj[keyInp[0]].length == 0 && ind == -1) continue
                 } catch (e) {
@@ -281,7 +281,7 @@
     }
 
     StarM.makeStarPlot = function (containerId = "") {
-        console.log(' making star plot for models ')
+        // console.log(' making star plot for models ')
         RadarChart.defaultConfig.color = function () {};
         RadarChart.defaultConfig.radius = 3;
         RadarChart.defaultConfig.w = 300;
@@ -298,7 +298,7 @@
 
         // var ht = $('.constraintContent').height();
         var ht = 275;
-        console.log('height found ', ht)
+        // console.log('height found ', ht)
         // css styling
         $('.starPlotHeader').css('display', 'flex');
         $('.starPlotHeader').css('padding', '3px');
@@ -375,7 +375,7 @@
 
         d3.selectAll('.poly_model')
             .each(function (d, i) {
-                console.log(' styling the poly ', d, i)
+                // console.log(' styling the poly ', d, i)
                 $(this).css('fill', StarM.colorFill[i]);
                 $(this).css('stroke-width', '2');
                 $(this).css('stroke', 'gray');
@@ -442,7 +442,7 @@
         $('.rowConstTable').show();
         $('.rowConstTable').each(function (d) {
             var id = $(this).attr('parent');
-            console.log('getting id ', id, idList);
+            // console.log('getting id ', id, idList);
             var name = $(this).attr('given');
             if (idList.indexOf(id) == -1 && name != type) {
                 $(this).hide();
@@ -579,14 +579,7 @@
             var nameItem = $(this).find('.rowSpanNameItem').attr('parent')
 
             var data = Main.getDataByEntityName(Main.entityNameSecondImp, nameItem, Main.trainData)
-            console.log(' clicked on ', 'id', item, nameItem, data)
-
-
-
-
-
-
-
+            // console.log(' clicked on ', 'id', item, nameItem, data)
 
             if (!StarM.constraintsDict[id]) {
                 //when removing it

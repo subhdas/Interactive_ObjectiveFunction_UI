@@ -426,7 +426,9 @@
                 console.log('confMatrix gotten ', confMatrixTrain);
 
                 BarM.allModelData = dataObj['predictionsAll']
-                DataTable.modelUpdateLabel();
+
+
+               
 
                 // comppute data ids for each label combo
                 // train conf matr
@@ -467,6 +469,9 @@
                 StarM.makeStarPlot();
                 ConfM.makeConfMatrix(confMatrixTrain, 'train');
                 ConfM.makeConfMatrix(confMatrixTest, 'test'); // test
+
+                     DataTable.modelUpdateLabel();
+
             })
         })
 

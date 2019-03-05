@@ -156,7 +156,7 @@
 
 
     Cons.makeConsDivs = function (containerId = "constrainPanel") {
-        console.log('Cons is ', Cons.typeConstraints)
+        // console.log('Cons is ', Cons.typeConstraints)
         if (containerId == "") containerId = "constrainPanel";
         $("#" + containerId).empty();
         var htmlStr = "<div class = 'constraintHeader' id = 'constraintHeaderId' ></div>";
@@ -520,7 +520,7 @@
             active: false,
             activate: function (event, ui) {
                 Cons.accordionOpen = !Cons.accordionOpen
-                console.log('accordion opened ', Cons.accordionOpen)
+                // console.log('accordion opened ', Cons.accordionOpen)
                 // return
 
                  if (Cons.accordionOpen) {

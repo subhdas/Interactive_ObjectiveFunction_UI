@@ -250,6 +250,8 @@
 						// 	['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
 						var idList = BarM.allModelData[BarM.selectedModelId]
 							['confMatTrain_ids'][idNum + '_' + [i]]['data_idList'];
+
+						console.log('idlist gotten ', idList)
 						DataTable.hideRowsById(idList, 'train');
 						if (!Main.tabelViewMode) Scat.hideSelectedCircle(idList);
 					}
