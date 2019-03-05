@@ -275,7 +275,7 @@
     //     }
     // }
 
-  
+
 
 
     DataTable.addIconsTop = function (dataIn = Main.trainData, containerId = "") {
@@ -392,11 +392,14 @@
             // })
             Main.loadingSpinnerToggle(true);
             var metricList = Object.keys(ConsInt.activeConstraints);
+            var metricObj = Cons.constraintIdFinder();
+            console.log(' finding metric obj ', metricObj)
             var objSend = {
                 'train': Main.trainData,
                 'test': Main.testData,
                 'targetCol': Main.targetName,
-                'metrics': metricList
+                'metrics': metricList,
+                'metricKeys': metricObj,
             }
             socket.emit("get_good_model", objSend);
             // socket.off('get_good_model');
@@ -462,7 +465,7 @@
                 Cons.checkConstraintsActive();
 
                 setTimeout(() => {
-                    Main.loadingSpinnerToggle(false);            
+                    Main.loadingSpinnerToggle(false);
                 }, 150);
 
 

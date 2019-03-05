@@ -163,7 +163,8 @@ def makePredictions(space, train, test, targetTrain, targetTest, trainId, testId
                                 )
 
     metricList = extraInfo['metricList']
-    print " fitting before "
+    metricKeys = extraInfo['metricKeys']
+    print " fitting before ", metricKeys
     clf.fit(train, targetTrain)
     predTrain = clf.predict(train)
     predTest = clf.predict(test)

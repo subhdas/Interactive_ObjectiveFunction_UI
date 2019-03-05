@@ -153,38 +153,72 @@
 
     }
 
-
-
-    Cons.checkConstraintsActive = function(){
+    Cons.constraintIdFinder = function () {
         var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score']
-
-        for(var item in ConsInt.activeConstraints){
+        var metricObj = {}
+        for (var item in ConsInt.activeConstraints) {
             var check = true;
+            if (origDef.indexOf(item) != -1) check = false;
+
             var el = ConsInt.activeConstraints[item]
             if (Object.keys(el).length == 0) check = false;
-            else if(Object.keys(el['input']).length == 0) check = false;
-            else{
-                try{
+            else if (Object.keys(el['input']).length == 0) check = false;
+            else {
+                try {
                     var keysObj = Object.keys(el['input']);
-                    if(el['input'][keysObj[0]].length == 0) check = false;
-                }catch(e){
+                    if (el['input'][keysObj[0]].length == 0) check = false;
+                } catch (e) {
                     check = false
                 }
             }
-            if(origDef.indexOf(item) != -1) check = true;
+            if (check == true) {
+                var keysObj = Object.keys(el['input']);
+                var obj = {}
+                for (var i = 0; i < keysObj.length; i++) {
+                    var key = keysObj[i].replace('labelitemsConId_', '')
+                    obj[key] = el['input'][keysObj[i]];
+                }
+                metricObj[item] = obj;
+            }
 
-            if(check == false){
+        }
+
+        return metricObj;
+
+    }
+
+
+
+    Cons.checkConstraintsActive = function () {
+        var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score']
+
+        for (var item in ConsInt.activeConstraints) {
+            var check = true;
+            var el = ConsInt.activeConstraints[item]
+            if (Object.keys(el).length == 0) check = false;
+            else if (Object.keys(el['input']).length == 0) check = false;
+            else {
+                try {
+                    var keysObj = Object.keys(el['input']);
+                    if (el['input'][keysObj[0]].length == 0) check = false;
+                } catch (e) {
+                    check = false
+                }
+            }
+            if (origDef.indexOf(item) != -1) check = true;
+
+            if (check == false) {
                 //toggle button
                 var idBtn = $(".btn_" + item).attr('id');
                 // console.log('toggling button ', item, check)
-                var name = $("#"+idBtn).attr('given');
+                var name = $("#" + idBtn).attr('given');
                 var item = $("#" + idBtn).attr('parent');
                 // if (!DataTable.fromTableInferred) Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
                 Cons.typeConstraints[item][name]['Checked'] = false;
                 $("#" + idBtn).click();
 
             }
-            
+
         }
     }
 
@@ -557,14 +591,14 @@
                 // console.log('accordion opened ', Cons.accordionOpen)
                 // return
 
-                 if (Cons.accordionOpen) {
-                     Main.rightPanelBothShow = false;
-                     $("#confMatTrain").hide();
-                 } else {
-                     Main.rightPanelBothShow = true;
+                if (Cons.accordionOpen) {
+                    Main.rightPanelBothShow = false;
+                    $("#confMatTrain").hide();
+                } else {
+                    Main.rightPanelBothShow = true;
 
-                     $("#confMatTrain").show();
-                 }
+                    $("#confMatTrain").show();
+                }
 
                 // if (Cons.accordionOpen) {
                 //     // $("#confMatTrain").hide();
