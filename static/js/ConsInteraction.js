@@ -20,7 +20,7 @@
                         obQj = ConsInt.tempActConstraints[k];
                         // console.log(' active copying worked ', ConsInt.activeConstraints, k, ConsInt.tempActConstraints)
                     } catch (e) {}
-                    if (typeof obj == 'undefined') {
+                    if (typeof obj == 'undefined' || Object.keys(obj).length == 0) {
                         //normal case
                         obj = {
                             'input': {},

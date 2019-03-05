@@ -155,6 +155,40 @@
 
 
 
+    Cons.checkConstraintsActive = function(){
+        var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score']
+
+        for(var item in ConsInt.activeConstraints){
+            var check = true;
+            var el = ConsInt.activeConstraints[item]
+            if (Object.keys(el).length == 0) check = false;
+            else if(Object.keys(el['input']).length == 0) check = false;
+            else{
+                try{
+                    var keysObj = Object.keys(el['input']);
+                    if(el['input'][keysObj[0]].length == 0) check = false;
+                }catch(e){
+                    check = false
+                }
+            }
+            if(origDef.indexOf(item) != -1) check = true;
+
+            if(check == false){
+                //toggle button
+                var idBtn = $(".btn_" + item).attr('id');
+                // console.log('toggling button ', item, check)
+                var name = $("#"+idBtn).attr('given');
+                var item = $("#" + idBtn).attr('parent');
+                // if (!DataTable.fromTableInferred) Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
+                Cons.typeConstraints[item][name]['Checked'] = false;
+                $("#" + idBtn).click();
+
+            }
+            
+        }
+    }
+
+
     Cons.makeConsDivs = function (containerId = "constrainPanel") {
         // console.log('Cons is ', Cons.typeConstraints)
         if (containerId == "") containerId = "constrainPanel";
@@ -376,7 +410,7 @@
             // return
             var name = $(this).attr('given');
             var item = $(this).attr('parent');
-            // console.log('clicked checkbox ', name, item);
+            console.log('clicked checkbox ', name, item);
             //COMMENTED BELOW
             // if (!DataTable.fromTableInferred) Cons.typeConstraints[item][name]['Checked'] = !Cons.typeConstraints[item][name]['Checked'];
             if (Cons.cnsBtnMouseEvent) {

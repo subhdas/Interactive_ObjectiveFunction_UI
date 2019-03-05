@@ -221,23 +221,17 @@
         DataTable.switchToLeftData();
         ParC.featureEditorCreate();
         DataTable.makeTable(Main.trainData);
-        // DataTable.makeTags();
         
         DataTable.extraContent = false;
         DataTable.makeTable(Main.testData, "tableContentTest");
-        // DataTable.addBtnTestTable();
         Scat.makeTheMatrix();
         Scat.hideScatterView();
 
         Cons.makeConsDivs();
-        // BarM.makeStackedModelBars();
-        // StarM.makeStarPlot();
 
         ConsInt.getActiveConstraints();
         
         Main.tableTogglingApply();
-        // Rul.makeRuleList();
-        // Main.makeTablePanelsAccord();
 
         Main.addRightPanelIcon();
     }

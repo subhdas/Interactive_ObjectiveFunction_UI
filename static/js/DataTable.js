@@ -275,22 +275,7 @@
     //     }
     // }
 
-    DataTable.addBtnTestTable = function (containerId = "") {
-        if (containerId == "") {
-            containerId = "tableHeadDivTest"
-
-            var htmlStr = "<div class = tabSelectorBtnsDiv>"
-            htmlStr += "<button id='bakeModels' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored bakeModelsCl'>"
-            htmlStr += "<i class='material-icons'>play_circle_filled</i></button>";
-            htmlStr += '</div>'
-
-            $("#" + containerId).append(htmlStr);
-            $("#" + containerId).css('display', 'flex');
-            $("#" + containerId).css('align-items', 'center');
-
-
-        }
-    }
+  
 
 
     DataTable.addIconsTop = function (dataIn = Main.trainData, containerId = "") {
@@ -467,15 +452,14 @@
                 BarM.allModelData[0] = BarM.modelData[0]['predictions']
 
                 BarM.computeIdsConfMatrAllModel();
-                // ConsInt.getActiveConstraints();
                 setTimeout(() => {
                     StarM.makeStarPlot();
-
-                }, 500);
+                }, 0);
                 ConfM.makeConfMatrix(confMatrixTrain, 'train');
                 ConfM.makeConfMatrix(confMatrixTest, 'test'); // test
 
                 DataTable.modelUpdateLabel();
+                Cons.checkConstraintsActive();
 
             })
         })
