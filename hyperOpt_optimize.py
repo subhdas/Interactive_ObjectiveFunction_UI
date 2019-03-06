@@ -58,7 +58,7 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
     train, trainId = preProcessData(train)
     test, testId = preProcessData(test)
 
-    def compo_metrics(targetTrain,predTrain):
+    def critical_metrics(targetTrain,predTrain):
         metObj = extraInfo['metricKeys']
         critIds = []
         # find for critical-items
@@ -80,6 +80,87 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
 
         critScore = (critScore*1.0)/len(critIds)
         return critScore
+
+
+    def samelabel_metrics(targetTrain,predTrain):
+        metObj = extraInfo['metricKeys']
+
+        # print "met obj is ", metObj
+        sameLabelObj = {}
+        # find for candidate or same-label
+        try:
+            sameLabelObj = metObj['Same-Label'] # gets an array
+        except:
+            return 0.65656
+        predTrainDict = {}
+        origTrainDict = {}
+        for i in range(len(predTrain)):
+            id = trainId[i]
+            predTrainDict[str(id)] = str(predTrain[i])
+            origTrainDict[str(id)] = str(targetTrain[i])
+
+        sameLabScore = 0;
+        count = 0
+        for item in sameLabelObj:
+            elIdList = sameLabelObj[item] # item is the class label
+            # print "elid object is ", elIdList
+            for i in range(len(elIdList)):
+                count += 1
+                if(predTrainDict[elIdList[i]] == item): sameLabScore += 1
+                else : sameLabScore += 0
+
+        sameLabScore = (sameLabScore*1.0)/count
+        return sameLabScore
+
+
+    def similar_metrics(targetTrain,predTrain):
+        metObj = extraInfo['metricKeys']
+
+        # print "met obj is ", metObj
+        similarityObj = {}
+        # find for candidate or same-label
+        try:
+            similarityObj = metObj['Similarity-Metric'] # gets an array
+        except:
+            return 0.65656
+        predTrainDict = {}
+        origTrainDict = {}
+        for i in range(len(predTrain)):
+            id = trainId[i]
+            predTrainDict[str(id)] = str(predTrain[i])
+            origTrainDict[str(id)] = str(targetTrain[i])
+
+        similarityScore = 0;
+        count = 0
+        defaultLabel = ""
+        for item in similarityObj:
+            if(item == 'Different'): continue
+            elIdList = similarityObj[item] # item is the class label
+            # print "elid object is ", elIdList
+            for i in range(len(elIdList)):
+                count += 1
+                if(defaultLabel == ""): defaultLabel = predTrainDict[elIdList[i]] 
+                if(predTrainDict[elIdList[i]] == defaultLabel): similarityScore += 1
+                else : similarityScore += 0
+
+        differentScore = 0;
+        count2 = 0
+        defaultLabel = ""
+        # for diffferent items
+        for item in similarityObj:
+            if(item == 'Similar'): continue
+            elIdList = similarityObj[item] # item is the class label
+            # print "elid object is ", elIdList
+            for i in range(len(elIdList)):
+                count2 += 1
+                if(defaultLabel == ""): defaultLabel = predTrainDict[elIdList[i]] 
+                if(predTrainDict[elIdList[i]] == defaultLabel): differentScore += 0
+                else : differentScore += 1
+
+        similarityScore = (similarityScore*1.0)/count
+        differentScore = (differentScore*1.0)/count2
+        finalScore = (similarityScore + differentScore)*0.5
+        return finalScore
 
 
     def objective(space):
@@ -106,10 +187,12 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
         cross_mean_score = cross_val_score( estimator=clf, X=train, y=targetTrain, scoring='precision_macro', cv=3, n_jobs=-1).mean()
 
 
-        compMetScore = compo_metrics(targetTrain, predTrain)
+        critScore = critical_metrics(targetTrain, predTrain)
+        sameLabScore = samelabel_metrics(targetTrain, predTrain)
+        similarityScore = similar_metrics(targetTrain, predTrain)
 
         result = {'loss': -1*cross_mean_score, 'status': STATUS_OK }
-        print " result is ", result, MAX_RET, MAX_EVAL, compMetScore
+        print " result is ", result, MAX_RET, MAX_EVAL, critScore, sameLabScore, similarityScore
         return result
 
     col_train = train.columns
