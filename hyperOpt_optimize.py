@@ -191,8 +191,13 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
         sameLabScore = samelabel_metrics(targetTrain, predTrain)
         similarityScore = similar_metrics(targetTrain, predTrain)
 
+        precTrain = precision_score(targetTrain, predTrain, average='macro') #+ random.uniform(-0.2,0.2)
+        accTrain = accuracy_score(targetTrain, predTrain,  normalize=True) #+ random.uniform(-0.2,0.2)
+        f1Train = f1_score(targetTrain, predTrain, average='macro') #+ random.uniform(-0.2,0.2)
+
         result = {'loss': -1*cross_mean_score, 'status': STATUS_OK }
-        print " result is ", result, MAX_RET, MAX_EVAL, critScore, sameLabScore, similarityScore
+        # print " result is ", result, MAX_RET, MAX_EVAL, critScore, sameLabScore, similarityScore
+        print " result is ", result, MAX_RET, MAX_EVAL, precTrain, accTrain, f1Train
         return result
 
     col_train = train.columns
@@ -295,9 +300,9 @@ def makePredictions(space, train, test, targetTrain, targetTest, trainId, testId
 
 
     # metrics for train
-    precTrain = precision_score(targetTrain, predTrain, average='micro') + random.uniform(-0.2,0.2)
+    precTrain = precision_score(targetTrain, predTrain, average='macro') + random.uniform(-0.2,0.2)
     accTrain = accuracy_score(targetTrain, predTrain,  normalize=True) + random.uniform(-0.2,0.2)
-    f1Train = f1_score(targetTrain, predTrain, average='micro') + random.uniform(-0.2,0.2)
+    f1Train = f1_score(targetTrain, predTrain, average='macro') + random.uniform(-0.2,0.2)
 
     trainMetricObj = {
         'prec' : precTrain,
@@ -319,9 +324,9 @@ def makePredictions(space, train, test, targetTrain, targetTest, trainId, testId
         trainMetricObj[metricList[i]] = random.uniform(0.1, 0.99)
 
     # metrics for test
-    precTest = precision_score(targetTest, predTest, average='micro') + random.uniform(-0.2,0.2)
+    precTest = precision_score(targetTest, predTest, average='macro') + random.uniform(-0.2,0.2)
     accTest = accuracy_score(targetTest, predTest,  normalize=True) + random.uniform(-0.2,0.2)
-    f1Test = f1_score(targetTest, predTest, average='micro') + random.uniform(-0.2,0.2)
+    f1Test = f1_score(targetTest, predTest, average='macro') + random.uniform(-0.2,0.2)
 
     testMetricObj = {
         'prec': precTest,
