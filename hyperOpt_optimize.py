@@ -58,6 +58,27 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
     train, trainId = preProcessData(train)
     test, testId = preProcessData(test)
 
+
+
+    def non_critical_metrics(targetTrain,predTrain):
+        metObj = extraInfo['metricKeys']
+        non_critIds = []
+        # find for non-critical-items
+        try:
+            non_critIds = metObj['Non-Critical']['Non-Critical'] # gets an array
+        except:
+            return targetTrain, predTrain
+        newTargetTrain =[]
+        newPredTrain =[]
+        for i in range(len(predTrain)):
+            # id = trainId['id'].values[i]
+            id = trainId[i]
+            if(str(id) in non_critIds) : continue
+            newTargetTrain.append(str(targetTrain[i]))
+            newPredTrain.append(str(predTrain[i]))
+        return newTargetTrain, newPredTrain
+
+
     def critical_metrics(targetTrain,predTrain):
         metObj = extraInfo['metricKeys']
         critIds = []
@@ -191,13 +212,29 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
         sameLabScore = samelabel_metrics(targetTrain, predTrain)
         similarityScore = similar_metrics(targetTrain, predTrain)
 
-        precTrain = precision_score(targetTrain, predTrain, average='macro') #+ random.uniform(-0.2,0.2)
-        accTrain = accuracy_score(targetTrain, predTrain,  normalize=True) #+ random.uniform(-0.2,0.2)
-        f1Train = f1_score(targetTrain, predTrain, average='macro') #+ random.uniform(-0.2,0.2)
+        targetTrainNew,predTrainNew = non_critical_metrics(targetTrain, predTrain)
+        # print " diff target length found ", len(targetTrainNew), len(targetTrain)
+
+        # ccheck for length of new target train
+        trainT = []
+        predT = []
+        if(len(targetTrainNew) < len(targetTrain)):
+            print " diff target length found ", len(targetTrainNew), len(targetTrain)
+            trainT = targetTrainNew
+            predT = predTrainNew
+        else:
+            trainT = targetTrain
+            predT = predTrain
+
+
+        precTrain = precision_score(trainT, predT, average='macro') #+ random.uniform(-0.2,0.2)
+        accTrain = accuracy_score(trainT, predT,  normalize=True) #+ random.uniform(-0.2,0.2)
+        f1Train = f1_score(trainT, predT, average='macro') #+ random.uniform(-0.2,0.2)
 
         result = {'loss': -1*cross_mean_score, 'status': STATUS_OK }
         # print " result is ", result, MAX_RET, MAX_EVAL, critScore, sameLabScore, similarityScore
-        print " result is ", result, MAX_RET, MAX_EVAL, precTrain, accTrain, f1Train
+        # print " result is ", result, MAX_RET, MAX_EVAL, precTrain, accTrain, f1Train
+        print " result is ", result, MAX_RET, MAX_EVAL, len(targetTrainNew), len(targetTrain), len(trainT)
         return result
 
     col_train = train.columns
