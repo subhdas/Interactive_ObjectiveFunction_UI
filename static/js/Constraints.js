@@ -155,6 +155,7 @@
 
     Cons.constraintIdFinder = function () {
         var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score']
+        var origDef = [];
         var metricObj = {}
         for (var item in ConsInt.activeConstraints) {
             var check = true;
@@ -162,11 +163,11 @@
 
             var el = ConsInt.activeConstraints[item]
             if (Object.keys(el).length == 0) check = false;
-            else if (Object.keys(el['input']).length == 0) check = false;
+            // else if (Object.keys(el['input']).length == 0) check = false;
             else {
                 try {
                     var keysObj = Object.keys(el['input']);
-                    if (el['input'][keysObj[0]].length == 0) check = false;
+                    // if (el['input'][keysObj[0]].length == 0) check = false;
                 } catch (e) {
                     check = false
                 }

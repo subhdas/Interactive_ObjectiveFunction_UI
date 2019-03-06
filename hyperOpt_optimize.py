@@ -195,6 +195,7 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
         #                        objective='reg:linear'
         #                        )
 
+        metObj = extraInfo['metricKeys']
         clf = RandomForestClassifier(max_depth=space['max_depth'],
                                     min_samples_split = space['min_samples_split'],
                                     min_samples_leaf = space['min_samples_leaf'],
@@ -205,6 +206,8 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
         # score =  A*SameLabel + B*Features +
         clf.fit(train, targetTrain)
         predTrain = clf.predict(train)
+        predTest = clf.predict(test)
+
         cross_mean_score = cross_val_score( estimator=clf, X=train, y=targetTrain, scoring='precision_macro', cv=3, n_jobs=-1).mean()
 
 
@@ -226,15 +229,40 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
             trainT = targetTrain
             predT = predTrain
 
+        # metrics for train
+        try:
+            exist = metObj['Precision']
+            precTrain = precision_score(trainT, predT, average='macro') #+ random.uniform(-0.2,0.2)
+        except: precTrain = 0
 
-        precTrain = precision_score(trainT, predT, average='macro') #+ random.uniform(-0.2,0.2)
-        accTrain = accuracy_score(trainT, predT,  normalize=True) #+ random.uniform(-0.2,0.2)
-        f1Train = f1_score(trainT, predT, average='macro') #+ random.uniform(-0.2,0.2)
+        try:
+            exist = metObj['F1-Score']
+            f1Train = f1_score(trainT, predT, average='macro') #+ random.uniform(-0.2,0.2)
+        except: f1Train = 0
+
+        try:
+            exist = metObj['Recall']
+            accTrain = accuracy_score(trainT, predT, normalize=True) #+ random.uniform(-0.2,0.2)
+        except: accTrain = 0
+
+
+        # metrics for test
+        try:
+            exist = metObj['Testing-Accuracy']
+            precTest = precision_score(targetTest, predTest, average='macro') #+ random.uniform(-0.2,0.2)
+        except: precTest = 0
+
+        try:
+            exist = metObj['Cross-Val-Score']
+            f1Test = f1_score(targetTest, predTest, average='macro') #+ random.uniform(-0.2,0.2)
+        except: f1Test = 0
+
 
         result = {'loss': -1*cross_mean_score, 'status': STATUS_OK }
         # print " result is ", result, MAX_RET, MAX_EVAL, critScore, sameLabScore, similarityScore
         # print " result is ", result, MAX_RET, MAX_EVAL, precTrain, accTrain, f1Train
-        print " result is ", result, MAX_RET, MAX_EVAL, len(targetTrainNew), len(targetTrain), len(trainT)
+        # print " result is ", result, MAX_RET, MAX_EVAL, len(targetTrainNew), len(targetTrain), len(trainT)
+        print " result is ", result, MAX_RET, MAX_EVAL, precTest, f1Test, precTrain, f1Train
         return result
 
     col_train = train.columns
