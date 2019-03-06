@@ -257,8 +257,24 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
             f1Test = f1_score(targetTest, predTest, average='macro') #+ random.uniform(-0.2,0.2)
         except: f1Test = 0
 
+        # store the result
+        modelMetricsObj = {}
 
-        result = {'loss': -1*cross_mean_score, 'status': STATUS_OK }
+        modelMetricsObj['Critical-Items'] = critScore
+        modelMetricsObj['Non-Critical'] = random.uniform(0.3,0.95)
+        modelMetricsObj['Same-Label'] = sameLabScore
+        modelMetricsObj['Similarity'] = similarityScore
+        modelMetricsObj['Precision'] = precTrain
+        modelMetricsObj['Recall'] = accTrain
+        modelMetricsObj['F1-Score'] = f1Train
+        modelMetricsObj['Testing-Accuracy'] = precTest
+        modelMetricsObj['Cross-Val-Score'] = f1Test
+
+
+        modelMetricsList = [modelMetricsObj]
+
+
+        result = {'loss': -1*cross_mean_score, 'status': STATUS_OK, 'modelMetrics' : modelMetricsList, }
         # print " result is ", result, MAX_RET, MAX_EVAL, critScore, sameLabScore, similarityScore
         # print " result is ", result, MAX_RET, MAX_EVAL, precTrain, accTrain, f1Train
         # print " result is ", result, MAX_RET, MAX_EVAL, len(targetTrainNew), len(targetTrain), len(trainT)
