@@ -1566,9 +1566,12 @@
 
             var name = d[Main.entityNameSecondImp]
             // console.log(' name is ', name, name.length)
-            if (name.length > vc) {
-                name = name.substring(0, vc) + '...'
-            }
+            try {
+                if (name.length > vc) {
+                    name = name.substring(0, vc) + '...'
+                }
+            } catch (e) {}
+
             d[Main.entityNameSecondImp] = name
         }); // end of data for each
         // main.testData = data.slice();

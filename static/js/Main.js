@@ -31,6 +31,7 @@
     Main.contentWidthTopBar = '700';
 
     Main.rightPanelBothShow = true
+    Main.LABELMODE = true
     /*
     stores system colors
     */
@@ -62,7 +63,13 @@
             }
             $("#sidePanel").css("width", "25px");
             $("#viewPanel").css("width", "100%");
+            Main.LABELMODE = false; // for car data make it true
+            Main.labels = ['economical', 'sports', 'utility'];
+            Main.labels = ['default no', 'default yes'];
+
             var dataSrc = "static/data/car_full2.csv";
+            var dataSrc = "static/data/def_credit_card_short1.csv";
+
             // var dataSrc = "static/data/movies_200.csv";
             // var dataSrc = "static/data/movie_metadata_200.csv";
             // var dataSrc = "static/data/BreastCancerDataSet.csv";
@@ -361,9 +368,11 @@
 
 
     Main.processAttrData = function (data, dataTest) {
+        if (Main.LABELMODE) {
+            data = Main.addLabels(data); // only for car data set
+            dataTest = Main.addLabels(dataTest) // only for car data set
+        }
 
-        data = Main.addLabels(data);
-        dataTest = Main.addLabels(dataTest)
         var title = Object.keys(data[0]);
         // console.log("title found ", title)
         for (var i = 0; i < title.length; i++) {
@@ -437,7 +446,7 @@
         Main.entityNameSecondImp = "0_" + Main.entityNameSecondImp;
         Main.leftData = Main.trainData;
         Main.makeLabelIds(Main.trainData);
-        // console.log(' train test and left data ', Main.trainData.length, Main.testData.length, Main.leftData.length)
+        console.log(' train test and left data ', Main.trainData.length, Main.testData.length, Main.leftData.length)
 
         setTimeout(() => {
             //  Util.writeCSV(Main.trainData)            
