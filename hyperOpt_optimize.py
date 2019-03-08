@@ -99,6 +99,7 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
         for i in range(len(critIds)):
             if(predTrainDict[critIds[i]] == origTrainDict[critIds[i]]): critScore += 1
 
+        if(len(critIds) == 0) : return 0
         critScore = (critScore*1.0)/len(critIds)
         return critScore
 
@@ -130,6 +131,8 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
                 if(predTrainDict[elIdList[i]] == item): sameLabScore += 1
                 else : sameLabScore += 0
 
+
+        if(count == 0) : return 0
         sameLabScore = (sameLabScore*1.0)/count
         return sameLabScore
 
@@ -178,8 +181,11 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
                 if(predTrainDict[elIdList[i]] == defaultLabel): differentScore += 0
                 else : differentScore += 1
 
-        similarityScore = (similarityScore*1.0)/count
-        differentScore = (differentScore*1.0)/count2
+        if(count == 0) : similarityScore = 0
+        else :  similarityScore = (similarityScore*1.0)/count
+        if(count2 == 0) : differentScore = 0
+        else : differentScore = (differentScore*1.0)/count2
+
         finalScore = (similarityScore + differentScore)*0.5
         return finalScore
 

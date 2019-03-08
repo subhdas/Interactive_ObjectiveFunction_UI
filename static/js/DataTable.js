@@ -456,7 +456,13 @@
 
                 BarM.computeIdsConfMatrAllModel();
                 setTimeout(() => {
-                    StarM.makeStarPlot();
+                    // StarM.makeStarPlot();
+
+                    var arr = ['id'];
+                    arr.push.apply(arr, Object.keys(Main.numericalAttributes));
+                    var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
+                    console.log('par coord model metric ', arr, dataNumeric)
+                    StarM.makeMetricsParCoord('',dataNumeric, true);
                 }, 0);
                 ConfM.makeConfMatrix(confMatrixTrain, 'train');
                 ConfM.makeConfMatrix(confMatrixTest, 'test'); // test

@@ -139,6 +139,7 @@
 
 
     ParC.makeParallelCoordChart = function (containerId = "", data, addInteract = false) {
+        // addInteract = false
         var parentContainerId = "featureEnggPanel";
         $('#' + containerId).empty();
         // var w = $("#" + containerId).css('width');
@@ -153,7 +154,7 @@
             h = 300;
         }
 
-        console.log('par coord width is ', w, h)
+        // console.log('par coord width is ', w, h)
 
         var margin = {
                 top: 20,
