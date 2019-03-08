@@ -363,7 +363,7 @@
             h = 300;
         }
 
-        console.log('par coord width is ', w, h)
+        // console.log('par coord width is ', w, h)
 
         var margin = {
                 top: 20,

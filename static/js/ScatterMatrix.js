@@ -88,6 +88,10 @@
         d3.csv("static/data/flowers.csv", function (error, data) {
             if (error) throw error;
             var categorical = Main.entityNameSecondImp; //"species"
+            if(categorical == '0_') {
+                var key = Object.keys(Main.numericalAttributes);
+                categorical = key[Util.getRandomNumberBetween(0,key.length-1).toFixed(0)]
+            }
             data = dataHave
 
             var domainByTrait = {},

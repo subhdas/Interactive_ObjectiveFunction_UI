@@ -64,7 +64,7 @@
 
     Main.datasetSelector = function () {
         var dataSel = 1; // car
-        // var dataSel = 2; // creditcard
+        var dataSel = 2; // creditcard
         // var dataSel = 3; // salary
         // var dataSel = 4; // movie
 
@@ -72,19 +72,19 @@
         if (dataSel == 1) {
             Main.labels = ['economical', 'sports', 'utility']; // for CARS DATA labels          
             Main.dataset = 'cars'
-            return "static/data/car_full2.csv";
+            return "static/data/scenario/car_full2.csv";
         } else if (dataSel == 2) {
             Main.labels = ['default no', 'default yes']; // for credit card default
             Main.dataset = 'credit_card'
-            return "static/data/def_credit_card_short1.csv";
+            return "static/data/scenario/def_credit_card_short1.csv";
         } else if (dataSel == 3) {
             Main.labels = ['admin_fin', 'cult_rec', 'health', 'pub_serv', 'welfare_city']; // for SALARY DATA default
             Main.dataset = 'salary'
-            return "static/data/Employee_Compensation_SF_SUB_short1.csv";
+            return "static/data/scenario/Employee_Compensation_SF_SUB_short1.csv";
         } else if (dataSel == 4) {
             Main.labels = ['low', 'med', 'high']; // for MOVIE DATA default
             Main.dataset = 'movie'
-            return "static/data/movie_metadata_short_SUB.csv";
+            return "static/data/scenario/movie_metadata_short_SUB.csv";
         } else if (dataSel == 5) {
 
         }
@@ -396,7 +396,7 @@
     Main.addOrigLabels = function (dataIn = Main.trainData) {
         var data = Util.deepCopyData(dataIn)
         data.forEach(function (d, i) {
-            var ind = d[Main.targetName]
+            var ind = +d[Main.targetName]
             d[Main.targetName] = Main.labels[ind];
         })
         var dataOut = Util.deepCopyData(data)
@@ -428,7 +428,7 @@
 
     Main.processAttrData = function (data, dataTest) {
 
-        if (Main.dataSet = 'cars') {
+        if (Main.dataSet == 'cars') {
             var num = 3
             data = Main.addLabels(data, num); // only for car data set
             dataTest = Main.addLabels(dataTest, num) // only for car data set
