@@ -11,6 +11,7 @@
 
     StarM.modelOutputView = true;
     StarM.constraintsDict = {}
+    StarM.starPlotMode = false;
 
     StarM.getModelData = function () {
         var modelData = BarM.allModelData;
@@ -220,7 +221,19 @@
     }
 
 
+    StarM.toggleParCoorStarPlot = function () {
 
+        if (StarM.starPlotMode) {
+          var arr = ['id'];
+          arr.push.apply(arr, Object.keys(Main.numericalAttributes));
+          var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
+        //   console.log('par coord model metric ', arr, dataNumeric)
+          StarM.makeMetricsParCoord('', dataNumeric, true);
+
+        } else {
+          StarM.makeStarPlot();       
+        }
+    }
 
 
 
@@ -236,15 +249,16 @@
         StarM.modelOutputView = !StarM.modelOutputView;
         if (StarM.modelOutputView) {
             $(".modelOutputText").text('Model Output Panel')
-            $("#starPlotContentId").hide()
+            if (StarM.starPlotMode) $("#starPlotContentId").show()
+            else $("#parCoorModelMetric").show()
             // $("#starPlotModelId").show()
             $("#modelOutDivId").show()
             $('.modelNameHead').show();
 
         } else {
             $(".modelOutputText").text('Constraint List View')
-
-            $("#starPlotContentId").show()
+            if(StarM.starPlotMode) $("#starPlotContentId").hide()
+            else $("#parCoorModelMetric").hide()
             // $("#starPlotModelId").hide()
             $("#modelOutDivId").hide()
             StarM.addConstraintsTable();
@@ -290,7 +304,7 @@
 
 
         $("#toggleParStarPlotId").on('click', function (d) {
-            StarM.toggleModelConstraintView();
+            StarM.toggleParCoorStarPlot();
         })
 
         $("#toggleModelConstraintsId").on('click', function (d) {
@@ -300,6 +314,7 @@
     }
 
      StarM.makeMetricsParCoord = function (containerId = "", data, addInteract = false) {
+         StarM.starPlotMode = false;
          
         // make sure empt and update header
         if (containerId == "") containerId = "modelExplorePanel"
@@ -377,7 +392,8 @@
              .attr("width", width + margin.left + margin.right)
              .attr("height", height + margin.top + margin.bottom)
              .append("g")
-             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+             .attr('id', 'parCoorModelMetric')
 
 
         // get data in the right format
@@ -785,6 +801,7 @@
      }
 
     StarM.makeStarPlot = function (containerId = "") {
+         StarM.starPlotMode = true;
         // console.log(' making star plot for models ')
         RadarChart.defaultConfig.color = function () {};
         RadarChart.defaultConfig.radius = 3;
