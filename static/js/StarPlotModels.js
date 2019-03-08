@@ -249,7 +249,7 @@
         StarM.modelOutputView = !StarM.modelOutputView;
         if (StarM.modelOutputView) {
             $(".modelOutputText").text('Model Output Panel')
-            if (StarM.starPlotMode) $("#starPlotContentId").show()
+            if (StarM.starPlotMode) $("#starPlotModelId").show()
             else $("#parCoorModelMetric").show()
             // $("#starPlotModelId").show()
             $("#modelOutDivId").show()
@@ -257,7 +257,7 @@
 
         } else {
             $(".modelOutputText").text('Constraint List View')
-            if(StarM.starPlotMode) $("#starPlotContentId").hide()
+            if (StarM.starPlotMode) $("#starPlotModelId").hide()
             else $("#parCoorModelMetric").hide()
             // $("#starPlotModelId").hide()
             $("#modelOutDivId").hide()
