@@ -222,7 +222,7 @@
 
 
     StarM.toggleParCoorStarPlot = function () {
-
+            $("#starPlotContentId").hide();
         if (StarM.starPlotMode) {
             var arr = ['id'];
             arr.push.apply(arr, Object.keys(Main.numericalAttributes));
@@ -254,11 +254,15 @@
             // $("#starPlotModelId").show()
             $("#modelOutDivId").show()
             $('.modelNameHead').show();
+            $("#starPlotContentId").hide();
+
 
         } else {
             $(".modelOutputText").text('Constraint List View')
-            if (StarM.starPlotMode) $("#starPlotModelId").hide()
+            if (StarM.starPlotMode == true) $("#starPlotModelId").hide()
             else $("#parCoorModelMetric").hide()
+
+            $("#starPlotContentId").show();
             // $("#starPlotModelId").hide()
             $("#modelOutDivId").hide()
             StarM.addConstraintsTable();
@@ -355,11 +359,11 @@
         h = parseFloat(h)
 
         if ((w < 120 && h < 120) || addInteract) {
-            w = 650;
+            w = 450;
             h = 300;
         }
 
-        // console.log('par coord width is ', w, h)
+        console.log('par coord width is ', w, h)
 
         var margin = {
                 top: 20,
@@ -391,9 +395,9 @@
         var svg = d3.select("#" + containerId).append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
+            .attr('id', 'parCoorModelMetric')
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-            .attr('id', 'parCoorModelMetric')
 
 
         // get data in the right format
