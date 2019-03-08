@@ -32,6 +32,14 @@
 
     Main.rightPanelBothShow = true
     Main.LABELMODE = true
+    Main.dataSet = ''
+
+    //employee salaries
+
+
+
+
+
     /*
     stores system colors
     */
@@ -54,6 +62,36 @@
         DEBUG: false,
     }
 
+    Main.datasetSelector = function () {
+        var dataSel = 1; // car
+        // var dataSel = 2; // creditcard
+        // var dataSel = 3; // salary
+        // var dataSel = 4; // movie
+
+
+        if (dataSel == 1) {
+            Main.labels = ['economical', 'sports', 'utility']; // for CARS DATA labels          
+            Main.dataset = 'cars'
+            return "static/data/car_full2.csv";
+        } else if (dataSel == 2) {
+            Main.labels = ['default no', 'default yes']; // for credit card default
+            Main.dataset = 'credit_card'
+            return "static/data/def_credit_card_short1.csv";
+        } else if (dataSel == 3) {
+            Main.labels = ['admin_fin', 'cult_rec', 'health', 'pub_serv', 'welfare_city']; // for SALARY DATA default
+            Main.dataset = 'salary'
+            return "static/data/Employee_Compensation_SF_SUB_short1.csv";
+        } else if (dataSel == 4) {
+            Main.labels = ['low', 'med', 'high']; // for MOVIE DATA default
+            Main.dataset = 'movie'
+            return "static/data/movie_metadata_short_SUB.csv";
+        } else if (dataSel == 5) {
+
+        }
+
+
+    }
+
 
     Main.init = function (tag = false) {
         $(document).ready(function () {
@@ -64,16 +102,21 @@
             $("#sidePanel").css("width", "25px");
             $("#viewPanel").css("width", "100%");
             Main.LABELMODE = false; // for car data make it true
-            Main.labels = ['economical', 'sports', 'utility'];
-            Main.labels = ['default no', 'default yes'];
+            // Main.labels = ['economical', 'sports', 'utility']; // for CARS DATA labels
+            // Main.labels = ['default no', 'default yes']; // for credit card default
+            // Main.labels = ['admin_fin', 'cult_rec', 'health', 'pub_serv', 'welfare_city']; // for SALARY DATA default
+            // Main.labels = ['low', 'med', 'high']; // for MOVIE DATA default
 
-            var dataSrc = "static/data/car_full2.csv";
-            var dataSrc = "static/data/def_credit_card_short1.csv";
+            // var dataSrc = "static/data/car_full2.csv";
+            // var dataSrc = "static/data/def_credit_card_short1.csv";
+            // // var dataSrc = "static/data/Employee_Compensation_SF_SUB_short1.csv";
+            // // var dataSrc = "static/data/movie_metadata_short_SUB.csv";
+            // // 
+            // // var dataSrc = "static/data/movies_200.csv";
+            // // var dataSrc = "static/data/movie_metadata_200.csv";
+            // // var dataSrc = "static/data/BreastCancerDataSet.csv";
 
-            // var dataSrc = "static/data/movies_200.csv";
-            // var dataSrc = "static/data/movie_metadata_200.csv";
-            // var dataSrc = "static/data/BreastCancerDataSet.csv";
-
+            var dataSrc = Main.datasetSelector();
             if (tag) Main.sendData(Main.outerData);
             else Main.loadData(dataSrc);
 
@@ -337,10 +380,10 @@
 
     }
 
-    Main.addLabels = function (dataIn = Main.trainData) {
+    Main.addLabels = function (dataIn = Main.trainData, num = 3) {
         var data = Util.deepCopyData(dataIn)
         data.forEach(function (d, i) {
-            var ind = Util.getRandomNumberBetween(1, 0) * 3;
+            var ind = Util.getRandomNumberBetween(1, 0) * num; // 3
             ind = Math.ceil(ind - 1)
             d[Main.targetName] = Main.labels[ind];
         })
@@ -348,6 +391,22 @@
         console.log('dataoUt ', dataOut)
         return dataOut;
     }
+
+
+    Main.addOrigLabels = function (dataIn = Main.trainData) {
+        var data = Util.deepCopyData(dataIn)
+        data.forEach(function (d, i) {
+            var ind = d[Main.targetName]
+            d[Main.targetName] = Main.labels[ind];
+        })
+        var dataOut = Util.deepCopyData(data)
+        console.log('dataoUt ', dataOut)
+        return dataOut;
+    }
+
+
+
+
 
 
     Main.makeLabelIds = function (data) {
@@ -368,10 +427,23 @@
 
 
     Main.processAttrData = function (data, dataTest) {
-        if (Main.LABELMODE) {
-            data = Main.addLabels(data); // only for car data set
-            dataTest = Main.addLabels(dataTest) // only for car data set
+
+        if (Main.dataSet = 'cars') {
+            var num = 3
+            data = Main.addLabels(data, num); // only for car data set
+            dataTest = Main.addLabels(dataTest, num) // only for car data set
+        } else {
+            data = Main.addOrigLabels(data); // only for car data set
+            dataTest = Main.addOrigLabels(dataTest) // only for car data set
         }
+        // if (!Main.LABELMODE) {
+        //     var num = 5
+        //     // data = Main.addLabels(data, num); // only for car data set
+        //     // dataTest = Main.addLabels(dataTest, num) // only for car data set
+
+        //     data = Main.addOrigLabels(data); // only for car data set
+        //     dataTest = Main.addOrigLabels(dataTest) // only for car data set
+        // }
 
         var title = Object.keys(data[0]);
         // console.log("title found ", title)
@@ -389,6 +461,9 @@
                         Main.entityNameSecondImp = title[i];
                     }
                 }
+
+                if (Main.entityName == Main.targetName) Main.entityName = ''
+                if (Main.entityNameSecondImp == Main.targetName) Main.entityNameSecondImp = ''
             } else {
                 if (title[i] != 'id' && title[i] != 'cluster') {
                     Main.numericalAttributes[title[i]] = true;
@@ -417,6 +492,9 @@
             Main.attrDict[title[i]]["range"] = [attrUniq[0], attrUniq[attrUniq.length - 1]];
         }
 
+
+        // console.log('main entity names ', Main.entityName, Main.entityNameSecondImp)
+
         data.forEach(function (d) {
             var temp = d[Main.entityName];
             var temp2 = d[Main.entityNameSecondImp];
@@ -439,14 +517,14 @@
 
         Main.trainData = data;
         Main.testData = dataTest
-        console.log(' data test is ', dataTest, Main.testData)
+        // console.log(' data test is ', dataTest, Main.testData)
 
 
         Main.entityName = "0_" + Main.entityName;
         Main.entityNameSecondImp = "0_" + Main.entityNameSecondImp;
         Main.leftData = Main.trainData;
         Main.makeLabelIds(Main.trainData);
-        console.log(' train test and left data ', Main.trainData.length, Main.testData.length, Main.leftData.length)
+        // console.log(' train test and left data ', Main.trainData.length, Main.testData.length, Main.leftData.length)
 
         setTimeout(() => {
             //  Util.writeCSV(Main.trainData)            

@@ -22,6 +22,7 @@ def read_data_index(file_name):
     # reads data from input csv file
 def read_data(file_name):
     data_frame = pd.read_csv(file_name, na_values=['nan'])
+    data_frame = data_frame.fillna(0)
 
     # data_frame = set_df_index(data_frame,'ID')
     return data_frame
@@ -35,6 +36,8 @@ if __name__ == '__main__':
     # file_name = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src//dataHist//histdata_i85_01Mar_15Jun_ref.csv'))
     # file_name = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src//histTest//histdata_i85_01Mar_15Jun_RP_4.csv'))
     file_name = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '01 Interactive_ObjectiveFunction_UI/static//data//def_credit_card.csv'))
+    file_name = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '01 Interactive_ObjectiveFunction_UI/static//data//Employee_Compensation_SF_SUB.csv'))
+    file_name = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '01 Interactive_ObjectiveFunction_UI/static//data//movie_metadata_short.csv'))
     final_df = read_data(file_name)
 
 
@@ -42,7 +45,7 @@ if __name__ == '__main__':
 
     # path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src//dataCgis//out//selectedTweets.csv'))
     # path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src//dataHist//histdata_i85_01Mar_15Jun_ref_selected_all.csv'))
-    path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '01 Interactive_ObjectiveFunction_UI/static//data//def_credit_card_short.csv'))
+    path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '01 Interactive_ObjectiveFunction_UI/static//data//movie_metadata_short_SUB.csv'))
     write_data(final_df,path)
 
     print " done .... "

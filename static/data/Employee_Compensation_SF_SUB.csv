@@ -1,0 +1,1140 @@
+Year,target_variable,Department,Job,Employee Identifier,Salaries,Overtime,Other Salaries,Total Salary,Retirement,Health/Dental,Other Benefits,Total Benefits,Total Compensation
+2016,Public Protection,District Attorney,Attorney (Civil/Criminal),49919,114473.16,0,1500,115973.16,21025.98,13068.8,9368.71,43463.49,159436.65
+2013,Culture & Recreation,Arts Commission,Senior Management Assistant,1225,84077.11,0,0,84077.11,16587.3,12457.73,6931.91,35976.94,120054.05
+2015,Community Health,Public Health,Eligibility Worker,34873,9980.17,0,798.43,10778.6,0,2254.93,835.11,3090.04,13868.64
+2015,Community Health,Public Health,Dental Aide,51145,2873.41,0,0,2873.41,0,622.63,222.46,845.09,3718.5
+2014,Culture & Recreation,Recreation and Park Commission,Recreation Leader,48705,6701.85,0,176.7,6878.55,0,2711.66,538.43,3250.09,10128.64
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,"Stdntdsgntrain1, Arch/Eng/Plng",19801,45321.18,0,0,45321.18,9386.03,11780.6,3486.34,24652.97,69974.15
+2015,Culture & Recreation,Public Library,Library Assistant,14135,28305.5,0,1193.14,29498.64,6616.52,5793.48,2430.74,14840.74,44339.38
+2014,General Administration & Finance,Assessor/Recorder,Real Property Appraiser,37352,39938.09,0,800,40738.09,8685.34,7269.02,3277.52,19231.88,59969.97
+2015,Public Protection,Police,Lieutenant (Police Department),13380,23112,2312.73,20944.16,46368.89,4183.12,1911.46,68.84,6163.42,52532.31
+2014,Public Protection,Sheriff,Deputy Sheriff,46569,89101.22,6856.77,5563.78,101521.77,17596.33,12512.55,1627.91,31736.79,133258.56
+2015,"Public Works, Transportation & Commerce",Airport Commission,Publ Svc Aide-Asst To Prof,38170,7091.33,0,0,7091.33,0,2361.82,549.01,2910.83,10002.16
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Street Inspector,28940,57467.12,355.65,0,57822.77,11901.38,11933.98,4691.34,28526.7,86349.47
+2015,Culture & Recreation,Recreation and Park Commission,Park Section Supervisor,10817,80357,5612.97,7.9,85977.87,16562.14,12424.5,7091.69,36078.33,122056.2
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Operator,21370,64170.89,13128.97,2677.81,79977.67,17109.68,13379.17,6204.01,36692.86,116670.53
+2016,Human Welfare & Neighborhood Development,Human Services,Personnel Analyst,37341,83038.01,0,200,83238.01,15490.62,13068.8,6525.06,35084.48,118322.49
+2014,General Administration & Finance,General Services Agency - City Admin,Media/Security Sys Spec,34486,92530.82,0,13412.58,105943.4,20224.21,13054.94,8450.17,41729.32,147672.72
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Station Agent, Muni Railway",13061,78639.3,20332.03,7821.87,106793.2,17683.84,12512.54,8707.07,38903.45,145696.65
+2015,"Public Works, Transportation & Commerce",PUC Water Department,Water Service Inspector,37594,100655.41,8240.09,16911.85,125807.35,24354.06,12500.56,9962.73,46817.35,172624.7
+2016,Community Health,Public Health,Special Nurse,49930,57272.29,0,9765.52,67037.81,0,4171.29,3334.9,7506.19,74544
+2015,Human Welfare & Neighborhood Development,Human Services,Eligibility Worker Supervisor,39898,85368.06,307.4,659,86334.46,17731.18,12424.5,6989.63,37145.31,123479.77
+2013,Culture & Recreation,Recreation and Park Commission,Painter,12884,66924.09,8749.42,2356.4,78029.91,13643.22,11083.02,6452.96,31179.2,109209.11
+2014,Community Health,Public Health,Patient Care Assistant,11367,58535.08,713.52,7502.19,66750.79,13854.97,11221.47,5241.67,30318.11,97068.9
+2013,Human Welfare & Neighborhood Development,Human Services,Clerk,13130,28926,0,0,28926,5990.58,8862.78,2311.94,17165.3,46091.3
+2016,Community Health,Public Health,Food Service Worker,53022,50527.16,868.12,2433.27,53828.55,11112.94,12535.71,4378.62,28027.27,81855.82
+2015,Human Welfare & Neighborhood Development,Human Services,Public Svc Aide-Public Works,38672,20258.75,0,906.7,21165.45,1771.07,8758.68,1714.73,12244.48,33409.93
+2013,Public Protection,Police,Fingerprint Technician 1,51618,51015.01,3572.78,871.2,55458.99,10565.26,12801.79,4510.65,27877.7,83336.69
+2013,Community Health,Public Health,IS Administrator 2,39302,40786.37,0,0,40786.37,7427.15,7718.01,3306.08,18451.24,59237.61
+2014,Community Health,Public Health,IS Business Analyst-Principal,6226,125662.01,0,17420.56,143082.57,26840.33,13054.94,10034.09,49929.36,193011.93
+2014,Community Health,Public Health,Health Worker 4,44217,76052.02,880.2,3660.15,80592.37,16829.03,13054.94,6638.31,36522.28,117114.65
+2013,Human Welfare & Neighborhood Development,Human Services,Protective Services Worker,25617,95229.04,0,6201.67,101430.71,19926.27,12918.24,8366.84,41211.35,142642.06
+2015,Human Welfare & Neighborhood Development,Human Services,Account Clerk,39500,47730.89,0,521.01,48251.9,10822.86,10397.19,3789.77,25009.82,73261.72
+2016,Community Health,Public Health,Stationary Engineer,49055,13292.8,0,1080.08,14372.88,653.75,1995.23,1120.17,3769.15,18142.03
+2014,Public Protection,Police,Sergeant 3,3327,137982.08,28686.53,42125.2,208793.81,29979.7,13054.94,428.25,43462.89,252256.7
+2015,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Architectural Assistant 1,14181,78718.9,0,0,78718.9,17656.73,12500.56,6281.72,36439.01,115157.91
+2015,Public Protection,Police,Community Police Services Aide,1454,67286.16,3656.69,2337.32,73280.17,15505.03,12512.53,5803.18,33820.74,107100.91
+2015,Culture & Recreation,Recreation and Park Commission,Public Service Trainee,48092,904.06,0,14.31,918.37,0,491.31,71.1,562.41,1480.78
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Parking Control Officer,8516,46738.58,15629.12,2022.76,64390.46,10171.68,10077.1,5062.26,25311.04,89701.5
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Fare Collections Receiver,34336,62811,7539.33,8382.41,78732.74,14020.17,12424.5,6469.2,32913.87,111646.61
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Parking Meter Repairer,13987,71781.5,1588.2,1325,74694.7,14374.07,12918.25,5663.19,32955.51,107650.21
+2014,Human Welfare & Neighborhood Development,Human Services,Senior Clerk Typist,42388,56261.25,0,599.45,56860.7,12122.7,11974.47,4706.05,28803.22,85663.92
+2013,Public Protection,Police,Police Officer,2594,8200.8,0,0,8200.8,1452.37,1181.7,633.57,3267.64,11468.44
+2014,Community Health,Public Health,Physician Assistant,19787,24336.6,0,728.88,25065.48,0,1926.56,1940.57,3867.13,28932.61
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Accountant II,36845,72097.73,0,0,72097.73,14276.97,11734.07,5855.16,31866.2,103963.93
+2015,Community Health,Public Health,Registered Nurse,16287,64134.67,0,250,64384.67,12550.62,5636.72,5406.6,23593.94,87978.61
+2014,Community Health,Public Health,Pharmacist,45572,145857.03,749.89,2290.73,148897.65,31274.54,13054.94,10123.5,54452.98,203350.63
+2013,Public Protection,Fire Department,EMT/Paramedic/Firefighter,9485,125192.74,6674.28,16602.74,148469.76,26907.42,14626.32,371.02,41904.76,190374.52
+2015,Community Health,Public Health,Porter,9890,34355.95,540.07,2783.39,37679.41,5935.65,9157.09,2843.73,17936.47,55615.88
+2013,Public Protection,Superior Court,Court Interpreter Supervisor,45541,94705.32,0,0,94705.32,16772.24,11178.8,11816.92,39767.96,134473.28
+2015,Community Health,Public Health,Diagnostic Imaging Tech I,29631,82771.21,37146.64,7833.5,127751.35,17649.08,10560.83,9797.47,38007.38,165758.73
+2015,Public Protection,Police,Police Officer 2,26114,118826.97,11822.94,11618.73,142268.64,25676.99,0,2418.56,28095.55,170364.19
+2015,Community Health,Public Health,Nursing Assistant,3594,68373.27,5225.49,10005.32,83604.08,16727.85,12299.34,6814.15,35841.34,119445.42
+2015,Culture & Recreation,Public Library,Librarian 1,29083,61956.63,0,889.23,62845.86,13628.8,8171.5,5177.7,26978,89823.86
+2013,"Public Works, Transportation & Commerce",Airport Commission,Transit Planner 4,29173,118014.02,0,1150,119164.02,21104.02,12801.79,9444.67,43350.48,162514.5
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Junior Engineer,11661,89028.01,0,0,89028.01,18349.03,12424.48,6932.74,37706.25,126734.26
+2014,Public Protection,Police,Police Officer 3,8960,118898.01,4705.05,9828.69,133431.75,25699.92,13054.94,274.8,39029.66,172461.41
+2013,Human Welfare & Neighborhood Development,Human Services,Protective Services Supervisor,12365,107082.12,1412.79,6360.26,114855.17,20924.62,12918.24,9373.41,43216.27,158071.44
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Parts Storekeeper,46338,68228.8,16460.26,4581,89270.06,12814.38,13068.8,7274.89,33158.07,122428.13
+2015,Public Protection,Police,Deputy Chief 3,27834,72324,0,91397.32,163721.32,15878.52,3345.06,4688.46,23912.04,187633.36
+2016,Public Protection,Department of Emergency Management,Public Safetycomm Supv,26131,66378.75,36505.33,6125.47,109009.55,12914.28,8367.53,8674.79,29956.6,138966.15
+2015,Community Health,Public Health,Nurse Practitioner,20576,158276.28,0,5588.07,163864.35,27123.24,10502.29,7268,44893.53,208757.88
+2014,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,Electrician,13145,94305.02,1492.43,2164.23,97961.68,20825.72,13054.94,7551.38,41432.04,139393.72
+2014,Culture & Recreation,War Memorial,Bldg & Grounds Patrol Officer,45475,20804.14,107.38,936.07,21847.59,0,5226.69,1691.44,6918.13,28765.72
+2013,Human Welfare & Neighborhood Development,Human Services,Senior Account Clerk,42362,10967,0,0,10967,1997.1,2708.07,871.42,5576.59,16543.59
+2013,Community Health,Public Health,Diagnostic Imaging Tech II,31546,110017.42,5024.65,21235.56,136277.63,22032.43,12781.97,9401.58,44215.98,180493.61
+2013,General Administration & Finance,General Services Agency - City Admin,Automotive Machinist,13797,43414,2616.47,40.72,46071.19,7913.1,6698.35,3824.53,18435.98,64507.17
+2013,Public Protection,Department of Emergency Management,Public Safetycomm Disp,34637,87290,4832.91,12242.53,104365.44,18992.88,12858.44,8570.36,40421.68,144787.12
+2014,Culture & Recreation,Recreation and Park Commission,Gardener,24491,62558.65,350.55,290,63199.2,13742.49,13054.96,5112.34,31909.79,95108.99
+2015,Community Health,Public Health,Assistant Storekeeper,42501,48609.2,11967.37,7985.61,68562.18,11773.34,11182.06,5616.08,28571.48,97133.66
+2014,Culture & Recreation,Fine Arts Museum,Museum Guard,22910,20071.9,2491.92,0,22563.82,0,4842.02,1746.9,6588.92,29152.74
+2015,Culture & Recreation,War Memorial,Stage Electrician,28228,2482.9,0,0,2482.9,0,0,196.15,196.15,2679.05
+2015,Human Welfare & Neighborhood Development,Environment,Sr Environmental Spec,52291,90125.89,0,0,90125.89,20215.19,11105.62,7045.88,38366.69,128492.58
+2015,Human Welfare & Neighborhood Development,Rent Arbitration Board,Citizens Complaint Officer,33225,18887.8,0,100,18987.8,3533.65,3488.42,1505.67,8527.74,27515.54
+2014,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,General Laborer,43529,195.1,0,2.44,197.54,0,47.95,15.29,63.24,260.78
+2015,"Public Works, Transportation & Commerce",PUC Water Department,Manager V,38696,157061.11,0,0,157061.11,34592.81,12500.56,18243.19,65336.56,222397.67
+2015,Community Health,Public Health,Pr Administrative Analyst,22739,116860.81,0,0,116860.81,25639.24,12500.55,9276.94,47416.73,164277.54
+2016,Public Protection,Sheriff,Sheriff's Lieutenant,22515,139889.2,14996.74,17925.1,172811.04,37301.21,13068.8,2919.86,53289.87,226100.91
+2013,General Administration & Finance,Board of Supervisors,Legislative Assistant,18365,98811,0,0,98811,19423.66,12918.24,7894.14,40236.04,139047.04
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Safety Officer,6717,122642.17,0,0,122642.17,21820.87,12801.79,9498.04,44120.7,166762.87
+2015,Public Protection,Juvenile Probation,"Counselor, Juvenile Hall",36225,21720.7,171.9,0,21892.6,0,0,1729.53,1729.53,23622.13
+2015,Human Welfare & Neighborhood Development,Environment,PS Aide To Prof,44447,40897.61,0,0,40897.61,10551.57,12500.56,3182.17,26234.3,67131.91
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Electrical Transit System Mech,46458,86524.2,38235.26,13318,138077.46,17971.03,13018.93,9554.51,40544.47,178621.93
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Senior Personnel Clerk,20454,45287.81,0,0,45287.81,11684.22,9914.24,3460.64,25059.1,70346.91
+2014,Public Protection,Fire Department,"Captain, Fire Suppression",44971,149655.25,2990.64,16700.8,169346.69,34670.14,15816.57,2723.78,53210.49,222557.18
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Environmental Service Worker,26592,38878.21,2115.72,2772.45,43766.38,8867.48,11351.08,3494.79,23713.35,67479.73
+2014,Human Welfare & Neighborhood Development,Human Services,Senior Eligibility Worker,44458,74587.03,4261.12,0,78848.15,16300.57,13054.94,6300.13,35655.64,114503.79
+2015,General Administration & Finance,Treasurer/Tax Collector,"Investigator, Tax Collector",40733,87160.95,0,603.26,87764.21,18060.67,12011.39,6997.13,37069.19,124833.4
+2016,"Public Works, Transportation & Commerce",Department of Building Inspection,Electrical Inspector,28107,0,0,17288.81,17288.81,0,0,1322.6,1322.6,18611.41
+2013,Culture & Recreation,Public Library,Library Page,4030,31178.25,0,466.83,31645.08,7059.82,8223.42,2519.85,17803.09,49448.17
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Manager 1,26169,33983,0,0,33983,7075.23,4074.97,2813.52,13963.72,47946.72
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Statnry Eng Water Treat Plant,33256,78876.34,6619.99,13387.71,98884.04,18309.3,11648.84,8220.95,38179.09,137063.13
+2014,Culture & Recreation,Recreation and Park Commission,Camp Assistant,13753,5996.43,0,172.64,6169.07,0,3089.19,477.62,3566.81,9735.88
+2015,Culture & Recreation,Public Library,Librarian 3,33301,103283.06,0,1045,104328.06,21502.39,12424.5,8509.73,42436.62,146764.68
+2015,Community Health,Public Health,Senior Physician Specialist,42407,223357.02,0,0,223357.02,49004.58,12500.56,12139.55,73644.69,297001.71
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Electrical Line Helper,45652,35216.8,4860.23,20,40097.03,9091.12,6561.63,3237.94,18890.69,58987.72
+2015,Public Protection,Fire Department,Firefighter,32685,113036.07,0,16115.78,129151.85,25300.42,14431.54,1012.87,40744.83,169896.68
+2014,Community Health,Public Health,Health Care Billing Clerk 1,37751,60402.93,0,1706.4,62109.33,13241.71,12512.89,5125.56,30880.16,92989.49
+2016,Community Health,Public Health,Medical Evaluations Assistant,46717,19539.33,31.72,0,19571.05,4296.71,4782.34,1587.01,10666.06,30237.11
+2014,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,"Operating Engineer, Universal",6517,91338.01,4129.07,0,95467.08,19961.19,13054.95,7474.64,40490.78,135957.86
+2014,Human Welfare & Neighborhood Development,Human Services,HSA Social Worker,5163,15120,0,660,15780,3572.3,3514.79,1275.23,8362.32,24142.32
+2014,Public Protection,Sheriff,Senior Deputy Sheriff,41349,103224,75.83,9220.54,112520.37,20901.13,12512.55,1860.92,35274.6,147794.97
+2014,Community Health,Public Health,Medical Social Worker,30924,88738.5,0,1626.4,90364.9,19265.79,12512.55,7454.92,39233.26,129598.16
+2016,Human Welfare & Neighborhood Development,Human Services,Junior Administrative Analyst,16923,7347.41,0,0,7347.41,1669.72,1695.96,606.92,3972.6,11320.01
+2016,Community Health,Public Health,Med Staff Svcs Dept Spc,30719,71565.07,0,0,71565.07,13318.25,13056.34,5566.91,31941.5,103506.57
+2013,Community Health,Public Health,Licensed Vocational Nurse,43493,64926.8,2277.02,5709.95,72913.77,13533.09,12918.25,5864.77,32316.11,105229.88
+2014,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Planner 4-Environmental Review,43302,120873.4,0,4734.07,125607.47,26836.53,12954.49,9574.33,49365.35,174972.82
+2013,Community Health,Public Health,X-Ray Laboratory Aide,39010,26383.4,0,2025.83,28409.23,0,6267.74,2199.45,8467.19,36876.42
+2015,Culture & Recreation,Public Library,Custodian,11201,55949.5,142.87,3554.71,59647.08,13346.78,12500.56,4916.58,30763.92,90411
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Watershed Worker (Seasonal),4353,14074.5,0,0,14074.5,0,4368.38,1089.65,5458.03,19532.53
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Manager IV, MTA",48726,129587.36,0,0,129587.36,27681.93,13054.95,18571.95,59308.83,188896.19
+2015,Public Protection,Sheriff,Deputy Sheriff 1,50055,60636.7,3206.77,2940.83,66784.3,13929.21,11946.63,5153.8,31029.64,97813.94
+2016,"Public Works, Transportation & Commerce",General Services Agency - Public Works,IT Operations Support Admin II,11342,32553.8,1998.03,0,34551.83,7158.64,6933.44,2743.58,16835.66,51387.49
+2015,"Public Works, Transportation & Commerce",Economic and Workforce Development,Manager II,37429,19434.04,0,0,19434.04,4263.84,1911.46,3356.05,9531.35,28965.39
+2016,Community Health,Public Health,Senior Stationary Engineer,39420,98736.45,4729.11,0,103465.56,18374.81,13068.8,8461.16,39904.77,143370.33
+2013,Public Protection,Fire Department,"Lieutenant, Fire Suppression",27836,131473.76,20244.39,16789.57,168507.72,26135.48,15683.42,2860.28,44679.18,213186.9
+2015,Community Health,Public Health,Health Worker 1,37514,52798.72,1336.6,1260,55395.32,12954.53,12424.51,4367.66,29746.7,85142.02
+2015,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Senior Administrative Analyst,3128,80319.43,0,0,80319.43,16987.98,9844.03,6424.39,33256.4,113575.83
+2014,Culture & Recreation,War Memorial,Apprentice Stationary Engineer,31277,78607,9962.18,1907.89,90477.07,17296.39,13054.94,6836.45,37187.78,127664.85
+2013,Public Protection,District Attorney,Victim/Witness Investigator 1,44877,67496.05,0,0,67496.05,12290.99,12801.8,5655.82,30748.61,98244.66
+2013,"Public Works, Transportation & Commerce",PUC Water Department,Electronic Maintenance Tech,40418,43241,589.65,630,44460.65,9353.31,5262.99,3328.29,17944.59,62405.24
+2014,Community Health,Public Health,Unit Clerk,53692,60557.08,0,5058.31,65615.39,13720.79,12454.98,5308.77,31484.54,97099.93
+2014,General Administration & Finance,Board of Supervisors,Junior Clerk,42803,2750.91,0,0,2750.91,0,892.89,212.97,1105.86,3856.77
+2014,Public Protection,Police,IS Engineer-Principal,51683,108447.06,0,0,108447.06,22578.68,10911.02,8714.93,42204.63,150651.69
+2015,"Public Works, Transportation & Commerce",Airport Commission,Automotive Mechanic,31228,81157,1163.26,775,83095.26,16874.18,12424.5,6810.2,36108.88,119204.14
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Engineer/Architect Principal,6350,200691.68,0,0,200691.68,36385.45,13081.28,11517.8,60984.53,261676.21
+2014,Community Health,Public Health,Nurse Manager,41603,180617.03,0,0,180617.03,38575.35,13054.94,10613.14,62243.43,242860.46
+2013,Community Health,Public Health,Clinical Nurse Specialist,5886,178435.99,2544.95,4902.56,185883.5,39478.82,12894.32,10575.95,62949.09,248832.59
+2013,Community Health,Public Health,Clinical Pharmacist,6612,155766.01,0,2346.65,158112.66,27842.6,12801.79,10185.51,50829.9,208942.56
+2015,Community Health,Public Health,Senior Clerk,7917,10475.1,0,0,10475.1,1949.41,2319.62,883.81,5152.84,15627.94
+2014,Public Protection,Fire Department,"Captain, Emergency Med Svcs",31642,148121.1,38691.34,17791.4,204603.84,33562.28,15101.34,3347.94,52011.56,256615.4
+2014,Human Welfare & Neighborhood Development,Human Services,Principal Clerk,22128,65429.1,3146.14,0,68575.24,14301.36,13054.94,5643.65,32999.95,101575.19
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Project Manager 2,21150,139768.02,0,0,139768.02,26806.23,12726.88,9814.72,49347.83,189115.85
+2014,"Public Works, Transportation & Commerce",Airport Commission,Construction Inspector,46318,62763.11,0,0,62763.11,13381.11,8080.23,5139.65,26600.99,89364.1
+2014,General Administration & Finance,General Services Agency - City Admin,Customer Service Agent,6184,58167.49,0,6624.95,64792.44,13683.72,11627.81,5256.26,30567.79,95360.23
+2013,Culture & Recreation,Public Library,Library Technical Assistant 2,20466,76302.46,0,430.06,76732.52,15074.14,12823.04,6242.63,34139.81,110872.33
+2014,Community Health,Public Health,Cook,41285,63061.51,2233.27,3613.69,68908.47,14006.51,13054.94,5399.92,32461.37,101369.84
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Assistant Const Inspector,19326,24822,1706.51,0,26528.51,5292.09,4306.08,2103.47,11701.64,38230.15
+2016,General Administration & Finance,City Attorney,Legal Secretary 1,47104,70915.81,0,0,70915.81,13197.43,13068.8,5578.24,31844.47,102760.28
+2015,"Public Works, Transportation & Commerce",Department of Building Inspection,"Bdcomm Mbr, Grp2,M=$25/Mtg",28946,125,0,0,125,0,29.93,9.66,39.59,164.59
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Executive Secretary 2,31556,80687.73,0,0,80687.73,18098.24,12500.55,6292.26,36891.05,117578.78
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Landscape Architect,34620,135421,0,0,135421,27253.5,12424.51,10128.14,49806.15,185227.15
+2014,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,"Aprntc Statnry Eng, Sew Plant",5693,80486.44,924.59,6933.3,88344.33,18879.7,12100.92,7215.11,38195.73,126540.06
+2014,Human Welfare & Neighborhood Development,Human Services,Estate Investigator,52484,80835.07,0,0,80835.07,17234.04,12464.61,6314.14,36012.79,116847.86
+2013,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,Assoc Engineer,23366,106713.32,0,0,106713.32,18898.95,12801.79,8864.4,40565.14,147278.46
+2013,General Administration & Finance,City Planning,Planner 5,40671,56975.67,0,0,56975.67,0,0,4501.08,4501.08,61476.75
+2014,General Administration & Finance,Human Resources,Senior Personnel Analyst,29656,29082.71,0,0,29082.71,6200.42,3766.35,2371.26,12338.03,41420.74
+2013,Human Welfare & Neighborhood Development,Human Services,Manager IV,39932,141364.02,0,0,141364.02,25035.53,12801.79,12185.67,50022.99,191387.01
+2015,Community Health,Public Health,Supervising Pharmacist,35299,173297.83,0,1200,174497.83,34899.69,12424.5,10666.46,57990.65,232488.48
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,School Crossing Guard,14057,6563.08,0,0,6563.08,0,2548.23,212.55,2760.78,9323.86
+2015,"Public Works, Transportation & Commerce",PUC Water Department,Utility Plumber Supervisor 1,7618,113369.02,80492.78,20038.96,213900.76,24007.93,12424.51,11345.83,47778.27,261679.03
+2014,General Administration & Finance,Civil Service Commission,"Bdcomm Mbr, Grp5,M$100/Mo",6291,874,0,0,874,0,60.64,68.98,129.62,1003.62
+2016,General Administration & Finance,Retirement System,Microphoto/Imaging Technician,37522,50547.31,0,0,50547.31,11129.65,13168.57,3851.87,28150.09,78697.4
+2014,Human Welfare & Neighborhood Development,Human Services,Social Work Supervisor,33910,85033.57,0,0,85033.57,18129.07,12518.54,7187.81,37835.42,122868.99
+2014,Human Welfare & Neighborhood Development,Human Services,Employment & Training Spec 1,5748,55693.72,257.77,0,55951.49,13162.16,12767.35,5119.64,31049.15,87000.64
+2013,General Administration & Finance,Controller,IS Engineer-Journey,52330,117339.57,5691.41,18018.67,141049.65,22479.31,12918.25,9801.25,45198.81,186248.46
+2015,General Administration & Finance,General Services Agency - City Admin,Management Assistant,16053,12808.6,0,240,13048.6,2428.34,2341.54,1026.99,5796.87,18845.47
+2014,General Administration & Finance,General Services Agency - City Admin,Manager I,15114,124360.18,0,0,124360.18,25891.77,12476.59,14800.16,53168.52,177528.7
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Fare Inspector,31076,49996.2,1751.11,2027.2,53774.51,12898.53,9958.32,4418.51,27275.36,81049.87
+2016,General Administration & Finance,City Planning,Planner 3,33828,108762.06,0,0,108762.06,20240.66,13068.8,7986.58,41296.04,150058.1
+2016,Public Protection,Superior Court,Sr Human Resources Analyst,46704,103965.74,0,3000,106965.74,19347.98,13068.8,8565.4,40982.18,147947.92
+2015,Public Protection,Police,"Sergeant, (Police Department)",19999,5010.01,97.85,278.13,5385.99,1081.92,478.95,91.53,1652.4,7038.39
+2015,"Public Works, Transportation & Commerce",Airport Commission,Heavy Equipment Ops Sprv,5355,50931.01,0,216.15,51147.16,9518.51,5734.39,4173.22,19426.12,70573.28
+2016,General Administration & Finance,General Services Agency - City Admin,Secretary 2,1563,69741.14,0,628.8,70369.94,13095.78,13068.81,5601.72,31766.31,102136.25
+2015,"Public Works, Transportation & Commerce",PUC Water Department,Bldgs & Grounds Maint Supt,2927,124801.03,4516.72,12386.68,141704.43,25116.28,12424.5,10096.85,47637.63,189342.06
+2013,Public Protection,Department of Emergency Management,Emergency Services Coord II,37515,56046.5,0,1054.21,57100.71,11247.47,10047.52,4559.62,25854.61,82955.32
+2014,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,"Stationary Eng, Sewage Plant",43219,84386.51,12253.13,12781.57,109421.21,19911.26,12464.6,8767.14,41143,150564.21
+2015,"Public Works, Transportation & Commerce",Airport Commission,Manager VI,20290,184879.49,0,0,184879.49,37100.41,12424.5,19288.69,68813.6,253693.09
+2015,General Administration & Finance,Assessor/Recorder,Sr Personal Property Auditor,42343,100554.03,0,1480,102034.03,21009.41,12424.5,8378.81,41812.72,143846.75
+2015,Community Health,Public Health,Health Program Coordinator 2,1390,10410,0,0,10410,2334.96,1433.6,834.65,4603.21,15013.21
+2014,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Eng/Arch/Landscape Arch Sr,41135,150029.83,0,0,150029.83,31236.21,12512.55,9800.28,53549.04,203578.87
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Automotive Mechanic Sprv 1,26720,107912.11,26659.23,7827.66,142399,24339.23,12500.56,10728.38,47568.17,189967.17
+2015,Community Health,Public Health,PS Aide Health Services,41321,8132.41,0,0,8132.41,0,2664.15,629.61,3293.76,11426.17
+2014,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Truck Driver,679,66027.72,898.55,2167.43,69093.7,14539.22,11610.65,5549.79,31699.66,100793.36
+2013,"Public Works, Transportation & Commerce",Economic and Workforce Development,Dept Head III,18918,146394.26,0,0,146394.26,28670.44,9090.62,12994.45,50755.51,197149.77
+2016,Community Health,Public Health,Hospital Eligiblity Worker,27188,8398.4,0,40,8438.4,1570.38,1446.55,687.36,3704.29,12142.69
+2013,General Administration & Finance,Human Resources,Employee Relations Representat,51271,31291,0,0,31291,5698.07,4640.65,2607.54,12946.26,44237.26
+2013,Public Protection,Superior Court,Court Supervisor II,50899,107946.36,0,0,107946.36,19657.02,12801.79,10150.72,42609.53,150555.89
+2016,Human Welfare & Neighborhood Development,Human Services,Program Specialist,33357,6401.1,0,40,6441.1,1198.68,947.74,487.4,2633.82,9074.92
+2013,Public Protection,Police,Personnel Clerk,51888,44526.01,0,265,44791.01,8156.44,10093.72,3706.33,21956.49,66747.5
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Electrl Trnst Mech, Asst Sprv",27001,29619,21704.14,2422.5,53745.64,6809.01,4016.91,991.43,11817.35,65562.99
+2016,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Engineer,29687,45301,0,0,45301,8213.1,4439.4,3693.96,16346.46,61647.46
+2013,"Public Works, Transportation & Commerce",Port,Administrative Analyst,28264,57227.5,0,0,57227.5,10421.17,9108.97,4804.01,24334.15,81561.65
+2016,Public Protection,Fire Department,"Battlion Chief, Fire Suppressi",28897,182976.64,33772.66,28927.46,245676.76,37075.21,16011.78,4168.75,57255.74,302932.5
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Manager III, MTA",30695,145248.53,0,0,145248.53,31867.55,12500.56,24366.6,68734.71,213983.24
+2016,Community Health,Public Health,Laboratory Technician II,8499,67719.41,80.27,628.8,68428.48,12719.61,13068.8,5532.93,31321.34,99749.82
+2014,Public Protection,Adult Probation,Deputy Probation Officer,5713,77008.39,0,0,77008.39,13159.18,12081.86,1239.78,26480.82,103489.21
+2014,General Administration & Finance,Controller,Clerk Typist,43809,54443,0,624,55067,12927.96,13054.94,4549.95,30532.85,85599.85
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Wire Rope Cable Maint Mechanic,18137,87943.11,31836.83,13538.87,133318.81,18002.8,12619.88,9632.61,40255.29,173574.1
+2015,Human Welfare & Neighborhood Development,Environment,Environmental Spec,32837,40712.42,0,0,40712.42,8104.01,5876.09,2770.03,16750.13,57462.55
+2015,General Administration & Finance,Assessor/Recorder,Asr-Office Assistant,40445,24934.01,0,0,24934.01,6432.93,6212.25,2025.7,14670.88,39604.89
+2014,Public Protection,Superior Court,Superior Court Judge,13045,9463.59,0,4743.22,14206.81,0,0,206,206,14412.81
+2016,Public Protection,Police,Criminalist II,23091,116558.42,5078.62,0,121637.04,21132.06,13081.28,9808.16,44021.5,165658.54
+2016,General Administration & Finance,General Services Agency - Technology,Storekeeper,1218,57592.8,0,596.24,58189.04,10828.97,12391.67,4793.69,28014.33,86203.37
+2014,Culture & Recreation,Recreation and Park Commission,Swimming Instr/Pool Lifeguard,40881,44982.72,262.87,3104.64,48350.23,10737.25,11136.86,3920.32,25794.43,74144.66
+2015,Community Health,Public Health,Food Service Supervisor,47431,8773.6,20.19,573.77,9367.56,0,2107.37,725.23,2832.6,12200.16
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Janitorial Svcs Asst Sprv,27656,69654.06,9398.77,1432.5,80485.33,12797.72,12801.79,6692.5,32292.01,112777.34
+2013,"Public Works, Transportation & Commerce",Port,Sign Worker,24664,244.2,0,0,244.2,44.47,49.23,20.46,114.16,358.36
+2015,General Administration & Finance,Retirement System,Dep Dir IV,24796,240727,0,0,240727,48347.77,12424.5,20116.59,80888.86,321615.86
+2013,Community Health,Public Health,Med Staff Svcs Dept Anl,45287,86424.04,0,0,86424.04,16988.34,12918.24,6969.56,36876.14,123300.18
+2015,Human Welfare & Neighborhood Development,Human Services,Employment & Training Spec 3,36961,67486.11,0,510.81,67996.92,15251.72,10193.64,5690.45,31135.81,99132.73
+2014,Public Protection,Police,Automotive Service Worker,19334,63661,0,0,63661,13912.62,13054.94,5256.97,32224.53,95885.53
+2013,"Public Works, Transportation & Commerce",Airport Commission,Survey Assistant II,23348,82899.51,0,56.54,82956.05,16306.41,12918.31,6829.66,36054.38,119010.43
+2016,"Public Works, Transportation & Commerce",PUC Water Department,Biologist I/II,12580,100589.32,1161.9,0,101751.22,18719.76,13068.8,8324.06,40112.62,141863.84
+2016,"Public Works, Transportation & Commerce",PUC Water Department,Engineering Associate 1,13205,85229.32,0,0,85229.32,15861.18,13068.79,6813,35742.97,120972.29
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Sr Payroll & Personnel Clerk,3154,73899.02,51.32,0,73950.34,14521.06,12918.24,5871.99,33311.29,107261.63
+2013,Community Health,Public Health,Nursing Supervisor Psychiatric,16247,199360,0,37213.12,236573.12,42006.02,12918.25,11460.63,66384.9,302958.02
+2014,General Administration & Finance,General Services Agency - Technology,Communications Systems Tech,41908,108971.53,12618.49,623.15,122213.17,23407.76,13037.18,9684.25,46129.19,168342.36
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Car Cleaner,30930,50545.2,5503.72,6233.43,62282.35,13757.79,13054.94,5002.93,31815.66,94098.01
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Manager II, MTA",19290,105779.09,0,0,105779.09,22593.4,13054.94,16587.72,52236.06,158015.15
+2013,Community Health,Public Health,Medical Records Clerk,22573,17272.5,0,6668.84,23941.34,3178.12,3692.82,1977.03,8847.97,32789.31
+2014,Public Protection,Sheriff,Senior Legal Process Clerk,35880,51324.83,847.15,307.2,52479.18,12738.8,12353.56,4318.11,29410.47,81889.65
+2014,Culture & Recreation,Recreation and Park Commission,Swimming Instructor,22293,1614,0,1.61,1615.61,0,514.67,408.49,923.16,2538.77
+2015,General Administration & Finance,Assessor/Recorder,Senior Real Property Appraiser,51033,78997.74,0,1000,79997.74,17943.46,10908.05,6964.91,35816.42,115814.16
+2015,Human Welfare & Neighborhood Development,Human Services,Emp & Training Spec 2,33357,81776.04,0,2219,83995.04,17308.05,12424.51,6311.69,36044.25,120039.29
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Supervisor,47754,26936,2306.03,2212.75,31454.78,5160.79,4348.58,2672.56,12181.93,43636.71
+2014,"Public Works, Transportation & Commerce",Airport Commission,Airport Property Specialist 1,36074,100830.07,0,0,100830.07,21496.99,12512.55,7830.91,41840.45,142670.52
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Accountant III,19062,74598.03,0,1030,75628.03,15454.04,11468.77,5764.53,32687.34,108315.37
+2014,Human Welfare & Neighborhood Development,Human Rights Commission,"Bdcomm Mbr, Grp3,M=$50/Mtg",37084,600,0,0,600,0,75.32,46.46,121.78,721.78
+2015,Community Health,Public Health,Health Educator,26181,92828.75,0,280,93108.75,20884.26,12488.58,7483.76,40856.6,133965.35
+2015,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,Maintenance Planner,48152,109323.35,0,2176.58,111499.93,25009.4,12500.56,9149.55,46659.51,158159.44
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Asst Engr,49087,81555.6,0,0,81555.6,17387.67,12272.82,6578.01,36238.5,117794.1
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Asphalt Finisher Supervisor 1,15273,51212,495.6,14923.76,66631.36,9325.72,7631.83,5820.77,22778.32,89409.68
+2014,Public Protection,Police,Inspector 3,7895,132484.13,22717.21,33304.99,188506.33,28424.85,11937.25,396.08,40758.18,229264.51
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Watershed Keeper,50364,60000.6,2702.9,2920.02,65623.52,12922.46,11206.53,5965.55,30094.54,95718.06
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,"Stdntdsgntrain3, Arch/Eng/Plng",17757,8512,0,0,8512,0,1969.51,659,2628.51,11140.51
+2014,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Utility Analyst,18477,767,14.38,0,781.38,0,251.06,60.49,311.55,1092.93
+2014,Community Health,Public Health,Manager VII,16445,195403.37,0,0,195403.37,40683.04,12512.55,16014.23,69209.82,264613.19
+2015,General Administration & Finance,General Services Agency - Technology,Cable Splicer,45125,46278.38,0,0,46278.38,0,0,3660.91,3660.91,49939.29
+2015,Community Health,Public Health,Pharmacy Helper,29441,59059.9,447.02,0,59506.92,13247.17,12403.26,4748.74,30399.17,89906.09
+2014,Community Health,Public Health,Physician Specialist,45783,130960.6,0,0,130960.6,27897.05,9540.15,9774.67,47211.87,178172.47
+2014,General Administration & Finance,City Planning,Planner Technician,13620,32552.51,0,0,32552.51,1558.83,8284.87,2487.43,12331.13,44883.64
+2015,Public Protection,Superior Court,Deputy Court Clerk II,2406,73694.06,0,3617.98,77312.04,15325.16,12304.62,6425.25,34055.03,111367.07
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Snr Permit And Citation Clerk,20740,71818.51,0,0,71818.51,15311.7,12512.55,5699.59,33523.84,105342.35
+2014,"Public Works, Transportation & Commerce",Airport Commission,Offset Machine Operator,30587,59652.63,0,0,59652.63,12717.97,12512.55,4922.12,30152.64,89805.27
+2016,Public Protection,Fire Department,EMT Paramedic,20885,12588.88,21.33,0,12610.21,0,1821.71,978.76,2800.47,15410.68
+2015,Community Health,Public Health,Medical Records Technician,10356,71612,0,612,72224,14885.78,12424.5,5936.43,33246.71,105470.71
+2015,Public Protection,Superior Court,Senior Fiscal Technician,5378,7863.88,0,0,7863.88,0,0,824.95,824.95,8688.83
+2016,"Public Works, Transportation & Commerce",Airport Commission,Executive Secretary 1,17187,75996.93,220.65,628.8,76846.38,14260.14,13068.8,6162.16,33491.1,110337.48
+2014,General Administration & Finance,Mayor,Mayoral Staff XVI,45974,142911.3,0,0,142911.3,30525.07,13054.93,18484.55,62064.55,204975.85
+2016,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Sheet Metal Worker,51113,48556.55,290.48,520,49367.03,1640.58,6160.27,3857.89,11658.74,61025.77
+2016,"Public Works, Transportation & Commerce",Economic and Workforce Development,Community Development Spec,12367,74503.82,0,0,74503.82,13865.15,13068.81,5987.1,32921.06,107424.88
+2015,General Administration & Finance,General Services Agency - City Admin,Asst Materials Coordinator,9455,35192.3,123.34,0,35315.64,7893.61,5124.74,2834.56,15852.91,51168.55
+2013,General Administration & Finance,General Services Agency - City Admin,Contract Compliance Officer 2,176,100777.45,0,1405,102182.45,18096.56,11570.85,8405.89,38073.3,140255.75
+2013,Community Health,Public Health,Accountant Intern,25773,39546,0,1207.25,40753.25,7201.26,8370.4,3311.89,18883.55,59636.8
+2013,Community Health,Public Health,Nurse Midwife,27020,13312.35,0,0,13312.35,0,0,1051.68,1051.68,14364.03
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Bricklayer,40219,86037.6,15836.61,3000,104874.21,17478.58,11961.35,8595.07,38035,142909.21
+2015,General Administration & Finance,General Services Agency - Technology,Media Production Tech,21055,54117.01,541.18,728.01,55386.2,11573.7,10035.18,4977.15,26586.03,81972.23
+2015,Human Welfare & Neighborhood Development,Human Services,Principal Account Clerk,37395,75161.27,0,0,75161.27,16858.66,12506.54,6183.37,35548.57,110709.84
+2015,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Meter Reader,12049,64280.9,0,0,64280.9,14418.25,12500.56,5241.74,32160.55,96441.45
+2013,Community Health,Public Health,Health Worker 2,41411,31792.17,64.38,1160,33016.55,6468.22,6867.31,2693.46,16028.99,49045.54
+2015,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,General Utility Mechanic,12795,86430.11,1001.7,600,88031.81,19520.89,12500.57,7104.61,39126.07,127157.88
+2013,"Public Works, Transportation & Commerce",Port,Crane Mechanic Supervisor,53741,111020,4789.09,160.13,115969.22,19661.72,12801.79,9576.54,42040.05,158009.27
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Pipe Welder,52728,97557,15213.72,0,112770.72,21320.42,13054.92,8804.35,43179.69,155950.41
+2013,Community Health,Public Health,"Marriage, Family & Child Cnslr",35104,83786.16,0,0,83786.16,15257.53,12281.73,7029.83,34569.09,118355.25
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Painter Supervisor 1,3322,89596.06,5224.08,2,94822.14,16318.06,12801.72,7677.65,36797.43,131619.57
+2015,Public Protection,Department of Emergency Management,Manager III,42913,142527.36,0,0,142527.36,31270.49,12500.56,18697.46,62468.51,204995.87
+2013,"Public Works, Transportation & Commerce",Airport Commission,Plumber,13777,98528.5,10576.9,4379.55,113484.95,20225.03,12918.24,9145.21,42288.48,155773.43
+2015,Public Protection,Sheriff,Deputy Sheriff (SFERS),48295,82259.71,16823.61,9465.6,108548.92,18217.04,12424.51,1802.58,32444.13,140993.05
+2016,Culture & Recreation,Recreation and Park Commission,Apprentice Gardener,47477,33825.57,174.8,107.07,34107.44,7461.76,10778.46,2773.24,21013.46,55120.9
+2013,"Public Works, Transportation & Commerce",Port,Ornamental Iron Wrk Sprv 1,34491,97760,1551,0,99311,17802.2,12801.79,8072.3,38676.29,137987.29
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Utility Plumber,34143,96446.4,13763.75,10354.02,120564.17,20562.4,12512.56,8324.04,41399,161963.17
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Stdntdsgn Train2/Arch/Eng/Plng,2675,3454.73,0,0,3454.73,291.53,766.09,267.46,1325.08,4779.81
+2013,"Public Works, Transportation & Commerce",Port,IS Business Analyst-Senior,37476,25960,0,0,25960,2767.33,3827.63,2037.02,8631.98,34591.98
+2016,Community Health,Public Health,Health Program Coordinator 3,25718,111962.73,0,0,111962.73,20298.79,13068.8,8908.32,42275.91,154238.64
+2013,Public Protection,District Attorney,Da Investigative Assist,16217,65898.8,0,0,65898.8,12000.09,12801.79,5188,29989.88,95888.68
+2013,Community Health,Public Health,Diagnostic Imaging Tech IV,14476,121531.33,0,844.31,122375.64,23382.92,12844.5,9516.33,45743.75,168119.39
+2013,General Administration & Finance,Elections,Dep Dir II,2410,0,0,10528.05,10528.05,0,0,805.4,805.4,11333.45
+2015,Public Protection,Department of Emergency Management,Pub Safety Communication Coord,24514,17123.8,2603.75,3531.65,23259.2,3365.36,1875.63,1870.42,7111.41,30370.61
+2015,Public Protection,Superior Court,"Research Asst, Superior Court",32657,75844.77,0,0,75844.77,14834.76,12471.04,5694.52,33000.32,108845.09
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Project Manager 3,1651,22221.5,0,0,22221.5,3935.43,1723.32,1845.97,7504.72,29726.22
+2016,Public Protection,Superior Court,Deputy Court Clerk III,15772,88830.07,0,5325.77,94155.84,16648.05,13047.49,7509.8,37205.34,131361.18
+2015,Human Welfare & Neighborhood Development,Environment,Principal Environ Specialist,1660,2096.54,0,19543.5,21640.04,0,227.5,1644.04,1871.54,23511.58
+2014,Culture & Recreation,Recreation and Park Commission,Pool Lifeguard,13541,610.32,0,5.58,615.9,0,219.67,81.55,301.22,917.12
+2015,"Public Works, Transportation & Commerce",Airport Commission,Housekeeper/Food Service Clnr,33482,49679,0,4253.13,53932.13,12560.4,12424.5,4308.89,29293.79,83225.92
+2013,Human Welfare & Neighborhood Development,Child Support Services,Child Support Officer II,9497,73294.04,0,624,73918.04,13460.47,12801.79,6191.39,32453.65,106371.69
+2014,Community Health,Public Health,Environmental Health Inspector,40649,104451.13,0,615.2,105066.33,22964.68,13054.94,8040.17,44059.79,149126.12
+2013,Community Health,Public Health,Psychiatric Social Worker,8924,90525.05,0,5115.97,95641.02,18081.09,12894.32,7892.41,38867.82,134508.84
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Dep Dir V,30846,72584.41,0,0,72584.41,0,4148.27,5245.74,9394.01,81978.42
+2013,General Administration & Finance,City Planning,Planner 3-Environmental Review,19561,81279.36,0,0,81279.36,14800.97,11366.2,6506.02,32673.19,113952.55
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Utility Specialist,951,48398.21,0,1839.76,50237.97,8585.97,5182.28,3862.69,17630.94,67868.91
+2015,General Administration & Finance,City Attorney,Legislative Asst City Atty Ofc,41091,33719,0,0,33719,7563.2,6417.91,2633,16614.11,50333.11
+2014,Community Health,Public Health,Health Care Billing Clerk 2,20668,55202.48,0,0,55202.48,11769.18,10156.74,5165.83,27091.75,82294.23
+2013,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Transmission Line Supervisor 1,37413,117347.52,26780.89,15906.59,160035,22534.26,12870.41,10143.84,45548.51,205583.51
+2015,Public Protection,Superior Court,Court Reporter,26864,113672,0,11367.2,125039.2,27433.64,12452.66,9862.97,49749.27,174788.47
+2014,Public Protection,Adult Probation,"Div Director, Adult Probation",45556,120566.74,0,0,120566.74,20602.37,12512.55,10470.15,43585.07,164151.81
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Senior Const Inspector,41945,26358,0,0,26358,4905.24,2867.2,1986.42,9758.86,36116.86
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Maintenance Machinist,11009,80938.8,20485.2,3339.1,104763.1,17373.48,12512.54,7983.53,37869.55,142632.65
+2013,Community Health,Public Health,Physical Therapist,42859,104936,0,440,105376,18662.16,12801.79,8635.96,40099.91,145475.91
+2014,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Architectural Assistant 2,7136,84898.03,967.8,0,85865.83,18555.18,13054.91,6930.22,38540.31,124406.14
+2015,Community Health,Public Health,Health Worker 3,35560,31007.5,0,0,31007.5,5948.25,6929.06,2494.24,15371.55,46379.05
+2014,Human Welfare & Neighborhood Development,Human Services,Senior Social Worker,44496,2249,0,0,2249,406.84,0,177.67,584.51,2833.51
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Planner 1,1480,9256,0,0,9256,0,1915.8,745.52,2661.32,11917.32
+2014,General Administration & Finance,City Attorney,Junior Management Assistant,29575,9487.09,0,0,9487.09,2022.64,2099.8,762.76,4885.2,14372.29
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Emergency Planning Coordinator,13397,6452,0,14343.6,20795.6,1174.9,956.91,1633.96,3765.77,24561.37
+2013,Community Health,Public Health,Senior Telephone Operator,47402,24083.37,9570.93,2053.16,35707.46,4463.8,5554.13,2917.94,12935.87,48643.33
+2014,Human Welfare & Neighborhood Development,Human Services,Program Support Analyst,1918,5118.4,0,0,5118.4,1091.24,767.05,394.66,2252.95,7371.35
+2015,General Administration & Finance,City Planning,Sr Community Dev Spec 2,2475,44220.02,0,0,44220.02,8229.35,4778.65,3616.28,16624.28,60844.3
+2014,General Administration & Finance,Elections,Secretary 1,26251,4365.9,0,0,4365.9,0,1006.76,346.82,1353.58,5719.48
+2014,Community Health,Public Health,Supervising Physician Spec,19760,111962.41,0,28973.45,140935.86,23310.55,6328.18,4605.66,34244.39,175180.25
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Trans Safety Specialist,20797,104449.41,5945.58,13640.12,124035.11,24536.68,11542.66,8935.13,45014.47,169049.58
+2015,General Administration & Finance,City Planning,Planner 2,5979,76444.33,0,0,76444.33,17146.48,12500.56,5953.68,35600.72,112045.05
+2015,"Public Works, Transportation & Commerce",Airport Commission,Chief Stationary Engineer,22757,107538.61,2318.63,2180.56,112037.8,24610,12500.56,9211.06,46321.62,158359.42
+2014,Public Protection,Fire Department,Pilot Of Fire Boats,7571,149531.78,33033.31,9719.63,192284.72,32285.38,15245.17,3098.45,50629,242913.72
+2014,Human Welfare & Neighborhood Development,Human Services,Dep Dir III,11417,115905.49,0,0,115905.49,24131.54,9396.39,13333.63,46861.56,162767.05
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Track Maint Wrk Sprv 1,22733,80262.02,14701.86,94,95057.88,14615.64,12801.79,7787.46,35204.89,130262.77
+2015,Community Health,Public Health,Epidemiologist 1,11152,32901.01,0,0,32901.01,6190.79,6116.67,2632.5,14939.96,47840.97
+2013,Human Welfare & Neighborhood Development,Environment,Environmental Assistant,29022,66021.62,0,0,66021.62,12952.9,12631.17,5325.53,30909.6,96931.22
+2016,"Public Works, Transportation & Commerce",Airport Commission,Lighting Fixture Maint Worker,22446,57810.2,882.75,5781.02,64473.97,11834.22,13068.8,5227.53,30130.55,94604.52
+2013,Public Protection,Police,Sergeant 2,15175,3257.5,0,276.22,3533.72,580.39,307.73,59.98,948.1,4481.82
+2015,Culture & Recreation,Public Library,Library Technical Assistant 1,48378,72699.07,0,1584,74283.07,15307.81,12424.5,5774.41,33506.72,107789.79
+2014,Community Health,Public Health,Psychiatric Technician,25486,58416.8,0,758.35,59175.15,12459.53,11218.75,4815.52,28493.8,87668.95
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Traf Signal Electrician Sup I,27547,120163.02,10605.92,8806.37,139575.31,24182.87,12424.5,10114.77,46722.14,186297.45
+2014,Public Protection,Sheriff,Sheriff's Cadet,43104,34127.41,27.51,523.48,34678.4,8476.26,11025.91,2767.08,22269.25,56947.65
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Power Line Worker,19176,70308,50090.9,7685.47,128084.37,14917.83,8601.58,9683.19,33202.6,161286.97
+2016,Human Welfare & Neighborhood Development,Human Services,Social Work Specialist,43426,87494.04,5021.92,26269.5,118785.46,16282.59,13068.8,9617.57,38968.96,157754.42
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Materials Coordinator,23940,0,0,198.53,198.53,0,0,15.19,15.19,213.72
+2016,Community Health,Public Health,Public Health Nurse,40913,122983.54,0,1375,124358.54,22500.87,13068.79,9827.7,45397.36,169755.9
+2013,Community Health,Public Health,Locksmith,9429,81276.02,14770.38,3473.18,99519.58,15262,12801.79,8166.95,36230.74,135750.32
+2013,Community Health,Public Health,Nursing Supervisor,12144,26173.37,0,2574.57,28747.94,4728.47,0,7244.53,11973,40720.94
+2014,Human Welfare & Neighborhood Development,Human Services,IS Engineer-Senior,2386,127304.46,0,1840,129144.46,26887.88,12512.55,9421.32,48821.75,177966.21
+2014,General Administration & Finance,Elections,Elections Worker,47852,44930.51,1411.45,678.9,47020.86,9741.19,9742,3895.46,23378.65,70399.51
+2015,General Administration & Finance,Health Service System,Benefits Analyst,48229,72930.8,0,601.93,73532.73,15162.87,11984.93,5649.09,32796.89,106329.62
+2015,Public Protection,Fire Department,Incident Support Specialist,40174,122219.76,9849.73,15758.09,147827.58,29671.22,13111.41,2502.77,45285.4,193112.98
+2013,General Administration & Finance,City Attorney,Assistant Chief Attorney 1,5011,37870,0,312.5,38182.5,7949.61,2392.26,726.15,11068.02,49250.52
+2015,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,"Sr Stationary Eng, Sew Plant",7237,102054.5,7413.67,6958.05,116426.22,23888.9,12332.92,9289.9,45511.72,161937.94
+2016,Public Protection,Police,Lieutenant 3,27056,160150.11,73617.15,6575.49,240342.75,28411.45,12981.51,4054.15,45447.11,285789.86
+2015,Community Health,Public Health,Pharmacy Technician,10460,4943.8,184.42,31.22,5159.44,1115.9,910.01,399.45,2425.36,7584.8
+2014,Community Health,Public Health,Pr Environmental Hlth Insp,4825,52032.23,0,1871.91,53904.14,10833.09,5510.19,4201.8,20545.08,74449.22
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,General Laborer Supervisor 1,13902,70791,20310.45,5036.17,96137.62,15629.17,12424.5,7864.43,35918.1,132055.72
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Planner 2,6437,86718.04,0,0,86718.04,16138.2,12376.71,6764.09,35279,121997.04
+2014,Human Welfare & Neighborhood Development,Human Services,IT Operations Support Admin I,8718,59458.02,2119.58,0,61577.6,12994.19,13054.94,5053.2,31102.33,92679.93
+2013,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Electr Maint Tech Asst Sprv,7119,2523.6,78.86,18022.18,20624.64,446.93,287.07,1584.3,2318.3,22942.94
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,IS Project Director,29959,97983.01,0,0,97983.01,17352.71,9355.15,6761.15,33469.01,131452.02
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Train Controller,2548,64857.3,15793.44,12881.56,93532.3,13113.48,8168.1,7872.49,29154.07,122686.37
+2013,Culture & Recreation,Public Library,Librarian 2,50596,91206.12,0,0,91206.12,17921.79,12918.24,7543.99,38384.02,129590.14
+2013,Public Protection,Fire Department,Assistant Deputy Chief 2,31246,177220.07,0,50042,227262.07,34524.2,9847.53,475.33,44847.06,272109.13
+2014,General Administration & Finance,City Planning,Planner 4,50472,119805.61,0,0,119805.61,18309.02,12838.4,9297.17,40444.59,160250.2
+2016,General Administration & Finance,Mayor,Mayoral Staff XV,21742,112727.37,0,0,112727.37,20437.53,13068.81,17797.39,51303.73,164031.1
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Traffic Signal Electrician,12710,109619.3,6885.52,0,116504.82,20400.21,13068.78,9107.52,42576.51,159081.33
+2014,General Administration & Finance,General Services Agency - City Admin,Animal Care Attendant,20717,48104.5,426.89,2520.88,51052.27,12227.99,12803.88,4120.33,29152.2,80204.47
+2013,Community Health,Public Health,"Dir Of Act, Therapy & Vol Svcs",41651,86049.01,0,1988,88037.01,17300.38,12918.24,7274.18,37492.8,125529.81
+2014,General Administration & Finance,Human Resources,"Manager,Employee Relations Div",8881,142826.02,0,0,142826.02,29736.4,11817.41,19273.44,60827.25,203653.27
+2016,Community Health,Public Health,Health Care Analyst,22887,91237.62,0,0,91237.62,16979.34,13068.8,7283.37,37331.51,128569.13
+2016,Culture & Recreation,Public Library,Illustrator And Art Designer,14828,85229.23,0,0,85229.23,15861.18,13068.8,6966.29,35896.27,121125.5
+2015,Community Health,Public Health,Dietitian,4354,5516,0,0,5516,1026.52,955.73,439.26,2421.51,7937.51
+2015,Public Protection,Fire Department,Fire Protection Engineer,51718,143321.77,0,0,143321.77,31444.83,12512.53,10457.89,54415.25,197737.02
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Landscape Architect Assoc 1,50968,45565.33,0,0,45565.33,7801.71,7521.04,3957.8,19280.55,64845.88
+2013,Public Protection,Sheriff,Rehabilitation Svcs Coord,12191,84954.61,0,0,84954.61,15470.2,12745.17,7066.78,35282.15,120236.76
+2015,Culture & Recreation,Recreation and Park Commission,Marina Associate Manager,46588,76567.74,0,441.9,77009.64,17174.21,12356.99,15267.94,44799.14,121808.78
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Investigator,Taxi & Accesssvcs",11937,89022.33,0,0,89022.33,18979.59,12512.55,6852.71,38344.85,127367.18
+2016,Community Health,Public Health,Nurses Staffing Assistant,1532,61264.73,221.43,3318.9,64805.06,12019.02,12935.07,5322.47,30276.56,95081.62
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Parking Enforcement Admin,49,97837.17,22385.1,7408.39,127630.66,18207.55,13093.75,10079.5,41380.8,169011.46
+2013,"Public Works, Transportation & Commerce",PUC Water Department,Utility Plumber Supervisor 2,15938,113038.73,17380.79,23602.06,154021.58,22600.82,11961.33,9950.36,44512.51,198534.09
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Communications Dispatcher 1,10884,47.03,0,0,47.03,0,11.94,3.65,15.59,62.62
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Principal Personnel Analyst,5601,76228.43,0,0,76228.43,14602.55,7961.7,6155.16,28719.41,104947.84
+2015,"Public Works, Transportation & Commerce",Airport Commission,Administrative Engineer,25621,144159.51,0,0,144159.51,31628.66,12500.56,10354.6,54483.82,198643.33
+2013,General Administration & Finance,Human Resources,IS Business Analyst,2424,90837.88,0,0,90837.88,16541.54,12801.79,7447.7,36791.03,127628.91
+2015,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Utility Plumber Apprentice,37546,36718.12,1895.94,0,38614.06,0,5626.85,3129.18,8756.03,47370.09
+2016,"Public Works, Transportation & Commerce",Department of Building Inspection,Building Inspector,38535,115556.4,4661.11,2925.22,123142.73,20950.28,13068.8,9817.84,43836.92,166979.65
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Survey Assistant I,46593,26471,0,0,26471,0,5256.53,2128.09,7384.62,33855.62
+2013,"Public Works, Transportation & Commerce",Airport Commission,Airport Electrician,28470,38730.02,10892.81,4612,54234.83,7017.08,4784.54,4441.17,16242.79,70477.62
+2016,"Public Works, Transportation & Commerce",PUC Water Department,Automotive Machinist Sprv 1,45130,34338.32,0,20392.13,54730.45,6502.04,4140.12,4397.38,15039.54,69769.99
+2016,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Senior Water Services Clerk,24497,26400.6,0,1043.96,27444.56,4955.45,4888.34,2266.6,12110.39,39554.95
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Senior Water Service Inspector,22171,108576.03,10246.33,19191.98,138014.34,25004.2,13054.94,10053.42,48112.56,186126.9
+2014,Culture & Recreation,Recreation and Park Commission,Admission Attendant,6996,14881.21,0,0,14881.21,3699.9,4868.99,1201.71,9770.6,24651.81
+2013,Human Welfare & Neighborhood Development,Human Rights Commission,"Coord, Human Rights Comm",32136,103714,0,0,103714,18886.4,12801.79,8617.22,40305.41,144019.41
+2015,"Public Works, Transportation & Commerce",PUC Water Department,Carpenter,49312,86663.05,0,1110,87773.05,18093.63,12424.48,7025.14,37543.25,125316.3
+2015,"Public Works, Transportation & Commerce",Port,Pile Worker,29583,95045.03,0,6082,101127.03,20810.81,12424.5,7736.45,40971.76,142098.79
+2015,Human Welfare & Neighborhood Development,Child Support Services,IT Operations Support Admin IV,31764,36675,0,0,36675,8226.18,4300.79,2780.02,15306.99,51981.99
+2014,General Administration & Finance,Elections,Elections Clerk,18109,23634.74,2581,0,26215.74,0,5983.31,2035.22,8018.53,34234.27
+2015,"Public Works, Transportation & Commerce",PUC Water Department,Chemist I/II,5168,86926.14,0,0,86926.14,19497.46,11199.91,7159.76,37857.13,124783.27
+2013,"Public Works, Transportation & Commerce",PUC Water Department,Water Qualitytech I/II,5608,73993.8,0,0,73993.8,13474.36,12801.79,6159.46,32435.61,106429.41
+2015,Public Protection,Sheriff,Sheriff's Sergeant,20776,117330.71,17935.5,14601.09,149867.3,30202.54,12500.55,2539.81,45242.9,195110.2
+2014,Culture & Recreation,Recreation and Park Commission,Recreation Coordinator,50291,60070.2,0,1240.05,61310.25,13071.35,12512.55,5061.53,30645.43,91955.68
+2015,Public Protection,Public Defender,Social Worker,13982,69247,0,0,69247,14272.17,12424.5,5698.43,32395.1,101642.1
+2014,Community Health,Public Health,"Sr Marriage, Fam & Cld Cnslr",36996,92723.2,0,2005.95,94729.15,20196.27,12503.56,7666.56,40366.39,135095.54
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Public Relations Officer,51931,79089.04,0,840,79929.04,14555.02,11660.04,5854.77,32069.83,111998.87
+2014,Human Welfare & Neighborhood Development,Human Services,Human Services Technician,6857,50156,6422.47,0,56578.47,11816.97,12552.83,4549.34,28919.14,85497.61
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Traffic Survey Technician,2330,73957.16,861.75,230,75048.91,15287.05,12424.47,5940.14,33651.66,108700.57
+2016,"Public Works, Transportation & Commerce",Airport Commission,Sheet Metal Supervisor 1,49594,15549.33,0,8365.87,23915.2,2907.99,1789.6,1945.17,6642.76,30557.96
+2014,Public Protection,District Attorney,Victim/Witness Investigator 3,31448,89659.82,0,0,89659.82,19115.5,12512.55,7323.82,38951.87,128611.69
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Manager VII, MTA",40965,182870.8,0,0,182870.8,35028.47,12918.25,17652.18,65598.9,248469.7
+2016,Community Health,Public Health,Porter Assistant Supervisor,45014,63732.71,0,1205.1,64937.81,12084.95,13068.8,5339.97,30493.72,95431.53
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Architectural Associate 1,25218,94343,0,0,94343,21161.13,12356.85,7391.54,40909.52,135252.52
+2014,Culture & Recreation,Recreation and Park Commission,Arborist Technician Supervisor,14162,11085.7,0,0,11085.7,2363.48,1656.97,913.43,4933.88,16019.58
+2014,General Administration & Finance,City Attorney,"Head Atty, Civil & Criminal",40296,169930.04,0,937.5,170867.54,36615.13,11548.6,9228.15,57391.88,228259.42
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Custodial Assistant Supervisor,37827,59036.01,69.37,4980.32,64085.7,13648.3,12472.46,5276.34,31397.1,95482.8
+2013,Human Welfare & Neighborhood Development,Human Services,Clinical Psychologist,21274,21578.4,0,243.49,21821.89,3928.52,2655.42,1595.59,8179.53,30001.42
+2014,Human Welfare & Neighborhood Development,Human Services,Child Care Specialist,27060,47310.91,0,0,47310.91,11742.6,12512.55,3909.32,28164.47,75475.38
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,IS Programmer Analyst,50046,17018.3,0,0,17018.3,3099.04,2870.71,1370.66,7340.41,24358.71
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Auto Svc Wrk Asst Sprv,42177,70369.36,6992.35,13882.5,91244.21,15811.64,12918.25,7382.81,36112.7,127356.91
+2014,Public Protection,Juvenile Probation,"Counselor, Juvenile Hall SFERS",20664,5020.9,44.2,98.25,5163.35,0,1154.86,399.74,1554.6,6717.95
+2015,General Administration & Finance,Assessor/Recorder,Asr Senior Office Specialist,44330,15952.76,0,0,15952.76,2968.83,3324.15,1276.29,7569.27,23522.03
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Parking Hearing Examiner,39484,49560.37,0,0,49560.37,10844.26,7010.76,4064.92,21919.94,71480.31
+2013,Community Health,Public Health,Sr Environmental Hlth Insp,10871,105877.16,0,1020,106897.16,20483.91,12108.77,8616.11,41208.79,148105.95
+2014,Community Health,Public Health,Senior Food Service Worker,26659,25416.89,22589.58,3955.63,51962.1,6822.11,6495.97,3959.39,17277.47,69239.57
+2015,General Administration & Finance,Mayor,Community Development Asst,48628,28739.41,0,3137.07,31876.48,6446.24,0,2638.56,9084.8,40961.28
+2014,Community Health,Public Health,Sr Psychiatric Social Worker,8948,92790.32,0,1748,94538.32,20155.58,12512.55,7789.46,40457.59,134995.91
+2013,"Public Works, Transportation & Commerce",Airport Commission,Airport Communications Disp,33433,81945.13,10478.8,6602.33,99026.26,16830.51,12918.24,7970.38,37719.13,136745.39
+2014,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Arborist Technician,10742,78569.7,13855.84,1949.4,94374.94,17166.69,12512.53,7577.17,37256.39,131631.33
+2016,General Administration & Finance,General Services Agency - City Admin,Animal Control Officer,32803,27105.15,0,75.82,27180.97,5056.01,5647.27,2162.73,12866.01,40046.98
+2016,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,"Chf Stationary Eng, Sew Plant",43180,121823.9,42.59,0,121866.49,22086.71,13068.8,9680.23,44835.74,166702.23
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Tile Setter,21324,10281.18,0,0,10281.18,1985.03,1705.75,920.33,4611.11,14892.29
+2013,Community Health,Public Health,Radiologic Tech Sprv,920,123558.7,2755.05,3358.43,129672.18,22414.36,12764.86,9444.83,44624.05,174296.23
+2013,Public Protection,Sheriff,Institutional Police Officer,3666,66541.43,0,1401.72,67943.15,11944.13,11995.85,873.09,24813.07,92756.22
+2013,Human Welfare & Neighborhood Development,"Children, Youth & Their Families",Sr Community Devl Spc 1,31064,75793.53,0,0,75793.53,13802.07,12555.62,6134.65,32492.34,108285.87
+2015,Public Protection,Police,Captain 3,28649,110304.07,0,121858.48,232162.55,25188.98,6896.86,286.4,32372.24,264534.79
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Pr Payroll & Personnel Clerk,8789,81005.08,864.6,2222.19,84091.87,17708.56,13054.94,6835.49,37598.99,121690.86
+2014,General Administration & Finance,General Services Agency - City Admin,Asst Med Examiner,26027,0,0,16280.49,16280.49,0,-193.95,238.12,44.17,16324.66
+2013,Public Protection,Sheriff,Fingerprint Technician 2,10733,65448.01,976.8,3518,69942.81,13184.37,12918.24,5676.67,31779.28,101722.09
+2014,Public Protection,Juvenile Probation,"Counselor,Log Cabin Rnch SFERS",10932,26123.4,3049.03,2117.93,31290.36,0,5513.19,2418.22,7931.41,39221.77
+2015,Human Welfare & Neighborhood Development,Human Services,IS Programmer Analyst-Senior,12178,84982.81,0,0,84982.81,17668.71,10404.93,6853.17,34926.81,119909.62
+2014,Public Protection,Superior Court,Admin Analyst 3,29219,96880.82,0,0,96880.82,21173.11,12954.52,7950.96,42078.59,138959.41
+2015,Public Protection,Police,Police Cadet,32732,6842.66,0,0,6842.66,0,2562.37,529.75,3092.12,9934.78
+2014,Human Welfare & Neighborhood Development,Child Support Services,Child Support Officer III,5954,88738.55,0,0,88738.55,18919.04,12512.55,7247.95,38679.54,127418.09
+2014,Public Protection,Superior Court,Personnel/Payroll Repres,47378,76809.9,1942.09,614.4,79366.39,16506.77,10843.13,6465.57,33815.47,113181.86
+2014,Public Protection,Superior Court,"Assistant Director, Probate",3067,107443.39,0,0,107443.39,22369.65,11577.7,25084.11,59031.46,166474.85
+2013,"Public Works, Transportation & Commerce",Department of Building Inspection,Senior Building Inspector,5568,123532.79,12984.07,7393.12,143909.98,24593.1,12918.24,9867.34,47378.68,191288.66
+2015,General Administration & Finance,Retirement System,Benefits Technician,1774,34546.01,0,12400.85,46946.86,7826.15,6896.86,3792.3,18515.31,65462.17
+2013,General Administration & Finance,General Services Agency - City Admin,Media/Security Syst Supv,34508,107108.54,0,13807.31,120915.85,20519.64,12918.24,9443.56,42881.44,163797.29
+2015,General Administration & Finance,Board of Supervisors,Commissioner No Benefits,43610,400,0,0,400,0,23.95,30.98,54.93,454.93
+2015,"Public Works, Transportation & Commerce",Airport Commission,Window Cleaner,51677,75545.63,0,4686.58,80232.21,17996.11,12500.56,6384.92,36881.59,117113.8
+2014,Culture & Recreation,Recreation and Park Commission,Volunteer/Outreach Coord,14570,61313.3,0,0,61313.3,9389.46,12512.54,4762.31,26664.31,87977.61
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Permit And Citation Clerk,36415,63951.93,0,0,63951.93,11645.56,12707.2,5360.91,29713.67,93665.6
+2014,Public Protection,Department of Emergency Management,Public Service Aide-Admin,39868,11994.8,0,0,11994.8,0,4122.91,928.64,5051.55,17046.35
+2014,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Water & Power Maint Sprv 1,39150,95903.01,7523.54,2071.7,105498.25,21042.24,13054.93,8591.85,42689.02,148187.27
+2013,"Public Works, Transportation & Commerce",PUC Water Department,Water Meter Repairer,34198,74990.52,2917.43,0,77907.95,14741.52,12918.24,6432.22,34091.98,111999.93
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Maintenance Controller,18556,91395.93,21403.36,26391.55,139190.84,19989.01,12777.17,9702.07,42468.25,181659.09
+2014,General Administration & Finance,City Attorney,Claims Adjuster,27465,112673.01,1386.91,0,114059.92,24065.99,13054.94,9356.57,46477.5,160537.42
+2015,Public Protection,Juvenile Probation,"Counselor, Log Cabin Ranch",44810,73615.18,617.84,3460.59,77693.61,16972.07,12451.16,481.37,29904.6,107598.21
+2014,General Administration & Finance,Retirement System,Assistant Retirement Analyst,18874,51919.03,0,0,51919.03,11446.87,9540.15,4004.93,24991.95,76910.98
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Senior Parts Storekeeper,16076,61716.67,5387.68,4986.05,72090.4,13159.37,11234.32,5702.43,30096.12,102186.52
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Automotive Mechanic Asst Sprv,13797,33642.01,7090.75,2102.64,42835.4,7545.88,4300.79,3530.48,15377.15,58212.55
+2016,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Asphalt Finisher,36447,67706.23,10354.47,2433.85,80494.55,13053.1,12810.03,6950.03,32813.16,113307.71
+2014,Community Health,Public Health,Senior Medical Social Worker,27794,93098.47,0,0,93098.47,20346.43,12892,7692.01,40930.44,134028.91
+2014,General Administration & Finance,General Services Agency - City Admin,Med Examiner's Investigator II,2642,77567.93,5606.81,9321.33,92496.07,17406.56,10327.83,7369.38,35103.77,127599.84
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Automotive Body & Fender Wrk,41177,59567.52,135.07,10885.81,70588.4,14255.6,9044.38,5647.21,28947.19,99535.59
+2015,Public Protection,Department of Emergency Management,Emergency Med Svcs Agency Spec,25208,107964.02,0,1292.08,109256.1,23687.27,12087.46,8840.44,44615.17,153871.27
+2015,Public Protection,Adult Probation,Chief Adult Prob Offcr (SFERS),44734,52438.62,0,0,52438.62,11505.04,3208.95,3197.97,17911.96,70350.58
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Assistant Purchaser,51139,66095.46,0,0,66095.46,14446.92,12971.97,5038.39,32457.28,98552.74
+2014,Public Protection,Police,Comm Pol Svcs Aide Supervisor,35022,74306.51,0,7797.67,82104.18,17014.44,12416.67,6751.62,36182.73,118286.91
+2013,Public Protection,Superior Court,Court Manager,22909,131136.09,0,0,131136.09,25069.52,12918.24,21512,59499.76,190635.85
+2015,Human Welfare & Neighborhood Development,Human Services,Institution Utility Worker,26499,40563.51,0,468,41031.51,9595.32,9318.38,3360.35,22274.05,63305.56
+2014,Community Health,Public Health,Bldg & Grounds Maint Sprv,6894,97809,4377.29,23124.28,125310.57,22649.9,13054.94,9738.08,45442.92,170753.49
+2013,Public Protection,Police,Assistant Inspector 3,32733,128647.27,14325.97,4633.44,147606.68,22917.48,11817.03,2444.47,37178.98,184785.66
+2014,Community Health,Public Health,Industrial Hygienist,5149,113618.74,0,0,113618.74,23655.46,12512.55,9007.12,45175.13,158793.87
+2014,General Administration & Finance,Human Resources,Worker's Compensation Adjuster,24284,1416.99,0,420.4,1837.39,302.1,225.51,171.17,698.78,2536.17
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Track Maintenance Worker,49211,54836.43,22407.47,3397.29,80641.19,15014.33,12500.56,6092.53,33607.42,114248.61
+2016,General Administration & Finance,Human Resources,Testing Technician,4385,1089,0,0,1089,0,274.34,84.52,358.86,1447.86
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Communications Dispatcher 2,11132,13883.42,0,696.96,14580.38,0,3349.87,1128.82,4478.69,19059.07
+2016,Public Protection,Superior Court,Principal Mgmt Analyst,21296,37282.79,0,0,37282.79,0,0,2951.74,2951.74,40234.53
+2014,Community Health,Public Health,IT Operations Support Admn III,8404,79161.64,0,0,79161.64,16877.27,11793.44,5788.89,34459.6,113621.24
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Cement Mason,24927,71413.02,9741.47,1080,82234.49,14236.82,12302.15,6400.46,32939.43,115173.92
+2013,Culture & Recreation,Recreation and Park Commission,Aquatics Facility Asst Supv,37609,4712.83,511.8,109.23,5333.86,0,1360.19,412.95,1773.14,7107
+2015,Community Health,Public Health,IT Operations Support Admin V,11956,113508.71,0,0,113508.71,24903.86,12500.56,9000.28,46404.7,159913.41
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Asphalt Worker,183,56858.56,3427.52,2367.45,62653.53,12216.99,12376.66,4814.78,29408.43,92061.96
+2016,General Administration & Finance,Treasurer/Tax Collector,Senior Collections Officer,2775,76959.01,0,1645.1,78604.11,14628.2,13081.28,6473.74,34183.22,112787.33
+2014,Public Protection,District Attorney,District Attry's Investigator,40633,39987,0,0,39987,0,0,3158.1,3158.1,43145.1
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Senior Parking Control Officer,39204,66802.8,8638.85,7004.85,82446.5,15581.22,12512.54,6515.37,34609.13,117055.63
+2015,Public Protection,Public Defender,Court Alternative Specialist 1,1731,25472.5,0,0,25472.5,0,5507.91,2043.86,7551.77,33024.27
+2014,General Administration & Finance,City Attorney,Legal Secretary 2,20407,80943.01,0,626.4,81569.41,17390.56,12512.55,6654.57,36557.68,118127.09
+2013,Public Protection,Fire Department,Fire Rescue Paramedic,8174,123417.61,0,7405.06,130822.67,23168.69,12795.94,2326.09,38290.72,169113.39
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Power House Operator,21318,74112.4,2223.3,3399.45,79735.15,15800.77,12512.54,6552.5,34865.81,114600.96
+2013,Public Protection,Superior Court,Court Staff Attorney II,22531,127412.48,0,600,128012.48,24496.28,12640.51,9754.52,46891.31,174903.79
+2015,Community Health,Public Health,Manager VIII,36782,241505,0,0,241505,48429.04,11946.64,18731.44,79107.12,320612.12
+2015,"Public Works, Transportation & Commerce",Department of Building Inspection,Senior Housing Inspector,39008,69869.11,0,2794.76,72663.87,15942.44,7040.55,5943.27,28926.26,101590.13
+2015,Community Health,Public Health,Senior Unit Clerk,29721,67495.11,733.2,240,68468.31,15148.11,12500.56,5516.1,33164.77,101633.08
+2015,"Public Works, Transportation & Commerce",Airport Commission,Auditor III,28627,116384.04,0,0,116384.04,23422.64,12424.5,9337.82,45184.96,161569
+2015,"Public Works, Transportation & Commerce",Airport Commission,Airport Safety Officer,9104,87908.4,26465.26,11357.61,125731.27,21515,12500.56,9783.11,43798.67,169529.94
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Manager IV, Municipal Transportation Age",3912,5058.38,0,0,5058.38,895.84,478.45,399.49,1773.78,6832.16
+2016,"Public Works, Transportation & Commerce",Department of Building Inspection,Permit Technician II,45291,75996.95,1846.55,40,77883.5,14150.47,13068.8,6386.99,33606.26,111489.76
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Automotive Trnst Shop Sprv 1,16192,111384,25599.6,8431.52,145415.12,19823.61,12801.79,9653.65,42279.05,187694.17
+2013,Community Health,Public Health,Senior Pharmacy Helper,48505,70742,835.44,393.15,71970.59,13901.01,12918.24,5947.33,32766.58,104737.17
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Car Cleaner Asst Sprv,4556,64558,19534.03,11587.06,95679.09,13530.46,12801.79,7859.2,34191.45,129870.54
+2015,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,Wastewater Control Inspector,37633,96254.08,3345.58,0,99599.66,19838.21,12424.5,8125.17,40387.88,139987.54
+2015,Public Protection,Fire Department,Marine Engineer Of Fire Boats,16745,148121.12,32674.21,24863.2,205658.53,35834.63,15086.88,3462.27,54383.78,260042.31
+2013,"Public Works, Transportation & Commerce",PUC Water Department,Electrician Supervisor 1,35719,103116.06,743.63,434,104293.69,18339.26,12801.74,8719.08,39860.08,144153.77
+2016,"Public Works, Transportation & Commerce",Airport Commission,Airport Noise Abatement Spec,42630,60582,0,0,60582,11274.38,11422.73,4887.43,27584.54,88166.54
+2013,Public Protection,Juvenile Probation,Employment & Training Spec 5,52007,2119.28,0,0,2119.28,0,319.97,164.08,484.05,2603.33
+2016,Public Protection,Police,Lieutenant 2,34459,158513.79,62637.84,15892.13,237043.76,28124.45,13156.1,4037.86,45318.41,282362.17
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Sr Transit Information Clerk,35097,55466.06,0,7067.28,62533.34,11934.24,10199.4,5125.67,27259.31,89792.65
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Graphic Artist,7218,15932.11,0,1630.15,17562.26,0,3301.33,1383.17,4684.5,22246.76
+2014,"Public Works, Transportation & Commerce",Department of Building Inspection,Plumbing Inspector,28302,107941.84,157.06,4205.89,112304.79,23349.17,12512.55,8966.45,44828.17,157132.96
+2015,Culture & Recreation,Arts Commission,Arts Program Assistant,30717,31682.19,0,115.27,31797.46,7106.3,6426.23,2303.23,15835.76,47633.22
+2015,"Public Works, Transportation & Commerce",PUC Water Department,Chemist III,45796,118057.9,0,0,118057.9,25901.82,12500.56,9515.72,47918.1,165976
+2015,General Administration & Finance,Human Resources,Special Examiner,33961,154.88,0,0,154.88,0,0,12.24,12.24,167.12
+2015,Human Welfare & Neighborhood Development,Human Services,Legal Assistant,3457,83528.04,0,0,83528.04,17211.04,12424.5,6854.94,36490.48,120018.52
+2013,"Public Works, Transportation & Commerce",PUC Water Department,Integrated Pest Mgmt Specialst,31303,78567,0,0,78567,15444.47,12918.24,6497.71,34860.42,113427.42
+2013,General Administration & Finance,General Services Agency - City Admin,Shelter Service Rep,48520,36694.12,39.66,206.85,36940.63,7091.72,8224.26,3154.27,18470.25,55410.88
+2016,Public Protection,Police,Chief Clerk,12738,2405.75,0,3.25,2409,448.31,367.74,210.45,1026.5,3435.5
+2013,Community Health,Public Health,Patient Svcs Finance Tech,26724,60210.04,0,984.91,61194.95,11958.42,12918.24,4965.8,29842.46,91037.41
+2016,Community Health,Public Health,Environmental Hlth Tech 1,38751,72720.33,0,69.6,72789.93,13546.12,12750.82,6013.57,32310.51,105100.44
+2014,General Administration & Finance,Controller,IS Prg Analyst-Principal,11600,113244.91,205.97,18466.84,131917.72,23577.62,12512.55,9352.15,45442.32,177360.04
+2015,Public Protection,Police,Invstgtor Ofc Citizen Cmplnts,33880,84882.71,0,1486.53,86369.24,17976.12,11280.14,6939.91,36196.17,122565.41
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Watershed Forester,31070,99998.01,0,0,99998.01,21924.27,13054.94,17276.62,52255.83,152253.84
+2014,General Administration & Finance,General Services Agency - City Admin,Purchaser,38201,83251.01,0,0,83251.01,18193.94,13054.94,6708.66,37957.54,121208.55
+2016,Community Health,Public Health,EEO Programs Specialist,27427,23229.33,0,0,23229.33,1052.72,4113.62,1860.88,7027.22,30256.55
+2016,General Administration & Finance,Human Resources,EEO Senior Specialist,47071,115814.1,0,5790.71,121604.81,22047.02,13068.8,9862.07,44977.89,166582.7
+2014,Public Protection,Police,Payroll Clerk,52828,70329.14,2750.74,624,73703.88,15506.76,13054.94,6071.11,34632.81,108336.69
+2015,General Administration & Finance,General Services Agency - City Admin,Med Examiner's Investigatoriii,41185,56656.8,9075.15,18255.07,83987.02,12883.13,6558.7,6704.62,26146.45,110133.47
+2013,Community Health,Public Health,Health Program Coordinator 1,30022,67941.01,0,246.78,68187.79,9785.22,12918.24,5504.44,28207.9,96395.69
+2013,Public Protection,Police,Criminalist III,33246,135376.94,0,0,135376.94,23975.31,12801.79,10038.58,46815.68,182192.62
+2015,"Public Works, Transportation & Commerce",Airport Commission,Survey Associate,26219,80290.54,0,1170,81460.54,16673.74,10245.37,5964.34,32883.45,114343.99
+2016,Public Protection,Police,IS Manager,18675,174471.41,0,0,174471.41,31631.67,13068.81,18579.25,63279.73,237751.14
+2015,General Administration & Finance,Controller,Accountant IV,331,24457.25,0,0,24457.25,0,2733,1893.48,4626.48,29083.73
+2015,"Public Works, Transportation & Commerce",Airport Commission,Head Airport Electrician,47894,5176,727.88,420,6323.88,968.84,477.86,108.82,1555.52,7879.4
+2015,"Public Works, Transportation & Commerce",PUC Water Department,"Sr Statnry Eng, Wtr Treat Plnt",36625,105785.99,2633.34,6523.05,114942.38,23220.06,12388.65,9436.57,45045.28,159987.66
+2014,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Safety Analyst,50198,114888.16,0,0,114888.16,24537.96,13054.94,9429.8,47022.7,161910.86
+2015,General Administration & Finance,City Planning,"Brd Comm Mbr, M=$200/Mtg",1393,1000,0,0,1000,0,0,79,79,1079
+2015,General Administration & Finance,General Services Agency - City Admin,Senior Real Property Officer,24589,101036.39,0,0,101036.39,20565.13,10284.98,8175.88,39025.99,140062.38
+2014,Public Protection,Fire Department,"Lieut,Fire Prev",6762,147160.09,11003.07,30939.63,189102.79,33458.86,13054.94,3063.94,49577.74,238680.53
+2013,Community Health,Public Health,Home Health Aide,1148,41888.81,1978.22,4808.25,48675.28,9912.02,12911.24,3901.57,26724.83,75400.11
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Executive Secretary 3,5,55877.5,0,0,55877.5,10175.37,8616.59,4627.97,23419.93,79297.43
+2014,General Administration & Finance,Controller,Auditor II,26971,82551.71,0,0,82551.71,17599.96,12512.55,6588.83,36701.34,119253.05
+2014,Community Health,Public Health,Dentist,22645,6440.67,0,0,6440.67,5068.12,0,2176.54,7244.66,13685.33
+2016,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,Electr Instrmntn Tech Wtr Poll,5455,110966.86,314.78,11862.31,123143.95,20118.25,12884.69,10047.67,43050.61,166194.56
+2014,Public Protection,Fire Department,"Capt,Fire Prev Or Fire Invsgtn",14233,152712,34687.44,13407.72,200807.16,32892.85,11326.01,3321.23,47540.09,248347.25
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Materials Testing Aide,5154,37545.64,2701.14,0,40246.78,3372.84,8982.73,3187.09,15542.66,55789.44
+2015,Public Protection,Sheriff,Chief Deputy Sheriff,17792,170027.9,3203.02,14552.23,187783.15,43413.37,12500.56,3187.01,59100.94,246884.09
+2016,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Engineering Associate 2,20916,97707.42,0,0,97707.42,18183.33,13068.8,7788.35,39040.48,136747.9
+2016,General Administration & Finance,City Planning,City Planning Intern,53613,2765,0,0,2765,0,698.34,214.61,912.95,3677.95
+2014,General Administration & Finance,General Services Agency - Technology,Fire Alarm Dispatcher,22240,42904.2,2760.43,2946.5,48611.13,9529,8251.81,4369.11,22149.92,70761.05
+2015,"Public Works, Transportation & Commerce",Airport Commission,Airport Economic Planner,14594,125284.04,0,0,125284.04,25213.79,12424.5,9921.39,47559.68,172843.72
+2014,Public Protection,Superior Court,Court Computer Sys Manager,33726,148952.78,0,0,148952.78,31012.02,12512.55,22551.49,66076.06,215028.84
+2015,Public Protection,Police,Commander 3,49283,223225.23,0,14468.33,237693.56,48080.7,12500.56,3966.44,64547.7,302241.26
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Street Inspection Supervisor,52656,104736.52,3601.47,0,108337.99,20432.62,12918.24,8958.14,42309,150646.99
+2015,Human Welfare & Neighborhood Development,Human Services,Medical Social Work Supervisor,46321,3734,0,40,3774,702.34,477.86,279.09,1459.29,5233.29
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Car And Auto Painter,6867,79283.53,15388.93,16423.99,111096.45,18061.72,12918.25,9070.25,40050.22,151146.67
+2013,Public Protection,Fire Department,Fire Safety Inspector 2,12901,139644,33305.08,8378.64,181327.72,28346.09,12918.24,10620.64,51884.97,233212.69
+2016,Public Protection,Police,Special Assistant 10,48340,44545.9,0,0,44545.9,0,5960.78,3457.69,9418.47,53964.37
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Paint Shop Sprv1,42,0,0,6407.92,6407.92,0,0,490.22,490.22,6898.14
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Manager VI, MTA",41130,133677.83,0,0,133677.83,27831.71,10834.62,15746.15,54412.48,188090.31
+2015,Culture & Recreation,Recreation and Park Commission,Ornamental Iron Worker,22702,82080.79,6106.11,1291.92,89478.82,18640.41,12389.79,7299.03,38329.23,127808.05
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Senior Maintenance Controller,5365,11126.7,2621.35,2379.88,16127.93,2870.08,1293.16,1295.69,5458.93,21586.86
+2016,Community Health,Public Health,Medical Transcriber Typist,35867,67233.21,0,628.8,67862.01,12629.14,13068.8,5575.35,31273.29,99135.3
+2014,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,Electrician Supervisor 2,39016,82966.02,8748.57,3525.81,95240.4,17988.84,9540.15,7226.02,34755.01,129995.41
+2015,Community Health,Public Health,Central Processing & Dist Tech,25958,0,0,981.36,981.36,0,0,75.07,75.07,1056.43
+2013,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Maintenance Scheduler,8979,3378,0,0,3378,615.13,0,266.87,882,4260
+2014,Community Health,Public Health,Senior Laundry Worker,34214,53120.99,7164.62,20164.69,80450.3,12682.88,13054.94,6470.12,32207.94,112658.24
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,IS Administrator 3,43631,5821.5,0,271.67,6093.17,1241.14,719.12,462.13,2422.39,8515.56
+2013,Public Protection,District Attorney,Sr District Atty Investigator,7586,93698.02,8793.29,5622.78,108114.09,17399.16,10525.98,1827.49,29752.63,137866.72
+2016,"Public Works, Transportation & Commerce",Airport Commission,Project Manager 4,38594,40939.5,0,0,40939.5,7422.33,2444.17,3250.36,13116.86,54056.36
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Hodcarrier,16629,71976.1,8519.36,1222,81717.46,13329.37,12752.54,6802.43,32884.34,114601.8
+2015,Public Protection,Superior Court,Court Interpreter,2796,65536.88,0,480.6,66017.48,14807.74,10981.69,5197.52,30986.95,97004.43
+2015,Culture & Recreation,Recreation and Park Commission,Nursery Specialist,2481,75464.12,2185.35,3026.54,80676.01,16926.58,12452.65,6628.2,36007.43,116683.44
+2013,Culture & Recreation,Recreation and Park Commission,Events & Facilities Specialist,12593,76447.81,8492.64,1118.03,86058.48,15246.3,12918.24,6859.61,35024.15,121082.63
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Architectural Associate 2,28456,109668.05,0,0,109668.05,19422.25,12801.76,9190.41,41414.42,151082.47
+2013,Culture & Recreation,Recreation and Park Commission,Animal Keeper,47395,62509.5,718.06,3592.5,66820.06,11382.99,12851.03,5568.19,29802.21,96622.27
+2013,Public Protection,Superior Court,Deputy Court Clerk I,26749,14296.5,0,382.32,14678.82,2960.8,3988.25,1166.23,8115.28,22794.1
+2015,"Public Works, Transportation & Commerce",Airport Commission,Museum Preparator,23436,28124.4,1630.88,310.71,30065.99,6378.01,6200.53,2352.34,14930.88,44996.87
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Senior Street Inspector,52509,90499.01,0,0,90499.01,17789.58,12918.25,7451.27,38159.1,128658.11
+2014,Public Protection,Superior Court,Fiscal Technician,52011,75267.47,0,0,75267.47,16452.12,13029.14,6256.46,35737.72,111005.19
+2016,General City Responsibilities,General Fund Unallocated,Recreation Director,51305,0,0,3302.81,3302.81,0,0,252.66,252.66,3555.47
+2014,General Administration & Finance,General Services Agency - City Admin,Med Examiner's Investigator I,12339,49929.46,520.86,981.85,51432.17,10644.96,9413,4215.14,24273.1,75705.27
+2014,"Public Works, Transportation & Commerce",Airport Commission,Research Assistant,16419,51410.03,0,0,51410.03,11335.72,9540.15,4241.27,25117.14,76527.17
+2016,General Administration & Finance,Mayor,Mayoral Staff IX,42041,56638.22,0,0,56638.22,10540.34,8629.4,9901.97,29071.71,85709.93
+2015,General Administration & Finance,City Attorney,IS Trainer-Journey,8989,86795.54,0,0,86795.54,19468.26,12500.56,7133.69,39102.51,125898.05
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Senior Storekeeper,8446,57225.44,0,0,57225.44,12016.57,12918.25,4613.23,29548.05,86773.49
+2015,Public Protection,District Attorney,Asst Chf Victim/Wit Invstgtor,42670,66409.93,0,0,66409.93,14895.71,9914.23,5409.4,30219.34,96629.27
+2016,Culture & Recreation,Recreation and Park Commission,Assistant Cook,24263,6513,784.99,0,7297.99,0,1945.36,566.73,2512.09,9810.08
+2016,Community Health,Public Health,Health Program Planner,20201,93300.31,0,0,93300.31,17363.21,13013.58,7651.79,38028.58,131328.89
+2013,Public Protection,Public Defender,Criminal Justice Specialist 2,37085,82938,0,0,82938,16322.92,12918.24,6659.46,35900.62,118838.62
+2014,General Administration & Finance,Mayor,Mayoral Staff XI,45817,19959,0,0,19959,4476.79,3012.68,3712.7,11202.17,31161.17
+2015,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,Water Quality Tech III,36325,89028.08,6708.57,0,95736.65,18349.07,12424.5,7629.07,38402.64,134139.29
+2015,General Administration & Finance,City Attorney,"Claims Investigator, Ca",31156,110335.99,0,0,110335.99,22740.85,12424.5,8911.55,44076.9,154412.89
+2015,Human Welfare & Neighborhood Development,Human Services,Emp & Training Spec 4,24964,30970,0,0,30970,5763.55,4778.65,2492.52,13034.72,44004.72
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Architect,45298,126932,0,4497.58,131429.58,23276.19,12801.79,9634.57,45712.55,177142.13
+2013,Community Health,Public Health,Senior Morgue Attendant,46133,73197.03,0,0,73197.03,14383.09,12918.24,6053.46,33354.79,106551.82
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Electric Motor Repair Sprv 1,51245,108038,18093.86,3819.13,129950.99,22266.23,12424.5,9949.5,44640.23,174591.22
+2014,Human Welfare & Neighborhood Development,Human Services,Training Officer,34667,51780.02,0,0,51780.02,11515.66,7531.7,4240.62,23287.98,75068
+2013,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Electrical Line Worker,50142,3426,0,68.52,3494.52,745.03,478.43,285.56,1509.02,5003.54
+2013,Community Health,Public Health,Mental Hlth Treatment Spec,35574,65310.1,0,0,65310.1,11892.96,9658.46,5293.58,26845,92155.1
+2014,Public Protection,Public Defender,Public Defender's Investigator,11991,90435,0,600,91035,19895.29,13054.94,7519.94,40470.17,131505.17
+2015,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Coord Of Citizen Involvement,4405,55799.6,0,711.53,56511.13,712.02,7120.2,4429.49,12261.71,68772.84
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Water Conservation Admin,42744,118389.87,0,0,118389.87,25288.1,13034.29,17960.01,56282.4,174672.27
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Sewer Maintenance Worker,14793,57144.98,483.18,543.6,58171.76,10505.09,10918.44,4898.07,26321.6,84493.36
+2014,Public Protection,Fire Department,Asst Chf Of Dept (Fire Dept),25347,201566.88,97907.38,29916.28,329390.54,48123.49,15515.28,5405.86,69044.63,398435.17
+2014,General Administration & Finance,Treasurer/Tax Collector,IS Business Analyst-Assistant,37234,43156.8,0,0,43156.8,9201.02,8437.58,3476.5,21115.1,64271.9
+2016,Community Health,Public Health,Dietetic Technician,39628,6819.15,449.96,0,7269.11,1499.52,1677.24,580.74,3757.5,11026.61
+2015,Community Health,Public Health,Occupational Therapist,21783,96113.5,0,0,96113.5,19809.51,12349.84,7732.05,39891.4,136004.9
+2013,General Administration & Finance,Retirement System,"Ex Asst To Ex Dir, Retirement",1147,129182.78,0,0,129182.78,24772.87,12918.24,17968.45,55659.56,184842.34
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Soft Floor Coverer,26060,547.06,377.12,34.19,958.37,0,83.73,74.2,157.93,1116.3
+2016,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,Sewer Service Worker,4498,97554.9,13283.74,4389.67,115228.31,18885.03,13068.8,9179.23,41133.06,156361.37
+2016,Community Health,Public Health,Surgical Procedures Technician,48381,69619.46,3678.61,1663.29,74961.36,13131.18,13031.39,6070.16,32232.73,107194.09
+2015,Community Health,Public Health,Food Service Mgr Administrator,2123,98356.6,0,0,98356.6,20174,12472.29,15763.87,48410.16,146766.76
+2015,Public Protection,Superior Court,Ct Comp App Programmer,13340,99510.02,0,2838.6,102348.62,21945.27,10249.5,8190.1,40384.87,142733.49
+2014,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Engineering Assistant,1987,71817.64,11979.86,0,83797.5,15311.54,12512.55,6387.81,34211.9,118009.4
+2013,Culture & Recreation,Recreation and Park Commission,Roofer,43777,59822.31,492.4,1750,62064.71,11212.35,10094.27,5431.43,26738.05,88802.76
+2015,Community Health,Public Health,Public Health Team Leader,29296,78115,0,8808.11,86923.11,18843.23,12402.67,6939.56,38185.46,125108.57
+2015,Community Health,Public Health,Cashier 1,32071,56276,2567.15,1662.65,60505.8,12894.37,12424.5,4949.57,30268.44,90774.24
+2014,General Administration & Finance,General Services Agency - City Admin,Contract Compliance Officer 1,8182,94847.44,0,960,95807.44,20426.11,12512.55,7858.41,40797.07,136604.51
+2013,Culture & Recreation,Public Library,Dept Head IV,53168,227406.42,0,0,227406.42,43589.4,12918.24,13179.75,69687.39,297093.81
+2015,Community Health,Public Health,Cashier 2,44643,60248.01,0,624,60872.01,12546.13,12424.5,5045.82,30016.45,90888.46
+2014,General Administration & Finance,Mayor,Mayoral Staff XVII,26121,163515.01,0,0,163515.01,34043.83,12512.55,18891.62,65448,228963.01
+2015,General Administration & Finance,General Services Agency - Technology,Senior Comm Systems Technican,34180,3106.1,0,16.8,3122.9,685.16,335.27,269.05,1289.48,4412.38
+2015,Community Health,Public Health,Physical Therapist Assistant,6412,88686.01,0,100,88786.01,19892.27,12500.56,7292.8,39685.63,128471.64
+2014,Public Protection,Adult Probation,Sprv Adult Probation Ofc,319,103282.56,0,0,103282.56,17648.93,12154.55,1724.2,31527.68,134810.24
+2013,"Public Works, Transportation & Commerce",Airport Commission,Custodial Supervisor,32107,3493.72,44.25,11773.82,15311.79,637.55,0,1180.2,1817.75,17129.54
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,IS Trainer-Senior,25386,86517.9,0,0,86517.9,16101.04,12570,6638.55,35309.59,121827.49
+2015,"Public Works, Transportation & Commerce",Airport Commission,Sr Airport Communications Disp,34447,89224.98,2416.97,6066.7,97708.65,18765.58,12352.82,7902.84,39021.24,136729.89
+2013,Public Protection,Superior Court,Fiscal Services Supervisor,42192,63947.39,0,69017.08,132964.47,11325.07,6937.57,13124.15,31386.79,164351.26
+2015,"Public Works, Transportation & Commerce",Airport Commission,Steamfitter Supervisor 2,33319,101109.01,27180.13,3033.27,131322.41,20820.86,10035.18,8338.68,39194.72,170517.13
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Planner III,50248,102975.21,0,0,102975.21,23097.29,12261.09,7825.12,43183.5,146158.71
+2015,Community Health,Public Health,Sr Cent Proc & Dist Tech,10694,89200.6,1682.16,10269.74,101152.5,21515.47,12500.56,8075.06,42091.09,143243.59
+2014,General Administration & Finance,General Services Agency - City Admin,Senior Purchaser,29775,33280.04,0,0,33280.04,0,4167.85,2576.55,6744.4,40024.44
+2014,Public Protection,Police,Assistant Inspector 2,27995,34203.75,3302.3,1866.58,39372.63,6992.28,3146.12,658.96,10797.36,50169.99
+2016,Public Protection,Superior Court,Ct Comp Facilities Coord,13340,127908.41,0,3000,130908.41,23189.88,13068.8,10047.68,46306.36,177214.77
+2014,Public Protection,Superior Court,"Counselor, Family Court Svc",15634,61950.54,0,3721.53,65672.07,14349.41,7780.43,5327.19,27457.03,93129.1
+2015,Public Protection,Adult Probation,Deputy Probation Officer SFERS,36560,7051.2,0,0,7051.2,1581.58,1245.26,116.1,2942.94,9994.14
+2016,General Administration & Finance,General Services Agency - City Admin,Customer Service Agent Trainee,10666,18927.83,14.39,94.79,19037.01,0,4059.07,1477.58,5536.65,24573.66
+2014,Community Health,Public Health,Medical Records Tech Sprv,30430,81274.98,5382.83,618.08,87275.89,17459.58,12512.55,7141.59,37113.72,124389.61
+2016,Community Health,Public Health,Chef,23540,0,0,2000,2000,0,0,158.4,158.4,2158.4
+2015,Community Health,Public Health,Anesthetist,3353,49361.1,0,1187.92,50549.02,10146.65,2344.53,3919.21,16410.39,66959.41
+2014,Human Welfare & Neighborhood Development,Human Services,Program Specialist Supervisor,26214,94147.84,0,0,94147.84,20072.34,12512.55,7627.84,40212.73,134360.57
+2013,Community Health,Public Health,Dental Hygienist,51756,27503.84,0,0,27503.84,5442.37,4597.94,2270.04,12310.35,39814.19
+2014,Culture & Recreation,Recreation and Park Commission,Recreation Supervisor,47410,22999.01,0,53.01,23052.02,5170.57,3514.79,1898.39,10583.75,33635.77
+2014,Community Health,Public Health,IS Engineer-Assistant,20579,101662.58,0,9030.11,110692.69,22199.16,12652.87,8829.45,43681.48,154374.17
+2013,Human Welfare & Neighborhood Development,Human Services,Specialist In Aging 2,45789,89829.1,0,648,90477.1,17773.39,12918.25,7481.23,38172.87,128649.97
+2014,General Administration & Finance,Assessor/Recorder,Personal Property Auditor,6434,22397.8,0,2917.44,25315.24,4809.31,4267.96,2007.53,11084.8,36400.04
+2015,Community Health,Public Health,Nutritionist,3778,78997.44,0,1320,80317.44,18015.18,12195.22,6371.7,36582.1,116899.54
+2014,"Public Works, Transportation & Commerce",Airport Commission,Plumber Supervisor 1,53569,108334.98,5587.24,11349.79,125272.01,24376.33,12496.97,9236.72,46110.02,171382.03
+2014,"Public Works, Transportation & Commerce",Department of Building Inspection,Chief Building Inspector,22962,131423.96,0,6571.22,137995.18,29481.04,12930.03,9940.59,52351.66,190346.84
+2015,General Administration & Finance,Controller,Prnpl Admin Analyst II,50179,123150.1,0,0,123150.1,27019.19,12500.56,9671.68,49191.43,172341.53
+2015,Community Health,Public Health,Assistant Health Educator,46520,51682.74,0,800,52482.74,11771.84,8510.44,4122.37,24404.65,76887.39
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Manager V, MTA",23620,30311.36,0,0,30311.36,0,2945.35,2346.71,5292.06,35603.42
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Sprv, Traffic & Street Signs",18489,95006.02,4312.32,0,99318.34,18675.67,12918.26,8151.76,39745.69,139064.03
+2015,Culture & Recreation,Recreation and Park Commission,Park Patrol Officer,23379,51653.2,16660.86,4836.53,73150.59,11813.61,10990.9,5894.28,28698.79,101849.38
+2013,General Administration & Finance,General Services Agency - City Admin,Senior Industrial Hygienist,2650,127971.55,0,0,127971.55,24516.51,12918.24,9492.73,46927.48,174899.03
+2013,General Administration & Finance,Retirement System,Special Assistant 15,6904,85235.93,0,0,85235.93,15095.26,8166.31,14299.16,37560.73,122796.66
+2013,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,Sprv Wastewater Cont Inspector,46882,98982.02,2641.1,0,101623.12,18024.53,12801.79,7965.82,38792.14,140415.26
+2013,Public Protection,Juvenile Probation,"Director, Juvenile Hall",13314,30557.7,0,0,30557.7,5221.72,3349.18,526.84,9097.74,39655.44
+2014,"Public Works, Transportation & Commerce",Department of Building Inspection,Building Plans Engineer,49727,142878.93,0,0,142878.93,29747.45,12512.55,9707.39,51967.39,194846.32
+2016,Culture & Recreation,Public Library,Public Service Aide-Technical,53200,530,0,0,530,0,261.87,44.43,306.3,836.3
+2014,"Public Works, Transportation & Commerce",Airport Commission,Airport Emerg Planning Coord,10484,93249.35,0,0,93249.35,19880.76,12512.55,12611.4,45004.71,138254.06
+2013,Public Protection,Public Defender,Legal Process Clerk,34312,54660.49,0,1578.86,56239.35,11024.35,12336.09,4658.43,28018.87,84258.22
+2014,"Public Works, Transportation & Commerce",General Services Agency - Public Works,"Area Sprv Parks, Squares & Fac",27396,91596.2,0,0,91596.2,19528.32,12464.61,16191.3,48184.23,139780.43
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Sr Fare Collections Receiver,31439,70348.02,806.4,1837.8,72992.22,15510.56,13054.94,5775.14,34340.64,107332.86
+2014,General Administration & Finance,General Services Agency - City Admin,Customer Service Agent Supv,18849,79569.5,225.9,5257.35,85052.75,17198.39,12512.55,6921.3,36632.24,121684.99
+2013,General Administration & Finance,Assessor/Recorder,Assessment Clerk,38842,523.5,0,0,523.5,95.33,0,50.63,145.96,669.46
+2015,General City Responsibilities,General Fund Unallocated,Assistant Recreation Director,53784,1786.2,0,0,1786.2,308.49,0,141.11,449.6,2235.8
+2015,Public Protection,Department of Emergency Management,Emergency Services Coord III,41015,92251.74,0,2224.31,94476.05,20692.06,12506.54,7505.54,40704.14,135180.19
+2013,"Public Works, Transportation & Commerce",Port,Fusion Welder,20504,97149.5,0,2580.47,99729.97,19609.66,12918.25,8153.74,40681.65,140411.62
+2015,General Administration & Finance,Board of Supervisors,Legislation Clerk,34476,42908.43,117.45,2349.78,45375.66,9624.39,6546.76,3613.33,19784.48,65160.14
+2013,General Administration & Finance,Board of Supervisors,"Asst Clk, Board Of Supervisors",12336,83539.24,1412.98,0,84952.22,15212.48,12801.79,6881.8,34896.07,119848.29
+2013,"Public Works, Transportation & Commerce",Airport Commission,Curator 3,20864,22417.52,0,0,22417.52,4082.25,3692.82,1870.8,9645.87,32063.39
+2014,General Administration & Finance,General Services Agency - Technology,Media Production Supv,40372,79030.45,0,159.86,79190.31,17305.98,12218.99,5865.14,35390.11,114580.42
+2016,Community Health,Public Health,Microbiologist,11195,71078.4,0,0,71078.4,13227.68,11672.14,5625.68,30525.5,101603.9
+2014,Community Health,Public Health,IS Administrator 1,894,3940.5,0,0,3940.5,840.12,719.12,299.18,1858.42,5798.92
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Lab Svcs Mgr,2808,134946.02,0,0,134946.02,28823.16,13054.94,9874.64,51752.74,186698.76
+2013,Human Welfare & Neighborhood Development,Human Services,Senior Estate Investigator,41857,36520,0,0,36520,7786.02,5262.99,2976.85,16025.86,52545.86
+2014,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Executive Contract Employee,43975,246928.4,0,0,246928.4,52741.79,13054.94,20085.55,85882.28,332810.68
+2014,General Administration & Finance,General Services Agency - City Admin,Animal Care Asst Supv,36047,59235.1,0,1114.93,60350.03,12866.6,12512.55,4975.29,30354.44,90704.47
+2016,General Administration & Finance,Retirement System,Senior Benefits Analyst,15245,71594.4,0,520,72114.4,13420.46,10425.12,5876.84,29722.42,101836.82
+2013,Community Health,Public Health,Senior Health Program Planner,24777,25104,0,0,25104,5352.16,3827.63,1963.33,11143.12,36247.12
+2015,General Administration & Finance,Health Service System,Sr Employee Asst Counselor,35116,53567.01,0,19550,73117.01,12015.05,6546.76,5802.96,24364.77,97481.78
+2013,Public Protection,Police,Crime Lab Mgr,2170,97076.01,0,16137.87,113213.88,17783.77,8612.16,9034.65,35430.58,148644.46
+2013,"Public Works, Transportation & Commerce",Department of Building Inspection,Housing Inspector,34104,105742,0,0,105742,18727.01,12801.79,8717.68,40246.48,145988.48
+2016,Public Protection,Superior Court,Building Services Technician,16524,86768.65,0,3613.21,90381.86,16261.72,12744.71,7503.59,36510.02,126891.88
+2015,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,Sewage Treatment Plant Supt,41117,147862.02,0,0,147862.02,29758.89,12424.49,10268.84,52452.22,200314.24
+2015,General Administration & Finance,Health Service System,Employee Assistance Counselor,48918,26684.2,0,0,26684.2,4965.95,3679.56,2107.5,10753.01,37437.21
+2014,Public Protection,District Attorney,"Prdainvest,Specunit (SFERS)",21575,67330.14,0,0,67330.14,0,6615.34,5221.23,11836.57,79166.71
+2016,Public Protection,District Attorney,Chf Payroll & Personnel Clerk,27305,31261.21,0,0,31261.21,5817.67,5437.02,2435.7,13690.39,44951.6
+2016,Public Protection,Adult Probation,Probation Assistant,24581,24892,0,0,24892,5473.7,6334.88,2013.36,13821.94,38713.94
+2014,Community Health,Public Health,Speech Pathologist,44401,98898.8,0,0,98898.8,21375.89,11918.91,8080.21,41375.01,140273.81
+2015,Culture & Recreation,Asian Art Museum,Curator 4,52562,81418.5,0,0,81418.5,18262.11,9818.45,6592.99,34673.55,116092.05
+2013,General Administration & Finance,Board of Supervisors,"Member, Board Of Supervisors",20952,55504.69,0,0,55504.69,10107.42,6720.94,8793.88,25622.24,81126.93
+2013,Public Protection,Adult Probation,IS Trainer-Assistant,7145,59585.91,0,0,59585.91,10850.65,12801.79,4461.25,28113.69,87699.6
+2014,Public Protection,District Attorney,Dist Atty Investigator (SFERS),2780,77579.84,705.85,4654.19,82939.88,18061.2,11197.12,1587.66,30845.98,113785.86
+2015,General Administration & Finance,Retirement System,Mail & Reproduction Svc Sprv,35235,76439.81,0,0,76439.81,15722.61,11815.17,6094.66,33632.44,110072.25
+2014,Public Protection,Sheriff,Security Guard,6689,48961.05,20562.98,8552.03,78076.06,13374.79,12392.69,5845.76,31613.24,109689.3
+2014,Public Protection,Juvenile Probation,Transcriber Typist,48585,58792.23,0,626.4,59418.63,12668.05,12512.55,4908.12,30088.72,89507.35
+2014,Public Protection,District Attorney,Victim/Witness Investigator 2,836,43587.01,0,0,43587.01,9292.74,7323.2,3607.93,20223.87,63810.88
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Senior Power House Operator,12719,84691,20758.89,1476.3,106926.19,18508.6,13054.94,8671.7,40235.24,147161.43
+2013,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Sr Power Generation Tech,12891,104633.3,23084.81,6082.26,133800.37,19120.09,12764.87,9750.64,41635.6,175435.97
+2014,"Public Works, Transportation & Commerce",Port,Project Manager 1,24945,21580.75,0,0,21580.75,0,2290.89,1670.78,3961.67,25542.42
+2013,Public Protection,Sheriff,Assistant Sheriff,4698,167681.62,0,9970.24,177651.86,34784.17,12801.79,2905.42,50491.38,228143.24
+2016,Culture & Recreation,Asian Art Museum,Senior Museum Registrar,3392,84993.42,0,628.8,85622.22,15934.28,13068.8,6964.16,35967.24,121589.46
+2014,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Line Inspector,5865,109163.02,363.74,0,109526.76,23316.25,13054.93,8296.78,44667.96,154194.72
+2015,"Public Works, Transportation & Commerce",Airport Commission,Auto Machinist Asst Sprv,1629,97793,11910.59,600,110303.59,20267.12,12424.5,8809.67,41501.29,151804.88
+2014,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Cement Finisher Supervisor 1,47217,99504.03,8762.28,602.02,108868.33,21874.84,12996.83,8871.92,43743.59,152611.92
+2014,Culture & Recreation,Recreation and Park Commission,Crafts Instructor,6893,6792.69,0,6815.56,13608.25,1490.78,0,1058.51,2549.29,16157.54
+2013,"Public Works, Transportation & Commerce",Airport Commission,Airport Electrician Supervisor,12571,16824,0,21281.31,38105.31,3277.48,1913.81,2848.61,8039.9,46145.21
+2015,Community Health,Public Health,Porter Supervisor 1,33974,68308.92,4938.87,6486.84,79734.63,14347.83,12376.71,6277.4,33001.94,112736.57
+2014,Culture & Recreation,Asian Art Museum,Librarian 2 - Asian Arts,45621,89240.4,0,626.4,89866.8,19159.62,12512.55,6631.19,38303.36,128170.16
+2014,Public Protection,Sheriff,Sheriff's Property Keeper,28631,14801.7,0,0,14801.7,0,3892.19,1145.95,5038.14,19839.84
+2014,Public Protection,Juvenile Probation,"Sprv Prob Ofc, Juv Court",24245,106330.8,0,0,106330.8,18169.8,12512.55,1768.66,32451.01,138781.81
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Information Clerk,7539,51738.86,0,0,51738.86,11605.02,9546.82,4325.64,25477.48,77216.34
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Supv Biologist,20534,4299.01,0,0,4299.01,761.35,492.38,359.92,1613.65,5912.66
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Urban Forestry Inspector,31833,61628,0,0,61628,12677.73,12424.5,4922.66,30024.89,91652.89
+2016,General Administration & Finance,General Services Agency - City Admin,Aprnt  Stationary Engineer I,29333,41106.5,10795.95,0,51902.45,9039.29,9402.56,4162.12,22603.97,74506.42
+2014,Community Health,Public Health,Respiratory Care Practitioner,34578,16236.56,0,200,16436.56,3461.62,2873.96,1346.28,7681.86,24118.42
+2013,"Public Works, Transportation & Commerce",Economic and Workforce Development,Mayoral Staff XII,35594,1641,0,0,1641,298.83,246.19,127.05,672.07,2313.07
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Traffic Checker,17215,32806.26,724.01,1284.03,34814.3,7535.89,5922.55,2910.04,16368.48,51182.78
+2015,Public Protection,Fire Department,"Insp, Fire Dept",38267,135118.5,37108.5,8107.11,180334.11,30887.49,12512.53,3033.07,46433.09,226767.2
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,IS Operator-Analyst,39798,29253.02,0,0,29253.02,5326.97,5169.97,2375.73,12872.67,42125.69
+2013,General Administration & Finance,Assessor/Recorder,Document Examiner Technician,11543,24424.5,242.53,228,24895.03,4489.22,4677.58,2109.02,11275.82,36170.85
+2015,Human Welfare & Neighborhood Development,Department of the Status of Women,Dept Head I,35260,148541.6,0,0,148541.6,29866.2,12424.5,25285.81,67576.51,216118.11
+2013,General Administration & Finance,Assessor/Recorder,Senior Assessment Clerk,7917,4974.2,0,0,4974.2,887.46,1063.47,450.97,2401.9,7376.1
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Deputy Dir II, MTA",36609,195070,0,0,195070,34546.9,12801.79,15894.02,63242.71,258312.71
+2014,General Administration & Finance,Controller,Personnel Trainee,8646,13488,0,0,13488,3025.34,3012.68,1071.36,7109.38,20597.38
+2016,Community Health,Public Health,Accountant I,27925,0,0,183.75,183.75,0,316.13,14.42,330.55,514.3
+2014,General Administration & Finance,General Services Agency - City Admin,Training Coordinator,52772,3799,0,0,3799,809.95,502.11,647.24,1959.3,5758.3
+2014,Community Health,Public Health,Inventory Clerk,28632,52227,3026.77,5156.45,60410.22,13478.35,13054.94,4841.43,31374.72,91784.94
+2013,Community Health,Public Health,Senior Occupational Therapist,19587,71493.76,0,0,71493.76,12661.49,7718.01,6462.05,26841.55,98335.31
+2014,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Apprentice Cement Mason I,51974,21977.56,0,0,21977.56,0,5196.86,1700.14,6897,28874.56
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Deputy Dir I, MTA",19108,185535.3,0,0,185535.3,38628.44,12512.55,18278.21,69419.2,254954.5
+2014,Public Protection,Sheriff,Stores & Equip Asst Sprv,141,64571.6,47.49,0,64619.09,14114.56,13054.94,4724.22,31893.72,96512.81
+2015,"Public Works, Transportation & Commerce",Port,Maritime Marketing Repr,20944,116279.24,0,0,116279.24,25511.56,12500.56,9149.94,47162.06,163441.3
+2014,Community Health,Public Health,Epidemiologist 2,30440,78599.2,0,0,78599.2,16757.31,9971.69,5929.62,32658.62,111257.82
+2013,General Administration & Finance,Health Service System,Court Administrative Secretary,20234,0,0,1693,1693,0,0,0,0,1693
+2013,"Public Works, Transportation & Commerce",PUC Water Department,"Chf Statnry Eng,Wtrtreat Plnt",46898,109856.56,13407.11,17197.32,140460.99,20984.71,12801.79,9916.84,43703.34,184164.33
+2015,General Administration & Finance,Treasurer/Tax Collector,Collections Officer,29412,4374.29,0,0,4374.29,981.15,952.75,348.96,2282.86,6657.15
+2015,General Administration & Finance,General Services Agency - City Admin,Janitorial Services Supervisor,8204,74807.44,938.54,11242.96,86988.94,16908.85,12500.56,6798.48,36207.89,123196.83
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Carpenter Supervisor 1,19626,42265.01,0,0,42265.01,9010.89,5081.73,3478.6,17571.22,59836.23
+2013,General Administration & Finance,Board of Supervisors,Special Assistant 3,14616,39570,0,0,39570,4457.7,10047.53,3075.58,17580.81,57150.81
+2014,General Administration & Finance,Assessor/Recorder,Pr Real Property Appraiser,26815,108671.48,0,2200,110871.48,23057.41,12512.55,8928.77,44498.73,155370.21
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Heavy Equip Ops Asst Sprv,5183,103254.5,0,0,103254.5,23159.91,12500.54,8182.79,43843.24,147097.74
+2016,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,Regulatory Specialist,14551,52366.73,0,0,52366.73,9745.43,6284.75,4265.37,20295.55,72662.28
+2014,Community Health,Public Health,Disease Control Investigator,46599,71066.02,0,920,71986.02,15731.5,13054.92,5876.99,34663.41,106649.43
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Prpl Permit And Citation Clerk,46073,0,0,921.79,921.79,0,0,70.52,70.52,992.31
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Biologist III,1252,66476.02,0,0,66476.02,14428.22,8245.71,5110.22,27784.15,94260.17
+2014,Culture & Recreation,Recreation and Park Commission,Emergency Services Coord I,30246,0,0,-2210.21,-2210.21,0,0,-169.08,-169.08,-2379.29
+2015,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Power Generation Technician 1,9828,87945.84,13634.34,6432.27,108012.45,20461.4,11937.79,8677.02,41076.21,149088.66
+2014,General Administration & Finance,Controller,Perf Analyst III Project Mgr,14058,122222.43,0,0,122222.43,25446.72,12512.55,9333.45,47292.72,169515.15
+2016,Public Protection,Superior Court,Court Reporter Coordinator,389,134956.21,0,3000,137956.21,24467.65,13068.8,33902.64,71439.09,209395.3
+2013,Public Protection,Sheriff,Sheriff's Captain,39070,150712.01,3205.41,13521.85,167439.27,31276.55,12918.25,2811.52,47006.32,214445.59
+2016,General Administration & Finance,General Services Agency - City Admin,Supervising Purchaser,24348,95686.75,0,23328.99,119015.74,17868.49,9627.02,8941.76,36437.27,155453.01
+2015,"Public Works, Transportation & Commerce",Airport Commission,Steamfitter,34614,99719.32,908.35,3204.58,103832.25,23085.8,12500.56,8563.35,44149.71,147981.96
+2014,General Administration & Finance,General Services Agency - Technology,Asst Electronic Main Tech,31747,11732,1484.83,0,13216.83,2631.48,2008.45,1038.59,5678.52,18895.35
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Glazier,10127,40137.54,0,2162.61,42300.15,6164.05,6263.88,3490.29,15918.22,58218.37
+2013,Culture & Recreation,Recreation and Park Commission,Recreation Specialist,45882,6033.51,0,0,6033.51,0,1634.07,600.01,2234.08,8267.59
+2015,"Public Works, Transportation & Commerce",PUC Water Department,"Aprntcstatnry Eng,Wtrtreatplnt",9816,86221.98,12509.1,2923.87,101654.95,19754.34,11822.24,8295.78,39872.36,141527.31
+2013,General Administration & Finance,Controller,Performance Analyst II,12759,57457.27,0,0,57457.27,10728.69,8133.71,4657.1,23519.5,80976.77
+2015,Human Welfare & Neighborhood Development,Department of the Status of Women,"Rep, Comm Status Of Women",24452,60796.43,0,417.6,61214.03,13730.29,8333.71,4982.36,27046.36,88260.39
+2016,General Administration & Finance,General Services Agency - Technology,Media Programming Spec,30111,53033.43,0,0,53033.43,9869.58,9427.5,4270.09,23567.17,76600.6
+2015,Community Health,Public Health,Hospital Elig Wrk Supervisor,44909,41576.22,0,978.9,42555.12,9325.53,6130.54,3462.39,18918.46,61473.58
+2015,Community Health,Public Health,"Inspector, Weights & Measures",41685,23406.14,0,136.06,23542.2,6038.79,5024.69,1882.32,12945.8,36488
+2016,Culture & Recreation,Recreation and Park Commission,Curator 2,48737,68729.1,0,847.03,69576.13,12948.05,13018.93,5626.96,31593.94,101170.07
+2013,Community Health,Public Health,Senior Microbiologist,20452,56158.51,0,22678.35,78836.86,9945.69,6937.57,6349.34,23232.6,102069.46
+2013,"Public Works, Transportation & Commerce",Airport Commission,Sprv Electronic Main Tech,19205,122137.53,38116.34,8464,168717.87,23493,12918.24,10312.46,46723.7,215441.57
+2015,Culture & Recreation,Public Library,Book Repairer,20544,58922.02,0,624,59546.02,12272.68,12424.5,4548.03,29245.21,88791.23
+2013,Public Protection,Police,Photographer,11419,7820,0,0,7820,1424.03,1969.5,610.01,4003.54,11823.54
+2014,Public Protection,Department of Emergency Management,Emergency Services Coord IV,49503,112498.24,0,2835.22,115333.46,23422.13,12512.55,8511.77,44446.45,159779.91
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Electric Motor Repairer,32353,81819.96,27972.73,4841.19,114633.88,18018.11,13053.31,9159.12,40230.54,154864.42
+2015,General Administration & Finance,Retirement System,Benefits Supervisor,25778,68992.01,0,680,69672.01,13800.8,8601.58,5098.45,27500.83,97172.84
+2015,Public Protection,Juvenile Probation,"Asst Dir, Log Cabin Rnch",49826,98365.01,0,1629.2,99994.21,22810.62,12424.5,10436.78,45671.9,145666.11
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Manager VIII, MTA",2025,182354.5,0,0,182354.5,36699.2,12424.5,18169.25,67292.95,249647.45
+2014,"Public Works, Transportation & Commerce",Airport Commission,Airport Operations Supervisor,20316,79689.62,2005.83,1877.09,83572.54,17568.97,10808.68,6491.38,34869.03,118441.57
+2015,General Administration & Finance,Treasurer/Tax Collector,Commercial Div Asst Sprv,17030,70913.91,0,0,70913.91,15906.03,12494.56,13802.71,42203.3,113117.21
+2014,Public Protection,Superior Court,Court Administrator,22707,103157.6,0,0,103157.6,22080.85,9577.8,29753.98,61412.63,164570.23
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Welder,44655,53521.28,201.47,22197.13,75919.88,10956.39,8046.42,6166.1,25168.91,101088.79
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Electrical Trnst Mech Sprv 1,2551,106132.14,18598.6,3298.74,128029.48,18804.07,12801.79,9583.38,41189.24,169218.72
+2014,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Public Relations Mgr,10336,20496.11,0,0,20496.11,4369.76,2205.28,3454.08,10029.12,30525.23
+2014,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Trans And Dist Line Worker,30648,103974,26803.97,40230.31,171008.28,22947.66,13054.96,10432.93,46435.55,217443.83
+2013,General Administration & Finance,City Attorney,Claims Investigator,30491,89464.5,10136.17,3755.69,103356.36,16659.48,11570.85,8152.61,36382.94,139739.3
+2014,"Public Works, Transportation & Commerce",Port,"Senior Property Manager, Port",24289,122829.61,0,0,122829.61,25573.12,12512.55,9489.58,47575.25,170404.86
+2014,Public Protection,Juvenile Probation,"Sr Counselor, Juvenile Hall",5697,77103.16,11943.84,4682.6,93729.6,13975.53,11433.87,1815,27224.4,120954
+2014,General Administration & Finance,Assessor/Recorder,Sr Microphoto/Imaging Tech,13784,60070.21,901.69,626.4,61598.3,12940.48,12512.55,5076.91,30529.94,92128.24
+2015,Culture & Recreation,Fine Arts Museum,Museum Sec Supv,36453,68885.42,20217.56,3026.92,92129.9,14203.92,12184.08,7446.61,33834.61,125964.51
+2014,Human Welfare & Neighborhood Development,Human Services,Welfare Fraud Investigator,24088,84481.74,0,0,84481.74,18011.46,12278.84,6839.92,37130.22,121611.96
+2014,General Administration & Finance,General Services Agency - City Admin,Dept Head V,50726,185318.2,0,11119.21,196437.41,40898.27,8308.74,11710.76,60917.77,257355.18
+2015,Community Health,Public Health,Rehabilitation Counselor,22469,77669.01,0,5868.94,83537.95,16304.22,12424.5,6835.16,35563.88,119101.83
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Operations Specialist,31895,114790.95,6317.33,10472.69,131580.97,24201.1,12567.87,9881.9,46650.87,178231.84
+2016,Public Protection,Superior Court,"Court Invstgtor, Superior Crt",30348,96579.25,0,5231.2,101810.45,18388.6,12049.68,8429.37,38867.65,140678.1
+2013,Public Protection,Superior Court,Ct Comp App Analyst,22204,109943.28,0,624,110567.28,19581.44,12801.79,9070.76,41453.99,152021.27
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Public Information Officer,8240,31137.03,0,0,31137.03,5670.04,5268.43,2568.96,13507.43,44644.46
+2014,Culture & Recreation,Law Library,Law Librarian,26735,149921.21,0,0,149921.21,43258.54,13054.94,18559.55,74873.03,224794.24
+2014,Culture & Recreation,Recreation and Park Commission,Aquatics Facility Supervisor,53150,71616.35,0,614.86,72231.21,15399.72,12512.55,5731.28,33643.55,105874.76
+2015,"Public Works, Transportation & Commerce",Port,Harbor Attendant (OCII),13049,42556.03,0,150.83,42706.86,10024.67,10035.18,3713.78,23773.63,66480.49
+2013,Community Health,Public Health,IS Operator-Journey,28887,35471.52,0,0,35471.52,6563.66,7655.26,2882.18,17101.1,52572.62
+2016,"Public Works, Transportation & Commerce",Airport Commission,Telephone Operator,4416,54591.31,0,5945.12,60536.43,12744.55,12956.58,5004.49,30705.62,91242.05
+2015,Community Health,Public Health,Patient Accounts Supervisor,1883,86490.85,1468.95,0,87959.8,19399.95,12484.15,7211.49,39095.59,127055.39
+2013,Public Protection,Fire Department,Statistician,19808,59000.34,0,0,59000.34,10743.94,9982.93,4751.25,25478.12,84478.46
+2013,"Public Works, Transportation & Commerce",Port,"Property Manager, Port",545,98774.01,0,0,98774.01,17986.8,12801.79,8058.24,38846.83,137620.84
+2015,"Public Works, Transportation & Commerce",Port,Harbor Security Officer (OCII),12820,14241.9,0,1339.28,15581.18,3956.58,4166.85,1260.13,9383.56,24964.74
+2014,"Public Works, Transportation & Commerce",Port,Maintenance Machinist Sprv 1,37272,103119.62,0,550,103669.62,22102.39,12512.53,8090.89,42705.81,146375.43
+2016,Community Health,Public Health,Chief Dietitian,36741,95564.91,0,200,95764.91,17784.58,13068.8,7889.89,38743.27,134508.18
+2013,General Administration & Finance,General Services Agency - City Admin,Forensic Laboratory Technician,53602,79435.98,373.34,0,79809.32,14465.23,12569.45,6639.56,33674.24,113483.56
+2015,General Administration & Finance,Mayor,Mayoral Staff II,18959,41024.59,0,0,41024.59,10584.38,12410.75,11660.28,34655.41,75680
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transportation Controller Trainee,46870,26640,1984.87,1982.61,30607.48,5245.44,4489.29,2444.34,12179.07,42786.55
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Mech Shop & Equip Supt,28160,85205.6,89716.64,15985.21,190907.45,21978.42,9914.23,12413,44305.65,235213.1
+2015,Public Protection,Juvenile Probation,Assistant Counselor,40395,60533.11,15689.35,11312.54,87535,16390.99,12328.92,455.66,29175.57,116710.57
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Power Plant Supervisor 1,23157,42110.4,2870.14,24936.17,69916.71,9398.46,5944.66,5564.16,20907.28,90823.99
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Pattern Maker,9134,90098.02,0,6002.78,96100.8,21379.83,12506.55,7855.95,41742.33,137843.13
+2013,"Public Works, Transportation & Commerce",Airport Commission,Associate Museum Registrar,16255,15804,148.16,0,15952.16,3922.56,4306.08,1278.38,9507.02,25459.18
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Switch Repairer,18260,64143.01,12375.91,6009.92,82528.84,13582.63,12391.95,6523.09,32497.67,115026.51
+2016,"Public Works, Transportation & Commerce",PUC Water Department,Water Operations Analyst,20550,132760.33,0,286.12,133046.45,24121.25,13093.75,10134.74,47349.74,180396.19
+2014,Community Health,Public Health,Diagnostic Imaging Tech III,3255,119402,10200.84,250,129852.84,25503.29,13054.94,9755.91,48314.14,178166.98
+2013,"Public Works, Transportation & Commerce",PUC Water Department,Principal Water Services Clerk,46747,71864.03,0,0,71864.03,13086.36,12801.79,5539.01,31427.16,103291.19
+2013,General Administration & Finance,Mayor,Mayoral Staff IV,10259,30276,0,0,30276,6270.1,8567.35,8381.35,23218.8,53494.8
+2015,Community Health,Public Health,Patient Accounts Asst Sprv,5386,43678.74,3761.19,0,47439.93,9797.12,6896.86,3591.26,20285.24,67725.17
+2014,General Administration & Finance,Health Service System,Administrative Services Mgr,36615,82909.02,0,0,82909.02,18136.43,12552.83,6787.63,37476.89,120385.91
+2014,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,IS Technician-Senior,40753,1513.5,0,0,1513.5,322.68,239.71,119.57,681.96,2195.46
+2013,Public Protection,Police,Fingerprint Technician 3,11420,52140,15132.16,1486.11,68758.27,10556.99,9569.07,5918.26,26044.32,94802.59
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Soft Floor Coverer Supvr I,28715,100126.04,433.24,643.46,101202.74,17846.25,12801.79,7720.29,38368.33,139571.07
+2015,Public Protection,Public Defender,Sr Public Defenders Invstgtor,5877,101531,0,0,101531,20926.02,12424.5,7942.98,41293.5,142824.5
+2015,General Administration & Finance,Human Resources,Labor and Employment Advisor,22982,58234.02,0,0,58234.02,12776.52,5256.52,8074.63,26107.67,84341.69
+2014,Public Protection,Sheriff,Sheriff (SFERS),4458,215629.23,0,12937.66,228566.89,48824.95,13054.94,13016.53,74896.42,303463.31
+2016,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Landscape Architect Assoc 2,22768,87361.34,0,0,87361.34,16257.91,9926.26,6732.52,32916.69,120278.03
+2016,Community Health,Public Health,Morgue Attendant,1998,2948.58,0,0,2948.58,648.39,611.04,247.79,1507.22,4455.8
+2015,General Administration & Finance,Human Resources,Dir Emp Relations Div,51242,211554.56,0,0,211554.56,46414.99,12500.56,19923.15,78838.7,290393.26
+2015,"Public Works, Transportation & Commerce",PUC Water Department,Supv Chemist,31612,117040.54,0,0,117040.54,23600.12,12185.57,9194.92,44980.61,162021.15
+2016,General Administration & Finance,Board of Supervisors,Youth Comm Advisor,2579,66195.55,0,0,66195.55,12318.97,13068.8,5242.96,30630.73,96826.28
+2013,Human Welfare & Neighborhood Development,Human Rights Commission,"Rep, Human Rights Comm",46007,7830,0,0,7830,1151.28,1387.51,605.83,3144.62,10974.62
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Power Line Sprv1,20394,87680.6,75454.87,1000.63,164136.1,19747.95,9914.23,10141.14,39803.32,203939.42
+2016,Culture & Recreation,Recreation and Park Commission,Asst Superintendent Rec,34574,57005.02,0,953.09,57958.11,10785.99,7581.9,4624.77,22992.66,80950.77
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Public Relations Assistant,30526,52684.31,0,727.03,53411.34,13592.53,12500.56,4175.52,30268.61,83679.95
+2014,"Public Works, Transportation & Commerce",Department of Building Inspection,"Sctry, Bldg Inspection Comm",50095,91519.91,0,0,91519.91,19512.08,12512.55,7175.7,39200.33,130720.24
+2015,Human Welfare & Neighborhood Development,Human Services,Senior Transcriber Typist,13678,64993.67,0,0,64993.67,14578.13,12500.56,5245.55,32324.24,97317.91
+2014,Community Health,Public Health,Patient Accounts Clerk,12363,70422.04,2451.87,0,72873.91,15013.95,12512.55,5556.66,33083.16,105957.07
+2015,General Administration & Finance,Mayor,Dvlpmnt Spec (OCII),51342,95634.01,0,0,95634.01,18836.37,10035.17,7629.51,36501.05,132135.06
+2013,Human Welfare & Neighborhood Development,Human Services,Sup Welfare Fraud Investigator,41542,105783.47,0,0,105783.47,20788.76,12918.24,8657.29,42364.29,148147.76
+2014,General Administration & Finance,Assessor/Recorder,Assessor-Recorder Office Spec,1398,51358.53,0,0,51358.53,12997.76,12146.49,4181.53,29325.78,80684.31
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Manager 2,21101,28889.6,0,0,28889.6,0,3062.1,2236.63,5298.73,34188.33
+2016,General Administration & Finance,Controller,Auditor I,52217,27810.9,0,0,27810.9,5175.6,5836.07,2214.81,13226.48,41037.38
+2014,Community Health,Public Health,Senior Physical Therapist,4391,121041.09,0,0,121041.09,25200.71,12512.55,9325.04,47038.3,168079.39
+2015,"Public Works, Transportation & Commerce",Port,"Market Research Spec, Port",22085,95244.91,0,0,95244.91,21363.45,12500.56,7771.56,41635.57,136880.48
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Investigator/Transit Fare Supv,10857,48987.06,67.87,3938.27,52993.2,11859.06,8477.39,4231.45,24567.9,77561.1
+2016,General Administration & Finance,General Services Agency - City Admin,Dep Dir I,38294,34236.74,0,21488.12,55724.86,6422.87,4140.12,7160.45,17723.44,73448.3
+2016,Public Protection,Fire Department,Dep Chf Of Dept (Fire Dept),39686,144830.4,0,14861.99,159692.39,28118.81,7132.98,8022.59,43274.38,202966.77
+2015,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Structural Engineer,11525,147746.51,0,0,147746.51,32415.63,12500.67,10380.75,55297.05,203043.56
+2016,Public Protection,Superior Court,"Director, Info Tech Group",9866,173077.21,0,3000,176077.21,31378.95,13068.8,34200.38,78648.13,254725.34
+2013,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,Main Machinist Asst Sprv,38727,89093.35,0,550,89643.35,16324.17,12558.68,7448.05,36330.9,125974.25
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Sr Light Rail Veh Equip Eng,30330,151730.07,0,0,151730.07,32408.24,13054.93,10252.47,55715.64,207445.71
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Pr Fare Collections Receiver,25651,88306,6868.01,2471.25,97645.26,17320.43,12822.56,8311.83,38454.82,136100.08
+2014,General Administration & Finance,Assessor/Recorder,Pr Personal Property Auditor,23769,112673.02,0,1480,114153.02,24376.37,13054.94,9293.44,46724.75,160877.77
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Manager I, MTA",30977,2094,0,0,2094,370.85,246.19,165.43,782.47,2876.47
+2014,Culture & Recreation,Public Library,Media Training Specialist,4452,90526.14,869.03,208.03,91603.2,19827.1,13004.73,7205.95,40037.78,131640.98
+2013,Human Welfare & Neighborhood Development,Human Services,Atty For The Public Admin,43256,74023.96,0,0,74023.96,13109.64,5169.96,3865.59,22145.19,96169.15
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Cement Finisher Supervisor 2,19783,9870,2035.67,0,11905.67,1797.33,1230.94,972.51,4000.78,15906.45
+2015,"Public Works, Transportation & Commerce",Airport Commission,Steamfitter Supervisor I,52565,114454.02,124.33,3477.62,118055.97,23753.86,12424.5,9684.6,45862.96,163918.93
+2016,General Administration & Finance,Human Resources,Personnel Technician,39285,74858.76,0,0,74858.76,13931.22,13068.8,5933.35,32933.37,107792.13
+2014,Community Health,Public Health,Asst General Services Manager,6993,57429.66,0,1845.62,59275.28,12915.98,10327.77,13983.65,37227.4,96502.68
+2013,Public Protection,Superior Court,Probate Examiner,17595,99832.7,0,576,100408.7,17782.42,12220.11,8276,38278.53,138687.23
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Parking Meter Repairer Sprv 1,22713,43771.97,1071.88,0,44843.85,8145.92,6595.39,3585.02,18326.33,63170.18
+2015,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Hh Mechanical Shop Sprv,42562,69516.81,9481.44,600,79598.25,15839.57,9435.27,6336.2,31611.04,111209.29
+2016,Culture & Recreation,War Memorial,Supv Bldg Grounds Patrol Ofcr,42734,69516.94,930.74,3984.49,74432.17,13678.59,13056.34,6043.73,32778.66,107210.83
+2013,Culture & Recreation,Arts Commission,Curator 1,20526,42786.52,0,0,42786.52,7982.52,8133.71,3544.76,19660.99,62447.51
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Architectural Administrator,35937,116620.82,0,0,116620.82,22335.06,12918.25,9393.75,44647.06,161267.88
+2015,"Public Works, Transportation & Commerce",PUC Water Department,Watershed Keeper Supervisor,41494,77795.4,3011.22,4043.7,84850.32,17449.5,12500.56,6758.53,36708.59,121558.91
+2014,Community Health,Public Health,Agricultural Inspector,40476,62852.26,0,920,63772.26,13596.22,12512.55,5013.12,31121.89,94894.15
+2014,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Materials Testing Technician,5154,38058.67,0,27.52,38086.19,8212.18,7936.45,3121.95,19270.58,57356.77
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Auto Body & Fender Wrk Sprv 1,43143,107816.03,37640.95,25186.64,170643.62,25653.96,12424.5,10646.29,48724.75,219368.37
+2013,Community Health,Public Health,Senior Health Educator,32003,32787.01,0,5664.41,38451.42,5970.51,4306.09,3132.98,13409.58,51861
+2015,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Power Generation Supervisor,48719,72023.89,11574.83,4000.01,87598.73,14139.44,7442.77,5680.36,27262.57,114861.3
+2015,Public Protection,Superior Court,Administrative Analyst II,52443,26560.81,0,0,26560.81,5957.61,4023.17,2138.58,12119.36,38680.17
+2013,Community Health,Public Health,Therapy Aide,18495,55589.04,0,200,55789.04,10122.74,10732.57,4606.15,25461.46,81250.5
+2015,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Chief Surveyor,44849,125047.23,0,0,125047.23,27435.36,12488.56,10070.27,49994.19,175041.42
+2015,Community Health,Public Health,Chief Telephone Operator,53698,423,0,0,423,0,95.79,32.75,128.54,551.54
+2014,General Administration & Finance,Mayor,Mayoral Staff X,48457,30446.5,0,0,30446.5,6491.21,4554.38,5207.77,16253.36,46699.86
+2015,General Administration & Finance,Mayor,Mayoral Staff VII,10259,72699.06,0,0,72699.06,14983.61,12424.5,13747,41155.11,113854.17
+2015,Public Protection,Police,Criminalist I,38538,84381.04,302.45,0,84683.49,17391.57,12424.51,6821.35,36637.43,121320.92
+2013,General Administration & Finance,Controller,Performance Analyst I,44485,16341,0,0,16341,2975.7,3200.44,1274.93,7451.07,23792.07
+2013,"Public Works, Transportation & Commerce",Airport Commission,Museum Registrar,30313,7449,0,100,7549,1374.68,1435.36,533.45,3343.49,10892.49
+2014,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Claims Process Clerk,18687,61795.03,0,0,61795.03,13505.01,13054.94,4657.71,31217.66,93012.69
+2015,General Administration & Finance,General Services Agency - City Admin,Payroll Supervisor,37104,50228.03,0,0,50228.03,9579.48,6690.11,3974.78,20244.37,70472.4
+2015,"Public Works, Transportation & Commerce",PUC Water Department,Water Meter Shop Supervisor 1,49061,83697.02,0,3978.79,87675.81,19665.76,12500.56,6866.26,39032.58,126708.39
+2016,"Public Works, Transportation & Commerce",Department of Building Inspection,Permit Technician I,49564,52116.49,72.98,880,53069.47,11654,13018.93,4318.63,28991.56,82061.03
+2015,"Public Works, Transportation & Commerce",PUC Water Department,IS Program Analyst-Assistant,42531,0,0,10.05,10.05,0,0,0.77,0.77,10.82
+2014,Human Welfare & Neighborhood Development,Human Services,Collection Supervisor,48118,65550.23,0,0,65550.23,13975.25,12497.57,5167.51,31640.33,97190.56
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Assistant Power House Operator,45958,2442,0,0,2442,454.46,477.86,189.54,1121.86,3563.86
+2014,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Apprentice Cement Mason II,51974,20135.33,612.21,0,20747.54,2850.12,4205.19,1625.58,8680.89,29428.43
+2013,Human Welfare & Neighborhood Development,"Children, Youth & Their Families",Dept Head II,47117,181745.76,0,0,181745.76,34875.03,12918.24,16299.71,64092.98,245838.74
+2015,General Administration & Finance,City Attorney,"Srclaimsinvstgtor,Cty Atty Ofc",10379,84842.03,0,0,84842.03,16657.58,9079.44,6781.25,32518.27,117360.3
+2013,General Administration & Finance,Health Service System,Training Technician,19130,0,0,1693,1693,0,0,0,0,1693
+2016,Human Welfare & Neighborhood Development,Human Services,Sprv Clincal Psychologist,12871,123440.93,0,40,123480.93,22387.14,13068.8,10048.29,45504.23,168985.16
+2013,General Administration & Finance,General Services Agency - City Admin,Senior Offset Machine Operator,28453,47292.02,1066.17,0,48358.19,8611.88,10339.91,4056.1,23007.89,71366.08
+2013,Public Protection,Police,Captain (Police Department),31042,30640,0,3138.06,33778.06,5448.64,1969.5,549.88,7968.02,41746.08
+2015,General Administration & Finance,General Services Agency - City Admin,Assistant Prjct Manager (OCII),3878,95634.04,0,0,95634.04,18836.37,10035.18,7276.87,36148.42,131782.46
+2014,General Administration & Finance,Human Resources,Senior Emp Relations Repres,13160,120031.05,0,0,120031.05,25637.43,13054.94,9644.32,48336.69,168367.74
+2013,Culture & Recreation,Asian Art Museum,"Assoc Musm Cnsrvt, AAM",7785,79664,0,624,80288,14620.32,12801.79,6581.42,34003.53,114291.53
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Real Estate Devt Mgr, SFMTA",36454,120440.7,0,0,120440.7,25075.69,12512.55,9313.07,46901.31,167342.01
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Signal And Systems Engineer,37020,9616.2,0,0,9616.2,0,788.48,744.55,1533.03,11149.23
+2013,General Administration & Finance,Human Resources,Human Resources Director,21191,210106.03,0,0,210106.03,37209.89,12801.79,19348.34,69360.02,279466.05
+2015,General Administration & Finance,City Attorney,Assistant Chief Attorney 2,37167,216129.45,0,1437.5,217566.95,47734.2,12500.56,11677.52,71912.28,289479.23
+2013,Public Protection,Police,Inspector 2,50015,141877.14,1665.4,10158.49,153701.03,27614.06,0,2612.91,30226.97,183928
+2014,General Administration & Finance,Mayor,Mayoral Staff XIV,6379,119663.05,0,0,119663.05,25557.99,13036.11,18088.05,56682.15,176345.2
+2013,Culture & Recreation,Recreation and Park Commission,Maintenance Manager,11558,78110.5,0,0,78110.5,15643.79,8612.16,6960.17,31216.12,109326.62
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,IS Administrator-Supervisor,41031,107562.07,0,0,107562.07,19049.18,12801.79,8781.56,40632.53,148194.6
+2013,Public Protection,Public Defender,Public Defender,37283,217573.89,0,0,217573.89,38532.27,12801.79,10391.5,61725.56,279299.45
+2015,"Public Works, Transportation & Commerce",Port,Mgmt Asst III (OCII),40268,30543.16,0,0,30543.16,6850.81,4142.91,2530.91,13524.63,44067.79
+2016,"Public Works, Transportation & Commerce",Airport Commission,Sheet Metal Wrk Supervisor 2,42400,126203.54,11405.78,0,137609.32,23007.45,13068.8,9785.14,45861.39,183470.71
+2014,Public Protection,Police,"Sr Investigator, OCC",2828,96204.74,0,0,96204.74,20510.84,12262.9,7947.07,40720.81,136925.55
+2014,Public Protection,Superior Court,Duty Officer,31350,69037.54,0,0,69037.54,22825.39,15760.54,14030.44,52616.37,121653.91
+2013,"Public Works, Transportation & Commerce",PUC Water Department,Water Const&Main Supt,253,95176.2,21821.9,25353.69,142351.79,20311.98,9569.06,7150.99,37032.03,179383.82
+2013,General Administration & Finance,Mayor,Mayoral Staff XIII,12946,92058.58,0,0,92058.58,16303.63,10586.09,14374.55,41264.27,133322.85
+2014,"Public Works, Transportation & Commerce",Airport Commission,Senior Museum Preparator,50615,61036.09,739.45,624,62399.54,13473.49,13054.94,4944.66,31473.09,93872.63
+2016,"Public Works, Transportation & Commerce",Port,Elevator And Crane Technician,43339,115556.41,57382.01,1517.92,174456.34,20983.51,13068.8,11150.77,45203.08,219659.42
+2013,Public Protection,District Attorney,District Attorney,47734,252221.06,0,0,252221.06,48342.29,12918.24,19291.19,80551.72,332772.78
+2015,Public Protection,Superior Court,Sr Court Staff Attorney,13992,150228.03,0,3624,153852.03,30377.92,12424.5,10496.48,53298.9,207150.93
+2013,Human Welfare & Neighborhood Development,Human Services,Conservatorship/Case Mgt Sprv,33942,100548,0,0,100548,19763.32,12918.24,8119.66,40801.22,141349.22
+2014,Public Protection,Juvenile Probation,"Dir, Log Cabin Ranch (SFERS)",8774,8979.3,0,5277.33,14256.63,1869.49,1004.22,561.58,3435.29,17691.92
+2016,Community Health,Public Health,Patient Accounts Manager,37296,99931.41,0,0,99931.41,18597.23,13068.8,8156.29,39822.32,139753.73
+2013,General Administration & Finance,General Services Agency - City Admin,Asst Forensic Toxicologist 1,41231,103428.02,0,18445.14,121873.16,18678.33,12801.79,9583.38,41063.5,162936.66
+2016,"Public Works, Transportation & Commerce",Airport Commission,Locksmith Supervisor 1,51902,109518.82,14274.79,0,123793.61,20381.45,13068.81,10020.83,43471.09,167264.7
+2015,Public Protection,Police,Stable Attendant,36360,55320.27,0,5974.1,61294.37,15253.72,12452.66,5054.18,32760.56,94054.93
+2015,"Public Works, Transportation & Commerce",Airport Commission,Airport Security ID Technician,22918,3299.7,18.2,0,3317.9,851.32,814.21,272.95,1938.48,5256.38
+2015,General Administration & Finance,General Services Agency - City Admin,Accountant III (OCII),34669,79423.01,0,0,79423.01,16027.91,10035.18,6481.87,32544.96,111967.97
+2013,Public Protection,Superior Court,"Director, Human Resources",9930,135247.41,0,0,135247.41,25771.87,12397.21,16273.82,54442.9,189690.31
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Heating/Ventilating Inspector,49294,112776.01,98902.85,12450.16,224129.02,23324.29,12424.51,11511.06,47259.86,271388.88
+2016,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Apprentice Arborist Tech I,15206,41095.93,5725.69,1227.15,48048.77,6847.58,12407.63,3880.3,23135.51,71184.28
+2015,"Public Works, Transportation & Commerce",Department of Building Inspection,Senior Electrical Inpsector,38339,8080.1,1986.69,161.6,10228.39,1808.22,814.21,820.13,3442.56,13670.95
+2016,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Senior Plan Checker,20691,19797.21,0,4357.11,24154.32,3589.25,2144.88,1933.22,7667.35,31821.67
+2016,"Public Works, Transportation & Commerce",Airport Commission,Airport Ground Transport Tech,47176,18725.6,0,0,18725.6,4117.76,4439.4,1525.25,10082.41,28808.01
+2016,"Public Works, Transportation & Commerce",Airport Commission,"Investigator, Taxi And Accessible Servic",34834,54435.41,1650.6,2260.42,58346.43,10551.1,7402.65,4657.23,22610.98,80957.41
+2016,Public Protection,Superior Court,Ct Comp Sys Engineer II,31766,110511.69,0,5740.2,116251.89,20150.16,13068.8,9587.56,42806.52,159058.41
+2016,General Administration & Finance,General Services Agency - Technology,Communication Line Sprv1,34268,107433.11,38636.05,16550.11,162619.27,19996.37,13068.8,11128.03,44193.2,206812.47
+2016,General Administration & Finance,General Services Agency - City Admin,Forensic Autopsy Technician,43779,1233,92.48,0,1325.48,0,249.4,102.89,352.29,1677.77
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Electrical Trnst Shop Sprv 1,13975,111599.71,14475.22,7296.9,133371.83,25031.83,11830.03,9793.58,46655.44,180027.27
+2014,Culture & Recreation,Recreation and Park Commission,Marina Assistant Manager,17649,59858.16,8876.1,2770.05,71504.31,13079.18,13055.82,5858.39,31993.39,103497.7
+2014,Public Protection,Adult Probation,Sprv Adult Prob Ofc (SFERS),53651,74382.59,0,0,74382.59,15858.39,9751.46,1225.46,26835.31,101217.9
+2013,General Administration & Finance,Treasurer/Tax Collector,"Pr Investigator, Tax Collector",12325,97119,0,0,97119,19083.65,12918.24,8023.83,40025.72,137144.72
+2015,General Administration & Finance,General Services Agency - Technology,Communications Line Wrk Sprv 2,11503,3112.24,0,621.33,3733.57,682.83,333.61,324.38,1340.82,5074.39
+2013,General Administration & Finance,General Services Agency - City Admin,Animal Control Supervisor,30859,7289.7,0,25.4,7315.1,1332.08,1624.84,620.8,3577.72,10892.82
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Principal Parts Storekeeper,23668,40002.98,412.96,2247.27,42663.21,7449.37,7196.4,3247.74,17893.51,60556.72
+2015,Public Protection,Sheriff,Chief Atty1 (Civil & Criminal),6377,218254.4,0,1437.5,219691.9,48200.4,12500.56,11845.59,72546.55,292238.45
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Chief Water Service Inspector,25881,126937.06,0,0,126937.06,24317.51,12918.24,9595.8,46831.55,173768.61
+2013,General Administration & Finance,Controller,Senior Data Entry Operator,12312,2470.31,0,1520.76,3991.07,469.2,7.59,311.51,788.3,4779.37
+2014,Public Protection,Superior Court,"Director, Probate",42163,127530,0,0,127530,27232.97,13054.94,30932.32,71220.23,198750.23
+2014,"Public Works, Transportation & Commerce",Airport Commission,Industrial Engineer,51328,109193.31,0,0,109193.31,22734.03,12512.55,8942.87,44189.45,153382.76
+2013,Community Health,Public Health,IS Technician-Supervisor,21959,88739.41,0,2749.97,91489.38,16660.17,12900.26,7357.05,36917.48,128406.86
+2015,"Public Works, Transportation & Commerce",Port,Street Environ Svcs Oprs Supv,20581,100940.57,12223.71,1447.56,114611.84,22641.04,12500.56,9375.88,44517.48,159129.32
+2014,"Public Works, Transportation & Commerce",PUC Wastewater Enterprise,"Ex Dir, Se Com Fac Comm",3516,108576.01,0,0,108576.01,23190.62,13054.94,18001.34,54246.9,162822.91
+2015,Public Protection,Fire Department,"Invstgtor,Fire Dept",16715,135087.89,45747.82,20279.34,201115.05,33277.5,15230.56,3365.6,51873.66,252988.71
+2015,Community Health,Public Health,Beautician,31150,50126.43,0,725.73,50852.16,11350.14,9493.77,4249.56,25093.47,75945.63
+2014,Public Protection,Police,"Inspector, (Police Department)",7334,147398.35,11939.27,13272.43,172610.05,31792.91,12512.55,356.75,44662.21,217272.26
+2015,General Administration & Finance,City Attorney,Senior Claims Investigator,30491,115186.51,19321.7,6834.24,141342.45,25831.22,12500.56,10331.69,48663.47,190005.92
+2015,Public Protection,Sheriff,Undersheriff (SFERS),29182,204178.21,0,12250.61,216428.82,43556.48,12424.5,11329.16,67310.14,283738.96
+2014,Public Protection,Superior Court,"Mgr, Unified Family Court Svcs",41475,127530.02,0,0,127530.02,27232.97,13054.94,31074.81,71362.72,198892.74
+2014,Community Health,Public Health,"Ex Asst To Admin, SFGH",27233,117858.01,0,17594.5,135452.51,24538.01,12512.55,15382.28,52432.84,187885.35
+2013,General Administration & Finance,Treasurer/Tax Collector,Treasurer,15052,169332.11,0,0,169332.11,29988.69,12801.79,17172.76,59963.24,229295.35
+2015,General Administration & Finance,General Services Agency - City Admin,Media Production Specialist,5489,574.25,0,0,574.25,0,119.74,44.46,164.2,738.45
+2015,General Administration & Finance,Retirement System,Security Analyst,10588,110858,0,0,110858,22310.68,12424.5,8907.81,43642.99,154500.99
+2016,"Public Works, Transportation & Commerce",Department of Building Inspection,Senior Plumbing Inspector,42234,127401.43,4591.14,8644.08,140636.65,24665.13,13068.8,10429.48,48163.41,188800.06
+2014,Community Health,Public Health,Acupuncturist,52000,74911,0,4584,79495,17300.86,13054.94,6540.49,36896.29,116391.29
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Glazier Supervisor 1,6797,34009.17,0,3391.77,37400.94,6023.01,4225.38,2900.73,13149.12,50550.06
+2016,General Administration & Finance,Human Resources,Special Assistant 11,28415,20981.1,0,0,20981.1,0,2768.39,1628.73,4397.12,25378.22
+2015,Community Health,Public Health,Senior Food Service Supervisor,49961,69896.33,788.62,5306.15,75991.1,14826.18,12423.49,5935.41,33185.08,109176.18
+2014,General Administration & Finance,Human Resources,Worker's Comp Supervisor 1,3073,0,0,56.64,56.64,0,0,4.33,4.33,60.97
+2013,Public Protection,Superior Court,Court Paralegal,18449,74115.8,0,1600,75715.8,13787.88,12506.37,6352.65,32646.9,108362.7
+2014,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Sr General Utility Mechanic,42562,87738.19,9175.57,550,97463.76,18901.11,12512.55,7582.03,38995.69,136459.45
+2016,Culture & Recreation,Recreation and Park Commission,Recreation Facility Assistant,8100,6888,0,56.45,6944.45,1527.09,2556.4,550.56,4634.05,11578.5
+2014,"Public Works, Transportation & Commerce",Airport Commission,Street Repair Supervisor 2,47659,96016.27,927.57,0,96943.84,20470.66,12492.83,7920.53,40884.02,137827.86
+2013,"Public Works, Transportation & Commerce",Port,Piledriver Supervisor 1,38482,96796.07,12568.5,0,109364.57,17626.55,12798.09,8622.95,39047.59,148412.16
+2013,General Administration & Finance,General Services Agency - Technology,Special Assistant 22,21645,95555.01,0,36027,131582.01,16922.76,5662.33,7566.89,30151.98,161733.99
+2016,Culture & Recreation,Recreation and Park Commission,Head Park Patrol Officer,21410,80323.36,98934.43,6840.4,186098.19,15178.96,13093.75,11122.55,39395.26,225493.45
+2013,General Administration & Finance,City Attorney,Court Clerk,11987,86859.08,0,648,87507.08,17195,12918.24,7223.73,37336.97,124844.05
+2016,Public Protection,Fire Department,Emergency Medical Svcs Chief,13606,234490.01,0,14069.4,248559.41,43870.85,13068.8,13330.85,70270.5,318829.91
+2013,General Administration & Finance,Board of Supervisors,Assessor,13371,2846.39,0,0,2846.39,518.33,334.92,427.25,1280.5,4126.89
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Trnst Power Line Wrk Sprv 2,11244,110994.41,57885.31,160.13,169039.85,19657.18,12801.79,10982.91,43441.88,212481.73
+2015,Community Health,Public Health,Industrial Injury Investigator,26830,67276.33,0,0,67276.33,13849.54,12424.5,5400.12,31674.16,98950.49
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Light Rail Vehicle Equip Eng,7345,138805.31,0,6.47,138811.78,25166.61,13068.8,10428.36,48663.77,187475.55
+2013,General Administration & Finance,Controller,Controller,32238,262888.04,0,0,262888.04,46557.54,12801.79,20209.48,79568.81,342456.85
+2015,"Public Works, Transportation & Commerce",Port,Wharfinger 2,6968,75921.13,0,0,75921.13,17029.07,11148.42,5888.87,34066.36,109987.49
+2014,"Public Works, Transportation & Commerce",Port,Port Director,31849,252149.01,0,0,252149.01,53860.97,13054.94,20617.33,87533.24,339682.25
+2013,Community Health,Public Health,Orthopedic Technician 1,4045,12512.35,0,0,12512.35,2278.51,3089.66,1035.73,6403.9,18916.25
+2016,Culture & Recreation,Fine Arts Museum,Chief Preparator,19788,81822,0,0,81822,15227.06,13065.69,6666.03,34958.78,116780.78
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transportation Safety Specialist,39241,4206,195.18,644.46,5045.64,773.59,492.38,422.58,1688.55,6734.19
+2015,Public Protection,Superior Court,Emergcy Protective Orders Comm,28235,80463.6,0,0,80463.6,18047.98,12069.5,29196.37,59313.85,139777.45
+2013,General Administration & Finance,City Attorney,"Cfdntal Chf Atty 2,(Cvl&Crmnl)",26904,217891.28,0,0,217891.28,38588.61,12801.79,18358.21,69748.61,287639.89
+2014,General Administration & Finance,General Services Agency - City Admin,Field Svcs Asst Supv,32434,52947.48,389.4,4184.75,57521.63,11549.79,10515.5,4757.35,26822.64,84344.27
+2014,Public Protection,Superior Court,Civil Case Settlmnt Specialist,33158,135720,0,0,135720,28256.9,12512.55,9545.33,50314.78,186034.78
+2015,Public Protection,District Attorney,Sr Da Investigator(SFERS),36274,41679.02,12136.08,2500.74,56315.84,8009.8,4300.79,899.43,13210.02,69525.86
+2013,Culture & Recreation,Public Library,"Secretary, Library Commission",945,95006.04,0,0,95006.04,18675.67,12918.24,7822.67,39416.58,134422.62
+2014,"Public Works, Transportation & Commerce",Port,Roofer Supervisor 1,42853,90222.03,267.45,0,90489.48,19717.41,13054.94,7391.06,40163.41,130652.89
+2013,General Administration & Finance,General Services Agency - City Admin,Special Assistant 14,149,6081,0,0,6081,811.3,492.38,473.17,1776.85,7857.85
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Senior Transit Traffic Checker,48508,70078.54,6886.42,3586.52,80551.48,13168.29,12851.04,6454.07,32473.4,113024.88
+2016,Community Health,Public Health,Sr Medical Transcriber Typist,30296,0,0,293.29,293.29,0,0,22.44,22.44,315.73
+2014,Culture & Recreation,Recreation and Park Commission,Municipal Stadium Groundskpr,45641,74068.05,24831.95,1511.9,100411.9,16187.05,13054.94,7742.61,36984.6,137396.5
+2015,General Administration & Finance,Mayor,Mayoral Staff V,19478,39364.86,0,0,39364.86,10156.19,8207.98,7234.93,25599.1,64963.96
+2015,"Public Works, Transportation & Commerce",Airport Commission,Carpenter Supervisor 2,41376,70875.03,11074.23,0,81949.26,15402.24,7167.99,6328.47,28898.7,110847.96
+2013,Culture & Recreation,Law Library,Assistant Law Librarian,18374,123648.58,0,0,123648.58,31191.46,12801.79,12626.54,56619.79,180268.37
+2013,General Administration & Finance,General Services Agency - City Admin,Special Assistant 21,19822,40711.01,0,0,40711.01,7209.91,2461.89,3265.03,12936.83,53647.84
+2013,Public Protection,Juvenile Probation,Counselor 2,27374,79800.32,0,5245.24,85045.56,14975.95,12676.2,1749.52,29401.67,114447.23
+2015,Community Health,Public Health,"Secretary, Health Commission",25982,109642.8,0,0,109642.8,24055.67,11482.79,8816.5,44354.96,153997.76
+2015,General Administration & Finance,General Services Agency - City Admin,Principal Real Property Ofc,34160,141182.01,0,0,141182.01,28413.37,12424.5,10172.2,51010.07,192192.08
+2015,General Administration & Finance,Controller,IS Operator-Senior,32048,70448.09,0,0,70448.09,14519.74,12424.5,5774.34,32718.58,103166.67
+2014,General Administration & Finance,City Attorney,City Attorney,40369,231523.83,0,0,231523.83,49456.52,13054.94,19801.19,82312.65,313836.48
+2013,"Public Works, Transportation & Commerce",PUC Hetch Hetchy,Power Generation Technician 2,50356,102073.54,21553.7,4555.2,128182.44,20061.77,12870.41,9560.66,42492.84,170675.28
+2016,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Materials/Supplies Supervisor,50321,57810.25,0,628.8,58439.05,10875.6,13068.81,4832.61,28777.02,87216.07
+2015,Community Health,Public Health,"Adm, SFGH Medical Center",49535,275041.11,0,0,275041.11,60343.94,12500.56,20854.11,93698.61,368739.72
+2014,Public Protection,Superior Court,Court Training Specialist,17128,99476,0,624,100100,21871.29,13054.94,8206.52,43132.75,143232.75
+2015,General Administration & Finance,Controller,Ex Asst To The Controller,28517,96802.62,0,0,96802.62,19944.5,12376.72,7800.84,40122.06,136924.68
+2014,General Administration & Finance,General Services Agency - Technology,Chief Fire Alarm Dispatcher,22829,89240.44,16298.85,2088.55,107627.84,19034.87,12512.55,7654.23,39201.65,146829.49
+2015,General Administration & Finance,Retirement System,Chief Investment Officer,3931,507831.6,0,0,507831.6,105052.98,12424.5,23566.16,141043.64,648875.24
+2014,Culture & Recreation,Recreation and Park Commission,Chief Nursery Specialist,39916,62036.39,962.85,967.8,63967.04,13226.11,9183.35,5286.51,27695.97,91663.01
+2015,Community Health,Public Health,Depty Sealer Of Weights & Meas,4421,88144.92,0,1000,89144.92,19995.3,12480.56,6983.55,39459.41,128604.33
+2014,Human Welfare & Neighborhood Development,Child Support Services,Child Support Officer I,40194,15686,0,0,15686,3344.25,3514.79,1279.35,8138.39,23824.39
+2014,General Administration & Finance,General Services Agency - City Admin,Real Property Manager,50358,100830.06,0,0,100830.06,21497.03,12512.55,8282.41,42291.99,143122.05
+2016,General Administration & Finance,General Services Agency - City Admin,Animal Health Technician,35059,19404.25,59.81,0,19464.06,0,5735.8,1510.73,7246.53,26710.59
+2014,Community Health,Public Health,Sr Materials & Supplies Sprv,21662,58600.63,1772.9,571.66,60945.19,12934.23,12963.93,5030.07,30928.23,91873.42
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Board Scty, MTA",42242,176365.89,0,0,176365.89,33743.81,12918.25,17620.98,64283.04,240648.93
+2016,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Asphalt Plant Supervisor 1,32832,103018.6,74.36,86.76,103179.72,19171.73,13068.81,8462.68,40703.22,143882.94
+2014,"Public Works, Transportation & Commerce",Department of Building Inspection,Chief Electrical Inspector,46510,131206.54,0,2623.95,133830.49,27863.44,12512.55,9500.71,49876.7,183707.19
+2014,"Public Works, Transportation & Commerce",Airport Commission,"Asst To Dir, Public Affairs",5189,96176.8,0,0,96176.8,20504.9,12512.55,16327.83,49345.28,145522.08
+2015,Public Protection,Superior Court,Court Commissioner,50068,36276.65,0,1803.67,38080.32,11746.26,2897.64,11043.54,25687.44,63767.76
+2015,Community Health,Public Health,Junior Clerk Typist,38683,13744.86,0,2279.77,16024.63,3590.77,3448.43,1309.2,8348.4,24373.03
+2015,Community Health,Public Health,"Manager, Department Of Public Health",22683,201015.75,0,0,201015.75,44481.69,9435.29,16631.75,70548.73,271564.48
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Manager II, Municipal Transportation Age",33605,4154.84,0,0,4154.84,735.82,478.45,299.37,1513.64,5668.48
+2014,Community Health,Public Health,Operating Room Nurse,17831,50112.5,761.58,22162.35,73036.43,11189.06,4554.38,804.84,16548.28,89584.71
+2015,General Administration & Finance,General Services Agency - Technology,Telecommunications Tech Supv,29803,103399.64,9306.1,19720.52,132426.26,22685.95,11207.39,9097.59,42990.93,175417.19
+2014,"Public Works, Transportation & Commerce",Port,"Feasibility Analyst, Port",44789,101669.08,0,0,101669.08,22219.09,13054.94,8293.77,43567.8,145236.88
+2014,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Sewer Repair Supervisor,20548,102696,27817.56,6310.53,136824.09,22443.54,13054.93,9993.47,45491.94,182316.03
+2015,General Administration & Finance,General Services Agency - City Admin,Shelter Veterinarian,12228,62407.21,0,0,62407.21,12246.37,8028.14,4999.48,25273.99,87681.2
+2013,"Public Works, Transportation & Commerce",PUC Water Department,Forester,46537,1558.63,0,1104,2662.63,286.13,-272.78,132.18,145.53,2808.16
+2013,Public Protection,Police,Assistant Inspector,48673,135270.17,34674.72,28387.45,198332.34,25760.2,12918.25,3370.63,42049.08,240381.42
+2014,Public Protection,Juvenile Probation,"Director, Probation Services",32643,124344.96,0,0,124344.96,24200.19,13054.94,10909.53,48164.66,172509.62
+2014,"Public Works, Transportation & Commerce",PUC Water Department,Supt Water Treatment Fac,43217,132459.07,3518.25,11145.81,147123.13,30084.68,13054.94,10050.09,53189.71,200312.84
+2013,Community Health,Public Health,Electroencephalograph Tech 1,44451,70767.04,0,650,71417.04,13985.92,12918.24,5876.99,32781.15,104198.19
+2015,Community Health,Public Health,Asst Dir Of Clinical Svcs 1,18884,118427.04,0,0,118427.04,24426,12424.5,18151.77,55002.27,173429.31
+2013,Public Protection,Superior Court,"Director, Fiscal Services",8895,150056.84,0,0,150056.84,28695.25,12918.24,16381.85,57995.34,208052.18
+2013,General Administration & Finance,General Services Agency - City Admin,Shelter Officer Supervisor,47209,61126.03,0,7448.4,68574.43,11421.2,12851.02,5555.24,29827.46,98401.89
+2015,Community Health,Public Health,Supply Room Attendant,20940,50905.02,156.68,2608.39,53670.09,12347.51,11946.64,4333.16,28627.31,82297.4
+2015,Community Health,Public Health,Research Psychologist,9170,15984.01,0,0,15984.01,3585.21,1724.21,1294.52,6603.94,22587.95
+2016,"Public Works, Transportation & Commerce",Department of Building Inspection,Permit Technician III,3605,84670.62,125.74,1040,85836.36,15950.75,13068.8,7123.66,36143.21,121979.57
+2015,Public Protection,Superior Court,Communications Director,24038,120939.98,0,5336,126275.98,24344.79,12370.09,31937.22,68652.1,194928.08
+2015,Public Protection,Juvenile Probation,"Asst Director, Juvenile Hall",14820,5858.2,0,3.66,5861.86,0,0,463.1,463.1,6324.96
+2013,General Administration & Finance,General Services Agency - City Admin,Metalsmith,34833,72494,0,0,72494,14250.77,12918.24,5995.1,33164.11,105658.11
+2014,General Administration & Finance,General Services Agency - City Admin,Special Assistant 19,6761,174121.8,0,0,174121.8,36252.16,12512.55,14804.66,63569.37,237691.17
+2014,Public Protection,Superior Court,Administrative Analyst I,23153,27408.16,0,1595.83,29003.99,5843.45,0,2400.58,8244.03,37248.02
+2016,"Public Works, Transportation & Commerce",Airport Commission,Painter Supervisor 2,46869,102790.12,8999.94,0,111790.06,19129.28,13068.8,8658.53,40856.61,152646.67
+2015,Community Health,Public Health,Audiologist,43175,98852.01,0,0,98852.01,22172.53,12500.56,7878.27,42551.36,141403.37
+2014,Public Protection,District Attorney,Asst Chf Dist Atty's Invstgtor,40566,120369.25,0,7222.17,127591.42,24856.21,13054.94,2075.31,39986.46,167577.88
+2014,Community Health,Public Health,Baker,29974,34033.52,377.57,12772.87,47183.96,7415.01,6472.01,3823.35,17710.37,64894.33
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Supervising Parts Storekeeper,16076,79722.05,16361.8,3491.63,99575.48,16430.89,12424.5,7931.76,36787.15,136362.63
+2015,Public Protection,District Attorney,Chf Victim/Witness Invstgtor,43221,40851,0,0,40851,8962.74,0,5842.9,14805.64,55656.64
+2015,Community Health,Public Health,Recruiter,53268,26480.45,0,0,26480.45,0,3431.48,2123.51,5554.99,32035.44
+2013,General Administration & Finance,Mayor,Mayor,34234,272103,0,0,272103,48189.44,12801.79,13214,74205.23,346308.23
+2014,Human Welfare & Neighborhood Development,Rent Arbitration Board,Rent Board Supervisor,48036,78689.61,0,0,78689.61,17226.33,10810.37,6144.83,34181.53,112871.14
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Traffic Sign Manager,36736,89574.56,0,0,89574.56,15863.63,10640.38,7290.51,33794.52,123369.08
+2013,Public Protection,Juvenile Probation,Barber,15746,875.66,0,41.56,917.22,0,213.21,71.01,284.22,1201.44
+2014,General Administration & Finance,General Services Agency - City Admin,Forensic Toxicologist,2436,200494.53,0,21980.54,222475.07,41743.04,12512.55,11037.96,65293.55,287768.62
+2014,"Public Works, Transportation & Commerce",Airport Commission,Airports Communications Sprv,43862,96522.1,0,624,97146.1,21229.74,13054.94,8018.79,42303.47,139449.57
+2014,General Administration & Finance,General Services Agency - City Admin,Animal Care Supervisor,38294,42369.53,0,22092.2,64461.73,9124.14,6527.46,5202.95,20854.55,85316.28
+2013,Community Health,Public Health,Special Assistant 16,50030,68939.04,0,1764.57,70703.61,12209.08,6219.89,10918.93,29347.9,100051.51
+2014,Community Health,Public Health,Senior Psychiatric Orderly,17696,76411.1,0,1270.77,77681.87,16976.05,13054.94,473.69,30504.68,108186.55
+2014,Public Protection,Juvenile Probation,"Chf Prob Ofc, Juv Court",36141,198104.36,0,0,198104.36,38555.43,13054.94,12150.61,63760.98,261865.34
+2013,Public Protection,Superior Court,"Court Asst-Sr, Superior Court",898,941.4,0,0,941.4,171.43,147.71,69.64,388.78,1330.18
+2015,"Public Works, Transportation & Commerce",Department of Building Inspection,Chief Housing Inspector,50398,134937.82,0,0,134937.82,27199.91,12233.36,10077.72,49510.99,184448.81
+2015,General Administration & Finance,City Planning,Govrnmt/Publ Affairs Mgr,16708,69990.63,0,0,69990.63,15698.9,7519.49,10538.95,33757.34,103747.97
+2013,Culture & Recreation,Asian Art Museum,Principal Museum Preparator,25098,69843.02,1343.44,0,71186.46,13726.12,12918.24,5650.03,32294.39,103480.85
+2013,General Administration & Finance,General Services Agency - City Admin,City Shops Asst Superintendent,21287,6405,0,0,6405,1134.33,738.57,519.48,2392.38,8797.38
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Wire Rope Cable Maint Sprv,48289,93340.51,90436.31,20373.48,204150.3,23367.69,12464.6,11435.24,47267.53,251417.83
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Manager I,26169,3998,0,0,3998,708.05,492.38,348.24,1548.67,5546.67
+2014,"Public Works, Transportation & Commerce",Port,"Asstdepdir, Port",45845,140803.51,0,0,140803.51,29315.33,12512.55,15801.88,57629.76,198433.27
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Traffic Signal Operator,18836,44253.76,16.94,1408.39,45679.09,11571.07,11926.78,3541.43,27039.28,72718.37
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Wireropecable Maint Mech Train,41667,2769,1427.77,276.9,4473.67,566.84,477.86,342.39,1387.09,5860.76
+2014,Human Welfare & Neighborhood Development,Human Services,IS Technical-Journey,39782,1307,0,0,1307,278.65,239.71,103.26,621.62,1928.62
+2015,"Public Works, Transportation & Commerce",Port,Bd/Comm Secretary 3,10904,107792.4,0,0,107792.4,23649.6,12500.56,8650.01,44800.17,152592.57
+2013,"Public Works, Transportation & Commerce",Airport Commission,Plumber Supervisor 2,44278,117000.07,1482.21,5870.91,124353.19,21884.21,12801.79,9642.81,44328.81,168682
+2015,General Administration & Finance,General Services Agency - City Admin,Automotive Body And Fender Worker Asst S,43736,96891.34,2924.57,600,100415.91,21836.72,12512.53,8062.16,42411.41,142827.32
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Gen Mgr, Public Trnsp Dept",47503,305307.89,0,0,305307.89,58465.81,12918.25,12175.95,83560.01,388867.9
+2013,Public Protection,District Attorney,Cfdntal Sctry To Distric Atty,45682,6836,0,0,6836,1244.84,956.91,638.31,2840.06,9676.06
+2015,Public Protection,Department of Emergency Management,Emergency Services Assistant,33290,1039.5,0,0,1039.5,0,238.93,80.74,319.67,1359.17
+2014,General Administration & Finance,General Services Agency - City Admin,Shelter Office Asst Supv,46295,58315.56,245.85,2064.63,60626.04,12873.05,12505.41,4937.71,30316.17,90942.21
+2014,Community Health,Public Health,Audiometrist,18351,36474,0,0,36474,7985.4,6025.35,2932.28,16943.03,53417.03
+2016,General Administration & Finance,Retirement System,Managing Director,46922,98099.1,0,0,98099.1,17785.35,4938.21,14585.78,37309.34,135408.44
+2015,Public Protection,Juvenile Probation,"Sr Sprv Prob Ofc, Juv Prob",41821,122217,0,0,122217,27878.41,12424.5,7912.61,48215.52,170432.52
+2013,Culture & Recreation,Recreation and Park Commission,Principal Recreation Sprv,34574,33767.41,0,758.9,34526.31,6287.22,4874.53,2885.08,14046.83,48573.14
+2014,"Public Works, Transportation & Commerce",Department of Building Inspection,Chief Plumbing Inspector,8038,132690.08,0,6634.53,139324.61,29758.52,13054.94,9869.44,52682.9,192007.51
+2014,Public Protection,Superior Court,Managing Attorney,5613,162006,0,0,162006,34594.94,13054.94,31292.89,78942.77,240948.77
+2014,Public Protection,District Attorney,Chf District Atty Investigator,30226,148968.44,0,8937.74,157906.18,26983.02,12512.55,7577.05,47072.62,204978.8
+2013,Culture & Recreation,Public Library,Senior Book Repairer,50214,71552,0,0,71552,13029.64,12801.79,5957.44,31788.87,103340.87
+2015,Public Protection,Juvenile Probation,"Sctry, Juv Probation Comm",36178,59338.39,0,0,59338.39,13309.68,9375.42,4621.17,27306.27,86644.66
+2014,"Public Works, Transportation & Commerce",Airport Commission,Graphics Supervisor,37059,79928.91,0,0,79928.91,17040.9,12512.55,6442.42,35995.87,115924.78
+2013,General City Responsibilities,General Fund Unallocated,Head Photographer,53041,2987.97,0,19547.5,22535.47,540.52,0,1731.43,2271.95,24807.42
+2013,General Administration & Finance,Retirement System,"Dep Dir For Investments, Ret",51085,273446,0,0,273446,48427.39,11570.85,13839.15,73837.39,347283.39
+2015,"Public Works, Transportation & Commerce",Port,Piledriver Engine Operator,41809,49423.5,0,3754.69,53178.19,11360.49,6451.18,4236.52,22048.19,75226.38
+2016,Public Protection,Police,Crime Scene Invstgtn Mngr 3,5580,111362.5,19534.62,11363.06,142260.18,20153.61,9415.03,2394.05,31962.69,174222.87
+2015,General Administration & Finance,General Services Agency - City Admin,Management Assistant II (OCII),1858,65180.02,0,0,65180.02,13153.6,10035.18,5352.24,28541.02,93721.04
+2016,"Public Works, Transportation & Commerce",Airport Commission,Sr Airport Noise Abatement Spe,17389,86988.01,0,0,86988.01,16188.42,12420.36,7529.13,36137.91,123125.92
+2013,Public Protection,Superior Court,Court Adr Coord,18890,4707,0,0,4707,857.14,738.57,406.98,2002.69,6709.69
+2015,General Administration & Finance,General Services Agency - City Admin,Project Mgr (OCII),33310,36030.01,0,0,36030.01,7905,3583.99,2940.61,14429.6,50459.61
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Employment & Training Spec 6,46866,90130.84,0,0,90130.84,18750.63,9292.93,7461,35504.56,125635.4
+2016,"Public Works, Transportation & Commerce",Port,Wharfinger 1,34668,25035.7,817.52,0,25853.22,4659.15,4439.4,2061.64,11160.19,37013.41
+2015,General Administration & Finance,General Services Agency - City Admin,Accounting Supervisor (OCII),42696,45640.21,0,0,45640.21,10013.44,4166.85,3749.62,17929.91,63570.12
+2015,Culture & Recreation,Recreation and Park Commission,Arborist Technician Supv II,6745,95244.95,0,0,95244.95,21363.45,12500.56,7530.46,41394.47,136639.42
+2015,Public Protection,Superior Court,Court Executive Officer,43105,222534.01,0,7279.5,229813.51,44812.93,12424.5,33753.87,90991.3,320804.81
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Track Maint Supt, Muni Railway",1659,20482.01,0,18620,39102.01,4366.78,2636.75,3041.35,10044.88,49146.89
+2015,"Public Works, Transportation & Commerce",Port,Harbor Office Assistant (OCII),37242,44466,614.53,739.43,45819.96,8957.41,9796.24,3714.55,22468.2,68288.16
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Auto Body&Fender Wrk Asst Sprv,878,48836.01,10929.37,2512.79,62278.17,9728.35,6212.25,4965.68,20906.28,83184.45
+2013,Community Health,Public Health,Laboratory Technician I,18391,54860,0,624,55484,10103.6,12801.79,4401.01,27306.4,82790.4
+2013,General Administration & Finance,City Attorney,Cfdntal Sctry To City Atty,28309,88819.49,0,0,88819.49,16174.07,12801.79,7393.31,36369.17,125188.66
+2014,Public Protection,Fire Department,"Chief, Fire Department",46959,302068,0,24165.44,326233.44,68064.34,13054.94,14585.04,95704.32,421937.76
+2015,General Administration & Finance,Human Resources,Instructional Designer,51232,75253.14,0,0,75253.14,15310.08,10990.9,5594.01,31894.99,107148.13
+2014,Public Protection,Sheriff,Undersheriff,15352,172502.49,0,46360.65,218863.14,33969.68,11505.79,8075.9,53551.37,272414.51
+2013,Public Protection,Superior Court,Sup Ct Admin Secretary,10137,19468.4,0,12690.77,32159.17,3545.18,1913.81,3248.95,8707.94,40867.11
+2015,General Administration & Finance,General Services Agency - City Admin,Accountant II (OCII),10709,27013.5,0,0,27013.5,6059.12,4166.85,1863.15,12089.12,39102.62
+2014,Public Protection,Sheriff,Institutional Police Sergeant,83,113076.49,0,3111.33,116187.82,22662.04,12962.73,348.25,35973.02,152160.84
+2015,Culture & Recreation,Public Library,Braillist,18284,25283.35,0,0,25283.35,4861.54,6212.25,2009.31,13083.1,38366.45
+2013,Public Protection,Adult Probation,Chief Dep Adlt Prob Of (SFERS),22455,162953.5,0,0,162953.5,31217.66,12918.24,2608.57,46744.47,209697.97
+2013,Public Protection,Adult Probation,Chief Deputy Adlt Probation Of,20356,69257.89,0,0,69257.89,0,6653.49,5361.94,12015.43,81273.32
+2014,"Public Works, Transportation & Commerce",Airport Commission,Airport Mechanical Maint Sprv,42239,117434.01,0,8394.81,125828.82,26857.84,11046.49,9691.14,47595.47,173424.29
+2014,Community Health,Public Health,"Administrator, Department Of Public Heal",8309,282619.96,0,0,282619.96,60365.2,13054.94,20781.19,94201.33,376821.29
+2013,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Mobile Equipment Supervisor,35527,0,0,18760,18760,0,0,1435.14,1435.14,20195.14
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Transit Power Cable Splicer,9780,107334.66,13254.22,1910,122498.88,19832.39,12558.83,9992.44,42383.66,164882.54
+2015,Public Protection,Superior Court,Mental Health Hearing Officer,37898,93830.89,0,4804.44,98635.33,19350.54,12424.5,31866.66,63641.7,162277.03
+2014,"Public Works, Transportation & Commerce",Airport Commission,Window Cleaner Supervisor,10423,78863.66,0,1210.87,80074.53,17451.33,12769.24,6368.46,36589.03,116663.56
+2014,Public Protection,Adult Probation,Chief Adult Probation Officer,6053,207654.94,0,0,207654.94,40414.18,13054.94,12235.37,65704.49,273359.43
+2014,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Traf Signal Electrician Sup II,43263,128878.07,45.8,9103.77,138027.64,27528.69,13054.94,9942.09,50525.72,188553.36
+2014,Public Protection,Sheriff,Farmer,50686,63978,0,0,63978,13981.94,13054.92,4681.06,31717.92,95695.92
+2013,Public Protection,Superior Court,"Court Asst, Superior Court",34362,41107.02,0,7859.78,48966.8,7539.73,6101.53,4097.27,17738.53,66705.33
+2015,Public Protection,Superior Court,Principl Personnel Payroll Rep,47378,94978,1164.39,4826.5,100968.89,19587.16,12424.5,8150.1,40161.76,141130.65
+2013,Human Welfare & Neighborhood Development,Environment,"Secretary, Comm On The Environ",3018,99768.45,0,0,99768.45,19604.49,12918.25,8129.22,40651.96,140420.41
+2016,General Administration & Finance,Treasurer/Tax Collector,"Attorney, Tax Collector",40991,179584.93,0,1500,181084.93,32830.67,13068.8,11137.38,57036.85,238121.78
+2014,"Public Works, Transportation & Commerce",General Services Agency - Public Works,Disability Access Coordinator,15221,149490.06,0,0,149490.06,31923.32,13054.76,10119.32,55097.4,204587.46
+2015,Public Protection,Superior Court,Court Staff Attorney I,18180,19920,0,0,19920,4468.08,2873.69,1673.02,9014.79,28934.79
+2014,Public Protection,District Attorney,Victim & Witness Technician,21567,1252.57,0,4187.9,5440.47,931.38,0,651.71,1583.09,7023.56
+2013,Human Welfare & Neighborhood Development,Human Services,"Sctry, Human Svcs Commission",34522,38170,0,0,38170,0,5416.14,2955.12,8371.26,46541.26
+2015,General Administration & Finance,General Services Agency - City Admin,DvlpmntServicesManager (OCII),30832,113430.01,0,0,113430.01,22341.51,10035.17,9207.92,41584.6,155014.61
+2013,Public Protection,Superior Court,"Supervising Mediator, UFCS",41475,44163.65,0,0,44163.65,7821.39,3827.63,7820.21,19469.23,63632.88
+2016,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Maintenance Machinist Helper,51564,31656.6,0,1104.3,32760.9,5891.3,6434.64,2881.71,15207.65,47968.55
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,"Manager III, Municipal Transportation Ag",36947,4581,0,0,4581,811.3,478.45,354.43,1644.18,6225.18
+2013,Public Protection,Juvenile Probation,"Asst Chf Prob Ofc, Juv Prob",36141,175231.24,0,0,175231.24,31681.82,12841.79,11682.21,56205.82,231437.06
+2016,Public Protection,Juvenile Probation,"Acpo,Juvp, Juv Prob (SFERS)",15747,161606.96,0,0,161606.96,29299.3,13068.8,10739.2,53107.3,214714.26
+2016,Community Health,Public Health,Shade And Drapery Worker,7016,59299.15,940.18,591.16,60830.49,11145.61,12286.3,5059.12,28491.03,89321.52
+2016,Public Protection,Department of Emergency Management,Senior Statistician,12721,88034.91,0,2387.67,90422.58,16383.29,13118.69,6636.94,36138.92,126561.5
+2013,Culture & Recreation,Recreation and Park Commission,Vet Laboratory Technologist,16308,86502.01,125.36,1125.45,87752.82,15865.72,12801.79,7339.83,36007.34,123760.16
+2013,Community Health,Public Health,Orthopedic Technician 2,7419,68715.02,0,250,68965.02,13502.28,12918.24,5573.5,31994.02,100959.04
+2015,Culture & Recreation,Fine Arts Museum,Manager Of Museum Security Services,24158,9972.2,0,3271.76,13243.96,2236.76,1628.43,1744.84,5610.03,18853.99
+2016,Public Protection,Police,Chief Of Police,13584,292450.12,0,100271.38,392721.5,54680.78,11572.38,7823.55,74076.71,466798.21
+2013,Public Protection,Superior Court,Court Supervisor I,36436,0,0,34237.89,34237.89,0,0,2665.8,2665.8,36903.69
+2013,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Sr Opers Mgr,37258,63677.9,0,0,63677.9,0,0,5030.56,5030.56,68708.46
+2014,General Administration & Finance,City Attorney,"Asst Chf, Bur Clm Invest&Admin",22133,72147.01,0,0,72147.01,15088.48,6527.46,10327.89,31943.83,104090.84
+2015,Public Protection,Juvenile Probation,"Sr Cnselor, Juv Hall (SFERS)",14820,28613.5,0,69.37,28682.87,0,0,2265.95,2265.95,30948.82
+2013,"Public Works, Transportation & Commerce",PUC Public Utilities Commission,Cashier 3,13374,1203.5,0,0,1203.5,219.16,246.19,108.7,574.05,1777.55
+2016,General Administration & Finance,General Services Agency - City Admin,Asst Forensic Toxicologist 2,50938,45817.4,0,12332.95,58150.35,8306.72,4638.93,3845.74,16791.39,74941.74
+2015,Culture & Recreation,Recreation and Park Commission,Assistant Industrial Hygienist,2538,88484.63,0,0,88484.63,19847.17,12500.56,7052.92,39400.65,127885.28
+2013,Culture & Recreation,Arts Commission,Musm Exhibit Packer & Repairer,32508,6952.42,0,0,6952.42,0,1997.2,538.25,2535.45,9487.87
+2014,Community Health,Public Health,Environmental Hlth Tech 2,31636,0,0,5804.86,5804.86,0,0,444.07,444.07,6248.93
+2013,Public Protection,Superior Court,Trial Delay Reduct Coord,6543,4579.52,0,35.03,4614.55,840.31,718.56,399.69,1958.56,6573.11
+2015,"Public Works, Transportation & Commerce",Municipal Transportation Agency,Parking Hearing Supervisor,47342,108913.01,0,0,108913.01,22197.88,12421.52,8708.66,43328.06,152241.07
+2014,General Administration & Finance,Retirement System,"Commissioner 16700c, No Pay",53128,0,0,0,0,0,-193.95,0,-193.95,-193.95
+2013,Public Protection,Police,Police Services Aide,47044,2947.93,0,167.57,3115.5,582.94,0,246.13,829.07,3944.57
+2013,General Administration & Finance,General Services Agency - City Admin,Special Assistant 8,47644,3656.9,0,0,3656.9,0,640.09,284.45,924.54,4581.44
+2013,Community Health,Public Health,Asst Dir Clinical Svcs 2,2313,31890.01,0,0,31890.01,5647.74,2870.72,2758.56,11277.02,43167.03
+2015,"Public Works, Transportation & Commerce",Port,Asst Harbormaster (OCII),25842,12659.85,0,0,12659.85,2839.59,1911.46,989.72,5740.77,18400.62
+2013,Public Protection,Sheriff,Sheriff,3090,46890.69,0,2813.29,49703.98,0,2880.4,3740.02,6620.42,56324.4
+2016,Public Protection,Superior Court,Ct Comp Sys Engineer I,6864,17697,0,0,17697,3293.42,2543.93,1455.32,7292.67,24989.67
+2013,Culture & Recreation,Recreation and Park Commission,Pianist,20991,4218.76,0,0,4218.76,0,0,333.28,333.28,4552.04

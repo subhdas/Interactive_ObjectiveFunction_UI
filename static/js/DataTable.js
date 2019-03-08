@@ -1556,9 +1556,10 @@
 
         var data = Util.deepCopyData(dataGiven);
         var vc = 15
-        // console.log(" drawing test data table ... ", dataGiven);
         data.forEach(function (d, i) {
+            // return
             delete d.cluster;
+            // delete d.id
             d['0_' + Main.targetName] = d[Main.targetName]
             // d['0_' + Main.predictedName] = d[Main.predictedName]
             delete d[Main.targetName];
@@ -1573,8 +1574,13 @@
             } catch (e) {}
 
             d[Main.entityNameSecondImp] = name
+            if(Main.entityNameSecondImp == "0_") delete d[Main.entityNameSecondImp]
+            // var temp = d.id;
+            // delete d['id']
+            // d['zid'] = temp
         }); // end of data for each
         // main.testData = data.slice();
+
 
         var sortAscending = true;
         var table = d3
