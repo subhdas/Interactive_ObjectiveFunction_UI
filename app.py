@@ -48,12 +48,12 @@ def preprocess_data(dataGiven):
 	inp_df = pd.DataFrame(dataIn)
 	inp_df['cluster'] = 0
 	orig_df = inp_df.fillna(0)
-	v = 30*6
+	v = 40*6
 	inp_df = orig_df[0:v]
 	app_df = orig_df[v:orig_df.shape[0] - 1]
 	app_df['id'] = [i for i in range(app_df.shape[0])]
 	inp_df['id'] = [i for i in range(inp_df.shape[0])]
-	train, test = train_test_split(inp_df, test_size=0.15)
+	train, test = train_test_split(inp_df, test_size=0.35)
 	print " after split ", train.shape, test.shape
 
 

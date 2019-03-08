@@ -53,8 +53,8 @@ def wrap_findGoodModel(train,test, targetTrain, targetTest, extraInfo):
 
 
 def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
-    MAX_RET = 2
-    MAX_EVAL = 10
+    MAX_RET = 4
+    MAX_EVAL = 8
     train, trainId = preProcessData(train)
     test, testId = preProcessData(test)
 

@@ -176,7 +176,7 @@
             idNum = Util.getNumberFromText(idNum);
             $(".modelNameHead").css('opacity', 0.3);
             $(this).css('opacity', 1);
-            $(".poly_model").css("opacity", 0.05);
+            $(".poly_model").css("opacity", 0.1);
             $(".model_" + idNum).css("opacity", 0.75);
         })
 
@@ -184,7 +184,10 @@
             var idNum = $(this).attr('id');
             idNum = Util.getNumberFromText(idNum);
             $(".modelNameHead").css('opacity', 1);
-            $(".poly_model").css("opacity", 0.75);
+            // $(".poly_model").css("opacity", 0.75);
+
+            $(".poly_model").css("opacity", 0.1);
+            $(".model_" + idNum).css("opacity", 0.75);
         })
 
         $(".modelNameHead").on('click', function (e) {
@@ -222,7 +225,7 @@
 
 
     StarM.toggleParCoorStarPlot = function () {
-            $("#starPlotContentId").hide();
+        $("#starPlotContentId").hide();
         if (StarM.starPlotMode) {
             var arr = ['id'];
             arr.push.apply(arr, Object.keys(Main.numericalAttributes));
@@ -865,7 +868,11 @@
                 $(this).css('fill', StarM.colorFill[i]);
                 $(this).css('stroke-width', '2');
                 $(this).css('stroke', 'gray');
-                $(this).css('opacity', 0.75);
+                $(this).css('opacity', 0.1);
+
+
+                // $(".poly_model").css("opacity", 0.05);
+                $(".model_" + 0).css("opacity", 0.75);
             })
 
     }
@@ -959,7 +966,15 @@
                     var dataItem = Main.getDataById(arrId[i], Main.trainData);
                     var nameItem = dataItem[Main.entityNameSecondImp];
                     var fullNameItem = dataItem[Main.entityNameSecondImp];
-                    if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
+                    try {
+                        if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
+
+                    } catch (e) {
+                        try {
+                            var nameItem = dataItem[Main.entityName];
+                            if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
+                        } catch (e) {}
+                    }
                     var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
                     var splClass = 'rowConstTableCol_' + result;
                     StarM.constraintsDict[i] = true;

@@ -197,6 +197,9 @@
 
     DataTable.showTableView = function () {
         Main.tabelViewMode = true;
+        if (Scat.filteredScatData.length > 0){
+            DataTable.hideRowsById(Scat.filteredScatData, 'train')
+        }
         $("#tableContent").show();
         $("#scatContent").hide();
     }
