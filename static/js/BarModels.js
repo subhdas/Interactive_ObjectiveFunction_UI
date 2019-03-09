@@ -393,9 +393,9 @@
         var binmargin = .2;
         var margin = {
             top: 2,
-            right: 2,
+            right: 5, //2
             bottom: 40,
-            left: 2
+            left: 5 //2
         };
         var width = w - margin.left - margin.right;
         var height = h - margin.top - margin.bottom;
@@ -426,6 +426,7 @@
             var bin = Math.abs(Math.ceil((d.value - minbin) / (binsize + 1)));
             // console.log(' bin is ', bin, d.value, binsize)
             if ((bin.toString() != "NaN") && (bin < histdata.length)) {
+            // if ((bin < histdata.length)) {
                 try {
                     BarM.filterHistData[attr + "_" + bin].push(d.label)
                 } catch (err) {
@@ -461,17 +462,19 @@
         // Scale for the placement of the bars
         var x2 = d3.scale.linear()
             .domain([xmin, xmax])
-            .range([0, width]);
+            // .nice()
+            .range([0, width])
 
         var y = d3.scale.linear()
             .domain([0, d3.max(histdata, function (d) {
                 return d.numfill;
             })])
-            .range([height, 0]);
+            .range([height, 0])
+            
 
         var xAxis = d3.svg.axis()
             .scale(x2)
-            .ticks(4)
+            .ticks(2)
             .orient("bottom");
         var yAxis = d3.svg.axis()
             .scale(y)
@@ -535,18 +538,25 @@
             .style('fill', Main.colors.HIGHLIGHT2)
 
         // add the x axis and x-label
-        svg.append("g")
+        var xaxis2 = svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis)
-            .select('path')
+             
+                        
+            
+            xaxis2.selectAll('text')
+                .style('font-size', '9px')
+                // .remove()
+            xaxis2.select('path')
             .style('display', 'block')
-        svg.append("text")
-            .attr("class", "xlabel")
-            .attr("text-anchor", "middle")
-            .attr("x", width / 2)
-            .attr("y", height + margin.bottom)
-            .text(attr);
+            
+        // svg.append("text")
+        //     .attr("class", "xlabel")
+        //     .attr("text-anchor", "middle")
+        //     .attr("x", width / 2)
+        //     .attr("y", height + margin.bottom)
+        //     .text(attr);
 
         // add the y axis and y-label
         svg.append("g")

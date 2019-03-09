@@ -1,4 +1,4 @@
-year,target_variable,job,salaries,overtime,other_sal,total_sal,retirement,health_dent,other_ben,total_ben,total_compens
+year,target_variable,job,salaries,overtime,otherSal,totalSal,retirement,health,otherBen,totalBen,totalCompens
 2016,3,Parking Meter Repairer Sprv 1,43771.97,1071.88,0,44843.85,8145.92,6595.39,3585.02,18326.33,63170.18
 2015,3,"Sr Cnselor, Juv Hall (SFERS)",28613.5,0,69.37,28682.87,0,0,2265.95,2265.95,30948.82
 2015,3,Ct Comp App Programmer,99510.02,0,2838.6,102348.62,21945.27,10249.5,8190.1,40384.87,142733.49

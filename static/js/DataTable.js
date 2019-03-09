@@ -629,7 +629,7 @@
         // w = 200;
         h = 75; // 75
 
-        w = 150 // 199
+        w = 100 // 199
         // console.log('data ffound ', attr, data, id, w, h);
         // BarM.makeFeatureLabelsVerBar(id,w,h,data)
         BarM.makeHistoFilterTable(id, w, h, data, dataIn, attr, containerId);
@@ -691,7 +691,7 @@
             .style('background', function (d) {
                 if (DataTable.addedExtra == 1) dataGo = Main.testData;
                 else dataGo = Main.trainData;
-                console.log(' found ', d.name, containerId)
+                // console.log(' found ', d.name, containerId)
                 DataTable.makeFilterVisTable(d.name, $(this), dataGo, containerId)
                 return '';
             })
