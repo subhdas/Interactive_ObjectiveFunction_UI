@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
 
     BarM = {};
@@ -9,7 +9,10 @@
 
     BarM.filterHistData = {};
 
-    BarM.createData = function() {
+    BarM.countBin = 0;
+    BarM.binData = {}
+
+    BarM.createData = function () {
         var data = [];
         for (var i = 0; i < Cons.numConstraints; i++) {
             var arr = [];
@@ -26,50 +29,50 @@
     }
 
 
-    BarM.computeIdsConfMatrAllModel = function(){
-        for(var item in BarM.allModelData){
-            if(item == 0)continue
+    BarM.computeIdsConfMatrAllModel = function () {
+        for (var item in BarM.allModelData) {
+            if (item == 0) continue
             var mod = BarM.allModelData[item];
             var confMatrixTrain = JSON.parse(mod['trainConfMatrix'])
-             console.log(' checking for ' , item, confMatrixTrain)
-              var dataObj = {};
-              for (var i = 0; i < confMatrixTrain.length; i++) {
-                  var row = confMatrixTrain[i];
-                  for (var j = 0; j < row.length; j++) {
-                      var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'train', item)
-                      var obj = {
-                          'data_idList': idList,
-                          'num_pred': row[j]
-                      }
-                      dataObj[i + '_' + j] = obj;
-                  }
-              }
-              BarM.allModelData[item]['confMatTrain_ids'] = dataObj;
+            console.log(' checking for ', item, confMatrixTrain)
+            var dataObj = {};
+            for (var i = 0; i < confMatrixTrain.length; i++) {
+                var row = confMatrixTrain[i];
+                for (var j = 0; j < row.length; j++) {
+                    var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'train', item)
+                    var obj = {
+                        'data_idList': idList,
+                        'num_pred': row[j]
+                    }
+                    dataObj[i + '_' + j] = obj;
+                }
+            }
+            BarM.allModelData[item]['confMatTrain_ids'] = dataObj;
 
 
             var confMatrixTest = JSON.parse(mod['testConfMatrix'])
 
-              // test conf matr
-              var dataObj = {};
-              for (var i = 0; i < confMatrixTest.length; i++) {
-                  var row = confMatrixTest[i];
-                  for (var j = 0; j < row.length; j++) {
-                      var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'test', item)
-                      var obj = {
-                          'data_idList': idList,
-                          'num_pred': row[j]
-                      }
-                      dataObj[i + '_' + j] = obj;
-                  }
-              }
-              BarM.allModelData[item]['confMatTest_ids'] = dataObj;
+            // test conf matr
+            var dataObj = {};
+            for (var i = 0; i < confMatrixTest.length; i++) {
+                var row = confMatrixTest[i];
+                for (var j = 0; j < row.length; j++) {
+                    var idList = DataTable.findLabelAcc(Main.labels[i], Main.labels[j], 'test', item)
+                    var obj = {
+                        'data_idList': idList,
+                        'num_pred': row[j]
+                    }
+                    dataObj[i + '_' + j] = obj;
+                }
+            }
+            BarM.allModelData[item]['confMatTest_ids'] = dataObj;
 
 
         }
     }
 
 
-    BarM.makeStackedModelBars = function(containerId = "modelExplorePanel") {
+    BarM.makeStackedModelBars = function (containerId = "modelExplorePanel") {
         var data = [{
             data: [{
                 target: {
@@ -177,14 +180,14 @@
         var width = sizes.width - margins.left - margins.right;
         var height = sizes.height - margins.bottom;
 
-        var series = data.map(function(d) {
+        var series = data.map(function (d) {
             return d.source;
         });
 
         console.log('seris is ', series, data)
 
-        var dataset = data.map(function(d) {
-            return d.data.map(function(o, i) {
+        var dataset = data.map(function (d) {
+            return d.data.map(function (o, i) {
                 // Structure it so that your numeric axis (the stacked amount) is y
                 return {
                     y: o.count,
@@ -196,11 +199,11 @@
         dataset = BarM.createData();
 
         console.log('series dataset ', dataset)
-            // return
+        // return
         d3.layout.stack()(dataset);
 
-        var dataset = dataset.map(function(group) {
-            return group.map(function(d) {
+        var dataset = dataset.map(function (group) {
+            return group.map(function (d) {
                 // Invert the x and y values, and y0 becomes x0
                 return {
                     x: d.y,
@@ -219,9 +222,9 @@
             .append('g')
             .attr('transform', 'translate(' + margins.left + ', 0)');
 
-        var units = dataset[0].map(function(d) {
+        var units = dataset[0].map(function (d) {
             return d.y;
-            
+
         });
 
         var yScale = d3.scale.ordinal()
@@ -232,8 +235,8 @@
             .scale(yScale)
             .orient('left');
 
-        var xMax = d3.max(dataset, function(group) {
-            var groupMax = d3.max(group, function(d) {
+        var xMax = d3.max(dataset, function (group) {
+            var groupMax = d3.max(group, function (d) {
                 return d.x + d.x0;
             });
             return groupMax;
@@ -278,29 +281,29 @@
             .enter()
             .append('g')
             .attr('class', 'mainGrpStackedBarModel')
-            .style('fill', function(d, i) {
+            .style('fill', function (d, i) {
                 return colors[i];
             });
 
         groups.selectAll('rect')
-            .data(function(d) {
+            .data(function (d) {
                 return d;
             })
             .enter()
             .append('rect')
-            .attr('x', function(d) {
+            .attr('x', function (d) {
                 return xScale(d.x0);
             })
-            .attr('y', function(d, i) {
+            .attr('y', function (d, i) {
                 return yScale(d.y);
             })
-            .attr('height', function(d) {
+            .attr('height', function (d) {
                 return yScale.rangeBand();
             })
-            .attr('width', function(d) {
+            .attr('width', function (d) {
                 return xScale(d.x);
             })
-            .on('mouseover', function(d) {
+            .on('mouseover', function (d) {
                 // console.log('mouseovering')
                 var xPos = parseFloat(d3.select(this).attr('x')) / 2 + width / 2;
                 var yPos = parseFloat(d3.select(this).attr('y')) + yScale.rangeBand() / 2;
@@ -311,7 +314,7 @@
                     .text(d.x);
                 d3.select('#tooltip').classed('hidden', false);
             })
-            .on('mouseout', function() {
+            .on('mouseout', function () {
                 d3.select('#tooltip').classed('hidden', true);
             });
 
@@ -345,7 +348,7 @@
             .attr('class', 'bc-legend-label')
             .html(series[0]);
 
-        series.forEach(function(s, i) {
+        series.forEach(function (s, i) {
             legendContainer.append('span')
                 .attr('class', 'bc-legend-color')
                 .style('background-color', colors[i]);
@@ -358,7 +361,7 @@
     }
 
 
-    BarM.getDataforHorBar = function(labelName) {
+    BarM.getDataforHorBar = function (labelName) {
         console.log(' found ', LabelCard.computeReturnData, labelName)
         var dataIn = LabelCard.computeReturnData['colWtByData'][labelName];
         var dataOut = []
@@ -375,13 +378,16 @@
 
     BarM.makeHistoFilterTable = function (containerId = "", w, h, data = "", dataQuery, attr = "", parContainerId = "") {
         var ran = Main.attrDict[attr]['range']
-        var numbins = 5;
-        if(attr == 'Cylinders') numbins = 2
-        var minbin = ran[0]
-        var maxbin = ran[1]
+        var numbins = 25;
+        if (attr == 'Cylinders') numbins = 2
+        var minbin = +ran[0]
+        var maxbin = +ran[1]
         // var numbins =parseInt((maxbin - minbin) / binsize);
-        var binsize =parseInt((maxbin - minbin) / numbins);
-        // console.log('numbins ', numbins, maxbin, minbin, ran, containerId)
+        var binsize = parseInt((maxbin - minbin) / numbins) + 1;
+        // var binsize = Math.ceil((maxbin - minbin) / numbins).toFixed(0)
+        // binsize = 5;
+        // console.log('numbins ', binsize, numbins, maxbin, minbin, ran, containerId)
+
 
         // whitespace on either side of the bars in units of MPG
         var binmargin = .2;
@@ -401,28 +407,33 @@
         histdata = new Array(numbins);
         for (var i = 0; i < numbins; i++) {
             histdata[i] = {
-                numfill: 0,
+                numfill: 1, //
                 meta: "",
-                bin : -1,
-                attr: ""
+                bin: -1,
+                attr: "", 
+                binsz : binsize,
             };
         }
+
+        BarM.countBin += 1;
+        BarM.binData[BarM.countBin] = histdata;
+
 
 
 
         // Fill histdata with y-axis values and meta data
-        data.forEach(function(d,i) {
-            var bin = Math.abs(Math.floor((d.value - minbin) / binsize));
-            // console.log(' bin is ', bin, d.value)
+        data.forEach(function (d, i) {
+            var bin = Math.abs(Math.ceil((d.value - minbin) / (binsize + 1)));
+            // console.log(' bin is ', bin, d.value, binsize)
             if ((bin.toString() != "NaN") && (bin < histdata.length)) {
-                try{
-                    BarM.filterHistData[attr+"_"+bin].push(d.label)
-                }catch(err){
-                    BarM.filterHistData[attr+"_"+bin] = [d.label]                    
+                try {
+                    BarM.filterHistData[attr + "_" + bin].push(d.label)
+                } catch (err) {
+                    BarM.filterHistData[attr + "_" + bin] = [d.label]
                 }
 
                 var dt = Main.getDataById("" + d.label, dataQuery); //Main.trainData
-                // console.log('data is ', dt)
+                // console.log('data is ', dt, d.label)
                 histdata[bin].numfill += 1;
                 histdata[bin].bin = bin;
                 histdata[bin].attr = attr;
@@ -430,10 +441,12 @@
                     " id :  " + d.label +
                     "</td><td> " + attr + " : " +
                     d.value + " </td></tr>";
+
+                histdata[bin].binsz = binsize
             }
         });
 
-        histdata.forEach(function(d){
+        histdata.forEach(function (d) {
             d.numfill = Math.log(+d.numfill);
         })
 
@@ -451,7 +464,7 @@
             .range([0, width]);
 
         var y = d3.scale.linear()
-            .domain([0, d3.max(histdata, function(d) {
+            .domain([0, d3.max(histdata, function (d) {
                 return d.numfill;
             })])
             .range([height, 0]);
@@ -469,7 +482,7 @@
             .attr('class', 'd3-tip')
             .direction('e')
             .offset([0, 20])
-            .html(function(d) {
+            .html(function (d) {
                 return '<table id="tiptable">' + d.meta + "</table>";
             })
             .style('background', 'black')
@@ -478,10 +491,10 @@
             .style('border-radius', '10px');
 
 
-        
+
 
         // put the graph in the "mpg" div
-        var svg = d3.selectAll("#"+containerId).append("svg")
+        var svg = d3.selectAll("#" + containerId).append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
@@ -496,26 +509,27 @@
         // return
 
         // set up the bars
-        var bar = svg.selectAll(".bar_"+containerId)
+        var bar = svg.selectAll(".bar_" + containerId)
             .data(histdata)
             .enter().append("g")
-            .attr("class", "bar_"+containerId)
-            .attr("transform", function(d, i) {
+            .attr("class", "bar_" + containerId)
+            .attr("transform", function (d, i) {
+                // console.log('in bar making ', d, i, containerId)
                 return "translate(" +
                     x2(i * binsize + minbin) + "," + y(d.numfill) + ")";
             })
-            // .on('mouseover', tip.show) // commented 
-            // .on('mouseout', tip.hide);
+        // .on('mouseover', tip.show) // commented 
+        // .on('mouseout', tip.hide);
 
         // add rectangles of correct size at correct location
         bar.append("rect")
-            .attr('id', function(d){
+            .attr('id', function (d) {
                 // return "histoBars_" + d.attr + "_" + d.bin + "_" + containerId
                 return "histoBars_" + parContainerId + "_" + d.attr + "_" + d.bin
             })
             .attr("x", x(binmargin))
-            .attr("width", x(binsize - 2 * binmargin))
-            .attr("height", function(d) {
+            .attr("width", Math.abs(x(binsize - 2 * binmargin)))
+            .attr("height", function (d) {
                 return height - y(d.numfill);
             })
             .style('fill', Main.colors.HIGHLIGHT2)
@@ -526,7 +540,7 @@
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis)
             .select('path')
-            .style('display' , 'block')
+            .style('display', 'block')
         svg.append("text")
             .attr("class", "xlabel")
             .attr("text-anchor", "middle")
@@ -538,7 +552,7 @@
         svg.append("g")
             .attr("class", "y axis")
             .attr("transform", "translate(0,0)")
-            // .call(yAxis);
+        // .call(yAxis);
         svg.append("text")
             .attr("class", "ylabel")
             .attr("y", 0 - margin.left) // x and y switched due to rotation
@@ -551,7 +565,7 @@
     }
 
 
-    BarM.makeFeatureLabelsVerBar = function(containerId = "", w, h, data = "") {
+    BarM.makeFeatureLabelsVerBar = function (containerId = "", w, h, data = "") {
 
         $("#" + containerId).empty();
 
@@ -577,7 +591,7 @@
 
         var y = d3.scale.linear()
             // .base(Math.E)
-            .domain([0, d3.max(data, function(d) {
+            .domain([0, d3.max(data, function (d) {
                 return +d.value;
             })])
             .range([height, 0]);
@@ -586,7 +600,7 @@
             .scale(x)
             .ticks(4)
             .orient("bottom")
-            // .tickFormat(d3.time.format("%Y-%m"));
+        // .tickFormat(d3.time.format("%Y-%m"));
 
         var yAxis = d3.svg.axis()
             .scale(y)
@@ -602,11 +616,11 @@
             .attr("transform",
                 "translate(" + margin.left + "," + margin.top + ")");
 
-        data.forEach(function(d) {
+        data.forEach(function (d) {
             d.value = +d.value;
         });
 
-        x.domain(data.map(function(d) {
+        x.domain(data.map(function (d) {
             return d.label
         }));
         // y.domain([0, d3.max(data, function(d) {
@@ -621,20 +635,20 @@
             .style('display', 'block')
             .selectAll("text")
             .remove()
-            // .style("text-anchor", "end")
-            // .attr("dx", "-.8em")
-            // .attr("dy", "-.55em")
-            // .attr("transform", "rotate(-90)");
+        // .style("text-anchor", "end")
+        // .attr("dx", "-.8em")
+        // .attr("dy", "-.55em")
+        // .attr("transform", "rotate(-90)");
 
         svg.append("g")
             .attr("class", "y axis")
-            // .call(yAxis)
-            // .append("text")
-            // .attr("transform", "rotate(-90)")
-            // .attr("y", 6)
-            // .attr("dy", ".71em")
-            // .style("text-anchor", "end")
-            // .text("Value ($)");
+        // .call(yAxis)
+        // .append("text")
+        // .attr("transform", "rotate(-90)")
+        // .attr("y", 6)
+        // .attr("dy", ".71em")
+        // .style("text-anchor", "end")
+        // .text("Value ($)");
 
 
         // tooltips
@@ -647,17 +661,17 @@
             .data(data)
             .enter().append("rect")
             .style("fill", Main.colors.HIGHLIGHT2)
-            .attr("x", function(d) {
+            .attr("x", function (d) {
                 return x(d.label);
             })
             .attr("width", x.rangeBand())
-            .attr("y", function(d) {
+            .attr("y", function (d) {
                 return y(d.value);
             })
-            .attr("height", function(d) {
+            .attr("height", function (d) {
                 return height - y(d.value);
             })
-            .on('mouseover', function(d) {
+            .on('mouseover', function (d) {
                 // return
                 div_tooltip.style('display', 'inline');
                 div_tooltip
@@ -666,7 +680,7 @@
                     .style('left', (d3.event.pageX - 34) + 'px')
                     .style('top', (d3.event.pageY - 12) + 'px');
             })
-            .on('mouseout', function(d) {
+            .on('mouseout', function (d) {
                 // return
                 div_tooltip.style('display', 'none');
             })

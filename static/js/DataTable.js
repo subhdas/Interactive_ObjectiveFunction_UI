@@ -242,42 +242,7 @@
     }
 
 
-    // DataTable.toggleTableContentViews = function (id = 0) {
-    //     $("#tableHeadDivTrain").show()
-    //     //id=0, train table , elese test table
-    //     DataTable.splitView = !DataTable.splitView;
-    //     if (Cons.accordionOpen) {
-
-    //         if (id == 0) {
-    //             //train
-    //             $("#tableHeadDivTrain").hide()
-    //             $('#trainContent').css('height', '0%')
-    //             $('#testContent').css('height', '100%')
-    //         } else {
-    //             $('#trainContent').css('height', '100%')
-    //             $('#testContent').css('height', '0%')
-    //         }
-    //     } else {
-    //         if (DataTable.splitView) {
-    //             //two tables showing
-    //             $('#trainContent').css('height', '50%')
-    //             $('#testContent').css('height', '50%')
-
-    //         } else {
-    //             //only one showing
-    //             if (id == 0) {
-    //                 //train
-    //                 $('#trainContent').css('height', '100%')
-    //                 $('#testContent').css('height', '0%')
-    //             } else {
-    //                 $("#tableHeadDivTrain").hide()
-    //                 $('#trainContent').css('height', '0%')
-    //                 $('#testContent').css('height', '100%')
-    //             }
-    //         }
-    //     }
-    // }
-
+   
 
 
 
@@ -662,9 +627,9 @@
         // console.log('in filter vis table  ', attr, data, id)
 
         // w = 200;
-        h = 75;
+        h = 75; // 75
 
-        w = 100
+        w = 150 // 199
         // console.log('data ffound ', attr, data, id, w, h);
         // BarM.makeFeatureLabelsVerBar(id,w,h,data)
         BarM.makeHistoFilterTable(id, w, h, data, dataIn, attr, containerId);
@@ -726,7 +691,7 @@
             .style('background', function (d) {
                 if (DataTable.addedExtra == 1) dataGo = Main.testData;
                 else dataGo = Main.trainData;
-                console.log(' found ', d.name)
+                console.log(' found ', d.name, containerId)
                 DataTable.makeFilterVisTable(d.name, $(this), dataGo, containerId)
                 return '';
             })
