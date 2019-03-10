@@ -213,7 +213,7 @@
                 confMatrixTrain = JSON.parse(confMatrixTrain)
                 confMatrixTest = JSON.parse(confMatrixTest)
             }catch(e){
-                
+
             }
             
 

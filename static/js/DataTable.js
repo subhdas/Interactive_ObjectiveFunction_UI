@@ -347,6 +347,8 @@
 
         $("#expModid").on('click', function(e){
             e.stopPropagation();
+             alertify.set('notifier', 'position', 'top-center');
+             alertify.success('Current Model succesfully exported and saved ');
         })
 
         // table mode button click
