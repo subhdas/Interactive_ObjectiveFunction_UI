@@ -206,15 +206,25 @@
 
 
             var mod = BarM.allModelData[idNum];
+            console.log(' clicked on model ', idNum, mod)
             confMatrixTrain = mod['trainConfMatrix']
             confMatrixTest = mod['testConfMatrix']
-
-            confMatrixTrain = JSON.parse(confMatrixTrain)
-            confMatrixTest = JSON.parse(confMatrixTest)
+            try{
+                confMatrixTrain = JSON.parse(confMatrixTrain)
+                confMatrixTest = JSON.parse(confMatrixTest)
+            }catch(e){
+                
+            }
+            
 
             //to be done
+            BarM.modIter -= 1
             ConfM.makeConfMatrix(confMatrixTrain, 'train');
             ConfM.makeConfMatrix(confMatrixTest, 'test');
+
+            setTimeout(() => {
+                BarM.modIter += 1
+            }, 300);
 
             StarM.addfeatureResults("", BarM.selectedModelId)
 

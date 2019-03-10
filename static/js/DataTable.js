@@ -432,6 +432,9 @@
                     console.log('par coord model metric ', arr, dataNumeric)
                     StarM.makeMetricsParCoord('',dataNumeric, true);
                 }, 0);
+
+                
+
                 ConfM.makeConfMatrix(confMatrixTrain, 'train');
                 ConfM.makeConfMatrix(confMatrixTest, 'test'); // test
 

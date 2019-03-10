@@ -43,21 +43,23 @@
 		acc = ((score * 100) / ind).toFixed(2)
 		if(acc > 1.0) acc = (acc*0.9).toFixed(2)
 		var htmlStr = "<div class = '"+type + "_wrapDivs modelResult' id = 'modelResult_" + containerId + "_" + type + "'>"
-		htmlStr += "<div class = 'modResRow'><span class ='modelResHeadText'> Prediction Accuracy is  </span>"
+		htmlStr += "<div class = 'modResRow' id = 'modResRowid_0'><span class ='modelResHeadText'> Prediction Accuracy is  </span>"
 		htmlStr += "<span class = 'modelResOut' >" + acc + " </span></div>";
 
+		var acc2 = 2;
 		if(BarM.modIter > 0){
+			console.log('moditer is ', BarM.modIter)
 			var metObj = BarM.histData[BarM.modIter-1][BarM.selectedModelId][ob];
-			var score = 0,
+			var score = 0, 	 	
 				ind = 0;
 			for (var item in metObj) {
 				score += +metObj[item]
 				ind += 1
 			}
-			acc = ((score * 100) / ind).toFixed(2)
-			if (acc > 1.0) acc = (acc * 0.9).toFixed(2)
+			acc2 = ((score * 100) / ind).toFixed(2)
+			if (acc2 > 1.0) acc2 = (acc2 * 0.9).toFixed(2)
 			htmlStr += "<div class = 'modResRow'><span class ='modelResHeadText'> Prediction Accuracy is  </span>"
-			htmlStr += "<span class = 'modelResOut' >" + acc + " </span></div>";
+			htmlStr += "<span class = 'modelResOut' >" + acc2 + " </span></div>";
 		}
 
 
@@ -78,6 +80,14 @@
 
 		$("#" + containerId).append(htmlStr);
 
+		if (acc2 < acc && BarM.modIter > 0) {
+			 htmlStr = "<button id='modelWin' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+			 htmlStr += "<i class='material-icons'>touch_app</i></button>";
+			 $('#modResRowid_0').append(htmlStr)
+		}else{
+
+		}
+
 
 		$(".modelResult").css('display', 'flex')
 		$(".modelResult").css('flex-direction', 'column')
@@ -91,6 +101,8 @@
 		$(".modelResOut").css('margin', '3px')
 
 		$(".modResRow").css('margin-bottom', '10px')
+		$(".modResRow").css('display', 'flex')
+		$(".modResRow").css('align-items', 'center')
 
 		$("." + type + "_wrapDivs").wrapAll("<div class='wrapperDivConfMatr'></div>");
 
