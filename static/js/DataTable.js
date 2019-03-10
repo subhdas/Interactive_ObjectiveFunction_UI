@@ -325,6 +325,9 @@
         $('.tableHeadButtons').css('align-items', 'center')
 
 
+        //export button
+        $("#expModid").css('font-size', '0.75em')
+        $("#expModid").css('width', '80px')
         // $('.dataTableHeadText').css('display' , )
 
 
@@ -340,6 +343,10 @@
 
         $('#tableViewC').on('click', function () {
             DataTable.showTableView();
+        })
+
+        $("#expModid").on('click', function(e){
+            e.stopPropagation();
         })
 
         // table mode button click
