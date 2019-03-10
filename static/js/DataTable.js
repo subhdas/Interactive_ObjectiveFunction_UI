@@ -438,8 +438,13 @@
                 DataTable.modelUpdateLabel();
                 Cons.checkConstraintsActive();
 
+
+
+
                 setTimeout(() => {
                     Main.loadingSpinnerToggle(false);
+                    BarM.histData[BarM.modIter] = BarM.allModelData;
+                    BarM.modIter += 1;
                 }, 150);
 
 

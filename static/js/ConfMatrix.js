@@ -30,9 +30,35 @@
 
 		var acc = (Util.getRandomNumberBetween(0.9, 0.75) * 100).toFixed(2)
 
+		
+		var ob = 'trainMetrics'
+		if(type == 'test') ob ='testMetrics'
+		
+		var metObj = BarM.allModelData[BarM.selectedModelId][ob];
+		var score = 0, ind =0;
+		for(var item in metObj){
+			score += +metObj[item]
+			ind+= 1
+		}
+		acc = ((score * 100) / ind).toFixed(2)
+		if(acc > 1.0) acc = (acc*0.9).toFixed(2)
 		var htmlStr = "<div class = '"+type + "_wrapDivs modelResult' id = 'modelResult_" + containerId + "_" + type + "'>"
 		htmlStr += "<div class = 'modResRow'><span class ='modelResHeadText'> Prediction Accuracy is  </span>"
 		htmlStr += "<span class = 'modelResOut' >" + acc + " </span></div>";
+
+		if(BarM.modIter > 0){
+			var metObj = BarM.histData[BarM.modIter-1][BarM.selectedModelId][ob];
+			var score = 0,
+				ind = 0;
+			for (var item in metObj) {
+				score += +metObj[item]
+				ind += 1
+			}
+			acc = ((score * 100) / ind).toFixed(2)
+			if (acc > 1.0) acc = (acc * 0.9).toFixed(2)
+			htmlStr += "<div class = 'modResRow'><span class ='modelResHeadText'> Prediction Accuracy is  </span>"
+			htmlStr += "<span class = 'modelResOut' >" + acc + " </span></div>";
+		}
 
 
 		//add other constraints
@@ -55,14 +81,16 @@
 
 		$(".modelResult").css('display', 'flex')
 		$(".modelResult").css('flex-direction', 'column')
-		$(".modelResult").css('padding', '5px')
+		$(".modelResult").css('padding', '3px')
 		$(".modelResult").css('font-size', '1.3em')
-		$(".modelResult").css('margin', '8px')
-		$(".modelResult").css('height', '20px')
+		$(".modelResult").css('margin', '4px')
+		// $(".modelResult").css('height', '20px')
 
 		$(".modelResOut").css('background', Main.colors.HIGHLIGHT2)
-		$(".modelResOut").css('padding', '8px')
-		$(".modelResOut").css('margin', '8px')
+		$(".modelResOut").css('padding', '3px')
+		$(".modelResOut").css('margin', '3px')
+
+		$(".modResRow").css('margin-bottom', '10px')
 
 		$("." + type + "_wrapDivs").wrapAll("<div class='wrapperDivConfMatr'></div>");
 

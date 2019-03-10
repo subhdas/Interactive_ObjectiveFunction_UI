@@ -5,12 +5,16 @@
     BarM.numModel = parseInt(Util.getRandomNumberBetween(10, 5));
     BarM.modelData = {};
     BarM.allModelData = {};
+    BarM.histData = {}
+    BarM.modIter = 0;
     BarM.selectedModelId = 0;
 
     BarM.filterHistData = {};
 
     BarM.countBin = 0;
     BarM.binData = {}
+
+
 
     BarM.createData = function () {
         var data = [];
