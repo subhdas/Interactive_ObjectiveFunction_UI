@@ -478,7 +478,7 @@
 
         var xAxis = d3.svg.axis()
             .scale(x2)
-            .ticks(2)
+            .ticks(0)
             .orient("bottom");
         var yAxis = d3.svg.axis()
             .scale(y)
@@ -551,7 +551,7 @@
             
             xaxis2.selectAll('text')
                 .style('font-size', '9px')
-                // .remove()
+                .remove()
             xaxis2.select('path')
             .style('display', 'block')
             

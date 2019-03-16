@@ -53,8 +53,8 @@ def wrap_findGoodModel(train,test, targetTrain, targetTest, extraInfo):
 
 
 def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
-    MAX_RET = 4
-    MAX_EVAL = 8
+    MAX_RET = 6
+    MAX_EVAL = 6
     train, trainId = preProcessData(train)
     test, testId = preProcessData(test)
 
@@ -113,7 +113,7 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
         try:
             sameLabelObj = metObj['Same-Label'] # gets an array
         except:
-            return 0.65656
+            return 0# 0.65656
         predTrainDict = {}
         origTrainDict = {}
         for i in range(len(predTrain)):
@@ -146,7 +146,7 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
         try:
             similarityObj = metObj['Similarity-Metric'] # gets an array
         except:
-            return 0.65656
+            return 0 #0.65656
         predTrainDict = {}
         origTrainDict = {}
         for i in range(len(predTrain)):
@@ -267,7 +267,7 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
         modelMetricsObj = {}
 
         modelMetricsObj['Critical-Items'] = critScore
-        modelMetricsObj['Non-Critical'] = random.uniform(0.3,0.95)
+        modelMetricsObj['Non-Critical'] = 0 #random.uniform(0.3,0.95)
         modelMetricsObj['Same-Label'] = sameLabScore
         modelMetricsObj['Similarity'] = similarityScore
         modelMetricsObj['Precision'] = precTrain
@@ -276,11 +276,21 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
         modelMetricsObj['Testing-Accuracy'] = precTest
         modelMetricsObj['Cross-Val-Score'] = f1Test
 
+        scoreFinal = 0
+        ind = 0
+        for item in modelMetricsObj:
+            scoreFinal += modelMetricsObj[item]
+            ind += 1
+        if(ind > 0): scoreFinal = (scoreFinal*1.00)/ind 
+
 
         modelMetricsList = [modelMetricsObj]
 
+        # scoreFinal  = cross_mean_score
+        # scoreFinal = 
 
-        result = {'loss': -1*cross_mean_score, 'status': STATUS_OK, 'modelMetrics' : modelMetricsList, }
+
+        result = {'loss': -1*scoreFinal, 'status': STATUS_OK, 'modelMetrics' : modelMetricsList, }
         # print " result is ", result, MAX_RET, MAX_EVAL, critScore, sameLabScore, similarityScore
         # print " result is ", result, MAX_RET, MAX_EVAL, precTrain, accTrain, f1Train
         # print " result is ", result, MAX_RET, MAX_EVAL, len(targetTrainNew), len(targetTrain), len(trainT)
@@ -308,6 +318,9 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
                 max_evals=MAX_EVAL, # change 3
                 trials=trials)
 
+    print " best result is ", best
+    print " ++++++++++++++++++++++++++++++++++++++++ "
+
 
     # print " trials are ", trials
     mod_results = {}
@@ -319,8 +332,8 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
         par_space = trial['misc']['vals']
         # print " we get trial as : ", trial
         # print " we get trial as : ", res
-        print " we get trial as : ", par_space
-        print " ######################## "
+        # print " we get trial as : ", par_space
+        # print " ######################## "
 
         for item in res:
             res[item] = -1*res[item]
@@ -329,11 +342,13 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
             if(item == 'min_samples_split' or item == 'max_depth' or item == 'min_samples_leaf'):
                 if(par_space[item] < 2 ) : par_space[item] = int(par_space[item]) + 2
         mod_results[ind] = { 'res' : res, 'space' : par_space}
-        print " we get trial as  after : ", par_space
+        # print " we get trial as  after : ", par_space
         ind += 1
 
     allmodel_pred_out = {}
     for item in mod_results:
+        print " cycling in mod results ", item, mod_results[item]
+        print " ++++++++++++++++++++++++++++++++ "
         space = mod_results[item]['space']
         pred_out = {}
         pred_out = makePredictions(space, train, test, targetTrain, targetTest, trainId, testId, extraInfo)
