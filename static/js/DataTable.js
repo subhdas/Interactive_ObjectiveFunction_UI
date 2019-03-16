@@ -429,8 +429,8 @@
                     }
                 }
                 BarM.modelData[0]['predictions']['confMatTest_ids'] = dataObj;
-                BarM.allModelData[0] = BarM.modelData[0]['predictions']
-
+                // BarM.allModelData[0] = BarM.modelData[0]['predictions'] // commented now
+ 
                 BarM.computeIdsConfMatrAllModel();
                 setTimeout(() => {
                     // StarM.makeStarPlot();

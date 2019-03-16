@@ -326,32 +326,45 @@ def find_goodModel(train,test,targetTrain,targetTest, extraInfo):
     mod_results = {}
 
     ind = 0
+    loss_arr =[ item['result']['loss'] for item in trials.trials ]
+    # for item in trials.trials:
+    #     loss_arr.append(item['result']['loss'])
+
+    # sorted_ind = np.argsort(loss_arr)
+    print " found loss ", loss_arr
+    loss_arr.sort()
+
     for trial in trials.trials:
         if(ind > MAX_RET): break
         res = trial['result']
+        los = res['loss']
+        # sorted_arr = loss_arr.sort()
+        # print " list is ",loss_arr , los
+        index = loss_arr.index(los)
         par_space = trial['misc']['vals']
-        # print " we get trial as : ", trial
+        # print " we get trial as : ", los, index
         # print " we get trial as : ", res
         # print " we get trial as : ", par_space
         # print " ######################## "
-
         for item in res:
             res[item] = -1*res[item]
         for item in par_space:
             par_space[item] = par_space[item][0]
             if(item == 'min_samples_split' or item == 'max_depth' or item == 'min_samples_leaf'):
                 if(par_space[item] < 2 ) : par_space[item] = int(par_space[item]) + 2
-        mod_results[ind] = { 'res' : res, 'space' : par_space}
+        # mod_results[ind] = { 'res' : res, 'space' : par_space}
+        mod_results[index] = { 'res' : res, 'space' : par_space}
         # print " we get trial as  after : ", par_space
         ind += 1
 
     allmodel_pred_out = {}
     for item in mod_results:
-        print " cycling in mod results ", item, mod_results[item]
-        print " ++++++++++++++++++++++++++++++++ "
+        # print " cycling in mod results ", item, mod_results[item]
+        # print " ++++++++++++++++++++++++++++++++ "
         space = mod_results[item]['space']
         pred_out = {}
         pred_out = makePredictions(space, train, test, targetTrain, targetTest, trainId, testId, extraInfo)
+        pred_out['loss'] = mod_results[item]['res']['loss']
         allmodel_pred_out[item] = pred_out
     
     # print " mod results obj ", mod_results
