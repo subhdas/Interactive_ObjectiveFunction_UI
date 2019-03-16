@@ -13,7 +13,7 @@ from sklearn.ensemble import RandomForestClassifier
 import xgboost as xgb
 from hyperopt import hp, tpe, STATUS_OK, Trials
 from hyperopt.fmin import fmin
-from sklearn.metrics import classification_report, f1_score, accuracy_score, confusion_matrix, precision_score
+from sklearn.metrics import classification_report, f1_score, accuracy_score, confusion_matrix, precision_score, recall_score
 import json
 
 # for json dumps to work
@@ -58,8 +58,8 @@ def wrap_findGoodModel(train, test, targetTrain, targetTest, extraInfo):
 
 
 def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
-    MAX_RET = 6
-    MAX_EVAL = 6
+    MAX_RET = 3
+    MAX_EVAL = 50
     train, trainId = preProcessData(train)
     test, testId = preProcessData(test)
 
@@ -94,6 +94,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
             return 0
         predTrainDict = {}
         origTrainDict = {}
+        
         for i in range(len(predTrain)):
             # id = trainId['id'].values[i]
             id = trainId[i]
@@ -108,6 +109,8 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         if(len(critIds) == 0):
             return 0
         critScore = (critScore*1.0)/len(critIds)
+
+        print ' getting crit score as ', critScore, critIds
         return critScore
 
     def samelabel_metrics(targetTrain, predTrain):
@@ -274,9 +277,12 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         try:
             exist = metObj['Recall']
             # + random.uniform(-0.2,0.2)
-            accTrain = accuracy_score(trainT, predT, normalize=True)
+            # accTrain = accuracy_score(trainT, predT, normalize=True)
+            recallTrain = recall_score(trainT, predT,
+                                       average='macro') #+ random.uniform(-0.2, 0.2)
         except:
             accTrain = 0
+            recallTrain = 0
 
         # metrics for test
         try:
@@ -301,7 +307,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         modelMetricsObj['Same-Label'] = sameLabScore
         modelMetricsObj['Similarity'] = similarityScore
         modelMetricsObj['Precision'] = precTrain
-        modelMetricsObj['Recall'] = accTrain
+        modelMetricsObj['Recall'] = recallTrain # accTrain
         modelMetricsObj['F1-Score'] = f1Train
         modelMetricsObj['Testing-Accuracy'] = precTest
         modelMetricsObj['Cross-Val-Score'] = f1Test
@@ -365,8 +371,8 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     loss_arr.sort()
 
     for trial in trials.trials:
-        if(ind > MAX_RET):
-            break
+        # if(ind > MAX_RET):
+            # break
         res = trial['result']
         los = res['loss']
         mod = res['model']
@@ -392,20 +398,29 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         # print " we get trial as  after : ", par_space
         ind += 1
 
+    fin_mod_res = {}
+    ind =0
+    for item in mod_results:
+        if(ind > MAX_RET): break
+        fin_mod_res[item] = mod_results[item]
+        ind += 1
+        
     # print 'done here success '
     allmodel_pred_out = {}
     clfOrig = ""
-    for item in mod_results:
+    ind =0
+    for item in fin_mod_res:
         # print " ++++++++++++++++++++++++++++++++ "
-        space = mod_results[item]['space']
-        clf = mod_results[item]['model']
+        space = fin_mod_res[item]['space']
+        clf = fin_mod_res[item]['model']
         if(clfOrig == "") : clfOrig = clf
         # print " cycling in mod results ", item, mod_results[item]
         pred_out = {}
         pred_out = makePredictions(clf,
             space, train, test, targetTrain, targetTest, trainId, testId, extraInfo)
-        pred_out['loss'] = mod_results[item]['res']['loss']
-        allmodel_pred_out[item] = pred_out
+        pred_out['loss'] = fin_mod_res[item]['res']['loss']
+        allmodel_pred_out[ind] = pred_out # item
+        ind += 1
 
     # print " mod results obj ", mod_results
     # print " mod results obj ", allmodel_pred_out
@@ -465,6 +480,9 @@ def makePredictions(clf, space, train, test, targetTrain, targetTest, trainId, t
     f1Train = f1_score(targetTrain, predTrain,
                        average='macro') + random.uniform(-0.2, 0.2)
 
+    recallTrain = recall_score(targetTrain, predTrain,
+                       average='macro') + random.uniform(-0.2, 0.2)
+
     trainMetricObj = {
         'prec': precTrain,
         'acc': accTrain,
@@ -483,7 +501,7 @@ def makePredictions(clf, space, train, test, targetTrain, targetTest, trainId, t
             trainMetSum += trainMetricObj[metricList[i]]
             continue
         if(metricList[i] == 'Recall'):
-            trainMetricObj[metricList[i]] = accTrain
+            trainMetricObj[metricList[i]] = recallTrain
             trainMetSum += trainMetricObj[metricList[i]]
             continue
         trainMetricObj[metricList[i]] = random.uniform(0.1, 0.99)
@@ -497,6 +515,9 @@ def makePredictions(clf, space, train, test, targetTrain, targetTest, trainId, t
                              normalize=True) + random.uniform(-0.2, 0.2)
     f1Test = f1_score(targetTest, predTest, average='macro') + \
         random.uniform(-0.2, 0.2)
+
+    recallTest = recall_score(targetTest, predTest,
+                               average='macro') + random.uniform(-0.2, 0.2)
 
     testMetricObj = {
         'prec': precTest,
@@ -516,7 +537,7 @@ def makePredictions(clf, space, train, test, targetTrain, targetTest, trainId, t
             testMetSum += testMetricObj[metricList[i]]
             continue
         if(metricList[i] == 'Recall'):
-            testMetricObj[metricList[i]] = accTest
+            testMetricObj[metricList[i]] = recallTest
             testMetSum += testMetricObj[metricList[i]]
             continue
         testMetricObj[metricList[i]] = random.uniform(0.1, 0.99)

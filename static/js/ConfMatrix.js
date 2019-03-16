@@ -54,7 +54,7 @@
 			// console.log('moditer is ', BarM.modIter)
 			var text2 = 'Last Objective Function Score was  '
 
-			var metObj = BarM.histData[BarM.modIter-1][BarM.selectedModelId][ob];
+			var metObj = BarM.histData[BarM.modIter-1][+BarM.selectedModelId][ob];
 			var score = 0, 	 	
 				ind = 0;
 			for (var item in metObj) {
