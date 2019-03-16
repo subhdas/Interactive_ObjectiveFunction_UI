@@ -412,9 +412,6 @@
                     }
                 }
                 BarM.modelData[0]['predictions']['confMatTrain_ids'] = dataObj;
-
-
-
                 // test conf matr
                 var dataObj = {};
                 for (var i = 0; i < confMatrixTest.length; i++) {

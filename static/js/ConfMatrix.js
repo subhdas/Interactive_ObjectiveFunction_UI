@@ -63,6 +63,7 @@
 			}
 			acc2 = ((score * 100) / ind).toFixed(2)
 			if (acc2 > 1.0) acc2 = (acc2 * 0.9).toFixed(2)
+
 			htmlStr += "<div class = 'modResRow' ><span class ='modelResHeadText'>"+text2+" </span>"
 			htmlStr += "<span class = 'modelResOut' >" + acc2 + " </span></div>";
 		}
