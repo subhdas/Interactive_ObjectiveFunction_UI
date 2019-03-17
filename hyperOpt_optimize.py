@@ -258,7 +258,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
             id = int(trainId[i])
             # print " checking id ", id, critIds
             if(id in critIds): 
-                print 'setting more weight ', id, critIds
+                # print 'setting more weight ', id, critIds
                 wtList.append(2)
             else : wtList.append (0.1)
 
@@ -299,7 +299,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         predTrain = clf.predict(train)
         predTest = clf.predict(test)
 
-        print ' before corss val ', train.shape, len(predTrain), len(targetTrain), len(targetTrainNew), trainNew.shape
+        # print ' before corss val ', train.shape, len(predTrain), len(targetTrain), len(targetTrainNew), trainNew.shape
         # targetTrain = targetTrainNew
         cross_mean_score = cross_val_score(
             estimator=clf, X=trainNew, y=targetTrainNew, scoring='precision_macro', cv=3, n_jobs=-1).mean()
