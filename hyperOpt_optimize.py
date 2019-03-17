@@ -290,7 +290,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         # trainNew = train.copy()
         targetTrainNew = targetTrain
         trainNew, targetTrainNew = remove_non_crit_inst(
-            train, targetTrain)
+            train.copy(), targetTrain)
 
         # train = trainNew.copy()
         sampWtList = calc_sam_wt(targetTrainNew)
@@ -299,17 +299,21 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         predTrain = clf.predict(train)
         predTest = clf.predict(test)
 
-        print ' before corss val ', train.shape, len(predTrain), len(targetTrain), len(targetTrainNew)
+        print ' before corss val ', train.shape, len(predTrain), len(targetTrain), len(targetTrainNew), trainNew.shape
         # targetTrain = targetTrainNew
         cross_mean_score = cross_val_score(
-            estimator=clf, X=train, y=targetTrainNew, scoring='precision_macro', cv=3, n_jobs=-1).mean()
+            estimator=clf, X=trainNew, y=targetTrainNew, scoring='precision_macro', cv=3, n_jobs=-1).mean()
 
-        critScore = critical_metrics(targetTrainNew, predTrain)
+        critScore = critical_metrics(targetTrain, predTrain)
         sameLabScore = samelabel_metrics(targetTrainNew, predTrain)
         similarityScore = similar_metrics(targetTrainNew, predTrain)
 
+        # critScore = 0
+        # sameLabScore = 0 #samelabel_metrics(targetTrainNew, predTrain)
+        # similarityScore = 0# #similar_metrics(targetTrainNew, predTrain)
+
         targetTrainNew2, predTrainNew2 = non_critical_metrics(
-            targetTrainNew, predTrain)
+            targetTrain, predTrain)
         print " diff target length found ", len(targetTrainNew), len(targetTrain), train.shape
 
         # ccheck for length of new target train
