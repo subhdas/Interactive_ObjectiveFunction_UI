@@ -209,13 +209,13 @@
             console.log(' clicked on model ', idNum, mod)
             confMatrixTrain = mod['trainConfMatrix']
             confMatrixTest = mod['testConfMatrix']
-            try{
+            try {
                 confMatrixTrain = JSON.parse(confMatrixTrain)
                 confMatrixTest = JSON.parse(confMatrixTest)
-            }catch(e){
+            } catch (e) {
 
             }
-            
+
 
             //to be done
             BarM.modIter -= 1
@@ -985,7 +985,15 @@
                             if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
                         } catch (e) {}
                     }
-                    var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
+                    var result = 1
+                    try {
+                        var origVal = dataItem[Main.targetName];
+                        var predVal = BarM.allModelData[BarM.selectedModelId]['trainPred'][dataItem['id']]
+                        if (origVal != predVal) result = 0
+                    } catch (e) {}
+
+
+                    // var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
                     var splClass = 'rowConstTableCol_' + result;
                     StarM.constraintsDict[i] = true;
                     htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + " parent = " + dataItem['id'] + " given = " + name + ">"
@@ -1009,8 +1017,18 @@
                 var dataItem = Main.getDataById(arrId[i], Main.trainData);
                 var nameItem = dataItem[Main.entityNameSecondImp];
                 var fullNameItem = dataItem[Main.entityNameSecondImp];
-                if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
-                var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
+                try {
+                    if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
+                } catch (e) {}
+
+
+                var result = 1
+                try {
+                    var origVal = dataItem[Main.targetName];
+                    var predVal = BarM.allModelData[BarM.selectedModelId]['trainPred'][dataItem['id']]
+                    if (origVal != predVal) result = 0
+                } catch (e) {}
+                // var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
                 var splClass = 'rowConstTableCol_' + result;
                 StarM.constraintsDict[i] = true;
                 htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + " parent = " + dataItem['id'] + " given = " + name + ">"
@@ -1033,7 +1051,16 @@
                 var nameItem = dataItem[Main.entityNameSecondImp];
                 var fullNameItem = dataItem[Main.entityNameSecondImp];
                 if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
-                var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
+
+
+
+                var result = 1
+                try {
+                    var origVal = dataItem[Main.targetName];
+                    var predVal = BarM.allModelData[BarM.selectedModelId]['trainPred'][dataItem['id']]
+                    if (origVal != predVal) result = 0
+                } catch (e) {}
+                // var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
                 var splClass = 'rowConstTableCol_' + result;
                 StarM.constraintsDict[i] = true;
                 htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + " parent = " + dataItem['id'] + " given = " + name + ">"
@@ -1054,8 +1081,13 @@
             "#5B61E1"
         ]
 
-        $(".rowConstTableCol_0").css('background', '#E29510')
-        $(".rowConstTableCol_1").css('background', '#5B61E1')
+        var col = [
+            Main.colors.HIGHLIGHT,
+            Main.colors.HIGHLIGHT2,
+        ]
+
+        $(".rowConstTableCol_0").css('background', col[0])
+        $(".rowConstTableCol_1").css('background', col[1])
 
 
 
