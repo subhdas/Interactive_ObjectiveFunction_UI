@@ -105,7 +105,6 @@
 
 		$('.modelResOutSecond').on('mouseover', function (e) {
 			$('.prevConfMat').empty()
-			console.log('mousing on')
 			$(this).css('border', '1px dashed gray')
 			var pos = $(this).position();
 			var wid = 200;
@@ -120,7 +119,6 @@
 			$('.prevConfMat').css('padding', '5px')
 			// $('.prevConfMat').css('background', 'cyan')
 			$('.prevConfMat').show()
-
 			var par = $(this).attr('parent')
 
 			var selector = 'trainConfMatrix'
@@ -135,13 +133,10 @@
 		})
 
 		$('.modelResOutSecond').on('mouseout', function (e) {
-			console.log('mousing off')
 			$(this).css('border', '1px dashed transparent')
 			setTimeout(() => {
 				$('.prevConfMat').hide()
-			}, 500);
-
-
+			}, 300);
 		})
 
 		$('.modelResOutSecond').css('border', '1px dashed transparent')
