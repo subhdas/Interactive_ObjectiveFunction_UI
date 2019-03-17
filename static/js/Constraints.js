@@ -237,17 +237,21 @@
             var genList = ['Testing-Accuracy', 'Cross-Val-Score'];
 
             if (compList.indexOf(metricList[i]) != -1) {
-                Cons.indivUserWtConst[metricList[i]] = Cons.userWtConst['COMPOSITIONAL']
+
+                var lowWt = Cons.typeConstraints['COMPOSITIONAL'][metricList[i]]['UserWt']
+                Cons.indivUserWtConst[metricList[i]] = Cons.userWtConst['COMPOSITIONAL'] * lowWt;
                 continue;
             }
 
             if (quantList.indexOf(metricList[i]) != -1) {
-                Cons.indivUserWtConst[metricList[i]] = Cons.userWtConst['QUANTITATIVE']
+                var lowWt = Cons.typeConstraints['QUANTITATIVE'][metricList[i]]['UserWt']
+                Cons.indivUserWtConst[metricList[i]] = Cons.userWtConst['QUANTITATIVE'] * lowWt
                 continue;
             }
 
             if (genList.indexOf(metricList[i]) != -1) {
-                Cons.indivUserWtConst[metricList[i]] = Cons.userWtConst['GENERALIZATION']
+                var lowWt = Cons.typeConstraints['GENERALIZATION'][metricList[i]]['UserWt']
+                Cons.indivUserWtConst[metricList[i]] = Cons.userWtConst['GENERALIZATION'] * lowWt
                 continue;
             }
         }
@@ -394,8 +398,11 @@
                 var inc = 1 / children.length;
                 children.each(function (d) {
                     var txt = $(this).text();
-                    //    console.log(' child is ', txt)
-                    Cons.typeConstraints[type][txt]['UserWt'] = wt
+                    // var giv = $(this).attr('given')
+                    var giv = $(this).find('button').attr('given')
+                    var par = $(this).attr('parent')
+                       console.log(' child is ', txt, giv,par, $(this))
+                    Cons.typeConstraints[type][giv]['UserWt'] = wt
                     wt -= inc;
                 })
             }

@@ -278,6 +278,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         #                        )
 
         metObj = extraInfo['metricKeys']
+        userWts = extraInfo['highWeights']
         clf = RandomForestClassifier(max_depth=space['max_depth'],
                                      min_samples_split=space['min_samples_split'],
                                      min_samples_leaf=space['min_samples_leaf'],
@@ -302,13 +303,18 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
 
         print ' before corss val ', train.shape, len(predTrain), len(targetTrain), len(targetTrainNew), trainNew.shape
         # targetTrain = targetTrainNew
-        cross_mean_score = cross_val_score(
-            estimator=clf, X=trainNew, y=targetTrainNew, scoring='precision_macro', cv=3, n_jobs=-1).mean()
+        
+        try:
+            critScore = critical_metrics(targetTrain, predTrain) * userWts['Critical-Items']
+        except: critScore = 0
+        
+        try:
+            sameLabScore = samelabel_metrics(targetTrain, predTrain) * userWts['Same-Label']
+        except: sameLabScore = 0
 
-        critScore = critical_metrics(targetTrain, predTrain)
-        sameLabScore = samelabel_metrics(targetTrain, predTrain)
-        similarityScore = similar_metrics(targetTrain, predTrain)
-
+        try:
+            similarityScore = similar_metrics(targetTrain, predTrain) * userWts['Similarity-Metric']
+        except: similarityScore = 0
         # critScore = 0
         # sameLabScore = 0 #samelabel_metrics(targetTrainNew, predTrain)
         # similarityScore = 0# #similar_metrics(targetTrainNew, predTrain)
@@ -333,14 +339,14 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         try:
             exist = metObj['Precision']
             # + random.uniform(-0.2,0.2)
-            precTrain = precision_score(trainT, predT, average='macro')
+            precTrain = precision_score(trainT, predT, average='macro') * userWts['Precision']
         except:
             precTrain = 0
 
         try:
             exist = metObj['F1-Score']
             # + random.uniform(-0.2,0.2)
-            f1Train = f1_score(trainT, predT, average='macro')
+            f1Train = f1_score(trainT, predT, average='macro') * userWts['F1-Score']
         except:
             f1Train = 0
 
@@ -348,8 +354,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
             exist = metObj['Recall']
             # + random.uniform(-0.2,0.2)
             # accTrain = accuracy_score(trainT, predT, normalize=True)
-            recallTrain = recall_score(trainT, predT,
-                                       average='macro') #+ random.uniform(-0.2, 0.2)
+            recallTrain = recall_score(trainT, predT, average='macro') * userWts['Recall']#+ random.uniform(-0.2, 0.2)
         except:
             accTrain = 0
             recallTrain = 0
@@ -358,16 +363,18 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         try:
             exist = metObj['Testing-Accuracy']
             # + random.uniform(-0.2,0.2)
-            precTest = precision_score(targetTest, predTest, average='macro')
+            precTest = precision_score(targetTest, predTest, average='macro') * userWts['Testing-Accuracy']
         except:
             precTest = 0
 
         try:
             exist = metObj['Cross-Val-Score']
             # + random.uniform(-0.2,0.2)
-            f1Test = f1_score(targetTest, predTest, average='macro')
+            # f1Test = f1_score(targetTest, predTest, average='macro')
+            cross_mean_score = cross_val_score(
+                estimator=clf, X=trainNew, y=targetTrainNew, scoring='precision_macro', cv=3, n_jobs=-1).mean()* userWts['Cross-Val-Score']
         except:
-            f1Test = 0
+            cross_mean_score = 0
 
         # store the result
         modelMetricsObj = {}
@@ -380,7 +387,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         modelMetricsObj['Recall'] = recallTrain # accTrain
         modelMetricsObj['F1-Score'] = f1Train
         modelMetricsObj['Testing-Accuracy'] = precTest
-        modelMetricsObj['Cross-Val-Score'] = f1Test
+        modelMetricsObj['Cross-Val-Score'] = cross_mean_score
 
         scoreFinal = 0
         ind = 0
