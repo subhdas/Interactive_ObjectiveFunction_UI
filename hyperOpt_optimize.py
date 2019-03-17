@@ -59,7 +59,7 @@ def wrap_findGoodModel(train, test, targetTrain, targetTest, extraInfo):
 
 def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     MAX_RET = 3
-    MAX_EVAL = 50
+    MAX_EVAL = 10
     train, trainId = preProcessData(train)
     test, testId = preProcessData(test)
 
@@ -211,6 +211,27 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         finalScore = (similarityScore + differentScore)*0.5
         return finalScore
 
+    def calc_sam_wt():
+        metObj = extraInfo['metricKeys']
+        critIds = []
+        # find for critical-items
+        try:
+            critIds = metObj['Critical-Items']['Critical-Items']
+            critIds = [int(x) for x in critIds]
+        except:
+            return None
+        wtList = []
+        for  i in range(len(targetTrain)):
+            id = int(trainId[i])
+            # print " checking id ", id, critIds
+            if(id in critIds): 
+                print 'setting more weight ', id, critIds
+                wtList.append(2)
+            else : wtList.append (0.1)
+
+        print " wt list found ", wtList
+        return wtList
+
     def objective(space):
         # clf = xgb.XGBRegressor(n_estimators = space['n_estimators'],
         #                        max_depth = space['max_depth'],
@@ -233,7 +254,8 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
                                      )
 
         # score =  A*SameLabel + B*Features +
-        clf.fit(train, targetTrain)
+        sampWtList = calc_sam_wt()
+        clf.fit(train, targetTrain, sampWtList)
         predTrain = clf.predict(train)
         predTest = clf.predict(test)
 
@@ -457,7 +479,7 @@ def makePredictions(clf, space, train, test, targetTrain, targetTest, trainId, t
     metricList = extraInfo['metricList']
     metricKeys = extraInfo['metricKeys']
     # print " fitting before ", extraInfo
-    clf.fit(train, targetTrain)
+    # clf.fit(train, targetTrain)
     predTrain = clf.predict(train)
     predTest = clf.predict(test)
 
