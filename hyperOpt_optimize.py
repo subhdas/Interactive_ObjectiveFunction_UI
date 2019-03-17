@@ -40,6 +40,7 @@ def preProcessData(data):
     data = data._get_numeric_data()
     idCol = data['id']
     data = data.drop(['id', 'cluster'], axis=1)
+    print "START MOD COMP   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
     print " pre processing data col ", data.columns.values
     return data, idCol
 
@@ -62,6 +63,38 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     MAX_EVAL = 10
     train, trainId = preProcessData(train)
     test, testId = preProcessData(test)
+
+    def remove_non_crit_inst(train, targetTrain):
+        print 'starting remove non crit ', train.shape, len(targetTrain)
+        # return train
+        metObj = extraInfo['metricKeys']
+        try:
+            # gets an array
+            non_critIds = metObj['Non-Critical']['Non-Critical']
+        except:
+            return train, targetTrain
+        idList = []
+        for index, row in train.iterrows():
+            id = trainId[index]
+            if(str(id) in non_critIds):
+                # continue
+                train.drop(index, inplace=True)
+                idList.append(index)
+
+        # for i in range(len(targetTrain)):
+            # id = trainId['id'].values[i]
+            # id = trainId[i]
+            # print ' getiing id and ', id, train.shape, i
+            # train = train[train.id != id]
+            # if(str(id) in non_critIds):
+            #     continue
+
+
+        targetTrain = [i for j, i in enumerate(targetTrain) if j not in idList]
+        print ' final train shape ', train.shape, len(targetTrain), idList
+        return train, targetTrain
+
+
 
     def non_critical_metrics(targetTrain, predTrain):
         metObj = extraInfo['metricKeys']
@@ -211,7 +244,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         finalScore = (similarityScore + differentScore)*0.5
         return finalScore
 
-    def calc_sam_wt():
+    def calc_sam_wt(targetTrain):
         metObj = extraInfo['metricKeys']
         critIds = []
         # find for critical-items
@@ -229,7 +262,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
                 wtList.append(2)
             else : wtList.append (0.1)
 
-        print " wt list found ", wtList
+        print " wt list found ", len(wtList), len(targetTrain), train.shape
         return wtList
 
     def objective(space):
@@ -253,33 +286,42 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
                                      random_state = 1
                                      )
 
-        # score =  A*SameLabel + B*Features +
-        sampWtList = calc_sam_wt()
-        clf.fit(train, targetTrain, sampWtList)
+        print ' train shape is a ', train.shape
+        # trainNew = train.copy()
+        targetTrainNew = targetTrain
+        trainNew, targetTrainNew = remove_non_crit_inst(
+            train, targetTrain)
+
+        # train = trainNew.copy()
+        sampWtList = calc_sam_wt(targetTrainNew)
+        clf.fit(trainNew, targetTrainNew, sampWtList)
+        # clf.fit(trainNew, targetTrainNew, sampWtList)
         predTrain = clf.predict(train)
         predTest = clf.predict(test)
 
+        print ' before corss val ', train.shape, len(predTrain), len(targetTrain), len(targetTrainNew)
+        # targetTrain = targetTrainNew
         cross_mean_score = cross_val_score(
-            estimator=clf, X=train, y=targetTrain, scoring='precision_macro', cv=3, n_jobs=-1).mean()
+            estimator=clf, X=train, y=targetTrainNew, scoring='precision_macro', cv=3, n_jobs=-1).mean()
 
-        critScore = critical_metrics(targetTrain, predTrain)
-        sameLabScore = samelabel_metrics(targetTrain, predTrain)
-        similarityScore = similar_metrics(targetTrain, predTrain)
+        critScore = critical_metrics(targetTrainNew, predTrain)
+        sameLabScore = samelabel_metrics(targetTrainNew, predTrain)
+        similarityScore = similar_metrics(targetTrainNew, predTrain)
 
-        targetTrainNew, predTrainNew = non_critical_metrics(
-            targetTrain, predTrain)
-        # print " diff target length found ", len(targetTrainNew), len(targetTrain)
+        targetTrainNew2, predTrainNew2 = non_critical_metrics(
+            targetTrainNew, predTrain)
+        print " diff target length found ", len(targetTrainNew), len(targetTrain), train.shape
 
         # ccheck for length of new target train
         trainT = []
         predT = []
-        if(len(targetTrainNew) < len(targetTrain)):
+        if(len(targetTrainNew2) < len(targetTrainNew)):
             print " diff target length found ", len(targetTrainNew), len(targetTrain)
-            trainT = targetTrainNew
-            predT = predTrainNew
+            trainT = targetTrainNew2
+            predT = predTrainNew2
         else:
-            trainT = targetTrain
-            predT = predTrain
+            trainT = targetTrainNew
+            predT = predTrainNew2
 
         # metrics for train
         try:

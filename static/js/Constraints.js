@@ -481,7 +481,7 @@
                     // } catch (e) {}
                     setTimeout(() => {
                         var alertSend = false;
-                        var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score']
+                        var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score', 'Training-Accuracy']
                         var usedName = Cons.typeConstraints[item][name]['Name']
                         try {
                             var inpObj = ConsInt.activeConstraints[name]['input'];
