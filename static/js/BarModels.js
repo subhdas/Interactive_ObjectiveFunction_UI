@@ -52,6 +52,7 @@
                 }
             }
             BarM.allModelData[item]['confMatTrain_ids'] = dataObj;
+            BarM.allModelData[item]['trainConfMatrix'] = confMatrixTrain;
 
 
             var confMatrixTest = JSON.parse(mod['testConfMatrix'])
@@ -70,6 +71,8 @@
                 }
             }
             BarM.allModelData[item]['confMatTest_ids'] = dataObj;
+            BarM.allModelData[item]['testConfMatrix'] = confMatrixTest;
+
 
 
         }

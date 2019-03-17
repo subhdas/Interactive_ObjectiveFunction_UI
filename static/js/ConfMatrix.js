@@ -21,7 +21,7 @@
 
 	ConfM.modelResultsDisplay = function (containerId = "", type = "", index = 0) {
 		if (containerId == "") containerId = "confMatTrain"
-		$("#modelResult_" + containerId + "_"+type).remove();
+		$("#modelResult_" + containerId + "_" + type).remove();
 		//   try {
 		//   	var featImpDict = BarM.allModelData[index]['feat_imp_dict'];
 		//   } catch (e) {
@@ -30,32 +30,33 @@
 
 		var acc = (Util.getRandomNumberBetween(0.9, 0.75) * 100).toFixed(2)
 
-		
+
 		var ob = 'trainMetrics'
-		if(type == 'test') ob ='testMetrics'
+		if (type == 'test') ob = 'testMetrics'
 		var text = 'Prediction Accuracy is  '
 		var text = 'Objective Function Score is  '
 		var metObj = BarM.allModelData[BarM.selectedModelId][ob];
-		var score = 0, ind =0;
-		for(var item in metObj){
+		var score = 0,
+			ind = 0;
+		for (var item in metObj) {
 			score += +metObj[item]
-			ind+= 1
+			ind += 1
 		}
 		if (type == 'train') idName = 'modResRowid_0'
 		else idName = 'modResRowid_1'
 		acc = ((score * 100) / ind).toFixed(2)
-		if(acc > 1.0) acc = (acc*0.9).toFixed(2)
-		var htmlStr = "<div class = '"+type + "_wrapDivs modelResult' id = 'modelResult_" + containerId + "_" + type + "'>"
-		htmlStr += "<div class = 'modResRow' id = '"+idName+"' ><span class ='modelResHeadText'> "+text+"</span>"
+		if (acc > 1.0) acc = (acc * 0.9).toFixed(2)
+		var htmlStr = "<div class = '" + type + "_wrapDivs modelResult' id = 'modelResult_" + containerId + "_" + type + "'>"
+		htmlStr += "<div class = 'modResRow' id = '" + idName + "' ><span class ='modelResHeadText'> " + text + "</span>"
 		htmlStr += "<span class = 'modelResOut' >" + acc + " </span></div>";
 
 		var acc2 = 2;
-		if(BarM.modIter > 0){
+		if (BarM.modIter > 0) {
 			// console.log('moditer is ', BarM.modIter)
 			var text2 = 'Last Objective Function Score was  '
 
-			var metObj = BarM.histData[BarM.modIter-1][+BarM.selectedModelId][ob];
-			var score = 0, 	 	
+			var metObj = BarM.histData[BarM.modIter - 1][+BarM.selectedModelId][ob];
+			var score = 0,
 				ind = 0;
 			for (var item in metObj) {
 				score += +metObj[item]
@@ -64,8 +65,8 @@
 			acc2 = ((score * 100) / ind).toFixed(2)
 			if (acc2 > 1.0) acc2 = (acc2 * 0.9).toFixed(2)
 
-			htmlStr += "<div class = 'modResRow' ><span class ='modelResHeadText'>"+text2+" </span>"
-			htmlStr += "<span class = 'modelResOut' >" + acc2 + " </span></div>";
+			htmlStr += "<div class = 'modResRow' ><span class ='modelResHeadText'>" + text2 + " </span>"
+			htmlStr += "<span class = 'modelResOut modelResOutSecond' parent = '"+type+"' >" + acc2 + " </span></div>";
 		}
 
 
@@ -87,14 +88,63 @@
 		$("#" + containerId).append(htmlStr);
 
 		if (acc2 < acc && BarM.modIter > 0) {
-			 htmlStr = "<button id='modelWin' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-			 htmlStr += "<i class='material-icons'>touch_app</i></button>";
-			 if(type=='train') $('#modResRowid_0').append(htmlStr)
-			 else $('#modResRowid_1').append(htmlStr)
-		}else{
+			htmlStr = "<button id='modelWin' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+			htmlStr += "<i class='material-icons'>touch_app</i></button>";
+			if (type == 'train') $('#modResRowid_0').append(htmlStr)
+			else $('#modResRowid_1').append(htmlStr)
+		} else {
 
 		}
 
+
+		$('.prevConfMat').remove()
+
+		htmlStr = "<div class = 'prevConfMat' id='prevConfMatId' ></div>"
+		$('body').append(htmlStr)
+
+
+		$('.modelResOutSecond').on('mouseover', function (e) {
+			$('.prevConfMat').empty()
+			console.log('mousing on')
+			$(this).css('border', '1px dashed gray')
+			var pos = $(this).position();
+			var wid = 200;
+			var ht = 200;
+
+			$('.prevConfMat').css('display', 'flex')
+			$('.prevConfMat').css('position', 'absolute')
+			$('.prevConfMat').css('top', pos.top + 30 + 'px')
+			$('.prevConfMat').css('left', pos.left - wid - 120 + 'px')
+			$('.prevConfMat').css('width', wid + 'px')
+			$('.prevConfMat').css('height', ht + 'px')
+			$('.prevConfMat').css('padding', '5px')
+			// $('.prevConfMat').css('background', 'cyan')
+			$('.prevConfMat').show()
+
+			var par = $(this).attr('parent')
+
+			var selector = 'trainConfMatrix'
+			if (par == 'test') selector = 'testConfMatrix'
+			var confMatrixTrain = BarM.histData[BarM.modIter - 2][BarM.selectedModelId][selector]
+			try {
+				confMatrixTrain = JSON.parse(confMatrixTrain)
+			} catch (e) {}
+			ConfM.makeConfMatrix(confMatrixTrain, '', 'prevConfMatId');
+
+
+		})
+
+		$('.modelResOutSecond').on('mouseout', function (e) {
+			console.log('mousing off')
+			$(this).css('border', '1px dashed transparent')
+			setTimeout(() => {
+				$('.prevConfMat').hide()
+			}, 500);
+
+
+		})
+
+		$('.modelResOutSecond').css('border', '1px dashed transparent')
 
 		$(".modelResult").css('display', 'flex')
 		$(".modelResult").css('flex-direction', 'column')
@@ -114,8 +164,8 @@
 		$("." + type + "_wrapDivs").wrapAll("<div class='wrapperDivConfMatr'></div>");
 
 		var ind = 0
-		$('.wrapperDivConfMatr').each(function(d,i){
-			$(this).attr('id', 'wrapperDivConfMatrId_'+ind)
+		$('.wrapperDivConfMatr').each(function (d, i) {
+			$(this).attr('id', 'wrapperDivConfMatrId_' + ind)
 			ind += 1;
 		})
 
@@ -141,10 +191,12 @@
 		}
 
 
-		
-		if (ConfM.addMatrix == 0) $("#" + containerId).empty();
-		ConfM.addMatrix += 1;
-		if(ConfM.addMatrix == 2) ConfM.addMatrix = 0
+		if (type != '') {
+			if (ConfM.addMatrix == 0) $("#" + containerId).empty();
+			ConfM.addMatrix += 1;
+			if (ConfM.addMatrix == 2) ConfM.addMatrix = 0
+		}
+
 
 
 		// $("#"+containerId).css('overflow-Y', 'auto')
@@ -174,7 +226,7 @@
 
 		width = height;
 
-		if(width < 120){
+		if (width < 120) {
 			width = 120;
 			height = 120
 		}
@@ -200,7 +252,7 @@
 
 		numrows = data.length;
 		numcols = data[0].length;
-		
+
 		var svg = d3.select("#" + containerId)
 			.append('div')
 			.attr('id', type + '_ConfMatrixDiv')
@@ -208,8 +260,10 @@
 			.attr("width", width + margin.left + margin.right)
 			.attr("height", height + margin.top + margin.bottom)
 			.append("svg")
+			.attr('class', 'svgConfMat')
 			.attr("width", width + margin.left + margin.right)
 			.attr("height", height + margin.top + margin.bottom)
+			.style('background', 'white')
 			// .style('max-width', mxWid)
 			// .style('max-height', mxHt)
 			.append("g")
@@ -220,8 +274,8 @@
 			.style("stroke-width", "2px")
 			.attr("width", width)
 			.attr("height", height)
-			// .style('max-width', mxWid)
-			// .style('max-height', mxHt)
+		// .style('max-width', mxWid)
+		// .style('max-height', mxHt)
 
 
 		var x = d3.scale.ordinal()
@@ -487,7 +541,8 @@
 				return d;
 			});
 
-		ConfM.modelResultsDisplay(containerId, type)
+
+		if (type != "") ConfM.modelResultsDisplay(containerId, type)
 
 	}
 
