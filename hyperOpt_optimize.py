@@ -64,6 +64,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     train, trainId = preProcessData(train)
     test, testId = preProcessData(test)
 
+    print ' getting extra info as ', extraInfo
     def remove_non_crit_inst(train, targetTrain):
         print 'starting remove non crit ', train.shape, len(targetTrain)
         # return train

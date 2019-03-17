@@ -370,13 +370,15 @@
             Main.loadingSpinnerToggle(true);
             var metricList = Object.keys(ConsInt.activeConstraints);
             var metricObj = Cons.constraintIdFinder();
-            console.log(' finding metric obj ', metricObj)
+            Cons.computeWeightsToSend();
+            console.log(' finding metric obj ', metricObj, metricList)
             var objSend = {
                 'train': Main.trainData,
                 'test': Main.testData,
                 'targetCol': Main.targetName,
                 'metrics': metricList,
                 'metricKeys': metricObj,
+                'userConsWts': Cons.indivUserWtConst,
             }
             socket.emit("get_good_model", objSend);
             // socket.off('get_good_model');

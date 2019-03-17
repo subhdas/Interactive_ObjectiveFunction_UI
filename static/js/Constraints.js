@@ -14,6 +14,9 @@
     }
 
 
+    Cons.indivUserWtConst = {}
+
+
     Cons.typeConstraints = {
         'COMPOSITIONAL': {
             'Same-Label': {
@@ -223,6 +226,34 @@
         }
     }
 
+
+    Cons.computeWeightsToSend = function () {
+        var metricList = Object.keys(ConsInt.activeConstraints);
+        Cons.indivUserWtConst = {}
+        for (var i = 0; i < metricList.length; i++) {
+
+            var compList = ['Same-Label', 'Similarity-Metric', 'Critical-Items', 'Non-Critical'];
+            var quantList = ['Recall', 'Precision', 'F1-Score'];
+            var genList = ['Testing-Accuracy', 'Cross-Val-Score'];
+
+            if (compList.indexOf(metricList[i]) != -1) {
+                Cons.indivUserWtConst[metricList[i]] = Cons.userWtConst['COMPOSITIONAL']
+                continue;
+            }
+
+            if (quantList.indexOf(metricList[i]) != -1) {
+                Cons.indivUserWtConst[metricList[i]] = Cons.userWtConst['QUANTITATIVE']
+                continue;
+            }
+
+            if (genList.indexOf(metricList[i]) != -1) {
+                Cons.indivUserWtConst[metricList[i]] = Cons.userWtConst['GENERALIZATION']
+                continue;
+            }
+        }
+
+        console.log('indiv cons wt computed ', Cons.indivUserWtConst)
+    }
 
     Cons.makeConsDivs = function (containerId = "constrainPanel") {
         // console.log('Cons is ', Cons.typeConstraints)
