@@ -962,6 +962,7 @@
         // TAGS TYPE HIGHLIGHTED ABOVVE TO FILTER TABLE
         var htmlStr = "";
         htmlStr += "<div class = 'consTableDiv'>"
+        var num = 25;
         for (var item in ConsInt.activeConstraints) {
             var arrDict = ConsInt.activeConstraints[item]['input'];
             var name = ConsInt.activeConstraints[item]['usedName'];
@@ -977,12 +978,12 @@
                     var nameItem = dataItem[Main.entityNameSecondImp];
                     var fullNameItem = dataItem[Main.entityNameSecondImp];
                     try {
-                        if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
+                        if (nameItem.length > num) nameItem = nameItem.substring(0, num) + "..."
 
                     } catch (e) {
                         try {
                             var nameItem = dataItem[Main.entityName];
-                            if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
+                            if (nameItem.length > num) nameItem = nameItem.substring(0, num) + "..."
                         } catch (e) {}
                     }
                     var result = 1
@@ -991,16 +992,20 @@
                         var predVal = BarM.allModelData[BarM.selectedModelId]['trainPred'][dataItem['id']]
                         if (origVal != predVal) result = 0
                     } catch (e) {}
-
-
+                    var btnName = 'close'
+                    if(result == 1 ) btnName = 'check'
                     // var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
                     var splClass = 'rowConstTableCol_' + result;
                     StarM.constraintsDict[i] = true;
                     htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + " parent = " + dataItem['id'] + " given = " + name + ">"
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem' parent = '" + dataItem[Main.entityNameSecondImp] + "'>" + nameItem + "</span>";
-                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
+                    // htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + name + "</span>";
-                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";
+
+                    var item = "<div class ='btnResult'><button id='' title='Show Table View' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnElem' >"
+                    item += "<i class='material-icons'>" + btnName +"</i></button></div>";
+
+                    htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + item + "</span>"; //result
                     htmlStr += "</div>"
                 } // end of inner for
             }
@@ -1018,7 +1023,7 @@
                 var nameItem = dataItem[Main.entityNameSecondImp];
                 var fullNameItem = dataItem[Main.entityNameSecondImp];
                 try {
-                    if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
+                    if (nameItem.length > num) nameItem = nameItem.substring(0, num) + "..."
                 } catch (e) {}
 
 
@@ -1028,14 +1033,18 @@
                     var predVal = BarM.allModelData[BarM.selectedModelId]['trainPred'][dataItem['id']]
                     if (origVal != predVal) result = 0
                 } catch (e) {}
+                var btnName = 'close'
+                if (result == 1) btnName = 'check'
                 // var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
                 var splClass = 'rowConstTableCol_' + result;
                 StarM.constraintsDict[i] = true;
                 htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + " parent = " + dataItem['id'] + " given = " + name + ">"
                 htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem' parent = '" + dataItem[Main.entityNameSecondImp] + "'>" + nameItem + "</span>";
-                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
+                // htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
                 htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + name + "</span>";
-                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";
+               var item = "<div class ='btnResult'><button id='' title='Show Table View' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnElem' >"
+               item += "<i class='material-icons'>" + btnName + "</i></button></div>";
+                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + item + "</span>";
                 htmlStr += "</div>"
             } // end of inner for
         }
@@ -1050,24 +1059,25 @@
                 var dataItem = Main.getDataById(arrId[i], Main.trainData);
                 var nameItem = dataItem[Main.entityNameSecondImp];
                 var fullNameItem = dataItem[Main.entityNameSecondImp];
-                if (nameItem.length > 20) nameItem = nameItem.substring(0, 15) + "..."
-
-
-
+                if (nameItem.length > num) nameItem = nameItem.substring(0, num) + "..."
                 var result = 1
                 try {
                     var origVal = dataItem[Main.targetName];
                     var predVal = BarM.allModelData[BarM.selectedModelId]['trainPred'][dataItem['id']]
                     if (origVal != predVal) result = 0
                 } catch (e) {}
+                var btnName = 'close'
+                if (result == 1) btnName = 'check'
                 // var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
                 var splClass = 'rowConstTableCol_' + result;
                 StarM.constraintsDict[i] = true;
                 htmlStr += "<div class = 'rowConstTable " + splClass + "' id = rowConstTableId_" + dataItem['id'] + " parent = " + dataItem['id'] + " given = " + name + ">"
                 htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem' parent = '" + dataItem[Main.entityNameSecondImp] + "'>" + nameItem + "</span>";
-                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
+                // htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
                 htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + name + "</span>";
-                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + result + "</span>";
+                var item = "<div class ='btnResult'><button id='' title='Show Table View' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnElem' >"
+                item += "<i class='material-icons'>" + btnName + "</i></button></div>";
+                htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + item + "</span>";
                 htmlStr += "</div>"
             } // end of inner for
         }
@@ -1086,10 +1096,21 @@
             Main.colors.HIGHLIGHT2,
         ]
 
+
         $(".rowConstTableCol_0").css('background', col[0])
         $(".rowConstTableCol_1").css('background', col[1])
 
 
+        $('.btnResult').css('display', 'flex')
+        $('.btnResult').css('align-items', 'center')
+
+        // $('.btnResult').css('width', '30px')
+        $('.btnResult').css('height', '100%')
+
+        $('.btnElem').css('display', 'flex')
+        $('.btnElem').css('width', '10px')
+        $('.btnElem').css('height', '10px')
+        $('.btnElem').css('padding', '10px')
 
         $(".consTableDiv").css('display', 'flex')
         $(".consTableDiv").css('flex-direction', 'column')
