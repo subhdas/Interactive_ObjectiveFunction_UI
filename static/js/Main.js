@@ -63,10 +63,10 @@
     }
 
     Main.datasetSelector = function () {
-        var dataSel = 1; // car
+        // var dataSel = 1; // car
         // var dataSel = 2; // creditcard
-        var dataSel = 3; // salary
-        // var dataSel = 4; // movie
+        // var dataSel = 3; // salary
+        var dataSel = 4; // movie
 
 
         if (dataSel == 1) {
@@ -82,8 +82,8 @@
             Main.dataset = 'salary'
             return "static/data/scenario/Employee_Compensation_SF_SUB_short1.csv";
         } else if (dataSel == 4) {
-            Main.labels = ['low', 'med', 'high']; // for MOVIE DATA default
-            // Main.labels = ['high', 'med', 'low']; // for MOVIE DATA default
+            // Main.labels = ['low', 'med', 'high']; // for MOVIE DATA default
+            Main.labels = ['high', 'med', 'low']; // for MOVIE DATA default
             Main.dataset = 'movie'
             return "static/data/scenario/movie_metadata_short_SUB.csv";
         } else if (dataSel == 5) {
@@ -94,7 +94,7 @@
     }
 
 
-    Main.init = function (tag = false) {
+Main.init = function (tag = false) {
         $(document).ready(function () {
             console.log("loading data");
             if (!Main.commonVars.DEBUG) {
