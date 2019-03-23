@@ -66,7 +66,7 @@
 			if (acc2 > 1.0) acc2 = (acc2 * 0.9).toFixed(2)
 
 			htmlStr += "<div class = 'modResRow' ><span class ='modelResHeadText'>" + text2 + " </span>"
-			htmlStr += "<span class = 'modelResOut modelResOutSecond' parent = '"+type+"' >" + acc2 + " </span></div>";
+			htmlStr += "<span class = 'modelResOut modelResOutSecond' parent = '" + type + "' >" + acc2 + " </span></div>";
 		}
 
 
@@ -485,6 +485,35 @@
 		var labels = svg.append('g')
 			.attr('class', "labels");
 
+		//'horizontal axis caption'
+		labels.append('text')
+			.attr('class', 'hor_caption_conf_' + type)
+			.attr('x', 50)
+			.attr('y', 180)
+			.attr("dy", ".32em")
+			.attr("text-anchor", "end")
+			.text(function (d, i) {
+				return 'Predicted Labels';
+			})
+			.style('font-weight', 'bold')
+			.style('fill', Main.colors.HIGHLIGHT)
+
+
+
+		//'horizontal axis caption'
+		labels.append('text')
+			.attr('class', 'ver_caption_conf_' + type)
+			.attr('x', -10)
+			.attr('y', -65)
+			.attr("dy", ".32em")
+			.attr("text-anchor", "end")
+			.attr("transform", "rotate(-90)")
+			.text(function (d, i) {
+				return 'Original Labels';
+			})
+			.style('font-weight', 'bold')
+			.style('fill', Main.colors.HIGHLIGHT)
+
 		var columnLabels = labels.selectAll(".column-label")
 			.data(labelsData)
 			.enter().append("g")
@@ -502,11 +531,11 @@
 			.attr("y2", 5);
 
 		columnLabels.append("text")
-			.attr("x", 6)
-			.attr("y", y.rangeBand() / 2)
+			.attr("x", 6 - 15)
+			.attr("y", 0 + (y.rangeBand() * 0.5))
 			.attr("dy", ".32em")
 			.attr("text-anchor", "end")
-			.attr("transform", "rotate(-60)")
+			.attr("transform", "rotate(-90)")
 			.text(function (d, i) {
 				return d;
 			});
