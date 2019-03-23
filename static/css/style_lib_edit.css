@@ -124,13 +124,14 @@ svg {
 
 .background path {
   fill: none;
-  stroke: #ddd;
-  shape-rendering: crispEdges;
+  stroke: #b2b2b2;
+  /* shape-rendering: crispEdges; */
 }
 
 .foreground path {
   fill: none;
-  stroke: steelblue;
+  /* stroke: steelblue; */
+  stroke: #C23573; /*35B7C2*/
 }
 
 .brush .extent {
@@ -142,12 +143,12 @@ svg {
 .axis line,
 .axis path {
   fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+  /* stroke: #000; */
+  /* shape-rendering: crispEdges; */
 }
 
 .axis text {
-  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  /* text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff; */
   cursor: move;
 }
 

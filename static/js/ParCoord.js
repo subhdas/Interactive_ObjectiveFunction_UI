@@ -189,10 +189,10 @@
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
+        var noDimList = ["name", "id"]
         // Extract the list of dimensions and create a scale for each.
         x.domain(dimensions = d3.keys(data[0]).filter(function (d) {
-            return d != "name" && (y[d] = d3.scale.linear()
+            return noDimList.indexOf(d) == -1 && (y[d] = d3.scale.linear() // d != "name"
                 .domain(d3.extent(data, function (p) {
                     return +p[d];
                 }))
@@ -267,12 +267,13 @@
 
         // only do the following if the following flag is true
         if (addInteract) {
+            var wd = 55
             //feature selection rects on top
             gr.append("rect")
                 .attr('class', 'par_rect_header')
-                .attr("x", -35)
+                .attr("x", -25) // -35
                 .attr("y", -20)
-                .style('width', '70px')
+                .style('width', wd+'px')
                 .style('height', '15px')
                 .style('fill', 'lightgray')
                 .on('mouseover', function (d, i) {
@@ -293,13 +294,15 @@
                         ParC.userPickedAttr.splice(ind, 1);
                     }
                 })
-
+            var num = 8;
             gr.append("text")
                 .attr('class', 'par_text_header')
                 .style("text-anchor", "middle")
                 .attr("y", -9)
                 .text(function (d) {
-                    return d;
+                    
+                   if (d.length > num) return d.substring(0, num) + ".."
+                   else   return d;
                 });
             // following for variance
             var ypos = height - 0

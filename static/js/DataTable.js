@@ -176,7 +176,8 @@
             DataTable.makeTable(Main.trainData);
         } else {
             // $('.dataTableHeadText').text(' Added : ' + Main.currentData.length + ' rows  | Left : ' + Main.leftData.length + ' rows ')
-            $('.containerDataTableHeadText').text(' Current Data Length : ' + Main.currentData.length)
+            // $('.containerDataTableHeadText').text(' Current Data Length : ' + Main.currentData.length)
+            $('.containerDataTableHeadText').text('')            
             DataTable.makeTable(Main.leftData);
         }
     }
@@ -184,14 +185,17 @@
 
     DataTable.updateOnlyHeader = function (dataGiven) {
         // $('.dataTableHeadText').text(dataGiven.length + ' rows');
-        $('.containerDataTableHeadText').text(' Current Data Length : ' + Main.currentData.length)
+        // $('.containerDataTableHeadText').text(' Current Data Length : ' + Main.currentData.length)
+        $('.containerDataTableHeadText').text('')
     }
 
 
     DataTable.switchToLeftData = function () {
         DataTable.viewFullTable = false;
         // $('#tableContent').css('background', Main.colors.HIGHLIGHT);
-        $('.containerDataTableHeadText').text(' Current Data Length : ' + Main.trainData.length)
+        // $('.containerDataTableHeadText').text(' Current Data Length : ' + Main.trainData.length)
+        $('.containerDataTableHeadText').text('')
+        
     }
 
 
