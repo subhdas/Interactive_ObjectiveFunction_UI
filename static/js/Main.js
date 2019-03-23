@@ -64,7 +64,7 @@
 
     Main.datasetSelector = function () {
         // var dataSel = 1; // car
-        var dataSel = 2; // creditcard
+        // var dataSel = 2; // creditcard
         // var dataSel = 3; // salary
         // var dataSel = 4; // movie
         var dataSel = 5; // diabetes
@@ -85,11 +85,13 @@
         } else if (dataSel == 4) {
             // Main.labels = ['low', 'med', 'high']; // for MOVIE DATA default
             Main.labels = ['high', 'med', 'low']; // for MOVIE DATA default
+            Main.labels = ['high', 'low', 'med']; // for MOVIE DATA default
+            // Main.labels = ['med', 'low', 'high']; // for MOVIE DATA default
             Main.dataset = 'movie'
             return "static/data/scenario/movie_metadata_short_SUB.csv";
         } else if (dataSel == 5) {
 
-            Main.labels = ['>30', '<30', 'NO']; // for MOVIE DATA default
+            Main.labels = ['<30', '>30', 'NO']; // for DIABETES DATA default
             Main.dataset = 'diabetis'
             return "static/data/scenario/diabetic_data_short_SUB.csv";
 
@@ -404,6 +406,7 @@ Main.init = function (tag = false) {
         data.forEach(function (d, i) {
             var ind = +d[Main.targetName]
             d[Main.targetName] = Main.labels[ind];
+            console.log(' ind and data ', ind, d)
         })
         var dataOut = Util.deepCopyData(data)
         console.log('dataoUt ', dataOut)
@@ -438,9 +441,11 @@ Main.init = function (tag = false) {
             var num = 3
             data = Main.addLabels(data, num); // only for car data set
             dataTest = Main.addLabels(dataTest, num) // only for car data set
-        } else {
-            data = Main.addOrigLabels(data); // only for car data set
-            dataTest = Main.addOrigLabels(dataTest) // only for car data set
+        } else if(Main.dataset == 'diabetis') {
+        }
+        else  {
+            data = Main.addOrigLabels(data); // COMMENTED
+            dataTest = Main.addOrigLabels(dataTest) // COMMENTED
         }
         // if (!Main.LABELMODE) {
         //     var num = 5
