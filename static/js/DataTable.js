@@ -1662,15 +1662,27 @@
 
             })
             .on('mouseover', function (d) {
+                // console.log('mouse over on td ', d)
+                $('.par_Filter_cl_back').css('opacity', 0)
+                $('.par_Filter_cl').css('stroke', 'lightgray')
+                $('.par_Filter_cl').css('stroke-width', 1)
+                $('.par_Filter_cl').css('opacity', 0.1)
+                $('#par_Filter_Id_' + d.id).css('stroke', Main.colors.HIGHLIGHT)
+                $('#par_Filter_Id_' + d.id).css('stroke-width', 5)
+                $('#par_Filter_Id_' + d.id).css('opacity', 1)
                 try {
                     DataTable.nodeColor = d3.selectAll(".node_" + d.id).style("fill");
-                    d3.selectAll(".node_" + d.id).style("fill", "black");
+                    d3.selectAll(".node_" + d.id).style("stroke", "black");
                 } catch (err) {
 
                 }
 
             })
             .on('mouseout', function (d) {
+                $('.par_Filter_cl_back').css('opacity', 1)
+                $('.par_Filter_cl').css('opacity', 1)
+                $('.par_Filter_cl').css('stroke-width', 1)
+                 $('.par_Filter_cl').css('stroke', Main.colors.HIGHLIGHT)
                 try {
                     d3.selectAll(".node_" + d.id).style("fill", DataTable.nodeColor);
                 } catch (err) {
@@ -2094,6 +2106,8 @@
                 try {
                     DataTable.nodeColor = d3.selectAll(".node_" + d.id).style("fill");
                     d3.selectAll(".node_" + d.id).style("fill", "black");
+                    $('.par_Filter_cl').css('fill', 'lightgray')
+                    $('#par_Filter_Id_'+d.id).css('fill', Main.colors.HIGHLIGHT)
                 } catch (err) {
 
                 }
@@ -2102,6 +2116,8 @@
             .on('mouseout', function (d) {
                 try {
                     d3.selectAll(".node_" + d.id).style("fill", DataTable.nodeColor);
+                    $('.par_Filter_cl').css('fill', Main.colors.HIGHLIGHT)
+
                 } catch (err) {
 
                 }

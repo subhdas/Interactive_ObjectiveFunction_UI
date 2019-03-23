@@ -23,12 +23,12 @@
         $(".featureHeadTitle").css('width', '100%')
         $(".featureHeadTitle").css('font-size', '1.5em')
 
-         var htmlStr = "<div class = 'parCDataSelect' ><div class='input-field col s12 parCSelectorTop'>"
-         htmlStr += "<select  class='parCDataSelectClass browser-default'>"
-         htmlStr += "<option class ='' value='" + "0" + "'>" + "Train Data" + "</option>";
-         htmlStr += "<option class ='' value='" + "1" + "'>" + "Test Data" + "</option>";
-         htmlStr += "</select>";
-         htmlStr += "<label></label></div>"
+        var htmlStr = "<div class = 'parCDataSelect' ><div class='input-field col s12 parCSelectorTop'>"
+        htmlStr += "<select  class='parCDataSelectClass browser-default'>"
+        htmlStr += "<option class ='' value='" + "0" + "'>" + "Train Data" + "</option>";
+        htmlStr += "<option class ='' value='" + "1" + "'>" + "Test Data" + "</option>";
+        htmlStr += "</select>";
+        htmlStr += "<label></label></div>"
 
         $(".featureHeadButton").append(htmlStr);
 
@@ -66,20 +66,20 @@
         })
 
 
-         $('select').formSelect();
-         // interaction for selector selection
-         var $select1 = $('select:not(.browser-default)');
-         $('.parCDataSelectClass').on('change', function (e) {
-             var valueSelect = $(this).val();
+        $('select').formSelect();
+        // interaction for selector selection
+        var $select1 = $('select:not(.browser-default)');
+        $('.parCDataSelectClass').on('change', function (e) {
+            var valueSelect = $(this).val();
             //  console.log(' e is ', valueSelect);
-             if(valueSelect == 0){
-                 ParC.dataImpactContainer = 'tableContent'
-                 ParC.updateParCoord(valueSelect);
-             }else{
-                 ParC.dataImpactContainer = 'tableContentTest'
-                 ParC.updateParCoord(valueSelect);
-             }
-         })
+            if (valueSelect == 0) {
+                ParC.dataImpactContainer = 'tableContent'
+                ParC.updateParCoord(valueSelect);
+            } else {
+                ParC.dataImpactContainer = 'tableContentTest'
+                ParC.updateParCoord(valueSelect);
+            }
+        })
 
     }
 
@@ -123,17 +123,17 @@
         }, 0);
     }
 
-    ParC.updateParCoord = function(dataType = 0){
-           var arr = ['id'];
-           arr.push.apply(arr, Object.keys(Main.numericalAttributes));
-           var dataNumeric = [];
-           if(dataType == 0){
-             dataNumeric = Main.getDataByKeys(arr, Main.trainData);
-           }else{
-             dataNumeric = Main.getDataByKeys(arr, Main.testData);
-           }
-          console.log('updating par coord chart ', dataType, dataNumeric.length)
-           ParC.makeParallelCoordChart('featureEngContentId', dataNumeric, true);
+    ParC.updateParCoord = function (dataType = 0) {
+        var arr = ['id'];
+        arr.push.apply(arr, Object.keys(Main.numericalAttributes));
+        var dataNumeric = [];
+        if (dataType == 0) {
+            dataNumeric = Main.getDataByKeys(arr, Main.trainData);
+        } else {
+            dataNumeric = Main.getDataByKeys(arr, Main.testData);
+        }
+        console.log('updating par coord chart ', dataType, dataNumeric.length)
+        ParC.makeParallelCoordChart('featureEngContentId', dataNumeric, true);
 
     }
 
@@ -165,13 +165,13 @@
             width = w - margin.left - margin.right,
             height = h - margin.top - margin.bottom;
 
-        if (addInteract){
-             margin = {
-                 top: 20,
-                 right: 20,
-                 bottom: 30,
-                 left: 10
-             }
+        if (addInteract) {
+            margin = {
+                top: 20,
+                right: 20,
+                bottom: 30,
+                left: 10
+            }
         }
 
         var x = d3.scale.ordinal().rangePoints([0, width], 1),
@@ -205,7 +205,13 @@
             .selectAll("path")
             .data(data)
             .enter().append("path")
-            .attr("d", path);
+            .attr("d", path)
+               .attr('class', 'par_Filter_cl_back')
+            //        .attr('id', function (d) {
+            //            // console.log(' path filter panel ', d)
+            //            return 'par_Filter_Id_' + d.id
+            //        })
+
 
         // Add blue foreground lines for focus.
         foreground = svg.append("g")
@@ -213,7 +219,13 @@
             .selectAll("path")
             .data(data)
             .enter().append("path")
-            .attr("d", path);
+            .attr("d", path)
+            .attr('class', 'par_Filter_cl')
+            .attr('id', function (d) {
+                // console.log(' path filter panel ', d)
+                return 'par_Filter_Id_' + d.id
+            })
+            .style('stroke-width', 1)
 
         // Add a group element for each dimension.
         var g = svg.selectAll(".dimension")
@@ -273,7 +285,7 @@
                 .attr('class', 'par_rect_header')
                 .attr("x", -25) // -35
                 .attr("y", -20)
-                .style('width', wd+'px')
+                .style('width', wd + 'px')
                 .style('height', '15px')
                 .style('fill', 'lightgray')
                 .on('mouseover', function (d, i) {
@@ -300,9 +312,9 @@
                 .style("text-anchor", "middle")
                 .attr("y", -9)
                 .text(function (d) {
-                    
-                   if (d.length > num) return d.substring(0, num) + ".."
-                   else   return d;
+
+                    if (d.length > num) return d.substring(0, num) + ".."
+                    else return d;
                 });
             // following for variance
             var ypos = height - 0
@@ -559,7 +571,7 @@
                     return +(extents[j][0] <= d[p] && d[p] <= extents[j][1]);
                 }) ? d['id'] : -1);
 
-            
+
 
                 ParC.filteredData = Util.getUniqueArray(ParC.filteredData);
 
