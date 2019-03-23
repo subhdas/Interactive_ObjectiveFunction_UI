@@ -64,9 +64,10 @@
 
     Main.datasetSelector = function () {
         // var dataSel = 1; // car
-        // var dataSel = 2; // creditcard
+        var dataSel = 2; // creditcard
         // var dataSel = 3; // salary
-        var dataSel = 4; // movie
+        // var dataSel = 4; // movie
+        var dataSel = 5; // diabetes
 
 
         if (dataSel == 1) {
@@ -87,6 +88,10 @@
             Main.dataset = 'movie'
             return "static/data/scenario/movie_metadata_short_SUB.csv";
         } else if (dataSel == 5) {
+
+            Main.labels = ['>30', '<30', 'NO']; // for MOVIE DATA default
+            Main.dataset = 'diabetis'
+            return "static/data/scenario/diabetic_data_short_SUB.csv";
 
         }
 
