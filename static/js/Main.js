@@ -101,7 +101,7 @@
     }
 
 
-Main.init = function (tag = false) {
+    Main.init = function (tag = false) {
         $(document).ready(function () {
             console.log("loading data");
             if (!Main.commonVars.DEBUG) {
@@ -152,6 +152,56 @@ Main.init = function (tag = false) {
             dataOut.push(obj)
         })
         return dataOut;
+    }
+
+    Main.getDataByFeatValCat = function (feat = '', featVal = '', data = Main.trainData) {
+        var idList = []
+
+        data.forEach(function (d) {
+            //  for (var item in d) {
+            if (typeof d[feat] == 'undefined') {
+                if (d['0_' + feat] == featVal) {
+                    idList.push(d.id)
+                }
+            } else {
+                if (d[feat] == featVal) {
+                    idList.push(d.id)
+                }
+            }
+
+            //  }
+        })
+        return idList;
+    }
+
+    Main.getDataByFeatValQuant = function (feat = '', featVal = '', tag = true, data = Main.trainData) {
+        var idList = []
+        data.forEach(function (d) {
+            if (tag == true) {
+                if (typeof d[feat] == 'undefined') {
+                    if (+d['0_' + feat] <= +featVal) {
+                        idList.push(d.id)
+                    }
+                } else {
+                    if (+d[feat] <= +featVal) {
+                        idList.push(d.id)
+                    }
+                }
+            } else {
+                  if (typeof d[feat] == 'undefined') {
+                      if (+d['0_' + feat] >= +featVal) {
+                          idList.push(d.id)
+                      }
+                  } else {
+                      if (+d[feat] >= +featVal) {
+                          idList.push(d.id)
+                      }
+                  }
+
+            }
+
+        })
+        return idList;
     }
 
 
@@ -441,9 +491,7 @@ Main.init = function (tag = false) {
             var num = 3
             data = Main.addLabels(data, num); // only for car data set
             dataTest = Main.addLabels(dataTest, num) // only for car data set
-        } else if(Main.dataset == 'diabetis') {
-        }
-        else  {
+        } else if (Main.dataset == 'diabetis') {} else {
             data = Main.addOrigLabels(data); // COMMENTED
             dataTest = Main.addOrigLabels(dataTest) // COMMENTED
         }

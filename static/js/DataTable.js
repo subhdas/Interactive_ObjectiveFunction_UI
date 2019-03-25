@@ -1538,45 +1538,58 @@
             } catch {
                 type = ''
             }
+            var keyCode = -1
             // if (type == 'categorical') {
             if (type != '') {
-
-                
                 var setVals = Main.attrDict[txt]['uniqueVals'];
-                
-                
+
                 for (var m = 0; m < setVals.length; m++) {
                     var obj = {
                         name: setVals[m],
                         icon: setVals[m],
+                        // events: {
+                        //     keyup: function (e) {
+                        //         // add some fancy key handling here?
+                        //         keyCode = e.keyCode
+                        //         window.console && console.log('key: ' + e.keyCode);
+                        //     }
+                        // }
                     }
                     itemObj[setVals[m]] = obj;
                 }
-                //construct item obj
-                $.contextMenu({
-                    selector: '#' + id,
-                    callback: function (key, options) {
-                        //  var m = "clicked: " + key;
-                        //  window.console && console.log(m) || alert(m);
-                        if (key == 'clear') {
-                            try {
-                                delete ParC.userCorrel[ParC.hoveredItem];
-                                d3.select('.par_corr_' + ParC.hoveredItem)
-                                    .style('opacity', 0);
-                            } catch (e) {
+                var self =
+                    $.contextMenu({
+                        selector: '#' + id,
+                        trigger: 'hover',
+                        delay: 500,
+                        autoHide: true,
+                        events: {
+                            show: function (op) {
+                                // console.log(' hehe in show ', op)
+                            },
+                            // keyup: function (e) {
+                            //     // add some fancy key handling here?
+                            //     // console.log('key: ' + e.keyCode);
+                            // }
+                        },
+                        callback: function (key, options, e) {
+                            var type = Main.attrDict[txt]['type']
+                            var idList = [];
+                            console.log(' getting key ', key, txt, idList, options, keyCode)
+                            console.log(' getting key ', key, e, e.keyCode)
+                            if (type == 'categorical') {
+                                idList = Main.getDataByFeatValCat(txt, key);
+                                // DataTable.hideSelectedRows(idList);
 
+                            } else {
+                                idList = Main.getDataByFeatValQuant(txt, key, e.shiftKey);
+                                // DataTable.hideSelectedRows(idList);
                             }
-                        } else {
-                            if (key != ParC.hoveredItem) {
-                                ParC.userCorrel[ParC.hoveredItem] = key;
-                                d3.select('.par_corr_' + ParC.hoveredItem)
-                                    .style('opacity', 1);
+                            if (idList.length > 0) DataTable.hideSelectedRows(idList);
 
-                            }
-                        }
-                    },
-                    items: itemObj
-                }); // end of context menu
+                        },
+                        items: itemObj
+                    }); // end of context menu
 
             }; // end of if statement
 
