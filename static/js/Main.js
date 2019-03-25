@@ -65,9 +65,9 @@
     Main.datasetSelector = function () {
         // var dataSel = 1; // car
         // var dataSel = 2; // creditcard
-        // var dataSel = 3; // salary
+        var dataSel = 3; // salary
         // var dataSel = 4; // movie
-        var dataSel = 5; // diabetes
+        // var dataSel = 5; // diabetes
 
 
         if (dataSel == 1) {
@@ -406,7 +406,7 @@ Main.init = function (tag = false) {
         data.forEach(function (d, i) {
             var ind = +d[Main.targetName]
             d[Main.targetName] = Main.labels[ind];
-            console.log(' ind and data ', ind, d)
+            // console.log(' ind and data ', ind, d)
         })
         var dataOut = Util.deepCopyData(data)
         console.log('dataoUt ', dataOut)

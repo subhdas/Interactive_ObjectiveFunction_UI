@@ -40,6 +40,8 @@
     }
 
     Scat.hideSelectedCircle = function (idList) {
+
+        $('.scatterCir').show();
         idList.forEach(function (d, i) {
             idList[i] = +idList[i]
         })

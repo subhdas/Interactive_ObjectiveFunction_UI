@@ -61,6 +61,7 @@
             ParC.featureEditorCreate();
             ParC.parallelBrushed = false;
             ParC.tempDimRules = []
+            $('.scatterCir').show();
 
 
         })
@@ -585,9 +586,10 @@
 
             var ind = ParC.filteredData.indexOf(-1);
             ParC.filteredData.splice(ind, 1);
-            setTimeout(function () {
-                DataTable.hideSelectedRows(ParC.filteredData, ParC.dataImpactContainer);
-            }, 1000)
+            setTimeout(function () {                
+                if (!Main.tabelViewMode) Scat.hideSelectedCircle(ParC.filteredData);
+                else DataTable.hideSelectedRows(ParC.filteredData, ParC.dataImpactContainer);
+            }, 100)
         }
     }
 
