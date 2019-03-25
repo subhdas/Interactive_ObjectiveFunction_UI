@@ -446,7 +446,7 @@
             }
             itemObj[item] = obj;
         }
-        itemObj['sep1'] = '------------------'
+    itemObj['sep1'] = '------------------'
         itemObj['clear'] = {
             name: 'clear',
             icon: 'clear'

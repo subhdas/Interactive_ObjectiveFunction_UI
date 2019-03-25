@@ -485,7 +485,9 @@ Main.init = function (tag = false) {
 
             var attrList = [];
             data.forEach(function (d) {
-                attrList.push(+d[title[i]])
+                var val = d[title[i]]
+                if (typeof val == 'undefined') val = d[title[i]]
+                attrList.push(val)
                 // delete d[Main.predictedName]
                 d[Main.predictedName] = 'NA';
             })

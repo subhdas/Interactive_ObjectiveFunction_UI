@@ -137,7 +137,7 @@
         if (containerId == "") containerId = "constraintHeaderId";
         $("#" + containerId).empty();
 
-        var htmlStr = "<div class = 'constraintHeadTitle' > Constraint Panel </div>";
+        var htmlStr = "<div class = 'constraintHeadTitle' > Objective Function Stack </div>";
         htmlStr += "<div class = 'constraintHeadButton' ></div>";
 
         $("#" + containerId).append(htmlStr);

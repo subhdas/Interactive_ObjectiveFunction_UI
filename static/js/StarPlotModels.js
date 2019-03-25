@@ -261,7 +261,7 @@
 
         StarM.modelOutputView = !StarM.modelOutputView;
         if (StarM.modelOutputView) {
-            $(".modelOutputText").text('Model Output Panel')
+            $(".modelOutputText").text('Model Interpreter')
             if (StarM.starPlotMode) $("#starPlotModelId").show()
             else $("#parCoorModelMetric").show()
             // $("#starPlotModelId").show()
@@ -289,7 +289,7 @@
         if (containerId == "") containerId = "starPlotHeaderId";
         $("#" + containerId).empty();
 
-        var htmlStr = "<div class = 'starPlotHeadTitle' id='starPlotHeadTitleId' > <span class = 'modelOutputText'> Model Output Panel </span> </div>";
+        var htmlStr = "<div class = 'starPlotHeadTitle' id='starPlotHeadTitleId' > <span class = 'modelOutputText'> Model Interpreter </span> </div>";
         htmlStr += "<div class = 'starPlotHeadButton' ></div>";
 
         $("#" + containerId).append(htmlStr);

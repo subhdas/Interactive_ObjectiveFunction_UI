@@ -177,7 +177,7 @@
         } else {
             // $('.dataTableHeadText').text(' Added : ' + Main.currentData.length + ' rows  | Left : ' + Main.leftData.length + ' rows ')
             // $('.containerDataTableHeadText').text(' Current Data Length : ' + Main.currentData.length)
-            $('.containerDataTableHeadText').text('')            
+            $('.containerDataTableHeadText').text('')
             DataTable.makeTable(Main.leftData);
         }
     }
@@ -195,13 +195,13 @@
         // $('#tableContent').css('background', Main.colors.HIGHLIGHT);
         // $('.containerDataTableHeadText').text(' Current Data Length : ' + Main.trainData.length)
         $('.containerDataTableHeadText').text('')
-        
+
     }
 
 
     DataTable.showTableView = function () {
         Main.tabelViewMode = true;
-        if (Scat.filteredScatData.length > 0){
+        if (Scat.filteredScatData.length > 0) {
             DataTable.hideRowsById(Scat.filteredScatData, 'train')
         }
         $("#tableContent").show();
@@ -246,7 +246,7 @@
     }
 
 
-   
+
 
 
 
@@ -349,10 +349,10 @@
             DataTable.showTableView();
         })
 
-        $("#expModid").on('click', function(e){
+        $("#expModid").on('click', function (e) {
             e.stopPropagation();
-             alertify.set('notifier', 'position', 'top-center');
-             alertify.success('Current Model succesfully exported and saved ');
+            alertify.set('notifier', 'position', 'top-center');
+            alertify.success('Current Model succesfully exported and saved ');
         })
 
         // table mode button click
@@ -433,7 +433,7 @@
                 }
                 BarM.modelData[0]['predictions']['confMatTest_ids'] = dataObj;
                 // BarM.allModelData[0] = BarM.modelData[0]['predictions'] // commented now
- 
+
                 BarM.computeIdsConfMatrAllModel();
                 setTimeout(() => {
                     // StarM.makeStarPlot();
@@ -442,10 +442,10 @@
                     arr.push.apply(arr, Object.keys(Main.numericalAttributes));
                     var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
                     console.log('par coord model metric ', arr, dataNumeric)
-                    StarM.makeMetricsParCoord('',dataNumeric, true);
+                    StarM.makeMetricsParCoord('', dataNumeric, true);
                 }, 0);
 
-                
+
 
                 ConfM.makeConfMatrix(confMatrixTrain, 'train');
                 ConfM.makeConfMatrix(confMatrixTest, 'test'); // test
@@ -1510,6 +1510,83 @@
 
     }
 
+    DataTable.addContextMenuHeader = function () {
+        // add a context menu here
+        var itemObj = {};
+        for (var item in Main.numericalAttributes) {
+            var obj = {
+                name: item,
+                icon: item,
+            }
+            itemObj[item] = obj;
+        }
+        itemObj['sep1'] = '------------------'
+        itemObj['clear'] = {
+            name: 'clear',
+            icon: 'clear'
+        }
+        var x = $('.fixedHeader');
+        x.each(function (d, i) {
+            var id = $(this).attr('id')
+            var txt = $(this).text()
+            txt = txt.replace("0_", "");
+            var itemObj = {};
+
+            // console.log('here is ', $(this).text(), id, d);
+            try {
+                var type = Main.attrDict[txt]['type'];
+            } catch {
+                type = ''
+            }
+            // if (type == 'categorical') {
+            if (type != '') {
+
+                
+                var setVals = Main.attrDict[txt]['uniqueVals'];
+                
+                
+                for (var m = 0; m < setVals.length; m++) {
+                    var obj = {
+                        name: setVals[m],
+                        icon: setVals[m],
+                    }
+                    itemObj[setVals[m]] = obj;
+                }
+                //construct item obj
+                $.contextMenu({
+                    selector: '#' + id,
+                    callback: function (key, options) {
+                        //  var m = "clicked: " + key;
+                        //  window.console && console.log(m) || alert(m);
+                        if (key == 'clear') {
+                            try {
+                                delete ParC.userCorrel[ParC.hoveredItem];
+                                d3.select('.par_corr_' + ParC.hoveredItem)
+                                    .style('opacity', 0);
+                            } catch (e) {
+
+                            }
+                        } else {
+                            if (key != ParC.hoveredItem) {
+                                ParC.userCorrel[ParC.hoveredItem] = key;
+                                d3.select('.par_corr_' + ParC.hoveredItem)
+                                    .style('opacity', 1);
+
+                            }
+                        }
+                    },
+                    items: itemObj
+                }); // end of context menu
+
+            }; // end of if statement
+
+
+
+
+
+        }) // end of each on selector
+    }
+
     DataTable.resetFilterPanel = function () {
         $(".trTable").show();
         ParC.filteredData = [];
@@ -1568,7 +1645,7 @@
             } catch (e) {}
 
             d[Main.entityNameSecondImp] = name
-            if(Main.entityNameSecondImp == "0_") delete d[Main.entityNameSecondImp]
+            if (Main.entityNameSecondImp == "0_") delete d[Main.entityNameSecondImp]
             // var temp = d.id;
             // delete d['id']
             // d['zid'] = temp
@@ -1595,6 +1672,7 @@
 
         var titles = d3.keys(data[0]);
         titles.sort();
+        console.log('titiles is ', titles)
         var headers = table
             .append("thead")
             .append("tr")
@@ -1603,6 +1681,9 @@
             .enter()
             .append("th")
             .attr('class', 'fixedHeader')
+            .attr('id', function (d, i) {
+                return 'fixHead_' + d;
+            })
             // .attr('class', 'mdl-data-table__cell--non-numeric')
             .text(function (d) {
                 return d
@@ -1682,7 +1763,7 @@
                 $('.par_Filter_cl_back').css('opacity', 1)
                 $('.par_Filter_cl').css('opacity', 1)
                 $('.par_Filter_cl').css('stroke-width', 1)
-                 $('.par_Filter_cl').css('stroke', Main.colors.HIGHLIGHT)
+                $('.par_Filter_cl').css('stroke', Main.colors.HIGHLIGHT)
                 try {
                     d3.selectAll(".node_" + d.id).style("fill", DataTable.nodeColor);
                 } catch (err) {
@@ -1942,6 +2023,8 @@
 
         })
 
+        DataTable.addContextMenuHeader();
+
         DataTable.dragFunction()
         if (DataTable.extraContent == false) {
             try {
@@ -2107,7 +2190,7 @@
                     DataTable.nodeColor = d3.selectAll(".node_" + d.id).style("fill");
                     d3.selectAll(".node_" + d.id).style("fill", "black");
                     $('.par_Filter_cl').css('fill', 'lightgray')
-                    $('#par_Filter_Id_'+d.id).css('fill', Main.colors.HIGHLIGHT)
+                    $('#par_Filter_Id_' + d.id).css('fill', Main.colors.HIGHLIGHT)
                 } catch (err) {
 
                 }
