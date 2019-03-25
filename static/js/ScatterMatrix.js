@@ -33,6 +33,7 @@
     }
 
     Scat.showScatterView = function () {
+        if ($('#scatContent').children().length == 0) Scat.makeTheMatrix();
         Main.tabelViewMode = false;
         $("#tableContent").hide();
         $("#scatContent").show();
@@ -118,7 +119,9 @@
                 .on("brush", brushmove)
                 .on("brushend", brushend);
 
-            var svg = d3.select("#" + containerId).append("svg")
+            var svg = d3.select("#" + containerId)
+                .append("svg")
+                .attr('class', '.scatMatSvg')
                 .attr("width", size * n + padding + 100)
                 .attr("height", size * n + padding + 100)
                 .append("g")
