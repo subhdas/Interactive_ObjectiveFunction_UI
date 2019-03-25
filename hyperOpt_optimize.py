@@ -181,6 +181,16 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         sameLabScore = (sameLabScore*1.0)/count
         return sameLabScore
 
+    def list_toTuple(idList):
+        n = len(idList)
+        # make it even number
+        if(n%2 is not 0):
+            idList = idList[0:n-1]
+        newTupList = []
+        for i in range(0,len(idList)-1,2):
+            newTupList.append((idList[i], idList[i+1]))
+        return newTupList
+        
     def similar_metrics(targetTrain, predTrain):
         metObj = extraInfo['metricKeys']
 
@@ -220,19 +230,35 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         count2 = 0
         defaultLabel = ""
         # for diffferent items
+        # for item in similarityObj:
+        #     if(item == 'Similar'):
+        #         continue
+        #     elIdList = similarityObj[item]  # item is the class label
+        #     print "in different object is ", elIdList
+        #     for i in range(len(elIdList)):
+        #         count2 += 1
+        #         if(defaultLabel == ""):
+        #             defaultLabel = predTrainDict[elIdList[i]]
+        #         if(predTrainDict[elIdList[i]] == defaultLabel):
+        #             differentScore += 0
+        #         else:
+        #             differentScore += 1
+
         for item in similarityObj:
             if(item == 'Similar'):
                 continue
             elIdList = similarityObj[item]  # item is the class label
-            # print "elid object is ", elIdList
-            for i in range(len(elIdList)):
+            newTupList = list_toTuple(elIdList)
+            print "in different object is ", elIdList, newTupList
+            for i in range(len(newTupList)):
                 count2 += 1
-                if(defaultLabel == ""):
-                    defaultLabel = predTrainDict[elIdList[i]]
-                if(predTrainDict[elIdList[i]] == defaultLabel):
-                    differentScore += 0
-                else:
+                if(predTrainDict[newTupList[i][0]] is not predTrainDict[newTupList[i][1]]):
                     differentScore += 1
+                else:
+                    differentScore += 0
+
+
+        
         fac = 0.5
         if(count == 0):
             similarityScore = 0
@@ -240,7 +266,6 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         else:
             similarityScore = (similarityScore*1.0)/count
             # fac = 0.5
-
 
         if(count2 == 0):
             differentScore = 0
@@ -252,7 +277,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         # fac = 0.5
         finalScore = (similarityScore + differentScore)*fac
 
-        print " def lable and sim score 2 ", defaultLabel, similarityScore, differentScore, finalScore
+        print " def lable and sim score 2 ", defaultLabel, similarityScore, differentScore, finalScore, fac
 
         return finalScore
 
