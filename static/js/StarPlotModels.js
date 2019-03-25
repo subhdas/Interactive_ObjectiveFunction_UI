@@ -55,7 +55,12 @@
                 }
 
                 var valFound = trainMet[item]
+                if(typeof valFound == 'undefined') valFound = trainMet[name]
                 // if (ind == -1) {
+
+                //add jitter to valFound
+                valFound = valFound * 0.97 + Util.getRandomNumberBetween(0.05,-0.05);
+                if (valFound > 1.00) valFound = Util.getRandomNumberBetween(0.99, 0.93);
                 var ob = {
                     axis: name,
                     // value: Util.getRandomNumberBetween(1, 0).toFixed(2),
@@ -66,6 +71,7 @@
             }
             dataCollect.push(obj);
         }
+        console.log('in star plot gettting data ', dataCollect)
         return dataCollect;
 
     }

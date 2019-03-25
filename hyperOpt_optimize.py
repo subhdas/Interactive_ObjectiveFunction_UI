@@ -489,6 +489,8 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         res = trial['result']
         los = res['loss']
         mod = res['model']
+        modMetr = res['modelMetrics'][0]
+        # print " hehe we have mod metrics ", res['modelMetrics'][0]
         # sorted_arr = loss_arr.sort()
         # print " list is ",  mod
         index = loss_arr.index(los)
@@ -507,7 +509,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
                 if(par_space[item] < 2):
                     par_space[item] = int(par_space[item]) + 2
         # mod_results[ind] = { 'res' : res, 'space' : par_space}
-        mod_results[index] = {'res': res, 'space': par_space, 'model' : mod}
+        mod_results[index] = {'res': res, 'space': par_space, 'model' : mod, 'modelMetrics' : modMetr}
         # print " we get trial as  after : ", par_space
         ind += 1
 
@@ -518,7 +520,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         fin_mod_res[item] = mod_results[item]
         ind += 1
         
-    # print 'done here success '
+    # print 'done here success ', fin_mod_res
     allmodel_pred_out = {}
     clfOrig = ""
     ind =0
@@ -527,11 +529,12 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         space = fin_mod_res[item]['space']
         clf = fin_mod_res[item]['model']
         if(clfOrig == "") : clfOrig = clf
-        # print " cycling in mod results ", item, mod_results[item]
+        # print " cycling in mod results ", item, fin_mod_res[item]['res']['modelMetrics']
         pred_out = {}
         pred_out = makePredictions(clf,
             space, train, test, targetTrain, targetTest, trainId, testId, extraInfo)
         pred_out['loss'] = fin_mod_res[item]['res']['loss']
+        pred_out['trainMetrics'] = fin_mod_res[item]['modelMetrics'] # commented
         allmodel_pred_out[ind] = pred_out # item
         ind += 1
 
@@ -548,6 +551,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         'params': best,
         'STATUS': 'OK'
     }
+    print " COMPLETED FIND GOOD MODEL +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
     return obj
 
 
