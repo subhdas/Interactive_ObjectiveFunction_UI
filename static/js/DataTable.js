@@ -1542,25 +1542,19 @@
             // if (type == 'categorical') {
             if (type != '') {
                 var setVals = Main.attrDict[txt]['uniqueVals'];
+                setVals.sort();
 
                 for (var m = 0; m < setVals.length; m++) {
                     var obj = {
                         name: setVals[m],
                         icon: setVals[m],
-                        // events: {
-                        //     keyup: function (e) {
-                        //         // add some fancy key handling here?
-                        //         keyCode = e.keyCode
-                        //         window.console && console.log('key: ' + e.keyCode);
-                        //     }
-                        // }
                     }
                     itemObj[setVals[m]] = obj;
                 }
                 var self =
                     $.contextMenu({
                         selector: '#' + id,
-                        trigger: 'hover',
+                        trigger: 'left', // hover
                         delay: 500,
                         autoHide: true,
                         events: {
@@ -1575,8 +1569,8 @@
                         callback: function (key, options, e) {
                             var type = Main.attrDict[txt]['type']
                             var idList = [];
-                            console.log(' getting key ', key, txt, idList, options, keyCode)
-                            console.log(' getting key ', key, e, e.keyCode)
+                            // console.log(' getting key ', key, txt, idList, options, keyCode)
+                            // console.log(' getting key ', key, e, e.keyCode)
                             if (type == 'categorical') {
                                 idList = Main.getDataByFeatValCat(txt, key);
                                 // DataTable.hideSelectedRows(idList);

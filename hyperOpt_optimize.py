@@ -205,7 +205,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
             if(item == 'Different'):
                 continue
             elIdList = similarityObj[item]  # item is the class label
-            # print "elid object is ", elIdList
+            print "in similar object is ", elIdList
             for i in range(len(elIdList)):
                 count += 1
                 if(defaultLabel == ""):
@@ -214,6 +214,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
                     similarityScore += 1
                 else:
                     similarityScore += 0
+        print " def lable and sim score 1 ", defaultLabel, similarityScore, similarityObj
 
         differentScore = 0
         count2 = 0
@@ -232,17 +233,27 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
                     differentScore += 0
                 else:
                     differentScore += 1
-
+        fac = 0.5
         if(count == 0):
             similarityScore = 0
+            fac = 1
         else:
             similarityScore = (similarityScore*1.0)/count
+            # fac = 0.5
+
+
         if(count2 == 0):
             differentScore = 0
+            fac = 1
         else:
             differentScore = (differentScore*1.0)/count2
+            # fac = 0.5
 
-        finalScore = (similarityScore + differentScore)*0.5
+        # fac = 0.5
+        finalScore = (similarityScore + differentScore)*fac
+
+        print " def lable and sim score 2 ", defaultLabel, similarityScore, differentScore, finalScore
+
         return finalScore
 
     def calc_sam_wt(targetTrain):

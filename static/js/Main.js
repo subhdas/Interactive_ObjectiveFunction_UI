@@ -177,7 +177,7 @@
     Main.getDataByFeatValQuant = function (feat = '', featVal = '', tag = true, data = Main.trainData) {
         var idList = []
         data.forEach(function (d) {
-            if (tag == true) {
+            if (tag == false) {
                 if (typeof d[feat] == 'undefined') {
                     if (+d['0_' + feat] <= +featVal) {
                         idList.push(d.id)
@@ -384,7 +384,7 @@
 
         DataTable.extraContent = false;
         DataTable.makeTable(Main.testData, "tableContentTest");
-        Scat.makeTheMatrix();
+        // Scat.makeTheMatrix(); // COMMENTED
         Scat.hideScatterView();
 
         Cons.makeConsDivs();
