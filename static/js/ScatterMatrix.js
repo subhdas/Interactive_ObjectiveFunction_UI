@@ -224,7 +224,10 @@
                         $('.par_Filter_cl').css('opacity', 0.1);
                         $('#par_Filter_Id_' + id).css('opacity', 1);
                         $('#par_Filter_Id_' + id).css('stroke-width', 5);
-                        console.log('mouse over circle ', id, i)
+
+                        // console.log('mouse over circle ', d,id, i)
+                        var e = Main.getDataById(d.id,Main.trainData);
+                        showTooltip(e, id);
                     })
                     .on('mouseout', function (d, i) {
                         $(this).css('stroke', 'transparent')
@@ -233,10 +236,74 @@
                         id = Util.getNumberFromText(id);
                         $('.par_Filter_cl').css('opacity', 1);
                         $('.par_Filter_cl').css('stroke-width', 1);
-                        console.log('mouse out circle ', id, i)
+                        // console.log('mouse out circle ', id, i)
+
+                        Scat.tipDiv.style("display", "none");
 
                     })
             }
+
+               function showTooltip (d, idVal) {
+
+                  var disp = $(".dipScat").remove()
+                //   console.log('hill tip disp ', disp);
+
+                  Scat.tipDiv = d3
+                      .select("body")
+                      .append("div")
+                      .attr("class", "dipScat")
+                      .attr("id", "dipScat_" + idVal);
+
+
+                  d3.selectAll(".dipScat")
+                      .style("position", "absolute")
+                      .style("display", "flex")
+                      .style("min-width", "80px")
+                      .style("height", "auto")
+                      .style("background", "none repeat scroll 0 0 #ffffff")
+                      .style("border", "1px solid "+ Main.colors.HIGHLIGHT)
+                      .style("padding", "3px")
+                      .style("text-align", "center");
+
+
+                  var htmlStr = "<div class = 'tipHullHeader'><span class = 'topHead' > ID : " + d.id + "</span>";
+                  htmlStr += "<span> Name : " + d[Main.entityName] + "</span></div>";
+                //   htmlStr += "<div class = 'tipHullContent' ><div>Local Coeff : " + Util.getRandomNumberBetween(10, 0).toFixed(4) + "</div>";
+                  // htmlStr += "<div class = 'tooltipModelContent' ><div>Origin : " + 2 + "</div>";
+                  // htmlStr += "<div class = 'tooltipModelContent' ><div>Cluster : " +  3 + "</div>";
+                  // htmlStr += "<div class = 'tooltipModelContent' ><div>MPG : " + 4+ "</div>";
+
+                  Scat.tipDiv
+                      .style("left", d3.event.pageX + 35 + "px")
+                      .style("top", d3.event.pageY - 75 + "px")
+                      .style("display", "flex")
+                      .style("flex-direction", "column")
+                      .style("align-items", "start")
+                      .style("font-size", "0.75em")
+                      .style("padding", "4px")
+                      .html(htmlStr);
+
+                  $(".topHead").css("font-weight", "bold");
+
+                  $(".tipHullHeader").css("display", "flex");
+                  $(".tipHullHeader").css("flex-direction", "column");
+                  $(".tipHullHeader").css("align-items", "start");
+                  $(".tipHullHeader").css("width", "100%");
+                  $(".tipHullHeader").css('background', 'white');
+                  $(".tipHullHeader").css("padding", "4px");
+
+                  $(".tipHullContent").css("display", "flex");
+                  $(".tipHullContent").css("flex-direction", "column");
+                  $(".tipHullContent").css("align-items", "start");
+                  $(".tipHullContent").css("width", "100%");
+                  $(".tipHullContent").css("background", "transparent");
+                  // $(".tooltipModelContent").css("padding", "4px");
+
+                  setTimeout(() => {
+                      $("#dipScat_" + idVal).show();
+                  }, 100);
+
+              }
 
             var brushCell;
 
