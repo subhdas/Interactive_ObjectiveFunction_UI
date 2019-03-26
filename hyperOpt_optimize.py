@@ -349,34 +349,47 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         #                        colsample_bytree = space['colsample_bytree'],
         #                        objective='reg:linear'
         #                        )
+        learngAlg = space['lag']
+        spaceR = space['rf']
+        spaceN = space['nn']
+        spaceB = space['bg']
         print " space is ", space
+
         metObj = extraInfo['metricKeys']
         userWts = extraInfo['highWeights']
         userWts = normalize_wts(userWts)
         print " in obj func, user wts ", userWts
-        # clf = RandomForestClassifier(max_depth=space['max_depth'],
-        #                              min_samples_split=space['min_samples_split'],
-        #                              min_samples_leaf=space['min_samples_leaf'],
-        #                              bootstrap=space['bootstrap'],
-        #                             #  criterion=space['criterion']
-        #                              criterion = 'gini',
-        #                              random_state = 1
-        #                              )
+        clf = ''
+        if(clf == '' and learngAlg == 0):
+            clf = RandomForestClassifier(max_depth=spaceR['max_depth'],
+                                        min_samples_split=spaceR['min_samples_split'],
+                                         min_samples_leaf=spaceR['min_samples_leaf'],
+                                         bootstrap=spaceR['bootstrap'],
+                                        #  criterion=space['criterion']
+                                        criterion = 'gini',
+                                        random_state = 1
+                                        )
 
         # NEURAL NETWORK CLASSIF -------------------------------------------------------------------------------------
-        # clf = MLPClassifier(verbose=False, random_state=0, activation=space['activation'], solver=space['solver'], learning_rate_init=space['learning_rate_init'],
-        #                     max_iter=space['max_iter'], hidden_layer_sizes=int(space['hidden_layer_sizes']), alpha=space['alpha'], learning_rate='adaptive')
+        if(clf == '' and learngAlg == 1):        
+            clf = MLPClassifier(verbose=False, random_state=0, activation=spaceN['activation'], solver=spaceN['solver'], learning_rate_init=spaceN['learning_rate_init'],
+                                max_iter=spaceN['max_iter'], hidden_layer_sizes=int(spaceN['hidden_layer_sizes']), alpha=spaceN['alpha'], learning_rate='adaptive')
        
         # -------------------------------------------------------------------------------------------------------------
 
         # BOOSTING CLASSOIF --------------------------------------------------------------------------------------------
-        # clf = AdaBoostClassifier(n_estimators=space['n_estimators'], learning_rate=space['learning_rate'], random_state=1)
-        # clf = GradientBoostingClassifier(n_estimators=space['n_estimators'], learning_rate=space['learning_rate'], random_state=1)
-        # clf = BaggingClassifier(n_estimators=space['n_estimators'], random_state=1) # SIMPLE
-        clf = BaggingClassifier(n_estimators=space['n_estimators'], max_samples=space['max_samples'], max_features=space['max_features'],
-        bootstrap = space['bootstrap'], bootstrap_features = space['bootstrap_features'], random_state=1)
+        if(clf == '' and learngAlg == 2):            
+            # clf = AdaBoostClassifier(n_estimators=space['n_estimators'], learning_rate=space['learning_rate'], random_state=1)
+            # clf = GradientBoostingClassifier(n_estimators=space['n_estimators'], learning_rate=space['learning_rate'], random_state=1)
+            # clf = BaggingClassifier(n_estimators=space['n_estimators'], random_state=1) # SIMPLE
+            clf = BaggingClassifier(n_estimators=spaceB['n_estimators'], max_samples=spaceB['max_samples'], max_features=spaceB['max_features'],
+            bootstrap = spaceB['bootstrapB'], bootstrap_features = spaceB['bootstrap_features'], random_state=1)
         # --------------------------------------------------------------------------------------------------------------
-        print ' train shape is a ', train.shape
+        if(clf == ''):
+            clf = BaggingClassifier(n_estimators=spaceB['n_estimators'], random_state=1) # SIMPLE
+            # clf = MLPClassifier(verbose=False, random_state=0, activation=spaceN['activation'], solver=spaceN['solver'], learning_rate_init=spaceN['learning_rate_init'],
+            #                     max_iter=spaceN['max_iter'], hidden_layer_sizes=int(spaceN['hidden_layer_sizes']), alpha=spaceN['alpha'], learning_rate='adaptive')
+        print ' train shape is a ', train.shape, learngAlg
         # trainNew = train.copy()
         targetTrainNew = targetTrain
         trainNew, targetTrainNew = remove_non_crit_inst(
@@ -547,7 +560,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     col_train = train.columns
     bootStrapArr = [True, False]
     criterionArr = ["gini", "entropy"]
-    space = {
+    spaceR = {
         # 'max_depth': hp.choice('max_depth', np.arange(10, 30, dtype=int)),
         'max_depth': hp.choice('max_depth', range(5, 30)),
         # 'min_samples_split': hp.choice('min_samples_split', np.arange(8, 15, dtype=int)),
@@ -576,7 +589,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     activationArr = ['identity', 'logistic', 'tanh', 'relu']
     # solverArr = ['lbfgs', 'sgd', 'adam']
     solverArr = ['sgd']
-    space = {
+    spaceN = {
         'max_iter': hp.choice('max_iter', range(10, 100)),
         'hidden_layer_sizes': hp.choice('hidden_layer_sizes', range(2, 15)),
         'alpha': hp.choice('alpha', frange),
@@ -591,16 +604,23 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     bootStrapArr = [True, False]
 
     print " got frange ", frange
-    space = {
+    spaceB = {
         'n_estimators': hp.choice('n_estimators', range(10, 100)),
         'max_samples': hp.choice('max_samples', range(40, train.shape[0])),
         'max_features': hp.choice('max_features', range(4, train.shape[1])),
         'learning_rate': hp.choice('learning_rate', frange),
-        'bootstrap': hp.choice('bootstrap', bootStrapArr),
-        'bootstrap_features': hp.choice('bootstrap_features', bootStrapArr),
+        'bootstrapB': hp.choice('bootstrapB', bootStrapArr),
+        'bootstrap_features': hp.choice('bootstrap_features', bootStrapArr)
     }
     #---------------------------------------------------------------------------------------------
 
+
+    space = {
+        'rf': spaceR,
+        'nn': spaceN,
+        'bg': spaceB,
+        'lag':  hp.choice('lag', range(0, 3))
+    }
     trials = Trials()
     best = fmin(fn=objective,
                 space=space,
