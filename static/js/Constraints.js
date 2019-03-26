@@ -157,7 +157,7 @@
     }
 
     Cons.constraintIdFinder = function () {
-        var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score']
+        var origDef = ['Recall', 'Precision', 'F1-Score', 'Training-Accuracy', 'Testing-Accuracy', 'Cross-Val-Score']
         var origDef = [];
         var metricObj = {}
         for (var item in ConsInt.activeConstraints) {
@@ -194,7 +194,7 @@
 
 
     Cons.checkConstraintsActive = function () {
-        var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score']
+        var origDef = ['Recall', 'Precision', 'F1-Score', 'Training-Accuracy', 'Testing-Accuracy', 'Cross-Val-Score']
 
         for (var item in ConsInt.activeConstraints) {
             var check = true;
@@ -233,7 +233,7 @@
         for (var i = 0; i < metricList.length; i++) {
 
             var compList = ['Same-Label', 'Similarity-Metric', 'Critical-Items', 'Non-Critical'];
-            var quantList = ['Recall', 'Precision', 'F1-Score'];
+            var quantList = ['Recall', 'Precision', 'F1-Score', 'Training-Accuracy'];
             var genList = ['Testing-Accuracy', 'Cross-Val-Score'];
 
             if (compList.indexOf(metricList[i]) != -1) {
