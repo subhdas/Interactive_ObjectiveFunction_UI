@@ -1012,6 +1012,21 @@
 
             // Rul.makeRuleList('', 'critical_All');
             DataTable.makeTags();
+
+
+
+            setTimeout(() => {
+
+                // $(this).click();
+                // $(this).click();
+                DataTable.criticalClicked = false;
+                DataTable.criticalInteractAll[-1] = '-'
+                var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                htmlStr += "<i class='material-icons'>linear_scale</i></button>";
+                $(this).html(htmlStr);
+                $('.btnTableAddOn').css('width', '100%')
+                $('.btnTableAddOn').css('height', '100%')
+            }, 3000);
         }) // end of rect dict
 
 

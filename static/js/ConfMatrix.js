@@ -32,10 +32,14 @@
 
 
 		var ob = 'trainMetrics'
+		var len = Main.trainData.length;
+		var tag = 'num_wrong_train'
 		var obLoss = 'loss'
 		if (type == 'test') {
 			ob = 'testMetrics'
 			obLoss = 'lossTest'
+			 len = Main.testData.length;
+			tag = 'num_wrong_test'
 		}
 		var text = 'Prediction Accuracy is  '
 		var text = 'Objective Function Score is  '
@@ -55,9 +59,16 @@
 		else idName = 'modResRowid_1'
 		// acc = ((score * 100) / ind).toFixed(2)
 		if (acc > 1.0) acc = (acc * 0.9).toFixed(2)
+
+
+		var numLab = '% | ' + ((len-BarM.allModelData[BarM.selectedModelId]['trainMetrics'][tag])*100 / len).toFixed(1) + '% '
+
+
+
+
 		var htmlStr = "<div class = '" + type + "_wrapDivs modelResult' id = 'modelResult_" + containerId + "_" + type + "'>"
 		htmlStr += "<div class = 'modResRow' id = '" + idName + "' ><span class ='modelResHeadText'> " + text + "</span>"
-		htmlStr += "<span class = 'modelResOut' >" + acc + " </span></div>";
+		htmlStr += "<span class = 'modelResOut' >" + acc + numLab +" </span></div>";
 
 		var acc2 = 2;
 		if (BarM.modIter > 0) {
@@ -77,8 +88,13 @@
 			acc2 = (score * 100).toFixed(2)
 			if (acc2 > 1.0) acc2 = (acc2 * 0.9).toFixed(2)
 
+			// var oldOb = BarM.histData[BarM.modIter - 1][BarM.selectedModelId]['trainMetrics'];
+			// console.log('old ob ', oldOb, Main.testData.length)
+			var numLab2 = '% | ' + ((len-BarM.histData[BarM.modIter - 1][BarM.selectedModelId]['trainMetrics'][tag])*100 / len).toFixed(1) + '% '
+
+
 			htmlStr += "<div class = 'modResRow' ><span class ='modelResHeadText'>" + text2 + " </span>"
-			htmlStr += "<span class = 'modelResOut modelResOutSecond' parent = '" + type + "' >" + acc2 + " </span></div>";
+			htmlStr += "<span class = 'modelResOut modelResOutSecond' parent = '" + type + "' >" + acc2 + numLab2 + " </span></div>";
 		}
 
 

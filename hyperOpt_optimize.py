@@ -69,7 +69,7 @@ def wrap_findGoodModel(train, test, targetTrain, targetTest, extraInfo):
 
 def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     MAX_RET = 4
-    MAX_EVAL = 50
+    MAX_EVAL = 15
     train, trainId = preProcessData(train)
     test, testId = preProcessData(test)
 
@@ -447,10 +447,26 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
 
         lab = list(set(trainT))
 
-        # tn, fp, fn, tp = confusion_matrix(trainT.tolist(), predT.tolist()).ravel()
-        conf = confusion_matrix(trainT.tolist(), predT.tolist(), labels = lab).ravel()
+        trList = trainT
+        prList = predT
+        numWrongTr = 0
+        for i in range(len(trList)):
+            if(trList[i] != prList[i]):
+                numWrongTr += 1
+            # print " getting ", trList[i], prList[i]
 
-        print " getting tn fp fn tp ", conf, lab
+        ttList = targetTest
+        ptList = predTest
+        numWrongTt = 0
+        for i in range(len(ttList)):
+            if(ttList[i] != predTest[i]):
+                numWrongTt += 1
+            # print " getting ", trList[i], prList[i]
+
+        # tn, fp, fn, tp = confusion_matrix(trainT.tolist(), predT.tolist()).ravel()
+        # conf = confusion_matrix(trainT.tolist(), predT.tolist(), labels = lab).ravel()
+
+        # print " getting tn fp fn tp ", conf, lab
 
         lossTestFinal = -1*precision_score(targetTest, predTest, average='macro')
         # store the result
@@ -465,6 +481,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         modelMetricsObj['F1-Score'] = f1Train
         modelMetricsObj['Testing-Accuracy'] = precTest
         modelMetricsObj['Cross-Val-Score'] = cross_mean_score
+        
 
         scoreFinal = 0
         ind = 0
@@ -475,6 +492,8 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         if(ind > 0):
             scoreFinal = (scoreFinal*1.00)/ind
 
+        modelMetricsObj['num_wrong_train'] = numWrongTr
+        modelMetricsObj['num_wrong_test'] = numWrongTt
         modelMetricsList = [modelMetricsObj]
 
         # scoreFinal  = cross_mean_score
