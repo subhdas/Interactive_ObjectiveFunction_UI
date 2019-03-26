@@ -245,9 +245,53 @@
             StarM.addfeatureResults("", BarM.selectedModelId)
 
 
-        })
+        })// END OF CLICK
 
-    }
+        var itemObj = {
+            'save': {
+                name: 'save',
+                icon: 'save',
+            },
+                'export': {
+                    name: 'export',
+                    icon: 'export',
+                }
+        }
+
+         $.contextMenu({
+             selector: '.modelNameHead',
+             trigger: 'right', // hover
+             delay: 500,
+             autoHide: true,
+             callback: function (key, options, e) {
+                //  var type = Main.attrDict[txt]['type']
+                //  var idList = [];
+                var id = $(this).attr('id')
+                id = Util.getNumberFromText(id)
+                console.log(' getting key ', key, options)
+                alertify.set('notifier', 'position', 'top-center');
+                if(key=='save'){
+                      alertify.success('Successfully saved Model : ' + id);
+                }
+                if(key =='export'){
+                      alertify.error('Successfully exported Model : ' + id);
+                }   
+                //  // console.log(' getting key ', key, e, e.keyCode)
+                //  if (type == 'categorical') {
+                //      idList = Main.getDataByFeatValCat(txt, key);
+                //      // DataTable.hideSelectedRows(idList);
+
+                //  } else {
+                //      idList = Main.getDataByFeatValQuant(txt, key, e.shiftKey);
+                //      // DataTable.hideSelectedRows(idList);
+                //  }
+                //  if (idList.length > 0) DataTable.hideSelectedRows(idList);
+
+             },
+             items: itemObj
+         }); // end of context menu
+
+    } // END OF FUNC
 
 
     StarM.toggleParCoorStarPlot = function () {

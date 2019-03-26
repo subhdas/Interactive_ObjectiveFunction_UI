@@ -76,9 +76,17 @@
             var valueSelect = $(this).val();
             //  console.log(' e is ', valueSelect);
             if (valueSelect == 0) {
+                if ($('#trainContent').height() < $('#testContent').height()) $("#tableTogglerId_0").click()
+                else if (Cons.accordionOpen) {
+                    if ($('#trainContent').height() <= $('#testContent').height()) $("#tableTogglerId_0").click()
+                }
                 ParC.dataImpactContainer = 'tableContent'
                 ParC.updateParCoord(valueSelect);
             } else {
+                if ($('#trainContent').height() > $('#testContent').height()) $("#tableTogglerId_1").click()
+                else if (Cons.accordionOpen) {
+                    if ($('#trainContent').height() >= $('#testContent').height()) $("#tableTogglerId_1").click()
+                }
                 ParC.dataImpactContainer = 'tableContentTest'
                 ParC.updateParCoord(valueSelect);
             }
@@ -209,11 +217,11 @@
             .data(data)
             .enter().append("path")
             .attr("d", path)
-               .attr('class', 'par_Filter_cl_back')
-            //        .attr('id', function (d) {
-            //            // console.log(' path filter panel ', d)
-            //            return 'par_Filter_Id_' + d.id
-            //        })
+            .attr('class', 'par_Filter_cl_back')
+        //        .attr('id', function (d) {
+        //            // console.log(' path filter panel ', d)
+        //            return 'par_Filter_Id_' + d.id
+        //        })
 
 
         // Add blue foreground lines for focus.
@@ -448,7 +456,7 @@
             }
             itemObj[item] = obj;
         }
-    itemObj['sep1'] = '------------------'
+        itemObj['sep1'] = '------------------'
         itemObj['clear'] = {
             name: 'clear',
             icon: 'clear'
@@ -588,7 +596,7 @@
 
             var ind = ParC.filteredData.indexOf(-1);
             ParC.filteredData.splice(ind, 1);
-            setTimeout(function () {                
+            setTimeout(function () {
                 if (!Main.tabelViewMode) Scat.hideSelectedCircle(ParC.filteredData);
                 else DataTable.hideSelectedRows(ParC.filteredData, ParC.dataImpactContainer);
             }, 100)
