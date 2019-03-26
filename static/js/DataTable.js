@@ -1011,7 +1011,7 @@
                 $("#" + idBtn2).click();
             }, 100);
 
-            // Rul.makeRuleList('', 'critical_All');
+            if (containerId == 'tableContentTest') Rul.makeRuleList();
             DataTable.makeTags();
 
 

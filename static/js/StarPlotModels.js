@@ -187,13 +187,13 @@
 
             $('.par_ModMetric_cl').css('opacity', 0.1);
             $('#par_ModMetric_Id_' + idNum).css('opacity', 1);
-            $('#par_ModMetric_Id_'+idNum).css('stroke-width', 5);
+            $('#par_ModMetric_Id_' + idNum).css('stroke-width', 5);
 
 
         })
 
         $(".modelNameHead").on('mouseout', function (e) {
-            
+
             var idNum = $(this).attr('id');
             idNum = Util.getNumberFromText(idNum);
             $(".modelNameHead").css('opacity', 1);
@@ -245,37 +245,37 @@
             StarM.addfeatureResults("", BarM.selectedModelId)
 
 
-        })// END OF CLICK
+        }) // END OF CLICK
 
         var itemObj = {
             'save': {
                 name: 'save',
                 icon: 'save',
             },
-                'export': {
-                    name: 'export',
-                    icon: 'export',
-                }
+            'export': {
+                name: 'export',
+                icon: 'export',
+            }
         }
 
-         $.contextMenu({
-             selector: '.modelNameHead',
-             trigger: 'right', // hover
-             delay: 500,
-             autoHide: true,
-             callback: function (key, options, e) {
+        $.contextMenu({
+            selector: '.modelNameHead',
+            trigger: 'right', // hover
+            delay: 500,
+            autoHide: true,
+            callback: function (key, options, e) {
                 //  var type = Main.attrDict[txt]['type']
                 //  var idList = [];
                 var id = $(this).attr('id')
                 id = Util.getNumberFromText(id)
                 console.log(' getting key ', key, options)
                 alertify.set('notifier', 'position', 'top-center');
-                if(key=='save'){
-                      alertify.success('Successfully saved Model : ' + id);
+                if (key == 'save') {
+                    alertify.success('Successfully saved Model : ' + id);
                 }
-                if(key =='export'){
-                      alertify.error('Successfully exported Model : ' + id);
-                }   
+                if (key == 'export') {
+                    alertify.error('Successfully exported Model : ' + id);
+                }
                 //  // console.log(' getting key ', key, e, e.keyCode)
                 //  if (type == 'categorical') {
                 //      idList = Main.getDataByFeatValCat(txt, key);
@@ -287,9 +287,9 @@
                 //  }
                 //  if (idList.length > 0) DataTable.hideSelectedRows(idList);
 
-             },
-             items: itemObj
-         }); // end of context menu
+            },
+            items: itemObj
+        }); // end of context menu
 
     } // END OF FUNC
 
@@ -516,7 +516,7 @@
             .enter().append("path")
             .attr("d", path)
             .attr('class', 'par_ModMetric_cl')
-            .attr('id', function (d,i) {
+            .attr('id', function (d, i) {
                 console.log(' path filter panel ', d)
                 return 'par_ModMetric_Id_' + i
             })
@@ -1041,7 +1041,24 @@
             if (arrId.length > 0) {
                 for (var i = 0; i < arrId.length; i++) {
                     var dataItem = Main.getDataById(arrId[i], Main.trainData);
-                    var nameItem = dataItem[Main.entityNameSecondImp];
+                    if (typeof dataItem == 'undefined') {
+                        dataItem =  Main.getDataById(arrId[i], Main.testData);
+                    console.log(' dataitem is 1 ', dataItem)
+
+                    }
+                    if(dataItem== null){
+                        dataItem = Main.getDataById(arrId[i], Main.testData);
+                    console.log(' dataitem is 2', dataItem)
+
+                    }
+                    console.log(' dataitem is ', dataItem)
+                    try {
+                        var nameItem = dataItem[Main.entityNameSecondImp];
+                    } catch (error) {
+                        var ent =  Main.entityName.replace('0_', '')
+                        var nameItem = dataItem[ent];
+
+                    }
                     var fullNameItem = dataItem[Main.entityNameSecondImp];
                     try {
                         if (nameItem.length > num) nameItem = nameItem.substring(0, num) + "..."
