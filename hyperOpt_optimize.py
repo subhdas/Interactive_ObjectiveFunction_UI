@@ -17,6 +17,7 @@ from sklearn.metrics import classification_report, f1_score, accuracy_score, con
 import json
 from sklearn import preprocessing
 from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import AdaBoostClassifier, GradientBoostingClassifier, BaggingClassifier
 
 # for json dumps to work
 
@@ -363,11 +364,16 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         #                              )
 
         # NEURAL NETWORK CLASSIF -------------------------------------------------------------------------------------
-        clf = MLPClassifier(verbose=False, random_state=0, activation=space['activation'], solver=space['solver'], learning_rate_init=space['learning_rate_init'],
-                            max_iter=space['max_iter'], hidden_layer_sizes=int(space['hidden_layer_sizes']), alpha=space['alpha'], learning_rate='adaptive')
+        # clf = MLPClassifier(verbose=False, random_state=0, activation=space['activation'], solver=space['solver'], learning_rate_init=space['learning_rate_init'],
+        #                     max_iter=space['max_iter'], hidden_layer_sizes=int(space['hidden_layer_sizes']), alpha=space['alpha'], learning_rate='adaptive')
        
         # -------------------------------------------------------------------------------------------------------------
 
+        # BOOSTING CLASSOIF --------------------------------------------------------------------------------------------
+        # clf = AdaBoostClassifier(n_estimators=space['n_estimators'], learning_rate=space['learning_rate'], random_state=1)
+        # clf = GradientBoostingClassifier(n_estimators=space['n_estimators'], learning_rate=space['learning_rate'], random_state=1)
+        clf = BaggingClassifier(n_estimators=space['n_estimators'], random_state=1)
+        # --------------------------------------------------------------------------------------------------------------
         print ' train shape is a ', train.shape
         # trainNew = train.copy()
         targetTrainNew = targetTrain
@@ -568,6 +574,15 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         'learning_rate_init': hp.choice('learning_rate_init', frange),
         'activation': hp.choice('activation', activationArr),
         'solver': hp.choice('solver', solverArr)
+    }
+    #---------------------------------------------------------------------------------------------
+
+    # FOR BOOSTING NETWORK ------------------------------------------------------------------------
+    frange = [x / 100.0 for x in range(100, 200, 1)]
+    print " got frange ", frange
+    space = {
+        'n_estimators': hp.choice('n_estimators', range(10, 100)),
+        'learning_rate': hp.choice('learning_rate', frange),
     }
     #---------------------------------------------------------------------------------------------
 
