@@ -1042,20 +1042,20 @@
                 for (var i = 0; i < arrId.length; i++) {
                     var dataItem = Main.getDataById(arrId[i], Main.trainData);
                     if (typeof dataItem == 'undefined') {
-                        dataItem =  Main.getDataById(arrId[i], Main.testData);
-                    console.log(' dataitem is 1 ', dataItem)
-
-                    }
-                    if(dataItem== null){
                         dataItem = Main.getDataById(arrId[i], Main.testData);
-                    console.log(' dataitem is 2', dataItem)
+                        // console.log(' dataitem is 1 ', dataItem)
 
                     }
-                    console.log(' dataitem is ', dataItem)
+                    if (dataItem == null) {
+                        dataItem = Main.getDataById(arrId[i], Main.testData);
+                        // console.log(' dataitem is 2', dataItem)
+
+                    }
+                    // console.log(' dataitem is ', dataItem)
                     try {
                         var nameItem = dataItem[Main.entityNameSecondImp];
                     } catch (error) {
-                        var ent =  Main.entityName.replace('0_', '')
+                        var ent = Main.entityName.replace('0_', '')
                         var nameItem = dataItem[ent];
 
                     }

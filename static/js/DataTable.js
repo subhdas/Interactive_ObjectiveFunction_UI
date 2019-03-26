@@ -24,6 +24,10 @@
     DataTable.criticalInteractAll = {
         '-1': '-'
     }
+    DataTable.criticalInteractTest = {}
+    DataTable.criticalInteractAllTest = {
+        '-1': '-'
+    }
     DataTable.inforInteract = {}
     DataTable.inforInteractaLL = {
         '-1': '-'
@@ -840,196 +844,278 @@
         $(".criticalRectAll").on('mouseout', function (d, i) {
             $(this).css('border', '')
         })
-        $(".criticalRectAll").on('click', function (d, i) {
-            if (DataTable.criticalSwitch) {
-                return
-            }
-            DataTable.criticalSwitch = true;
-            setTimeout(function () {
-                DataTable.criticalSwitch = false;
-            }, 500)
 
-            DataTable.fromTableInferred = true;
-            setTimeout(() => {
-                DataTable.fromTableInferred = false;
-            }, 6000);
-            var id = -1;
-            var val = DataTable.criticalInteractAll[id];
-            if (val == '-') {
-                DataTable.criticalInteractAll[id] = 'yes'
-                // $(this).css('background', Main.colors.HIGHLIGHT);
-                //id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "'
-                var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
-                htmlStr += "<i class='material-icons'>alarm_on</i></button>";
-                $(this).html(htmlStr);
-                $('.btnTableAddOn').css('width', '100%')
-                $('.btnTableAddOn').css('height', '100%')
-                DataTable.tempLatestTag = 'Critical'
 
-            } else if (val == 'yes') {
-                DataTable.criticalInteractAll[id] = 'no'
-                // $(this).css('background', Main.colors.HIGHLIGHT2);
-
-                var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
-                htmlStr += "<i class='material-icons'>alarm_off</i></button>";
-                $(this).html(htmlStr);
-                $('.btnTableAddOn').css('width', '100%')
-                $('.btnTableAddOn').css('height', '100%')
-                DataTable.tempLatestTag = 'Ignore'
-
-            } else {
-                DataTable.criticalInteractAll[id] = '-'
-                // $(this).css('background', 'lightgray');
-
-                var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
-                htmlStr += "<i class='material-icons'>linear_scale</i></button>";
-                $(this).html(htmlStr);
-                $('.btnTableAddOn').css('width', '100%')
-                $('.btnTableAddOn').css('height', '100%')
-            }
-            var col = $(this).css('background-color');
-            var state = DataTable.criticalInteractAll[id];
-            // var arr = ParC.filteredData;
-            var stri = 'Critical-Items';
-            var stri2 = 'Non-Critical';
-            // Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; // !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
-            // ConsInt.getActiveConstraints();
-            // ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = ParC.filteredData;
-
-            var cont = $(this).attr('parent')
-            $("#dataViewAppTable_" + cont)
-                .find(".trTable:visible")
-                .each(function (i, el) {
-                    var id = $(this).attr('id');
-                    id = Util.getNumberFromText(id);
-                    // arr.push(id)
-                    // $("#criticalRectId_" + id).css('background', col)
-                    htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
-
-                    if (col == "rgb(194, 53, 115)" || state == 'yes') {
-                        htmlStr += "<i class='material-icons'>alarm_on</i></button>";
-
-                    } else if (col == "rgb(53, 183, 194)" || state == 'no') {
-                        htmlStr += "<i class='material-icons'>alarm_off</i></button>";
-
-                    } else {
-                        htmlStr += "<i class='material-icons'>linear_scale</i></button>";
-                    }
-                    $("#criticalRectId_" + id).html(htmlStr);
-                    $("#criticalRectId_" + id).attr('parent', state);
-                    DataTable.criticalInteract[id] = state
+        if (containerId == "tableContentTest") {
+            $("#criticalRectId_" + containerId).on('click', function (d, i) {
+                console.log('container id ', containerId)
+                var id = -1;
+                var val = DataTable.criticalInteractAllTest[id];
+                if (val == '-') {
+                    DataTable.criticalInteractAllTest[id] = 'yes'
+                    // $(this).css('background', Main.colors.HIGHLIGHT);
+                    //id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "'
+                    var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                    htmlStr += "<i class='material-icons'>alarm_on</i></button>";
+                    $(this).html(htmlStr);
                     $('.btnTableAddOn').css('width', '100%')
                     $('.btnTableAddOn').css('height', '100%')
-                });
+                    // DataTable.tempLatestTag = 'Critical'
 
-            if (state == 'yes') {
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false     
-                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false; //false
-                DataTable.criticalClicked = false;
-            } else if (state == 'no') {
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false
-                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; //false          
-                DataTable.criticalClicked = true;
-            } else {
-                //same as no
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false     
-                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false; //false
-                DataTable.criticalClicked = true;
-            }
-            var critIdList = [];
-            var critIdList2 = [];
-            // $("#dataViewAppTable_" + cont)
-            //     .find(".trTable:visible")
-            //     .each(function (i, el) {
-            //         // console.log(' found is ', i, cont, el)
-            //         var id = $(this).attr('id');
-            //         id = Util.getNumberFromText(id);
-            //         // arr.push(id)
-            //         var back = $("#criticalRectId_" + id).css('background-color')
-            //         // console.log(' found back col as ', back)
-            //         if (back == 'rgb(194, 53, 115)' || state == 'yes') {
-            //             critIdList.push(id);
-            //         }
+                } else if (val == 'yes') {
+                    DataTable.criticalInteractAllTest[id] = 'no'
+                    // $(this).css('background', Main.colors.HIGHLIGHT2);
 
-            //         if (back == 'rgb(53, 183, 194)' || state == 'no') {
-            //             critIdList2.push(id);
-            //         }
-            //     });
+                    var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                    htmlStr += "<i class='material-icons'>alarm_off</i></button>";
+                    $(this).html(htmlStr);
+                    $('.btnTableAddOn').css('width', '100%')
+                    $('.btnTableAddOn').css('height', '100%')
+                    // DataTable.tempLatestTag = 'Ignore'
 
+                } else {
+                    DataTable.criticalInteractAllTest[id] = '-'
+                    // $(this).css('background', 'lightgray');
 
+                    var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                    htmlStr += "<i class='material-icons'>linear_scale</i></button>";
+                    $(this).html(htmlStr);
+                    $('.btnTableAddOn').css('width', '100%')
+                    $('.btnTableAddOn').css('height', '100%')
+                }
 
-            $("#dataViewAppTable_" + cont)
-                .find(".trTable")
-                .each(function (i, el) {
-                    var id = $(this).attr('id');
-                    // var stateGot = $(this).attr('parent');
-                    id = Util.getNumberFromText(id);
-                    // arr.push(id)
-                    var back = $("#criticalRectId_" + id).css('background-color')
-                    var stateGot = $("#criticalRectId_" + id).attr('parent')
-                    // console.log('state getting ', stateGot, id)
-                    // console.log(' found back col as ', back)
-                    if (back == 'rgb(194, 53, 115)' || stateGot == 'yes') {
-                        critIdList.push(id);
-                    }
+                var col = $(this).css('background-color');
+                var state = DataTable.criticalInteractAllTest[id];
 
-                    if (back == 'rgb(53, 183, 194)' || stateGot == 'no') {
-                        critIdList2.push(id);
-                    }
-                });
+                var cont = $(this).attr('parent')
+                $("#dataViewAppTable_" + cont)
+                    .find(".trTable:visible")
+                    .each(function (i, el) {
+                        var id = $(this).attr('id');
+                        id = Util.getNumberFromText(id);
+                        // arr.push(id)
+                        // $("#criticalRectId_" + id).css('background', col)
+                        htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
 
+                        if (col == "rgb(194, 53, 115)" || state == 'yes') {
+                            htmlStr += "<i class='material-icons'>alarm_on</i></button>";
 
-            if (critIdList.length == 0) {
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false          
-                DataTable.criticalClicked = false;
-            } else {
-                Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //true
-                DataTable.criticalClicked = true;
-            }
+                        } else if (col == "rgb(53, 183, 194)" || state == 'no') {
+                            htmlStr += "<i class='material-icons'>alarm_off</i></button>";
 
-            if (critIdList2.length == 0) {
-                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false; //false          
-                DataTable.criticalClicked = false;
-            } else {
-                Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; //true
-                DataTable.criticalClicked = true;
-            }
-            ConsInt.getActiveConstraints();
-            try {
-                ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = critIdList;
-            } catch (e) {}
-            try {
-                ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2] = critIdList2;
-            } catch (e) {}
+                        } else {
+                            htmlStr += "<i class='material-icons'>linear_scale</i></button>";
+                        }
+                        $("#criticalRectId_" + id).html(htmlStr);
+                        $("#criticalRectId_" + id).attr('parent', state);
+                        DataTable.criticalInteractTest[id] = state
+                        $('.btnTableAddOn').css('width', '100%')
+                        $('.btnTableAddOn').css('height', '100%')
+                    });
 
 
 
-            setTimeout(() => {
-                var idBtn = $(".btn_" + stri).attr('id')
-                var idBtn2 = $(".btn_" + stri2).attr('id')
-                $("#" + idBtn).click();
-                $("#" + idBtn2).click();
-            }, 100);
-
-            if (containerId == 'tableContentTest') Rul.makeRuleList();
-            DataTable.makeTags();
+            }) // end of click test
+        }
 
 
+        if (containerId == "tableContent") {
+            // $(".criticalRectAll").on('click', function (d, i) {
+            $("#criticalRectId_" + containerId).on('click', function (d, i) {
+                console.log('container id ', containerId)
 
-            setTimeout(() => {
 
-                // $(this).click();
-                // $(this).click();
-                DataTable.criticalClicked = false;
-                DataTable.criticalInteractAll[-1] = '-'
-                var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
-                htmlStr += "<i class='material-icons'>linear_scale</i></button>";
-                $(this).html(htmlStr);
-                $('.btnTableAddOn').css('width', '100%')
-                $('.btnTableAddOn').css('height', '100%')
-            }, 3000);
-        }) // end of rect dict
+                if (DataTable.criticalSwitch) {
+                    return
+                }
+                DataTable.criticalSwitch = true;
+                setTimeout(function () {
+                    DataTable.criticalSwitch = false;
+                }, 500)
 
+                DataTable.fromTableInferred = true;
+                setTimeout(() => {
+                    DataTable.fromTableInferred = false;
+                }, 6000);
+                var id = -1;
+                var val = DataTable.criticalInteractAll[id];
+                if (val == '-') {
+                    DataTable.criticalInteractAll[id] = 'yes'
+                    // $(this).css('background', Main.colors.HIGHLIGHT);
+                    //id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "'
+                    var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                    htmlStr += "<i class='material-icons'>alarm_on</i></button>";
+                    $(this).html(htmlStr);
+                    $('.btnTableAddOn').css('width', '100%')
+                    $('.btnTableAddOn').css('height', '100%')
+                    DataTable.tempLatestTag = 'Critical'
+
+                } else if (val == 'yes') {
+                    DataTable.criticalInteractAll[id] = 'no'
+                    // $(this).css('background', Main.colors.HIGHLIGHT2);
+
+                    var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                    htmlStr += "<i class='material-icons'>alarm_off</i></button>";
+                    $(this).html(htmlStr);
+                    $('.btnTableAddOn').css('width', '100%')
+                    $('.btnTableAddOn').css('height', '100%')
+                    DataTable.tempLatestTag = 'Ignore'
+
+                } else {
+                    DataTable.criticalInteractAll[id] = '-'
+                    // $(this).css('background', 'lightgray');
+
+                    var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                    htmlStr += "<i class='material-icons'>linear_scale</i></button>";
+                    $(this).html(htmlStr);
+                    $('.btnTableAddOn').css('width', '100%')
+                    $('.btnTableAddOn').css('height', '100%')
+                }
+                var col = $(this).css('background-color');
+                var state = DataTable.criticalInteractAll[id];
+                // var arr = ParC.filteredData;
+                var stri = 'Critical-Items';
+                var stri2 = 'Non-Critical';
+                // Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; // !Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'];
+                // ConsInt.getActiveConstraints();
+                // ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = ParC.filteredData;
+
+                var cont = $(this).attr('parent')
+                $("#dataViewAppTable_" + cont)
+                    .find(".trTable:visible")
+                    .each(function (i, el) {
+                        var id = $(this).attr('id');
+                        id = Util.getNumberFromText(id);
+                        // arr.push(id)
+                        // $("#criticalRectId_" + id).css('background', col)
+                        htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+
+                        if (col == "rgb(194, 53, 115)" || state == 'yes') {
+                            htmlStr += "<i class='material-icons'>alarm_on</i></button>";
+
+                        } else if (col == "rgb(53, 183, 194)" || state == 'no') {
+                            htmlStr += "<i class='material-icons'>alarm_off</i></button>";
+
+                        } else {
+                            htmlStr += "<i class='material-icons'>linear_scale</i></button>";
+                        }
+                        $("#criticalRectId_" + id).html(htmlStr);
+                        $("#criticalRectId_" + id).attr('parent', state);
+                        DataTable.criticalInteract[id] = state
+                        $('.btnTableAddOn').css('width', '100%')
+                        $('.btnTableAddOn').css('height', '100%')
+                    });
+
+                if (state == 'yes') {
+                    Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //false     
+                    Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false; //false
+                    DataTable.criticalClicked = false;
+                } else if (state == 'no') {
+                    Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false
+                    Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; //false          
+                    DataTable.criticalClicked = true;
+                } else {
+                    //same as no
+                    Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false     
+                    Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false; //false
+                    DataTable.criticalClicked = true;
+                }
+                var critIdList = [];
+                var critIdList2 = [];
+                // $("#dataViewAppTable_" + cont)
+                //     .find(".trTable:visible")
+                //     .each(function (i, el) {
+                //         // console.log(' found is ', i, cont, el)
+                //         var id = $(this).attr('id');
+                //         id = Util.getNumberFromText(id);
+                //         // arr.push(id)
+                //         var back = $("#criticalRectId_" + id).css('background-color')
+                //         // console.log(' found back col as ', back)
+                //         if (back == 'rgb(194, 53, 115)' || state == 'yes') {
+                //             critIdList.push(id);
+                //         }
+
+                //         if (back == 'rgb(53, 183, 194)' || state == 'no') {
+                //             critIdList2.push(id);
+                //         }
+                //     });
+
+
+
+                $("#dataViewAppTable_" + cont)
+                    .find(".trTable")
+                    .each(function (i, el) {
+                        var id = $(this).attr('id');
+                        // var stateGot = $(this).attr('parent');
+                        id = Util.getNumberFromText(id);
+                        // arr.push(id)
+                        var back = $("#criticalRectId_" + id).css('background-color')
+                        var stateGot = $("#criticalRectId_" + id).attr('parent')
+                        // console.log('state getting ', stateGot, id)
+                        // console.log(' found back col as ', back)
+                        if (back == 'rgb(194, 53, 115)' || stateGot == 'yes') {
+                            critIdList.push(id);
+                        }
+
+                        if (back == 'rgb(53, 183, 194)' || stateGot == 'no') {
+                            critIdList2.push(id);
+                        }
+                    });
+
+
+                if (critIdList.length == 0) {
+                    Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = false; //false          
+                    DataTable.criticalClicked = false;
+                } else {
+                    Cons.typeConstraints['COMPOSITIONAL'][stri]['Checked'] = true; //true
+                    DataTable.criticalClicked = true;
+                }
+
+                if (critIdList2.length == 0) {
+                    Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = false; //false          
+                    DataTable.criticalClicked = false;
+                } else {
+                    Cons.typeConstraints['COMPOSITIONAL'][stri2]['Checked'] = true; //true
+                    DataTable.criticalClicked = true;
+                }
+                ConsInt.getActiveConstraints();
+                try {
+                    ConsInt.activeConstraints[stri]['input']['labelitemsConId_' + stri] = critIdList;
+                } catch (e) {}
+                try {
+                    ConsInt.activeConstraints[stri2]['input']['labelitemsConId_' + stri2] = critIdList2;
+                } catch (e) {}
+
+
+
+                setTimeout(() => {
+                    var idBtn = $(".btn_" + stri).attr('id')
+                    var idBtn2 = $(".btn_" + stri2).attr('id')
+                    $("#" + idBtn).click();
+                    $("#" + idBtn2).click();
+                }, 100);
+
+                if (containerId == 'tableContentTest') Rul.makeRuleList();
+                DataTable.makeTags();
+
+
+
+                setTimeout(() => {
+
+                    // $(this).click();
+                    // $(this).click();
+                    DataTable.criticalClicked = false;
+                    DataTable.criticalInteractAll[-1] = '-'
+                    var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                    htmlStr += "<i class='material-icons'>linear_scale</i></button>";
+                    $(this).html(htmlStr);
+                    $('.btnTableAddOn').css('width', '100%')
+                    $('.btnTableAddOn').css('height', '100%')
+                }, 3000);
+
+
+            }) // end of rect dict
+        }
 
         $(".infoRectAll").on('click', function (d, i) {
             if (DataTable.criticalSwitch) {
