@@ -361,6 +361,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         print " in obj func, user wts ", userWts
         clf = ''
         if(clf == '' and learngAlg == 0):
+            model = 'RandomForest'
             clf = RandomForestClassifier(max_depth=spaceR['max_depth'],
                                         min_samples_split=spaceR['min_samples_split'],
                                          min_samples_leaf=spaceR['min_samples_leaf'],
@@ -371,21 +372,24 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
                                         )
 
         # NEURAL NETWORK CLASSIF -------------------------------------------------------------------------------------
-        if(clf == '' and learngAlg == 1):        
+        if(clf == '' and learngAlg == 1):  
+            model = 'NeuralNetwork'
             clf = MLPClassifier(verbose=False, random_state=0, activation=spaceN['activation'], solver=spaceN['solver'], learning_rate_init=spaceN['learning_rate_init'],
                                 max_iter=spaceN['max_iter'], hidden_layer_sizes=int(spaceN['hidden_layer_sizes']), alpha=spaceN['alpha'], learning_rate='adaptive')
        
         # -------------------------------------------------------------------------------------------------------------
 
         # BOOSTING CLASSOIF --------------------------------------------------------------------------------------------
-        if(clf == '' and learngAlg == 2):            
+        if(clf == '' and learngAlg == 2):   
+            model = 'Bagging'
             # clf = AdaBoostClassifier(n_estimators=space['n_estimators'], learning_rate=space['learning_rate'], random_state=1)
             # clf = GradientBoostingClassifier(n_estimators=space['n_estimators'], learning_rate=space['learning_rate'], random_state=1)
             # clf = BaggingClassifier(n_estimators=space['n_estimators'], random_state=1) # SIMPLE
-            clf = BaggingClassifier(n_estimators=spaceB['n_estimators'], max_samples=spaceB['max_samples'], max_features=spaceB['max_features'],
+            clf = BaggingClassifier(n_estimators=spaceB['n_estimators'], max_samples=spaceB['max_samples'],  # max_features=spaceB['max_features']
             bootstrap = spaceB['bootstrapB'], bootstrap_features = spaceB['bootstrap_features'], random_state=1)
         # --------------------------------------------------------------------------------------------------------------
         if(clf == ''):
+            model = 'BaggingSimple'
             clf = BaggingClassifier(n_estimators=spaceB['n_estimators'], random_state=1) # SIMPLE
             # clf = MLPClassifier(verbose=False, random_state=0, activation=spaceN['activation'], solver=spaceN['solver'], learning_rate_init=spaceN['learning_rate_init'],
             #                     max_iter=spaceN['max_iter'], hidden_layer_sizes=int(spaceN['hidden_layer_sizes']), alpha=spaceN['alpha'], learning_rate='adaptive')
@@ -532,8 +536,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
             if(modelMetricsObj[item] > 0):
                 scoreFinal += modelMetricsObj[item]
                 ind += 1
-        if(ind > 0):
-            scoreFinal = (scoreFinal*1.00)/ind
+        # if(ind > 0): scoreFinal = (scoreFinal*1.00)/ind
 
 
         for item in modelMetricsObj:
@@ -544,15 +547,15 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         modelMetricsObj['num_wrong_test'] = numWrongTt
         modelMetricsList = [modelMetricsObj]
 
-        # scoreFinal = precision_score(trainT, predT, average='weighted')
+        checkScore = precision_score(trainT, predT, average='weighted')
         # scoreFinal =
 
         result = {'loss': -1*scoreFinal, 'status': STATUS_OK,
-                  'modelMetrics': modelMetricsList, 'model' : clf, 'lossTest': lossTestFinal}
+                  'modelMetrics': modelMetricsList, 'model' : clf, 'lossTest': lossTestFinal, 'modelName' : model}
         # print " result is ", result, MAX_RET, MAX_EVAL, critScore, sameLabScore, similarityScore
         # print " result is ", result, MAX_RET, MAX_EVAL, precTrain, accTrain, f1Train
         # print " result is ", result, MAX_RET, MAX_EVAL, len(targetTrainNew), len(targetTrain), len(trainT)
-        print " result is ", result, precTest, precTrain, scoreFinal
+        print " result is ", result, precTest, precTrain, scoreFinal, checkScore
         print " result is ", -1*scoreFinal
         print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
         return result
@@ -648,6 +651,9 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
             # break
         res = trial['result']
         los = res['loss']
+        losTest = res['lossTest']
+        print " @@@@@@@@@@@@@@@ los and lossTest is ", ind, los, losTest
+        modName = res['modelName']
         mod = res['model']
         modMetr = res['modelMetrics'][0]
         # print " hehe we have mod metrics ", res['modelMetrics'][0]
@@ -669,7 +675,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
             #     if(par_space[item] < 2):
             #         par_space[item] = int(par_space[item]) + 2
         # mod_results[ind] = { 'res' : res, 'space' : par_space}
-        mod_results[index] = {'res': res, 'space': par_space, 'model' : mod, 'modelMetrics' : modMetr}
+        mod_results[index] = {'res': res, 'space': par_space, 'model' : mod, 'modelMetrics' : modMetr, 'modName': modName, 'los' : los, 'losTest' : losTest}
         # print " we get trial as  after : ", par_space
         ind += 1
 
@@ -693,8 +699,9 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         pred_out = {}
         pred_out = makePredictions(clf,
             space, train, test, targetTrain, targetTest, trainId, testId, extraInfo)
-        pred_out['loss'] = fin_mod_res[item]['res']['loss']
-        pred_out['lossTest'] = fin_mod_res[item]['res']['lossTest']
+        pred_out['loss'] = fin_mod_res[item]['los'] #fin_mod_res[item]['res']['loss']
+        pred_out['lossTest'] = fin_mod_res[item]['losTest'] # fin_mod_res[item]['res']['lossTest']
+        pred_out['modelName'] = fin_mod_res[item]['modName']
         pred_out['trainMetrics'] = fin_mod_res[item]['modelMetrics'] # commented
         allmodel_pred_out[ind] = pred_out # item
         ind += 1
