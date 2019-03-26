@@ -531,14 +531,14 @@
                         .style('stroke', '')
                 })
                 .on('click', function (d) {
-                    var ind = ParC.userPickedAttr.indexOf(d);
-                    if (ind == -1) {
-                        d3.select(this).style('fill', Main.colors.HIGHLIGHT2)
-                        ParC.userPickedAttr.push(d);
-                    } else {
-                        d3.select(this).style('fill', 'lightgray')
-                        ParC.userPickedAttr.splice(ind, 1);
-                    }
+                    // var ind = ParC.userPickedAttr.indexOf(d);
+                    // if (ind == -1) {
+                    //     d3.select(this).style('fill', Main.colors.HIGHLIGHT2)
+                    //     ParC.userPickedAttr.push(d);
+                    // } else {
+                    //     d3.select(this).style('fill', 'lightgray')
+                    //     ParC.userPickedAttr.splice(ind, 1);
+                    // }
                 })
 
             gr.append("text")

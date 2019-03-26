@@ -383,6 +383,7 @@
                 'metrics': metricList,
                 'metricKeys': metricObj,
                 'userConsWts': Cons.indivUserWtConst,
+                'userFeatures': ParC.userPickedAttr,
             }
             socket.emit("get_good_model", objSend);
             // socket.off('get_good_model');

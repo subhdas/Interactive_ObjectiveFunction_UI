@@ -124,6 +124,7 @@ def handle_my_custom_event(data):
 	metricList = data['metrics']
 	metricKeys = data['metricKeys']
 	userConsWts = data['userConsWts']
+	userFeatures = data['userFeatures']
 	train = data['train']
 	train = pd.DataFrame(train)
 	train = train.drop(['predicted'], axis = 1)
@@ -145,7 +146,8 @@ def handle_my_custom_event(data):
 	extraInfo = {
         'metricList': metricList,
 		'metricKeys': metricKeys,
-		'highWeights': userConsWts
+		'highWeights': userConsWts,
+		'userFeatures': userFeatures,
     }
 	out = wrap_findGoodModel(train,test, targetTrain,targetTest, extraInfo)
 	# print " we get out ", out

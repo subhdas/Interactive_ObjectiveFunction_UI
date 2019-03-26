@@ -36,11 +36,12 @@ class NumpyEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
-def preProcessData(data):
+def preProcessData(data, userFeatures):
     data = data.apply(pd.to_numeric, errors='ignore')
     data = data._get_numeric_data()
     idCol = data['id']
     data = data.drop(['id', 'cluster'], axis=1)
+    if(len(userFeatures)> 0):    data = data[userFeatures]
     print "START MOD COMP   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
     print " pre processing data col ", data.columns.values
 
@@ -50,7 +51,7 @@ def preProcessData(data):
     # scaled_df = scaler.fit_transform(data)
     # data = pd.DataFrame(scaled_df)
     # data.columns = myCol
-    # print " data is ", data.head(3), myCol
+    print " data is ", data.head(3), myCol
     return data, idCol
 
 
@@ -68,10 +69,13 @@ def wrap_findGoodModel(train, test, targetTrain, targetTest, extraInfo):
 
 
 def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
+    try:
+        userFeatures = extraInfo['userFeatures']
+    except: userFeatures = []
     MAX_RET = 4
     MAX_EVAL = 15
-    train, trainId = preProcessData(train)
-    test, testId = preProcessData(test)
+    train, trainId = preProcessData(train,userFeatures)
+    test, testId = preProcessData(test, userFeatures)
 
     print ' getting extra info as ', extraInfo
     def remove_non_crit_inst(train, targetTrain):

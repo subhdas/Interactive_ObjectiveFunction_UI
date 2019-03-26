@@ -65,9 +65,9 @@
     Main.datasetSelector = function () {
         // var dataSel = 1; // car
         // var dataSel = 2; // creditcard
-        // var dataSel = 3; // salary
+        var dataSel = 3; // salary
         // var dataSel = 4; // movie
-        var dataSel = 5; // diabetes
+        // var dataSel = 5; // diabetes
 
 
         if (dataSel == 1) {
