@@ -531,10 +531,10 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         modelMetricsObj['num_wrong_test'] = numWrongTt
         modelMetricsList = [modelMetricsObj]
 
-        scoreFinal = precision_score(trainT, predT, average='weighted')
+        # scoreFinal = precision_score(trainT, predT, average='weighted')
         # scoreFinal =
 
-        result = {'loss': scoreFinal, 'status': STATUS_OK,
+        result = {'loss': -1*scoreFinal, 'status': STATUS_OK,
                   'modelMetrics': modelMetricsList, 'model' : clf, 'lossTest': lossTestFinal}
         # print " result is ", result, MAX_RET, MAX_EVAL, critScore, sameLabScore, similarityScore
         # print " result is ", result, MAX_RET, MAX_EVAL, precTrain, accTrain, f1Train
