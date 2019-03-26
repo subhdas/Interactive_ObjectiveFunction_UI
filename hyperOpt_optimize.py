@@ -372,7 +372,9 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         # BOOSTING CLASSOIF --------------------------------------------------------------------------------------------
         # clf = AdaBoostClassifier(n_estimators=space['n_estimators'], learning_rate=space['learning_rate'], random_state=1)
         # clf = GradientBoostingClassifier(n_estimators=space['n_estimators'], learning_rate=space['learning_rate'], random_state=1)
-        clf = BaggingClassifier(n_estimators=space['n_estimators'], random_state=1)
+        # clf = BaggingClassifier(n_estimators=space['n_estimators'], random_state=1) # SIMPLE
+        clf = BaggingClassifier(n_estimators=space['n_estimators'], max_samples=space['max_samples'], max_features=space['max_features'],
+        bootstrap = space['bootstrap'], bootstrap_features = space['bootstrap_features'], random_state=1)
         # --------------------------------------------------------------------------------------------------------------
         print ' train shape is a ', train.shape
         # trainNew = train.copy()
@@ -584,12 +586,18 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     }
     #---------------------------------------------------------------------------------------------
 
-    # FOR BOOSTING NETWORK ------------------------------------------------------------------------
+    # FOR BOOSTING/BAGGING NETWORK ------------------------------------------------------------------------
     frange = [x / 100.0 for x in range(100, 200, 1)]
+    bootStrapArr = [True, False]
+
     print " got frange ", frange
     space = {
         'n_estimators': hp.choice('n_estimators', range(10, 100)),
+        'max_samples': hp.choice('max_samples', range(40, train.shape[0])),
+        'max_features': hp.choice('max_features', range(4, train.shape[1])),
         'learning_rate': hp.choice('learning_rate', frange),
+        'bootstrap': hp.choice('bootstrap', bootStrapArr),
+        'bootstrap_features': hp.choice('bootstrap_features', bootStrapArr),
     }
     #---------------------------------------------------------------------------------------------
 
