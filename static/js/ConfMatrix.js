@@ -32,19 +32,28 @@
 
 
 		var ob = 'trainMetrics'
-		if (type == 'test') ob = 'testMetrics'
+		var obLoss = 'loss'
+		if (type == 'test') {
+			ob = 'testMetrics'
+			obLoss = 'lossTest'
+		}
 		var text = 'Prediction Accuracy is  '
 		var text = 'Objective Function Score is  '
 		var metObj = BarM.allModelData[BarM.selectedModelId][ob];
-		var score = 0,
-			ind = 0;
-		for (var item in metObj) {
-			score += +metObj[item]
-			ind += 1
-		}
+		// var score = 0,
+		// 	ind = 0;
+		// for (var item in metObj) {
+		// 	score += +metObj[item]
+		// 	ind += 1
+		// }		
+		// acc = ((score * 100) / ind).toFixed(2)
+
+
+		score = BarM.allModelData[BarM.selectedModelId][obLoss];
+		acc = (score * 100).toFixed(2)
 		if (type == 'train') idName = 'modResRowid_0'
 		else idName = 'modResRowid_1'
-		acc = ((score * 100) / ind).toFixed(2)
+		// acc = ((score * 100) / ind).toFixed(2)
 		if (acc > 1.0) acc = (acc * 0.9).toFixed(2)
 		var htmlStr = "<div class = '" + type + "_wrapDivs modelResult' id = 'modelResult_" + containerId + "_" + type + "'>"
 		htmlStr += "<div class = 'modResRow' id = '" + idName + "' ><span class ='modelResHeadText'> " + text + "</span>"
@@ -54,15 +63,18 @@
 		if (BarM.modIter > 0) {
 			// console.log('moditer is ', BarM.modIter)
 			var text2 = 'Last Objective Function Score was  '
-
 			var metObj = BarM.histData[BarM.modIter - 1][+BarM.selectedModelId][ob];
-			var score = 0,
-				ind = 0;
-			for (var item in metObj) {
-				score += +metObj[item]
-				ind += 1
-			}
-			acc2 = ((score * 100) / ind).toFixed(2)
+
+			// var score = 0,
+			// 	ind = 0;
+			// for (var item in metObj) {
+			// 	score += +metObj[item]
+			// 	ind += 1
+			// }
+			// acc2 = ((score * 100) / ind).toFixed(2)
+			score = BarM.histData[BarM.modIter - 1][BarM.selectedModelId][obLoss];
+
+			acc2 = (score * 100).toFixed(2)
 			if (acc2 > 1.0) acc2 = (acc2 * 0.9).toFixed(2)
 
 			htmlStr += "<div class = 'modResRow' ><span class ='modelResHeadText'>" + text2 + " </span>"

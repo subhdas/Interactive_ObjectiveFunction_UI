@@ -15,6 +15,7 @@ from hyperopt import hp, tpe, STATUS_OK, Trials
 from hyperopt.fmin import fmin
 from sklearn.metrics import classification_report, f1_score, accuracy_score, confusion_matrix, precision_score, recall_score
 import json
+from sklearn import preprocessing
 
 # for json dumps to work
 
@@ -42,6 +43,14 @@ def preProcessData(data):
     data = data.drop(['id', 'cluster'], axis=1)
     print "START MOD COMP   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
     print " pre processing data col ", data.columns.values
+
+    myCol = data.columns.values
+    # SCALE DATA
+    # scaler = preprocessing.StandardScaler()
+    # scaled_df = scaler.fit_transform(data)
+    # data = pd.DataFrame(scaled_df)
+    # data.columns = myCol
+    # print " data is ", data.head(3), myCol
     return data, idCol
 
 
@@ -59,8 +68,8 @@ def wrap_findGoodModel(train, test, targetTrain, targetTest, extraInfo):
 
 
 def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
-    MAX_RET = 3
-    MAX_EVAL = 10
+    MAX_RET = 4
+    MAX_EVAL = 50
     train, trainId = preProcessData(train)
     test, testId = preProcessData(test)
 
@@ -302,6 +311,28 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         print " wt list found ", len(wtList), len(targetTrain), train.shape
         return wtList
 
+    def normalize_wts(wtObj):
+        total = 0
+        ind = 0
+        for item in wtObj:
+            total += wtObj[item]
+            ind += 1
+
+        cont = (total - 1.00)/ind
+
+        sumT = 0
+        for item in wtObj:
+            wtObj[item] = wtObj[item] - cont
+            sumT += wtObj[item]
+        # mxVal = -10000
+        # for item in wtObj:
+        #         if mxVal < wtObj[item] : mxVal = wtObj[item]
+        
+        # for item in wtObj:
+        #     wtObj[item] = wtObj[item]/mxVal
+        print " summing wts ", sumT
+        return wtObj
+
     def objective(space):
         # clf = xgb.XGBRegressor(n_estimators = space['n_estimators'],
         #                        max_depth = space['max_depth'],
@@ -315,6 +346,8 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
 
         metObj = extraInfo['metricKeys']
         userWts = extraInfo['highWeights']
+        userWts = normalize_wts(userWts)
+        print " in obj func, user wts ", userWts
         clf = RandomForestClassifier(max_depth=space['max_depth'],
                                      min_samples_split=space['min_samples_split'],
                                      min_samples_leaf=space['min_samples_leaf'],
@@ -412,6 +445,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         except:
             cross_mean_score = 0
 
+        lossTestFinal = -1*precision_score(targetTest, predTest, average='macro')
         # store the result
         modelMetricsObj = {}
 
@@ -440,7 +474,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         # scoreFinal =
 
         result = {'loss': -1*scoreFinal, 'status': STATUS_OK,
-                  'modelMetrics': modelMetricsList, 'model' : clf, }
+                  'modelMetrics': modelMetricsList, 'model' : clf, 'lossTest': lossTestFinal}
         # print " result is ", result, MAX_RET, MAX_EVAL, critScore, sameLabScore, similarityScore
         # print " result is ", result, MAX_RET, MAX_EVAL, precTrain, accTrain, f1Train
         # print " result is ", result, MAX_RET, MAX_EVAL, len(targetTrainNew), len(targetTrain), len(trainT)
@@ -450,13 +484,24 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     col_train = train.columns
     bootStrapArr = [True, False]
     criterionArr = ["gini", "entropy"]
+    # space = {
+    #     # 'max_depth': hp.choice('max_depth', np.arange(10, 30, dtype=int)),
+    #     'max_depth': hp.choice('max_depth', range(5, 30)),
+    #     # 'min_samples_split': hp.choice('min_samples_split', np.arange(8, 15, dtype=int)),
+    #     'min_samples_split': hp.choice('min_samples_split', range(8, 15)),
+    #     # 'min_samples_leaf': hp.choice('min_samples_leaf', np.arange(5, 15, dtype=int)),
+    #     'min_samples_leaf': hp.choice('min_samples_leaf', range(5, 15)),
+    #     'bootstrap': hp.choice('bootstrap', bootStrapArr),
+    #     'criterion': hp.choice('criterion', criterionArr)
+    # }
+
     space = {
         # 'max_depth': hp.choice('max_depth', np.arange(10, 30, dtype=int)),
-        'max_depth': hp.choice('max_depth', range(5, 30)),
+        'max_depth': hp.choice('max_depth', range(30, 100)),
         # 'min_samples_split': hp.choice('min_samples_split', np.arange(8, 15, dtype=int)),
-        'min_samples_split': hp.choice('min_samples_split', range(8, 15)),
+        'min_samples_split': hp.choice('min_samples_split', range(2, 70)),
         # 'min_samples_leaf': hp.choice('min_samples_leaf', np.arange(5, 15, dtype=int)),
-        'min_samples_leaf': hp.choice('min_samples_leaf', range(5, 15)),
+        'min_samples_leaf': hp.choice('min_samples_leaf', range(2, 70)),
         'bootstrap': hp.choice('bootstrap', bootStrapArr),
         'criterion': hp.choice('criterion', criterionArr)
     }
@@ -534,6 +579,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         pred_out = makePredictions(clf,
             space, train, test, targetTrain, targetTest, trainId, testId, extraInfo)
         pred_out['loss'] = fin_mod_res[item]['res']['loss']
+        pred_out['lossTest'] = fin_mod_res[item]['res']['lossTest']
         pred_out['trainMetrics'] = fin_mod_res[item]['modelMetrics'] # commented
         allmodel_pred_out[ind] = pred_out # item
         ind += 1
