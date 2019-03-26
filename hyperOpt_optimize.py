@@ -48,9 +48,9 @@ def preProcessData(data, userFeatures):
 
     myCol = data.columns.values
     # SCALE DATA
-    # scaler = preprocessing.StandardScaler()
-    # scaled_df = scaler.fit_transform(data)
-    # data = pd.DataFrame(scaled_df)
+    scaler = preprocessing.StandardScaler()
+    scaled_df = scaler.fit_transform(data)
+    data = pd.DataFrame(scaled_df)
     # data.columns = myCol
     print " data is ", data.head(3), myCol
     return data, idCol
@@ -348,7 +348,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         #                        colsample_bytree = space['colsample_bytree'],
         #                        objective='reg:linear'
         #                        )
-
+        print " space is ", space
         metObj = extraInfo['metricKeys']
         userWts = extraInfo['highWeights']
         userWts = normalize_wts(userWts)
@@ -516,15 +516,15 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         modelMetricsObj['num_wrong_test'] = numWrongTt
         modelMetricsList = [modelMetricsObj]
 
-        # scoreFinal  = cross_mean_score
+        scoreFinal = precision_score(trainT, predT, average='weighted')
         # scoreFinal =
 
-        result = {'loss': -1*scoreFinal, 'status': STATUS_OK,
+        result = {'loss': scoreFinal, 'status': STATUS_OK,
                   'modelMetrics': modelMetricsList, 'model' : clf, 'lossTest': lossTestFinal}
         # print " result is ", result, MAX_RET, MAX_EVAL, critScore, sameLabScore, similarityScore
         # print " result is ", result, MAX_RET, MAX_EVAL, precTrain, accTrain, f1Train
         # print " result is ", result, MAX_RET, MAX_EVAL, len(targetTrainNew), len(targetTrain), len(trainT)
-        # print " result is ", result, precTest, precTrain
+        print " result is ", result, precTest, precTrain, scoreFinal
         print " result is ", -1*scoreFinal
         print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
         return result
@@ -559,7 +559,8 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     frange = [x / 10000.0 for x in range(100, 200, 1)]
     print " got frange ", frange
     activationArr = ['identity', 'logistic', 'tanh', 'relu']
-    solverArr = ['lbfgs', 'sgd', 'adam']
+    # solverArr = ['lbfgs', 'sgd', 'adam']
+    solverArr = ['sgd']
     space = {
         'max_iter': hp.choice('max_iter', range(10, 100)),
         'hidden_layer_sizes': hp.choice('hidden_layer_sizes', range(2, 15)),
@@ -614,9 +615,9 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
             except: print 'some error ignore plz '
         for item in par_space:
             par_space[item] = par_space[item][0]
-            if(item == 'min_samples_split' or item == 'max_depth' or item == 'min_samples_leaf'):
-                if(par_space[item] < 2):
-                    par_space[item] = int(par_space[item]) + 2
+            # if(item == 'min_samples_split' or item == 'max_depth' or item == 'min_samples_leaf'):
+            #     if(par_space[item] < 2):
+            #         par_space[item] = int(par_space[item]) + 2
         # mod_results[ind] = { 'res' : res, 'space' : par_space}
         mod_results[index] = {'res': res, 'space': par_space, 'model' : mod, 'modelMetrics' : modMetr}
         # print " we get trial as  after : ", par_space
@@ -638,7 +639,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         space = fin_mod_res[item]['space']
         clf = fin_mod_res[item]['model']
         if(clfOrig == "") : clfOrig = clf
-        # print " cycling in mod results ", item, fin_mod_res[item]['res']['modelMetrics']
+        print " cycling in mod results ", item,space
         pred_out = {}
         pred_out = makePredictions(clf,
             space, train, test, targetTrain, targetTest, trainId, testId, extraInfo)
