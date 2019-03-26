@@ -16,6 +16,7 @@ from hyperopt.fmin import fmin
 from sklearn.metrics import classification_report, f1_score, accuracy_score, confusion_matrix, precision_score, recall_score
 import json
 from sklearn import preprocessing
+from sklearn.neural_network import MLPClassifier
 
 # for json dumps to work
 
@@ -352,14 +353,20 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         userWts = extraInfo['highWeights']
         userWts = normalize_wts(userWts)
         print " in obj func, user wts ", userWts
-        clf = RandomForestClassifier(max_depth=space['max_depth'],
-                                     min_samples_split=space['min_samples_split'],
-                                     min_samples_leaf=space['min_samples_leaf'],
-                                     bootstrap=space['bootstrap'],
-                                    #  criterion=space['criterion']
-                                     criterion = 'gini',
-                                     random_state = 1
-                                     )
+        # clf = RandomForestClassifier(max_depth=space['max_depth'],
+        #                              min_samples_split=space['min_samples_split'],
+        #                              min_samples_leaf=space['min_samples_leaf'],
+        #                              bootstrap=space['bootstrap'],
+        #                             #  criterion=space['criterion']
+        #                              criterion = 'gini',
+        #                              random_state = 1
+        #                              )
+
+        # NEURAL NETWORK CLASSIF -------------------------------------------------------------------------------------
+        clf = MLPClassifier(verbose=False, random_state=0, activation=space['activation'], solver=space['solver'], learning_rate_init=space['learning_rate_init'],
+                            max_iter=space['max_iter'], hidden_layer_sizes=int(space['hidden_layer_sizes']), alpha=space['alpha'], learning_rate='adaptive')
+       
+        # -------------------------------------------------------------------------------------------------------------
 
         print ' train shape is a ', train.shape
         # trainNew = train.copy()
@@ -369,7 +376,8 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
 
         # train = trainNew.copy()
         sampWtList = calc_sam_wt(targetTrainNew)
-        clf.fit(trainNew, targetTrainNew, sampWtList)
+        try: clf.fit(trainNew, targetTrainNew, sampWtList)
+        except: clf.fit(trainNew, targetTrainNew)
         # clf.fit(trainNew, targetTrainNew, sampWtList)
         predTrain = clf.predict(train)
         predTest = clf.predict(test)
@@ -546,6 +554,22 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     #     'criterion': hp.choice('criterion', criterionArr)
     # }
 
+
+    # FOR NEURAL NETWORK ------------------------------------------------------------------------
+    frange = [x / 10000.0 for x in range(100, 200, 1)]
+    print " got frange ", frange
+    activationArr = ['identity', 'logistic', 'tanh', 'relu']
+    solverArr = ['lbfgs', 'sgd', 'adam']
+    space = {
+        'max_iter': hp.choice('max_iter', range(10, 100)),
+        'hidden_layer_sizes': hp.choice('hidden_layer_sizes', range(2, 15)),
+        'alpha': hp.choice('alpha', frange),
+        'learning_rate_init': hp.choice('learning_rate_init', frange),
+        'activation': hp.choice('activation', activationArr),
+        'solver': hp.choice('solver', solverArr)
+    }
+    #---------------------------------------------------------------------------------------------
+
     trials = Trials()
     best = fmin(fn=objective,
                 space=space,
@@ -628,8 +652,11 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     # print " mod results obj ", allmodel_pred_out
 
     # print(" best output is ", best)
-    best['bootstrap'] = bootStrapArr[best['bootstrap']]
-    best['criterion'] = criterionArr[best['criterion']]
+    try:
+        best['bootstrap'] = bootStrapArr[best['bootstrap']]
+        best['criterion'] = criterionArr[best['criterion']]
+    except:
+        pass
 
     obj = {
         'predictions': makePredictions(clfOrig, best, train, test, targetTrain, targetTest, trainId, testId, extraInfo),
@@ -664,7 +691,8 @@ def makePredictions(clf, space, train, test, targetTrain, targetTest, trainId, t
     predTrain = clf.predict(train)
     predTest = clf.predict(test)
 
-    feat_imp = clf.feature_importances_
+    try: feat_imp = clf.feature_importances_
+    except : feat_imp = []
     # print " features are ", train.columns.values
     # print " feature imp is ", feat_imp
     # print " feat imp zipped ", zip(train.columns.values,feat_imp)
