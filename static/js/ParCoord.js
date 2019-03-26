@@ -62,6 +62,8 @@
             ParC.parallelBrushed = false;
             ParC.tempDimRules = []
             $('.scatterCir').show();
+            $('.scatterCir').css('opacity', 1);
+            d3.selectAll(".scatterCir").classed("hidden", false);
 
 
         })

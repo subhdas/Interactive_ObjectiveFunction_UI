@@ -151,7 +151,19 @@ svg {
   /* text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff; */
   cursor: move;
 }
+/* 
+.hiddenParFilter {
+  opacity : 0.1;
+  stroke-width: 1;
+}
 
+.strongParFilter {
+  opacity: 1;
+  stroke-width: 2;
+} */
+
+
+/*end of par coord */
 /*style of buttons mdl*/
 .mdl-button.mdl-button--colored{
   color : black;

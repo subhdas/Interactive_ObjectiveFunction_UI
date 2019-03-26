@@ -54,7 +54,7 @@
         })
     }
 
-    Scat.showAllCircle = function(){
+    Scat.showAllCircle = function () {
         $(".scatterCir").show();
     }
 
@@ -91,9 +91,9 @@
         d3.csv("static/data/flowers.csv", function (error, data) {
             if (error) throw error;
             var categorical = Main.entityNameSecondImp; //"species"
-            if(categorical == '0_') {
+            if (categorical == '0_') {
                 var key = Object.keys(Main.numericalAttributes);
-                categorical = key[Util.getRandomNumberBetween(0,key.length-1).toFixed(0)]
+                categorical = key[Util.getRandomNumberBetween(0, key.length - 1).toFixed(0)]
             }
             data = dataHave
 
@@ -151,10 +151,10 @@
                     d3.select(this).call(yAxis);
                 });
 
-            var cell = svg.selectAll(".cell")
+            var cell = svg.selectAll(".cell_scat")
                 .data(cross(traits, traits))
                 .enter().append("g")
-                .attr("class", "cell")
+                .attr("class", "cell_scat")
                 .attr("transform", function (d) {
                     return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")";
                 })
@@ -172,6 +172,17 @@
                 });
 
             cell.call(brush);
+
+            setTimeout(() => {
+                // $(".background").prependTo(".cell");
+                // $('.background').css('opacity' ,0)
+                // $('.background').css('fill' ,'none')
+
+                $('.cell_scat').each(function (e) {
+                    $(this).find('.background').prependTo(this);
+                })
+
+            }, 200);
 
             function plot(p) {
                 var cell = d3.select(this);
@@ -204,7 +215,27 @@
                     .attr("r", 4)
                     .style("fill", function (d) {
                         return color(d[categorical]);
-                    });
+                    })
+                    .style('z-index', 1000)
+                    .on('mouseover', function (d, i) {
+                        $(this).css('stroke', 'black')
+                        var id = $(this).attr('id');
+                        id = Util.getNumberFromText(id);
+                        $('.par_Filter_cl').css('opacity', 0.1);
+                        $('#par_Filter_Id_' + id).css('opacity', 1);
+                        $('#par_Filter_Id_' + id).css('stroke-width', 5);
+                        console.log('mouse over circle ', id, i)
+                    })
+                    .on('mouseout', function (d, i) {
+                        $(this).css('stroke', 'transparent')
+
+                        var id = $(this).attr('id');
+                        id = Util.getNumberFromText(id);
+                        $('.par_Filter_cl').css('opacity', 1);
+                        $('.par_Filter_cl').css('stroke-width', 1);
+                        console.log('mouse out circle ', id, i)
+
+                    })
             }
 
             var brushCell;
@@ -235,6 +266,7 @@
                         ConP.selectedRowsCons[d.id] = true;
                     }
                     Scat.filteredScatData = Util.getUniqueArray(Scat.filteredScatData)
+
                     return res
                 });
             }
@@ -242,6 +274,17 @@
             // If the brush is empty, select all circles.
             function brushend() {
                 if (brush.empty()) svg.selectAll(".hidden").classed("hidden", false);
+                $('.par_Filter_cl').css('opacity', 0.1);
+                // $('.par_Filter_cl').addClass('hiddenParFilter');
+
+                for (var i = 0; i < Scat.filteredScatData.length; i++) {
+                    var id = Scat.filteredScatData[i]
+                     $('#par_Filter_Id_' + id).css('opacity', 1);
+                     $('#par_Filter_Id_' + id).css('stroke-width', 1);
+                    // $('#par_Filter_Id_' + id).removeClass('hiddenParFilter');
+                    // $('#par_Filter_Id_' + id).addClass('strongParFilter');
+
+                }
             }
         });
 

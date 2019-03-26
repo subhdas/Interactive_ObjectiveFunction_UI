@@ -55,11 +55,11 @@
                 }
 
                 var valFound = trainMet[item]
-                if(typeof valFound == 'undefined') valFound = trainMet[name]
+                if (typeof valFound == 'undefined') valFound = trainMet[name]
                 // if (ind == -1) {
 
                 //add jitter to valFound
-                valFound = valFound * 0.97 + Util.getRandomNumberBetween(0.05,-0.05);
+                valFound = valFound * 0.97 + Util.getRandomNumberBetween(0.05, -0.05);
                 if (valFound > 1.00) valFound = Util.getRandomNumberBetween(0.99, 0.93);
                 var ob = {
                     axis: name,
@@ -184,9 +184,16 @@
             $(this).css('opacity', 1);
             $(".poly_model").css("opacity", 0.1);
             $(".model_" + idNum).css("opacity", 0.75);
+
+            $('.par_ModMetric_cl').css('opacity', 0.1);
+            $('#par_ModMetric_Id_' + idNum).css('opacity', 1);
+            $('#par_ModMetric_Id_'+idNum).css('stroke-width', 5);
+
+
         })
 
         $(".modelNameHead").on('mouseout', function (e) {
+            
             var idNum = $(this).attr('id');
             idNum = Util.getNumberFromText(idNum);
             $(".modelNameHead").css('opacity', 1);
@@ -194,6 +201,9 @@
 
             $(".poly_model").css("opacity", 0.1);
             $(".model_" + idNum).css("opacity", 0.75);
+            $('.par_ModMetric_cl').css('opacity', 1);
+            $('.par_ModMetric_cl').css('stroke-width', 1);
+
         })
 
         $(".modelNameHead").on('click', function (e) {
@@ -460,7 +470,13 @@
             .selectAll("path")
             .data(data)
             .enter().append("path")
-            .attr("d", path);
+            .attr("d", path)
+            .attr('class', 'par_ModMetric_cl')
+            .attr('id', function (d,i) {
+                console.log(' path filter panel ', d)
+                return 'par_ModMetric_Id_' + i
+            })
+            .style('stroke-width', 1)
 
         // Add a group element for each dimension.
         var g = svg.selectAll(".dimension")
@@ -999,7 +1015,7 @@
                         if (origVal != predVal) result = 0
                     } catch (e) {}
                     var btnName = 'close'
-                    if(result == 1 ) btnName = 'check'
+                    if (result == 1) btnName = 'check'
                     // var result = Util.getRandomNumberBetween(1, 0).toFixed(0);
                     var splClass = 'rowConstTableCol_' + result;
                     StarM.constraintsDict[i] = true;
@@ -1009,7 +1025,7 @@
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + name + "</span>";
 
                     var item = "<div class ='btnResult'><button id='' title='Show Table View' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnElem' >"
-                    item += "<i class='material-icons'>" + btnName +"</i></button></div>";
+                    item += "<i class='material-icons'>" + btnName + "</i></button></div>";
 
                     htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + item + "</span>"; //result
                     htmlStr += "</div>"
@@ -1048,8 +1064,8 @@
                 htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanNameItem' parent = '" + dataItem[Main.entityNameSecondImp] + "'>" + nameItem + "</span>";
                 // htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanParent'>" + par + "</span>";
                 htmlStr += "<span class ='rowNameConstTable rowSpanConsTab rowSpanItem'>" + name + "</span>";
-               var item = "<div class ='btnResult'><button id='' title='Show Table View' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnElem' >"
-               item += "<i class='material-icons'>" + btnName + "</i></button></div>";
+                var item = "<div class ='btnResult'><button id='' title='Show Table View' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnElem' >"
+                item += "<i class='material-icons'>" + btnName + "</i></button></div>";
                 htmlStr += "<span class ='rowNameConstTable rowSpanConsTab'>" + item + "</span>";
                 htmlStr += "</div>"
             } // end of inner for
