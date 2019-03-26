@@ -53,7 +53,7 @@ def preprocess_data(dataGiven):
 	app_df = orig_df[v:orig_df.shape[0] - 1]
 	app_df['id'] = [i for i in range(app_df.shape[0])]
 	inp_df['id'] = [i for i in range(inp_df.shape[0])]
-	train, test = train_test_split(inp_df, test_size=0.35)
+	train, test = train_test_split(inp_df, test_size=0.15)
 	print " after split ", train.shape, test.shape
 
 

@@ -445,6 +445,13 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         except:
             cross_mean_score = 0
 
+        lab = list(set(trainT))
+
+        # tn, fp, fn, tp = confusion_matrix(trainT.tolist(), predT.tolist()).ravel()
+        conf = confusion_matrix(trainT.tolist(), predT.tolist(), labels = lab).ravel()
+
+        print " getting tn fp fn tp ", conf, lab
+
         lossTestFinal = -1*precision_score(targetTest, predTest, average='macro')
         # store the result
         modelMetricsObj = {}
@@ -478,33 +485,35 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         # print " result is ", result, MAX_RET, MAX_EVAL, critScore, sameLabScore, similarityScore
         # print " result is ", result, MAX_RET, MAX_EVAL, precTrain, accTrain, f1Train
         # print " result is ", result, MAX_RET, MAX_EVAL, len(targetTrainNew), len(targetTrain), len(trainT)
-        print " result is ", result, precTest, precTrain
+        # print " result is ", result, precTest, precTrain
+        print " result is ", -1*scoreFinal
+        print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
         return result
 
     col_train = train.columns
     bootStrapArr = [True, False]
     criterionArr = ["gini", "entropy"]
-    # space = {
-    #     # 'max_depth': hp.choice('max_depth', np.arange(10, 30, dtype=int)),
-    #     'max_depth': hp.choice('max_depth', range(5, 30)),
-    #     # 'min_samples_split': hp.choice('min_samples_split', np.arange(8, 15, dtype=int)),
-    #     'min_samples_split': hp.choice('min_samples_split', range(8, 15)),
-    #     # 'min_samples_leaf': hp.choice('min_samples_leaf', np.arange(5, 15, dtype=int)),
-    #     'min_samples_leaf': hp.choice('min_samples_leaf', range(5, 15)),
-    #     'bootstrap': hp.choice('bootstrap', bootStrapArr),
-    #     'criterion': hp.choice('criterion', criterionArr)
-    # }
-
     space = {
         # 'max_depth': hp.choice('max_depth', np.arange(10, 30, dtype=int)),
-        'max_depth': hp.choice('max_depth', range(30, 100)),
+        'max_depth': hp.choice('max_depth', range(5, 30)),
         # 'min_samples_split': hp.choice('min_samples_split', np.arange(8, 15, dtype=int)),
-        'min_samples_split': hp.choice('min_samples_split', range(2, 70)),
+        'min_samples_split': hp.choice('min_samples_split', range(8, 15)),
         # 'min_samples_leaf': hp.choice('min_samples_leaf', np.arange(5, 15, dtype=int)),
-        'min_samples_leaf': hp.choice('min_samples_leaf', range(2, 70)),
+        'min_samples_leaf': hp.choice('min_samples_leaf', range(5, 15)),
         'bootstrap': hp.choice('bootstrap', bootStrapArr),
         'criterion': hp.choice('criterion', criterionArr)
     }
+
+    # space = {
+    #     # 'max_depth': hp.choice('max_depth', np.arange(10, 30, dtype=int)),
+    #     'max_depth': hp.choice('max_depth', range(30, 100)),
+    #     # 'min_samples_split': hp.choice('min_samples_split', np.arange(8, 15, dtype=int)),
+    #     'min_samples_split': hp.choice('min_samples_split', range(2, 70)),
+    #     # 'min_samples_leaf': hp.choice('min_samples_leaf', np.arange(5, 15, dtype=int)),
+    #     'min_samples_leaf': hp.choice('min_samples_leaf', range(2, 70)),
+    #     'bootstrap': hp.choice('bootstrap', bootStrapArr),
+    #     'criterion': hp.choice('criterion', criterionArr)
+    # }
 
     trials = Trials()
     best = fmin(fn=objective,
