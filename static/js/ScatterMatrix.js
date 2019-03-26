@@ -226,7 +226,7 @@
                         $('#par_Filter_Id_' + id).css('stroke-width', 5);
 
                         // console.log('mouse over circle ', d,id, i)
-                        var e = Main.getDataById(d.id,Main.trainData);
+                        var e = Main.getDataById(d.id, Main.trainData);
                         showTooltip(e, id);
                     })
                     .on('mouseout', function (d, i) {
@@ -243,67 +243,75 @@
                     })
             }
 
-               function showTooltip (d, idVal) {
+            function showTooltip(d, idVal) {
 
-                  var disp = $(".dipScat").remove()
+                var disp = $(".dipScat").remove()
                 //   console.log('hill tip disp ', disp);
 
-                  Scat.tipDiv = d3
-                      .select("body")
-                      .append("div")
-                      .attr("class", "dipScat")
-                      .attr("id", "dipScat_" + idVal);
+                Scat.tipDiv = d3
+                    .select("body")
+                    .append("div")
+                    .attr("class", "dipScat")
+                    .attr("id", "dipScat_" + idVal);
 
 
-                  d3.selectAll(".dipScat")
-                      .style("position", "absolute")
-                      .style("display", "flex")
-                      .style("min-width", "80px")
-                      .style("height", "auto")
-                      .style("background", "none repeat scroll 0 0 #ffffff")
-                      .style("border", "1px solid "+ Main.colors.HIGHLIGHT)
-                      .style("padding", "3px")
-                      .style("text-align", "center");
+                d3.selectAll(".dipScat")
+                    .style("position", "absolute")
+                    .style("display", "flex")
+                    .style("min-width", "80px")
+                    .style("height", "auto")
+                    .style("background", "none repeat scroll 0 0 #ffffff")
+                    .style("border", "1px solid " + Main.colors.HIGHLIGHT)
+                    .style("padding", "3px")
+                    .style("text-align", "center");
 
 
-                  var htmlStr = "<div class = 'tipHullHeader'><span class = 'topHead' > ID : " + d.id + "</span>";
-                  htmlStr += "<span> Name : " + d[Main.entityName] + "</span></div>";
+                var htmlStr = "<div class = 'tipHullHeader'><span class = 'topHead' > ID : " + d.id + "</span>";
+                htmlStr += "<span class = 'topHead' > Name : " + d[Main.entityName] + "</span></div>";
+                var ind = 0;
+                htmlStr += "<div class = 'tipHullContent' >"
+                for (var item in Main.numericalAttributes) {
+                    htmlStr += "<div>" + item + " : " + d[item] + "</div>";
+                    ind += 1
+                    if (ind > 4) break;
+                }
+                htmlStr += "</div>"
                 //   htmlStr += "<div class = 'tipHullContent' ><div>Local Coeff : " + Util.getRandomNumberBetween(10, 0).toFixed(4) + "</div>";
-                  // htmlStr += "<div class = 'tooltipModelContent' ><div>Origin : " + 2 + "</div>";
-                  // htmlStr += "<div class = 'tooltipModelContent' ><div>Cluster : " +  3 + "</div>";
-                  // htmlStr += "<div class = 'tooltipModelContent' ><div>MPG : " + 4+ "</div>";
+                // htmlStr += "<div class = 'tooltipModelContent' ><div>Origin : " + 2 + "</div>";
+                // htmlStr += "<div class = 'tooltipModelContent' ><div>Cluster : " +  3 + "</div>";
+                // htmlStr += "<div class = 'tooltipModelContent' ><div>MPG : " + 4+ "</div>";
 
-                  Scat.tipDiv
-                      .style("left", d3.event.pageX + 35 + "px")
-                      .style("top", d3.event.pageY - 75 + "px")
-                      .style("display", "flex")
-                      .style("flex-direction", "column")
-                      .style("align-items", "start")
-                      .style("font-size", "0.75em")
-                      .style("padding", "4px")
-                      .html(htmlStr);
+                Scat.tipDiv
+                    .style("left", d3.event.pageX + 35 + "px")
+                    .style("top", d3.event.pageY - 75 + "px")
+                    .style("display", "flex")
+                    .style("flex-direction", "column")
+                    .style("align-items", "start")
+                    .style("font-size", "0.75em")
+                    .style("padding", "4px")
+                    .html(htmlStr);
 
-                  $(".topHead").css("font-weight", "bold");
+                $(".topHead").css("font-weight", "bold");
 
-                  $(".tipHullHeader").css("display", "flex");
-                  $(".tipHullHeader").css("flex-direction", "column");
-                  $(".tipHullHeader").css("align-items", "start");
-                  $(".tipHullHeader").css("width", "100%");
-                  $(".tipHullHeader").css('background', 'white');
-                  $(".tipHullHeader").css("padding", "4px");
+                $(".tipHullHeader").css("display", "flex");
+                $(".tipHullHeader").css("flex-direction", "column");
+                $(".tipHullHeader").css("align-items", "start");
+                $(".tipHullHeader").css("width", "100%");
+                $(".tipHullHeader").css('background', 'white');
+                $(".tipHullHeader").css("padding", "4px");
 
-                  $(".tipHullContent").css("display", "flex");
-                  $(".tipHullContent").css("flex-direction", "column");
-                  $(".tipHullContent").css("align-items", "start");
-                  $(".tipHullContent").css("width", "100%");
-                  $(".tipHullContent").css("background", "transparent");
-                  // $(".tooltipModelContent").css("padding", "4px");
+                $(".tipHullContent").css("display", "flex");
+                $(".tipHullContent").css("flex-direction", "column");
+                $(".tipHullContent").css("align-items", "start");
+                $(".tipHullContent").css("width", "100%");
+                $(".tipHullContent").css("background", "transparent");
+                $(".tipHullContent").css("padding", "5px");
 
-                  setTimeout(() => {
-                      $("#dipScat_" + idVal).show();
-                  }, 100);
+                setTimeout(() => {
+                    $("#dipScat_" + idVal).show();
+                }, 100);
 
-              }
+            }
 
             var brushCell;
 
@@ -346,8 +354,8 @@
 
                 for (var i = 0; i < Scat.filteredScatData.length; i++) {
                     var id = Scat.filteredScatData[i]
-                     $('#par_Filter_Id_' + id).css('opacity', 1);
-                     $('#par_Filter_Id_' + id).css('stroke-width', 1);
+                    $('#par_Filter_Id_' + id).css('opacity', 1);
+                    $('#par_Filter_Id_' + id).css('stroke-width', 1);
                     // $('#par_Filter_Id_' + id).removeClass('hiddenParFilter');
                     // $('#par_Filter_Id_' + id).addClass('strongParFilter');
 
