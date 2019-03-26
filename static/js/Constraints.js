@@ -560,6 +560,7 @@
 
             }
             setTimeout(() => {
+                // if (!Cons.cnsBtnMouseEvent) ConsInt.getActiveConstraints();
                 ConsInt.getActiveConstraints();
             }, 300);
 

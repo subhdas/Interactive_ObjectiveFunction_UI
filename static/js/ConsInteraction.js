@@ -15,19 +15,36 @@
                 }
                 if (elem[k]['Checked'] == true) {
                     //adding data to the datastack
+                    var check = false;
                     var obj = {}
                     try {
-                        obQj = ConsInt.tempActConstraints[k];
+                        obj = ConsInt.tempActConstraints[k];
                         // console.log(' active copying worked ', ConsInt.activeConstraints, k, ConsInt.tempActConstraints)
                     } catch (e) {}
                     if (typeof obj == 'undefined' || Object.keys(obj).length == 0) {
-                        //normal case
-                        obj = {
-                            'input': {},
-                            'parent': item,
-                            'name': k,
-                            'usedName': elem[k]['Name'], // 
+                        //===
+                        var nowObj = ConsInt.activeConstraints[k]
+                        try {
+                            var len = Object.keys(nowObj['input']).length;
+                            if (len > 0) check = false
+                            else check = true
+
+                            obj = nowObj
+                        } catch (e) {
+                            check = true
                         }
+                        //===
+                        console.log(' finding spl case ', obj, item, k, elem)
+                        //normal case
+                        if (check) {
+                            obj = {
+                                'input': {},
+                                'parent': item,
+                                'name': k,
+                                'usedName': elem[k]['Name'], // 
+                            }
+                        }
+
                     }
                     ConsInt.activeConstraints[k] = obj;
                 } else {
