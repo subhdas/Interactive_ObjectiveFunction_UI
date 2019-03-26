@@ -503,8 +503,8 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         modelMetricsObj['Non-Critical'] = 0  # random.uniform(0.3,0.95)
         modelMetricsObj['Same-Label'] = sameLabScore
         modelMetricsObj['Similarity'] = similarityScore
-        modelMetricsObj['Precision'] = precTrain
-        modelMetricsObj['Recall'] = recallTrain # accTrain
+        modelMetricsObj['Precision'] = precTrain 
+        modelMetricsObj['Recall'] = recallTrain 
         modelMetricsObj['F1-Score'] = f1Train
         modelMetricsObj['Training-Accuracy'] = accTrain
         modelMetricsObj['Testing-Accuracy'] = precTest
@@ -519,6 +519,11 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
                 ind += 1
         if(ind > 0):
             scoreFinal = (scoreFinal*1.00)/ind
+
+
+        for item in modelMetricsObj:
+            try: modelMetricsObj[item] = modelMetricsObj[item] / userWts[item]
+            except: pass
 
         modelMetricsObj['num_wrong_train'] = numWrongTr
         modelMetricsObj['num_wrong_test'] = numWrongTt
