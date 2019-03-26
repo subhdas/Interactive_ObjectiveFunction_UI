@@ -49,9 +49,9 @@ def preProcessData(data, userFeatures):
 
     myCol = data.columns.values
     # SCALE DATA
-    scaler = preprocessing.StandardScaler()
-    scaled_df = scaler.fit_transform(data)
-    data = pd.DataFrame(scaled_df)
+    # scaler = preprocessing.StandardScaler()
+    # scaled_df = scaler.fit_transform(data)
+    # data = pd.DataFrame(scaled_df)
     # data.columns = myCol
     print " data is ", data.head(3), myCol
     return data, idCol
@@ -426,14 +426,15 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         try:
             exist = metObj['Precision']
             # + random.uniform(-0.2,0.2)
-            precTrain = precision_score(trainT, predT, average='macro') * userWts['Precision']
+            precTrain = precision_score(
+                trainT, predT, average='weighted') * userWts['Precision']
         except:
             precTrain = 0
 
         try:
             exist = metObj['F1-Score']
             # + random.uniform(-0.2,0.2)
-            f1Train = f1_score(trainT, predT, average='macro') * userWts['F1-Score']
+            f1Train = f1_score(trainT, predT, average='weighted') * userWts['F1-Score']
         except:
             f1Train = 0
 
@@ -441,7 +442,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
             exist = metObj['Recall']
             # + random.uniform(-0.2,0.2)
             # accTrain = accuracy_score(trainT, predT, normalize=True)
-            recallTrain = recall_score(trainT, predT, average='macro') * userWts['Recall']#+ random.uniform(-0.2, 0.2)
+            recallTrain = recall_score(trainT, predT, average='weighted') * userWts['Recall']#+ random.uniform(-0.2, 0.2)
         except:
             accTrain = 0
             recallTrain = 0
@@ -457,7 +458,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         try:
             exist = metObj['Testing-Accuracy']
             # + random.uniform(-0.2,0.2)
-            precTest = precision_score(targetTest, predTest, average='macro') * userWts['Testing-Accuracy']
+            precTest = precision_score(targetTest, predTest, average='weighted') * userWts['Testing-Accuracy']
         except:
             precTest = 0
 
@@ -493,7 +494,8 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
 
         # print " getting tn fp fn tp ", conf, lab
 
-        lossTestFinal = -1*precision_score(targetTest, predTest, average='macro')
+        lossTestFinal = -1 * \
+            precision_score(targetTest, predTest, average='weighted')
         # store the result
         modelMetricsObj = {}
 
