@@ -58,10 +58,13 @@
 		if (type == 'train') idName = 'modResRowid_0'
 		else idName = 'modResRowid_1'
 		// acc = ((score * 100) / ind).toFixed(2)
+		acc = Math.abs(acc);
 		if (acc > 1.0) acc = (acc * 0.9).toFixed(2)
 
-
-		var numLab = '% | ' + ((len-BarM.allModelData[BarM.selectedModelId]['trainMetrics'][tag])*100 / len).toFixed(1) + '% '
+		acc = ''
+		var add = ''//'% | '
+		var numLabVal = ((len - BarM.allModelData[BarM.selectedModelId]['trainMetrics'][tag]) * 100 / len).toFixed(1)
+		var numLab = add + numLabVal + '% '
 
 
 
@@ -86,11 +89,14 @@
 			score = BarM.histData[BarM.modIter - 1][BarM.selectedModelId][obLoss];
 
 			acc2 = (score * 100).toFixed(2)
+			acc2 = Math.abs(acc2);
 			if (acc2 > 1.0) acc2 = (acc2 * 0.9).toFixed(2)
+			acc2 = ''
 
 			// var oldOb = BarM.histData[BarM.modIter - 1][BarM.selectedModelId]['trainMetrics'];
 			// console.log('old ob ', oldOb, Main.testData.length)
-			var numLab2 = '% | ' + ((len-BarM.histData[BarM.modIter - 1][BarM.selectedModelId]['trainMetrics'][tag])*100 / len).toFixed(1) + '% '
+			var numLabVal2 = ((len - BarM.histData[BarM.modIter - 1][BarM.selectedModelId]['trainMetrics'][tag]) * 100 / len).toFixed(1)
+			var numLab2 = add + numLabVal2 + '% '
 
 
 			htmlStr += "<div class = 'modResRow' ><span class ='modelResHeadText'>" + text2 + " </span>"
@@ -115,9 +121,10 @@
 
 		$("#" + containerId).append(htmlStr);
 
-		if (acc2 < acc && BarM.modIter > 0) {
+		// if (acc2 < acc && BarM.modIter > 0) {
+		if (numLabVal2 < numLabVal && BarM.modIter > 0) {
 			htmlStr = "<button id='modelWin' class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-			htmlStr += "<i class='material-icons'>touch_app</i></button>";
+			htmlStr += "<i class='material-icons'>check_circle</i></button>"; //touch_app
 			if (type == 'train') $('#modResRowid_0').append(htmlStr)
 			else $('#modResRowid_1').append(htmlStr)
 		} else {

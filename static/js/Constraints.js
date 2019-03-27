@@ -156,6 +156,11 @@
 
     }
 
+
+    Cons.computeNumCorrectAllModel = function(){
+        
+    }
+
     Cons.constraintIdFinder = function () {
         var origDef = ['Recall', 'Precision', 'F1-Score', 'Training-Accuracy', 'Testing-Accuracy', 'Cross-Val-Score']
         var origDef = [];

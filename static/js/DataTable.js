@@ -851,13 +851,14 @@
             $("#criticalRectId_" + containerId).on('click', function (d, i) {
                 console.log('container id ', containerId)
                 var id = -1;
+                var iconMark = "near_me"
                 var val = DataTable.criticalInteractAllTest[id];
                 if (val == '-') {
                     DataTable.criticalInteractAllTest[id] = 'yes'
                     // $(this).css('background', Main.colors.HIGHLIGHT);
                     //id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "'
                     var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
-                    htmlStr += "<i class='material-icons'>alarm_on</i></button>";
+                    htmlStr += "<i class='material-icons'>"+iconMark+"</i></button>"; // alarm_on
                     $(this).html(htmlStr);
                     $('.btnTableAddOn').css('width', '100%')
                     $('.btnTableAddOn').css('height', '100%')
@@ -901,12 +902,14 @@
                         htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
 
                         if (col == "rgb(194, 53, 115)" || state == 'yes') {
-                            htmlStr += "<i class='material-icons'>alarm_on</i></button>";
+                            htmlStr += "<i class='material-icons'>" + iconMark +"< /i></button > ";
 
-                        } else if (col == "rgb(53, 183, 194)" || state == 'no') {
-                            htmlStr += "<i class='material-icons'>alarm_off</i></button>";
+                        } 
+                        // else if (col == "rgb(53, 183, 194)" || state == 'no') {
+                        //     htmlStr += "<i class='material-icons'>alarm_off</i></button>";
 
-                        } else {
+                        // } 
+                        else {
                             htmlStr += "<i class='material-icons'>linear_scale</i></button>";
                         }
                         $("#criticalRectId_" + id).html(htmlStr);

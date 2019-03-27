@@ -75,7 +75,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         userFeatures = extraInfo['userFeatures']
     except: userFeatures = []
     MAX_RET = 4
-    MAX_EVAL = 15
+    MAX_EVAL = 50
     train, trainId = preProcessData(train,userFeatures)
     test, testId = preProcessData(test, userFeatures)
 

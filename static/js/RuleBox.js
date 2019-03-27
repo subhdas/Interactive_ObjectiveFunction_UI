@@ -169,8 +169,6 @@
 
 		$('.ruleItems').css('font-weight', 'bold')
 		$('.ruleItems').css('font-size', '1.3em')
-
-
 		$("#" + containerId).css('overflow-y', 'hidden')
 	}
 
@@ -399,6 +397,92 @@
 			$(this).parent().remove();
 
 		})
+
+	} // END OF MAKE RULE
+
+
+	Rul.makeRuleFromConfMatrix = function(){
+
+
+			if (containerId == "") containerId = "featureEnggPanel"
+			// $("#" + containerId).empty();
+
+			if (ParC.tempDimRules.length > 0) {
+				Rul.ruleDataTest = {}
+				var dims = ParC.tempDimRules[0]
+				var ext = ParC.tempDimRules[1]
+				var checkin = true;
+				// try {
+				// 	id = DataTable.latestTag[0];
+				// } catch (e) {
+				// 	// return
+				// 	checkin = false;
+				// }
+				// if (typeof id == 'undefined') checkin = false
+				// console.log('lets make rule for ', id)
+
+				// for (var id in DataTable.tagNameDataIdTest) {
+				var id = DataTable.latestTagTest;
+				Rul.ruleDataTest[id] = {}
+				for (var i = 0; i < dims.length; i++) {
+					ext[i] = ext[i].map(function (e) {
+						return +e.toFixed(2);
+					});
+					Rul.ruleDataTest[id][dims[i]] = ext[i]
+				}
+				// Rul.ruleIndex += 1;
+				Rul.setRule = false;
+				setTimeout(() => {
+					Rul.setRule = true;
+				}, 300);
+				// }
+			} // end of if
+
+
+
+			var keysTags = Object.keys(DataTable.tagNameDataIdTest);
+
+			// keysTags.push.apply(keysTags, Rul.tempRuleName)
+			// console.log(' key tags are ', keysTags)
+			var ind = 0;
+			for (var item in Rul.ruleDataTest) {
+				$("#testRule_" + item).remove();
+				// if (keysTags.indexOf(item) == -1) continue; // might need to remoe for custom naming
+				var dataObj = Rul.ruleDataTest[item];
+				htmlStr += "<div class ='fullRuleAll' parent = " + item + " id = 'testRule_" + item + "' >"
+				htmlStr += "<div class ='ruleName' contenteditable=" + true + " parent=" + item + "  given=" + item + " id='ruleNameId_" + ind + "' >" + item + "</div>"
+				htmlStr += "<div class ='ruleOneSet' >"
+
+				for (var el in dataObj) {
+					htmlStr += "<div class ='ruleRow' >"
+					htmlStr += "<span class = 'ruleItems mainFeatRule'>" + el + "</span>";
+
+					if (dataObj[el][0] != -1) {
+						htmlStr += "<span class = 'ruleNumber'> is betweeen </span>";
+						htmlStr += "<span class = 'ruleItems ruleNumber'>" + dataObj[el][0] + "</span>";
+						htmlStr += "<span class = 'ruleNumber'> and  </span>";
+						// htmlStr += "<span class = 'ruleItems ruleNumber'> >  </span>";
+						htmlStr += "<span class = 'ruleItems ruleNumber'>" + dataObj[el][1] + "</span>";
+					} else {
+						htmlStr += "<span class = 'ruleNumber'> = </span>";
+						htmlStr += "<span class = 'ruleItems ruleNumber'>" + dataObj[el][1] + "</span>";
+					}
+					htmlStr += "</div>"
+
+				}
+				htmlStr += "</div>"
+				htmlStr += "</div>"
+				ind += 1;
+
+			}
+
+
+
+
+			// $("#" + containerId).append(htmlStr);
+			$(".ruleContent").append(htmlStr);
+
+
 
 	}
 
