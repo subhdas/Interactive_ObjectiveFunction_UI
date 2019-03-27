@@ -366,7 +366,7 @@
 				var id = $(this).parents();
 				var idNum = $(id[1]).attr('id')
 				idNum = Util.getNumberFromText(idNum)
-				// console.log(' getting the parent ', idNum, i, type)
+				console.log(' getting the parent ', idNum, i, type)
 				// var idList = DataTable.findLabelAcc(labelsData[i], labelsData[idNum])
 				if (type == 'train') {
 					if (!ConfM.cellClickedTrain) {

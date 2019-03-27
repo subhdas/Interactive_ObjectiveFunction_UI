@@ -1784,6 +1784,8 @@
         //  .style('width', '100%')
 
         var titles = d3.keys(data[0]);
+        var index = titles.indexOf('id')
+        titles.splice(index,1)
         titles.sort();
         console.log('titiles is ', titles)
         var headers = table
@@ -2204,6 +2206,15 @@
         });
 
 
+        setTimeout(() => {
+            $('.fixedHeader').each(function(d){
+                var txt = $(this).text();
+                txt = txt.replace('0_', '')
+                $(this).text(txt)
+            })
+        }, 200);
+
+
     }; // end of makeTable
 
 
@@ -2483,6 +2494,8 @@
         // var htmlStr = "<div class ='tagContainerTest' >"
         var htmlStr = ""
         var tagName = 'Pinned_Test';
+        // DataTable.latestTagTest = tagName + "_" + Util.getRandomNumberBetween(100, 0).toFixed(0);
+        DataTable.latestTagTest = tagName
 
         for (var item in DataTable.tagNameDataIdTest) {
             var idHere = DataTable.tagNameDataIdTest[item];
@@ -2594,6 +2607,7 @@
         StarM.addConstraintsTable();
         setTimeout(() => {
             Rul.makeRuleList();
+            Rul.makeRuleListTestData();
         }, 400);
     }
 

@@ -99,7 +99,7 @@
 
             var domainByTrait = {},
                 traits = d3.keys(data[0]).filter(function (d) {
-                    return d !== categorical;
+                    return d !== categorical && d !== 'id' && d !== '0_'
                 }),
                 n = traits.length;
 
@@ -161,14 +161,28 @@
                 .each(plot);
 
             // Titles for the diagonal.
-            cell.filter(function (d) {
-                    return d.i === d.j;
-                }).append("text")
+            cell
+                .filter(function (d) {
+                        return d.i != d.j;
+                    })
+                .append("text")
+                .attr("x", padding+80)
+                .attr("y", padding+100)
+                .attr("dy", ".71em")
+                .text(function (d) {
+                    return d.x;
+                });
+
+            cell
+                .filter(function (d) {
+                        return d.i != d.j;
+                    })
+                .append("text")
                 .attr("x", padding)
                 .attr("y", padding)
                 .attr("dy", ".71em")
                 .text(function (d) {
-                    return d.x;
+                    return d.y;
                 });
 
             cell.call(brush);
@@ -195,7 +209,8 @@
                     .attr("x", padding / 2)
                     .attr("y", padding / 2)
                     .attr("width", size - padding)
-                    .attr("height", size - padding);
+                    .attr("height", size - padding)
+
 
                 cell.selectAll("circle")
                     .data(data)
@@ -228,6 +243,10 @@
                         // console.log('mouse over circle ', d,id, i)
                         var e = Main.getDataById(d.id, Main.trainData);
                         showTooltip(e, id);
+
+                        setTimeout(() => {
+                        Scat.tipDiv.style("display", "none");                            
+                        }, 3000);
                     })
                     .on('mouseout', function (d, i) {
                         $(this).css('stroke', 'transparent')
