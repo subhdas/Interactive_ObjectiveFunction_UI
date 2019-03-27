@@ -180,59 +180,6 @@
 		}
 
 
-
-
-
-		// // get the rules 
-		// if (ParC.tempDimRules.length > 0) {
-		// 	var dims = ParC.tempDimRules[0]
-		// 	var ext = ParC.tempDimRules[1]
-
-		// 	if(id==""){
-		// 		id = 'n_rule_' + Rul.ruleIndex
-		// 	}
-		// 	Rul.ruleData[id] = {}
-		// 	for (var i = 0; i < dims.length; i++) {
-		// 		ext[i] = ext[i].map(function (e) {
-		// 			return +e.toFixed(2);
-		// 		});
-		// 		Rul.ruleData[id][dims[i]] = ext[i]
-		// 	}
-		// 	Rul.ruleIndex += 1;
-		// 	Rul.setRule = false;
-		// 	setTimeout(() => {
-		// 		Rul.setRule = true;
-		// 	}, 300);
-		// }
-
-
-
-
-
-
-		// if (Object.keys(Rul.ruleData).length == 0) {
-		// 	Rul.ruleData = {
-		// 		'rule_1': {
-		// 			'MPG': [32, 90],
-		// 			'Acceleration': [6.5, 8.23],
-		// 			'Weight': [2874, 3585],
-		// 			'Cyinders': [3, 6],
-		// 		},
-
-		// 		'rule_2': {
-		// 			'Acceleration': [2.1, 5.3],
-		// 			'Cyinders': [5, 7],
-		// 		},
-
-
-		// 		'rule_3': {
-		// 			'Weight': [-1, 3402],
-		// 			'MPG': [-1, 38],
-		// 		},
-		// 	}
-		// }
-
-
 		var keysTags = Object.keys(DataTable.tagNameDataId);
 
 		keysTags.push.apply(keysTags, Rul.tempRuleName)
@@ -335,9 +282,7 @@
 			var txt = $(this).text();
 			txt = txt.replace(/\s/g, "");
 			// $(this).text(txt)
-
-			console.log(' txt found on change ', origTxt, txt)
-
+			// console.log(' txt found on change ', origTxt, txt)
 			var ob = Rul.ruleData[origTxt];
 			delete Rul.ruleData[origTxt];
 			Rul.ruleData[txt] = ob;

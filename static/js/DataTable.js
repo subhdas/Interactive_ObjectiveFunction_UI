@@ -44,6 +44,7 @@
     DataTable.tagClicked = false;
     DataTable.tagClickName = ""
     DataTable.tagNameDataId = {}
+    DataTable.tagNameDataIdTest = {}
     DataTable.latestTag = ""
 
     DataTable.findLabelAcc = function (labelTar, labelPre, type = 'train', index = -1) {
@@ -862,18 +863,20 @@
                     $('.btnTableAddOn').css('height', '100%')
                     // DataTable.tempLatestTag = 'Critical'
 
-                } else if (val == 'yes') {
-                    DataTable.criticalInteractAllTest[id] = 'no'
-                    // $(this).css('background', Main.colors.HIGHLIGHT2);
+                } 
+                // else if (val == 'yes') {
+                //     DataTable.criticalInteractAllTest[id] = 'no'
+                //     // $(this).css('background', Main.colors.HIGHLIGHT2);
 
-                    var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
-                    htmlStr += "<i class='material-icons'>alarm_off</i></button>";
-                    $(this).html(htmlStr);
-                    $('.btnTableAddOn').css('width', '100%')
-                    $('.btnTableAddOn').css('height', '100%')
-                    // DataTable.tempLatestTag = 'Ignore'
+                //     var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                //     htmlStr += "<i class='material-icons'>alarm_off</i></button>";
+                //     $(this).html(htmlStr);
+                //     $('.btnTableAddOn').css('width', '100%')
+                //     $('.btnTableAddOn').css('height', '100%')
+                //     // DataTable.tempLatestTag = 'Ignore'
 
-                } else {
+                // } 
+                else {
                     DataTable.criticalInteractAllTest[id] = '-'
                     // $(this).css('background', 'lightgray');
 
@@ -914,7 +917,7 @@
                     });
 
 
-
+                DataTable.makeTagsTest()
             }) // end of click test
         }
 
@@ -1097,6 +1100,7 @@
 
                 if (containerId == 'tableContentTest') Rul.makeRuleList();
                 DataTable.makeTags();
+                DataTable.makeTagsTest();
 
 
 
@@ -2457,6 +2461,141 @@
         DataTable.tagNameDataId = tagDict;
     }
 
+
+
+    DataTable.makeTagsTest = function (containerId = "") {
+        if (containerId == "") containerId = "tableHeadDivTest"
+        $(".tagHeadTest").remove();
+
+        $("#" + containerId).css('display', 'flex')
+        $("#" + containerId).css('align-items', 'center')
+        var listOfTagDict = {
+            'critical-items': true,
+            'ignore': true,
+            'similar': true,
+            'same-label': true,
+            'different': true,
+        }
+
+        var idList = Object.keys(DataTable.criticalInteractTest)
+
+        if (idList.length == 0) return
+        // var htmlStr = "<div class ='tagContainerTest' >"
+        var htmlStr = ""
+        var tagName = 'Pinned_Test';
+
+        for (var item in DataTable.tagNameDataIdTest) {
+            var idHere = DataTable.tagNameDataIdTest[item];
+            for (var i=0;i<idHere.length;i++){
+                var index = idList.indexOf(idHere[i])
+                if(index!= -1){
+                    idList.splice(index,1);
+                }
+            }
+
+        }
+
+        DataTable.tagNameDataIdTest[tagName] = idList
+
+        for(var item in DataTable.tagNameDataIdTest){
+            htmlStr += "<div contenteditable = "+true+" class ='tagHeadTest' id = 'tagHead_" + item + " ' parent = " + item + " > " + item + " </div>"
+            htmlStr += "</div>"
+        }
+        
+        $("#" + containerId).append(htmlStr);
+
+        //css stylings
+        $(".tagContainerTest").css('display', 'flex')
+        $(".tagContainerTest").css('width', 'auto')
+        $(".tagContainerTest").css('height', '100%')
+        $(".tagContainerTest").css('padding', '5px')
+        $(".tagContainerTest").css('align-items', 'center')
+
+        $(".tagHeadTest").css('display', 'flex')
+        $(".tagHeadTest").css('width', 'auto')
+        $(".tagHeadTest").css('height', '20px')
+        $(".tagHeadTest").css('padding', '3px')
+        $(".tagHeadTest").css('margin-right', '5px')
+        $(".tagHeadTest").css('border-radius', '5px')
+        $(".tagHeadTest").css('background', Main.colors.HIGHLIGHT2)
+        $(".tagHeadTest").css('color', 'white')
+        $(".tagHeadTest").css('font-size', '0.9em')
+        $(".tagHeadTest").css('cursor', 'pointer')
+        $(".tagHeadTest").css('align-items', 'center')
+
+        $(".tagHeadTest").on('keyup', function (e) {
+            var origTxt = $(this).attr('parent');
+            // $(this).text().replace(/\s/g, "");
+            var txt = $(this).text();
+            txt = txt.replace(/\s/g, "");
+            console.log(' new name ', origTxt, txt)
+            var idList = DataTable.tagNameDataIdTest[origTxt]
+            delete DataTable.tagNameDataIdTest[origTxt]
+            DataTable.tagNameDataIdTest[txt] = idList
+			$(this).attr('parent', txt)
+        })
+
+        $(".tagHeadTest").on('mouseover', function (d) {
+            if (DataTable.tagClicked) return
+            if (ParC.parallelBrushed) return
+            $(this).css('border', '1px solid black')
+            $(".tagHeadTest").css('background', 'lightgray')
+            $(this).css('background', Main.colors.HIGHLIGHT2)
+
+            var elem = $(this).attr('parent')
+            var idList = DataTable.tagNameDataIdTest[elem]
+            $("#dataViewAppTable_tableContentTest").find('tr').show();
+
+            // console.log(' found is ', elem, idList, DataTable.tagNameDataId)
+            DataTable.hideRowsById(idList, 'test')
+        })
+
+        $(".tagHeadTest").on('mouseout', function (d) {
+            if (DataTable.tagClicked) return
+            if (ParC.parallelBrushed) return
+
+            $(this).css('border', 'transparent')
+            $(".tagHeadTest").css('background', Main.colors.HIGHLIGHT2)
+            //train table
+            $("#dataViewAppTable_tableContentTest").find('tr').show();
+        })
+
+        $(".tagHeadTest").on('click', function (d) {
+            if (ParC.parallelBrushed) return
+
+            var elem = $(this).attr('parent');
+
+            if (DataTable.tagClickName == elem) {
+                DataTable.tagClicked = false;
+                DataTable.tagClickName = ""
+            } else {
+                DataTable.tagClicked = true;
+                DataTable.tagClickName = elem;
+
+            }
+            if (DataTable.tagClicked) {
+                $(".tagHeadTest").css('border', 'transparent')
+                $(this).css('border', '1px solid black')
+                $(".tagHeadTest").css('background', 'lightgray')
+                $(this).css('background', Main.colors.HIGHLIGHT2)
+
+                var idList = DataTable.tagNameDataIdTest[elem]
+                // console.log(' found is ', elem, idList, DataTable.tagNameDataId);
+                $("#dataViewAppTable_tableContentTest").find('tr').show();
+                DataTable.hideRowsById(idList, 'test')
+            } else {
+                $(".tagHeadTest").css('border', 'transparent')
+                $(".tagHeadTest").css('background', Main.colors.HIGHLIGHT2)
+                //train table
+                $("#dataViewAppTable_tableContentTest").find('tr').show();
+            }
+        })
+
+        StarM.addConstraintsTable();
+        setTimeout(() => {
+            Rul.makeRuleList();
+        }, 400);
+    }
 
 
     DataTable.makeTags = function (containerId = "") {
