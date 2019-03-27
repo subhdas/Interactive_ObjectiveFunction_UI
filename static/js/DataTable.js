@@ -863,7 +863,7 @@
                     $('.btnTableAddOn').css('height', '100%')
                     // DataTable.tempLatestTag = 'Critical'
 
-                } 
+                }
                 // else if (val == 'yes') {
                 //     DataTable.criticalInteractAllTest[id] = 'no'
                 //     // $(this).css('background', Main.colors.HIGHLIGHT2);
@@ -1676,16 +1676,26 @@
                             var type = Main.attrDict[txt]['type']
                             var idList = [];
                             // console.log(' getting key ', key, txt, idList, options, keyCode)
-                            // console.log(' getting key ', key, e, e.keyCode)
+                            var idPar = $(this).closest('table').attr('id')
+
+                            if (idPar == 'dataViewAppTable_tableContent') { // train
+                                var dataGo = Main.trainData
+                                var container = 'tableContent'
+                            } else { // test
+                                var dataGo = Main.testData
+                                var container = 'tableContentTest'
+                            }
+
+                            console.log(' getting key ', key, idPar)
                             if (type == 'categorical') {
-                                idList = Main.getDataByFeatValCat(txt, key);
+                                idList = Main.getDataByFeatValCat(txt, key, dataGo);
                                 // DataTable.hideSelectedRows(idList);
 
                             } else {
-                                idList = Main.getDataByFeatValQuant(txt, key, e.shiftKey);
+                                idList = Main.getDataByFeatValQuant(txt, key, e.shiftKey, dataGo);
                                 // DataTable.hideSelectedRows(idList);
                             }
-                            if (idList.length > 0) DataTable.hideSelectedRows(idList);
+                            if (idList.length > 0) DataTable.hideSelectedRows(idList, container);
 
                         },
                         items: itemObj
@@ -1785,7 +1795,7 @@
 
         var titles = d3.keys(data[0]);
         var index = titles.indexOf('id')
-        titles.splice(index,1)
+        titles.splice(index, 1)
         titles.sort();
         console.log('titiles is ', titles)
         var headers = table
@@ -2207,7 +2217,7 @@
 
 
         setTimeout(() => {
-            $('.fixedHeader').each(function(d){
+            $('.fixedHeader').each(function (d) {
                 var txt = $(this).text();
                 txt = txt.replace('0_', '')
                 $(this).text(txt)
@@ -2499,10 +2509,10 @@
 
         for (var item in DataTable.tagNameDataIdTest) {
             var idHere = DataTable.tagNameDataIdTest[item];
-            for (var i=0;i<idHere.length;i++){
+            for (var i = 0; i < idHere.length; i++) {
                 var index = idList.indexOf(idHere[i])
-                if(index!= -1){
-                    idList.splice(index,1);
+                if (index != -1) {
+                    idList.splice(index, 1);
                 }
             }
 
@@ -2510,11 +2520,11 @@
 
         DataTable.tagNameDataIdTest[tagName] = idList
 
-        for(var item in DataTable.tagNameDataIdTest){
-            htmlStr += "<div contenteditable = "+true+" class ='tagHeadTest' id = 'tagHead_" + item + " ' parent = " + item + " > " + item + " </div>"
+        for (var item in DataTable.tagNameDataIdTest) {
+            htmlStr += "<div contenteditable = " + true + " class ='tagHeadTest' id = 'tagHead_" + item + " ' parent = " + item + " > " + item + " </div>"
             htmlStr += "</div>"
         }
-        
+
         $("#" + containerId).append(htmlStr);
 
         //css stylings
@@ -2545,7 +2555,7 @@
             var idList = DataTable.tagNameDataIdTest[origTxt]
             delete DataTable.tagNameDataIdTest[origTxt]
             DataTable.tagNameDataIdTest[txt] = idList
-			$(this).attr('parent', txt)
+            $(this).attr('parent', txt)
         })
 
         $(".tagHeadTest").on('mouseover', function (d) {
