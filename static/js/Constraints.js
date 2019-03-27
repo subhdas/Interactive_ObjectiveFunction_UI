@@ -107,6 +107,25 @@
             }
         },
         'GENERALIZATION': {
+              'Test-Recall': {
+                  'Checked': false,
+                  'UserWt': 1,
+                  'Name': 'Recall Test',
+                  'Tip': 'Accuracy Recall is how many of the true positives are correctly predicted by the model',
+              },
+              'Test-Precision': {
+                  'Checked': false,
+                  'UserWt': 1,
+                  'Name': 'Precision Test',
+                  'Tip': 'Accuracy Precision is how many of the predicted data items were true positive',
+              },
+              'Test-F1-Score': {
+                  'Checked': false,
+                  'UserWt': 1,
+                  'Name': 'F1 Test',
+                  'Tip': 'Accuracy F1 is the weighted average of Precision and Recall. This score takes both false positives and false negatives into account.\
+                Accuracy F1 is usually more useful if you have an uneven class distribution in the data',
+              },
             'Testing-Accuracy': {
                 'Checked': false,
                 'UserWt': 1,
@@ -158,7 +177,7 @@
 
 
     Cons.computeNumCorrectAllModel = function(){
-        
+
     }
 
     Cons.constraintIdFinder = function () {

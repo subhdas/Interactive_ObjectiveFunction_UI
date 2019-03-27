@@ -490,6 +490,30 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         except:
             cross_mean_score = 0
 
+        # new added
+        try:
+            exist = metObj['Test-Precision']
+            precTest = precision_score(targetTest, predTest, average='weighted') * userWts['Test-Precision']
+        except:
+            precTest = 0
+
+        try:
+            exist = metObj['Test-F1-Score']
+            # + random.uniform(-0.2,0.2)
+            f1Test = f1_score(targetTest, predTest, average='weighted') * userWts['Test-F1-Score']
+        except:
+            f1Test = 0
+
+        try:
+            exist = metObj['Test-Recall']
+            # + random.uniform(-0.2,0.2)
+            # accTrain = accuracy_score(trainT, predT, normalize=True)
+            recallTest = recall_score(targetTest, predTest, average='weighted') * userWts['Test-Recall']#+ random.uniform(-0.2, 0.2)
+        except:
+            recallTest = 0
+
+
+
         lab = list(set(trainT))
 
         trList = trainT
@@ -528,7 +552,11 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         modelMetricsObj['Training-Accuracy'] = accTrain
         modelMetricsObj['Testing-Accuracy'] = precTest
         modelMetricsObj['Cross-Val-Score'] = cross_mean_score
-        
+
+        # new added
+        modelMetricsObj['Test-Precision'] = precTest
+        modelMetricsObj['Test-Recall'] = recallTest
+        modelMetricsObj['Test-F1-Score'] = f1Test
 
         scoreFinal = 0
         ind = 0
