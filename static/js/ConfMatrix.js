@@ -19,6 +19,44 @@
 		return [minVal, mxVal]
 	}
 
+	ConfM.calcPerformancePerc = function () {
+		function lossCal(matrix,ind) {
+			let cnt = 0;
+			let total = 0;
+			for (var i = 0; i < matrix.length; i++) {
+				var row = matrix[i];
+				for (var j = 0; j < row.length; j++) {
+					if (i == j) {
+
+					} else {
+						cnt += +row[j];
+						// console.log(' checking matrix ', ind, i,j,cnt, row[j], row )
+					}
+					total += row[j]
+				}
+			}
+			// acc = (cnt / total).toFixed(1);
+			acc = cnt
+			return acc;
+		}
+		for (var item in BarM.allModelData) {
+			var mod = BarM.allModelData[item];
+			var lossBeforeTrain = BarM.allModelData[item]['trainMetrics']['num_wrong_train']
+			var lossBeforeTest = BarM.allModelData[item]['trainMetrics']['num_wrong_test']
+			var confMatrixTrain = mod['trainConfMatrix']
+			var confMatrixTest = mod['testConfMatrix']
+
+			var accTrain = lossCal(confMatrixTrain, item)
+			var accTest = lossCal(confMatrixTest,item)
+			// BarM.allModelData[item]['loss'] = accTrain
+			// BarM.allModelData[item]['lossTest'] = accTest
+			BarM.allModelData[item]['trainMetrics']['num_wrong_train'] = accTrain
+			BarM.allModelData[item]['trainMetrics']['num_wrong_test'] = accTest
+
+			// console.log('perf fixed ', lossBeforeTrain, lossBeforeTest, accTrain, accTest, confMatrixTrain, confMatrixTest)
+		}
+	}
+
 	ConfM.modelResultsDisplay = function (containerId = "", type = "", index = 0) {
 		if (containerId == "") containerId = "confMatTrain"
 		$("#modelResult_" + containerId + "_" + type).remove();
@@ -38,7 +76,7 @@
 		if (type == 'test') {
 			ob = 'testMetrics'
 			obLoss = 'lossTest'
-			 len = Main.testData.length;
+			len = Main.testData.length;
 			tag = 'num_wrong_test'
 		}
 		var text = 'Prediction Accuracy is  '
@@ -62,8 +100,9 @@
 		if (acc > 1.0) acc = (acc * 0.9).toFixed(2)
 
 		acc = ''
-		var add = ''//'% | '
+		var add = '' //'% | '
 		var numLabVal = ((len - BarM.allModelData[BarM.selectedModelId]['trainMetrics'][tag]) * 100 / len).toFixed(1)
+		// var numLabVal = (BarM.allModelData[BarM.selectedModelId]['trainMetrics'][tag])
 		var numLab = add + numLabVal + '% '
 
 
@@ -71,7 +110,7 @@
 
 		var htmlStr = "<div class = '" + type + "_wrapDivs modelResult' id = 'modelResult_" + containerId + "_" + type + "'>"
 		htmlStr += "<div class = 'modResRow' id = '" + idName + "' ><span class ='modelResHeadText'> " + text + "</span>"
-		htmlStr += "<span class = 'modelResOut' >" + acc + numLab +" </span></div>";
+		htmlStr += "<span class = 'modelResOut' >" + acc + numLab + " </span></div>";
 
 		var acc2 = 2;
 		if (BarM.modIter > 0) {
@@ -96,6 +135,7 @@
 			// var oldOb = BarM.histData[BarM.modIter - 1][BarM.selectedModelId]['trainMetrics'];
 			// console.log('old ob ', oldOb, Main.testData.length)
 			var numLabVal2 = ((len - BarM.histData[BarM.modIter - 1][BarM.selectedModelId]['trainMetrics'][tag]) * 100 / len).toFixed(1)
+			// var numLabVal2 = (BarM.histData[BarM.modIter - 1][BarM.selectedModelId]['trainMetrics'][tag]) 
 			var numLab2 = add + numLabVal2 + '% '
 
 

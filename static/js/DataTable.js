@@ -457,9 +457,14 @@
                 }, 0);
 
 
+                ConfM.calcPerformancePerc();
 
+
+                setTimeout(() => {
                 ConfM.makeConfMatrix(confMatrixTrain, 'train');
                 ConfM.makeConfMatrix(confMatrixTest, 'test'); // test
+                }, 100);
+              
 
                 DataTable.modelUpdateLabel();
                 Cons.checkConstraintsActive();
@@ -471,7 +476,7 @@
                     Main.loadingSpinnerToggle(false);
                     BarM.histData[BarM.modIter] = BarM.allModelData;
                     BarM.modIter += 1;
-                }, 150);
+                }, 250);
 
 
             })
