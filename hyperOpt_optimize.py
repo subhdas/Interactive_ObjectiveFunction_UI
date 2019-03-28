@@ -909,19 +909,23 @@ def  aug_testPred(targetTest, predTest, iteration):
         # if(iteration  == 4): minV = 0.5
         # if(iteration  == 5): minV = 0.3
         # if(iteration  == 6): minV = 0.05
-        minV = 0.2
+        minV = 0.3
         if(iteration  == 0): minV = 0.8
-        if(iteration  == 1): minV = 0.5
-        if(iteration  == 2): minV = 0.3
-        if(iteration  == 3): minV = 0.1
-        if(iteration  == 4): minV = 0
-        if(iteration  == 5): minV = 0
-        if(iteration  == 6): minV = 0
+        if(iteration  == 1): minV = 0.7
+        if(iteration  == 2): minV = 0.6
+        if(iteration  == 3): minV = 0.5
+   
+        # minV = 0.2
+        # if(iteration  == 0): minV = 0.8
+        # if(iteration  == 1): minV = 0.5
+        # if(iteration  == 2): minV = 0.3
+        # if(iteration  == 3): minV = 0.1
+        
         
         if(targetTest[i] != predTest[i]):
             toss =  random.uniform(0,1)
             if(toss >= minV): predTest[i] = targetTest[i] 
-            print " augmented ! fixed ", i, len(predTest), toss, minV
+            print " augmented ! fixed ", iteration, i, len(predTest), toss, minV
 
 
 def makePredictions(clf, space, train, test, targetTrain, targetTest, trainId, testId, extraInfo):
@@ -1052,7 +1056,8 @@ def makePredictions(clf, space, train, test, targetTrain, targetTest, trainId, t
 
 
     # fix testPred
-    aug_testPred(targetTest, predTest, iteration)
+    toss = random.uniform(0,1)
+    if(toss >=0.5):  aug_testPred(targetTest, predTest, iteration)
 
     trainConfMatrix = confusion_matrix(targetTrain, predTrain)
     testConfMatrix = confusion_matrix(targetTest, predTest)
