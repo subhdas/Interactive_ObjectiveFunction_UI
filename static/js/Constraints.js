@@ -13,6 +13,7 @@
         'GENERALIZATION': 1,
     }
 
+    Cons.splMetrics = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score', 'Training-Accuracy', 'Test-Recall', 'Test-Precision', 'Test-F1-Score']
 
     Cons.indivUserWtConst = {}
 
@@ -181,7 +182,7 @@
     }
 
     Cons.constraintIdFinder = function () {
-        var origDef = ['Recall', 'Precision', 'F1-Score', 'Training-Accuracy', 'Testing-Accuracy', 'Cross-Val-Score']
+        // var origDef = Cons.splMetrics;
         var origDef = [];
         var metricObj = {}
         for (var item in ConsInt.activeConstraints) {
@@ -218,7 +219,7 @@
 
 
     Cons.checkConstraintsActive = function () {
-        var origDef = ['Recall', 'Precision', 'F1-Score', 'Training-Accuracy', 'Testing-Accuracy', 'Cross-Val-Score']
+        var origDef = Cons.splMetrics;
 
         for (var item in ConsInt.activeConstraints) {
             var check = true;
@@ -258,7 +259,7 @@
 
             var compList = ['Same-Label', 'Similarity-Metric', 'Critical-Items', 'Non-Critical'];
             var quantList = ['Recall', 'Precision', 'F1-Score', 'Training-Accuracy'];
-            var genList = ['Testing-Accuracy', 'Cross-Val-Score'];
+            var genList = ['Testing-Accuracy', 'Cross-Val-Score', 'Test-Recall', 'Test-Precision', 'Test-F1-Score', ];
 
             if (compList.indexOf(metricList[i]) != -1) {
 
@@ -543,7 +544,7 @@
                     // } catch (e) {}
                     setTimeout(() => {
                         var alertSend = false;
-                        var origDef = ['Recall', 'Precision', 'F1-Score', 'Testing-Accuracy', 'Cross-Val-Score', 'Training-Accuracy']
+                        var origDef = Cons.splMetrics;
                         var usedName = Cons.typeConstraints[item][name]['Name']
                         try {
                             var inpObj = ConsInt.activeConstraints[name]['input'];

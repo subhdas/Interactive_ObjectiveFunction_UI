@@ -48,12 +48,12 @@ def preprocess_data(dataGiven):
 	inp_df = pd.DataFrame(dataIn)
 	inp_df['cluster'] = 0
 	orig_df = inp_df.fillna(0)
-	v = 50*6
+	v = 60*6
 	inp_df = orig_df[0:v]
 	app_df = orig_df[v:orig_df.shape[0] - 1]
 	app_df['id'] = [i for i in range(app_df.shape[0])]
 	inp_df['id'] = [i for i in range(inp_df.shape[0])]
-	train, test = train_test_split(inp_df, test_size=0.25)
+	train, test = train_test_split(inp_df, test_size=0.20)
 	print " after split ", train.shape, test.shape
 
 
@@ -125,6 +125,8 @@ def handle_my_custom_event(data):
 	metricKeys = data['metricKeys']
 	userConsWts = data['userConsWts']
 	userFeatures = data['userFeatures']
+	instWeights = data['instWeights']
+	iteration = data['iteration']
 	train = data['train']
 	train = pd.DataFrame(train)
 	train = train.drop(['predicted'], axis = 1)
@@ -148,6 +150,8 @@ def handle_my_custom_event(data):
 		'metricKeys': metricKeys,
 		'highWeights': userConsWts,
 		'userFeatures': userFeatures,
+		'instWeights': instWeights,
+		'iteration': iteration,
     }
 	out = wrap_findGoodModel(train,test, targetTrain,targetTest, extraInfo)
 	# print " we get out ", out

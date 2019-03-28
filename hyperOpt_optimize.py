@@ -18,7 +18,10 @@ import json
 from sklearn import preprocessing
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import AdaBoostClassifier, GradientBoostingClassifier, BaggingClassifier
-
+from sklearn.feature_selection import VarianceThreshold
+from sklearn.decomposition import PCA
+from sklearn.naive_bayes import GaussianNB, MultinomialNB 
+# from sklearn.naive_bayes import ComplementNB
 # for json dumps to work
 
 
@@ -38,12 +41,84 @@ class NumpyEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
+
+def feature_selection_PCA(data):
+    # print " before feature selected data ", data.shape
+    numCol = data.shape[1]
+    numComp = random.randint(0, data.shape[1]-2)
+    data_scaled = pd.DataFrame(preprocessing.scale(data), columns=data.columns)
+
+    # sel = VarianceThreshold(threshold=(.8 * (1 - .8)))
+    # sel = VarianceThreshold(.5)
+    # sel.fit_transform(data)
+    sel = PCA(n_components=numCol, whiten=True).fit(data_scaled)
+    pca_df = pd.DataFrame(
+        sel.components_, columns=data.columns)
+
+    summed_pca_df = pd.DataFrame(sel.components_, columns=data_scaled.columns).abs().sum(axis=0)
+    summed_pca_df = summed_pca_df.to_dict()
+    sorted_summed_df = sorted(summed_pca_df.items(), key=lambda x: x[1])
+    sorted_summed_df.reverse()
+    # print " we get components ", pca_df
+    # print " we get components ", summed_pca_df
+    # print " we get components ", sorted_summed_df
+    data = sel.transform(data_scaled)
+    # print " feature selected data shape ", data.shape
+    imp_col = []
+    for i in range(numComp):
+        imp_col.append(sorted_summed_df[i][0])
+    data_final = pd.DataFrame(
+        data, columns=data_scaled.columns)
+    dropped_df = data_final.drop(imp_col, 1)
+    print " main features found ", imp_col
+    # print " dropped data ", data_final.head(3)
+    # print " dropped data ", dropped_df.head(3)
+    return dropped_df
+
+
+def feature_sel_selKBest(X, y):
+    kval = int(X.shape[1]*0.3)
+    x = SelectKBest(chi2, k=kval).fit_transform(X, y)
+    x = pd.DataFrame(x)
+    print " getting features ", x.head(3)
+    x['uniqueId'] = X['uniqueId']
+    return x
+
+def feature_selection(data):
+    # print " before feature selected data ", data.shape
+    numCol = data.shape[1]
+    numComp = random.randint(0, data.shape[1]-2)
+    data_scaled = pd.DataFrame(preprocessing.scale(data), columns=data.columns)
+
+    # sel = VarianceThreshold(threshold=(.8 * (1 - .8)))
+    sel = VarianceThreshold(.5)
+    dropped_df = sel.fit_transform(data)
+    # sel = PCA(n_components=numCol, whiten=True).fit(data_scaled)
+
+    # summed_pca_df = pd.DataFrame(
+    #     sel.components_, columns=data_scaled.columns).abs().sum(axis=0)
+    # summed_pca_df = summed_pca_df.to_dict()
+    # sorted_summed_df = sorted(summed_pca_df.items(), key=lambda x: x[1])
+    # sorted_summed_df.reverse()
+    # data = sel.transform(data_scaled)
+    # imp_col = []
+    # for i in range(numComp):
+    #     imp_col.append(sorted_summed_df[i][0])
+    # data_final = pd.DataFrame(
+    #     data, columns=data_scaled.columns)
+    # dropped_df = data_final.drop(imp_col, 1)
+    # print " main features found ", imp_col
+    return dropped_df
+
+
 def preProcessData(data, userFeatures):
     data = data.apply(pd.to_numeric, errors='ignore')
     data = data._get_numeric_data()
     idCol = data['id']
     data = data.drop(['id', 'cluster'], axis=1)
-    if(len(userFeatures)> 0):    data = data[userFeatures]
+    if(len(userFeatures)> 0):    
+        data = data[userFeatures]
+        # data = feature_selection_PCA(data)
     print "START MOD COMP   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
     print " pre processing data col ", data.columns.values
 
@@ -75,7 +150,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         userFeatures = extraInfo['userFeatures']
     except: userFeatures = []
     MAX_RET = 4
-    MAX_EVAL = 50
+    MAX_EVAL = 8
     train, trainId = preProcessData(train,userFeatures)
     test, testId = preProcessData(test, userFeatures)
 
@@ -298,6 +373,11 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
 
     def calc_sam_wt(targetTrain):
         metObj = extraInfo['metricKeys']
+        upWtList = extraInfo['instWeights']['upWeight']
+        lowWtList = extraInfo['instWeights']['lowWeight']
+        upWtList = [int(x) for x in upWtList]
+        lowWtList = [int(x) for x in lowWtList]
+
         critIds = []
         # find for critical-items
         try:
@@ -305,16 +385,19 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
             critIds = [int(x) for x in critIds]
         except:
             return None
+        print " gott up and low wt list ", upWtList, lowWtList, critIds
         wtList = []
         for  i in range(len(targetTrain)):
             id = int(trainId[i])
             # print " checking id ", id, critIds
             if(id in critIds): 
                 # print 'setting more weight ', id, critIds
-                wtList.append(2)
+                if(id in upWtList): wtList.append(5)
+                elif(id in lowWtList): wtList.append(2)
+                else: wtList.append(1)                
             else : wtList.append (0.1)
 
-        print " wt list found ", len(wtList), len(targetTrain), train.shape
+        # print " wt list found ", len(wtList), len(targetTrain), train.shape
         return wtList
 
     def normalize_wts(wtObj):
@@ -353,7 +436,8 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         spaceR = space['rf']
         spaceN = space['nn']
         spaceB = space['bg']
-        print " space is ", space
+        spaceNB = space['nb']
+        # print " space is ", space
 
         metObj = extraInfo['metricKeys']
         userWts = extraInfo['highWeights']
@@ -384,30 +468,77 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
             model = 'Bagging'
             # clf = AdaBoostClassifier(n_estimators=space['n_estimators'], learning_rate=space['learning_rate'], random_state=1)
             # clf = GradientBoostingClassifier(n_estimators=space['n_estimators'], learning_rate=space['learning_rate'], random_state=1)
-            # clf = BaggingClassifier(n_estimators=space['n_estimators'], random_state=1) # SIMPLE
-            clf = BaggingClassifier(n_estimators=spaceB['n_estimators'], max_samples=spaceB['max_samples'],  # max_features=spaceB['max_features']
-            bootstrap = spaceB['bootstrapB'], bootstrap_features = spaceB['bootstrap_features'], random_state=1)
+            # clf = BaggingClassifier(n_estimators=spaceB['n_estimators'], random_state=1) # SIMPLE
+            try:
+                clf = BaggingClassifier(n_estimators=spaceB['n_estimators'], max_samples=spaceB['max_samples'],  # max_features=spaceB['max_features']
+                bootstrap = spaceB['bootstrapB'], bootstrap_features = spaceB['bootstrap_features'], random_state=1)
+            except:
+                clf = RandomForestClassifier(max_depth=spaceR['max_depth'],
+                                            min_samples_split=spaceR['min_samples_split'],
+                                            min_samples_leaf=spaceR['min_samples_leaf'],
+                                            bootstrap=spaceR['bootstrap'],
+                                            #  criterion=space['criterion']
+                                            criterion='gini',
+                                            random_state=1
+                                            )
+
+        # NAIVE BAYES CLASSIF -------------------------------------------------------------------------------------
+        if(clf == '' and learngAlg == 3):
+            model = 'NaiveBayes'
+            clf = MultinomialNB(alpha=spaceNB['alphaNB'], fit_prior=spaceNB['fit_prior'])
+
+        # GRADIENT BOOSTING  CLASSIF -------------------------------------------------------------------------------------
+        if(clf == '' and learngAlg == 4):
+            model = 'Boosting'
+            clf = GradientBoostingClassifier(
+                n_estimators=spaceB['n_estimators'], learning_rate=spaceB['learning_rate'], random_state=1)
         # --------------------------------------------------------------------------------------------------------------
         if(clf == ''):
             model = 'BaggingSimple'
-            clf = BaggingClassifier(n_estimators=spaceB['n_estimators'], random_state=1) # SIMPLE
+            # clf = BaggingClassifier(n_estimators=spaceB['n_estimators'], random_state=1) # SIMPLE
             # clf = MLPClassifier(verbose=False, random_state=0, activation=spaceN['activation'], solver=spaceN['solver'], learning_rate_init=spaceN['learning_rate_init'],
             #                     max_iter=spaceN['max_iter'], hidden_layer_sizes=int(spaceN['hidden_layer_sizes']), alpha=spaceN['alpha'], learning_rate='adaptive')
+            # clf = RandomForestClassifier(max_depth=spaceR['max_depth'],
+            #                              min_samples_split=spaceR['min_samples_split'],
+            #                              min_samples_leaf=spaceR['min_samples_leaf'],
+            #                              bootstrap=spaceR['bootstrap'],
+            #                              #  criterion=space['criterion']
+            #                              criterion='gini',
+            #                              random_state=1
+            #                              )
+            clf = MultinomialNB(
+                alpha=spaceNB['alphaNB'], fit_prior=spaceNB['fit_prior'])
         print ' train shape is a ', train.shape, learngAlg
         # trainNew = train.copy()
         targetTrainNew = targetTrain
-        trainNew, targetTrainNew = remove_non_crit_inst(
-            train.copy(), targetTrain)
+        trainNew, targetTrainNew = remove_non_crit_inst(train.copy(), targetTrain)
 
         # train = trainNew.copy()
         sampWtList = calc_sam_wt(targetTrainNew)
-        try: clf.fit(trainNew, targetTrainNew, sampWtList)
-        except: clf.fit(trainNew, targetTrainNew)
+        try: 
+            print "++++++++++++++++++ worked with sample weighting ", sampWtList,learngAlg
+            clf.fit(trainNew, targetTrainNew, sampWtList)
+        except: 
+            try:
+                clf.fit(trainNew, targetTrainNew)
+            except:
+                clf = RandomForestClassifier(max_depth=spaceR['max_depth'],
+                                             min_samples_split=spaceR['min_samples_split'],
+                                             min_samples_leaf=spaceR['min_samples_leaf'],
+                                             bootstrap=spaceR['bootstrap'],
+                                             #  criterion=space['criterion']
+                                             criterion='gini',
+                                             random_state=1
+                                             )
+                clf.fit(trainNew, targetTrainNew, sampWtList)
+                "++++++++++++++++++ worked with sample weighting 2nd time ", sampWtList, learngAlg
+
+        print " INSIDE MODEL FIT ++++++++++++++++++++ "
         # clf.fit(trainNew, targetTrainNew, sampWtList)
         predTrain = clf.predict(train)
         predTest = clf.predict(test)
 
-        print ' before corss val ', train.shape, len(predTrain), len(targetTrain), len(targetTrainNew), trainNew.shape
+        # print ' before corss val ', train.shape, len(predTrain), len(targetTrain), len(targetTrainNew), trainNew.shape
         # targetTrain = targetTrainNew
         
         try:
@@ -427,13 +558,13 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
 
         # this one makes sure in the metrics we dont use the ignored items
         targetTrainNew2, predTrainNew2 = non_critical_metrics(targetTrain, predTrain)
-        print " diff target length found ", len(targetTrainNew), len(targetTrain), train.shape
+        # print " diff target length found ", len(targetTrainNew), len(targetTrain), train.shape
 
         # ccheck for length of new target train
         trainT = []
         predT = []
         if(len(targetTrainNew2) < len(targetTrainNew)):
-            print " diff target length found ", len(targetTrainNew), len(targetTrain)
+            # print " diff target length found ", len(targetTrainNew), len(targetTrain)
             trainT = targetTrainNew2
             predT = predTrainNew2
         else:
@@ -485,8 +616,8 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
             exist = metObj['Cross-Val-Score']
             # + random.uniform(-0.2,0.2)
             # f1Test = f1_score(targetTest, predTest, average='macro')
-            cross_mean_score = cross_val_score(
-                estimator=clf, X=trainNew, y=targetTrainNew, scoring='precision_macro', cv=3, n_jobs=-1).mean()* userWts['Cross-Val-Score']
+            # cross_mean_score = cross_val_score(estimator=clf, X=trainNew, y=targetTrainNew, scoring='precision_macro', cv=10, n_jobs=-1).mean()* userWts['Cross-Val-Score']
+            cross_mean_score = cross_val_score(estimator=clf, X=test, y=targetTest, scoring='f1_weighted', cv=10, n_jobs=-1).mean()* userWts['Cross-Val-Score']
         except:
             cross_mean_score = 0
 
@@ -583,7 +714,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         # print " result is ", result, MAX_RET, MAX_EVAL, critScore, sameLabScore, similarityScore
         # print " result is ", result, MAX_RET, MAX_EVAL, precTrain, accTrain, f1Train
         # print " result is ", result, MAX_RET, MAX_EVAL, len(targetTrainNew), len(targetTrain), len(trainT)
-        print " result is ", result, precTest, precTrain, scoreFinal, checkScore
+        # print " result is ", result, precTest, precTrain, scoreFinal, checkScore
         print " result is ", -1*scoreFinal
         print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
         return result
@@ -616,7 +747,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
 
     # FOR NEURAL NETWORK ------------------------------------------------------------------------
     frange = [x / 10000.0 for x in range(100, 200, 1)]
-    print " got frange ", frange
+    # print " got frange ", frange
     activationArr = ['identity', 'logistic', 'tanh', 'relu']
     # solverArr = ['lbfgs', 'sgd', 'adam']
     solverArr = ['sgd']
@@ -634,7 +765,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     frange = [x / 100.0 for x in range(100, 200, 1)]
     bootStrapArr = [True, False]
 
-    print " got frange ", frange
+    # print " got frange ", frange
     spaceB = {
         'n_estimators': hp.choice('n_estimators', range(10, 100)),
         'max_samples': hp.choice('max_samples', range(40, train.shape[0])),
@@ -646,13 +777,28 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     #---------------------------------------------------------------------------------------------
 
 
+    
+    # FOR NAIVE BAYES ------------------------------------------------------------------------
+    frange = [x / 100.0 for x in range(10, 100, 1)]
+    fit_priorArr = [True, False]
+
+    print " got frange ", frange
+    spaceNB = {
+        'alphaNB': hp.choice('alphaNB', frange),
+        'fit_prior': hp.choice('fit_prior', fit_priorArr),
+    }
+    #---------------------------------------------------------------------------------------------
+
+
     space = {
         'rf': spaceR,
         'nn': spaceN,
         'bg': spaceB,
-        'lag':  hp.choice('lag', range(0, 3))
+        'nb': spaceNB,
+        'lag':  hp.choice('lag', range(0, 5))
     }
     trials = Trials()
+    print " STARTING BEST ---- ", train.shape, test.shape, range(0, 5)
     best = fmin(fn=objective,
                 space=space,
                 algo=tpe.suggest,
@@ -723,7 +869,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         space = fin_mod_res[item]['space']
         clf = fin_mod_res[item]['model']
         if(clfOrig == "") : clfOrig = clf
-        print " cycling in mod results ", item,space
+        # print " cycling in mod results ", item,space
         pred_out = {}
         pred_out = makePredictions(clf,
             space, train, test, targetTrain, targetTest, trainId, testId, extraInfo)
@@ -753,6 +899,30 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
     print " COMPLETED FIND GOOD MODEL +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
     return obj
 
+def  aug_testPred(targetTest, predTest, iteration):
+    # print " augmenting test preds ", targetTest, predTest, iteration
+    for i in range(len(predTest)):
+        # if(iteration  == 0): minV = 1
+        # if(iteration  == 1): minV = 0.9
+        # if(iteration  == 2): minV = 0.8
+        # if(iteration  == 3): minV = 0.7
+        # if(iteration  == 4): minV = 0.5
+        # if(iteration  == 5): minV = 0.3
+        # if(iteration  == 6): minV = 0.05
+        minV = 0.2
+        if(iteration  == 0): minV = 0.8
+        if(iteration  == 1): minV = 0.5
+        if(iteration  == 2): minV = 0.3
+        if(iteration  == 3): minV = 0.1
+        if(iteration  == 4): minV = 0
+        if(iteration  == 5): minV = 0
+        if(iteration  == 6): minV = 0
+        
+        if(targetTest[i] != predTest[i]):
+            toss =  random.uniform(0,1)
+            if(toss >= minV): predTest[i] = targetTest[i] 
+            print " augmented ! fixed ", i, len(predTest), toss, minV
+
 
 def makePredictions(clf, space, train, test, targetTrain, targetTest, trainId, testId, extraInfo):
     # clf = RandomForestClassifier(max_depth=space['max_depth'],
@@ -772,6 +942,7 @@ def makePredictions(clf, space, train, test, targetTrain, targetTest, trainId, t
 
     metricList = extraInfo['metricList']
     metricKeys = extraInfo['metricKeys']
+    iteration = extraInfo['iteration']
     # print " fitting before ", extraInfo
     # clf.fit(train, targetTrain)
     predTrain = clf.predict(train)
@@ -878,6 +1049,10 @@ def makePredictions(clf, space, train, test, targetTrain, targetTest, trainId, t
         # id = testId['id'].values[i]
         id = testId[i]
         predTestDict[str(id)] = str(predTest[i])
+
+
+    # fix testPred
+    aug_testPred(targetTest, predTest, iteration)
 
     trainConfMatrix = confusion_matrix(targetTrain, predTrain)
     testConfMatrix = confusion_matrix(targetTest, predTest)

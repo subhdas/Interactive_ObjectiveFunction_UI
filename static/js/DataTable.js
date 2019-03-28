@@ -389,6 +389,11 @@
                 'metricKeys': metricObj,
                 'userConsWts': Cons.indivUserWtConst,
                 'userFeatures': ParC.userPickedAttr,
+                'instWeights':{
+                    'upWeight': DataTable.userInformativeItems,
+                    'lowWeight' : DataTable.userWastefulItems,
+                },
+                'iteration': BarM.modIter,
             }
             socket.emit("get_good_model", objSend);
             // socket.off('get_good_model');
@@ -1109,8 +1114,7 @@
 
                 setTimeout(() => {
 
-                    // $(this).click();
-                    // $(this).click();
+                    //RESET CRITIC ALL BUTTON FOR TRAIN SET
                     DataTable.criticalClicked = false;
                     DataTable.criticalInteractAll[-1] = '-'
                     var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
@@ -1118,7 +1122,7 @@
                     $(this).html(htmlStr);
                     $('.btnTableAddOn').css('width', '100%')
                     $('.btnTableAddOn').css('height', '100%')
-                }, 3000);
+                }, 9000);
 
 
             }) // end of rect dict
@@ -2060,7 +2064,7 @@
                     }
                     ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame] = arr;
                     // TabCon.makeSameLabContent();
-                    TabCon.addSameLabContentFromData(valueSelect);
+                    // TabCon.addSameLabContentFromData(valueSelect);
 
                     var arr = Object.keys(ConP.selectedRowsCons);
                     ConP.selectedRowsCons = {};
@@ -2104,7 +2108,7 @@
                     ConsInt.activeConstraints[valueSelect]['input']["labelitemsConId_" + TabCon.radioCheckedSame] = arr;
 
                     // TabCon.makeSameLabContent("_mainContentMid" + TabCon.radioCheckedSame, TabCon.radioCheckedSame, valueSelect);
-                    TabCon.addSameLabContentFromData(valueSelect);
+                    // TabCon.addSameLabContentFromData(valueSelect);
                     var arr = Object.keys(ConP.selectedRowsCons);
                     ConP.selectedRowsCons = {};
                     //commented - no need to deselect
