@@ -413,7 +413,7 @@
 				var id = $(this).parents();
 				var idNum = $(id[1]).attr('id')
 				idNum = Util.getNumberFromText(idNum)
-				console.log(' getting the parent ', idNum, i, type)
+				// console.log(' getting the parent ', idNum, i, type)
 				// var idList = DataTable.findLabelAcc(labelsData[i], labelsData[idNum])
 				if (type == 'train') {
 					if (!ConfM.cellClickedTrain) {
@@ -541,7 +541,7 @@
 			.style("fill", function (d, i) {
 				return d >= 0.5 ? 'white' : 'black';
 			})
-			.style("font-size", '1.5em')
+			.style("font-size", '1.2em')
 			.style("cursor", 'pointer')
 			.text(function (d, i) {
 				return d;

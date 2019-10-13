@@ -463,7 +463,7 @@
                 setTimeout(() => {
                 ConfM.makeConfMatrix(confMatrixTrain, 'train');
                 ConfM.makeConfMatrix(confMatrixTest, 'test'); // test
-                }, 100);
+                }, 100); // 100
               
 
                 DataTable.modelUpdateLabel();
@@ -476,7 +476,7 @@
                     Main.loadingSpinnerToggle(false);
                     BarM.histData[BarM.modIter] = BarM.allModelData;
                     BarM.modIter += 1;
-                }, 250);
+                }, 250); // 250
 
 
             })
@@ -2629,7 +2629,7 @@
         StarM.addConstraintsTable();
         setTimeout(() => {
             Rul.makeRuleList();
-            Rul.makeRuleListTestData();
+            // Rul.makeRuleListTestData();
         }, 400);
     }
 

@@ -65,9 +65,9 @@
     Main.datasetSelector = function () {
         // var dataSel = 1; // car
         // var dataSel = 2; // creditcard
-        // var dataSel = 3; // salary
+        var dataSel = 3; // salary
         // var dataSel = 4; // movie
-        var dataSel = 5; // diabetes
+        // var dataSel = 5; // diabetes
 
 
         if (dataSel == 1) {
@@ -91,7 +91,8 @@
             return "static/data/scenario/movie_metadata_short_SUB.csv";
         } else if (dataSel == 5) {
 
-            Main.labels = ['<30', '>30', 'NO']; // for DIABETES DATA default
+            Main.labels = ['<30', '>30', 'NO']; // for DIABETES DATA default = WORKED
+            // Main.labels = ['>30', '<30', 'NO']; // for DIABETES DATA default
             Main.dataset = 'diabetis'
             return "static/data/scenario/diabetic_data_short_SUB.csv";
 
@@ -105,7 +106,7 @@
         $(document).ready(function () {
             console.log("loading data");
             if (!Main.commonVars.DEBUG) {
-                // console.log = function () {};
+                console.log = function () {};
             }
             $("#sidePanel").css("width", "25px");
             $("#viewPanel").css("width", "100%");

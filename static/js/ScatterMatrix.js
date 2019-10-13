@@ -246,7 +246,7 @@
 
                         setTimeout(() => {
                         Scat.tipDiv.style("display", "none");                            
-                        }, 3000);
+                        }, 2000);
                     })
                     .on('mouseout', function (d, i) {
                         $(this).css('stroke', 'transparent')
