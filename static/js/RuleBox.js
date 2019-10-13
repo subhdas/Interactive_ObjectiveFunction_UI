@@ -11,7 +11,9 @@
 	Rul.tempRuleMapping = {}
 	Rul.tempTagNameDataId = {}
 
+	//called from make rule list
 	Rul.addIcons = function (containerId = '') {
+		return; // tp
 		if (containerId == "") containerId = "ruleHeaderId";
 		$("#" + containerId).empty();
 
@@ -41,7 +43,7 @@
 
 	}
 
-
+	// not called 
 	Rul.makeRuleListTestData = function (containerId = "", id = "") {
 		if (containerId == "") containerId = "featureEnggPanel"
 		// $("#" + containerId).empty();
@@ -172,8 +174,9 @@
 		$("#" + containerId).css('overflow-y', 'hidden')
 	}
 
-
+	// blocking it
 	Rul.makeRuleList = function (containerId = "", id = "") {
+		return;
 		// Rul.ruleData = {}
 
 		if (!Rul.setRule) return;
@@ -400,7 +403,7 @@
 
 	} // END OF MAKE RULE
 
-
+	// not called
 	Rul.makeRuleFromConfMatrix = function(){
 
 

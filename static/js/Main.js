@@ -106,7 +106,7 @@
         $(document).ready(function () {
             console.log("loading data");
             if (!Main.commonVars.DEBUG) {
-                console.log = function () {};
+                // console.log = function () {};
             }
             $("#sidePanel").css("width", "25px");
             $("#viewPanel").css("width", "100%");

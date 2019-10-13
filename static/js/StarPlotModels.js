@@ -349,7 +349,7 @@
         if (containerId == "") containerId = "starPlotHeaderId";
         $("#" + containerId).empty();
 
-        var htmlStr = "<div class = 'starPlotHeadTitle' id='starPlotHeadTitleId' > <span class = 'modelOutputText'> Model Interpreter </span> </div>";
+        var htmlStr = "<div class = 'starPlotHeadTitle' id='starPlotHeadTitleId' > <span class = 'modelOutputText'> Model Selector </span> </div>";
         htmlStr += "<div class = 'starPlotHeadButton' ></div>";
 
         $("#" + containerId).append(htmlStr);
@@ -357,12 +357,12 @@
         $(".starPlotHeadTitle").css('width', '100%')
         $(".starPlotHeadTitle").css('font-size', '1.5em')
         $(".starPlotHeadTitle").css('display', 'flex')
-        htmlStr = "<button id='toggleParStarPlotId' class='someBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-        htmlStr += "<i class='material-icons'>change_history</i></button>";
-        htmlStr += "<button id='toggleModelConstraintsId' class='someBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
-        htmlStr += "<i class='material-icons'>blur_linear</i></button>";
+        // htmlStr = "<button id='toggleParStarPlotId' class='someBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        // htmlStr += "<i class='material-icons'>change_history</i></button>";
+        // htmlStr += "<button id='toggleModelConstraintsId' class='someBtn mdl-button mdl-js-button mdl-button--icon mdl-button--colored'>"
+        // htmlStr += "<i class='material-icons'>blur_linear</i></button>";
 
-        $(".starPlotHeadButton").append(htmlStr);
+        // $(".starPlotHeadButton").append(htmlStr);
 
         //css styling
         $(".modelOutputText").css('margin-right', '25px')
@@ -394,10 +394,10 @@
         StarM.starPlotMode = false;
 
         // make sure empt and update header
-        if (containerId == "") containerId = "modelExplorePanel"
+        if (containerId == "") containerId = "modelExplorePanel" //"featureEnggPanel"
         $("#" + containerId).empty();
 
-        $('#' + containerId).css('border-left', '1px solid lightgray')
+        // $('#' + containerId).css('border-left', '1px solid lightgray')
         //make icon panel 
         var htmlStr = "<div class = 'starPlotHeader' id = 'starPlotHeaderId' ></div>";
         htmlStr += "<div class = 'starPlotContent' id = 'starPlotContentId' ></div>";
@@ -469,6 +469,7 @@
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .attr('id', 'parCoorModelMetric')
+            .style('padding', '10px')
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
@@ -852,34 +853,36 @@
         RadarChart.defaultConfig.w = 300;
         RadarChart.defaultConfig.h = 250;
 
-        if (containerId == "") containerId = "modelExplorePanel"
+        if (containerId == "") containerId = "featureEnggPanel" //"modelExplorePanel"
         $("#" + containerId).empty();
 
         $('#' + containerId).css('border-left', '1px solid lightgray')
+        $('#' + containerId).css('height', RadarChart.defaultConfig.h +50+'px')
         //make icon panel 
-        var htmlStr = "<div class = 'starPlotHeader' id = 'starPlotHeaderId' ></div>";
-        htmlStr += "<div class = 'starPlotContent' id = 'starPlotContentId' ></div>";
-        $("#" + containerId).append(htmlStr);
+        // var htmlStr = "<div class = 'starPlotHeader' id = 'starPlotHeaderId' ></div>";
+        // htmlStr += "<div class = 'starPlotContent' id = 'starPlotContentId' ></div>";
+        // $("#" + containerId).append(htmlStr);
 
+        console.log('MAKING STARPLOT ON ', containerId)
         // var ht = $('.constraintContent').height();
-        var ht = 275;
-        // console.log('height found ', ht)
-        // css styling
-        $('.starPlotHeader').css('display', 'flex');
-        $('.starPlotHeader').css('padding', '3px');
-        // $('.featureEngHeader').css('margin', '5px');
-        $('.starPlotHeader').css('width', '100%');
-        $('.starPlotHeader').css('height', '35px');
-        $('.starPlotHeader').css('border-bottom', '1px dotted lightgray');
+        // var ht = 275;
+        // // console.log('height found ', ht)
+        // // css styling
+        // $('.starPlotHeader').css('display', 'flex');
+        // $('.starPlotHeader').css('padding', '3px');
+        // // $('.featureEngHeader').css('margin', '5px');
+        // $('.starPlotHeader').css('width', '100%');
+        // $('.starPlotHeader').css('height', '35px');
+        // $('.starPlotHeader').css('border-bottom', '1px dotted lightgray');
 
-        $('.starPlotContent').css('display', 'flex');
-        $('.starPlotContent').css('padding', '4px');
-        $('.starPlotContent').css('margin', '5px');
-        $('.starPlotContent').css('width', '100%');
-        $('.starPlotContent').css('height', ht);
+        // $('.starPlotContent').css('display', 'flex');
+        // $('.starPlotContent').css('padding', '4px');
+        // $('.starPlotContent').css('margin', '5px');
+        // $('.starPlotContent').css('width', '100%');
+        // $('.starPlotContent').css('height', ht);
 
-        StarM.addIconsStarPlot('starPlotHeaderId');
-        $('.starPlotContent').hide();
+        // StarM.addIconsStarPlot('starPlotHeaderId');
+        // $('.starPlotContent').hide();
 
 
         // make the svg

@@ -454,6 +454,8 @@
                     var dataNumeric = Main.getDataByKeys(arr, Main.trainData);
                     console.log('par coord model metric ', arr, dataNumeric)
                     StarM.makeMetricsParCoord('', dataNumeric, true);
+                    StarM.makeStarPlot();
+
                 }, 0);
 
 
@@ -1515,7 +1517,7 @@
                 }
             } catch (e) {
                 ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [idNum]
-            }
+            } 
         })
 
 
