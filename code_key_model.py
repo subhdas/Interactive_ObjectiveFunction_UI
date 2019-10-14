@@ -21,7 +21,6 @@ def critical_metrics_key(targetTrain, predTrain, trainId):
 
 def list_toTuple(idList):
         n = len(idList)
-        # make it even number
         if(n % 2 is not 0):
             idList = idList[0:n-1]
         newTupList = []
@@ -88,3 +87,28 @@ def similar_diff_metrics_key(targetTrain, predTrain, trainId):
     finalScore = (similarityScore + differentScore)*fac
     print " def lable and sim score 2 ", defaultLabel, similarityScore, differentScore, finalScore, fac
     return finalScore
+
+def cand_metrics_key(targetTrain, predTrain, trainId):
+    predTrainDict, origTrainDict = {}, {}
+    trainId = trainId.values
+    targetTrain = targetTrain.values
+    print('predTrain labels ', set(predTrain))
+    ind = [23, 6, 10]
+    sameLabelObj = {}
+    sameLabelObj['0'] = [trainId[ind[0]], trainId[ind[1]], trainId[ind[2]]]
+    ind = [12, 54, 15]
+    sameLabelObj['1'] = [trainId[ind[0]], trainId[ind[1]], trainId[ind[2]]]
+    for i in range(len(predTrain)):
+        id = trainId[i]
+        predTrainDict[(id)] = (predTrain[i])
+        origTrainDict[(id)] = (targetTrain[i])
+    candScore, count = 0,0
+    for item in sameLabelObj:
+        elIdList = sameLabelObj[item]  # item is the class label
+        for i in range(len(elIdList)):
+            count += 1
+            if(predTrainDict[elIdList[i]] == int(item)): candScore += 1
+    if(count == 0): return 0
+    candScore = (candScore*1.0)/count
+    print ('cand score retrieved ', candScore)
+    return candScore

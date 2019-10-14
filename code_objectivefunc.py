@@ -37,8 +37,6 @@ def load_prep_data(path=None):
 
 
 def objective(space):
-    # global train, test, targetTrain, targetTest
-    # print ('inside obj ', space, train.shape)
     clf = RandomForestClassifier(max_depth=space['max_depth'],
                                     min_samples_split=space['min_samples_split'],
                                     min_samples_leaf=space['min_samples_leaf'],
@@ -55,24 +53,12 @@ def objective(space):
 
     critScore = critical_metrics_key(targetTrain, predTrain, trainId)
     similarityScore = similar_diff_metrics_key(targetTrain, predTrain, trainId)
+    candScore = cand_metrics_key(targetTrain, predTrain, trainId)
 
-
-    # try:
-    #     critScore = critical_metrics_key(targetTrain, predTrain, trainId)
-    # except: critScore = 0
-    
-    try:
-        sameLabScore = samelabel_metrics(targetTrain, predTrain)
-    except: sameLabScore = 0
-
-    # try:
-    #     similarityScore = similar_diff_metrics_key(targetTrain, predTrain)
-    # except: similarityScore = 0
-
-    finalscore = (critScore + sameLabScore + similarityScore)/3.0
+    finalscore = (critScore + similarityScore + candScore)/3.0
 
     result = {'loss': -1*finalscore, 'status': STATUS_OK}
-    print " result is ", result, critScore
+    print " result is ", result, critScore, candScore
     return result
     # end of objective function
 
