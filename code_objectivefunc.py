@@ -7,7 +7,7 @@ from hyperopt.fmin import fmin
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score
 
-
+train, test, targetTrain, targetTest = None,None,None,None
 def load_prep_data(path=None):
     if(path is None ): path ='./static/data/scenario/Employee_Compensation_SF_SUB_short1.csv'
     tarCol = 'target_variable'
@@ -20,24 +20,47 @@ def load_prep_data(path=None):
     train, test, targetTrain, targetTest = train_test_split(X, y, test_size=0.33, random_state=42)
     return train, test, targetTrain, targetTest
 
-def find_goodModel(train, test, targetTrain, targetTest):
+
+def objective(space):
+    global train, test, targetTrain, targetTest
+    # train, test, targetTrain, targetTest = space['dataArr']
+    # train, idCol = preProcessData(train, userFeatures=[])
+    # test, idCol = preProcessData(test, userFeatures=[])
+    print ('inside obj ', space, train.shape)
+    clf = RandomForestClassifier(max_depth=space['max_depth'],
+                                    min_samples_split=space['min_samples_split'],
+                                    min_samples_leaf=space['min_samples_leaf'],
+                                    bootstrap=space['bootstrap'],
+                                    criterion=space['criterion']
+                                    )
+    clf.fit(train, targetTrain)
+    cross_mean_score = cross_val_score(
+        estimator=clf, X=train, y=targetTrain, scoring='accuracy', cv=3, n_jobs=-1).mean()
+
+    result = {'loss': -1*cross_mean_score, 'status': STATUS_OK}
+    print " result is ", result
+    return result
+    # end of objective function
+
+def find_goodModel():
+    global train, test, targetTrain, targetTest
     train,idCol = preProcessData(train, userFeatures  = [])
     test, idCol = preProcessData(test, userFeatures=[])
 
-    def objective(space):
-        clf = RandomForestClassifier(max_depth=space['max_depth'],
-                                     min_samples_split=space['min_samples_split'],
-                                     min_samples_leaf=space['min_samples_leaf'],
-                                     bootstrap=space['bootstrap'],
-                                     criterion=space['criterion']
-                                     )
-        clf.fit(train, targetTrain)
-        cross_mean_score = cross_val_score( estimator=clf, X=train, y=targetTrain, scoring='accuracy', cv=3, n_jobs=-1).mean()
+    # def objective(space):
+    #     clf = RandomForestClassifier(max_depth=space['max_depth'],
+    #                                  min_samples_split=space['min_samples_split'],
+    #                                  min_samples_leaf=space['min_samples_leaf'],
+    #                                  bootstrap=space['bootstrap'],
+    #                                  criterion=space['criterion']
+    #                                  )
+    #     clf.fit(train, targetTrain)
+    #     cross_mean_score = cross_val_score( estimator=clf, X=train, y=targetTrain, scoring='accuracy', cv=3, n_jobs=-1).mean()
 
-        result = {'loss': -1*cross_mean_score, 'status': STATUS_OK}
-        print " result is ", result
-        return result
-        # end of objective function
+    #     result = {'loss': -1*cross_mean_score, 'status': STATUS_OK}
+    #     print " result is ", result
+    #     return result
+    #     # end of objective function
 
     col_train = train.columns
     bootStrapArr = [True, False]
@@ -52,6 +75,8 @@ def find_goodModel(train, test, targetTrain, targetTest):
         'bootstrap': hp.choice('bootstrap', bootStrapArr),
         'criterion': hp.choice('criterion', criterionArr)
     }
+
+    # space['dataArr'] = (train, test, targetTrain, targetTest)
 
     trials = Trials()
     best = fmin(fn=objective,
@@ -107,8 +132,7 @@ def find_goodModel(train, test, targetTrain, targetTest):
 
 
 if __name__ == "__main__":
-
     import warnings
     warnings.filterwarnings("ignore")
     train, test, targetTrain, targetTest = load_prep_data()
-    find_goodModel(train, test, targetTrain, targetTest)
+    find_goodModel()
