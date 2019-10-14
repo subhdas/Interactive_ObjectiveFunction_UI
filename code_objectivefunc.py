@@ -74,6 +74,9 @@ def find_goodModel():
     train,trainId = preProcessData(train, userFeatures  = [])
     test, testId = preProcessData(test, userFeatures=[])
 
+    trainId = trainId.values
+    targetTrain = targetTrain.values
+
     col_train = train.columns
     bootStrapArr = [True, False]
     criterionArr = ["gini", "entropy"]

@@ -4,9 +4,6 @@ from sklearn.model_selection import train_test_split, cross_val_score
 
 def critical_metrics_key(targetTrain, predTrain, trainId):
     predTrainDict, origTrainDict = {},{}
-    trainId = trainId.values
-    targetTrain = targetTrain.values
-
     ind = [12, 23, 5]
     critIds = [trainId[ind[0]], trainId[ind[1]], trainId[ind[2]]]
     for i in range(len(predTrain)):
@@ -23,19 +20,17 @@ def critical_metrics_key(targetTrain, predTrain, trainId):
     return critScore
 
 
-def list_toTuple(idList):
-        n = len(idList)
-        if(n % 2 is not 0):
-            idList = idList[0:n-1]
-        newTupList = []
-        for i in range(0, len(idList)-1, 2):
-            newTupList.append((idList[i], idList[i+1]))
-        return newTupList
+# def list_toTuple(idList):
+#         n = len(idList)
+#         if(n % 2 is not 0):
+#             idList = idList[0:n-1]
+#         newTupList = []
+#         for i in range(0, len(idList)-1, 2):
+#             newTupList.append((idList[i], idList[i+1]))
+#         return newTupList
 
 def similar_diff_metrics_key(targetTrain, predTrain, trainId):
     predTrainDict, origTrainDict = {}, {}
-    trainId = trainId.values
-    targetTrain = targetTrain.values
     similarityObj = {'Similarity' : 1, 'Different' : 1}
     for i in range(len(predTrain)):
         id = trainId[i]
@@ -94,8 +89,6 @@ def similar_diff_metrics_key(targetTrain, predTrain, trainId):
 
 def cand_metrics_key(targetTrain, predTrain, trainId):
     predTrainDict, origTrainDict = {}, {}
-    trainId = trainId.values
-    targetTrain = targetTrain.values
     print('predTrain labels ', set(predTrain))
     ind = [23, 6, 10]
     sameLabelObj = {}
