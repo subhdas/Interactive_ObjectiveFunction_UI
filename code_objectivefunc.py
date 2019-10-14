@@ -54,6 +54,8 @@ def objective(space):
     predTest = clf.predict(test)
 
     critScore = critical_metrics_key(targetTrain, predTrain, trainId)
+    similarityScore = similar_diff_metrics_key(targetTrain, predTrain, trainId)
+
 
     # try:
     #     critScore = critical_metrics_key(targetTrain, predTrain, trainId)
@@ -63,9 +65,9 @@ def objective(space):
         sameLabScore = samelabel_metrics(targetTrain, predTrain)
     except: sameLabScore = 0
 
-    try:
-        similarityScore = similar_metrics(targetTrain, predTrain)
-    except: similarityScore = 0
+    # try:
+    #     similarityScore = similar_diff_metrics_key(targetTrain, predTrain)
+    # except: similarityScore = 0
 
     finalscore = (critScore + sameLabScore + similarityScore)/3.0
 
