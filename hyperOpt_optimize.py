@@ -21,8 +21,6 @@ from sklearn.ensemble import AdaBoostClassifier, GradientBoostingClassifier, Bag
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.decomposition import PCA
 from sklearn.naive_bayes import GaussianNB, MultinomialNB 
-# from sklearn.naive_bayes import ComplementNB
-# for json dumps to work
 
 
 class NumpyEncoder(json.JSONEncoder):
@@ -115,7 +113,9 @@ def preProcessData(data, userFeatures):
     data = data.apply(pd.to_numeric, errors='ignore')
     data = data._get_numeric_data()
     idCol = data['id']
-    data = data.drop(['id', 'cluster'], axis=1)
+    data = data.drop(['id'], axis=1)
+    try: data = data.drop(['cluster'], axis=1)
+    except: pass
     if(len(userFeatures)> 0):    
         data = data[userFeatures]
         # data = feature_selection_PCA(data)
@@ -592,8 +592,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         try:
             exist = metObj['Precision']
             # + random.uniform(-0.2,0.2)
-            precTrain = precision_score(
-                trainT, predT, average='weighted') * userWts['Precision']
+            precTrain = precision_score(trainT, predT, average='weighted') * userWts['Precision']
         except:
             precTrain = 0
 
