@@ -2,19 +2,15 @@ from sklearn.metrics import classification_report, f1_score, accuracy_score, con
 from sklearn.model_selection import train_test_split, cross_val_score
 
 
-def critical_metrics_key(targetTrain, predTrain, trainId):
-    predTrainDict, origTrainDict = {},{}
+def critical_metrics_key(origTrainDict,predTrainDict):
+    trainId = origTrainDict.keys()
     ind = [12, 23, 5]
     critIds = [trainId[ind[0]], trainId[ind[1]], trainId[ind[2]]]
-    for i in range(len(predTrain)):
-        id = trainId[i]
-        predTrainDict[str(id)] = str(predTrain[i])
-        origTrainDict[str(id)] = str(targetTrain[i])
     critScore = 0
     for i in range(len(critIds)):
-        if(predTrainDict[str(critIds[i])] == origTrainDict[str(critIds[i])]):  critScore += 1
+        if(predTrainDict[(critIds[i])] == origTrainDict[(critIds[i])]): critScore += 1
 
-    if(len(critIds) == 0): return 0
+    if(len(critIds) == 0):  return 0
     critScore = (critScore*1.0)/len(critIds)
     print ' getting crit score as ', critScore, critIds
     return critScore
@@ -29,17 +25,12 @@ def critical_metrics_key(targetTrain, predTrain, trainId):
 #             newTupList.append((idList[i], idList[i+1]))
 #         return newTupList
 
-def similar_diff_metrics_key(targetTrain, predTrain, trainId):
-    predTrainDict, origTrainDict = {}, {}
+def similar_diff_metrics_key(origTrainDict, predTrainDict):
     similarityObj = {'Similarity' : 1, 'Different' : 1}
-    for i in range(len(predTrain)):
-        id = trainId[i]
-        predTrainDict[(id)] = (predTrain[i])
-        origTrainDict[(id)] = (targetTrain[i])
-
     similarityScore, count = 0,0
     defaultLabel = ""
 
+    trainId = origTrainDict.keys()
     ind = [13, 34, 12]
     similarityObj={}
     similarityObj['label_name'] = [(trainId[ind[0]]),(trainId[ind[1]]),(trainId[ind[2]])] # this data ids should be in same label, given by the label name
@@ -87,18 +78,14 @@ def similar_diff_metrics_key(targetTrain, predTrain, trainId):
     print " def lable and sim score 2 ", defaultLabel, similarityScore, differentScore, finalScore, fac
     return finalScore
 
-def cand_metrics_key(targetTrain, predTrain, trainId):
-    predTrainDict, origTrainDict = {}, {}
-    print('predTrain labels ', set(predTrain))
+
+def cand_metrics_key(origTrainDict, predTrainDict):
+    trainId = origTrainDict.keys()
     ind = [23, 6, 10]
     sameLabelObj = {}
     sameLabelObj['0'] = [trainId[ind[0]], trainId[ind[1]], trainId[ind[2]]]
     ind = [12, 54, 15]
     sameLabelObj['1'] = [trainId[ind[0]], trainId[ind[1]], trainId[ind[2]]]
-    for i in range(len(predTrain)):
-        id = trainId[i]
-        predTrainDict[(id)] = (predTrain[i])
-        origTrainDict[(id)] = (targetTrain[i])
     candScore, count = 0,0
     for item in sameLabelObj:
         elIdList = sameLabelObj[item]  # item is the class label

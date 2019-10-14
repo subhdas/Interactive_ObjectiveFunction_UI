@@ -49,9 +49,15 @@ def objective(space):
     predTrain = clf.predict(train)
     predTest = clf.predict(test)
 
-    critScore = critical_metrics_key(targetTrain, predTrain, trainId)
-    similarityScore = similar_diff_metrics_key(targetTrain, predTrain, trainId)
-    candScore = cand_metrics_key(targetTrain, predTrain, trainId)
+    predTrainDict, origTrainDict = {}, {}
+    for i in range(len(predTrain)):
+        id = trainId[i]
+        predTrainDict[(id)] = (predTrain[i])
+        origTrainDict[(id)] = (targetTrain[i])
+
+    critScore = critical_metrics_key(origTrainDict, predTrainDict)
+    similarityScore = similar_diff_metrics_key(origTrainDict, predTrainDict)
+    candScore = cand_metrics_key(origTrainDict, predTrainDict)
     
     crossScore = crossval_metric_key(clf, train, targetTrain)
     precScore = precision_metric_key(targetTrain,predTrain)

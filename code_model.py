@@ -4,17 +4,17 @@ from sklearn.model_selection import train_test_split, cross_val_score
 
 # CONSTRAINTS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-def critical_metrics_key(targetTrain, predTrain, trainId):
+def critical_metrics_key(origTrainDict,predTrainDict):
     score = random.random()
     return score
 
 
-def cand_metrics_key(targetTrain, predTrain, trainId):
+def cand_metrics_key(origTrainDict, predTrainDict):
     score = random.random()
     return score
 
 
-def similar_diff_metrics_key(targetTrain, predTrain, trainId):
+def similar_diff_metrics_key(origTrainDict, predTrainDict):
     score = random.random()
     return score
 
