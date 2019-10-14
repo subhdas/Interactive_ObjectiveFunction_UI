@@ -6,8 +6,23 @@ from hyperopt import hp, tpe, STATUS_OK, Trials
 from hyperopt.fmin import fmin
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score
+from code_model import *
+from code_key_model import *
+
+
+# def warn(*args, **kwargs):
+#         pass
+# import warnings
+# warnings.filterwarnings("ignore", category=DeprecationWarning)
+# from sklearn.exceptions import DataConversionWarning
+# warnings.filterwarnings(action='ignore', category=DataConversionWarning)
+# with warnings.catch_warnings():
+#     warnings.simplefilter("ignore")
 
 train, test, targetTrain, targetTest = None,None,None,None
+trainId, testId = None, None
+
+
 def load_prep_data(path=None):
     if(path is None ): path ='./static/data/scenario/Employee_Compensation_SF_SUB_short1.csv'
     tarCol = 'target_variable'
@@ -22,45 +37,48 @@ def load_prep_data(path=None):
 
 
 def objective(space):
-    global train, test, targetTrain, targetTest
-    # train, test, targetTrain, targetTest = space['dataArr']
-    # train, idCol = preProcessData(train, userFeatures=[])
-    # test, idCol = preProcessData(test, userFeatures=[])
-    print ('inside obj ', space, train.shape)
+    # global train, test, targetTrain, targetTest
+    # print ('inside obj ', space, train.shape)
     clf = RandomForestClassifier(max_depth=space['max_depth'],
                                     min_samples_split=space['min_samples_split'],
                                     min_samples_leaf=space['min_samples_leaf'],
                                     bootstrap=space['bootstrap'],
                                     criterion=space['criterion']
                                     )
+                                    
     clf.fit(train, targetTrain)
     cross_mean_score = cross_val_score(
         estimator=clf, X=train, y=targetTrain, scoring='accuracy', cv=3, n_jobs=-1).mean()
 
-    result = {'loss': -1*cross_mean_score, 'status': STATUS_OK}
-    print " result is ", result
+    predTrain = clf.predict(train)
+    predTest = clf.predict(test)
+
+    critScore = critical_metrics_key(targetTrain, predTrain, trainId)
+
+    # try:
+    #     critScore = critical_metrics_key(targetTrain, predTrain, trainId)
+    # except: critScore = 0
+    
+    try:
+        sameLabScore = samelabel_metrics(targetTrain, predTrain)
+    except: sameLabScore = 0
+
+    try:
+        similarityScore = similar_metrics(targetTrain, predTrain)
+    except: similarityScore = 0
+
+    finalscore = (critScore + sameLabScore + similarityScore)/3.0
+
+    result = {'loss': -1*finalscore, 'status': STATUS_OK}
+    print " result is ", result, critScore
     return result
     # end of objective function
 
 def find_goodModel():
     global train, test, targetTrain, targetTest
-    train,idCol = preProcessData(train, userFeatures  = [])
-    test, idCol = preProcessData(test, userFeatures=[])
-
-    # def objective(space):
-    #     clf = RandomForestClassifier(max_depth=space['max_depth'],
-    #                                  min_samples_split=space['min_samples_split'],
-    #                                  min_samples_leaf=space['min_samples_leaf'],
-    #                                  bootstrap=space['bootstrap'],
-    #                                  criterion=space['criterion']
-    #                                  )
-    #     clf.fit(train, targetTrain)
-    #     cross_mean_score = cross_val_score( estimator=clf, X=train, y=targetTrain, scoring='accuracy', cv=3, n_jobs=-1).mean()
-
-    #     result = {'loss': -1*cross_mean_score, 'status': STATUS_OK}
-    #     print " result is ", result
-    #     return result
-    #     # end of objective function
+    global trainId, testId
+    train,trainId = preProcessData(train, userFeatures  = [])
+    test, testId = preProcessData(test, userFeatures=[])
 
     col_train = train.columns
     bootStrapArr = [True, False]
@@ -84,18 +102,15 @@ def find_goodModel():
                 algo=tpe.suggest,
                 max_evals=3,  # change
                 trials=trials)
-
-    print " trials are ", trials
     mod_results = {}
-
     ind = 0
     for trial in trials.trials:
         res = trial['result']
         par_space = trial['misc']['vals']
-        print " we get trial as : ", trial
-        print " we get trial as : ", res
-        print " we get trial as : ", par_space
-        print " ######################## "
+        # print " we get trial as : ", trial
+        # print " we get trial as : ", res
+        # print " we get trial as : ", par_space
+        # print " ######################## "
 
         for item in res:
             res[item] = -1*res[item]
@@ -116,8 +131,8 @@ def find_goodModel():
         # pred_out = makePredictions(space, train, test, targetTrain, targetTest)
         allmodel_pred_out[item] = pred_out
 
-    print " mod results obj ", mod_results
-    print " mod results obj ", allmodel_pred_out
+    # print " mod results obj ", mod_results
+    # print " mod results obj ", allmodel_pred_out
 
     print(" best output is ", best)
     best['bootstrap'] = bootStrapArr[best['bootstrap']]
@@ -134,5 +149,6 @@ def find_goodModel():
 if __name__ == "__main__":
     import warnings
     warnings.filterwarnings("ignore")
+    
     train, test, targetTrain, targetTest = load_prep_data()
     find_goodModel()

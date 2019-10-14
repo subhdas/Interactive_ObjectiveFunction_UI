@@ -1,26 +1,23 @@
+import random
+
+# CONSTRAINTS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+def critical_metrics(targetTrain, predTrain):
+    score = random.random()
+    return score
 
 
-
-def objective ():
-    obj = {
-        'params': best,
-        'status': 'OK'
-    }
-    return obj
+def samelabel_metrics(targetTrain, predTrain):
+    score = random.random()
+    return score
 
 
-def user_coded_models():
-    # GIVEN
-    # space { hyperpar, domain space}
-    # clf or model
+def similar_metrics(targetTrain, predTrain):
+    score = random.random()
+    return score
 
+# CONSTRAINTS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
-    # COLLECT CONSTRAINTS
-    # USER WRITE CODE HERE
-    # HYPEROPT TRIALS
-
-    return
 
 
 if __name__ == "__main__":

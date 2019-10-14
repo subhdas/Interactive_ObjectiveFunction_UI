@@ -220,7 +220,6 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         origTrainDict = {}
         
         for i in range(len(predTrain)):
-            # id = trainId['id'].values[i]
             id = trainId[i]
             predTrainDict[str(id)] = str(predTrain[i])
             origTrainDict[str(id)] = str(targetTrain[i])
@@ -230,10 +229,8 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
             if(predTrainDict[critIds[i]] == origTrainDict[critIds[i]]):
                 critScore += 1
 
-        if(len(critIds) == 0):
-            return 0
+        if(len(critIds) == 0): return 0
         critScore = (critScore*1.0)/len(critIds)
-
         print ' getting crit score as ', critScore, critIds
         return critScore
 
