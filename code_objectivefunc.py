@@ -1,6 +1,6 @@
 from hyperOpt_optimize import preProcessData, makePredictions
 import pandas as pd
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score
 import numpy as np
 from hyperopt import hp, tpe, STATUS_OK, Trials
 from hyperopt.fmin import fmin
@@ -45,8 +45,6 @@ def objective(space):
                                     )
                                     
     clf.fit(train, targetTrain)
-    cross_mean_score = cross_val_score(
-        estimator=clf, X=train, y=targetTrain, scoring='accuracy', cv=3, n_jobs=-1).mean()
 
     predTrain = clf.predict(train)
     predTest = clf.predict(test)
@@ -54,8 +52,16 @@ def objective(space):
     critScore = critical_metrics_key(targetTrain, predTrain, trainId)
     similarityScore = similar_diff_metrics_key(targetTrain, predTrain, trainId)
     candScore = cand_metrics_key(targetTrain, predTrain, trainId)
+    
+    crossScore = crossval_metric_key(clf, train, targetTrain)
+    precScore = precision_metric_key(targetTrain,predTrain)
+    accScore = acc_metric_key(targetTrain,predTrain)
+    recallScore = recall_metric_key(targetTrain, predTrain)
+    f1Score = f1score_metric_key(targetTrain, predTrain)
 
-    finalscore = (critScore + similarityScore + candScore)/3.0
+    accAll = (crossScore + precScore + accScore + recallScore + f1Score)/5.0
+
+    finalscore = (critScore + similarityScore + candScore + accAll)/4.0
 
     result = {'loss': -1*finalscore, 'status': STATUS_OK}
     print " result is ", result, critScore, candScore

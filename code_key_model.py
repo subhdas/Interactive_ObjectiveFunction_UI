@@ -1,3 +1,7 @@
+from sklearn.metrics import classification_report, f1_score, accuracy_score, confusion_matrix, precision_score, recall_score
+from sklearn.model_selection import train_test_split, cross_val_score
+
+
 def critical_metrics_key(targetTrain, predTrain, trainId):
     predTrainDict, origTrainDict = {},{}
     trainId = trainId.values
@@ -112,3 +116,24 @@ def cand_metrics_key(targetTrain, predTrain, trainId):
     candScore = (candScore*1.0)/count
     print ('cand score retrieved ', candScore)
     return candScore
+
+
+def precision_metric_key(targetTrain, predTrain):
+    precScore = precision_score(targetTrain, predTrain, average='weighted')
+    return precScore
+
+def recall_metric_key(targetTrain, predTrain):
+    recScore = precision_score(targetTrain, predTrain, average='weighted')
+    return recScore
+
+def f1score_metric_key(targetTrain, predTrain):
+    f1Score = f1_score(targetTrain, predTrain, average='weighted')
+    return f1Score
+
+def acc_metric_key(targetTrain, predTrain):
+    accScore = accuracy_score(targetTrain, predTrain, normalize=True)
+    return accScore
+
+def crossval_metric_key(clf,train, targetTrain):
+    crossScore = cross_val_score(estimator=clf, X=train, y=targetTrain, scoring='f1_weighted', cv=10, n_jobs=-1).mean()
+    return crossScore
