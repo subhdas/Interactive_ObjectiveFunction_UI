@@ -79,8 +79,10 @@
 			len = Main.testData.length;
 			tag = 'num_wrong_test'
 		}
-		var text = 'Prediction Accuracy is  '
-		var text = 'Objective Function Score is  '
+		// var text = 'Prediction Accuracy is  '
+		var text = 'Objective Function Score '
+		var headtxt = 'Test Data Results: '
+		if (type == 'train') headtxt = 'Train Data Results: '
 		var metObj = BarM.allModelData[BarM.selectedModelId][ob];
 		// var score = 0,
 		// 	ind = 0;
@@ -109,13 +111,14 @@
 
 
 		var htmlStr = "<div class = '" + type + "_wrapDivs modelResult' id = 'modelResult_" + containerId + "_" + type + "'>"
+		htmlStr += "<div class = 'modResRow' id = '" + idName + "' ><span class ='modelResHeadText modResHeader'> " + headtxt + "</span>"
 		htmlStr += "<div class = 'modResRow' id = '" + idName + "' ><span class ='modelResHeadText'> " + text + "</span>"
 		htmlStr += "<span class = 'modelResOut' >" + acc + numLab + " </span></div>";
 
 		var acc2 = 2;
 		if (BarM.modIter > 0) {
 			// console.log('moditer is ', BarM.modIter)
-			var text2 = 'Last Objective Function Score was  '
+			var text2 = 'Last Objective Function Score  '
 			var metObj = BarM.histData[BarM.modIter - 1][+BarM.selectedModelId][ob];
 
 			// var score = 0,
@@ -184,16 +187,29 @@
 			var pos = $(this).position();
 			var wid = 200;
 			var ht = 200;
+			var posTop = pos.top + 110
+			var posLeft = pos.left - wid - 80
+
+			if($(this).attr('parent') == 'test'){
+				posTop = pos.top - 400
+			}
 
 			$('.prevConfMat').css('display', 'flex')
 			$('.prevConfMat').css('position', 'absolute')
-			$('.prevConfMat').css('top', pos.top + 30 + 'px')
-			$('.prevConfMat').css('left', pos.left - wid - 120 + 'px')
+			$('.prevConfMat').css('top', posTop + 'px')
+			$('.prevConfMat').css('left', posLeft + 'px')
 			$('.prevConfMat').css('width', wid + 'px')
 			$('.prevConfMat').css('height', ht + 'px')
 			$('.prevConfMat').css('padding', '5px')
 			// $('.prevConfMat').css('background', 'cyan')
 			$('.prevConfMat').show()
+
+			// for box shadow
+			// $('.prevConfMat').css('-webkit-box-shadow', '10px 10px 22px -17px rgba(0,0,0,0.75)')
+			// $('.prevConfMat').css('-moz-box-shadow', '10px 10px 22px -17px rgba(0,0,0,0.75)')
+			// $('.prevConfMat').css('box-shadow', '10px 10px 22px -17px rgba(0,0,0,0.75)')
+
+
 			var par = $(this).attr('parent')
 
 			var selector = 'trainConfMatrix'
@@ -229,7 +245,10 @@
 
 		$(".modResRow").css('margin-bottom', '10px')
 		$(".modResRow").css('display', 'flex')
-		$(".modResRow").css('align-items', 'center')
+		$(".modResRow").css('align-items', 'flex-start')
+		$(".modResRow").css('flex-direction', 'column')
+
+		$('.modResHeader').css('font-weight', 'bold')
 
 		$("." + type + "_wrapDivs").wrapAll("<div class='wrapperDivConfMatr'></div>");
 
@@ -246,6 +265,7 @@
 		$(".wrapperDivConfMatr").css('padding', '4px');
 		$(".wrapperDivConfMatr").css('align-items', 'center');
 		$(".wrapperDivConfMatr").css('justify-content', 'center');
+		$(".wrapperDivConfMatr").css('border-bottom', '1px solid lightgray');
 
 	}
 

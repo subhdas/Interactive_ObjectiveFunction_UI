@@ -685,7 +685,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         # store the result
         modelMetricsObj = {}
 
-        modelMetricsObj['Critical-Items'] = critScore  +  random.uniform(0.1,0.4)
+        modelMetricsObj['Critical-Items'] = critScore + random.uniform(0.1,0.4)
         modelMetricsObj['Non-Critical'] = 0  # random.uniform(0.3,0.95)
         modelMetricsObj['Same-Label'] = sameLabScore +  random.uniform(0.1,0.4)
         modelMetricsObj['Similarity'] = similarityScore  +  random.uniform(0.1,0.4)
@@ -854,7 +854,7 @@ def find_goodModel(train, test, targetTrain, targetTest, extraInfo):
         for item in res:
             try:
                 res[item] = -1*res[item]
-            except: print 'some error ignore plz '
+            except Exception as e: print ('some error ignore plz ', e)
         for item in par_space:
             par_space[item] = par_space[item][0]
             # if(item == 'min_samples_split' or item == 'max_depth' or item == 'min_samples_leaf'):

@@ -754,6 +754,8 @@
             // .style('background', 'white')
             // .style('color', 'black')
             .html(function (d, i) {
+                //place to hide test data critical buttons
+                // if($(this).closest('table').attr('id') == 'dataViewAppTable_tableContentTest') return
                 // console.log(' d and i is ', d, i)
                 if (i < 2) {
                     var col = $(this).siblings().attr('background');
@@ -778,19 +780,13 @@
                     htmlStr += "<i class='material-icons'>linear_scale</i></button>";
                     htmlStr += "</div>"
 
-
-                    // htmlStr += "<div id = 'criticalRectId_" + d.id + "'  class='iconHolder criticalRect tableBtnInt'  title='Show logs'>"
-                    // htmlStr += "<img class='imgIcon' src='static/img/icons/print.png'> </div>"
-
-                    // htmlStr += "</div>";
-                    // htmlStr += "<div class = 'infoRect tableBtnInt' id = 'infoRectId_" + d.id + "' ></div>";
-
-                    if (containerId == 'tableContent') {
-                        htmlStr += "<div id = 'infoRectId_" + d.id + "' class = 'infoRect tableBtnInt' >"
-                        htmlStr += "<button  class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored  btnTableAddOn'>"
-                        htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
-                        htmlStr += "</div>"
-                    }
+                    //commented info and wasteful button
+                    // if (containerId == 'tableContent') {
+                    //     htmlStr += "<div id = 'infoRectId_" + d.id + "' class = 'infoRect tableBtnInt' >"
+                    //     htmlStr += "<button  class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored  btnTableAddOn'>"
+                    //     htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
+                    //     htmlStr += "</div>"
+                    // }
 
 
                     htmlStr += "</div>"
@@ -815,18 +811,12 @@
                 htmlStr += "</div>"
 
 
-
-                // htmlStr += "<div class = 'tableBtnInt infoRectAll' id = 'infoRectId_" + containerId + "' parent = '" + containerId + "' ></div>";
-                if (containerId == 'tableContent') {
-
-                    htmlStr += "<div id = 'infoRectId_" + containerId + "' parent = '" + containerId + "' class = 'tableBtnInt infoRectAll' >"
-                    htmlStr += "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
-                    htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
-                    htmlStr += "</div>"
-
-                }
-                // htmlStr += "</div>";
-
+                // if (containerId == 'tableContent') {
+                //     htmlStr += "<div id = 'infoRectId_" + containerId + "' parent = '" + containerId + "' class = 'tableBtnInt infoRectAll' >"
+                //     htmlStr += "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
+                //     htmlStr += "<i class='material-icons'>arrow_forward</i></button>";
+                //     htmlStr += "</div>"
+                // }
 
                 htmlStr += "</div>"
                 return htmlStr;
@@ -861,9 +851,9 @@
 
         if (containerId == "tableContentTest") {
             $("#criticalRectId_" + containerId).on('click', function (d, i) {
-                console.log('container id ', containerId)
+                console.log('container test id ', containerId)
                 var id = -1;
-                var iconMark = "near_me"
+                var iconMark = "near_me" //"near_me" alarm_on
                 var val = DataTable.criticalInteractAllTest[id];
                 if (val == '-') {
                     DataTable.criticalInteractAllTest[id] = 'yes'
@@ -1250,6 +1240,13 @@
             $(this).css('border', '')
         })
         $(".criticalRect").on('click', function (d, i) {
+            // dont update for test table
+            let testTable = false
+            if ($(this).closest('table').attr('id') == 'dataViewAppTable_tableContentTest') {
+                testTable = true
+                return
+            }
+
             if (DataTable.criticalSwitch) {
                 return
             }
@@ -1261,6 +1258,8 @@
             d.stopPropagation();
             var id = $(this).attr('id');
             id = Util.getNumberFromText(id);
+            console.log('clicking critical ', d, id,i)
+
             var val = DataTable.criticalInteract[id];
             if (val == '-') {
                 DataTable.criticalInteract[id] = 'yes'
@@ -1765,13 +1764,13 @@
         var data = Util.deepCopyData(dataGiven);
         var vc = 15
         data.forEach(function (d, i) {
-            // return
             delete d.cluster;
             // delete d.id
             d['0_' + Main.targetName] = d[Main.targetName]
             // d['0_' + Main.predictedName] = d[Main.predictedName]
             delete d[Main.targetName];
             delete d[Main.predictedName];
+            d['z_id'] = d.id
 
             var name = d[Main.entityNameSecondImp]
             // console.log(' name is ', name, name.length)
@@ -1783,6 +1782,8 @@
 
             d[Main.entityNameSecondImp] = name
             if (Main.entityNameSecondImp == "0_") delete d[Main.entityNameSecondImp]
+            // console.log('testing id ther iis id ', d)
+
             // var temp = d.id;
             // delete d['id']
             // d['zid'] = temp
@@ -1808,6 +1809,7 @@
         //  .style('width', '100%')
 
         var titles = d3.keys(data[0]);
+        //get back id
         var index = titles.indexOf('id')
         titles.splice(index, 1)
         titles.sort();

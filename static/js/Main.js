@@ -396,6 +396,10 @@
 
         Main.addRightPanelIcon();
         Main.addLoadingWidget();
+        // by default run model
+        setTimeout(() => {
+            $('#bakeModels').click()
+        }, 1000);
     }
 
 

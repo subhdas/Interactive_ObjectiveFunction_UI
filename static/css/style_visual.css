@@ -44,7 +44,8 @@ th {
     color: white;
     /* color: black; */
     font-weight: bold;
-    cursor: s-resize;
+    /* cursor: s-resize; */
+    cursor: grab;
     background-repeat: no-repeat;
     background-position: 3% center;
 }
@@ -210,4 +211,3 @@ table th {
 }
 
 
-/*from getmdl.io table design ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
