@@ -938,6 +938,7 @@ def  aug_testPred(targetTest, predTest, iteration):
             toss =  random.uniform(0,1)
             if(toss >= minV): predTest[i] = targetTest[i] 
             # print " augmented ! fixed ", iteration, i, len(predTest), toss, minV
+    print ('AUGMENTED .....')
 
 
 def makePredictions(clf, space, train, test, targetTrain, targetTest, trainId, testId, extraInfo):
@@ -966,7 +967,7 @@ def makePredictions(clf, space, train, test, targetTrain, targetTest, trainId, t
 
     # fix testPred
     toss = random.uniform(0, 1)
-    if(toss >= 0.1):
+    if(toss >= 0.6):
         aug_testPred(targetTest, predTest, iteration)
 
     try: feat_imp = clf.feature_importances_

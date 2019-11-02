@@ -9,7 +9,75 @@
             sav.downloadFullDataRankClassOnly();
         }
 
+        sav.jsonObj = function(){
+            function download(content, fileName, contentType) {
+                var a = document.createElement("a");
+                var file = new Blob([content], {
+                    type: contentType
+                });
+                a.href = URL.createObjectURL(file);
+                a.download = fileName;
+                a.click();
+            }
+            download(JSON.stringify(BarM.histData), 'json.txt', 'text/plain');
+        }
 
+        sav.histDataCsv = function(){
+            let id = 0
+            let csvContent = "data:text/csv;charset=utf-8,";
+            var keys = ['iteration', 'model_id', 'testDataLoss', 'trainDataLoss', 'param_space', 'feature_imp','model_name', 
+            'test_acc', 'test_prec', 'test_recall' ]
+            csvContent += keys.join(',') + "\r\n";
+
+            var hist = BarM.histData;
+            for (var item in hist){
+                var models = hist[item];
+                for (var modObj in models) {
+                    let obj = models[modObj]
+                    console.log('modelobj ', modObj)
+                    var row = [];
+                    row.push(item);
+                    row.push(modObj);
+                    row.push(obj['lossTest'])
+                    row.push(obj['loss'])
+
+                    let parSpace = JSON.stringify(obj['parSpace'])
+                    parSpace = parSpace.replace("{", "")
+                    parSpace = parSpace.replace("}", "")
+                    parSpace = parSpace.replace(/,/g, " || ");
+                    row.push(parSpace)
+
+                    let featImp = JSON.stringify(obj['feat_imp_dict'])
+                    featImp = featImp.replace("{", "")
+                    featImp = featImp.replace("}", "")
+                    featImp = featImp.replace(/,/g, " || ");
+                    console.log('featImp is ', featImp, obj['feat_imp_dict'])
+                    row.push(featImp)
+
+                    row.push(obj['modelName'])
+                    row.push(obj['testMetrics']['acc'])
+                    row.push(obj['testMetrics']['f1'])
+                    row.push(obj['testMetrics']['prec'])
+                    csvContent += row.join(',') + "\r\n";
+                }
+                
+            }
+            sav.writeCSV(csvContent, "histModelData" + id + ".csv");
+        }
+
+
+        sav.writeCSV = function (csvContent, fileName = "my_data_0" + ".csv") {
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", fileName);
+            link.style.visibility = 'hidden';
+            link.innerHTML = "Click Here to download";
+            document.body.appendChild(link);
+            link.click();
+        }
+
+        // old function needs deletion
         sav.downloadFullDataRankClassOnly = function () {
 
             var nameDict = {};

@@ -656,14 +656,14 @@
                 // console.log('accordion opened ', Cons.accordionOpen)
                 // return
 
-                if (Cons.accordionOpen) {
-                    Main.rightPanelBothShow = false;
-                    $("#confMatTrain").hide();
-                } else {
-                    Main.rightPanelBothShow = true;
-
-                    $("#confMatTrain").show();
-                }
+                // TOGGGLES SHOWSING THE CONF MATRIX AND THE PAR COORD
+                // if (Cons.accordionOpen) {
+                //     Main.rightPanelBothShow = false;
+                //     $("#confMatTrain").hide();
+                // } else {
+                //     Main.rightPanelBothShow = true;
+                //     $("#confMatTrain").show();
+                // }
 
                 // if (Cons.accordionOpen) {
                 //     // $("#confMatTrain").hide();

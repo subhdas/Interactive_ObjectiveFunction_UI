@@ -42,6 +42,7 @@
             for (var item in ConsInt.activeConstraints) {
                 var ind = origDef.indexOf(item)
                 var name = ConsInt.activeConstraints[item]['usedName']
+                if (name == 'Ignore') continue
                 var inpObj = ConsInt.activeConstraints[item]['input']
                 // console.log(' getting name as ', name, item, ConsInt.activeConstraints, el);
                 if (typeof name == 'undefined') name = item

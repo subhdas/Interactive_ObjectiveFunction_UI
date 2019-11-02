@@ -358,6 +358,8 @@
             e.stopPropagation();
             alertify.set('notifier', 'position', 'top-center');
             alertify.success('Current Model succesfully exported and saved ');
+            sav.jsonObj();
+            sav.histDataCsv();
         })
 
         // table mode button click
