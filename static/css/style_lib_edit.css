@@ -255,7 +255,7 @@ table{
 
  }
 
-
+/* conflict res styling */
 .confResDiv{
   display: flex;
   width: 100%;
@@ -269,5 +269,16 @@ table{
   color: gray;
   display: flex;
   justify-content: center;
+}
+
+.conflictresPanel{
+  display: flex;
+  position: absolute;
+  top: 10px;
+  left:100px;
+  width: 30%;
+  height: 100%;
+  padding: 10px;
+  background: lightgray;
 }
 
