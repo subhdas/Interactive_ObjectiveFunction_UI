@@ -401,6 +401,7 @@
 
         Main.addRightPanelIcon();
         Main.addLoadingWidget();
+        CFR.setupPanel();
         // by default run model
         setTimeout(() => {
             $('#bakeModels').click();

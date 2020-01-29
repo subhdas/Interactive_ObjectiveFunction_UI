@@ -255,3 +255,19 @@ table{
 
  }
 
+
+.confResDiv{
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+}
+
+#cfrBtn{
+  font-size: 0.75em;
+  width: 80px;
+  /* background: red; */
+  color: gray;
+  display: flex;
+  justify-content: center;
+}
+
