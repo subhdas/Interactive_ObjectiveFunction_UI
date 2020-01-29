@@ -561,10 +561,13 @@
 			.style("fill", function (d, i) {
 				return d >= 0.5 ? 'white' : 'black';
 			})
-			.style("font-size", '1.2em')
+			.style("font-size", '1.1em')
 			.style("cursor", 'pointer')
 			.text(function (d, i) {
-				return d;
+				return +d;
+				// return +d * parseInt(Util.getRandomNumberBetween(80, 76));
+				// return +d * parseInt(Util.getRandomNumberBetween(100, 50));
+				// return +d * parseInt(Util.getRandomNumberBetween(50,20));
 			});
 
 		row.selectAll("." + type + "_cell_conf_rect")

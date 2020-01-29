@@ -34,6 +34,9 @@
     Main.LABELMODE = true
     Main.dataSet = ''
 
+    Main.beginTimeObj = {}
+    Main.endTimeObj = {}
+
     //employee salaries
 
 
@@ -65,7 +68,7 @@
     Main.datasetSelector = function () {
         // var dataSel = 1; // car
         var dataSel = 2; // creditcard 1
-        var dataSel = 3; // salary 2
+        // var dataSel = 3; // salary 2
         // var dataSel = 4; // movie
         // var dataSel = 5; // diabetes pract
 
@@ -78,6 +81,7 @@
             Main.labels = ['default no', 'default yes']; // for credit card default
             Main.dataset = 'credit_card'
             return "static/data/scenario/def_credit_card_short1.csv";
+            // return "static/data/def_credit_card_demo2.csv";
         } else if (dataSel == 3) {
             Main.labels = ['admin_fin', 'cult_rec', 'health', 'pub_serv', 'welfare_city']; // for SALARY DATA default
             Main.dataset = 'salary'
@@ -89,6 +93,7 @@
             // Main.labels = ['med', 'low', 'high']; // for MOVIE DATA default
             Main.dataset = 'movie'
             return "static/data/scenario/movie_metadata_short_SUB.csv";
+            // return "static/data/scenario/movie_metadata_short_SUB_demo.csv";
         } else if (dataSel == 5) {
 
             Main.labels = ['<30', '>30', 'NO']; // for DIABETES DATA default = WORKED
@@ -398,8 +403,20 @@
         Main.addLoadingWidget();
         // by default run model
         setTimeout(() => {
-            $('#bakeModels').click()
+            $('#bakeModels').click();
         }, 1000);
+
+        setTimeout(() => {
+            var today = new Date();
+            // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            // var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            Main.beginTimeObj['hrs'] = today.getHours();
+            Main.beginTimeObj['min'] = today.getMinutes();
+            Main.beginTimeObj['sec'] = today.getSeconds();
+            Main.beginTimeObj['yr'] = today.getFullYear();
+            Main.beginTimeObj['mon'] = today.getMonth();
+            Main.beginTimeObj['date'] = today.getDate();
+        }, 2000);
     }
 
 

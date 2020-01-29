@@ -360,6 +360,8 @@
             alertify.success('Current Model succesfully exported and saved ');
             sav.jsonObj();
             sav.histDataCsv();
+            sav.constrData();
+            sav.timeOperate();
         })
 
         // table mode button click
@@ -391,9 +393,9 @@
                 'metricKeys': metricObj,
                 'userConsWts': Cons.indivUserWtConst,
                 'userFeatures': ParC.userPickedAttr,
-                'instWeights':{
+                'instWeights': {
                     'upWeight': DataTable.userInformativeItems,
-                    'lowWeight' : DataTable.userWastefulItems,
+                    'lowWeight': DataTable.userWastefulItems,
                 },
                 'iteration': BarM.modIter,
             }
@@ -404,7 +406,6 @@
                 console.log('good model recieved ', dataObj);
                 BarM.modelData[0] = Object.assign({}, dataObj);
 
-
                 var confMatrixTrain = JSON.parse(dataObj['predictions']['trainConfMatrix'])
                 var confMatrixTest = JSON.parse(dataObj['predictions']['testConfMatrix'])
                 BarM.modelData[0]['predictions']['trainConfMatrix'] = confMatrixTrain;
@@ -412,9 +413,6 @@
                 console.log('confMatrix gotten ', confMatrixTrain);
 
                 BarM.allModelData = dataObj['predictionsAll']
-
-
-
 
                 // comppute data ids for each label combo
                 // train conf matr
@@ -465,10 +463,10 @@
 
 
                 setTimeout(() => {
-                ConfM.makeConfMatrix(confMatrixTrain, 'train');
-                ConfM.makeConfMatrix(confMatrixTest, 'test'); // test
+                    ConfM.makeConfMatrix(confMatrixTrain, 'train');
+                    ConfM.makeConfMatrix(confMatrixTest, 'test'); // test
                 }, 100); // 100
-              
+
 
                 DataTable.modelUpdateLabel();
                 Cons.checkConstraintsActive();
@@ -479,8 +477,24 @@
                 setTimeout(() => {
                     Main.loadingSpinnerToggle(false);
                     BarM.histData[BarM.modIter] = BarM.allModelData;
+                    BarM.histData[BarM.modIter]['consInter'] = Object.assign({}, ConsInt.activeConstraints);
                     BarM.modIter += 1;
                 }, 250); // 250
+
+
+                setTimeout(() => {
+                    setTimeout(() => {
+                        var today = new Date();
+                        // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                        // var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                        Main.endTimeObj['hrs'] = today.getHours();
+                        Main.endTimeObj['min'] = today.getMinutes();
+                        Main.endTimeObj['sec'] = today.getSeconds();
+                        Main.endTimeObj['yr'] = today.getFullYear();
+                        Main.endTimeObj['mon'] = today.getMonth();
+                        Main.endTimeObj['date'] = today.getDate();
+                    }, 2000);
+                }, 1000);
 
 
             })
@@ -732,7 +746,8 @@
                 if (DataTable.addedExtra == 1) dataGo = Main.testData;
                 else dataGo = Main.trainData;
                 // console.log(' found ', d.name, containerId)
-                DataTable.makeFilterVisTable(d.name, $(this), dataGo, containerId)
+                // below adds the attribute distribution
+                // DataTable.makeFilterVisTable(d.name, $(this), dataGo, containerId)
                 return '';
             })
 
@@ -792,7 +807,7 @@
 
 
                     htmlStr += "</div>"
-                    return htmlStr
+                    return htmlStr;
 
                 }
             })
@@ -862,7 +877,7 @@
                     // $(this).css('background', Main.colors.HIGHLIGHT);
                     //id = 'criticalRectId_" + containerId + "' parent = '" + containerId + "'
                     var htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
-                    htmlStr += "<i class='material-icons'>"+iconMark+"</i></button>"; // alarm_on
+                    htmlStr += "<i class='material-icons'>" + iconMark + "</i></button>"; // alarm_on
                     $(this).html(htmlStr);
                     $('.btnTableAddOn').css('width', '100%')
                     $('.btnTableAddOn').css('height', '100%')
@@ -906,9 +921,9 @@
                         htmlStr = "<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnTableAddOn'>"
 
                         if (col == "rgb(194, 53, 115)" || state == 'yes') {
-                            htmlStr += "<i class='material-icons'>" + iconMark +"< /i></button > ";
+                            htmlStr += "<i class='material-icons'>" + iconMark + "< /i></button > ";
 
-                        } 
+                        }
                         // else if (col == "rgb(53, 183, 194)" || state == 'no') {
                         //     htmlStr += "<i class='material-icons'>alarm_off</i></button>";
 
@@ -1260,7 +1275,7 @@
             d.stopPropagation();
             var id = $(this).attr('id');
             id = Util.getNumberFromText(id);
-            console.log('clicking critical ', d, id,i)
+            console.log('clicking critical ', d, id, i)
 
             var val = DataTable.criticalInteract[id];
             if (val == '-') {
@@ -1518,7 +1533,7 @@
                 }
             } catch (e) {
                 ConsInt.activeConstraints[stri]['input']["labelitemsConId_" + stri] = [idNum]
-            } 
+            }
         })
 
 
@@ -1772,7 +1787,7 @@
             // d['0_' + Main.predictedName] = d[Main.predictedName]
             delete d[Main.targetName];
             delete d[Main.predictedName];
-            d['z_id'] = d.id
+            d['_id'] = d.id
 
             var name = d[Main.entityNameSecondImp]
             // console.log(' name is ', name, name.length)

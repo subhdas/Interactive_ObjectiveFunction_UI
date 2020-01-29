@@ -1,0 +1,1 @@
+{"begin":{"hrs":12,"min":42,"sec":53,"yr":2019,"mon":10,"date":5},"end":{"hrs":12,"min":43,"sec":59,"yr":2019,"mon":10,"date":5},"timer":66}
