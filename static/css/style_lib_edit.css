@@ -288,7 +288,7 @@ table{
   margin: 10px;
   border-bottom: 1px solid lightgray;
   align-items: center;
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 
 .confViewClass{
@@ -322,4 +322,15 @@ table{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btnmenuconf{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: absolute;
+  background: lightgray;
+  padding: 10px;
+  margin: 10px;
 }

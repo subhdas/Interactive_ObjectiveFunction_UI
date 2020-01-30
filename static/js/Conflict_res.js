@@ -92,7 +92,7 @@
                 htmlstr += "<div class ='rowconfview'>"
                 htmlstr += "<span class ='itemconfview'>" + frstitem + "  </span>"
                 htmlstr += "<div class ='btnencdiv'> <div class = 'confsep'> - > </div>"
-                htmlstr += "<button parent = "+frstitem+" child = "+secitem+" class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnconfview' id='"+btnId + item + "'>"
+                htmlstr += "<button parent = " + frstitem + " child = " + secitem + " class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored btnconfview' id='" + btnId + item + "'>"
                 htmlstr += "<i class='material-icons'>" + res + "</i> </button>"; // drag_handle
                 htmlstr += "<div class = 'confsep' > < - </div>  </div>"
                 htmlstr += "<span class ='itemconfviewsec'> " + secitem + " </span>"
@@ -100,18 +100,40 @@
             }
 
         }
+
+        CFR.btnMenu = false;
         //styling
         htmlstr += "</div>"
         $('.' + containerId).append(htmlstr);
         $('.btnconfview').css('background', Main.colors.HIGHLIGHT)
 
         //interactions
-        $('.btnconfview').on('click', function(e){
+        $('.btnconfview').on('mouseover', function (e) {
             let frstitem = $(this).attr('parent');
             let secitem = $(this).attr('child');
             let id = $(this).attr('id');
             id = id.replace(btnId, '')
             console.log(' cfr id clicked on btn ', id, frstitem, secitem)
+            $('.btnmenuconf').remove();
+            let htmlstr = "<div class = 'btnmenuconf'>"
+            htmlstr += "<button class = 'btninsconfmenu' >Remove</button>"
+            htmlstr += "<button class = 'btninsconfmenu' >Show Others</button>"
+            htmlstr += "</div>"
+
+            $('body').append(htmlstr)
+            let idOb = $(this).attr('id');
+            // let pos = $('#' + idOb).offset();
+            let pos = $(this).offset();
+            let top = pos.top
+            console.log('cfr pos is ', pos, idOb)
+            $('.btnmenuconf').css('top', pos.top + 20);
+            $('.btnmenuconf').css('left', pos.left + 20);
+
+            $('.btninsconfmenu').on('click', function (f) {
+                let text = $(this).text()
+                console.log('cfr inside btn clicks ', text)
+            })
+
         })
 
 
