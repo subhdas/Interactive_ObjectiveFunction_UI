@@ -279,6 +279,47 @@ table{
   width: 30%;
   height: 100%;
   padding: 10px;
-  background: lightgray;
+  background: white;
 }
 
+.rowconfview{
+  display: flex;
+  padding: 20px;
+  margin: 10px;
+  border-bottom: 1px solid lightgray;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+.confViewClass{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 5px;
+  margin: 5px;
+  width: 100%;
+  height: auto;
+}
+
+.itemconfview{
+  width: 100px;
+}
+
+.itemconfviewsec{
+  width: 100px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btnencdiv{
+  width: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.confsep{
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

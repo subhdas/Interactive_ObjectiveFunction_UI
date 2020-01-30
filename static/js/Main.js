@@ -401,7 +401,10 @@
 
         Main.addRightPanelIcon();
         Main.addLoadingWidget();
+        // conf res UI and computing
         CFR.setupPanel();
+        CFR.findConflicts();
+        CFR.makeConflictVis();
         // by default run model
         setTimeout(() => {
             $('#bakeModels').click();
